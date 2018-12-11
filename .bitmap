@@ -23,5 +23,16 @@
         "mainFile": "src/components/FormField.js",
         "origin": "AUTHORED"
     },
+    "linnitdev.react-components/components/back-button@1.0.1": {
+        "files": [
+            {
+                "relativePath": "src/components/BackButton.js",
+                "test": false,
+                "name": "BackButton.js"
+            }
+        ],
+        "mainFile": "src/components/BackButton.js",
+        "origin": "AUTHORED"
+    },
     "version": "13.0.4"
 }
