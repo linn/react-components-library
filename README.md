@@ -1,4 +1,4 @@
-#React Component Library
+# React Component Library
 
 This project consists of react components to be reused across projects.
 
