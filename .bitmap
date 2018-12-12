@@ -34,5 +34,16 @@
         "mainFile": "src/components/BackButton.js",
         "origin": "AUTHORED"
     },
+    "linnitdev.react-components/components/breadcrumbs@1.0.3": {
+        "files": [
+            {
+                "relativePath": "src/components/Breadcrumbs.js",
+                "test": false,
+                "name": "Breadcrumbs.js"
+            }
+        ],
+        "mainFile": "src/components/Breadcrumbs.js",
+        "origin": "AUTHORED"
+    },
     "version": "13.0.4"
 }
