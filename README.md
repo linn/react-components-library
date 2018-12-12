@@ -15,7 +15,7 @@ That storybook page will serve as a living, interactive source of documentation 
 To use components, import them individually like so: 
 
 ```
-import BackButton from 'linn-reusable-react-components-library';
+import { BackButton } from 'linn-reusable-react-components-library';
 ```
 
 ## Development
