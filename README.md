@@ -27,7 +27,11 @@ which runs the storybook dev server.
 Make a new branch and add your new components, tests and stories in the relevant directories and view them in storybook.
 When you are ready to share your new component, add it to the index.js following the existing syntax. Up the version number in package.json and then make a pull request for review.
 
-After merging your new component branch into master, run 
+After merging your new component branch into master, build the npm package: 
+
+### ` npm run build` 
+
+and publish it: 
 
 ### ` npm publish --access public` 
 
