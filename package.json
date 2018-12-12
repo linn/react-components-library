@@ -1,6 +1,6 @@
 {
-  "name": "linn-reusable-react-components-library",
-  "version": "0.1.1",
+  "name": "linn-component-library",
+  "version": "0.0.1",
   "private": false,
   "dependencies": {
     "@material-ui/core": "^3.6.2",
@@ -10,11 +10,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "rollup -c -o dist/bundle.min.js",
-    "build-storybook": "build-storybook -c .storybook",
+    "build-storybook": "build-storybook -s public",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public"
+    "storybook": "start-storybook -p 9009 -s public"
   },
   "eslintConfig": {
     "extends": "react-app"
