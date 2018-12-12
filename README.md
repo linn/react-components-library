@@ -31,6 +31,6 @@ After merging your new component branch into master, run
 
 ### ` npm publish --access public` 
 
-to publish the changes to npm.
+to publish the changes to npm. (n.b. if this is your first time, you'll need to make an npm account and request contribution permissions for this package.)
 
 
