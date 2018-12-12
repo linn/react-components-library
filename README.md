@@ -6,7 +6,7 @@ This project consists of react components to be reused across projects.
 ## Usage
 To install: 
 
-### npm i linn-reusable-react-components-library
+### `npm i linn-reusable-react-components-library`
 
 To use components, import them individually like so: 
 
