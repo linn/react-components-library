@@ -4,7 +4,7 @@ React components to be reused across projects presented in a storybook dev envir
 
 
 ## Usage
-To install: 
+To install:
 
 ### `npm i @linn-it/linn-form-components-library`
 
