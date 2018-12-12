@@ -10,6 +10,8 @@ To install:
 
 You can explore components currently in the project [here](https://fervent-einstein-8b4f23.netlify.com/).
 
+That storybook page will serve as a living, interactive source of documentation for the components available in the package as well as a style guide for our react forms.
+
 To use components, import them individually like so: 
 
 ```
