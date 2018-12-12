@@ -6,7 +6,7 @@ React components to be reused across projects presented in a storybook dev envio
 ## Usage
 To install: 
 
-### `npm i linn-reusable-react-components-library`
+### `npm i linn-components-library`
 
 You can explore components currently in the project [here](https://fervent-einstein-8b4f23.netlify.com/).
 
