@@ -1,5 +1,5 @@
 src/**/*
-test/**/*
+tests/**/*
 .babelrc
 rollup.config.js
 .storybook/**/*
@@ -8,3 +8,5 @@ public/**/*
 storybook-static/**/*
 index.js
 dist/src/components/*
+jest-test-results.json
+sh.exe.stackdump
