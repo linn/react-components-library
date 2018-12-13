@@ -1,1 +1,9 @@
-src/ test/ .npmignore .babelrc rollup.config.js .storybook .gitignore bit.json README.md 
+src/**/*
+test/**/*
+.babelrc
+rollup.config.js
+.storybook/**/*
+.gitignore
+public/**/*
+storybook-static/**/*
+index.js
