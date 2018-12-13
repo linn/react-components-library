@@ -7,3 +7,4 @@ rollup.config.js
 public/**/*
 storybook-static/**/*
 index.js
+dist/src/components/*
