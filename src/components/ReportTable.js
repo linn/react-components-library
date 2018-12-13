@@ -7,6 +7,23 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import classnames from 'classnames';
+import { formatTitle, displayError, setDrilldown, setValueDrilldown, setTextValueDrilldown } from '../utilities/DisplayUtilities';
+import { reportResultType } from '../propTypes/index'
+import PropTypes from 'prop-types';
+
+const styles = theme => ({
+  root: {
+    width: '100%',
+    margin: theme.spacing.unit * 3,
+
+    overflowX: 'auto',
+  },
+  table: {
+
+    margin: theme.spacing.unit * 3,
+  },
+});
 
 const getCellClassName = (isVarianceColumn, isTotalColumn, value, textValue, defaults = []) => classnames(
     defaults,
@@ -34,49 +51,83 @@ const getTableHeaderClassNames = (cellHeader, fixColumnWidth, isTextColumn, defa
     { 'text-right': !(isTextColumn) }
 );
 
-const styles = theme => ({
-  root: {
-    width: '100%',
-    marginTop: theme.spacing.unit * 3,
-    overflowX: 'auto',
-  },
-  table: {
-    minWidth: 700,
-  },
-});
-
 const Placeholder = ({ rows, columns }) => (
-    <table className="table placeholder table-placeholder">
-        <tbody>
+    <Table className="table placeholder table-placeholder">
+        <TableBody>
             {
                 [...Array(rows).keys()].map((row) => (
-                    <tr key={row}>
+                    <TableRow key={row}>
                         {[...Array(columns).keys()].map((column) => (
-                            <td key={column}></td>
+                            <TableCell key={column}></TableCell>
                         ))}
-                    </tr>
+                    </TableRow>
                 ))
             }
-        </tbody>
-    </table>);
+        </TableBody>
+    </Table>);
 
-class ReportTable extends Component {
+const ReportTable = (
+    {
+        reportData,
+        title,
+        showTitle = true,
+        showTotals = true,
+        placeholderRows = 5,
+        placeholderColumns = 6,
+        containsSubtotals = false,
+        fixColumnWidths = false,
+        showRowTitles = true
+    }) => (
 
-    render() {
-        const { reportData, title, placeholderRows, placeholderColumns, classes} = this.props;
+        <Paper className={styles.root}>
+            {formatTitle(title, showTitle, !reportData, reportData && reportData.error, reportData ? reportData.reportHelpText : null)}
+            {!reportData
+                ? <Placeholder rows={placeholderRows} columns={placeholderColumns} /> :
+                reportData.error ? displayError(reportData.message)
+                    : <div style={{backgroundColor: "white"}}>
+                        <Table className={getTableClassNames(containsSubtotals)}>
+                                <TableHead key="headers">
+                                <TableRow>
+                                    {showRowTitles ? (<TableCell className={getTableHeaderClassNames(false, fixColumnWidths, '')}></TableCell>) : null}
+                                    {reportData.headers.columnHeaders
+                                        .map((header, i) => (<TableCell className={getTableHeaderClassNames(true, fixColumnWidths, reportData.headers.textColumns.includes(i), [])} key={i}>{header}</TableCell>))}
+                                </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                {reportData.results.map((item, j) => (
+                                    <TableRow className={getTableRowClassNames(item.rowType, containsSubtotals, ['report-data-row'])} key={j} >
+                                        {showRowTitles ? (<TableCell className="single-line-field" data-tip={item.rowTitle.displayString}>{setDrilldown(item.rowTitle)}</TableCell>) : null}
+                                        {item.values
+                                            .map((value, i) => (<TableCell className={getCellClassName(reportData.headers.varianceColumns.includes(i) || reportData.headers.varianceRows.includes(j), reportData.headers.totalColumns.includes(i), value.displayValue, value.textDisplayValue, [])} key={i}>{setValueDrilldown(value)}{setTextValueDrilldown(value)}</TableCell>))}
+                                    </TableRow>
+                                ))}
 
-        if (!reportData) {
-          return (
-              <Placeholder rows={placeholderRows} columns={placeholderColumns} />
-          );
-        }
+                                {showTotals
+                                    ? (<TableRow className={getTableRowClassNames(reportData.totals.rowType, containsSubtotals, ['report-totals'])} key="totals">
+                                        {showRowTitles ? (<TableCell>{reportData.totals.rowTitle.displayString}</TableCell>) : null}
+                                        {reportData.totals.values
+                                            .map((value, i) => (<TableCell className={getCellClassName(reportData.headers.varianceColumns.includes(i), reportData.headers.totalColumns.includes(i), value.displayValue, value.textDisplayValue, ['total'])} key={i}>{setValueDrilldown(value)}</TableCell>))}
+                                    </TableRow>)
+                                    : false
+                                }
+                            </TableBody>
+                        </Table>
+                    </div>
+            }
+        </Paper>
+    );
 
-        return (
-          <Paper className={classes.root}>
-          <div> we got a report </div>
-          </Paper>
-        )
-    }
+Table.propTypes = {
+    reportData: reportResultType,
+    title: PropTypes.object,
+    showTitle: PropTypes.bool,
+    showTotals: PropTypes.bool,
+    placeholderRows: PropTypes.number,
+    placeholderColumns: PropTypes.number,
+    containsSubtotals: PropTypes.bool,
+    fixColumnWidths: PropTypes.bool,
+    showRowTitles: PropTypes.bool
 }
+
 
 export default withStyles(styles)(ReportTable);

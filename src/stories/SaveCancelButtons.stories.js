@@ -11,5 +11,5 @@ export const actions = {
 
 
 storiesOf('SaveCancelButtons', module)
-  .addDecorator(story => <div style={{ position: "absolute", right: '5%', bottom: '10%'  }}>{story()}</div>)
+  .addDecorator(story => <div style={{ position: "absolute", right: '5%', top: '10%'  }}>{story()}</div>)
   .add('default', () => <SaveCancelButtons {...actions} />);
