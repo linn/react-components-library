@@ -11,6 +11,8 @@ import classnames from 'classnames';
 import { formatTitle, displayError, setDrilldown, setValueDrilldown, setTextValueDrilldown } from '../utilities/DisplayUtilities';
 import { reportResultType } from '../propTypes/index'
 import PropTypes from 'prop-types';
+import { createMuiTheme } from '@material-ui/core/styles';
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 
 const styles = theme => ({
   root: {
@@ -23,6 +25,19 @@ const styles = theme => ({
 
     margin: theme.spacing.unit * 3,
   },
+});
+
+const theme = createMuiTheme({
+    overrides: {
+      MuiTableCell: {
+        body: {
+          fontSize:"12px"
+        },
+        head: {
+          fontSize:"14px"
+        }
+      }
+    }
 });
 
 const getCellClassName = (isVarianceColumn, isTotalColumn, value, textValue, defaults = []) => classnames(
@@ -78,7 +93,7 @@ const ReportTable = (
         fixColumnWidths = false,
         showRowTitles = true
     }) => (
-
+        <MuiThemeProvider theme={theme}>
         <Paper className={styles.root}>
             {formatTitle(title, showTitle, !reportData, reportData && reportData.error, reportData ? reportData.reportHelpText : null)}
             {!reportData
@@ -115,6 +130,7 @@ const ReportTable = (
                     </div>
             }
         </Paper>
+        </MuiThemeProvider>
     );
 
 Table.propTypes = {

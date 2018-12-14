@@ -6,8 +6,6 @@ import StoryRouter from 'storybook-react-router';
 import  Breadcrumbs from '../components/Breadcrumbs';
 
 export const actions = {
-  // saveClick: action('Saved'),
-  // cancelClick: action('Cancelled'),
 };
 
 const props = {
@@ -19,7 +17,6 @@ const props = {
      }
 
 }
-
 
 storiesOf('Breadcrumbs', module)
 .addDecorator(StoryRouter())

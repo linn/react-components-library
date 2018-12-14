@@ -8,5 +8,5 @@ public/**/*
 storybook-static/**/*
 index.js
 dist/src/components/*
-jest-test-results.json
 sh.exe.stackdump
+jest-test-results.json
