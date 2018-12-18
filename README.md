@@ -13,7 +13,7 @@ You can explore components currently in the project [here](https://fervent-einst
 To use components, import them individually like so:
 
 ```
-import { BackButton } from '@linn-it/linn-reusable-react-components-library';
+import { BackButton } from '@linn-it/linn-form-components-library';
 ```
 
 ## Development
