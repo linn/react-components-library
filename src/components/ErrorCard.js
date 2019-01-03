@@ -2,7 +2,7 @@ import React from 'react';
 import { Typography, Card } from '@material-ui/core';
 import { Error } from '@material-ui/icons';
 import { withStyles, MuiThemeProvider } from '@material-ui/core/styles';
-import { errorTheme } from '../themes';
+import { errorTheme } from '../themes/index.js';
 
 const styles = () => ({
     root: {

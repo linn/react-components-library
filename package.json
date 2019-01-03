@@ -7,7 +7,7 @@
     "@material-ui/icons": "^3.0.1",
     "classnames": "^2.2.6",
     "numeral": "^2.0.6",
-    "react-scripts": "2.1.1"
+    "react-scripts": "^2.1.2"
   },
   "scripts": {
     "start": "react-scripts start",
