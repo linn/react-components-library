@@ -1,4 +1,3 @@
-import { uglify } from 'rollup-plugin-uglify'
 import babel from 'rollup-plugin-babel';
 
 module.exports = {
@@ -7,5 +6,5 @@ module.exports = {
     file: 'bundle.js',
     format: 'cjs'
   },
-  plugins: [ babel({ exclude: "node_modules/**" }), uglify() ]
+  plugins: [ babel({ exclude: "node_modules/**" })]
 };

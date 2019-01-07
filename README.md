@@ -8,7 +8,7 @@ To install:
 
 ### `npm i @linn-it/linn-form-components-library`
 
-You can explore components currently in the project [here](https://fervent-einstein-8b4f23.netlify.com/).
+You can explore components currently in the project by running the storybook dev server (see Development).
 
 To use components, import them individually like so:
 
