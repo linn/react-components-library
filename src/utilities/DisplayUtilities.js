@@ -39,11 +39,12 @@ export const formatTitle = (title, showTitle, loading, error, helpText) => {
     if (loading) {
         return <h5>{`${displayTitle} (loading)`}</h5>;
     }
-
     return (
         <div className="row">
             <div className="col-xs-11">
-                <h5>{setDrilldown(title)}</h5>
+            { setDrilldown(title) ?
+                <h5 className="main-title">{setDrilldown(title)}</h5> : null
+            }    
             </div>
             {helpText ? (
                 <div className="col-xs-1">
@@ -124,7 +125,7 @@ export const formatHeading = (title, showTitle, loading, error) => {
     }
 
     if (loading) {
-        return <h5>{`${displayTitle} (loading)`}</h5>;
+        return <h5 className="loading-title">{`${displayTitle} (loading)`}</h5>;
     }
 
     return <strong>{displayTitle}</strong>;

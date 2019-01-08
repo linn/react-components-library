@@ -1,0 +1,116 @@
+{
+    "title": {
+        "displayString": "Product Ranges",
+        "drillDowns": []
+    },
+    "resultType": null,
+    "reportValueType": "Value",
+    "displaySequence": null,
+    "headers": {
+        "rowHeader": "Id",
+        "columnHeaders": [
+            "Name",
+            "Description"
+        ],
+        "varianceRows": [],
+        "varianceColumns": [],
+        "totalColumns": [],
+        "textColumns": [
+            0,
+            1
+        ]
+    },
+    "filterOptions": [],
+    "results": [
+        {
+            "rowTitle": {
+                "displayString": "2",
+                "drillDowns": []
+            },
+            "rowSortOrder": 0,
+            "values": [
+                {
+                    "displayValue": null,
+                    "textDisplayValue": "AKURATE",
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": [
+                        {
+                            "name": "sales-products",
+                            "href": "/products/reports/sales-products-by-product-range?productRangeId=2&productRangeName=AKURATE&includePhasedOut=false"
+                        }
+                    ]
+                },
+                {
+                    "displayValue": null,
+                    "textDisplayValue": "AKURATE PRODUCTS",
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                }
+            ],
+            "rowType": "Value"
+        },
+        {
+            "rowTitle": {
+                "displayString": "2",
+                "drillDowns": []
+            },
+            "rowSortOrder": 0,
+            "values": [
+                {
+                    "displayValue": null,
+                    "textDisplayValue": "KLIMAX",
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": [
+                        {
+                            "name": "sales-products",
+                            "href": "/products/reports/sales-products-by-product-range?productRangeId=2&productRangeName=KLIMAX&includePhasedOut=false"
+                        }
+                    ]
+                },
+                {
+                    "displayValue": null,
+                    "textDisplayValue": "KLIMAX PRODUCTS",
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                }
+            ],
+            "rowType": "Value"
+        }
+
+    ],
+    "totals": {
+        "rowTitle": {
+            "displayString": "Totals",
+            "drillDowns": []
+        },
+        "rowSortOrder": null,
+        "values": [
+            {
+                "displayValue": null,
+                "textDisplayValue": null,
+                "prefix": null,
+                "suffix": null,
+                "decimalPlaces": null,
+                "drillDowns": []
+            },
+            {
+                "displayValue": null,
+                "textDisplayValue": null,
+                "prefix": null,
+                "suffix": null,
+                "decimalPlaces": null,
+                "drillDowns": []
+            }
+        ],
+        "rowType": "Total"
+    },
+    "reportHelpText": null
+}
