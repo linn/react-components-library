@@ -9,10 +9,10 @@ export const actions = {
 
 const props = {
   location: {
-       pathname: '/a/test/path/',
+       pathname: '/a/test/path',
      },
      history : {
-       push: () => {alert('hi')}
+       push: () => {}
      }
 
 }
