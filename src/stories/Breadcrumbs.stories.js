@@ -10,7 +10,7 @@ export const actions = {
 
 const props = {
   location: {
-       pathname: '/a/test/path',
+       pathname: '/a/test/path/report',
      },
      history : {
        push: () => {alert('hi')}
