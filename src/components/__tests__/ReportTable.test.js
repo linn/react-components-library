@@ -13,8 +13,7 @@ describe('<ReportTable />', () => {
     let wrapper, props;
 
     // some sample report data with 2 results
-    let reportData =  require('./reportData.json');
-
+    let reportData =  require('../../../public/sampleReportData.json');
 
     describe('When no report data', () => {
         

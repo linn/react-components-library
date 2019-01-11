@@ -54,7 +54,6 @@ export const formatTitle = (title, showTitle, loading, error, helpText) => {
                       >
                         {helpText}
                     </Modal>
-
                 </div>) : ''}
         </div>);
 }
