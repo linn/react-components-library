@@ -31,7 +31,7 @@ class Breadcrumbs extends Component {
         return (
         <div>
            {crumbs.map((crumb, index) => (
-                <Link to={crumb.href}>           
+                <Link to={crumb.href} key={index}>           
                     <span>                 
                         <Button variant="contained" >
                             {crumb.caption }   
