@@ -6,9 +6,14 @@ import { ChevronRight } from '@material-ui/icons';
 class Breadcrumbs extends Component {
 
     render() {
-        const { location, history, rootPathLength = 2 } = this.props
+         const { location, history, rootPathLength = 2 } = this.props;
 
-        const crumbs = location.pathname
+         let path = location.pathname;
+        if (path.indexOf('/report') > -1) {
+            path = path.substring(0, path.indexOf('/report'));
+        }
+
+        const crumbs = path
             .split('/')
             .reduce((sofar, crumb, i, crumbs) => {
                 const path = crumbs.slice(0, i + 1);
