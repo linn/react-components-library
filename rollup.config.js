@@ -1,4 +1,3 @@
-import { uglify } from 'rollup-plugin-uglify'
 import babel from 'rollup-plugin-babel';
 
 module.exports = {
