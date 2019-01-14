@@ -65,22 +65,13 @@ const styles = theme => ({
         display: "none"
     },
 
-    drawer: {
-        width: drawerWidth,
-        flexShrink: 0
-    },
+   
 
     drawerPaper: {
         width: drawerWidth
     },
 
-    drawerHeader: {
-        display: "flex",
-        alignItems: "left",
-        textAlign: "left",
-        padding: "0 0px",
-        ...theme.mixins.toolbar
-    },
+   
 
     content: {
         flexGrow: 1,
@@ -92,18 +83,11 @@ const styles = theme => ({
         marginLeft: -drawerWidth
     },
 
-    contentShift: {
-        transition: theme.transitions.create("margin", {
-            easing: theme.transitions.easing.easeOut,
-            duration: theme.transitions.duration.enteringScreen
-        }),
-        marginLeft: 0
-    }
 });
 
 class Navigation extends React.Component {
     state = {
-        open: true,
+        open: false,
         selected: "",
         lists: []
     };
@@ -113,14 +97,6 @@ class Navigation extends React.Component {
         menu = require('../../public/menu.json').sections
         this.HandleMenuItemClick = this.HandleMenuItemClick.bind(this);
     }
-
-    handleDrawerOpen = () => {
-        this.setState({ open: true });
-    };
-
-    handleDrawerClose = () => {
-        this.setState({ open: false });
-    };
 
     getTopLevelMenu = () => {
         var topLevel = menu.map(x => ({ id: x.id, title: x.title, link: x.links[0].href }));
@@ -168,22 +144,20 @@ class Navigation extends React.Component {
                         })}
                     >
                         <Toolbar disableGutters={!open}>
-                            <IconButton
-                                aria-label="Open drawer"
-                                onClick={this.handleDrawerOpen}
-                                className={classNames(classes.menuButton, open && classes.hide)}
-                            >
-                                <MenuIcon />
-                            </IconButton>
-                            {Breadcrumbs ? 
-                            <Breadcrumbs {...this.props} /> : <span />}  
+                            
+                        {this.getTopLevelMenu().map((item) => (
+                                // <Link style={{ textDecoration: 'none' }} key={item.id} to={item.link}>
+                                    <ListItem key={item.id} button onClick={() => this.HandleMenuItemClick(item.title)} selected={this.state.selected === item.title}>
+                                        <ListItemText> {item.title}</ListItemText>
+                                    </ListItem> //</Link>
+                            ))}   
                         </Toolbar>
 
                     </AppBar>
-                    <Drawer
+                    {/* <Drawer
                         className={classes.drawer}
                         variant="persistent"
-                        anchor="left"
+                        anchor="top"
                         open={open}
                         classes={{
                             paper: classes.drawerPaper
@@ -197,15 +171,15 @@ class Navigation extends React.Component {
                     </IconButton>
                         </div>
                         <Divider />
-                        <List>
+                        
                             {this.getTopLevelMenu().map((item) => (
                                 <Link style={{ textDecoration: 'none' }} key={item.id} to={item.link}>
                                     <ListItem key={item.id} button onClick={() => this.HandleMenuItemClick(item.title)} selected={this.state.selected === item.title}>
                                         <ListItemText> {item.title}</ListItemText>
                                     </ListItem> </Link>
                             ))}
-                        </List>
-                    </Drawer>
+                       
+                    </Drawer> */}
                     <main
                         className={classNames(classes.content, {
                             [classes.contentShift]: open

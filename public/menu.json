@@ -2388,8 +2388,8 @@
         }
       },
       {
-        "id": "productsmaint",
-        "title": "productsmaint",
+        "id": "products",
+        "title": "Products",
         "links": [
           {
             "rel": "landing",
