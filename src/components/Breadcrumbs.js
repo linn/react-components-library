@@ -6,9 +6,14 @@ import { ChevronRight } from '@material-ui/icons';
 class Breadcrumbs extends Component {
 
     render() {
-        const { location, history, rootPathLength = 2 } = this.props
+         const { location, history, rootPathLength = 2 } = this.props;
 
-        const crumbs = location.pathname
+         let path = location.pathname;
+        if (path.indexOf('/report') > -1) {
+            path = path.substring(0, path.indexOf('/report'));
+        }
+
+        const crumbs = path
             .split('/')
             .reduce((sofar, crumb, i, crumbs) => {
                 const path = crumbs.slice(0, i + 1);
@@ -30,10 +35,16 @@ class Breadcrumbs extends Component {
 
         return (
         <div>
-            {crumbs.map(crumb => (
-            <span>
-                <Button variant="contained" ><Link to={crumb.href}> {crumb.caption }  </Link> </Button> <ChevronRight/> 
-            </span>
+           {crumbs.map((crumb, index) => (
+                <Link to={crumb.href} key={index}>           
+                    <span>                 
+                        <Button variant="contained" >
+                            {crumb.caption }   
+                        </Button>                 
+                        {index < crumbs.length -1 ? <ChevronRight/> :false // dont show chevron pointing away from last crumb                 
+                        }
+                    </span>
+                </Link> 
             )) }
         </div>
         );
