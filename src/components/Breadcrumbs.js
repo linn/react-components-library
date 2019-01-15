@@ -1,14 +1,28 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
-import { Link } from "react-router-dom";
+import { NavLink } from 'react-router-dom'
 import { ChevronRight } from '@material-ui/icons';
+import { withStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+
+
+
+const styles = {
+    root: {
+        width: '100%',
+        paddingTop: '20px',
+        paddingLeft: '10%',
+        paddingLeft: '10%'
+    }
+}
+
 
 class Breadcrumbs extends Component {
 
     render() {
-         const { location, history, rootPathLength = 2 } = this.props;
+        const { location, classes, history, rootPathLength = 2 } = this.props;
 
-         let path = location.pathname;
+        let path = location.pathname;
         if (path.indexOf('/report') > -1) {
             path = path.substring(0, path.indexOf('/report'));
         }
@@ -34,21 +48,24 @@ class Breadcrumbs extends Component {
             }, []);
 
         return (
-        <div>
-           {crumbs.map((crumb, index) => (
-                <Link to={crumb.href} key={index}>           
-                    <span>                 
-                        <Button variant="contained" >
-                            {crumb.caption }   
-                        </Button>                 
-                        {index < crumbs.length -1 ? <ChevronRight/> :false // dont show chevron pointing away from last crumb                 
+            <div className={classes.root}>
+                {crumbs.map((crumb, index) => (
+                    <span>
+                        <NavLink to={crumb.href} key={index}>
+                            <Button variant="contained" >
+                                <Typography variant="subtitle2">
+                                    <strong>{crumb.caption}</strong>
+                                </Typography>
+                            </Button>
+                        </NavLink>
+                        {index < crumbs.length - 1 ? <ChevronRight /> : false // dont show chevron pointing away from last crumb                 
                         }
                     </span>
-                </Link> 
-            )) }
-        </div>
+
+                ))}
+            </div>
         );
     }
 }
 
-export default Breadcrumbs;
+export default withStyles(styles)(Breadcrumbs);;
