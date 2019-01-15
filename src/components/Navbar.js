@@ -9,7 +9,7 @@ import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import MenuPage from "./MenuPage";
 
 let topLevels;
-let menu =require('../../public/menu.json').sections; 
+let menu = require('../../public/menu.json').sections; 
 
 function TabContainer(props) {
     return (
@@ -31,7 +31,7 @@ const styles = theme => ({
     },
  
     tab: {
-        minWidth: 20, // a number of your choice
+        minWidth: 20, 
         width: `calc(100/13)vw`,    },
 
     tabLabel : {
@@ -51,17 +51,22 @@ class Navbar extends React.Component {
     }
 
     handleChange = (event, value) => {
+        
         var id = this.slugify(topLevels[value].title);
         var section = menu.filter(x => x.id === id);
         var columns = section[0].columns;
         var categoriesListArray = [];
+
         columns.forEach(function (column) {
             categoriesListArray.push(column.categories);
         });
+
         var lists = [];
+
         categoriesListArray.forEach(function (categoriesList) {
             lists.push(categoriesList);
         });
+
         this.setState({
             value: value,
             lists: lists
@@ -77,11 +82,6 @@ class Navbar extends React.Component {
     handleClick = () => {
         this.setState({ selected: false });
     };
-
-    getTopLevelMenu = () => {
-        var topLevel = menu.map(x => ({ id: x.id, title: x.title, link: x.links[0].href }));
-        return topLevel;
-    }
 
     handleClickAway = () => {
         this.setState({
