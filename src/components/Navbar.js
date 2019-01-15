@@ -101,8 +101,8 @@ class Navbar extends React.Component {
                             <Tabs
                                 value={value}
                                 onChange={this.handleChange}
-                                variant="scrollable"
-                                scrollButtons="auto"
+                                scrollable
+                                scrollButtons="on"
                                 indicatorColor="primary"
                                 textColor="primary"
                             >
