@@ -22,7 +22,7 @@ const styles = theme => ({
 });
 
 class MenuList extends React.Component {
-  
+
   state = {
     open: false
   };
@@ -38,20 +38,20 @@ class MenuList extends React.Component {
         component="nav"
         className={classes.root}
       >
-        
+
         <ListItem button onClick={this.handleClick} >
           <ListItemText> {title}</ListItemText>
           {this.state.open ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
-        
+
         <Collapse in={this.state.open} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
             {entries.map((entry, index) => (
-              entry.showInMenu ? (<span key={index}>
-                
-                <ListItem key={entry.title} button className={classes.nested} onClick={() => { window.location.href = (window.APPLICATION_SETTINGS.proxyRoot + entry.href) }} >
-                  <ListItemText primary={entry.title}  />
-                </ListItem>  </span>) : <span />
+              entry.showInMenu ? (
+                <a key={entry.title} href={ entry.href}>
+                  <ListItem key={entry.title + index} button className={classes.nested}  >
+                    <ListItemText  primary={entry.title} />
+                  </ListItem> </a>) : <span key={entry.title}/>
             ))}
           </List>
         </Collapse>

@@ -9,6 +9,7 @@ import MiniLoading from "./src/components/MiniLoading";
 import Dropdown from "./src/components/Dropdown";
 import ErrorCard from "./src/components/ErrorCard";
 import CheckboxWithLabel from "./src/components/CheckboxWithLabel";
+import Navbar from "./src/components/Navbar";
 
 export {
     Breadcrumbs, 
@@ -21,5 +22,6 @@ export {
     ReportTable, 
     ExportButton,
     Loading,
-    MiniLoading
+    MiniLoading,
+    Navbar
 };

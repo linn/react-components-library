@@ -41,7 +41,7 @@ const styles = theme => ({
 
 class Navbar extends React.Component {
     state = {
-        value: null,
+        value: false,
     };
 
     constructor(props) {
@@ -51,7 +51,6 @@ class Navbar extends React.Component {
     }
 
     handleChange = (event, value) => {
-
         var id = this.slugify(topLevels[value].title);
         var section = menu.filter(x => x.id === id);
         var columns = section[0].columns;
@@ -86,7 +85,7 @@ class Navbar extends React.Component {
 
     handleClickAway = () => {
         this.setState({
-            value: -1,
+            value: false,
         });
     };
 
@@ -107,12 +106,12 @@ class Navbar extends React.Component {
                                 indicatorColor="primary"
                                 textColor="primary"
                             >
-                                {topLevels.map((item) => (
-                                    <Tab classes={{ root: classes.tab }} label={<span className={classes.tabLabel}>{item.title}</span>} selected={false} />
+                                {topLevels.map((item, index) => (
+                                    <Tab key={index} classes={{ root: classes.tab }} label={<span className={classes.tabLabel}>{item.title}</span>} selected={false} />
                                 ))}
                             </Tabs>
                         </AppBar>
-                        {this.state.lists  && this.state.value >= 0 ?
+                        {this.state.lists  && ( this.state.value || this.state.value === 0) ?
                         <TabContainer>
                               <MenuPage lists={this.state.lists} /> 
                         </TabContainer> : false }
