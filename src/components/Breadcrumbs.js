@@ -5,8 +5,6 @@ import { ChevronRight } from '@material-ui/icons';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 
-
-
 const styles = {
     root: {
         width: '100%',
@@ -15,7 +13,6 @@ const styles = {
         paddingLeft: '10%'
     }
 }
-
 
 class Breadcrumbs extends Component {
 
