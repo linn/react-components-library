@@ -5,6 +5,7 @@ import { text } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 import { Grid } from '@material-ui/core';
 import InputField from '../components/InputField';
+import moment from 'moment';
 
 const actions = {
     onChange: action('onChange')
@@ -58,7 +59,7 @@ storiesOf('InputField', module)
     ))
     .add('Date', () => (
         <InputField
-            value={text('value', '')}
+            value={text('value', '2011-10-05T14:48:00.000Z')}
             label={text('label', 'Date')}
             name={text('name', 'storybook')}
             type='date'
