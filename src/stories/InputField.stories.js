@@ -5,6 +5,7 @@ import { text } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { Grid } from '@material-ui/core';
 import InputField from '../components/InputField';
+import moment from 'moment';
 
 const actions = {
     onChange: action('onChange')
