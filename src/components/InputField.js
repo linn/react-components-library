@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { TextField, InputAdornment } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
+import moment from 'moment';
 
 const styles = () => ({});
 
@@ -37,7 +38,7 @@ function InputField(props) {
             placeholder={placeholder}
             rows={multiline ? 4 : ''}
             type={type}
-            value={value}
+            value={type === 'date' ? moment(value).format('YYYY-MM-DD') : value}
             onChange={onChange}
             InputLabelProps={{ shrink: true }}
             InputProps={
