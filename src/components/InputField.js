@@ -31,11 +31,7 @@ class InputField extends Component {
             value: val
         }));
 
-        if (propertyName) {
-            onChange(value, propertyName);
-        } else {
-            onChange(value);
-        }
+        onChange(value, propertyName);
     }
 
     render() {
