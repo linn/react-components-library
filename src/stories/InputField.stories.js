@@ -17,23 +17,16 @@ storiesOf('InputField', module)
         <InputField
             value={text('value', 'Value')}
             label={text('label', 'Input Field')}
-            name={text('name', 'storybook')}
             {...actions}
         />
     ))
     .add('Label no value', () => (
-        <InputField
-            value={text('value', '')}
-            label={text('label', 'No Value')}
-            name={text('name', 'storybook')}
-            {...actions}
-        />
+        <InputField value={text('value', '')} label={text('label', 'No Value')} {...actions} />
     ))
     .add('Full width', () => (
         <InputField
             value={text('value', 'Full Width')}
             label={text('label', 'Full Width')}
-            name={text('name', 'storybook')}
             fullWidth
             {...actions}
         />
@@ -42,25 +35,17 @@ storiesOf('InputField', module)
         <InputField
             value={text('value', 'Error')}
             label={text('label', 'Error')}
-            name={text('name', 'storybook')}
             error
             {...actions}
         />
     ))
     .add('Disabled', () => (
-        <InputField
-            value={text('value', 'Disabled')}
-            label={text('label', 'Disabled')}
-            name={text('name', 'storybook')}
-            disabled
-            {...actions}
-        />
+        <InputField value={text('value', 'Disabled')} label={text('label', 'Disabled')} disabled />
     ))
     .add('Date', () => (
         <InputField
             value={text('value', '2011-10-05T14:48:00.000Z')}
             label={text('label', 'Date')}
-            name={text('name', 'storybook')}
             type="date"
             {...actions}
         />
@@ -69,7 +54,6 @@ storiesOf('InputField', module)
         <InputField
             value={text('value', '123.45')}
             label={text('label', 'Number')}
-            name={text('name', 'storybook')}
             type="number"
             {...actions}
         />
@@ -78,7 +62,6 @@ storiesOf('InputField', module)
         <InputField
             value={text('value', 'With adornment')}
             label={text('label', 'With adornment')}
-            name={text('name', 'storybook')}
             adornment="$"
             {...actions}
         />
@@ -87,7 +70,6 @@ storiesOf('InputField', module)
         <InputField
             value={text('value', 'Multiline')}
             label={text('label', 'Multiline')}
-            name={text('name', 'storybook')}
             multiline
             {...actions}
         />
@@ -100,7 +82,6 @@ storiesOf('InputField', module)
                         <InputField
                             value={text('value', 'value')}
                             label={text('label', 'Normal Spacing')}
-                            name={text('name', 'storybook')}
                             {...actions}
                         />
                     </Grid>
@@ -108,7 +89,6 @@ storiesOf('InputField', module)
                         <InputField
                             value={text('value', 'value')}
                             label={text('label', 'Normal Spacing')}
-                            name={text('name', 'storybook')}
                             {...actions}
                         />
                     </Grid>
@@ -116,7 +96,6 @@ storiesOf('InputField', module)
                         <InputField
                             value={text('value', 'value')}
                             label={text('label', 'Normal Spacing')}
-                            name={text('name', 'storybook')}
                             {...actions}
                         />
                     </Grid>
@@ -124,7 +103,6 @@ storiesOf('InputField', module)
                         <InputField
                             value={text('value', 'value')}
                             label={text('label', 'Normal Spacing')}
-                            name={text('name', 'storybook')}
                             {...actions}
                         />
                     </Grid>
@@ -140,7 +118,6 @@ storiesOf('InputField', module)
                         <InputField
                             value={text('value', 'value')}
                             label={text('label', 'Compact Spacing')}
-                            name={text('name', 'storybook')}
                             margin="dense"
                             {...actions}
                         />
@@ -149,7 +126,6 @@ storiesOf('InputField', module)
                         <InputField
                             value={text('value', 'value')}
                             label={text('label', 'Compact Spacing')}
-                            name={text('name', 'storybook')}
                             margin="dense"
                             {...actions}
                         />
@@ -158,7 +134,6 @@ storiesOf('InputField', module)
                         <InputField
                             value={text('value', 'value')}
                             label={text('label', 'Compact Spacing')}
-                            name={text('name', 'storybook')}
                             margin="dense"
                             {...actions}
                         />
@@ -167,7 +142,6 @@ storiesOf('InputField', module)
                         <InputField
                             value={text('value', 'value')}
                             label={text('label', 'Compact Spacing')}
-                            name={text('name', 'storybook')}
                             margin="dense"
                             {...actions}
                         />

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { TextField, InputAdornment } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
@@ -6,53 +6,86 @@ import moment from 'moment';
 
 const styles = () => ({});
 
-function InputField(props) {
-    const {
-        adornment,
-        classes,
-        disabled,
-        error,
-        fullWidth,
-        helperText,
-        label,
-        margin,
-        multiline,
-        name,
-        placeholder,
-        type,
-        value,
-        onChange
-    } = props;
+class InputField extends Component {
+    constructor(props) {
+        super(props);
+        const { value } = this.props;
 
-    return (
-        <TextField
-            className={classes.root}
-            disabled={disabled}
-            error={error}
-            fullWidth={fullWidth}
-            helperText={helperText}
-            label={label}
-            margin={margin}
-            multiline={multiline}
-            name={name}
-            placeholder={placeholder}
-            rows={multiline ? 4 : ''}
-            type={type}
-            value={type === 'date' ? moment(value).format('YYYY-MM-DD') : value}
-            onChange={onChange}
-            InputLabelProps={{ shrink: true }}
-            InputProps={
-                adornment
-                    ? {
-                          startAdornment: (
-                              <InputAdornment position="start">{adornment}</InputAdornment>
-                          )
-                      }
-                    : {}
-            }
-            variant="outlined"
-        />
-    );
+        this.state = {
+            value
+        };
+    }
+
+    onChange(e, type) {
+        const { onChange, propertyName } = this.props;
+        const { value } = e.target;
+
+        const val =
+            type === 'date'
+                ? moment(value)
+                      .utc()
+                      .format()
+                : value;
+
+        this.setState(() => ({
+            value: val
+        }));
+
+        if (propertyName) {
+            onChange(value, propertyName);
+        } else {
+            onChange(value);
+        }
+    }
+
+    render() {
+        const {
+            adornment,
+            classes,
+            disabled,
+            error,
+            fullWidth,
+            helperText,
+            label,
+            margin,
+            multiline,
+            name,
+            placeholder,
+            type
+        } = this.props;
+
+        const { value } = this.state;
+
+        return (
+            <TextField
+                className={classes.root}
+                disabled={disabled}
+                error={error}
+                fullWidth={fullWidth}
+                helperText={helperText}
+                label={label}
+                margin={margin}
+                multiline={multiline}
+                name={name}
+                placeholder={placeholder}
+                rows={multiline ? 4 : ''}
+                type={type}
+                value={type === 'date' ? moment(value).format('YYYY-MM-DD') : value}
+                onChange={e => this.onChange(e, type)}
+                InputLabelProps={{ shrink: true }}
+                InputProps={
+                    adornment
+                        ? {
+                              startAdornment: (
+                                  <InputAdornment position="start">{adornment}</InputAdornment>
+                              )
+                          }
+                        : {}
+                }
+                variant="outlined"
+            />
+        );
+    }
 }
 
 InputField.propTypes = {
@@ -65,12 +98,15 @@ InputField.propTypes = {
     label: PropTypes.string.isRequired,
     margin: PropTypes.string,
     multiline: PropTypes.bool,
-    name: PropTypes.string.isRequired,
+    name: PropTypes.string,
     placeholder: PropTypes.string,
+    propertyName: PropTypes.string,
     type: PropTypes.string,
     value: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired
 };
+
+// property name not required any more -  do i need onchange?
 
 InputField.defaultProps = {
     adornment: '',
@@ -80,7 +116,9 @@ InputField.defaultProps = {
     helperText: '',
     margin: 'normal',
     multiline: false,
+    name: '',
     placeholder: '',
+    propertyName: '',
     type: 'text'
 };
 

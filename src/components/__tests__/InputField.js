@@ -11,7 +11,6 @@ describe('<InputField />', () => {
     beforeEach(() => {
         props = {
             label: 'label',
-            name: 'name',
             value: 'value',
             onChange: () => {}
         };
