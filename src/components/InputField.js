@@ -106,8 +106,6 @@ InputField.propTypes = {
     onChange: PropTypes.func.isRequired
 };
 
-// property name not required any more -  do i need onchange?
-
 InputField.defaultProps = {
     adornment: '',
     disabled: false,
