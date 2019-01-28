@@ -108,7 +108,7 @@ class Typeahead extends Component {
 Typeahead.propTypes = {
     items: PropTypes.arrayOf(
         PropTypes.shape({
-            id: PropTypes.string,
+            id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
             name: PropTypes.string,
             description: PropTypes.string,
             href: PropTypes.string
