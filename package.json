@@ -30,7 +30,10 @@
     "setupTestFrameworkScriptFile": "./src/setupTests.js"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "react-app",
+    "env": {
+      "browser": true
+    }
   },
   "browserslist": [
     ">0.2%",
