@@ -87,7 +87,7 @@ class Typeahead extends Component {
                         {items.map(item => (
                             <ListItem key={item.id} button component="a" href={item.href}>
                                 <Typography style={{ fontWeight: 600, width: 140 }}>
-                                    {item.id}
+                                    {item.name}
                                 </Typography>
                                 <Typography>{item.description}</Typography>
                             </ListItem>
@@ -106,7 +106,14 @@ class Typeahead extends Component {
 }
 
 Typeahead.propTypes = {
-    items: PropTypes.arrayOf(PropTypes.object).isRequired,
+    items: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.string,
+            name: PropTypes.string,
+            description: PropTypes.string,
+            href: PropTypes.string
+        })
+    ).isRequired,
     title: PropTypes.string,
     loading: PropTypes.bool,
     classes: PropTypes.shape({}).isRequired,
