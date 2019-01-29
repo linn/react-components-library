@@ -15,19 +15,22 @@ import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 const styles = theme => ({
   root: {
     width: "100%",  
-    minWidth: '700px',
+    minWidth: "fit-content",
   },
   table: {
-    margin: theme.spacing.unit * 3,
   },
 });
 
 const theme = createMuiTheme({
     overrides: {
+      MuiTable :{
+        root: {
+            maxWidth: "inherit"
+        }
+      },
       MuiTableCell: {
         body: {
           fontSize:"12px",
-
         },
         head: {
           fontSize:"14px"
@@ -75,7 +78,7 @@ const ReportTable = (
                                 <TableHead key="headers">
                                 <TableRow>
                                     {showRowTitles ? (
-                                        <TableCell className={getTableHeaderClassNames(false, fixColumnWidths, '')}/>) : null}
+                                        <TableCell />) : null}
                                     {reportData.headers.columnHeaders.map((header, i) => (
                                         <TableCell key={i}>
                                                 {header}
