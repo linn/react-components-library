@@ -9,17 +9,23 @@ import MiniLoading from "./src/components/MiniLoading";
 import Dropdown from "./src/components/Dropdown";
 import ErrorCard from "./src/components/ErrorCard";
 import CheckboxWithLabel from "./src/components/CheckboxWithLabel";
+import Title from "./src/components/Title";
+import InputField from './src/components/InputField';
+import Typeahead from './src/components/Typeahead';
 
 export {
-    Breadcrumbs, 
-    BackButton, 
+    Breadcrumbs,
+    BackButton,
     CheckboxWithLabel,
     Dropdown,
     ErrorCard,
-    FormField, 
-    SaveCancelButtons, 
-    ReportTable, 
+    FormField,
+    SaveCancelButtons,
+    ReportTable,
     ExportButton,
     Loading,
-    MiniLoading
+    MiniLoading,
+    Title,
+    InputField,
+    Typeahead
 };
