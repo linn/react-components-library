@@ -11,31 +11,32 @@ import { reportResultType } from '../propTypes/index'
 import PropTypes from 'prop-types';
 import { createMuiTheme } from '@material-ui/core/styles';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import Title from './Title';
 
 const styles = theme => ({
-  root: {
-    width: "100%",  
-    minWidth: "fit-content",
-  },
-  table: {
-  },
+    root: {
+        width: "100%",
+        minWidth: "fit-content",
+    },
+    table: {
+    },
 });
 
 const theme = createMuiTheme({
     overrides: {
-      MuiTable :{
-        root: {
-            maxWidth: "inherit"
-        }
-      },
-      MuiTableCell: {
-        body: {
-          fontSize:"12px",
+        MuiTable: {
+            root: {
+                maxWidth: "inherit"
+            }
         },
-        head: {
-          fontSize:"14px"
+        MuiTableCell: {
+            body: {
+                fontSize: "12px",
+            },
+            head: {
+                fontSize: "14px"
+            }
         }
-      }
     }
 });
 
@@ -68,51 +69,52 @@ const ReportTable = (
         showRowTitles = true
     }) => (
         <MuiThemeProvider theme={theme}>
-        <Paper className={classes.root}>
-            {formatTitle(title, showTitle, !reportData, reportData && reportData.error, reportData ? reportData.reportHelpText : null)}
-            {!reportData
-                ? <Placeholder rows={placeholderRows} columns={placeholderColumns} /> :
-                reportData.error ? displayError(reportData.message)
-                    : <div style={{backgroundColor: "white"}}>
-                        <Table className={styles.table}>
+            <Paper className={classes.root}>
+                <Title
+                    text={formatTitle(title, showTitle, !reportData, reportData && reportData.error, reportData ? reportData.reportHelpText : null)} />
+                {!reportData
+                    ? <Placeholder rows={placeholderRows} columns={placeholderColumns} /> :
+                    reportData.error ? displayError(reportData.message)
+                        : <div style={{ backgroundColor: "white" }}>
+                            <Table className={styles.table}>
                                 <TableHead key="headers">
-                                <TableRow>
-                                    {showRowTitles ? (
-                                        <TableCell />) : null}
-                                    {reportData.headers.columnHeaders.map((header, i) => (
-                                        <TableCell key={i}>
+                                    <TableRow>
+                                        {showRowTitles ? (
+                                            <TableCell />) : null}
+                                        {reportData.headers.columnHeaders.map((header, i) => (
+                                            <TableCell key={i}>
                                                 {header}
-                                        </TableCell>))}
-                                </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                {reportData.results.map((item, j) => (
-                                    <TableRow key={j} >
-                                        {showRowTitles ? (<TableCell className="single-line-field" data-tip={item.rowTitle.displayString}>{setDrilldown(item.rowTitle)}</TableCell>) : null}
-                                        {item.values
-                                            .map((value, i) => (
-                                            <TableCell 
-                                                key={i}>{setValueDrilldown(value)}{setTextValueDrilldown(value)}
                                             </TableCell>))}
                                     </TableRow>
-                                ))}
+                                </TableHead>
+                                <TableBody>
+                                    {reportData.results.map((item, j) => (
+                                        <TableRow key={j} >
+                                            {showRowTitles ? (<TableCell className="single-line-field" data-tip={item.rowTitle.displayString}>{setDrilldown(item.rowTitle)}</TableCell>) : null}
+                                            {item.values
+                                                .map((value, i) => (
+                                                    <TableCell
+                                                        key={i}>{setValueDrilldown(value)}{setTextValueDrilldown(value)}
+                                                    </TableCell>))}
+                                        </TableRow>
+                                    ))}
 
-                                {showTotals
-                                    ? (<TableRow key="totals">
-                                        {showRowTitles ? (<TableCell>{reportData.totals.rowTitle.displayString}</TableCell>) : null}
-                                        {reportData.totals.values
-                                            .map((value, i) => (
-                                            <TableCell 
-                                                key={i}>{setValueDrilldown(value)}
-                                            </TableCell>))}
-                                    </TableRow>)
-                                    : false
-                                }
-                            </TableBody>
-                        </Table>
-                    </div>
-            }
-        </Paper>
+                                    {showTotals
+                                        ? (<TableRow key="totals">
+                                            {showRowTitles ? (<TableCell>{reportData.totals.rowTitle.displayString}</TableCell>) : null}
+                                            {reportData.totals.values
+                                                .map((value, i) => (
+                                                    <TableCell
+                                                        key={i}>{setValueDrilldown(value)}
+                                                    </TableCell>))}
+                                        </TableRow>)
+                                        : false
+                                    }
+                                </TableBody>
+                            </Table>
+                        </div>
+                }
+            </Paper>
         </MuiThemeProvider>
     );
 
