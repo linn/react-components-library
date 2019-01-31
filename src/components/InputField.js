@@ -7,31 +7,22 @@ import moment from 'moment';
 const styles = () => ({});
 
 class InputField extends Component {
-    constructor(props) {
-        super(props);
-        const { value } = this.props;
-
-        this.state = {
-            value
-        };
-    }
-
-    onChange(e, type) {
+    change(e, type) {
         const { onChange, propertyName } = this.props;
         const { value } = e.target;
 
-        const val =
-            type === 'date'
-                ? moment(value)
-                      .utc()
-                      .format()
-                : value;
+        let val = value;
 
-        this.setState(() => ({
-            value: val
-        }));
+        if (type === 'date') {
+            val = moment(value)
+                .utc()
+                .format();
+        }
 
-        onChange(value, propertyName);
+        if (type === 'number') {
+            val = value || value === 0 ? parseFloat(value) : '';
+        }
+        onChange(propertyName, val);
     }
 
     render() {
@@ -47,10 +38,9 @@ class InputField extends Component {
             multiline,
             name,
             placeholder,
-            type
+            type,
+            value
         } = this.props;
-
-        const { value } = this.state;
 
         return (
             <TextField
@@ -66,8 +56,8 @@ class InputField extends Component {
                 placeholder={placeholder}
                 rows={multiline ? 4 : ''}
                 type={type}
-                value={type === 'date' ? moment(value).format('YYYY-MM-DD') : value}
-                onChange={e => this.onChange(e, type)}
+                value={type === 'date' ? moment(value).format('YYYY-MM-DD') : value || ' '}
+                onChange={e => this.change(e)}
                 InputLabelProps={{ shrink: true }}
                 InputProps={
                     adornment
@@ -98,8 +88,9 @@ InputField.propTypes = {
     placeholder: PropTypes.string,
     propertyName: PropTypes.string,
     type: PropTypes.string,
-    value: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+
+    onChange: PropTypes.func
 };
 
 InputField.defaultProps = {
@@ -113,7 +104,9 @@ InputField.defaultProps = {
     name: '',
     placeholder: '',
     propertyName: '',
-    type: 'text'
+    type: 'text',
+    value: '',
+    onChange: null
 };
 
 export default withStyles(styles)(InputField);
