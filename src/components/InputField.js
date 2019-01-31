@@ -16,16 +16,27 @@ class InputField extends Component {
         };
     }
 
+    componentWillReceiveProps(nextProps) {
+        const { value } = nextProps;
+
+        this.setState({ value });
+    }
+
     onChange(e, type) {
         const { onChange, propertyName } = this.props;
         const { value } = e.target;
 
-        const val =
-            type === 'date'
-                ? moment(value)
-                      .utc()
-                      .format()
-                : value;
+        let val = value;
+
+        if (type === 'date') {
+            val = moment(value)
+                .utc()
+                .format();
+        }
+
+        if (type === 'number') {
+            val = value || value === 0 ? parseFloat(value) : '';
+        }
 
         this.setState(() => ({
             value: val
@@ -72,9 +83,7 @@ class InputField extends Component {
                 InputProps={
                     adornment
                         ? {
-                              startAdornment: (
-                                  <InputAdornment position="start">{adornment}</InputAdornment>
-                              )
+                              startAdornment: (<InputAdornment position="start">{adornment}</InputAdornment>)
                           }
                         : {}
                 }
@@ -98,8 +107,8 @@ InputField.propTypes = {
     placeholder: PropTypes.string,
     propertyName: PropTypes.string,
     type: PropTypes.string,
-    value: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    onChange: PropTypes.func
 };
 
 InputField.defaultProps = {
@@ -113,7 +122,9 @@ InputField.defaultProps = {
     name: '',
     placeholder: '',
     propertyName: '',
-    type: 'text'
+    type: 'text',
+    value: '',
+    onChange: null
 };
 
 export default withStyles(styles)(InputField);
