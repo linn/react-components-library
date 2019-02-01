@@ -6,24 +6,12 @@ import moment from 'moment';
 
 const styles = () => ({});
 
+const hasValue = val => val || val === 0;
+const getValue = val => (hasValue(val) ? val : '');
+
 class InputField extends Component {
-    constructor(props) {
-        super(props);
-        const { value } = this.props;
-
-        this.state = {
-            value
-        };
-    }
-
-    componentWillReceiveProps(nextProps) {
-        const { value } = nextProps;
-
-        this.setState({ value });
-    }
-
-    onChange(e, type) {
-        const { onChange, propertyName } = this.props;
+    change(e) {
+        const { onChange, propertyName, type } = this.props;
         const { value } = e.target;
 
         let val = value;
@@ -35,14 +23,10 @@ class InputField extends Component {
         }
 
         if (type === 'number') {
-            val = value || value === 0 ? parseFloat(value) : '';
+            val = hasValue(value) ? parseFloat(value) : '';
         }
 
-        this.setState(() => ({
-            value: val
-        }));
-
-        onChange(value, propertyName);
+        onChange(propertyName, val);
     }
 
     render() {
@@ -58,10 +42,9 @@ class InputField extends Component {
             multiline,
             name,
             placeholder,
-            type
+            type,
+            value
         } = this.props;
-
-        const { value } = this.state;
 
         return (
             <TextField
@@ -77,13 +60,15 @@ class InputField extends Component {
                 placeholder={placeholder}
                 rows={multiline ? 4 : ''}
                 type={type}
-                value={type === 'date' ? moment(value).format('YYYY-MM-DD') : value}
-                onChange={e => this.onChange(e, type)}
+                value={type === 'date' ? moment(value).format('YYYY-MM-DD') : getValue(value)}
+                onChange={e => this.change(e)}
                 InputLabelProps={{ shrink: true }}
                 InputProps={
                     adornment
                         ? {
-                              startAdornment: (<InputAdornment position="start">{adornment}</InputAdornment>)
+                              startAdornment: (
+                                  <InputAdornment position="start">{adornment}</InputAdornment>
+                              )
                           }
                         : {}
                 }
@@ -108,6 +93,7 @@ InputField.propTypes = {
     propertyName: PropTypes.string,
     type: PropTypes.string,
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+
     onChange: PropTypes.func
 };
 
