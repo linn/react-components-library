@@ -41,7 +41,7 @@ class InputField extends Component {
             helperText,
             label,
             margin,
-            multiline,
+            rows,
             name,
             placeholder,
             type,
@@ -57,10 +57,10 @@ class InputField extends Component {
                 helperText={helperText}
                 label={label}
                 margin={margin}
-                multiline={multiline}
+                multiline={rows > 0}
                 name={name}
                 placeholder={placeholder}
-                rows={multiline ? 4 : ''}
+                rows={rows}
                 type={type}
                 value={type === 'date' ? moment(value).format('YYYY-MM-DD') : getValue(value)}
                 onChange={e => this.change(e)}
@@ -89,7 +89,7 @@ InputField.propTypes = {
     helperText: PropTypes.string,
     label: PropTypes.string.isRequired,
     margin: PropTypes.string,
-    multiline: PropTypes.bool,
+    rows: PropTypes.number,
     name: PropTypes.string,
     placeholder: PropTypes.string,
     propertyName: PropTypes.string,
@@ -106,7 +106,7 @@ InputField.defaultProps = {
     fullWidth: false,
     helperText: '',
     margin: 'normal',
-    multiline: false,
+    rows: null,
     name: '',
     placeholder: '',
     propertyName: '',
