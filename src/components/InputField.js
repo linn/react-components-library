@@ -17,9 +17,11 @@ class InputField extends Component {
         let val = value;
 
         if (type === 'date') {
-            val = moment(value)
-                .utc()
-                .format();
+            val = value
+                ? moment(value)
+                      .utc()
+                      .format()
+                : '';
         }
 
         if (type === 'number') {
