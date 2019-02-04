@@ -66,9 +66,18 @@ Dropdown.propTypes = {
     fullWidth: PropTypes.bool,
     helpText: PropTypes.string,
     label: PropTypes.string.isRequired,
-    items: PropTypes.arrayOf(PropTypes.string),
+    items: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.string),
+        PropTypes.arrayOf(PropTypes.number)
+    ]),
     propertyName: PropTypes.string,
-    value: PropTypes.string,
+    value: props => {
+        const { items, value } = props;
+        if (!items.includes(value)) {
+            return new Error('Please provide a value that is in the items list');
+        }
+        return null;
+    },
     type: PropTypes.string,
     onChange: PropTypes.func.isRequired
 };
