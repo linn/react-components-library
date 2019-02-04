@@ -8,11 +8,9 @@ import Dropdown from '../components/Dropdown';
 
 const actions = {
     onChange: action('onChange')
-}
+};
 
-const items = [
-    'Item One', 'Item Two', 'Item Three'
-];
+const items = ['Item One', 'Item Two', 'Item Three'];
 
 storiesOf('Dropdown', module)
     .addDecorator(story => <div>{story()}</div>)
@@ -20,14 +18,6 @@ storiesOf('Dropdown', module)
     .add('default ', () => (
         <Dropdown
             value={text('value', '')}
-            label={text('label', 'Dropdown Label')}
-            items={array('items', items)}
-            {...actions}
-        />
-    ))
-    .add('item selected ', () => (
-        <Dropdown
-            value={text('value', 'Item One')}
             label={text('label', 'Dropdown Label')}
             items={array('items', items)}
             {...actions}
