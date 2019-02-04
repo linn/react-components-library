@@ -1,6 +1,7 @@
 import BackButton from './src/components/BackButton';
 import ExportButton from './src/components/ExportButton';
 import Breadcrumbs from './src/components/Breadcrumbs';
+import SaveBackCancelButtons from './src/components/SaveBackCancelButtons';
 import SaveCancelButtons from './src/components/SaveCancelButtons';
 import ReportTable from './src/components/ReportTable';
 import Loading from './src/components/Loading';
@@ -18,6 +19,7 @@ export {
     CheckboxWithLabel,
     Dropdown,
     ErrorCard,
+    SaveBackCancelButtons,
     SaveCancelButtons,
     ReportTable,
     ExportButton,
