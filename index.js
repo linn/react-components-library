@@ -11,6 +11,7 @@ import CheckboxWithLabel from './src/components/CheckboxWithLabel';
 import Title from './src/components/Title';
 import InputField from './src/components/InputField';
 import Typeahead from './src/components/Typeahead';
+import Page from './src/components/Page';
 
 export {
     Breadcrumbs,
@@ -21,6 +22,7 @@ export {
     SaveCancelButtons,
     ReportTable,
     ExportButton,
+    Page,
     Loading,
     MiniLoading,
     Title,
