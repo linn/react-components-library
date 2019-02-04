@@ -6,32 +6,29 @@ import moment from 'moment';
 
 const styles = () => ({});
 
+const hasValue = val => val || val === 0;
+const getValue = val => (hasValue(val) ? val : '');
+
 class InputField extends Component {
-    constructor(props) {
-        super(props);
-        const { value } = this.props;
-
-        this.state = {
-            value
-        };
-    }
-
-    onChange(e, type) {
-        const { onChange, propertyName } = this.props;
+    change(e) {
+        const { onChange, propertyName, type } = this.props;
         const { value } = e.target;
 
-        const val =
-            type === 'date'
+        let val = value;
+
+        if (type === 'date') {
+            val = value
                 ? moment(value)
                       .utc()
                       .format()
-                : value;
+                : '';
+        }
 
-        this.setState(() => ({
-            value: val
-        }));
+        if (type === 'number') {
+            val = hasValue(value) ? parseFloat(value) : '';
+        }
 
-        onChange(value, propertyName);
+        onChange(propertyName, val);
     }
 
     render() {
@@ -44,13 +41,12 @@ class InputField extends Component {
             helperText,
             label,
             margin,
-            multiline,
+            rows,
             name,
             placeholder,
-            type
+            type,
+            value
         } = this.props;
-
-        const { value } = this.state;
 
         return (
             <TextField
@@ -61,13 +57,13 @@ class InputField extends Component {
                 helperText={helperText}
                 label={label}
                 margin={margin}
-                multiline={multiline}
+                multiline={rows > 0}
                 name={name}
                 placeholder={placeholder}
-                rows={multiline ? 4 : ''}
+                rows={rows}
                 type={type}
-                value={type === 'date' ? moment(value).format('YYYY-MM-DD') : value}
-                onChange={e => this.onChange(e, type)}
+                value={type === 'date' ? moment(value).format('YYYY-MM-DD') : getValue(value)}
+                onChange={e => this.change(e)}
                 InputLabelProps={{ shrink: true }}
                 InputProps={
                     adornment
@@ -93,13 +89,14 @@ InputField.propTypes = {
     helperText: PropTypes.string,
     label: PropTypes.string.isRequired,
     margin: PropTypes.string,
-    multiline: PropTypes.bool,
+    rows: PropTypes.number,
     name: PropTypes.string,
     placeholder: PropTypes.string,
     propertyName: PropTypes.string,
     type: PropTypes.string,
-    value: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+
+    onChange: PropTypes.func
 };
 
 InputField.defaultProps = {
@@ -109,11 +106,13 @@ InputField.defaultProps = {
     fullWidth: false,
     helperText: '',
     margin: 'normal',
-    multiline: false,
+    rows: null,
     name: '',
     placeholder: '',
     propertyName: '',
-    type: 'text'
+    type: 'text',
+    value: '',
+    onChange: null
 };
 
 export default withStyles(styles)(InputField);
