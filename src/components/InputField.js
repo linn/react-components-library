@@ -25,7 +25,7 @@ class InputField extends Component {
         }
 
         if (type === 'number') {
-            val = hasValue(value) ? parseFloat(value) : '';
+            val = hasValue(value) ? parseFloat(value) : null;
         }
 
         onChange(propertyName, val);

@@ -4,22 +4,22 @@ import { InputLabel, Select } from '@material-ui/core';
 import Dropdown from '../Dropdown';
 
 describe('<Dropdown />', () => {
+    let wrapper;
+    let props;
     const getInputLabel = () => wrapper.find(InputLabel);
     const getSelect = () => wrapper.find(Select);
-    const getMenuItems = () => wrapper.find('WithStyles(MenuItem)');
+    const getMenuItems = () => wrapper.find('option');
     const shallow = createShallow({ dive: true });
-    let wrapper, props;
 
     beforeEach(() => {
         props = {
-            items: [
-                'one', 'two', 'three'
-            ],
+            items: ['one', 'two', 'three'],
             value: 'val',
-            label: 'dropdown label'
+            label: 'dropdown label',
+            onChange: jest.fn()
         };
         wrapper = shallow(<Dropdown {...props} />);
-    })
+    });
 
     describe('when items exist', () => {
         it('should render label', () => {
@@ -29,9 +29,21 @@ describe('<Dropdown />', () => {
 
         it('should render menu items', () => {
             expect(getMenuItems()).toHaveLength(3);
-            expect(getMenuItems().at(0).props().children).toEqual('one');
-            expect(getMenuItems().at(1).props().children).toEqual('two');
-            expect(getMenuItems().at(2).props().children).toEqual('three');
+            expect(
+                getMenuItems()
+                    .at(0)
+                    .props().children
+            ).toEqual('one');
+            expect(
+                getMenuItems()
+                    .at(1)
+                    .props().children
+            ).toEqual('two');
+            expect(
+                getMenuItems()
+                    .at(2)
+                    .props().children
+            ).toEqual('three');
         });
 
         it('should render select', () => {
