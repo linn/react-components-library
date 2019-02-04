@@ -19,33 +19,35 @@ class Breadcrumbs extends Component {
         const { classes, history, rootPathLength = 2 } = this.props;
 
         let path = history.location.pathname;
-        const crumbs = path.split('/').reduce((sofar, crumb, i, list) => {
-            path = list.slice(0, i + 1);
-            const href = path.join('/') || '/';
-            const handleClick = e => {
-                // we should just let the browser handle any paths
-                // shorter than our root path, e.g.the 'Home' path
-                if (path.length > rootPathLength) {
-                    e.preventDefault();
-                    history.push(href);
-                }
-            };
 
-            return [
-                ...sofar,
-                { key: i, caption: crumb || 'Home', href, onClick: e => handleClick(e) }
-            ];
-        }, []);
+        const crumbs = path
+            .split('/')
+            .filter(x => x !== 'report')
+            .reduce((sofar, crumb, i, list) => {
+                path = list.slice(0, i + 1);
+                const href = path.join('/') || '/';
+                const handleClick = e => {
+                    if (path.length > rootPathLength) {
+                        e.preventDefault();
+                        history.push(href);
+                    }
+                };
+
+                return [
+                    ...sofar,
+                    { key: i, caption: crumb || 'Home', href, onClick: e => handleClick(e) }
+                ];
+            }, []);
 
         return (
             <div className={classes.root}>
-                <Typography variant="subtitle2">
+                <Typography variant="button" gutterBottom>
                     {crumbs.map((crumb, index) => (
-                        <span>
-                            <NavLink className={classes.a} to={crumb.href} key={crumb.caption}>
+                        <span key={crumb.caption}>
+                            <NavLink className={classes.a} to={crumb.href}>
                                 <strong>{crumb.caption}</strong>
                             </NavLink>
-                            {index < crumbs.length - 1 ? <strong> {'>'} </strong> : false}
+                            {index < crumbs.length - 1 ? ' / ' : false}
                         </span>
                     ))}
                 </Typography>
