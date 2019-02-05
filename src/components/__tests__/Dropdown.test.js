@@ -14,7 +14,7 @@ describe('<Dropdown />', () => {
     beforeEach(() => {
         props = {
             items: ['one', 'two', 'three'],
-            value: 'val',
+            value: 'two',
             label: 'dropdown label',
             onChange: jest.fn()
         };
@@ -48,7 +48,7 @@ describe('<Dropdown />', () => {
 
         it('should render select', () => {
             expect(getSelect()).toHaveLength(1);
-            expect(getSelect().props().value).toEqual('val');
+            expect(getSelect().props().value).toEqual('two');
         });
     });
 
@@ -60,7 +60,7 @@ describe('<Dropdown />', () => {
 
         it('should render select', () => {
             expect(getSelect()).toHaveLength(1);
-            expect(getSelect().props().value).toEqual('val');
+            expect(getSelect().props().value).toEqual('two');
         });
     });
 });
