@@ -10,12 +10,13 @@ class Dropdown extends Component {
         const { onChange, propertyName, type } = this.props;
         const { value } = e.target;
 
-        let val = value;
+        let val;
 
         if (type === 'number') {
             val = hasValue(value) ? parseFloat(value) : null;
+        } else {
+            val = hasValue(value) ? value : '';
         }
-        val = hasValue(value) ? value : '';
 
         onChange(propertyName, val);
     }
@@ -76,6 +77,7 @@ Dropdown.propTypes = {
         if (!items.includes(value)) {
             return new Error('Please provide a value that is in the items list');
         }
+
         return null;
     },
     type: PropTypes.string,
