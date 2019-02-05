@@ -14,10 +14,12 @@ import InputField from './src/components/InputField';
 import Typeahead from './src/components/Typeahead';
 import Page from './src/components/Page';
 import EntityList from './src/components/EntityList';
+import CreateButton from './src/components/CreateButton';
 
 export {
     Breadcrumbs,
     BackButton,
+    CreateButton,
     CheckboxWithLabel,
     Dropdown,
     ErrorCard,
