@@ -17,7 +17,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "rollup -c -o dist/bundle.min.js",
+    "build": "jest src/ && rollup -c -o dist/bundle.min.js",
     "build-storybook": "build-storybook -s public",
     "test:generate-output": "jest --json --outputFile=jest-test-results.json src/components/__tests__/*",
     "test": "jest src/",
