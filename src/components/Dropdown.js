@@ -3,7 +3,18 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 const hasValue = val => val || val === 0;
+
 const getValue = val => (hasValue(val) ? val : '');
+
+const hasDisplayText = items => items.some(item => item.displayText);
+
+const includesValue = (value, items) => {
+    if (hasDisplayText(items)) {
+        return items.some(item => item.id === value);
+    }
+
+    return items.includes(value);
+};
 
 class Dropdown extends Component {
     change(e) {
@@ -32,6 +43,7 @@ class Dropdown extends Component {
             adornment,
             type
         } = this.props;
+
         return (
             <TextField
                 id="outlined-select-currency-native"
@@ -51,11 +63,17 @@ class Dropdown extends Component {
                 margin="normal"
                 variant="outlined"
             >
-                {items.map(item => (
-                    <option key={item} value={item}>
-                        {item}
-                    </option>
-                ))}
+                {hasDisplayText(items)
+                    ? items.map(item => (
+                          <option key={item.id} value={item.id}>
+                              {item.displayText}
+                          </option>
+                      ))
+                    : items.map(item => (
+                          <option key={item} value={item}>
+                              {item}
+                          </option>
+                      ))}
             </TextField>
         );
     }
@@ -69,12 +87,18 @@ Dropdown.propTypes = {
     label: PropTypes.string.isRequired,
     items: PropTypes.oneOfType([
         PropTypes.arrayOf(PropTypes.string),
-        PropTypes.arrayOf(PropTypes.number)
+        PropTypes.arrayOf(PropTypes.number),
+        PropTypes.arrayOf(
+            PropTypes.shape({
+                id: PropTypes.oneOfType([PropTypes.PropTypes.string, PropTypes.PropTypes.number]),
+                displayText: PropTypes.string
+            })
+        )
     ]),
     propertyName: PropTypes.string,
     value: props => {
         const { items, value } = props;
-        if (!items.includes(value)) {
+        if (!includesValue(value, items)) {
             return new Error('Please provide a value that is in the items list');
         }
 
