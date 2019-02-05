@@ -11,17 +11,17 @@ describe('<Dropdown />', () => {
     const getMenuItems = () => wrapper.find('option');
     const shallow = createShallow({ dive: true });
 
-    beforeEach(() => {
-        props = {
-            items: ['one', 'two', 'three'],
-            value: 'two',
-            label: 'dropdown label',
-            onChange: jest.fn()
-        };
-        wrapper = shallow(<Dropdown {...props} />);
-    });
-
     describe('when items exist', () => {
+        beforeEach(() => {
+            props = {
+                items: ['one', 'two', 'three'],
+                value: 'two',
+                label: 'dropdown label',
+                onChange: jest.fn()
+            };
+            wrapper = shallow(<Dropdown {...props} />);
+        });
+
         it('should render label', () => {
             expect(getInputLabel()).toHaveLength(1);
             expect(getInputLabel().props().children).toEqual('dropdown label');
@@ -52,7 +52,62 @@ describe('<Dropdown />', () => {
         });
     });
 
+    describe('when item objects exist', () => {
+        beforeEach(() => {
+            props = {
+                items: [
+                    { id: 1, displayText: 'one' },
+                    { id: 2, displayText: 'two' },
+                    { id: 3, displayText: 'three' }
+                ],
+                value: 2,
+                label: 'dropdown label',
+                onChange: jest.fn()
+            };
+            wrapper = shallow(<Dropdown {...props} />);
+        });
+
+        it('should render label', () => {
+            expect(getInputLabel()).toHaveLength(1);
+            expect(getInputLabel().props().children).toEqual('dropdown label');
+        });
+
+        it('should render menu items', () => {
+            expect(getMenuItems()).toHaveLength(3);
+            expect(
+                getMenuItems()
+                    .at(0)
+                    .props().children
+            ).toEqual('one');
+            expect(
+                getMenuItems()
+                    .at(1)
+                    .props().children
+            ).toEqual('two');
+            expect(
+                getMenuItems()
+                    .at(2)
+                    .props().children
+            ).toEqual('three');
+        });
+
+        it('should render select', () => {
+            expect(getSelect()).toHaveLength(1);
+            expect(getSelect().props().value).toEqual(2);
+        });
+    });
+
     describe('when there are no items', () => {
+        beforeEach(() => {
+            props = {
+                items: [],
+                value: 'two',
+                label: 'dropdown label',
+                onChange: jest.fn()
+            };
+            wrapper = shallow(<Dropdown {...props} />);
+        });
+
         it('should render label', () => {
             expect(getInputLabel()).toHaveLength(1);
             expect(getInputLabel().props().children).toEqual('dropdown label');
