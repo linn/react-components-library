@@ -13,6 +13,7 @@ import Title from './src/components/Title';
 import InputField from './src/components/InputField';
 import Typeahead from './src/components/Typeahead';
 import Page from './src/components/Page';
+import EntityList from './src/components/EntityList';
 
 export {
     Breadcrumbs,
@@ -29,5 +30,6 @@ export {
     MiniLoading,
     Title,
     InputField,
-    Typeahead
+    Typeahead,
+    EntityList
 };
