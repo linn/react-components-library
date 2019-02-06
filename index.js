@@ -15,6 +15,7 @@ import Typeahead from './src/components/Typeahead';
 import Page from './src/components/Page';
 import EntityList from './src/components/EntityList';
 import CreateButton from './src/components/CreateButton';
+import OnOffSwitch from './src/components/OnOffSwitch';
 
 export {
     Breadcrumbs,
@@ -33,5 +34,6 @@ export {
     Title,
     InputField,
     Typeahead,
-    EntityList
+    EntityList,
+    OnOffSwitch
 };

@@ -4,10 +4,10 @@ import Switch from '@material-ui/core/Switch';
 import PropTypes from 'prop-types';
 
 class OnOffSwitch extends React.Component {
-    change = () => {
+    change() {
         const { onChange, propertyName, value } = this.props;
         onChange(propertyName, !value);
-    };
+    }
 
     render() {
         const { value, label, disabled } = this.props;
