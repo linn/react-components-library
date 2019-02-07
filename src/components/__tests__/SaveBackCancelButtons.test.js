@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import Button from '@material-ui/core/Button';
-import SaveBackCancelButtons from '../SaveCancelButtons';
+import SaveBackCancelButtons from '../SaveBackCancelButtons';
 
 describe('SaveBackCancelButtons', () => {
     it('should render without throwing an error', () => {

@@ -1,17 +1,19 @@
 import React from 'react';
 import { createShallow } from '@material-ui/core/test-utils';
+import { Typography } from '@material-ui/core';
 import Title from '../Title';
 
 describe('<Title />', () => {
-    const getTypography = () => wrapper.find('WithStyles(Typography)');
-    const shallow = createShallow({ dive: true });
-    let wrapper, props;
+    let wrapper;
+    let props;
+    const getTypography = () => wrapper.find(Typography);
+    const shallow = createShallow();
 
     beforeEach(() => {
         props = {
-            text : 'Title Text'
+            text: 'Title Text'
         };
-        wrapper = shallow(<Title{...props} />);
+        wrapper = shallow(<Title {...props} />);
     });
 
     it('should render title', () => {
