@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import { ListItem, InputAdornment, TextField, Typography } from '@material-ui/core';
@@ -77,7 +77,7 @@ class Typeahead extends Component {
         const { title, loading, classes } = this.props;
 
         return (
-            <div>
+            <Fragment>
                 <Title text={title} />
                 <TextField
                     className={classes.halfWidth}
@@ -105,7 +105,7 @@ class Typeahead extends Component {
                     }}
                 />
                 {loading ? <Loading /> : this.results()}
-            </div>
+            </Fragment>
         );
     }
 }
