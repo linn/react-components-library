@@ -1,8 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import { ListItem, InputAdornment, TextField, Typography } from '@material-ui/core';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+
 import Title from './Title';
 import Loading from './Loading';
 
@@ -50,11 +52,32 @@ class Typeahead extends Component {
         }
     }
 
+    results() {
+        const { items } = this.props;
+        if (items.length > 0) {
+            return (
+                <List>
+                    {items.map(item => (
+                        <Link to={item.href}>
+                            <ListItem key={item.id} button>
+                                <Typography style={{ fontWeight: 600, width: 140 }}>
+                                    {item.name}
+                                </Typography>
+                                <Typography>{item.description}</Typography>
+                            </ListItem>
+                        </Link>
+                    ))}
+                </List>
+            );
+        }
+        return <Typography>No matching items</Typography>;
+    }
+
     render() {
-        const { items, title, loading, classes } = this.props;
+        const { title, loading, classes } = this.props;
 
         return (
-            <div>
+            <Fragment>
                 <Title text={title} />
                 <TextField
                     className={classes.halfWidth}
@@ -81,26 +104,8 @@ class Typeahead extends Component {
                         )
                     }}
                 />
-
-                {items.length > 0 ? (
-                    <List>
-                        {items.map(item => (
-                            <ListItem key={item.id} button component="a" href={item.href}>
-                                <Typography style={{ fontWeight: 600, width: 140 }}>
-                                    {item.name}
-                                </Typography>
-                                <Typography>{item.description}</Typography>
-                            </ListItem>
-                        ))}
-                    </List>
-                ) : loading ? (
-                    <Loading />
-                ) : (
-                    <div>
-                        <Typography>No matching items</Typography>
-                    </div>
-                )}
-            </div>
+                {loading ? <Loading /> : this.results()}
+            </Fragment>
         );
     }
 }
