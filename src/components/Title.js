@@ -1,18 +1,15 @@
-import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import React from 'react';
 import { Typography } from '@material-ui/core';
+import PropTypes from 'prop-types';
 
-const styles = theme => ({
-});
+const Title = ({ text }) => (
+    <Typography variant="h4" gutterBottom>
+        {text}
+    </Typography>
+);
 
-class Title extends Component {
-    render() {
-        const { text } = this.props;
+Title.propTypes = {
+    text: PropTypes.string.isRequired
+};
 
-        return (
-            <Typography variant="h4" gutterBottom>{text}</Typography>
-        );
-    }
-}
-
-export default withStyles(styles)(Title);
+export default Title;

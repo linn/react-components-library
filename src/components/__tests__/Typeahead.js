@@ -2,12 +2,13 @@ import React from 'react';
 import { createShallow } from '@material-ui/core/test-utils';
 import { ListItem } from '@material-ui/core';
 import Typeahead from '../Typeahead';
+import Title from '../Title';
 
 describe('<Typeahead />', () => {
     let wrapper;
     let props;
     const getListItem = () => wrapper.find(ListItem);
-    const getTitle = () => wrapper.find('WithStyles(Title)');
+    const getTitle = () => wrapper.find(Title);
     const shallow = createShallow({ dive: true });
 
     beforeEach(() => {
