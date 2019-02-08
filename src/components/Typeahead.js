@@ -24,6 +24,9 @@ const styles = theme => ({
     },
     biggerText: {
         fontSize: 14
+    },
+    a: {
+        textDecoration: 'none !important'
     }
 });
 
@@ -53,12 +56,12 @@ class Typeahead extends Component {
     }
 
     results() {
-        const { items } = this.props;
+        const { items, classes } = this.props;
         if (items.length > 0) {
             return (
                 <List>
                     {items.map(item => (
-                        <Link to={item.href}>
+                        <Link to={item.href} className={classes.a}>
                             <ListItem key={item.id} button>
                                 <Typography style={{ fontWeight: 600, width: 140 }}>
                                     {item.name}
