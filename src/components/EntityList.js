@@ -15,7 +15,7 @@ const EntityList = ({ title, entityList, entityId, descriptionFieldName }) => (
         <List>
             {entityList.map(entity => (
                 <ListItem key={entity[entityId]} component={Link} to={entity.href} button>
-                    <Typography color="primary">
+                    <Typography color="primary" variant="subtitle2">
                         {getListItemtText(entity, entityId, descriptionFieldName)}
                     </Typography>
                 </ListItem>

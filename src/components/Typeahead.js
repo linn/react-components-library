@@ -26,7 +26,7 @@ const styles = theme => ({
         fontSize: 14
     },
     a: {
-        textDecoration: 'none !important'
+        textDecoration: 'none'
     }
 });
 
