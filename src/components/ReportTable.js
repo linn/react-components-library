@@ -1,126 +1,146 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, createMuiTheme } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { formatTitle, displayError, setDrilldown, setValueDrilldown, setTextValueDrilldown } from '../utilities/DisplayUtilities';
-import { reportResultType } from '../propTypes/index'
-import PropTypes from 'prop-types';
-import { createMuiTheme } from '@material-ui/core/styles';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import PropTypes from 'prop-types';
+import {
+    formatTitle,
+    displayError,
+    setDrilldown,
+    setValueDrilldown,
+    setTextValueDrilldown
+} from '../utilities/DisplayUtilities';
+import { reportResultType } from '../propTypes/index';
 import Title from './Title';
 
-const styles = theme => ({
+const styles = () => ({
     root: {
-        width: "100%",
-        minWidth: "fit-content",
+        width: '100%',
+        minWidth: 'fit-content'
     },
-    table: {
-    },
+    table: {}
 });
 
 const theme = createMuiTheme({
     overrides: {
         MuiTable: {
             root: {
-                maxWidth: "inherit"
+                maxWidth: 'inherit'
             }
         },
         MuiTableCell: {
             body: {
-                fontSize: "12px",
+                fontSize: '12px'
             },
             head: {
-                fontSize: "14px"
+                fontSize: '14px'
             }
         }
     }
 });
 
 const Placeholder = ({ rows, columns }) => (
-    <Table >
+    <Table>
         <TableBody>
-            {
-                [...Array(rows).keys()].map((row) => (
-                    <TableRow key={row}>
-                        {[...Array(columns).keys()].map((column) => (
-                            <TableCell key={column}></TableCell>
-                        ))}
-                    </TableRow>
-                ))
-            }
+            {[...Array(rows).keys()].map(row => (
+                <TableRow key={row}>
+                    {[...Array(columns).keys()].map(column => (
+                        <TableCell key={column} />
+                    ))}
+                </TableRow>
+            ))}
         </TableBody>
-    </Table>);
+    </Table>
+);
 
-const ReportTable = (
-    {
-        reportData,
-        classes,
-        title,
-        showTitle = true,
-        showTotals = true,
-        placeholderRows = 5,
-        placeholderColumns = 6,
-        containsSubtotals = false,
-        fixColumnWidths = false,
-        showRowTitles = true
-    }) => (
-        <MuiThemeProvider theme={theme}>
-            <Paper className={classes.root}>
-                <Title
-                    text={formatTitle(title, showTitle, !reportData, reportData && reportData.error, reportData ? reportData.reportHelpText : null)} />
-                {!reportData
-                    ? <Placeholder rows={placeholderRows} columns={placeholderColumns} /> :
-                    reportData.error ? displayError(reportData.message)
-                        : <div style={{ backgroundColor: "white" }}>
-                            <Table className={styles.table}>
-                                <TableHead key="headers">
-                                    <TableRow>
-                                        {showRowTitles ? (
-                                            <TableCell />) : null}
-                                        {reportData.headers.columnHeaders.map((header, i) => (
-                                            <TableCell key={i}>
-                                                {header}
-                                            </TableCell>))}
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {reportData.results.map((item, j) => (
-                                        <TableRow key={j} >
-                                            {showRowTitles ? (<TableCell className="single-line-field" data-tip={item.rowTitle.displayString}>{setDrilldown(item.rowTitle)}</TableCell>) : null}
-                                            {item.values
-                                                .map((value, i) => (
-                                                    <TableCell
-                                                        key={i}>{setValueDrilldown(value)}{setTextValueDrilldown(value)}
-                                                    </TableCell>))}
-                                        </TableRow>
+const ReportTable = ({
+    reportData,
+    classes,
+    title,
+    showTitle = true,
+    showTotals = true,
+    placeholderRows = 5,
+    placeholderColumns = 6,
+    containsSubtotals = false,
+    fixColumnWidths = false,
+    showRowTitles = true
+}) => (
+    <MuiThemeProvider theme={theme}>
+        <Paper className={classes.root}>
+            <Title
+                text={formatTitle(
+                    title,
+                    showTitle,
+                    !reportData,
+                    reportData && reportData.error,
+                    reportData ? reportData.reportHelpText : ''
+                )}
+            />
+            {!reportData ? (
+                <Placeholder rows={placeholderRows} columns={placeholderColumns} />
+            ) : reportData.error ? (
+                displayError(reportData.message)
+            ) : (
+                <div style={{ backgroundColor: 'white' }}>
+                    <Table className={styles.table}>
+                        <TableHead key="headers">
+                            <TableRow>
+                                {showRowTitles ? <TableCell /> : null}
+                                {reportData.headers.columnHeaders.map((header, i) => (
+                                    <TableCell key={i}>{header}</TableCell>
+                                ))}
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {reportData.results.map((item, j) => (
+                                <TableRow key={j}>
+                                    {showRowTitles ? (
+                                        <TableCell
+                                            className="single-line-field"
+                                            data-tip={item.rowTitle.displayString}
+                                        >
+                                            {setDrilldown(item.rowTitle)}
+                                        </TableCell>
+                                    ) : null}
+                                    {item.values.map((value, i) => (
+                                        <TableCell key={i}>
+                                            {setValueDrilldown(value)}
+                                            {setTextValueDrilldown(value)}
+                                        </TableCell>
                                     ))}
+                                </TableRow>
+                            ))}
 
-                                    {showTotals
-                                        ? (<TableRow key="totals">
-                                            {showRowTitles ? (<TableCell>{reportData.totals.rowTitle.displayString}</TableCell>) : null}
-                                            {reportData.totals.values
-                                                .map((value, i) => (
-                                                    <TableCell
-                                                        key={i}>{setValueDrilldown(value)}
-                                                    </TableCell>))}
-                                        </TableRow>)
-                                        : false
-                                    }
-                                </TableBody>
-                            </Table>
-                        </div>
-                }
-            </Paper>
-        </MuiThemeProvider>
-    );
+                            {showTotals ? (
+                                <TableRow key="totals">
+                                    {showRowTitles ? (
+                                        <TableCell>
+                                            {reportData.totals.rowTitle.displayString}
+                                        </TableCell>
+                                    ) : null}
+                                    {reportData.totals.values.map((value, i) => (
+                                        <TableCell key={i}>{setValueDrilldown(value)}</TableCell>
+                                    ))}
+                                </TableRow>
+                            ) : (
+                                false
+                            )}
+                        </TableBody>
+                    </Table>
+                </div>
+            )}
+        </Paper>
+    </MuiThemeProvider>
+);
 
 Table.propTypes = {
     reportData: reportResultType,
-    title: PropTypes.object,
+    title: PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})]),
     showTitle: PropTypes.bool,
     showTotals: PropTypes.bool,
     placeholderRows: PropTypes.number,
@@ -128,7 +148,11 @@ Table.propTypes = {
     containsSubtotals: PropTypes.bool,
     fixColumnWidths: PropTypes.bool,
     showRowTitles: PropTypes.bool
-}
+};
 
+Placeholder.propTypes = {
+    rows: PropTypes.number.isRequired,
+    columns: PropTypes.number.isRequired
+};
 
 export default withStyles(styles)(ReportTable);
