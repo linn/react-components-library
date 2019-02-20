@@ -66,6 +66,14 @@ storiesOf('InputField', module)
             {...actions}
         />
     ))
+    .add('Max length', () => (
+        <InputField
+            value={text('value', 'A')}
+            label={text('label', 'Max Length')}
+            maxLength={1}
+            {...actions}
+        />
+    ))
     .add('Multiline', () => (
         <InputField
             value={text('value', 'Multiline')}
