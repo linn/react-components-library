@@ -61,7 +61,7 @@ class Typeahead extends Component {
             return (
                 <List>
                     {items.map(item => (
-                        <Link to={item.href} className={classes.a}>
+                        <Link key={item.id} to={item.href} className={classes.a}>
                             <ListItem key={item.id} button>
                                 <Typography style={{ fontWeight: 600, width: 140 }}>
                                     {item.name}

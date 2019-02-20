@@ -4,14 +4,16 @@ import { FormControlLabel } from '@material-ui/core';
 import CheckboxWithLabel from '../CheckboxWithLabel';
 
 describe('<CheckboxWithLabel />', () => {
+    let wrapper;
+    let props;
     const getFormControlLabel = () => wrapper.find(FormControlLabel);
     const shallow = createShallow({ dive: true });
-    let wrapper, props;
 
     beforeEach(() => {
         props = {
-            label: 'checkbox label'
-        }
+            label: 'checkbox label',
+            onChange: () => {}
+        };
         wrapper = shallow(<CheckboxWithLabel {...props} />);
     });
 
