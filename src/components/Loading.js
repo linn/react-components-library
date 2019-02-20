@@ -1,7 +1,6 @@
-﻿import React, { Component } from 'react';
+﻿import React from 'react';
 
 export const styles = {
-    
     outer: {
         textAlign: 'center',
         margin: '20px',
@@ -16,11 +15,9 @@ export const styles = {
     }
 };
 
-class Loading extends Component {
-    
-    render() {
-        let styleSheet = document.styleSheets[0];
-        let keyframes =`@keyframes stretchdelay {
+const Loading = () => {
+    const styleSheet = document.styleSheets[0];
+    const keyframes = `@keyframes stretchdelay {
             0%, 40%, 100% {
                 transform: scaleY(0.2);
                 -webkit-transform: scaleY(0.2);
@@ -32,19 +29,18 @@ class Loading extends Component {
             }
         }`;
 
-        styleSheet.insertRule(keyframes, styleSheet.cssRules.length);
-        
-        return (
-            <div style={styles.outer} >
-                <div style={{ ...styles.loading }}></div>{' '}
-                <div style={{ ...styles.loading, animationDelay: '-1.0s' }}></div>{' '}
-                <div style={{ ...styles.loading, animationDelay: '-0.9s' }}></div>{' '}
-                <div style={{ ...styles.loading, animationDelay: '-0.8s' }}></div>{' '}
-                <div style={{ ...styles.loading, animationDelay: '-0.7s' }}></div>{' '}
-                <div style={{ ...styles.loading, animationDelay: '-0.6s' }}></div>
-            </div>
-        );
-    }
-}
+    styleSheet.insertRule(keyframes, styleSheet.cssRules.length);
+
+    return (
+        <div style={styles.outer}>
+            <div style={{ ...styles.loading }} />{' '}
+            <div style={{ ...styles.loading, animationDelay: '-1.0s' }} />{' '}
+            <div style={{ ...styles.loading, animationDelay: '-0.9s' }} />{' '}
+            <div style={{ ...styles.loading, animationDelay: '-0.8s' }} />{' '}
+            <div style={{ ...styles.loading, animationDelay: '-0.7s' }} />{' '}
+            <div style={{ ...styles.loading, animationDelay: '-0.6s' }} />
+        </div>
+    );
+};
 
 export default Loading;

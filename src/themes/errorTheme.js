@@ -5,7 +5,7 @@ export const errorTheme = createMuiTheme({
     palette: {
         background: {
             paper: red[100]
-        },        
+        }
     },
     typography: {
         useNextVariants: true

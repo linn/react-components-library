@@ -2,7 +2,8 @@ import React from 'react';
 import { Typography, Card } from '@material-ui/core';
 import { Error } from '@material-ui/icons';
 import { withStyles, MuiThemeProvider } from '@material-ui/core/styles';
-import { errorTheme } from '../themes/index.js';
+import PropTypes from 'prop-types';
+import { errorTheme } from '../themes/index';
 
 const styles = () => ({
     root: {
@@ -23,12 +24,21 @@ const styles = () => ({
 const ErrorCard = ({ classes, errorMessage }) => (
     <MuiThemeProvider theme={errorTheme}>
         <Card className={classes.root}>
-            <Error color='error' className={classes.icon} />
-            <Typography align='center' className={classes.typography}>
+            <Error color="error" className={classes.icon} />
+            <Typography align="center" className={classes.typography}>
                 {errorMessage}
             </Typography>
         </Card>
     </MuiThemeProvider>
 );
+
+ErrorCard.propTypes = {
+    classes: PropTypes.shape({}),
+    errorMessage: PropTypes.string.isRequired
+};
+
+ErrorCard.defaultProps = {
+    classes: {}
+};
 
 export default withStyles(styles)(ErrorCard);

@@ -1,4 +1,4 @@
-﻿import React, { Component } from 'react';
+﻿import React from 'react';
 
 const styles = {
     outer: {
@@ -15,16 +15,13 @@ const styles = {
         display: 'inline-block'
     }
 };
-class MiniLoading extends Component {
-    render() {
-        return (
-            <div style={styles.outer} >
-                <div style={{ ...styles.loading }}></div>{' '}
-                <div style={{ ...styles.loading, animationDelay: '-1.0s' }}></div>{' '}
-                <div style={{ ...styles.loading, animationDelay: '-0.9s' }}></div>{' '}
-            </div>
-        );
-    }
-}
+
+const MiniLoading = () => (
+    <div style={styles.outer}>
+        <div style={{ ...styles.loading }} />{' '}
+        <div style={{ ...styles.loading, animationDelay: '-1.0s' }} />{' '}
+        <div style={{ ...styles.loading, animationDelay: '-0.9s' }} />{' '}
+    </div>
+);
 
 export default MiniLoading;

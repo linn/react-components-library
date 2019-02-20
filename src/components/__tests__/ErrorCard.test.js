@@ -3,11 +3,12 @@ import { createShallow } from '@material-ui/core/test-utils';
 import ErrorCard from '../ErrorCard';
 
 describe('<ErrorCard />', () => {
+    let wrapper;
+    let props;
     const getCard = () => wrapper.find('WithStyles(Card)');
     const getIcon = () => wrapper.find('pure(ErrorIcon)');
     const getTypography = () => wrapper.find('WithStyles(Typography)');
     const shallow = createShallow({ dive: true });
-    let wrapper, props;
 
     beforeEach(() => {
         props = {
@@ -18,7 +19,7 @@ describe('<ErrorCard />', () => {
 
     it('should render card container', () => {
         expect(getCard()).toHaveLength(1);
-    })
+    });
 
     it('should render error icon', () => {
         expect(getIcon()).toHaveLength(1);
