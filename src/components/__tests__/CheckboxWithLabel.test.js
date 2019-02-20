@@ -11,7 +11,8 @@ describe('<CheckboxWithLabel />', () => {
 
     beforeEach(() => {
         props = {
-            label: 'checkbox label'
+            label: 'checkbox label',
+            onChange: () => {}
         };
         wrapper = shallow(<CheckboxWithLabel {...props} />);
     });

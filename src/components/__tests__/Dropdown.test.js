@@ -96,26 +96,4 @@ describe('<Dropdown />', () => {
             expect(getSelect().props().value).toEqual(2);
         });
     });
-
-    describe('when there are no items', () => {
-        beforeEach(() => {
-            props = {
-                items: [],
-                value: 'two',
-                label: 'dropdown label',
-                onChange: jest.fn()
-            };
-            wrapper = shallow(<Dropdown {...props} />);
-        });
-
-        it('should render label', () => {
-            expect(getInputLabel()).toHaveLength(1);
-            expect(getInputLabel().props().children).toEqual('dropdown label');
-        });
-
-        it('should render select', () => {
-            expect(getSelect()).toHaveLength(1);
-            expect(getSelect().props().value).toEqual('two');
-        });
-    });
 });
