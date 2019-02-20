@@ -41,6 +41,7 @@ class InputField extends Component {
             helperText,
             label,
             margin,
+            maxLength,
             rows,
             name,
             placeholder,
@@ -65,15 +66,14 @@ class InputField extends Component {
                 value={type === 'date' ? moment(value).format('YYYY-MM-DD') : getValue(value)}
                 onChange={e => this.change(e)}
                 InputLabelProps={{ shrink: true }}
-                InputProps={
-                    adornment
-                        ? {
-                              startAdornment: (
-                                  <InputAdornment position="start">{adornment}</InputAdornment>
-                              )
-                          }
-                        : {}
-                }
+                InputProps={{
+                    startAdornment: adornment ? (
+                        <InputAdornment position="start">{adornment}</InputAdornment>
+                    ) : null,
+                    inputProps: {
+                        maxLength
+                    }
+                }}
                 variant="outlined"
             />
         );
@@ -89,6 +89,7 @@ InputField.propTypes = {
     helperText: PropTypes.string,
     label: PropTypes.string.isRequired,
     margin: PropTypes.string,
+    maxLength: PropTypes.number,
     rows: PropTypes.number,
     name: PropTypes.string,
     placeholder: PropTypes.string,
@@ -106,6 +107,7 @@ InputField.defaultProps = {
     fullWidth: false,
     helperText: '',
     margin: 'normal',
+    maxLength: null,
     rows: null,
     name: '',
     placeholder: '',
