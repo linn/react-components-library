@@ -10,7 +10,8 @@ describe('<SnackbarMessage />', () => {
 
     beforeEach(() => {
         props = {
-            message: 'Snackbar message'
+            message: 'Snackbar message',
+            onClose: jest.fn()
         };
         wrapper = shallow(<SnackbarMessage {...props} />);
     });
