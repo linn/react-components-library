@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -14,12 +14,16 @@ const styles = {
     }
 };
 
+const Slash = () => <Fragment> {' / '} </Fragment>;
+
 class Breadcrumbs extends Component {
     render() {
         const { classes, history, rootPathLength = 2 } = this.props;
 
         let path = history.location.pathname;
-
+        if (path.endsWith('/')) {
+            path = path.substring(0, path.length - 1);
+        }
         const crumbs = path
             .split('/')
             .filter(x => x !== 'report')
@@ -43,12 +47,20 @@ class Breadcrumbs extends Component {
             <div className={classes.root}>
                 <Typography variant="button" gutterBottom>
                     {crumbs.map((crumb, index) => (
-                        <span key={crumb.caption}>
-                            <NavLink className={classes.a} to={crumb.href}>
-                                <strong>{crumb.caption}</strong>
-                            </NavLink>
-                            {index < crumbs.length - 1 ? ' / ' : false}
-                        </span>
+                        <Fragment key={crumb.caption}>
+                            {index < crumbs.length - 1 ? (
+                                <span>
+                                    <NavLink className={classes.a} to={crumb.href}>
+                                        <strong>{crumb.caption}</strong>
+                                    </NavLink>
+                                    <Slash />
+                                </span>
+                            ) : (
+                                <span>
+                                    <strong>{crumb.caption}</strong>
+                                </span>
+                            )}
+                        </Fragment>
                     ))}
                 </Typography>
             </div>
