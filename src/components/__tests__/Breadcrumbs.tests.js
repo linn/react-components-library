@@ -27,17 +27,25 @@ describe('<Breadcrumbs />', () => {
             mountedBreadcrumbs = undefined;
         });
 
-        it('renders correct number of breadcrumbs', () => {
-            expect(breadcrumbs().find('NavLink').length).toBe(4); // home/a/test/path
+        it('renders correct number of Breadcrumbs', () => {
+            expect(breadcrumbs().find('span').length).toBe(4); // home/a/test/path, but path isn't a link it's the current page
+        });
+
+        it('renders correct number of Links', () => {
+            expect(breadcrumbs().find('NavLink').length).toBe(3); // last breadcrumb isn't a link
+        });
+
+        it('renders correct number of Slashes', () => {
+            expect(breadcrumbs().find('Slash').length).toBe(3); // last breadcrumb doesn't have a trailing slash
         });
 
         it('renders link to correct url', () => {
             expect(
                 breadcrumbs()
                     .find('NavLink')
-                    .at(3)
+                    .at(2)
                     .props().to
-            ).toEqual('/a/test/path');
+            ).toEqual('/a/test');
 
             // the browser should handle clicks on the first breadcrumb, i.e. the home path
             // i.e. there should not be a call to history.push if the 0th node is clicked
@@ -59,7 +67,7 @@ describe('<Breadcrumbs />', () => {
         });
 
         it('removes report from path before rendering breadcrumbs', () => {
-            expect(breadcrumbs().find('NavLink').length).toBe(4); // should remove report from path: home/a/test/path
+            expect(breadcrumbs().find('span').length).toBe(4); // should remove report from path: home/a/test/path
         });
     });
 });
