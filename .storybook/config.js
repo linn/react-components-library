@@ -8,7 +8,7 @@ addDecorator(
      * name to display in the top left corner
      * @type {String}
      */
-    name: 'Linn React Components',
+    name: 'Linn',
     /**
      * URL for name in top left corner to link to
      * @type {String}
@@ -76,7 +76,8 @@ addDecorator(
      * enable/disable shortcuts
      * @type {Boolean}
      */
-    enableShortcuts: true, // true by default
+    enableShortcuts: true, // true by default,
+    selectedKind: undefined
   })
 );
 
