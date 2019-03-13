@@ -18,8 +18,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "jest src/ && rollup -c -o dist/bundle.min.js",
-    "deploy": "npm run build && npm publish",
-    "build-storybook": "build-storybook -s public",
+    "deploy": "npm run build && npm publish && npm run deploy-storybook",
+    "build-storybook": "build-storybook -c .storybook -o .out",
+    "deploy-storybook": "storybook-to-ghpages -- --out=.out",
     "test:generate-output": "jest --json --outputFile=jest-test-results.json src/components/__tests__/*",
     "test": "jest src/",
     "test:watch": "jest --watch",
@@ -44,7 +45,6 @@
   ],
   "devDependencies": {
     "@babel/core": "^7.2.0",
-    "babel-eslint": "^8.2.6",
     "@storybook/addon-actions": "^4.0.12",
     "@storybook/addon-jest": "^4.1.1",
     "@storybook/addon-knobs": "^4.1.1",
@@ -52,6 +52,8 @@
     "@storybook/addon-options": "^4.0.12",
     "@storybook/addons": "^4.0.12",
     "@storybook/react": "^4.0.12",
+    "@storybook/storybook-deployer": "^2.8.1",
+    "babel-eslint": "^8.2.6",
     "babel-loader": "^8.0.4",
     "babel-preset-react": "^6.24.1",
     "enzyme": "^3.8.0",
