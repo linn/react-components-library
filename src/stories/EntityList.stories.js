@@ -44,4 +44,7 @@ storiesOf('EntityList', module)
             entityId="id"
             descriptionFieldName={text('descriptionFieldName', 'description')}
         />
+    ))
+    .add('with external Links', () => (
+        <EntityList title="Entities" entityList={entities} entityId="id" hasExternalLinks />
     ));
