@@ -7,11 +7,15 @@ import Page from '../components/Page';
 import EntityList from '../components/EntityList';
 
 const entities = [
-    { id: 'First entity', description: 'The first item in the list', href: '/entity/1' },
-    { id: 'Second entity', description: 'The second item in the list', href: '/entity/2' },
-    { id: 'Third entity', description: 'The third item in the list', href: '/entity/3' },
-    { id: 'Fourth entity', description: 'The fourth item in the list', href: '/entity/4' }
+    {
+        id: 'First entity',
+        description: 'This links to a url within this app',
+        href: '/products/maint/entity/1'
+    },
+    { id: 'Second entity', description: 'This links to an external url', href: '/entity/2' }
 ];
+
+const appRoutes = ['/products/maint'];
 
 const pageProps = {
     history: {
@@ -28,6 +32,7 @@ storiesOf('EntityList', module)
     .addDecorator(StoryRouter())
     .add('default ', () => (
         <EntityList
+            appRoutes={appRoutes}
             title="Entities"
             entityList={entities}
             entityId="id"
@@ -36,6 +41,7 @@ storiesOf('EntityList', module)
     ))
     .add('with descriptions', () => (
         <EntityList
+            appRoutes={appRoutes}
             title="Entities"
             entityList={entities}
             entityId="id"

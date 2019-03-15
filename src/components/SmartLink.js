@@ -2,25 +2,30 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const SmartLink = ({ to, appRoutes, text }) => (
-    <Fragment>
-        {appRoutes.some(el => to.startsWith(el)) ? (
-            <Link to={to}>{text}</Link>
-        ) : (
-            <a href={to}> {text} </a>
-        )}
-    </Fragment>
-);
+const SmartLink = WrappedComponent => props => {
+    const { to, appRoutes } = props;
+    return (
+        <Fragment>
+            {appRoutes.some(el => to.startsWith(el)) ? (
+                <Link to={to}>
+                    <WrappedComponent {...props} />
+                </Link>
+            ) : (
+                <a href={to}>
+                    <WrappedComponent {...props} />
+                </a>
+            )}
+        </Fragment>
+    );
+};
 
 SmartLink.defaultProps = {
-    appRoutes: [],
-    text: ''
+    appRoutes: []
 };
 
 SmartLink.propTypes = {
     appRoutes: PropTypes.arrayOf(PropTypes.string),
-    to: PropTypes.string.isRequired,
-    text: PropTypes.string
+    to: PropTypes.string.isRequired
 };
 
 export default SmartLink;
