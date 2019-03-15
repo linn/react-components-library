@@ -9,31 +9,42 @@ const getListItemtText = (entity, entityid, descriptionFieldName) =>
         ? `${entity[entityid]} - ${entity[descriptionFieldName]}`
         : entity[entityid];
 
-const EntityList = ({ title, entityList, entityId, descriptionFieldName }) => (
-    <Fragment>
-        <Title text={title} />
-        <List>
-            {entityList.map(entity => (
-                <ListItem key={entity[entityId]} component={Link} to={entity.href} button>
-                    <Typography color="primary" variant="subtitle2">
-                        {getListItemtText(entity, entityId, descriptionFieldName)}
-                    </Typography>
-                </ListItem>
-            ))}
-        </List>
-    </Fragment>
-);
+function EntityList({ title, entityList, entityId, descriptionFieldName, hasExternalLinks }) {
+    const Component = hasExternalLinks ? 'a' : Link;
+    return (
+        <Fragment>
+            <Title text={title} />
+            <List>
+                {entityList.map(entity => (
+                    <ListItem
+                        key={entity[entityId]}
+                        button
+                        component={Component}
+                        to={entity.href}
+                        href={entity.href}
+                    >
+                        <Typography color="primary" variant="subtitle2">
+                            {getListItemtText(entity, entityId, descriptionFieldName)}
+                        </Typography>
+                    </ListItem>
+                ))}
+            </List>
+        </Fragment>
+    );
+}
 
 EntityList.propTypes = {
     title: PropTypes.string,
     entityId: PropTypes.string.isRequired,
     entityList: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-    descriptionFieldName: PropTypes.string
+    descriptionFieldName: PropTypes.string,
+    hasExternalLinks: PropTypes.bool
 };
 
 EntityList.defaultProps = {
     descriptionFieldName: null,
-    title: ''
+    title: '',
+    hasExternalLinks: false
 };
 
 export default EntityList;

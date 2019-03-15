@@ -1,0 +1,1290 @@
+{
+    "title": {
+        "displayString": "Stock Trigger Levels",
+        "drillDowns": []
+    },
+    "resultType": null,
+    "reportValueType": "Value",
+    "displaySequence": null,
+    "headers": {
+        "rowHeader": null,
+        "columnHeaders": [
+            "Trigger Level",
+            "Max Capacity",
+            "Qty At Location",
+            "Total Qty At EK-2 Locations"
+        ],
+        "varianceRows": [],
+        "varianceColumns": [],
+        "totalColumns": [],
+        "textColumns": [0]
+    },
+    "filterOptions": [],
+    "results": [
+        {
+            "rowTitle": {
+                "displayString": "CAP 324",
+                "drillDowns": [
+                    {
+                        "name": "name",
+                        "href": "/products/reports/stock-trigger-levels/18104/CAP 324"
+                    }
+                ]
+            },
+            "rowSortOrder": 0,
+            "values": [
+                {
+                    "displayValue": 1000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 6000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 0,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 7000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                }
+            ],
+            "rowType": "Value"
+        },
+        {
+            "rowTitle": {
+                "displayString": "CAP 366",
+                "drillDowns": [
+                    {
+                        "name": "name",
+                        "href": "/products/reports/stock-trigger-levels/18104/CAP 366"
+                    }
+                ]
+            },
+            "rowSortOrder": 1,
+            "values": [
+                {
+                    "displayValue": 4000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 32000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 0,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 28000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                }
+            ],
+            "rowType": "Value"
+        },
+        {
+            "rowTitle": {
+                "displayString": "CAP 372",
+                "drillDowns": [
+                    {
+                        "name": "name",
+                        "href": "/products/reports/stock-trigger-levels/18104/CAP 372"
+                    }
+                ]
+            },
+            "rowSortOrder": 2,
+            "values": [
+                {
+                    "displayValue": 4000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 32000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 0,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 28000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                }
+            ],
+            "rowType": "Value"
+        },
+        {
+            "rowTitle": {
+                "displayString": "CAP 409",
+                "drillDowns": [
+                    {
+                        "name": "name",
+                        "href": "/products/reports/stock-trigger-levels/18104/CAP 409"
+                    }
+                ]
+            },
+            "rowSortOrder": 3,
+            "values": [
+                {
+                    "displayValue": 500,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 1500,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 0,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 3000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                }
+            ],
+            "rowType": "Value"
+        },
+        {
+            "rowTitle": {
+                "displayString": "CAP 412",
+                "drillDowns": [
+                    {
+                        "name": "name",
+                        "href": "/products/reports/stock-trigger-levels/18104/CAP 412"
+                    }
+                ]
+            },
+            "rowSortOrder": 4,
+            "values": [
+                {
+                    "displayValue": 500,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 3000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 0,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 8000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                }
+            ],
+            "rowType": "Value"
+        },
+        {
+            "rowTitle": {
+                "displayString": "CAP 516",
+                "drillDowns": [
+                    {
+                        "name": "name",
+                        "href": "/products/reports/stock-trigger-levels/18104/CAP 516"
+                    }
+                ]
+            },
+            "rowSortOrder": 5,
+            "values": [
+                {
+                    "displayValue": 1000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 8000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 0,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 30020,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                }
+            ],
+            "rowType": "Value"
+        },
+        {
+            "rowTitle": {
+                "displayString": "CAP 518",
+                "drillDowns": [
+                    {
+                        "name": "name",
+                        "href": "/products/reports/stock-trigger-levels/18104/CAP 518"
+                    }
+                ]
+            },
+            "rowSortOrder": 6,
+            "values": [
+                {
+                    "displayValue": 1000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 8000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 0,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 76000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                }
+            ],
+            "rowType": "Value"
+        },
+        {
+            "rowTitle": {
+                "displayString": "CAP 519",
+                "drillDowns": [
+                    {
+                        "name": "name",
+                        "href": "/products/reports/stock-trigger-levels/18104/CAP 519"
+                    }
+                ]
+            },
+            "rowSortOrder": 7,
+            "values": [
+                {
+                    "displayValue": 10000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 60000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 0,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 160000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                }
+            ],
+            "rowType": "Value"
+        },
+        {
+            "rowTitle": {
+                "displayString": "CAP 585",
+                "drillDowns": [
+                    {
+                        "name": "name",
+                        "href": "/products/reports/stock-trigger-levels/18104/CAP 585"
+                    }
+                ]
+            },
+            "rowSortOrder": 8,
+            "values": [
+                {
+                    "displayValue": 3000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 24000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 0,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 207000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                }
+            ],
+            "rowType": "Value"
+        },
+        {
+            "rowTitle": {
+                "displayString": "CAP 586",
+                "drillDowns": [
+                    {
+                        "name": "name",
+                        "href": "/products/reports/stock-trigger-levels/18104/CAP 586"
+                    }
+                ]
+            },
+            "rowSortOrder": 9,
+            "values": [
+                {
+                    "displayValue": 3000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 18000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 0,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 155000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                }
+            ],
+            "rowType": "Value"
+        },
+        {
+            "rowTitle": {
+                "displayString": "CAP 587",
+                "drillDowns": [
+                    {
+                        "name": "name",
+                        "href": "/products/reports/stock-trigger-levels/18104/CAP 587"
+                    }
+                ]
+            },
+            "rowSortOrder": 10,
+            "values": [
+                {
+                    "displayValue": 4000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 32000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 0,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 52000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                }
+            ],
+            "rowType": "Value"
+        },
+        {
+            "rowTitle": {
+                "displayString": "CONN 1528",
+                "drillDowns": [
+                    {
+                        "name": "name",
+                        "href": "/products/reports/stock-trigger-levels/18104/CONN 1528"
+                    }
+                ]
+            },
+            "rowSortOrder": 11,
+            "values": [
+                {
+                    "displayValue": 100,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 200,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 0,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 175,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                }
+            ],
+            "rowType": "Value"
+        },
+        {
+            "rowTitle": {
+                "displayString": "CONN 1549",
+                "drillDowns": [
+                    {
+                        "name": "name",
+                        "href": "/products/reports/stock-trigger-levels/18104/CONN 1549"
+                    }
+                ]
+            },
+            "rowSortOrder": 12,
+            "values": [
+                {
+                    "displayValue": 100,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 200,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 0,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 250,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                }
+            ],
+            "rowType": "Value"
+        },
+        {
+            "rowTitle": {
+                "displayString": "CONN 1550",
+                "drillDowns": [
+                    {
+                        "name": "name",
+                        "href": "/products/reports/stock-trigger-levels/18104/CONN 1550"
+                    }
+                ]
+            },
+            "rowSortOrder": 13,
+            "values": [
+                {
+                    "displayValue": 200,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 100,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 0,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 393,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                }
+            ],
+            "rowType": "Value"
+        },
+        {
+            "rowTitle": {
+                "displayString": "MISS 614",
+                "drillDowns": [
+                    {
+                        "name": "name",
+                        "href": "/products/reports/stock-trigger-levels/18104/MISS 614"
+                    }
+                ]
+            },
+            "rowSortOrder": 14,
+            "values": [
+                {
+                    "displayValue": 3000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 24000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 0,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 81000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                }
+            ],
+            "rowType": "Value"
+        },
+        {
+            "rowTitle": {
+                "displayString": "RES 422",
+                "drillDowns": [
+                    {
+                        "name": "name",
+                        "href": "/products/reports/stock-trigger-levels/18104/RES 422"
+                    }
+                ]
+            },
+            "rowSortOrder": 15,
+            "values": [
+                {
+                    "displayValue": 5000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 40000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 0,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 70000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                }
+            ],
+            "rowType": "Value"
+        },
+        {
+            "rowTitle": {
+                "displayString": "RES 424",
+                "drillDowns": [
+                    {
+                        "name": "name",
+                        "href": "/products/reports/stock-trigger-levels/18104/RES 424"
+                    }
+                ]
+            },
+            "rowSortOrder": 16,
+            "values": [
+                {
+                    "displayValue": 5000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 40000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 0,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 80000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                }
+            ],
+            "rowType": "Value"
+        },
+        {
+            "rowTitle": {
+                "displayString": "RES 425",
+                "drillDowns": [
+                    {
+                        "name": "name",
+                        "href": "/products/reports/stock-trigger-levels/18104/RES 425"
+                    }
+                ]
+            },
+            "rowSortOrder": 17,
+            "values": [
+                {
+                    "displayValue": 20000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 120000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 0,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 80000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                }
+            ],
+            "rowType": "Value"
+        },
+        {
+            "rowTitle": {
+                "displayString": "RES 426",
+                "drillDowns": [
+                    {
+                        "name": "name",
+                        "href": "/products/reports/stock-trigger-levels/18104/RES 426"
+                    }
+                ]
+            },
+            "rowSortOrder": 18,
+            "values": [
+                {
+                    "displayValue": 5000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 40000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 0,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 75000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                }
+            ],
+            "rowType": "Value"
+        },
+        {
+            "rowTitle": {
+                "displayString": "RES 427",
+                "drillDowns": [
+                    {
+                        "name": "name",
+                        "href": "/products/reports/stock-trigger-levels/18104/RES 427"
+                    }
+                ]
+            },
+            "rowSortOrder": 19,
+            "values": [
+                {
+                    "displayValue": 5000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 40000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 0,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 110000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                }
+            ],
+            "rowType": "Value"
+        },
+        {
+            "rowTitle": {
+                "displayString": "RES 429",
+                "drillDowns": [
+                    {
+                        "name": "name",
+                        "href": "/products/reports/stock-trigger-levels/18104/RES 429"
+                    }
+                ]
+            },
+            "rowSortOrder": 20,
+            "values": [
+                {
+                    "displayValue": 10000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 60000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 0,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 60000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                }
+            ],
+            "rowType": "Value"
+        },
+        {
+            "rowTitle": {
+                "displayString": "RES 445",
+                "drillDowns": [
+                    {
+                        "name": "name",
+                        "href": "/products/reports/stock-trigger-levels/18104/RES 445"
+                    }
+                ]
+            },
+            "rowSortOrder": 21,
+            "values": [
+                {
+                    "displayValue": 5000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 40000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 0,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 60000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                }
+            ],
+            "rowType": "Value"
+        },
+        {
+            "rowTitle": {
+                "displayString": "RES 449",
+                "drillDowns": [
+                    {
+                        "name": "name",
+                        "href": "/products/reports/stock-trigger-levels/18104/RES 449"
+                    }
+                ]
+            },
+            "rowSortOrder": 22,
+            "values": [
+                {
+                    "displayValue": 5000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 40000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 0,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 40000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                }
+            ],
+            "rowType": "Value"
+        },
+        {
+            "rowTitle": {
+                "displayString": "RES 465",
+                "drillDowns": [
+                    {
+                        "name": "name",
+                        "href": "/products/reports/stock-trigger-levels/18104/RES 465"
+                    }
+                ]
+            },
+            "rowSortOrder": 23,
+            "values": [
+                {
+                    "displayValue": 10000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 20000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 0,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 100000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                }
+            ],
+            "rowType": "Value"
+        },
+        {
+            "rowTitle": {
+                "displayString": "RES 485",
+                "drillDowns": [
+                    {
+                        "name": "name",
+                        "href": "/products/reports/stock-trigger-levels/18104/RES 485"
+                    }
+                ]
+            },
+            "rowSortOrder": 24,
+            "values": [
+                {
+                    "displayValue": 10000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 20000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 0,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 30000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                }
+            ],
+            "rowType": "Value"
+        },
+        {
+            "rowTitle": {
+                "displayString": "TRAN 054",
+                "drillDowns": [
+                    {
+                        "name": "name",
+                        "href": "/products/reports/stock-trigger-levels/18104/TRAN 054"
+                    }
+                ]
+            },
+            "rowSortOrder": 25,
+            "values": [
+                {
+                    "displayValue": 1000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 3000,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 0,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                },
+                {
+                    "displayValue": 978,
+                    "textDisplayValue": null,
+                    "prefix": null,
+                    "suffix": null,
+                    "decimalPlaces": null,
+                    "drillDowns": []
+                }
+            ],
+            "rowType": "Value"
+        }
+    ],
+    "totals": {
+        "rowTitle": {
+            "displayString": "Totals",
+            "drillDowns": []
+        },
+        "rowSortOrder": null,
+        "values": [
+            {
+                "displayValue": 116400,
+                "textDisplayValue": null,
+                "prefix": null,
+                "suffix": null,
+                "decimalPlaces": null,
+                "drillDowns": []
+            },
+            {
+                "displayValue": 712000,
+                "textDisplayValue": null,
+                "prefix": null,
+                "suffix": null,
+                "decimalPlaces": null,
+                "drillDowns": []
+            },
+            {
+                "displayValue": 0,
+                "textDisplayValue": null,
+                "prefix": null,
+                "suffix": null,
+                "decimalPlaces": null,
+                "drillDowns": []
+            },
+            {
+                "displayValue": 1541816,
+                "textDisplayValue": null,
+                "prefix": null,
+                "suffix": null,
+                "decimalPlaces": null,
+                "drillDowns": []
+            }
+        ],
+        "rowType": "Total"
+    },
+    "reportHelpText": null
+}

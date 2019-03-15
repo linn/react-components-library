@@ -1,0 +1,146 @@
+{
+    "title": {
+      "displayString": "Product Ranges",
+      "drillDowns": []
+    },
+    "resultType": null,
+    "reportValueType": "Value",
+    "displaySequence": null,
+    "headers": {
+      "rowHeader": "Id",
+      "columnHeaders": [
+        "Name",
+        "Description"
+      ],
+      "varianceRows": [],
+      "varianceColumns": [],
+      "totalColumns": [],
+      "textColumns": [
+        0,
+        1
+      ]
+    },
+    "filterOptions": [],
+    "results": [
+      {
+        "rowTitle": {
+          "displayString": "2",
+          "drillDowns": []
+        },
+        "rowSortOrder": 0,
+        "values": [
+          {
+            "displayValue": null,
+            "textDisplayValue": "thing",
+            "prefix": null,
+            "suffix": null,
+            "decimalPlaces": null,
+            "drillDowns": [
+              {
+                "name": "sales-products",
+                "href": "/products/reports/sales-products-by-product-range"
+              }
+            ]
+          },
+          {
+            "displayValue": null,
+            "textDisplayValue": "AKURATE PRODUCTS",
+            "prefix": null,
+            "suffix": null,
+            "decimalPlaces": null,
+            "drillDowns": []
+          }
+        ],
+        "rowType": "Value"
+      },
+      {
+        "rowTitle": {
+          "displayString": "10",
+          "drillDowns": []
+        },
+        "rowSortOrder": 1,
+        "values": [
+          {
+            "displayValue": null,
+            "textDisplayValue": "AML",
+            "prefix": null,
+            "suffix": null,
+            "decimalPlaces": null,
+            "drillDowns": [
+              {
+                "name": "sales-products",
+                "href": "/products/reports/sales-products-"
+              }
+            ]
+          },
+          {
+            "displayValue": null,
+            "textDisplayValue": "ASTON MARTIN",
+            "prefix": null,
+            "suffix": null,
+            "decimalPlaces": null,
+            "drillDowns": []
+          }
+        ],
+        "rowType": "Value"
+      },
+      {
+        "rowTitle": {
+          "displayString": "6",
+          "drillDowns": []
+        },
+        "rowSortOrder": 2,
+        "values": [
+          {
+            "displayValue": null,
+            "textDisplayValue": "CLASSIK",
+            "prefix": null,
+            "suffix": null,
+            "decimalPlaces": null,
+            "drillDowns": [
+              {
+                "name": "sales-products",
+                "href": "/products/reports/sales-products-by-produce"
+              }
+            ]
+          },
+          {
+            "displayValue": "wow",
+            "textDisplayValue": "CLASSIK MUSIC",
+            "prefix": null,
+            "suffix": null,
+            "decimalPlaces": null,
+            "drillDowns": []
+          }
+        ],
+        "rowType": "Value"
+      }
+    ],
+    "totals": {
+      "rowTitle": {
+        "displayString": "Totals",
+        "drillDowns": []
+      },
+      "rowSortOrder": null,
+      "values": [
+        {
+          "displayValue": 0,
+          "textDisplayValue": null,
+          "prefix": null,
+          "suffix": null,
+          "decimalPlaces": null,
+          "drillDowns": []
+        },
+        {
+          "displayValue": 0,
+          "textDisplayValue": null,
+          "prefix": null,
+          "suffix": null,
+          "decimalPlaces": null,
+          "drillDowns": []
+        }
+      ],
+      "rowType": "Total"
+    },
+    "reportHelpText": null
+  }

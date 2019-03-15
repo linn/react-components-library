@@ -5,8 +5,7 @@ import EntityList from '../EntityList';
 describe('<EntityList />', () => {
     let wrapper;
     let props;
-    const getListItems = () => wrapper.find('WithStyles(ListItem)');
-    const getListItemText = () => wrapper.find('WithStyles(Typography)');
+    const getListItems = () => wrapper.find('WithStyles(List)');
     const shallow = createShallow({ dive: false });
 
     const entityList = [
@@ -15,42 +14,16 @@ describe('<EntityList />', () => {
         { id: 'three', description: 'The third item in the list', href: '/entity/3' }
     ];
 
-    describe('when no descriptionFieldName supplied', () => {
-        beforeEach(() => {
-            props = {
-                entityList,
-                entityId: 'id',
-                descriptionFieldName: null
-            };
-            wrapper = shallow(<EntityList {...props} />);
-        });
-        it('should render list item ids', () => {
-            expect(getListItems()).toHaveLength(3);
-            expect(
-                getListItemText()
-                    .at(0)
-                    .props().children
-            ).toEqual('one');
-        });
+    beforeEach(() => {
+        props = {
+            entityList,
+            entityId: 'id',
+            descriptionFieldName: null
+        };
+        wrapper = shallow(<EntityList {...props} />);
     });
 
-    describe('when  descriptionFieldName supplied', () => {
-        beforeEach(() => {
-            props = {
-                entityList,
-                entityId: 'id',
-                descriptionFieldName: 'description'
-            };
-            wrapper = shallow(<EntityList {...props} />);
-        });
-
-        it('should render list item ids', () => {
-            expect(getListItems()).toHaveLength(3);
-            expect(
-                getListItemText()
-                    .at(0)
-                    .props().children
-            ).toEqual('one - The first item in the list');
-        });
+    it('should render list items', () => {
+        expect(getListItems().children()).toHaveLength(3);
     });
 });
