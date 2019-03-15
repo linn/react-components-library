@@ -1,39 +1,32 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { List, ListItem, Typography } from '@material-ui/core';
 import Title from './Title';
-import SmartLink from './SmartLink';
 
 const getListItemtText = (entity, entityid, descriptionFieldName) =>
     descriptionFieldName
         ? `${entity[entityid]} - ${entity[descriptionFieldName]}`
         : entity[entityid];
 
-function Entity({ entity, entityId, descriptionFieldName }) {
-    return (
-        <ListItem key={entity[entityId]} button>
-            <Typography color="primary" variant="subtitle2">
-                {getListItemtText(entity, entityId, descriptionFieldName)}
-            </Typography>
-        </ListItem>
-    );
-}
-
-const EntityLink = SmartLink(Entity);
-
-function EntityList({ title, entityList, entityId, descriptionFieldName, appRoutes }) {
+function EntityList({ title, entityList, entityId, descriptionFieldName, hasExternalLinks }) {
+    const Component = hasExternalLinks ? 'a' : Link;
     return (
         <Fragment>
             <Title text={title} />
             <List>
                 {entityList.map(entity => (
-                    <EntityLink
-                        entity={entity}
-                        descriptionFieldName={descriptionFieldName}
-                        entityId={entityId}
+                    <ListItem
+                        key={entity[entityId]}
+                        button
+                        component={Component}
                         to={entity.href}
-                        appRoutes={appRoutes}
-                    />
+                        href={entity.href}
+                    >
+                        <Typography color="primary" variant="subtitle2">
+                            {getListItemtText(entity, entityId, descriptionFieldName)}
+                        </Typography>
+                    </ListItem>
                 ))}
             </List>
         </Fragment>
@@ -41,27 +34,17 @@ function EntityList({ title, entityList, entityId, descriptionFieldName, appRout
 }
 
 EntityList.propTypes = {
-    appRoutes: PropTypes.arrayOf(PropTypes.string),
     title: PropTypes.string,
     entityId: PropTypes.string.isRequired,
     entityList: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-    descriptionFieldName: PropTypes.string
+    descriptionFieldName: PropTypes.string,
+    hasExternalLinks: PropTypes.bool
 };
 
 EntityList.defaultProps = {
     descriptionFieldName: null,
     title: '',
-    appRoutes: []
-};
-
-Entity.propTypes = {
-    entity: PropTypes.shape({}).isRequired,
-    entityId: PropTypes.string.isRequired,
-    descriptionFieldName: PropTypes.string
-};
-
-Entity.defaultProps = {
-    descriptionFieldName: null
+    hasExternalLinks: false
 };
 
 export default EntityList;

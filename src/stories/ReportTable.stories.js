@@ -2,14 +2,13 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import StoryRouter from 'storybook-react-router';
 import { withKnobs } from '@storybook/addon-knobs/react';
-import { boolean, text, array } from '@storybook/addon-knobs';
+import { boolean, text } from '@storybook/addon-knobs';
 import ReportTable from '../components/ReportTable';
 import Page from '../components/Page';
 import small from '../SampleData/ReportTable/small';
 import big from '../SampleData/ReportTable/big';
 import withExternalLinks from '../SampleData/ReportTable/withExternalLinks';
 
-const appRoutes = ['/products/maint', '/products/reports'];
 const pageProps = {
     history: {
         push: () => {},
@@ -24,7 +23,7 @@ const defaultProps = {
     title: text('title', 'Your Report Title'),
     showRowTitles: boolean('showRowTitles', true),
     showTotals: boolean('showTotals', false),
-    appRoutes: array('appRoutes', appRoutes)
+    hasExternalLinks: boolean('showTotals', false)
 };
 
 const stories = storiesOf('ReportTable', module);
@@ -38,7 +37,7 @@ stories.add('With Knobs', () => (
         title={text('title', 'Your Report Title')}
         showRowTitles={boolean('showRowTitles', true)}
         showTotals={boolean('showTotals', false)}
-        appRoutes={array('appRoutes', appRoutes)}
+        hasExternalLinks={boolean('hasExternalLinks', false)}
         reportData={small}
     />
 ));
@@ -52,5 +51,5 @@ stories.add('When Error Message', () => (
 ));
 
 stories.add('When External Links in Report', () => (
-    <ReportTable {...defaultProps} reportData={withExternalLinks} />
+    <ReportTable {...defaultProps} reportData={withExternalLinks} hasExternalLinks />
 ));

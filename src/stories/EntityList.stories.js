@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withKnobs } from '@storybook/addon-knobs/react';
-import { text } from '@storybook/addon-knobs';
+import { text, boolean, object } from '@storybook/addon-knobs';
 import StoryRouter from 'storybook-react-router';
 import Page from '../components/Page';
 import EntityList from '../components/EntityList';
@@ -14,8 +14,6 @@ const entities = [
     },
     { id: 'Second entity', description: 'This links to an external url', href: '/entity/2' }
 ];
-
-const appRoutes = ['/products/maint'];
 
 const pageProps = {
     history: {
@@ -32,16 +30,15 @@ storiesOf('EntityList', module)
     .addDecorator(StoryRouter())
     .add('default ', () => (
         <EntityList
-            appRoutes={appRoutes}
             title="Entities"
-            entityList={entities}
             entityId="id"
             descriptionFieldName={text('descriptionFieldName', null)}
+            hasExternalLinks={boolean('hasExternalLinks', true)}
+            entityList={object('entities', entities)}
         />
     ))
     .add('with descriptions', () => (
         <EntityList
-            appRoutes={appRoutes}
             title="Entities"
             entityList={entities}
             entityId="id"

@@ -46,12 +46,11 @@ const theme = createMuiTheme({
 
 const Results = ({
     reportData,
-    appRoutes,
     classes,
     title,
     showTitle,
     showTotals,
-
+    hasExternalLinks,
     showRowTitles
 }) => (
     <MuiThemeProvider theme={theme}>
@@ -83,13 +82,13 @@ const Results = ({
                                         className="single-line-field"
                                         data-tip={item.rowTitle.displayString}
                                     >
-                                        {setDrilldown(item.rowTitle, appRoutes)}
+                                        {setDrilldown(item.rowTitle, hasExternalLinks)}
                                     </TableCell>
                                 ) : null}
                                 {item.values.map((value, i) => (
                                     <TableCell key={i}>
-                                        {setValueDrilldown(value, appRoutes)}
-                                        {setTextValueDrilldown(value, appRoutes)}
+                                        {setValueDrilldown(value, hasExternalLinks)}
+                                        {setTextValueDrilldown(value, hasExternalLinks)}
                                     </TableCell>
                                 ))}
                             </TableRow>
@@ -104,7 +103,7 @@ const Results = ({
                                 ) : null}
                                 {reportData.totals.values.map((value, i) => (
                                     <TableCell key={i}>
-                                        {setValueDrilldown(value, appRoutes)}
+                                        {setValueDrilldown(value, hasExternalLinks)}
                                     </TableCell>
                                 ))}
                             </TableRow>
@@ -122,7 +121,7 @@ function ReportTable({
     placeholderRows,
     placeholderColumns,
     reportData,
-    appRoutes,
+    hasExternalLinks,
     classes,
     title,
     showTitle,
@@ -149,17 +148,25 @@ function ReportTable({
     if (reportData.message) {
         return <ErrorCard errorMessage={reportData.message} />;
     }
-    return Results({ reportData, appRoutes, classes, title, showRowTitles, showTitle, showTotals });
+    return Results({
+        reportData,
+        hasExternalLinks,
+        classes,
+        title,
+        showRowTitles,
+        showTitle,
+        showTotals
+    });
 }
 
 Results.propTypes = {
+    hasExternalLinks: PropTypes.bool,
     reportData: reportResultType,
     classes: PropTypes.shape({}).isRequired,
     title: PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})]),
     showTitle: PropTypes.bool,
     showTotals: PropTypes.bool,
-    showRowTitles: PropTypes.bool,
-    appRoutes: PropTypes.arrayOf(PropTypes.string)
+    showRowTitles: PropTypes.bool
 };
 
 Results.defaultProps = {
@@ -168,10 +175,11 @@ Results.defaultProps = {
     showTitle: true,
     showTotals: true,
     showRowTitles: true,
-    appRoutes: null
+    hasExternalLinks: false
 };
 
 ReportTable.propTypes = {
+    hasExternalLinks: PropTypes.bool,
     placeholderRows: PropTypes.number.isRequired,
     placeholderColumns: PropTypes.number.isRequired,
     reportData: PropTypes.shape({})
@@ -180,7 +188,8 @@ ReportTable.propTypes = {
 ReportTable.defaultProps = {
     reportData: null,
     placeholderRows: 5,
-    placeholderColumns: 6
+    placeholderColumns: 6,
+    hasExternalLinks: false
 };
 
 export default withStyles(styles)(ReportTable);

@@ -1,11 +1,12 @@
 import React from 'react';
 import Modal from '@material-ui/core/Modal';
 import numeral from 'numeral';
-import SmartLink from '../components/SmartLink';
+import { Link } from 'react-router-dom';
 
-const TextLink = ({ text }) => <span> {text} </span>;
-
-const SmartTextLink = SmartLink(TextLink);
+function LinkOrAnchor({ hasExternalLinks, text, href }) {
+    if (hasExternalLinks) return <a href={href}> {text} </a>;
+    return <Link to={href}> {text}</Link>;
+}
 
 export const format = (i, prefix, suffix, decimalPlaces) => {
     let decimalPlaceTemplate;
@@ -23,7 +24,7 @@ export const format = (i, prefix, suffix, decimalPlaces) => {
     return null;
 };
 
-export const setDrilldown = (item, appRoutes) => {
+export const setDrilldown = (item, hasExternalLinks) => {
     let displayItem;
     let href;
     if (item && item.hasOwnProperty('displayString')) {
@@ -34,9 +35,9 @@ export const setDrilldown = (item, appRoutes) => {
     } else {
         displayItem = item;
     }
-
+    let text = displayItem;
     if (href) {
-        return <SmartTextLink to={href} text={displayItem} appRoutes={appRoutes} />;
+        return LinkOrAnchor({ hasExternalLinks, text, href });
     }
 
     return displayItem;
@@ -83,22 +84,19 @@ export const formatTitle = (title, showTitle, loading, error, helpText) => {
     );
 };
 
-export const setValueDrilldown = (value, appRoutes) => {
+export const setValueDrilldown = (value, hasExternalLinks) => {
     let displayItem;
     if (value && (value.displayValue || value.displayValue === 0)) {
         if (value.drillDowns && value.drillDowns.length > 0) {
-            displayItem = (
-                <SmartTextLink
-                    to={value.drillDowns[0].href}
-                    appRoutes={appRoutes}
-                    text={format(
-                        value.displayValue,
-                        value.prefix,
-                        value.suffix,
-                        value.decimalPlaces
-                    )}
-                />
+            displayItem = format(
+                value.displayValue,
+                value.prefix,
+                value.suffix,
+                value.decimalPlaces
             );
+            let text = value.displayValue;
+            let href = value.drillDowns[0].href;
+            displayItem = LinkOrAnchor({ hasExternalLinks, href, text });
         } else {
             displayItem = format(
                 value.displayValue,
@@ -114,17 +112,13 @@ export const setValueDrilldown = (value, appRoutes) => {
     return displayItem;
 };
 
-export const setTextValueDrilldown = (value, appRoutes) => {
+export const setTextValueDrilldown = (value, hasExternalLinks) => {
     let displayItem;
     if (value && value.textDisplayValue) {
         if (value.drillDowns && value.drillDowns.length > 0) {
-            displayItem = (
-                <SmartTextLink
-                    appRoutes={appRoutes}
-                    text={value.textDisplayValue}
-                    to={value.drillDowns[0].href}
-                />
-            );
+            let text = value.textDisplayValue;
+            let href = value.drillDowns[0].href;
+            displayItem = LinkOrAnchor({ hasExternalLinks, text, href });
         } else {
             displayItem = value.textDisplayValue;
         }
