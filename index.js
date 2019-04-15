@@ -16,6 +16,7 @@ import EntityList from './src/components/EntityList';
 import CreateButton from './src/components/CreateButton';
 import OnOffSwitch from './src/components/OnOffSwitch';
 import SnackbarMessage from './src/components/SnackbarMessage';
+import SearchInputField from './src/components/SearchInputField';
 
 export {
     Breadcrumbs,
@@ -35,5 +36,6 @@ export {
     Typeahead,
     EntityList,
     OnOffSwitch,
-    SnackbarMessage
+    SnackbarMessage,
+    SearchInputField
 };
