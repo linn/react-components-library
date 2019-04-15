@@ -17,6 +17,7 @@ import CreateButton from './src/components/CreateButton';
 import OnOffSwitch from './src/components/OnOffSwitch';
 import SnackbarMessage from './src/components/SnackbarMessage';
 import SearchInputField from './src/components/SearchInputField';
+import useSearch from './src/hooks/useSearch';
 
 export {
     Breadcrumbs,
@@ -37,5 +38,6 @@ export {
     EntityList,
     OnOffSwitch,
     SnackbarMessage,
-    SearchInputField
+    SearchInputField,
+    useSearch
 };
