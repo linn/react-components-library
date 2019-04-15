@@ -1,7 +1,7 @@
 import React from 'react';
 import InputField from './InputField';
 
-function SearchInputField({ adornment, ...props }) {
+function SearchInputField(props) {
     return (
         <InputField
             adornment={
