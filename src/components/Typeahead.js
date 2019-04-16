@@ -1,13 +1,12 @@
 import React, { Component, Fragment } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
-import { ListItem, Typography } from '@material-ui/core';
+import { ListItem, InputAdornment, TextField, Typography } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import Title from './Title';
 import Loading from './Loading';
-import SearchInputField from './SearchInputField';
 
 const styles = theme => ({
     paper: {
@@ -83,13 +82,30 @@ class Typeahead extends Component {
         return (
             <Fragment>
                 <Title text={title} />
-                <SearchInputField
-                    classes={{ root: classes.halfWidth }}
+                <TextField
+                    className={classes.halfWidth}
                     placeholder="Search by id or description"
                     onChange={e => this.handleSearchTermChange(e)}
                     type="search"
                     margin="normal"
                     variant="outlined"
+                    InputProps={{
+                        classes: {
+                            input: classes.biggerText
+                        },
+                        startAdornment: (
+                            <InputAdornment position="start">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+                                </svg>
+                            </InputAdornment>
+                        )
+                    }}
                 />
                 {loading ? <Loading /> : this.results()}
             </Fragment>
