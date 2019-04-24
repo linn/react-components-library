@@ -13,7 +13,7 @@ const styles = () => ({
         margin: 'auto',
         padding: 10
     },
-    icon:{
+    icon: {
         marginRight: 5
     },
     typography: {
