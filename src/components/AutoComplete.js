@@ -1,22 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
-import { withStyles } from '@material-ui/core/styles';
-
-import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
-import MenuItem from '@material-ui/core/MenuItem';
-import Paper from '@material-ui/core/Paper';
-import { emphasize } from '@material-ui/core/styles/colorManipulator';
+import { withStyles, Typography, TextField, MenuItem, Paper } from '@material-ui/core';
 
 const styles = theme => ({
     root: {
-        flexGrow: 1,
-        height: 250
+        flexGrow: 1
     },
     input: {
         display: 'flex',
-        padding: 0
+        padding: 8
     },
     valueContainer: {
         display: 'flex',
@@ -24,15 +17,6 @@ const styles = theme => ({
         flex: 1,
         alignItems: 'center',
         overflow: 'hidden'
-    },
-    chip: {
-        margin: `${theme.spacing.unit / 2}px ${theme.spacing.unit / 4}px`
-    },
-    chipFocused: {
-        backgroundColor: emphasize(
-            theme.palette.type === 'light' ? theme.palette.grey[300] : theme.palette.grey[700],
-            0.08
-        )
     },
     noOptionsMessage: {
         padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`
@@ -47,7 +31,7 @@ const styles = theme => ({
     },
     paper: {
         position: 'absolute',
-        zIndex: 1,
+        zIndex: 200,
         marginTop: theme.spacing.unit,
         left: 0,
         right: 0
@@ -79,6 +63,10 @@ function Control(props) {
     return (
         <TextField
             fullWidth
+            margin="normal"
+            variant="outlined"
+            InputLabelProps={{ shrink: true }}
+            label={selectProps.label}
             InputProps={{
                 inputComponent,
                 inputProps: {
@@ -94,17 +82,9 @@ function Control(props) {
 }
 
 function Option(props) {
-    const { innerRef, isFocused, isSelected, innerProps, children } = props;
+    const { innerRef, isFocused, innerProps, children } = props;
     return (
-        <MenuItem
-            buttonRef={innerRef}
-            selected={isFocused}
-            component="div"
-            style={{
-                fontWeight: isSelected ? 500 : 400
-            }}
-            {...innerProps}
-        >
+        <MenuItem buttonRef={innerRef} selected={isFocused} component="div" {...innerProps}>
             {children}
         </MenuItem>
     );
@@ -159,51 +139,63 @@ const components = {
     ValueContainer
 };
 
-function AutoComplete({ classes, theme, suggestions, disabled, placeholder }) {
-    const [single, setSingle] = useState(null);
-
-    const handleChange = name => value => {
-        setSingle(value);
+class AutoComplete extends React.PureComponent {
+    state = {
+        single: null
     };
 
-    const selectStyles = {
-        input: base => ({
-            ...base,
-            color: theme.palette.text.primary,
-            '& input': {
-                font: 'inherit'
-            }
-        })
+    handleChange = name => value => {
+        const { propertyName, onChange } = this.props;
+        this.setState({
+            [name]: value
+        });
+        onChange(propertyName, value);
     };
 
-    return (
-        <div className={classes.root}>
-            <Select
-                isDisabled={disabled}
-                classes={classes}
-                styles={selectStyles}
-                options={suggestions}
-                components={components}
-                value={single}
-                onChange={handleChange('single')}
-                placeholder={placeholder}
-                isClearable
-            />
-        </div>
-    );
+    render() {
+        const { classes, theme, suggestions, disabled, label } = this.props;
+        const { single } = this.state;
+        const selectStyles = {
+            input: base => ({
+                ...base,
+                color: theme.palette.text.primary,
+                '& input': {
+                    font: 'inherit'
+                }
+            })
+        };
+
+        return (
+            <div className={classes.root}>
+                <Select
+                    isDisabled={disabled}
+                    classes={classes}
+                    styles={selectStyles}
+                    options={suggestions}
+                    label={label}
+                    components={components}
+                    placeholder=""
+                    value={single}
+                    onChange={this.handleChange('single')}
+                    isClearable
+                />
+            </div>
+        );
+    }
 }
 
 AutoComplete.defaultProps = {
-    disabled: false,
-    placeholder: ''
+    disabled: false
 };
 
 AutoComplete.propTypes = {
     classes: PropTypes.shape.isRequired,
     theme: PropTypes.shape.isRequired,
     suggestions: PropTypes.arrayOf(PropTypes.shape).isRequired,
+    propertyName: PropTypes.string.isRequired,
     disabled: PropTypes.bool,
-    placeholder: PropTypes.string
+    label: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired
 };
 
 export default withStyles(styles, { withTheme: true })(AutoComplete);
