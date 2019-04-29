@@ -95,7 +95,7 @@ Dropdown.propTypes = {
             })
         )
     ]),
-    propertyName: PropTypes.string,
+    propertyName: PropTypes.string.isRequired,
     value: props => {
         const { items, value } = props;
         if (!includesValue(value, items)) {
@@ -112,7 +112,6 @@ Dropdown.defaultProps = {
     adornment: '',
     disabled: false,
     fullWidth: false,
-    propertyName: '',
     items: [],
     helpText: '',
     type: 'text',

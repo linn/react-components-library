@@ -10,7 +10,13 @@ describe('SaveBackCancelButtons', () => {
 
     it('should render without throwing an error', () => {
         expect(
-            shallow(<SaveBackCancelButtons cancelClick={cancelClick} backClick={backClick} saveClick={saveClick} />)
+            shallow(
+                <SaveBackCancelButtons
+                    cancelClick={cancelClick}
+                    backClick={backClick}
+                    saveClick={saveClick}
+                />
+            )
                 .dive()
                 .find(Button).length
         ).toBe(2);
