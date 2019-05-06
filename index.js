@@ -20,6 +20,7 @@ import SearchInputField from './src/components/SearchInputField';
 import useSearch from './src/hooks/useSearch';
 
 export {
+    AutoComplete,
     Breadcrumbs,
     BackButton,
     CreateButton,
