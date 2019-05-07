@@ -20,9 +20,13 @@ function useSearch(fetchItems, searchTerm, queryString = null) {
                 clearTimeout(savedDebounceTimer.current);
             }
 
-            setDebounceTimer(
-                setTimeout(() => savedFetchItems.current(queryString, searchTerm), 500)
-            );
+            if (queryString) {
+                setDebounceTimer(
+                    setTimeout(() => savedFetchItems.current(queryString, searchTerm), 500)
+                );
+            } else {
+                setDebounceTimer(setTimeout(() => savedFetchItems.current(searchTerm), 500));
+            }
         } else if (savedDebounceTimer.current) {
             clearTimeout(savedDebounceTimer.current);
         }
