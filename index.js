@@ -18,6 +18,7 @@ import OnOffSwitch from './src/components/OnOffSwitch';
 import SnackbarMessage from './src/components/SnackbarMessage';
 import SearchInputField from './src/components/SearchInputField';
 import useSearch from './src/hooks/useSearch';
+import { AutoComplete } from './src/components/AutoComplete';
 
 export {
     AutoComplete,
