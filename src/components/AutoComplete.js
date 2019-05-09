@@ -152,13 +152,8 @@ export class AutoComplete extends React.PureComponent {
         onChange(propertyName, value);
     };
 
-    handleInputChange = value => {
-        const { onInputChange } = this.props;
-        onInputChange(value);
-    };
-
     render() {
-        const { classes, theme, suggestions, disabled, label } = this.props;
+        const { classes, theme, suggestions, disabled, label, onInputChange } = this.props;
         const { single } = this.state;
         const selectStyles = {
             input: base => ({
@@ -180,7 +175,7 @@ export class AutoComplete extends React.PureComponent {
                     label={label}
                     components={components}
                     placeholder=""
-                    onInputChange={this.handleInputChange}
+                    onInputChange={onInputChange}
                     value={single}
                     onChange={this.handleChange('single')}
                     isClearable
@@ -192,7 +187,7 @@ export class AutoComplete extends React.PureComponent {
 
 AutoComplete.defaultProps = {
     disabled: false,
-    onInputChange: null
+    onInputChange: undefined
 };
 
 AutoComplete.propTypes = {
