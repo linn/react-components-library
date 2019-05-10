@@ -53,11 +53,11 @@ function PaginatedTable({ page, pageLoad, pageSortedLoad, columnNames }) {
             <TableHead>
                 <TableRow>
                     {columnNames.map(columnName => (
-                        <TableCell sortDirection={localOrderBy === columnName.prop ? asc : false}>
+                        <TableCell sortDirection={localOrderBy === columnName.value ? asc : false}>
                             <TableSortLabel
-                                active={localOrderBy === columnName.prop}
+                                active={localOrderBy === columnName.value}
                                 direction={asc ? 'asc' : 'desc'}
-                                onClick={() => createSortHandler(columnName.prop)}
+                                onClick={() => createSortHandler(columnName.value)}
                             >
                                 {columnName.label}
                             </TableSortLabel>
@@ -66,30 +66,23 @@ function PaginatedTable({ page, pageLoad, pageSortedLoad, columnNames }) {
                 </TableRow>
             </TableHead>
             <TableBody>
-                {page.elements &&
-                    page.elements.map((row, index) => (
-                        // there are duplicates in the live database so this is a workaround
-                        // we should not use the index as a key as it will impact on performance when sorting
-                        // eslint-disable-next-line react/no-array-index-key
-                        <Fragment key={row.propId + index}>
-                            <TableRow
-                                style={cursor}
-                                hover
-                                onClick={() => handleRowOnClick(row.propId)}
-                            >
+                {page.rows &&
+                    page.rows.map(row => (
+                        <Fragment key={row.Id}>
+                            <TableRow style={cursor} hover onClick={() => handleRowOnClick(row.Id)}>
                                 <TableCell>
-                                    <Link key={row.propId} to={identifySelfLink(row.propId)}>
+                                    <Link key={row.Id} to={identifySelfLink(row.Id)}>
                                         <EditIcon />
                                     </Link>
                                 </TableCell>
-                                {row.props.map(cell => (
+                                {row.values.map(cell => (
                                     <TableCell component="th" scope="row">
                                         {cell}
                                     </TableCell>
                                 ))}
                             </TableRow>
-                            {rowOpen === row.propId && row.expandableInfo && (
-                                <tr key={row.expandableInfo.propId}>
+                            {rowOpen === row.Id && row.expandableInfo && (
+                                <tr key={row.expandableInfo.Id}>
                                     {row.expandableInfo.elements.map(element => (
                                         <TableCell>
                                             {element.label} {element.value}
@@ -123,17 +116,29 @@ function PaginatedTable({ page, pageLoad, pageSortedLoad, columnNames }) {
 }
 
 PaginatedTable.propTypes = {
-    page: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+    page: PropTypes.shape({
+        rows: PropTypes.arrayOf(
+            PropTypes.shape({
+                Id: PropTypes.string,
+                values: PropTypes.arrayOf(PropTypes.string),
+                expandableInfo: PropTypes.shape({
+                    Id: PropTypes.string,
+                    elements: PropTypes.arrayOf(
+                        PropTypes.shape({
+                            label: PropTypes.string,
+                            value: PropTypes.string
+                        })
+                    )
+                })
+            })
+        ).isRequired,
+        totalItemCount: PropTypes.number.isRequired
+    }).isRequired,
     pageLoad: PropTypes.func.isRequired,
     pageSortedLoad: PropTypes.func.isRequired,
     columnNames: PropTypes.arrayOf(
-        PropTypes.shape({ prop: PropTypes.string, label: PropTypes.string })
-    ).isRequired,
-    pagination: PropTypes.shape({})
-};
-
-PaginatedTable.defaultProps = {
-    pagination: null
+        PropTypes.shape({ value: PropTypes.string, label: PropTypes.string })
+    ).isRequired
 };
 
 export default PaginatedTable;
