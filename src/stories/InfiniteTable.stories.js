@@ -1,17 +1,11 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withKnobs } from '@storybook/addon-knobs/react';
-import { action } from '@storybook/addon-actions';
 
 import { BrowserRouter as Router } from 'react-router-dom';
-import PaginatedTable from '../components/table/PaginatedTable';
+import InfiniteTable from '../components/table/InfiniteTable';
 
-const actions = {
-    pageLoad: action('pageLoad'),
-    pageSortedLoad: action('pageSortedLoad')
-};
-
-const page = {
+const table = {
     rows: [
         {
             Id: 'id1',
@@ -42,6 +36,21 @@ const page = {
     ],
     totalItemCount: 10
 };
+
+const rowsWithoutExpandableInfo = {
+    rows: [
+        {
+            Id: 'id1',
+            values: ['1', '2', '3', '4']
+        },
+        {
+            Id: 'id2',
+            values: ['1', '2', '3', '4']
+        }
+    ],
+    totalItemCount: 10
+};
+
 const columnNames = [
     { value: 'column 1', label: 'column 1-l' },
     { value: 'column 2', label: 'column 2-l' },
@@ -49,28 +58,16 @@ const columnNames = [
     { value: 'column 4', label: 'column 4-l' }
 ];
 
-storiesOf('PaginatedTable', module)
+storiesOf('InfiniteTable', module)
     .addDecorator(story => <div>{story()}</div>)
     .addDecorator(withKnobs)
     .add('default ', () => (
         <Router>
-            <PaginatedTable
-                page={page}
-                sortable={false}
-                columnNames={columnNames}
-                pageLoad={actions.pageLoad}
-                pageSortedLoad={actions.pageSortedLoad}
-            />
+            <InfiniteTable table={table} columnNames={columnNames} />
         </Router>
     ))
-    .add('with sorting enabled', () => (
+    .add('with no expandable rows', () => (
         <Router>
-            <PaginatedTable
-                page={page}
-                sortable
-                columnNames={columnNames}
-                pageLoad={actions.pageLoad}
-                pageSortedLoad={actions.pageSortedLoad}
-            />
+            <InfiniteTable table={rowsWithoutExpandableInfo} columnNames={columnNames} />
         </Router>
     ));

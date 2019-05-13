@@ -1,18 +1,18 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { createShallow } from '@material-ui/core/test-utils';
-import PaginatedTable from '../table/PaginatedTable';
+import InfiniteTable from '../table/InfiniteTable';
 
-describe('<PaginatedTable />', () => {
+describe('<InfiniteTable />', () => {
     let wrapper;
     let props;
-    const getPaginatedTable = () => wrapper.find('Table');
+    const getInfiniteTable = () => wrapper.find('Table');
     const shallow = createShallow();
 
     describe('when items exist', () => {
         beforeEach(() => {
             props = {
-                page: {
+                table: {
                     rows: [
                         {
                             Id: 'id',
@@ -31,8 +31,6 @@ describe('<PaginatedTable />', () => {
                     ],
                     totalItemCount: 10
                 },
-                pageLoad: jest.fn(),
-                pageSortedLoad: jest.fn(),
                 columnNames: [
                     { value: 'id', label: 'id -l' },
                     { value: 'id1', label: 'id -l1' },
@@ -42,13 +40,13 @@ describe('<PaginatedTable />', () => {
             };
             wrapper = shallow(
                 <Router>
-                    <PaginatedTable {...props} />
+                    <InfiniteTable {...props} />
                 </Router>
             );
         });
 
         it('should ', () => {
-            getPaginatedTable();
+            getInfiniteTable();
         });
     });
 });

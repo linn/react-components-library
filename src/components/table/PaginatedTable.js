@@ -11,11 +11,24 @@ import {
     TableSortLabel
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import { withStyles } from '@material-ui/core/styles';
 import EditIcon from '@material-ui/icons/Edit';
 import { getSelfHref } from '../../utilities/Helpers';
-import TablePaginationActionsWrapped from './TablePaginationActions';
+import TablePaginationActions from './TablePaginationActions';
 
-function PaginatedTable({ page, pageLoad, pageSortedLoad, columnNames }) {
+const actionsStyles = theme => ({
+    root: {
+        flexShrink: 0,
+        color: theme.palette.text.secondary,
+        marginLeft: theme.spacing.unit * 2.5
+    }
+});
+
+const TablePaginationActionsWrapped = withStyles(actionsStyles, { withTheme: true })(
+    TablePaginationActions
+);
+
+function PaginatedTable({ page, sortable, pageLoad, pageSortedLoad, columnNames }) {
     const [rowOpen, setRowOpen] = useState();
     const [localPage, setLocalPage] = useState(0);
     const [localOrderBy, setOrderBy] = useState();
@@ -52,17 +65,24 @@ function PaginatedTable({ page, pageLoad, pageSortedLoad, columnNames }) {
         <Table>
             <TableHead>
                 <TableRow>
-                    {columnNames.map(columnName => (
-                        <TableCell sortDirection={localOrderBy === columnName.value ? asc : false}>
-                            <TableSortLabel
-                                active={localOrderBy === columnName.value}
-                                direction={asc ? 'asc' : 'desc'}
-                                onClick={() => createSortHandler(columnName.value)}
+                    {columnNames.map(columnName =>
+                        sortable ? (
+                            <TableCell
+                                sortDirection={localOrderBy === columnName.value ? asc : false}
                             >
-                                {columnName.label}
-                            </TableSortLabel>
-                        </TableCell>
-                    ))}
+                                <TableSortLabel
+                                    active={localOrderBy === columnName.value}
+                                    direction={asc ? 'asc' : 'desc'}
+                                    onClick={() => createSortHandler(columnName.value)}
+                                >
+                                    {columnName.label}
+                                </TableSortLabel>
+                            </TableCell>
+                        ) : (
+                            <TableCell>{columnName.label}</TableCell>
+                        )
+                    )}
+                    <TableCell>Actions</TableCell>
                 </TableRow>
             </TableHead>
             <TableBody>
@@ -70,16 +90,16 @@ function PaginatedTable({ page, pageLoad, pageSortedLoad, columnNames }) {
                     page.rows.map(row => (
                         <Fragment key={row.Id}>
                             <TableRow style={cursor} hover onClick={() => handleRowOnClick(row.Id)}>
-                                <TableCell>
-                                    <Link key={row.Id} to={identifySelfLink(row.Id)}>
-                                        <EditIcon />
-                                    </Link>
-                                </TableCell>
                                 {row.values.map(cell => (
                                     <TableCell component="th" scope="row">
                                         {cell}
                                     </TableCell>
                                 ))}
+                                <TableCell>
+                                    <Link key={row.Id} to={() => identifySelfLink(row)}>
+                                        <EditIcon />
+                                    </Link>
+                                </TableCell>
                             </TableRow>
                             {rowOpen === row.Id && row.expandableInfo && (
                                 <tr key={row.expandableInfo.Id}>
@@ -134,6 +154,7 @@ PaginatedTable.propTypes = {
         ).isRequired,
         totalItemCount: PropTypes.number.isRequired
     }).isRequired,
+    sortable: PropTypes.bool.isRequired,
     pageLoad: PropTypes.func.isRequired,
     pageSortedLoad: PropTypes.func.isRequired,
     columnNames: PropTypes.arrayOf(
