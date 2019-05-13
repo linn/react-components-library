@@ -45,8 +45,8 @@ describe('<InfiniteTable />', () => {
             );
         });
 
-        it('should ', () => {
-            getInfiniteTable();
+        it('should display the table and populate the rows with the given values ', () => {
+            expect(getInfiniteTable()).toBeDefined();
         });
     });
 });

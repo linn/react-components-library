@@ -47,8 +47,8 @@ describe('<PaginatedTable />', () => {
             );
         });
 
-        it('should ', () => {
-            getPaginatedTable();
+        it('should create a paginated table', () => {
+            expect(getPaginatedTable()).toBeDefined();
         });
     });
 });

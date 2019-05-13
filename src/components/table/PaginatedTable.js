@@ -154,12 +154,16 @@ PaginatedTable.propTypes = {
         ).isRequired,
         totalItemCount: PropTypes.number.isRequired
     }).isRequired,
-    sortable: PropTypes.bool.isRequired,
+    sortable: PropTypes.bool,
     pageLoad: PropTypes.func.isRequired,
     pageSortedLoad: PropTypes.func.isRequired,
     columnNames: PropTypes.arrayOf(
         PropTypes.shape({ value: PropTypes.string, label: PropTypes.string })
     ).isRequired
+};
+
+PaginatedTable.defaultProps = {
+    sortable: false
 };
 
 export default PaginatedTable;

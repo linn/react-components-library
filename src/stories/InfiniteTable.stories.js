@@ -6,36 +6,26 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import InfiniteTable from '../components/table/InfiniteTable';
 
 const table = {
-    rows: [
-        {
-            Id: 'id1',
-            values: ['1', '2', '3', '4'],
-            expandableInfo: {
-                Id: 'id1',
-                elements: [
-                    {
-                        label: 'label',
-                        value: 'value'
-                    }
-                ]
-            }
-        },
-        {
-            Id: 'id2',
-            values: ['1', '2', '3', '4'],
-            expandableInfo: {
-                Id: 'id2',
-                elements: [
-                    {
-                        label: 'label',
-                        value: 'value'
-                    }
-                ]
-            }
-        }
-    ],
-    totalItemCount: 10
+    rows: [],
+    totalItemCount: 100
 };
+
+for (let i = 0; i < 100; i += 1) {
+    const newItem = {
+        Id: `id${i}`,
+        values: [`${i}`, `${i}`, `${i}`, `${i}`],
+        expandableInfo: {
+            Id: `id${i}`,
+            elements: [
+                {
+                    label: 'label',
+                    value: 'value'
+                }
+            ]
+        }
+    };
+    table.rows.push(newItem);
+}
 
 const rowsWithoutExpandableInfo = {
     rows: [
