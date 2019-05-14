@@ -1,12 +1,14 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { Table, TableRow } from '@material-ui/core';
 import { createShallow } from '@material-ui/core/test-utils';
 import PaginatedTable from '../table/PaginatedTable';
 
 describe('<PaginatedTable />', () => {
     let wrapper;
     let props;
-    const getPaginatedTable = () => wrapper.find('Table');
+    const getPaginatedTable = () => wrapper.find(Table);
+    const getRows = () => wrapper.find(TableRow);
     const shallow = createShallow();
 
     describe('when items exist', () => {
@@ -49,6 +51,10 @@ describe('<PaginatedTable />', () => {
 
         it('should create a paginated table', () => {
             expect(getPaginatedTable()).toBeDefined();
+        });
+
+        it('should find one row', () => {
+            expect(getRows()).toBeDefined();
         });
     });
 });
