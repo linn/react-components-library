@@ -81,7 +81,7 @@ class InputField extends Component {
 }
 
 InputField.propTypes = {
-    adornment: PropTypes.string,
+    adornment: PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})]),
     classes: PropTypes.shape({}).isRequired,
     disabled: PropTypes.bool,
     error: PropTypes.bool,
