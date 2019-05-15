@@ -184,7 +184,7 @@ export class AutoComplete extends React.PureComponent {
                     components={components}
                     placeholder=""
                     onInputChange={onInputChange}
-                    value={single}
+                    value={suggestions.length === 1 ? suggestions[0] : single}
                     onChange={this.handleChange('single')}
                     isClearable
                     isLoading={isLoading}
