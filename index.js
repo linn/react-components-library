@@ -21,6 +21,7 @@ import useSearch from './src/hooks/useSearch';
 import AutoComplete from './src/components/AutoComplete';
 import PaginatedTable from './src/components/table/PaginatedTable';
 import InfiniteTable from './src/components/table/InfiniteTable';
+import TypeaheadDialog from './src/components/TypeaheadDialog';
 
 export {
     InfiniteTable,
@@ -45,5 +46,6 @@ export {
     OnOffSwitch,
     SnackbarMessage,
     SearchInputField,
-    useSearch
+    useSearch,
+    TypeaheadDialog
 };
