@@ -162,7 +162,15 @@ export class AutoComplete extends React.PureComponent {
             onInputChange,
             isLoading
         } = this.props;
+
         const { single } = this.state;
+
+        if (suggestions.length === 1) {
+            this.setState({
+                single: suggestions[0]
+            });
+        }
+
         const selectStyles = {
             input: base => ({
                 ...base,
@@ -184,7 +192,7 @@ export class AutoComplete extends React.PureComponent {
                     components={components}
                     placeholder=""
                     onInputChange={onInputChange}
-                    value={single}
+                    value={suggestions.length === 1 ? suggestions[0] : single}
                     onChange={this.handleChange('single')}
                     isClearable
                     isLoading={isLoading}
