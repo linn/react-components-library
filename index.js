@@ -19,8 +19,12 @@ import SnackbarMessage from './src/components/SnackbarMessage';
 import SearchInputField from './src/components/SearchInputField';
 import useSearch from './src/hooks/useSearch';
 import AutoComplete from './src/components/AutoComplete';
+import PaginatedTable from './src/components/table/PaginatedTable';
+import InfiniteTable from './src/components/table/InfiniteTable';
 
 export {
+    InfiniteTable,
+    PaginatedTable,
     AutoComplete,
     Breadcrumbs,
     BackButton,
