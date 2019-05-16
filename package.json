@@ -1,6 +1,6 @@
 {
     "name": "@linn-it/linn-form-components-library",
-    "version": "1.0.25",
+    "version": "1.0.26",
     "private": false,
     "dependencies": {
         "@material-ui/core": "^3.9.3",
@@ -9,8 +9,6 @@
         "moment": "^2.24.0",
         "numeral": "^2.0.6",
         "prop-types": "^15.7.2",
-        "react": "^16.8.6",
-        "react-dom": "^16.8.6",
         "react-router": "^4.3.1",
         "react-router-dom": "^4.3.1",
         "react-scripts": "^2.1.2",
@@ -28,6 +26,10 @@
         "eject": "react-scripts eject",
         "storybook": "start-storybook -p 9009 -s public",
         "eslint-check": "eslint --print-config . | eslint-config-prettier-check"
+    },
+    "peerDependencies": {
+        "react": "^16.8.6",
+        "react-dom": "^16.8.6"
     },
     "jest": {
         "setupTestFrameworkScriptFile": "./src/setupTests.js"
