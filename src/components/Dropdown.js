@@ -47,7 +47,7 @@ class Dropdown extends Component {
 
         return (
             <TextField
-                error
+                error={error}
                 id="outlined-select-currency-native"
                 type={type}
                 select
