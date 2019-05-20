@@ -30,7 +30,7 @@ import ItemType from './src/types/ItemType';
 import CollectionSelectors from './src/selectors/CollectionSelectors';
 import PaginationSelectors from './src/selectors/PaginationSelectors';
 import ItemSelectors from './src/selectors/ItemSelectors';
-import reportSelectors from './src/selectors/reportSelectors';
+import ReportSelectors from './src/selectors/ReportSelectors';
 import fetchErrorSelectors from './src/selectors/fetchErrorSelectors';
 
 export {
@@ -67,6 +67,6 @@ export {
     CollectionSelectors,
     PaginationSelectors,
     ItemSelectors,
-    reportSelectors,
+    ReportSelectors,
     fetchErrorSelectors
 };
