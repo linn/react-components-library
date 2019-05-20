@@ -26,6 +26,7 @@ import { makeActionTypes, makeReportActionTypes } from './src/actions/index';
 import FetchApiActions from './src/actions/FetchApiActions';
 import ReportActions from './src/actions/ReportActions';
 import UpdateApiActions from './src/actions/UpdateApiActions';
+import ItemType from './src/types/ItemType';
 
 export {
     InfiniteTable,
@@ -56,5 +57,6 @@ export {
     makeReportActionTypes,
     FetchApiActions,
     ReportActions,
-    UpdateApiActions
+    UpdateApiActions,
+    ItemType
 };
