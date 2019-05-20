@@ -27,6 +27,11 @@ import FetchApiActions from './src/actions/FetchApiActions';
 import ReportActions from './src/actions/ReportActions';
 import UpdateApiActions from './src/actions/UpdateApiActions';
 import ItemType from './src/types/ItemType';
+import CollectionSelectors from './src/selectors/CollectionSelectors';
+import PaginationSelectors from './src/selectors/PaginationSelectors';
+import ItemSelectors from './src/selectors/ItemSelectors';
+import reportSelectors from './src/selectors/reportSelectors';
+import fetchErrorSelectors from './src/selectors/fetchErrorSelectors';
 
 export {
     InfiniteTable,
@@ -58,5 +63,10 @@ export {
     FetchApiActions,
     ReportActions,
     UpdateApiActions,
-    ItemType
+    ItemType,
+    CollectionSelectors,
+    PaginationSelectors,
+    ItemSelectors,
+    reportSelectors,
+    fetchErrorSelectors
 };
