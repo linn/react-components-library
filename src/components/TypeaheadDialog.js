@@ -24,7 +24,7 @@ const TypeaheadDialog = ({ title, loading, fetchItems, searchItems, onSelect, cl
     const [searchTerm, setSearchTerm] = useState();
     const [dialogOpen, setDialogOpen] = useState(false);
 
-    useSearch(fetchItems, searchTerm);
+    useSearch(fetchItems, searchTerm, clearSearch);
 
     const handleOpen = () => {
         setDialogOpen(true);

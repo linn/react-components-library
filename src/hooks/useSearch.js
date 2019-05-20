@@ -1,10 +1,11 @@
 import { useEffect, useState, useRef } from 'react';
 
-function useSearch(fetchItems, searchTerm, queryString = null) {
+function useSearch(fetchItems, searchTerm, clearSearch, queryString = null) {
     const [debounceTimer, setDebounceTimer] = useState(null);
 
     const savedFetchItems = useRef();
     const savedDebounceTimer = useRef();
+    const savedClearSearch = useRef();
 
     useEffect(() => {
         savedFetchItems.current = fetchItems;
@@ -13,6 +14,10 @@ function useSearch(fetchItems, searchTerm, queryString = null) {
     useEffect(() => {
         savedDebounceTimer.current = debounceTimer;
     }, [debounceTimer]);
+
+    useEffect(() => {
+        savedClearSearch.current = clearSearch;
+    }, [clearSearch]);
 
     useEffect(() => {
         if (searchTerm) {
@@ -30,6 +35,8 @@ function useSearch(fetchItems, searchTerm, queryString = null) {
         } else if (savedDebounceTimer.current) {
             clearTimeout(savedDebounceTimer.current);
         }
+
+        savedClearSearch.current();
     }, [searchTerm, queryString]);
 }
 
