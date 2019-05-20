@@ -22,6 +22,10 @@ import AutoComplete from './src/components/AutoComplete';
 import PaginatedTable from './src/components/table/PaginatedTable';
 import InfiniteTable from './src/components/table/InfiniteTable';
 import TypeaheadDialog from './src/components/TypeaheadDialog';
+import { makeActionTypes, makeReportActionTypes } from './src/actions/index';
+import FetchApiActions from './src/actions/FetchApiActions';
+import ReportActions from './src/actions/ReportActions';
+import UpdateApiActions from './src/actions/UpdateApiActions';
 
 export {
     InfiniteTable,
@@ -47,5 +51,10 @@ export {
     SnackbarMessage,
     SearchInputField,
     useSearch,
-    TypeaheadDialog
+    TypeaheadDialog,
+    makeActionTypes,
+    makeReportActionTypes,
+    FetchApiActions,
+    ReportActions,
+    UpdateApiActions
 };
