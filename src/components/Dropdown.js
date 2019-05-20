@@ -41,11 +41,13 @@ class Dropdown extends Component {
             helpText,
             fullWidth,
             adornment,
-            type
+            type,
+            error
         } = this.props;
 
         return (
             <TextField
+                error={error}
                 id="outlined-select-currency-native"
                 type={type}
                 select
@@ -105,7 +107,8 @@ Dropdown.propTypes = {
         return null;
     },
     type: PropTypes.string,
-    onChange: PropTypes.func.isRequired
+    onChange: PropTypes.func.isRequired,
+    error: PropTypes.bool
 };
 
 Dropdown.defaultProps = {
@@ -115,7 +118,8 @@ Dropdown.defaultProps = {
     items: [],
     helpText: '',
     type: 'text',
-    value: ''
+    value: '',
+    error: false
 };
 
 export default Dropdown;

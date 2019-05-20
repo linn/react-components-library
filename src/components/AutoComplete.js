@@ -59,9 +59,10 @@ function inputComponent({ inputRef, ...props }) {
 }
 
 function Control(props) {
-    const { selectProps, innerRef, children, innerProps } = props;
+    const { selectProps, innerRef, children, innerProps, error } = props;
     return (
         <TextField
+            error={error}
             fullWidth
             margin="normal"
             variant="outlined"

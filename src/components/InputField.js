@@ -74,6 +74,13 @@ class InputField extends Component {
                         maxLength
                     }
                 }}
+                onInput={e => {
+                    if (type === 'number') {
+                        e.target.value = Math.max(0, parseInt(e.target.value, 10))
+                            .toString()
+                            .slice(0, maxLength);
+                    }
+                }}
                 variant="outlined"
             />
         );
