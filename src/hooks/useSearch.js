@@ -16,7 +16,9 @@ function useSearch(fetchItems, searchTerm, clearSearch, queryString = null) {
     }, [debounceTimer]);
 
     useEffect(() => {
-        savedClearSearch.current = clearSearch;
+        if (clearSearch) {
+            savedClearSearch.current = clearSearch;
+        }
     }, [clearSearch]);
 
     useEffect(() => {
@@ -36,7 +38,9 @@ function useSearch(fetchItems, searchTerm, clearSearch, queryString = null) {
             clearTimeout(savedDebounceTimer.current);
         }
 
-        savedClearSearch.current();
+        if (savedClearSearch.current) {
+            savedClearSearch.current();
+        }
     }, [searchTerm, queryString]);
 }
 
