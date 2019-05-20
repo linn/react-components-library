@@ -32,10 +32,10 @@ const styles = theme => ({
     }
 });
 
-function Typeahead({ fetchItems, items, classes, title, loading }) {
+function Typeahead({ fetchItems, items, classes, title, loading, clearSearch }) {
     const [searchTerm, setSearchTerm] = useState('');
 
-    useSearch(fetchItems, searchTerm);
+    useSearch(fetchItems, searchTerm, clearSearch);
 
     const handleSearchTermChange = (...args) => {
         setSearchTerm(args[1]);
@@ -89,7 +89,8 @@ Typeahead.propTypes = {
     title: PropTypes.string,
     loading: PropTypes.bool,
     classes: PropTypes.shape({}).isRequired,
-    fetchItems: PropTypes.func.isRequired
+    fetchItems: PropTypes.func.isRequired,
+    clearSearch: PropTypes.func.isRequired
 };
 
 Typeahead.defaultProps = {
