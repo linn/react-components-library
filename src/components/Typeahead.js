@@ -71,6 +71,7 @@ function Typeahead({ fetchItems, items, classes, title, loading, clearSearch }) 
                 type="search"
                 margin="normal"
                 variant="outlined"
+                value={searchTerm}
             />
             {loading ? <Loading /> : results()}
         </Fragment>
