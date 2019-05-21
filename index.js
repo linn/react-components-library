@@ -32,6 +32,14 @@ import PaginationSelectors from './src/selectors/PaginationSelectors';
 import ItemSelectors from './src/selectors/ItemSelectors';
 import ReportSelectors from './src/selectors/ReportSelectors';
 import fetchErrorSelectors from './src/selectors/fetchErrorSelectors';
+import collectionStoreFactory from './src/reducers/reducerFactories/collectionStoreFactory';
+import itemStoreFactory from './src/reducers/reducerFactories/itemStoreFactory';
+import paginationStoreFactory from './src/reducers/reducerFactories/paginationStoreFactory';
+import reportOptionsFactory from './src/reducers/reducerFactories/reportOptionsFactory';
+import reportResultsFactory from './src/reducers/reducerFactories/reportResultsFactory';
+import fetchErrorReducer from './src/reducers/fetchErrorReducer';
+import { getHref } from './src/utilities/index';
+import { getSelfHref } from './src/utilities/index';
 
 export {
     InfiniteTable,
@@ -68,5 +76,13 @@ export {
     PaginationSelectors,
     ItemSelectors,
     ReportSelectors,
-    fetchErrorSelectors
+    fetchErrorSelectors,
+    collectionStoreFactory,
+    itemStoreFactory ,
+    paginationStoreFactory,
+    reportOptionsFactory,
+    reportResultsFactory,
+    fetchErrorReducer,
+    getHref,
+    getSelfHref
 };
