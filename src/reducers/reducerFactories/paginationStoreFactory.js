@@ -1,4 +1,4 @@
-import { getSelfHref } from '../../utilities';
+import { getSelfHref } from '../../utilities/index';
 
 export default function(
     itemRoot,

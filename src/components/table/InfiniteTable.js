@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Table, TableHead, TableBody, TableRow, TableCell } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import EditIcon from '@material-ui/icons/Edit';
-import { getSelfHref } from '../../utilities';
+import { getSelfHref } from '../../utilities/index';
 
 function InfiniteTable({ table, columnNames }) {
     const [rowOpen, setRowOpen] = useState();

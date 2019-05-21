@@ -1,4 +1,4 @@
-import * as actionTypes from '../actions';
+import * as actionTypes from '../actions/index';
 
 const fetchErrorReducer = (state, action) => {
     switch (action.type) {
