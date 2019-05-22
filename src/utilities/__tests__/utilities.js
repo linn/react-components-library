@@ -34,6 +34,30 @@ describe('when getting href', () => {
         });
     });
 
+    describe('when links is null', () => {
+        beforeEach(() => {
+            item = {
+                links: null
+            }
+        });
+
+        test('should not return href', () => {
+            expectedResult = null;
+            expect(getHref(item, 'r3')).toEqual(expectedResult);
+        });
+    });
+
+    describe('when links not present', () => {
+        beforeEach(() => {
+            item = {}
+        });
+
+        test('should not return href', () => {
+            expectedResult = null;
+            expect(getHref(item, 'r3')).toEqual(expectedResult);
+        });
+    });
+
     describe('when object not present', () => {
         beforeEach(() => {
             item = null;
