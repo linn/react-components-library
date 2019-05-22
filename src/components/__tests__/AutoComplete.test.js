@@ -16,7 +16,7 @@ describe('<AutoComplete />', () => {
                 propertyName: 'autoComplete',
                 label: 'auto complete',
                 classes: {},
-                theme: jest.fn()
+                theme: {}
             };
             wrapper = shallow(<AutoComplete {...props} />);
         });
