@@ -210,8 +210,8 @@ AutoComplete.defaultProps = {
 };
 
 AutoComplete.propTypes = {
-    classes: PropTypes.shape.isRequired,
-    theme: PropTypes.shape.isRequired,
+    classes: PropTypes.shape({}).isRequired,
+    theme: PropTypes.shape({}).isRequired,
     suggestions: PropTypes.arrayOf(PropTypes.shape).isRequired,
     propertyName: PropTypes.string.isRequired,
     disabled: PropTypes.bool,

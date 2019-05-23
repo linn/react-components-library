@@ -17,7 +17,8 @@ describe('<Dropdown />', () => {
                 items: ['one', 'two', 'three'],
                 value: 'two',
                 label: 'dropdown label',
-                onChange: jest.fn()
+                onChange: jest.fn(),
+                propertyName: 'dropdownProperty'
             };
             wrapper = shallow(<Dropdown {...props} />);
         });
@@ -62,7 +63,8 @@ describe('<Dropdown />', () => {
                 ],
                 value: 2,
                 label: 'dropdown label',
-                onChange: jest.fn()
+                onChange: jest.fn(),
+                propertyName: 'dropdownProperty'
             };
             wrapper = shallow(<Dropdown {...props} />);
         });

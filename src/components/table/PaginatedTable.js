@@ -13,7 +13,7 @@ import {
 import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import EditIcon from '@material-ui/icons/Edit';
-import { getSelfHref } from '../../utilities/Helpers';
+import { getSelfHref } from '../../utilities/index';
 import TablePaginationActions from './TablePaginationActions';
 
 const actionsStyles = theme => ({
