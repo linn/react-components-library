@@ -44,4 +44,13 @@
 
         return storeItems.searchLoading;
     };
+
+    this.getLinks = state => {
+        const storeItems = state[itemType];
+        if (!storeItems) {
+            return [];
+        }
+
+        return storeItems.links ? storeItems.links : [];
+    };
 }
