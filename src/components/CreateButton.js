@@ -10,9 +10,9 @@ const styles = () => ({
     }
 });
 
-const CreateButton = ({ createUrl, classes, ...other }) => (
+const CreateButton = ({ createUrl, classes, disabled }) => (
     <Link to={createUrl}>
-        <Button color="primary" variant="outlined" className={classes.root} {...other}>
+        <Button color="primary" variant="outlined" className={classes.root} disabled={disabled}>
             Create
         </Button>
     </Link>
@@ -20,7 +20,12 @@ const CreateButton = ({ createUrl, classes, ...other }) => (
 
 CreateButton.propTypes = {
     createUrl: PropTypes.string.isRequired,
-    classes: PropTypes.shape({}).isRequired
+    classes: PropTypes.shape({}).isRequired,
+    disabled: PropTypes.bool
+};
+
+CreateButton.defaultProps = {
+    disabled: false
 };
 
 export default withStyles(styles)(CreateButton);
