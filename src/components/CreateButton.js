@@ -10,9 +10,9 @@ const styles = () => ({
     }
 });
 
-const CreateButton = ({ createUrl, classes }) => (
+const CreateButton = ({ createUrl, classes, ...other }) => (
     <Link to={createUrl}>
-        <Button color="primary" variant="outlined" className={classes.root}>
+        <Button color="primary" variant="outlined" className={classes.root} {...other}>
             Create
         </Button>
     </Link>
