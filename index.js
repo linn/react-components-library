@@ -33,13 +33,14 @@ import ItemSelectors from './src/selectors/ItemSelectors';
 import ReportSelectors from './src/selectors/ReportSelectors';
 import fetchErrorSelectors from './src/selectors/fetchErrorSelectors';
 import collectionStoreFactory from './src/reducers/reducerFactories/collectionStoreFactory';
+import collectionWithLinksStoreFactory from './src/reducers/reducerFactories/collectionWithLinksStoreFactory';
 import itemStoreFactory from './src/reducers/reducerFactories/itemStoreFactory';
 import paginationStoreFactory from './src/reducers/reducerFactories/paginationStoreFactory';
 import reportOptionsFactory from './src/reducers/reducerFactories/reportOptionsFactory';
 import reportResultsFactory from './src/reducers/reducerFactories/reportResultsFactory';
 import fetchErrorReducer from './src/reducers/fetchErrorReducer';
-import { getHref } from './src/utilities/index';
-import { getSelfHref } from './src/utilities/index';
+import { getHref, getSelfHref } from './src/utilities/index';
+import initialiseOnMount from './src/components/common/initialiseOnMount';
 
 export {
     InfiniteTable,
@@ -78,11 +79,13 @@ export {
     ReportSelectors,
     fetchErrorSelectors,
     collectionStoreFactory,
-    itemStoreFactory ,
+    collectionWithLinksStoreFactory,
+    itemStoreFactory,
     paginationStoreFactory,
     reportOptionsFactory,
     reportResultsFactory,
     fetchErrorReducer,
     getHref,
-    getSelfHref
+    getSelfHref,
+    initialiseOnMount
 };
