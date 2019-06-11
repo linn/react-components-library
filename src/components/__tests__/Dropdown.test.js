@@ -1,13 +1,10 @@
 import React from 'react';
 import { createShallow } from '@material-ui/core/test-utils';
-import { InputLabel, Select } from '@material-ui/core';
 import Dropdown from '../Dropdown';
 
 describe('<Dropdown />', () => {
     let wrapper;
     let props;
-    const getInputLabel = () => wrapper.find(InputLabel);
-    const getSelect = () => wrapper.find(Select);
     const getMenuItems = () => wrapper.find('option');
     const shallow = createShallow({ dive: true });
 
@@ -21,11 +18,6 @@ describe('<Dropdown />', () => {
                 propertyName: 'dropdownProperty'
             };
             wrapper = shallow(<Dropdown {...props} />);
-        });
-
-        it('should render label', () => {
-            expect(getInputLabel()).toHaveLength(1);
-            expect(getInputLabel().props().children).toEqual('dropdown label');
         });
 
         it('should render menu items', () => {
@@ -45,11 +37,6 @@ describe('<Dropdown />', () => {
                     .at(2)
                     .props().children
             ).toEqual('three');
-        });
-
-        it('should render select', () => {
-            expect(getSelect()).toHaveLength(1);
-            expect(getSelect().props().value).toEqual('two');
         });
     });
 
@@ -69,11 +56,6 @@ describe('<Dropdown />', () => {
             wrapper = shallow(<Dropdown {...props} />);
         });
 
-        it('should render label', () => {
-            expect(getInputLabel()).toHaveLength(1);
-            expect(getInputLabel().props().children).toEqual('dropdown label');
-        });
-
         it('should render menu items', () => {
             expect(getMenuItems()).toHaveLength(3);
             expect(
@@ -91,11 +73,6 @@ describe('<Dropdown />', () => {
                     .at(2)
                     .props().children
             ).toEqual('three');
-        });
-
-        it('should render select', () => {
-            expect(getSelect()).toHaveLength(1);
-            expect(getSelect().props().value).toEqual(2);
         });
     });
 });

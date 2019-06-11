@@ -5,7 +5,7 @@ import InputField from '../InputField';
 describe('<InputField />', () => {
     let wrapper;
     let props;
-    const getTextField = () => wrapper.find('TextField');
+    const getTextField = () => wrapper.find('WithStyles(ForwardRef(TextField))');
     const shallow = createShallow({ dive: true });
 
     beforeEach(() => {

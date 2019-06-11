@@ -5,7 +5,7 @@ import SnackbarMessage from '../SnackbarMessage';
 describe('<SnackbarMessage />', () => {
     let wrapper;
     let props;
-    const getSnackbar = () => wrapper.find('WithStyles(Snackbar)');
+    const getSnackbar = () => wrapper.find('WithStyles(ForwardRef(Snackbar))');
     const shallow = createShallow({ dive: true });
 
     beforeEach(() => {

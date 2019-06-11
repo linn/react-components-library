@@ -5,7 +5,7 @@ import EntityList from '../EntityList';
 describe('<EntityList />', () => {
     let wrapper;
     let props;
-    const getListItems = () => wrapper.find('WithStyles(List)');
+    const getListItems = () => wrapper.find('WithStyles(ForwardRef(List))');
     const shallow = createShallow({ dive: false });
 
     const entityList = [
