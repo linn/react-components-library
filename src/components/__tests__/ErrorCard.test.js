@@ -5,9 +5,9 @@ import ErrorCard from '../ErrorCard';
 describe('<ErrorCard />', () => {
     let wrapper;
     let props;
-    const getCard = () => wrapper.find('WithStyles(Card)');
-    const getIcon = () => wrapper.find('pure(ErrorIcon)');
-    const getTypography = () => wrapper.find('WithStyles(Typography)');
+    const getCard = () => wrapper.find('WithStyles(ForwardRef(Card))');
+    const getIcon = () => wrapper.find('ErrorIcon');
+    const getTypography = () => wrapper.find('WithStyles(ForwardRef(Typography))');
     const shallow = createShallow({ dive: true });
 
     beforeEach(() => {

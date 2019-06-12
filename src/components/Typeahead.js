@@ -12,7 +12,7 @@ import Loading from './Loading';
 
 const styles = theme => ({
     paper: {
-        padding: theme.spacing.unit * 6
+        padding: theme.spacing(6)
     },
     boldHeader: {
         fontWeight: 'bold',
