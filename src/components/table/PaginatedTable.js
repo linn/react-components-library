@@ -11,7 +11,7 @@ import {
     TableSortLabel
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/styles';
 import EditIcon from '@material-ui/icons/Edit';
 import { getSelfHref } from '../../utilities/index';
 import TablePaginationActions from './TablePaginationActions';
