@@ -1,6 +1,6 @@
 import React from 'react';
 import { FormControlLabel, Checkbox } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/styles';
 import PropTypes from 'prop-types';
 
 const styles = {

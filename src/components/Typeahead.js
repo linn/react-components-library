@@ -10,22 +10,9 @@ import SearchInputField from './SearchInputField';
 import Title from './Title';
 import Loading from './Loading';
 
-const styles = theme => ({
-    paper: {
-        padding: theme.spacing(6)
-    },
-    boldHeader: {
-        fontWeight: 'bold',
-        width: '140px'
-    },
-    pullRight: {
-        float: 'right'
-    },
+const styles = () => ({
     halfWidth: {
         width: '50%'
-    },
-    biggerText: {
-        fontSize: 14
     },
     a: {
         textDecoration: 'none'
