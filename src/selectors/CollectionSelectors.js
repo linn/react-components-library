@@ -53,4 +53,10 @@
 
         return storeItems.links ? storeItems.links : [];
     };
+
+    this.hasPrivilege = (state, rel) => {
+        const links = this.getLinks(state);
+
+        return links ? links.some(l => l.rel === rel) : false;
+    };
 }

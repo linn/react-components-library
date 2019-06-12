@@ -85,3 +85,56 @@ describe('when getting links', () => {
         expect(collectionSelectors.getLinks(state)).toEqual(expectedResult);
     });
 });
+
+describe('when getting privilege', () => {
+    it('should return true if matching privilege', () => {
+        const state = {
+            itemTypes: {
+                items: null,
+                links: [
+                    { rel: 'self', href: '/1' },
+                    { rel: 'amend-create-serial-numbers', href: '/serial-numbers' }
+                ]
+            }
+        };
+
+        const rel = 'amend-create-serial-numbers';
+
+        const expectedResult = true;
+
+        expect(collectionSelectors.hasPrivilege(state, rel)).toEqual(expectedResult);
+    });
+
+    it('should return false if no matching privilege', () => {
+        const state = {
+            itemTypes: {
+                items: null,
+                links: [
+                    { rel: 'self', href: '/1' },
+                    { rel: 'amend-create-serial-numbers', href: '/serial-numbers' }
+                ]
+            }
+        };
+
+        const rel = 'amend-vat-code';
+
+        const expectedResult = false;
+
+        expect(collectionSelectors.hasPrivilege(state, rel)).toEqual(expectedResult);
+    });
+
+    it('should return false if item has no links', () => {
+        const state = {
+            itemTypes: {
+                items: null,
+                links: null
+            }
+        };
+
+        const rel = 'amend-create-serial-numbers';
+
+        const expectedResult = false;
+
+        expect(collectionSelectors.hasPrivilege(state, rel)).toEqual(expectedResult);
+    });
+});
