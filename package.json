@@ -1,6 +1,6 @@
 {
     "name": "@linn-it/linn-form-components-library",
-    "version": "2.1.0",
+    "version": "2.1.1",
     "private": false,
     "dependencies": {
         "@material-ui/core": "^4.1.0",
@@ -13,7 +13,6 @@
         "query-string": "^6.5.0",
         "react-router": "^4.3.1",
         "react-router-dom": "^4.3.1",
-        "react-scripts": "^2.1.2",
         "react-select": "^2.4.3",
         "redux-api-middleware": "^2.3.0"
     },
