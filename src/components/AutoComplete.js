@@ -140,7 +140,7 @@ const components = {
     ValueContainer
 };
 
-export class AutoComplete extends React.PureComponent {
+class AutoComplete extends React.PureComponent {
     state = {
         single: null
     };

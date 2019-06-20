@@ -18,7 +18,7 @@ import OnOffSwitch from './src/components/OnOffSwitch';
 import SnackbarMessage from './src/components/SnackbarMessage';
 import SearchInputField from './src/components/SearchInputField';
 import useSearch from './src/hooks/useSearch';
-import AutoDropDown from './src/components/AutoComplete';
+import AutoComplete from './src/components/AutoComplete';
 import PaginatedTable from './src/components/table/PaginatedTable';
 import InfiniteTable from './src/components/table/InfiniteTable';
 import TypeaheadDialog from './src/components/TypeaheadDialog';
@@ -45,7 +45,7 @@ import initialiseOnMount from './src/components/common/initialiseOnMount';
 export {
     InfiniteTable,
     PaginatedTable,
-    AutoDropDown,
+    AutoComplete,
     Breadcrumbs,
     BackButton,
     CreateButton,
