@@ -81,5 +81,5 @@
         "rollup-plugin-uglify": "^6.0.0",
         "storybook-react-router": "^1.0.2"
     },
-    "main": "index.js"
+    "main": "/dist/bundle.min.js"
 }
