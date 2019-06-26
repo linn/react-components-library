@@ -114,14 +114,7 @@ function Navigation({
             if (!seenNotifications && !unseenNotifications) {
                 return true;
             }
-            let total = 0;
-            if (seenNotifications) {
-                total += seenNotifications.length;
-            }
-            if (unseenNotifications) {
-                total += unseenNotifications.length;
-            }
-            return total === 0;
+            return seenNotifications.length + unseenNotifications.length === 0;
         };
 
         const queueNotifications = () => {
