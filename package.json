@@ -8,6 +8,7 @@
         "@material-ui/styles": "^4.1.0",
         "classnames": "^2.2.6",
         "moment": "^2.24.0",
+        "notistack": "^0.8.7",
         "numeral": "^2.0.6",
         "prettier": "^1.18.2",
         "prop-types": "^15.7.2",
@@ -80,5 +81,5 @@
         "rollup-plugin-uglify": "^6.0.0",
         "storybook-react-router": "^1.0.2"
     },
-    "main": "/dist/bundle.min.js"
+    "main": "index.js"
 }
