@@ -42,6 +42,17 @@ import reportResultsFactory from './src/reducers/reducerFactories/reportResultsF
 import fetchErrorReducer from './src/reducers/fetchErrorReducer';
 import menu from './src/reducers/menu';
 import news from './src/reducers/news';
+import {
+    getSections,
+    getMenuSection,
+    getMyStuff,
+    getMenuLoading
+} from './src/selectors/menuSelectors';
+import {
+    getSeenNotifications,
+    getUnseenNotifications,
+    getNewsLoading
+} from './src/selectors/newsSelectors';
 import { getHref, getSelfHref } from './src/utilities/index';
 import initialiseOnMount from './src/components/common/initialiseOnMount';
 import Navigation from './src/components/Navigation';
@@ -97,5 +108,12 @@ export {
     fetchNews,
     menu,
     news,
-    markNotificationSeen
+    markNotificationSeen,
+    getSections,
+    getMenuSection,
+    getMyStuff,
+    getMenuLoading,
+    getSeenNotifications,
+    getUnseenNotifications,
+    getNewsLoading
 };

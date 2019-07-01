@@ -17,6 +17,7 @@ import {
 import { useSnackbar } from 'notistack';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Notifications from '@material-ui/icons/Notifications';
+import { getSelfHref } from '../utilities/index';
 import Panel from './Panel';
 
 const styles = theme => ({
@@ -93,7 +94,7 @@ function Navigation({
                 <Button
                     variant="contained"
                     onClick={() => {
-                        window.location = e.links.filter(l => l.rel === 'self')[0].href;
+                        window.location = getSelfHref(e);
                     }}
                 >
                     {'View'}
@@ -249,7 +250,7 @@ function Navigation({
                             selected === i && (
                                 <Panel
                                     key={item}
-                                    section={sections.filter(e => e.id === item)[0]}
+                                    section={sections.find(e => e.id === item)}
                                     id={item}
                                     style={{ align: 'right' }}
                                     anchorEl={item.id}

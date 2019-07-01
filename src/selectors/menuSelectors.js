@@ -1,24 +1,26 @@
-import { REQUEST_MENU, RECEIVE_MENU } from '../actions/index';
+export const getSections = state => {
+    const { menu } = state;
+    if (!menu.data) return null;
+    return menu.data.sections;
+};
 
-function menu(state = { loading: false, data: null }, action) {
-    switch (action.type) {
-        case REQUEST_MENU:
-            return {
-                ...state,
-                loading: true,
-                data: null
-            };
-
-        case RECEIVE_MENU:
-            return {
-                ...state,
-                loading: false,
-                data: action.payload.menu
-            };
-
-        default:
-            return state;
+export const getMenuSection = (state, sectionId) => {
+    const sections = getSections(state);
+    if (sections) {
+        const section = sections.filter(x => x.id === sectionId);
+        const { columns } = section[0];
+        return columns;
     }
-}
+    return [];
+};
 
-export default menu;
+export const getMyStuff = state => {
+    const { menu } = state;
+    if (!menu.data) return null;
+    return menu.data.myStuff;
+};
+
+export const getMenuLoading = state => {
+    const menu = state;
+    return menu ? menu.loading : false;
+};
