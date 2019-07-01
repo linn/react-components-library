@@ -11,7 +11,6 @@ const useStyles = makeStyles({
 });
 
 function MenuPage({ section }) {
-    console.info("i rendered");
     const classes = useStyles();
     return (
         <Paper className={classes.root}>

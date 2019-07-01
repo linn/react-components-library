@@ -53,9 +53,10 @@ import {
     getUnseenNotifications,
     getNewsLoading
 } from './src/selectors/newsSelectors';
+import getUsername from './src/selectors/userSelectors';
 import { getHref, getSelfHref } from './src/utilities/index';
 import initialiseOnMount from './src/components/common/initialiseOnMount';
-import Navigation from './src/components/Navigation';
+import Navigation from './src/containers/Navigation';
 import MenuPage from './src/containers/MenuPage';
 
 export {
@@ -117,5 +118,6 @@ export {
     getSeenNotifications,
     getUnseenNotifications,
     getNewsLoading,
-    MenuPage
+    MenuPage,
+    getUsername
 };
