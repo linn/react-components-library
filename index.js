@@ -56,6 +56,7 @@ import {
 import { getHref, getSelfHref } from './src/utilities/index';
 import initialiseOnMount from './src/components/common/initialiseOnMount';
 import Navigation from './src/components/Navigation';
+import MenuPage from './src/containers/MenuPage';
 
 export {
     InfiniteTable,
@@ -115,5 +116,6 @@ export {
     getMenuLoading,
     getSeenNotifications,
     getUnseenNotifications,
-    getNewsLoading
+    getNewsLoading,
+    MenuPage
 };
