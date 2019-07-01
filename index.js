@@ -26,6 +26,7 @@ import { makeActionTypes, makeReportActionTypes } from './src/actions/index';
 import FetchApiActions from './src/actions/FetchApiActions';
 import ReportActions from './src/actions/ReportActions';
 import UpdateApiActions from './src/actions/UpdateApiActions';
+import { fetchMenu, fetchNews, markNotificationSeen } from './src/actions/menuActions';
 import ItemType from './src/types/ItemType';
 import CollectionSelectors from './src/selectors/CollectionSelectors';
 import PaginationSelectors from './src/selectors/PaginationSelectors';
@@ -39,8 +40,24 @@ import paginationStoreFactory from './src/reducers/reducerFactories/paginationSt
 import reportOptionsFactory from './src/reducers/reducerFactories/reportOptionsFactory';
 import reportResultsFactory from './src/reducers/reducerFactories/reportResultsFactory';
 import fetchErrorReducer from './src/reducers/fetchErrorReducer';
+import menu from './src/reducers/menu';
+import news from './src/reducers/news';
+import {
+    getSections,
+    getMenuSection,
+    getMyStuff,
+    getMenuLoading
+} from './src/selectors/menuSelectors';
+import {
+    getSeenNotifications,
+    getUnseenNotifications,
+    getNewsLoading
+} from './src/selectors/newsSelectors';
+import getUsername from './src/selectors/userSelectors';
 import { getHref, getSelfHref } from './src/utilities/index';
 import initialiseOnMount from './src/components/common/initialiseOnMount';
+import Navigation from './src/containers/Navigation';
+import MenuPage from './src/containers/MenuPage';
 
 export {
     InfiniteTable,
@@ -87,5 +104,20 @@ export {
     fetchErrorReducer,
     getHref,
     getSelfHref,
-    initialiseOnMount
+    initialiseOnMount,
+    Navigation,
+    fetchMenu,
+    fetchNews,
+    menu,
+    news,
+    markNotificationSeen,
+    getSections,
+    getMenuSection,
+    getMyStuff,
+    getMenuLoading,
+    getSeenNotifications,
+    getUnseenNotifications,
+    getNewsLoading,
+    MenuPage,
+    getUsername
 };
