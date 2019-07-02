@@ -59,6 +59,8 @@ import initialiseOnMount from './src/components/common/initialiseOnMount';
 import Navigation from './src/containers/Navigation';
 import MenuPage from './src/containers/MenuPage';
 
+const reducers = { menu, news, fetchError: fetchErrorReducer };
+
 export {
     InfiniteTable,
     PaginatedTable,
@@ -101,7 +103,6 @@ export {
     paginationStoreFactory,
     reportOptionsFactory,
     reportResultsFactory,
-    fetchErrorReducer,
     getHref,
     getSelfHref,
     initialiseOnMount,
@@ -119,5 +120,6 @@ export {
     getUnseenNotifications,
     getNewsLoading,
     MenuPage,
-    getUsername
+    getUsername,
+    reducers
 };
