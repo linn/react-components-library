@@ -1,6 +1,6 @@
 import * as actionTypes from '../actions/index';
 
-const fetchError = (state, action) => {
+const fetchErrorReducer = (state, action) => {
     switch (action.type) {
         case actionTypes.FETCH_ERROR:
             return action.payload.error
@@ -22,4 +22,4 @@ const fetchError = (state, action) => {
     }
 };
 
-export default fetchError;
+export default fetchErrorReducer;
