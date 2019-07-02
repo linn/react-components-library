@@ -1,6 +1,6 @@
 export const getSections = state => {
     const { menu } = state;
-    if (!menu.data) return null;
+    if (!menu || !menu.data) return null;
     return menu.data.sections;
 };
 
@@ -16,7 +16,7 @@ export const getMenuSection = (state, sectionId) => {
 
 export const getMyStuff = state => {
     const { menu } = state;
-    if (!menu.data) return null;
+    if (!menu || !menu.data) return null;
     return menu.data.myStuff;
 };
 
