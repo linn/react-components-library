@@ -1,10 +1,48 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { TextField, InputAdornment } from '@material-ui/core';
-import { withStyles } from '@material-ui/styles';
+import { withStyles } from '@material-ui/core/styles';
 import moment from 'moment';
+import blue from '@material-ui/core/colors/blue';
+import grey from '@material-ui/core/colors/grey';
 
-const styles = () => ({});
+// const styles = theme => ({
+//     root: {},
+//     notchedOutline: {
+//         // borderColor: `${blue[200]} !important`
+//         borderColor: `${blue[200]} !important`
+//     },
+//     disabled: {
+//         background: grey[50],
+//         borderColor: `${grey[50]} !important`
+//     }
+// });
+
+const styles = theme => ({
+    root: {
+        // '& label.Mui-focused': {
+        //     color: 'green'
+        // },
+        // '& .MuiInput-underline:after': {
+        //     borderBottomColor: 'green'
+        // },
+        '& .MuiOutlinedInput-root': {
+            '& fieldset': {
+                borderColor: theme.primary.light
+            },
+            '&:hover fieldset': {
+                borderColor: theme.primary.main
+            },
+            // '&.Mui-focused fieldset': {
+            //     borderColor: 'green'
+            // },
+            '&.Mui-disabled fieldset': {
+                borderColor: 'green',
+                background: grey[50]
+            }
+        }
+    }
+});
 
 const hasValue = val => val || val === 0;
 const getValue = val => (hasValue(val) ? val : '');
@@ -51,6 +89,7 @@ class InputField extends Component {
 
         return (
             <TextField
+                // style={classes.root}
                 className={classes.root}
                 disabled={disabled}
                 error={error}
@@ -73,6 +112,11 @@ class InputField extends Component {
                     inputProps: {
                         maxLength
                     }
+                    // classes: {
+                    //     root: classes.root,
+                    //     disabled: classes.disabled,
+                    //     notchedOutline: classes.notchedOutline
+                    // }
                 }}
                 onInput={e => {
                     if (type === 'number' && maxLength) {
