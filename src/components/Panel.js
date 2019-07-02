@@ -82,15 +82,15 @@ function Panel({ section, classes, close }) {
                     </Grid>
                 ))}
                 <Grid item xs={12}>
-                    <Button
-                        component={Link}
-                        to={`/${section.id}`}
-                        onClick={close}
-                        color="primary"
-                        style={{ marginRight: '10px', marginBottom: '10px', float: 'right' }}
-                    >
-                        SHOW ALL OPTIONS...
-                    </Button>
+                    <a href={`/${section.id}`}>
+                        <Button
+                            onClick={close}
+                            color="primary"
+                            style={{ marginRight: '10px', marginBottom: '10px', float: 'right' }}
+                        >
+                            SHOW ALL OPTIONS...
+                        </Button>{' '}
+                    </a>
                 </Grid>
             </Grid>
         </Paper>
