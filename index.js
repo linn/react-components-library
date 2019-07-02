@@ -57,7 +57,8 @@ import getUsername from './src/selectors/userSelectors';
 import { getHref, getSelfHref } from './src/utilities/index';
 import initialiseOnMount from './src/components/common/initialiseOnMount';
 import Navigation from './src/containers/Navigation';
-import MenuPage from './src/containers/MenuPage';
+
+const reducers = { menu, news, fetchError: fetchErrorReducer };
 
 export {
     InfiniteTable,
@@ -101,7 +102,6 @@ export {
     paginationStoreFactory,
     reportOptionsFactory,
     reportResultsFactory,
-    fetchErrorReducer,
     getHref,
     getSelfHref,
     initialiseOnMount,
@@ -118,6 +118,6 @@ export {
     getSeenNotifications,
     getUnseenNotifications,
     getNewsLoading,
-    MenuPage,
-    getUsername
+    getUsername,
+    reducers
 };

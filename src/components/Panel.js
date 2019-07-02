@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom';
 import { Paper, Grid, List, ListItem, Typography, Button } from '@material-ui/core';
 import Close from '@material-ui/icons/Close';
 
@@ -82,15 +81,15 @@ function Panel({ section, classes, close }) {
                     </Grid>
                 ))}
                 <Grid item xs={12}>
-                    <Button
-                        component={Link}
-                        to={`/${section.id}`}
-                        onClick={close}
-                        color="primary"
-                        style={{ marginRight: '10px', marginBottom: '10px', float: 'right' }}
-                    >
-                        SHOW ALL OPTIONS...
-                    </Button>
+                    <a href={`/${section.id}`}>
+                        <Button
+                            onClick={close}
+                            color="primary"
+                            style={{ marginRight: '10px', marginBottom: '10px', float: 'right' }}
+                        >
+                            SHOW ALL OPTIONS...
+                        </Button>{' '}
+                    </a>
                 </Grid>
             </Grid>
         </Paper>
