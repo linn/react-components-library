@@ -1,6 +1,6 @@
 {
     "name": "@linn-it/linn-form-components-library",
-    "version": "2.1.4",
+    "version": "2.1.6",
     "private": false,
     "dependencies": {
         "@material-ui/core": "^4.1.0",
@@ -13,7 +13,6 @@
         "prettier": "^1.18.2",
         "prop-types": "^15.7.2",
         "query-string": "^6.5.0",
-        "react-redux": "^7.1.0",
         "react-router": "^4.3.1",
         "react-router-dom": "^4.3.1",
         "react-select": "^3.0.4",
@@ -34,7 +33,8 @@
     },
     "peerDependencies": {
         "react": "^16.8.6",
-        "react-dom": "^16.8.6"
+        "react-dom": "^16.8.6",
+        "react-redux": "^7.1.0"
     },
     "jest": {
         "setupTestFrameworkScriptFile": "./src/setupTests.js"
