@@ -3,7 +3,7 @@ import * as actionTypes from './index';
 
 export const fetchNews = (state, root) => ({
     [RSAA]: {
-        endpoint: `${root}/intranet/menu-no-auth`,
+        endpoint: `${root}/notifications`,
         method: 'GET',
         options: { requiresAuth: false },
         headers: {
