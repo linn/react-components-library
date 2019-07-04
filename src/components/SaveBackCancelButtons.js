@@ -1,15 +1,20 @@
 import React from 'react';
-import { withStyles } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/styles';
 import Button from '@material-ui/core/Button';
 import PropTypes from 'prop-types';
 
-const styles = () => ({
+const useStyles = makeStyles(theme => ({
     pullRight: {
         float: 'right'
+    },
+    cancel: {
+        marginRight: theme.spacing(1)
     }
-});
+}));
 
-const SaveBackCancelButtons = ({ saveClick, cancelClick, classes, saveDisabled, backClick }) => {
+function SaveBackCancelButtons({ saveClick, cancelClick, saveDisabled, backClick }) {
+    const classes = useStyles();
+
     const handleClick = () => {
         if (saveDisabled) {
             backClick();
@@ -20,7 +25,12 @@ const SaveBackCancelButtons = ({ saveClick, cancelClick, classes, saveDisabled, 
 
     return (
         <div className={classes.pullRight}>
-            <Button id="cancel-button" onClick={() => handleClick()}>
+            <Button
+                id="cancel-button"
+                onClick={() => handleClick()}
+                variant="outlined"
+                className={classes.cancel}
+            >
                 {saveDisabled ? 'Back' : 'Cancel'}
             </Button>
 
@@ -35,10 +45,9 @@ const SaveBackCancelButtons = ({ saveClick, cancelClick, classes, saveDisabled, 
             </Button>
         </div>
     );
-};
+}
 
 SaveBackCancelButtons.propTypes = {
-    classes: PropTypes.shape({}),
     saveClick: PropTypes.func.isRequired,
     cancelClick: PropTypes.func.isRequired,
     backClick: PropTypes.func.isRequired,
@@ -46,8 +55,7 @@ SaveBackCancelButtons.propTypes = {
 };
 
 SaveBackCancelButtons.defaultProps = {
-    classes: {},
     saveDisabled: false
 };
 
-export default withStyles(styles)(SaveBackCancelButtons);
+export default SaveBackCancelButtons;

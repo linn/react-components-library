@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
 import List from '@material-ui/core/List';
-import { ListItem, Typography } from '@material-ui/core';
+import { ListItem, Typography, Divider } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import useSearch from '../hooks/useSearch';
@@ -10,17 +10,20 @@ import SearchInputField from './SearchInputField';
 import Title from './Title';
 import Loading from './Loading';
 
-const styles = () => ({
-    halfWidth: {
-        width: '50%'
-    },
+const useStyles = makeStyles(theme => ({
     a: {
-        textDecoration: 'none'
+        textDecoration: 'none',
+        color: theme.palette.text.primary
+    },
+    nameText: {
+        fontWeight: theme.typography.fontWeightMedium
     }
-});
+}));
 
-function Typeahead({ fetchItems, items, classes, title, loading, clearSearch }) {
+function Typeahead({ fetchItems, items, title, loading, clearSearch }) {
     const [searchTerm, setSearchTerm] = useState('');
+
+    const classes = useStyles();
 
     useSearch(fetchItems, searchTerm, clearSearch);
 
@@ -33,14 +36,17 @@ function Typeahead({ fetchItems, items, classes, title, loading, clearSearch }) 
             return (
                 <List>
                     {items.map(item => (
-                        <Link key={item.id} to={item.href} className={classes.a}>
-                            <ListItem key={item.id} button>
-                                <Typography style={{ fontWeight: 600, width: 140 }}>
-                                    {item.name}
-                                </Typography>
-                                <Typography>{item.description}</Typography>
-                            </ListItem>
-                        </Link>
+                        <Fragment>
+                            <Link key={item.id} to={item.href} className={classes.a}>
+                                <ListItem key={item.id} button>
+                                    <Typography style={{ fontWeight: 600, width: 140 }}>
+                                        {item.name}
+                                    </Typography>
+                                    <Typography>{item.description}</Typography>
+                                </ListItem>
+                            </Link>
+                            <Divider component="li" />
+                        </Fragment>
                     ))}
                 </List>
             );
@@ -52,11 +58,9 @@ function Typeahead({ fetchItems, items, classes, title, loading, clearSearch }) 
         <Fragment>
             <Title text={title} />
             <SearchInputField
-                className={classes.halfWidth}
                 placeholder="Search by id or description"
                 onChange={handleSearchTermChange}
                 type="search"
-                margin="normal"
                 variant="outlined"
                 value={searchTerm}
             />
@@ -76,7 +80,6 @@ Typeahead.propTypes = {
     ).isRequired,
     title: PropTypes.string,
     loading: PropTypes.bool,
-    classes: PropTypes.shape({}).isRequired,
     fetchItems: PropTypes.func.isRequired,
     clearSearch: PropTypes.func.isRequired
 };
@@ -86,4 +89,4 @@ Typeahead.defaultProps = {
     loading: false
 };
 
-export default withStyles(styles)(Typeahead);
+export default Typeahead;

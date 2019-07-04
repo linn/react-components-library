@@ -58,6 +58,7 @@ import { getHref, getSelfHref } from './src/utilities/index';
 import initialiseOnMount from './src/components/common/initialiseOnMount';
 import Navigation from './src/containers/Navigation';
 import MenuPage from './src/containers/MenuPage';
+import { errorTheme, linnTheme } from './src/themes';
 
 export {
     InfiniteTable,
@@ -119,5 +120,7 @@ export {
     getUnseenNotifications,
     getNewsLoading,
     MenuPage,
-    getUsername
+    getUsername,
+    errorTheme,
+    linnTheme
 };

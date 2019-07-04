@@ -1,6 +1,33 @@
-import { TextField } from '@material-ui/core';
-import React, { Component } from 'react';
+import { TextField, InputLabel } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
+import React from 'react';
 import PropTypes from 'prop-types';
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        paddingTop: 0,
+        marginTop: theme.spacing(1)
+    },
+    disabled: {
+        background: theme.palette.grey[100],
+        color: theme.palette.text.secondary
+    },
+    label: {
+        fontSize: theme.typography.fontSize
+    },
+    helperText: {
+        color: theme.palette.error.main
+    },
+    labelAsterisk: {
+        color: theme.palette.error.main
+    },
+    required: {
+        color: theme.palette.error.main
+    },
+    error: {
+        color: theme.palette.error.main
+    }
+}));
 
 const hasValue = val => val || val === 0;
 
@@ -16,37 +43,50 @@ const includesValue = (value, items) => {
     return items.includes(value);
 };
 
-class Dropdown extends Component {
-    change(e) {
-        const { onChange, propertyName, type } = this.props;
-        const { value } = e.target;
+function Dropdown({
+    onChange,
+    propertyName,
+    required,
+    disabled,
+    label,
+    items = [],
+    value,
+    helperText,
+    fullWidth,
+    adornment,
+    type,
+    error,
+    margin
+}) {
+    const classes = useStyles();
+
+    const change = e => {
+        const newValue = e.target.value;
 
         let val;
 
         if (type === 'number') {
-            val = hasValue(value) ? parseFloat(value) : null;
+            val = hasValue(newValue) ? parseFloat(newValue) : null;
         } else {
-            val = hasValue(value) ? value : '';
+            val = hasValue(newValue) ? newValue : '';
         }
 
         onChange(propertyName, val);
-    }
+    };
 
-    render() {
-        const {
-            disabled,
-            label,
-            items = [],
-            value,
-            helpText,
-            fullWidth,
-            adornment,
-            type,
-            error
-        } = this.props;
-
-        return (
+    return (
+        <React.Fragment>
+            <InputLabel
+                classes={{ root: classes.label, asterisk: classes.labelAsterisk }}
+                required={required}
+                error={error}
+            >
+                {label}
+            </InputLabel>
             <TextField
+                classes={{
+                    root: classes.root
+                }}
                 error={error}
                 id="outlined-select-currency-native"
                 type={type}
@@ -54,16 +94,26 @@ class Dropdown extends Component {
                 adornment={adornment}
                 disabled={disabled}
                 fullWidth={fullWidth}
-                InputLabelProps={{ shrink: true }}
-                label={label}
                 value={getValue(value)}
-                onChange={e => this.change(e)}
+                onChange={e => change(e)}
                 SelectProps={{
                     native: true
                 }}
-                helperText={helpText}
-                margin="normal"
+                helperText={helperText}
+                margin={margin}
                 variant="outlined"
+                required={required}
+                InputProps={{
+                    classes: {
+                        disabled: classes.disabled
+                    }
+                }}
+                FormHelperTextProps={{
+                    classes: {
+                        required: classes.required,
+                        error: classes.error
+                    }
+                }}
             >
                 {hasDisplayText(items)
                     ? items.map(item => (
@@ -77,15 +127,15 @@ class Dropdown extends Component {
                           </option>
                       ))}
             </TextField>
-        );
-    }
+        </React.Fragment>
+    );
 }
 
 Dropdown.propTypes = {
     adornment: PropTypes.string,
     disabled: PropTypes.bool,
     fullWidth: PropTypes.bool,
-    helpText: PropTypes.string,
+    helperText: PropTypes.string,
     label: PropTypes.string.isRequired,
     items: PropTypes.oneOfType([
         PropTypes.arrayOf(PropTypes.string),
@@ -98,6 +148,7 @@ Dropdown.propTypes = {
         )
     ]),
     propertyName: PropTypes.string.isRequired,
+    required: PropTypes.bool,
     value: props => {
         const { items, value } = props;
         if (!includesValue(value, items)) {
@@ -108,7 +159,8 @@ Dropdown.propTypes = {
     },
     type: PropTypes.string,
     onChange: PropTypes.func.isRequired,
-    error: PropTypes.bool
+    error: PropTypes.bool,
+    margin: PropTypes.string
 };
 
 Dropdown.defaultProps = {
@@ -116,10 +168,12 @@ Dropdown.defaultProps = {
     disabled: false,
     fullWidth: false,
     items: [],
-    helpText: '',
+    helperText: '',
     type: 'text',
+    required: false,
     value: '',
-    error: false
+    error: false,
+    margin: 'dense'
 };
 
 export default Dropdown;
