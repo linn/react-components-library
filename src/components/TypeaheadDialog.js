@@ -1,5 +1,9 @@
 import React, { Fragment, useState } from 'react';
-import { List, ListItem, Typography, IconButton, Dialog } from '@material-ui/core';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import Dialog from '@material-ui/core/Dialog';
 import PropTypes from 'prop-types';
 import SearchIcon from '@material-ui/icons/Search';
 import CloseIcon from '@material-ui/icons/Close';

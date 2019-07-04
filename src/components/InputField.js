@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { TextField, InputAdornment } from '@material-ui/core';
-import { withStyles } from '@material-ui/styles';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import TextField from '@material-ui/core/TextField';
+import withStyles from '@material-ui/styles/withStyles';
 import moment from 'moment';
 
 const styles = () => ({});

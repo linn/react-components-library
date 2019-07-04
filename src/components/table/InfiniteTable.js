@@ -1,6 +1,10 @@
 import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Table, TableHead, TableBody, TableRow, TableCell } from '@material-ui/core';
+import Table from '@material-ui/core/Table';
+import TableHead from '@material-ui/core/TableHead';
+import TableBody from '@material-ui/core/TableBody';
+import TableRow from '@material-ui/core/TableRow';
+import TableCell from '@material-ui/core/TableCell';
 import { Link } from 'react-router-dom';
 import EditIcon from '@material-ui/icons/Edit';
 import { getSelfHref } from '../../utilities/index';

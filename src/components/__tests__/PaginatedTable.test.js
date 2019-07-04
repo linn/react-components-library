@@ -1,7 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { Table, TableRow } from '@material-ui/core';
-import { createShallow } from '@material-ui/core/test-utils';
+import Table from '@material-ui/core/Table';
+import TableRow from '@material-ui/core/TableRow';
+import createShallow from '@material-ui/core/test-utils/createShallow';
 import PaginatedTable from '../table/PaginatedTable';
 
 describe('<PaginatedTable />', () => {

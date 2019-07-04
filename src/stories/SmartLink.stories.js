@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { withKnobs } from '@storybook/addon-knobs/react';
 import StoryRouter from 'storybook-react-router';
 import { array, text } from '@storybook/addon-knobs';
-import { Typography } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
 import SmartLink from '../components/SmartLink';
 import Page from '../components/Page';
 

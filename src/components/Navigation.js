@@ -1,19 +1,17 @@
 import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import {
-    Tabs,
-    Tab,
-    AppBar,
-    ClickAwayListener,
-    Menu,
-    MenuItem,
-    Toolbar,
-    Grid,
-    Typography,
-    Badge,
-    Button
-} from '@material-ui/core';
+import withStyles from '@material-ui/core/styles/withStyles';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import AppBar from '@material-ui/core/AppBar';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import Toolbar from '@material-ui/core/Toolbar';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import Badge from '@material-ui/core/Badge';
+import Button from '@material-ui/core/Button';
 import { useSnackbar } from 'notistack';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Notifications from '@material-ui/icons/Notifications';

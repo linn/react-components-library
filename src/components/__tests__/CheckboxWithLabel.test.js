@@ -1,6 +1,6 @@
 import React from 'react';
-import { createShallow } from '@material-ui/core/test-utils';
-import { FormControlLabel } from '@material-ui/core';
+import createShallow from '@material-ui/core/test-utils/createShallow';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import CheckboxWithLabel from '../CheckboxWithLabel';
 
 describe('<CheckboxWithLabel />', () => {

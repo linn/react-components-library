@@ -1,6 +1,6 @@
 import React from 'react';
-import { createShallow } from '@material-ui/core/test-utils';
-import { ListItem } from '@material-ui/core';
+import createShallow from '@material-ui/core/test-utils/createShallow';
+import ListItem from '@material-ui/core/ListItem';
 import Typeahead from '../Typeahead';
 import Title from '../Title';
 
