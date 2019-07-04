@@ -76,6 +76,6 @@ storiesOf('PaginatedTable', module)
                     pageLoad={actions.pageLoad}
                     pageSortedLoad={actions.pageSortedLoad}
                 />
-            </Router>{' '}
+            </Router>
         </MuiThemeProvider>
     ));
