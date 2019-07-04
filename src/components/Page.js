@@ -1,5 +1,5 @@
-import { Paper } from '@material-ui/core';
-import { withStyles } from '@material-ui/styles';
+import Paper from '@material-ui/core/Paper';
+import withStyles from '@material-ui/styles/withStyles';
 import React from 'react';
 import PropTypes from 'prop-types';
 import Breadcrumbs from './Breadcrumbs';

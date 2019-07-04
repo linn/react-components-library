@@ -1,7 +1,9 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { List, ListItem, Typography } from '@material-ui/core';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import Typography from '@material-ui/core/Typography';
 import Title from './Title';
 
 const getListItemtText = (entity, entityid, descriptionFieldName) =>
