@@ -1,6 +1,6 @@
-import { Paper } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import withStyles from '@material-ui/styles/withStyles';
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Breadcrumbs from './Breadcrumbs';

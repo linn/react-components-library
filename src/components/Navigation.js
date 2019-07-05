@@ -1,19 +1,17 @@
 import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import {
-    Tabs,
-    Tab,
-    AppBar,
-    ClickAwayListener,
-    Menu,
-    MenuItem,
-    Toolbar,
-    Grid,
-    Typography,
-    Badge,
-    Button
-} from '@material-ui/core';
+import withStyles from '@material-ui/core/styles/withStyles';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import AppBar from '@material-ui/core/AppBar';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import Toolbar from '@material-ui/core/Toolbar';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import Badge from '@material-ui/core/Badge';
+import Button from '@material-ui/core/Button';
 import { useSnackbar } from 'notistack';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Notifications from '@material-ui/icons/Notifications';
@@ -156,114 +154,116 @@ function Navigation({
         };
 
         return (
-            <ClickAwayListener onClickAway={() => setSelected(false)}>
-                <div className={classes.root}>
-                    {sections && !loading && (
-                        <AppBar position="static" classes={{ root: classes.appBar }}>
-                            <Toolbar classes={{ gutters: classes.toolbar }}>
-                                <Grid
-                                    container
-                                    alignItems="center"
-                                    justify="space-between"
-                                    spacing={3}
-                                    classes={{ container: classes.container }}
-                                >
-                                    <Grid item xs={10}>
-                                        <Tabs
-                                            classes={{
-                                                root: classes.tabs
-                                            }}
-                                            value={selected}
-                                            onChange={(event, value) => {
-                                                if (selected === value) {
-                                                    setSelected(false);
-                                                } else {
-                                                    setSelected(value);
-                                                }
-                                            }}
-                                            scrollButtons="auto"
-                                            variant="scrollable"
-                                            indicatorColor="primary"
-                                            textColor="primary"
-                                        >
-                                            {sections.map(item => (
-                                                <Tab
-                                                    id={item.id}
-                                                    key={item.id}
-                                                    classes={{ root: classes.tab }}
-                                                    label={
-                                                        <span className={classes.tabLabel}>
-                                                            {item.title}
-                                                        </span>
-                                                    }
-                                                    selected={false}
-                                                />
-                                            ))}
-                                        </Tabs>
-                                    </Grid>
-                                    <Grid item xs={1}>
-                                        <Typography variant="h4">
-                                            <AccountCircle
-                                                aria-owns={anchorEl ? 'simple-menu' : undefined}
-                                                onClick={handleClick}
-                                                id={sections.length}
-                                                key={sections.length}
-                                            />
-                                        </Typography>
-                                    </Grid>
-                                    <Grid item xs={1}>
-                                        <Typography variant="h4">
-                                            <Badge
-                                                badgeContent={
-                                                    unseenNotifications
-                                                        ? unseenNotifications.length
-                                                        : 0
-                                                }
-                                                color="primary"
-                                                variant="dot"
-                                            >
-                                                <Notifications onClick={queueNotifications} />
-                                            </Badge>
-                                        </Typography>
-                                    </Grid>
-                                    <Menu
-                                        id="simple-menu"
-                                        anchorEl={anchorEl}
-                                        open={Boolean(anchorEl)}
-                                        onClose={handleClose}
+            <Fragment>
+                <ClickAwayListener onClickAway={() => setSelected(false)}>
+                    <div className={classes.root}>
+                        {sections && !loading && (
+                            <AppBar position="static" classes={{ root: classes.appBar }}>
+                                <Toolbar classes={{ gutters: classes.toolbar }}>
+                                    <Grid
+                                        container
+                                        alignItems="center"
+                                        justify="space-between"
+                                        spacing={3}
+                                        classes={{ container: classes.container }}
                                     >
-                                        <MenuItem onClick={handleClose}>{username}</MenuItem>
-                                        {username &&
-                                            myStuff.groups.map(item => (
-                                                <span>
-                                                    <a href={item.items[0].href}>
-                                                        <MenuItem onClick={handleClose}>
-                                                            {item.items[0].title}
-                                                        </MenuItem>
-                                                    </a>
-                                                </span>
-                                            ))}
-                                        <MenuItem onClick={handleSignOut}>Sign Out</MenuItem>
-                                    </Menu>
-                                </Grid>
-                            </Toolbar>
-                        </AppBar>
-                    )}
-                    {menuIds.map(
-                        (item, i) =>
-                            selected === i && (
-                                <Panel
-                                    key={item}
-                                    section={sections.find(e => e.id === item)}
-                                    id={item}
-                                    style={{ align: 'right' }}
-                                    anchorEl={item.id}
-                                    close={() => setSelected(false)}
-                                />
-                            )
-                    )}
-                </div>
-            </ClickAwayListener>
+                                        <Grid item xs={10}>
+                                            <Tabs
+                                                classes={{
+                                                    root: classes.tabs
+                                                }}
+                                                value={selected}
+                                                onChange={(event, value) => {
+                                                    if (selected === value) {
+                                                        setSelected(false);
+                                                    } else {
+                                                        setSelected(value);
+                                                    }
+                                                }}
+                                                scrollButtons="auto"
+                                                variant="scrollable"
+                                                indicatorColor="primary"
+                                                textColor="primary"
+                                            >
+                                                {sections.map(item => (
+                                                    <Tab
+                                                        id={item.id}
+                                                        key={item.id}
+                                                        classes={{ root: classes.tab }}
+                                                        label={
+                                                            <span className={classes.tabLabel}>
+                                                                {item.title}
+                                                            </span>
+                                                        }
+                                                        selected={false}
+                                                    />
+                                                ))}
+                                            </Tabs>
+                                        </Grid>
+                                        <Grid item xs={1}>
+                                            <Typography variant="h4">
+                                                <AccountCircle
+                                                    aria-owns={anchorEl ? 'simple-menu' : undefined}
+                                                    onClick={handleClick}
+                                                    id={sections.length}
+                                                    key={sections.length}
+                                                />
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item xs={1}>
+                                            <Typography variant="h4">
+                                                <Badge
+                                                    badgeContent={
+                                                        unseenNotifications
+                                                            ? unseenNotifications.length
+                                                            : 0
+                                                    }
+                                                    color="primary"
+                                                    variant="dot"
+                                                >
+                                                    <Notifications onClick={queueNotifications} />
+                                                </Badge>
+                                            </Typography>
+                                        </Grid>
+                                        <Menu
+                                            id="simple-menu"
+                                            anchorEl={anchorEl}
+                                            open={Boolean(anchorEl)}
+                                            onClose={handleClose}
+                                        >
+                                            <MenuItem onClick={handleClose}>{username}</MenuItem>
+                                            {username &&
+                                                myStuff.groups.map(item => (
+                                                    <span>
+                                                        <a href={item.items[0].href}>
+                                                            <MenuItem onClick={handleClose}>
+                                                                {item.items[0].title}
+                                                            </MenuItem>
+                                                        </a>
+                                                    </span>
+                                                ))}
+                                            <MenuItem onClick={handleSignOut}>Sign Out</MenuItem>
+                                        </Menu>
+                                    </Grid>
+                                </Toolbar>
+                            </AppBar>
+                        )}
+                        {menuIds.map(
+                            (item, i) =>
+                                selected === i && (
+                                    <Panel
+                                        key={item}
+                                        section={sections.find(e => e.id === item)}
+                                        id={item}
+                                        style={{ align: 'right' }}
+                                        anchorEl={item.id}
+                                        close={() => setSelected(false)}
+                                    />
+                                )
+                        )}
+                    </div>
+                </ClickAwayListener>
+            </Fragment>
         );
     }
     return (
@@ -284,7 +284,8 @@ Navigation.propTypes = {
     myStuff: PropTypes.shape({}),
     seenNotifications: PropTypes.arrayOf(PropTypes.shape({})),
     unseenNotifications: PropTypes.arrayOf(PropTypes.shape({})),
-    markNotificationSeen: PropTypes.func.isRequired
+    markNotificationSeen: PropTypes.func.isRequired,
+    authRoot: PropTypes.string.isRequired
 };
 
 Navigation.defaultProps = {

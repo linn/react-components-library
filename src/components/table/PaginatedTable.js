@@ -1,17 +1,15 @@
 import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
-import {
-    Table,
-    TableHead,
-    TableBody,
-    TablePagination,
-    TableFooter,
-    TableRow,
-    TableCell,
-    TableSortLabel
-} from '@material-ui/core';
+import Table from '@material-ui/core/Table';
+import TableHead from '@material-ui/core/TableHead';
+import TableBody from '@material-ui/core/TableBody';
+import TablePagination from '@material-ui/core/TablePagination';
+import TableFooter from '@material-ui/core/TableFooter';
+import TableRow from '@material-ui/core/TableRow';
+import TableCell from '@material-ui/core/TableCell';
+import TableSortLabel from '@material-ui/core/TableSortLabel';
 import { Link } from 'react-router-dom';
-import { withStyles } from '@material-ui/styles';
+import withStyles from '@material-ui/styles/withStyles';
 import EditIcon from '@material-ui/icons/Edit';
 import { getSelfHref } from '../../utilities/index';
 import TablePaginationActions from './TablePaginationActions';

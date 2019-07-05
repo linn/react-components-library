@@ -1,15 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Snackbar, IconButton, withStyles } from '@material-ui/core';
+import makeStyles from '@material-ui/styles/makeStyles';
+import IconButton from '@material-ui/core/IconButton';
+import Snackbar from '@material-ui/core/Snackbar';
 import CloseIcon from '@material-ui/icons/Close';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
     root: {
         backgroundColor: theme.palette.primary.main
     }
-});
+}));
 
-function SnackbarMessage({ classes, message, visible, onClose, timeOut }) {
+function SnackbarMessage({ message, visible, onClose, timeOut }) {
+    const classes = useStyles();
     return (
         <Snackbar
             anchorOrigin={{
@@ -53,4 +56,4 @@ SnackbarMessage.defaultProps = {
     visible: false
 };
 
-export default withStyles(styles)(SnackbarMessage);
+export default SnackbarMessage;

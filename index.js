@@ -18,7 +18,6 @@ import OnOffSwitch from './src/components/OnOffSwitch';
 import SnackbarMessage from './src/components/SnackbarMessage';
 import SearchInputField from './src/components/SearchInputField';
 import useSearch from './src/hooks/useSearch';
-import AutoComplete from './src/components/AutoComplete';
 import PaginatedTable from './src/components/table/PaginatedTable';
 import InfiniteTable from './src/components/table/InfiniteTable';
 import TypeaheadDialog from './src/components/TypeaheadDialog';
@@ -60,10 +59,11 @@ import Navigation from './src/containers/Navigation';
 import MenuPage from './src/containers/MenuPage';
 import { errorTheme, linnTheme } from './src/themes';
 
+const reducers = { menu, news, fetchError: fetchErrorReducer };
+
 export {
     InfiniteTable,
     PaginatedTable,
-    AutoComplete,
     Breadcrumbs,
     BackButton,
     CreateButton,
@@ -102,7 +102,6 @@ export {
     paginationStoreFactory,
     reportOptionsFactory,
     reportResultsFactory,
-    fetchErrorReducer,
     getHref,
     getSelfHref,
     initialiseOnMount,
@@ -122,5 +121,6 @@ export {
     MenuPage,
     getUsername,
     errorTheme,
-    linnTheme
+    linnTheme,
+    reducers
 };

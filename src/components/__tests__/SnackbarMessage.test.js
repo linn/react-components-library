@@ -1,22 +1,28 @@
 import React from 'react';
-import { createShallow } from '@material-ui/core/test-utils';
+import createMount from '@material-ui/core/test-utils/createMount';
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import CreateMuiTheme from '@material-ui/core/styles/createMuiTheme';
 import SnackbarMessage from '../SnackbarMessage';
 
 describe('<SnackbarMessage />', () => {
     let wrapper;
     let props;
     const getSnackbar = () => wrapper.find('WithStyles(ForwardRef(Snackbar))');
-    const shallow = createShallow({ dive: true });
+    const mount = createMount({ dive: false });
 
     beforeEach(() => {
         props = {
             message: 'Snackbar message',
             onClose: jest.fn()
         };
-        wrapper = shallow(<SnackbarMessage {...props} />);
     });
 
     it('should render snackbar', () => {
+        wrapper = mount(
+            <MuiThemeProvider theme={CreateMuiTheme()}>
+                <SnackbarMessage {...props} />{' '}
+            </MuiThemeProvider>
+        );
         expect(getSnackbar()).toHaveLength(1);
     });
 });

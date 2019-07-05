@@ -1,7 +1,9 @@
 import React, { Fragment, useState } from 'react';
-import { makeStyles } from '@material-ui/styles';
+import makeStyles from '@material-ui/styles/makeStyles';
 import List from '@material-ui/core/List';
-import { ListItem, Typography, Divider } from '@material-ui/core';
+import ListItem from '@material-ui/core/ListItem';
+import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import useSearch from '../hooks/useSearch';

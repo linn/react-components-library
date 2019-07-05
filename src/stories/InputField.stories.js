@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { withKnobs } from '@storybook/addon-knobs/react';
 import { text } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
-import { Grid } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
 import InputField from '../components/InputField';
 
 const actions = {

@@ -1,6 +1,6 @@
 import React from 'react';
-import { createShallow } from '@material-ui/core/test-utils';
-import { Typography } from '@material-ui/core';
+import createShallow from '@material-ui/core/test-utils/createShallow';
+import Typography from '@material-ui/core/Typography';
 import Title from '../Title';
 
 describe('<Title />', () => {

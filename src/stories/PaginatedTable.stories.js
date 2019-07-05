@@ -2,7 +2,8 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withKnobs } from '@storybook/addon-knobs/react';
 import { action } from '@storybook/addon-actions';
-
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import CreateMuiTheme from '@material-ui/core/styles/createMuiTheme';
 import { BrowserRouter as Router } from 'react-router-dom';
 import PaginatedTable from '../components/table/PaginatedTable';
 
@@ -53,24 +54,28 @@ storiesOf('PaginatedTable', module)
     .addDecorator(story => <div>{story()}</div>)
     .addDecorator(withKnobs)
     .add('default ', () => (
-        <Router>
-            <PaginatedTable
-                page={page}
-                sortable={false}
-                columnNames={columnNames}
-                pageLoad={actions.pageLoad}
-                pageSortedLoad={actions.pageSortedLoad}
-            />
-        </Router>
+        <MuiThemeProvider theme={CreateMuiTheme()}>
+            <Router>
+                <PaginatedTable
+                    page={page}
+                    sortable={false}
+                    columnNames={columnNames}
+                    pageLoad={actions.pageLoad}
+                    pageSortedLoad={actions.pageSortedLoad}
+                />
+            </Router>{' '}
+        </MuiThemeProvider>
     ))
     .add('with sorting enabled', () => (
-        <Router>
-            <PaginatedTable
-                page={page}
-                sortable
-                columnNames={columnNames}
-                pageLoad={actions.pageLoad}
-                pageSortedLoad={actions.pageSortedLoad}
-            />
-        </Router>
+        <MuiThemeProvider theme={CreateMuiTheme()}>
+            <Router>
+                <PaginatedTable
+                    page={page}
+                    sortable
+                    columnNames={columnNames}
+                    pageLoad={actions.pageLoad}
+                    pageSortedLoad={actions.pageSortedLoad}
+                />
+            </Router>
+        </MuiThemeProvider>
     ));

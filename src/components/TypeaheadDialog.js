@@ -1,15 +1,13 @@
 import React, { Fragment, useState } from 'react';
-import {
-    List,
-    ListItem,
-    Typography,
-    IconButton,
-    Dialog,
-    Button,
-    Divider,
-    Grid
-} from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import Dialog from '@material-ui/core/Dialog';
+import Button from '@material-ui/core/Button';
+import Divider from '@material-ui/core/Divider';
+import Grid from '@material-ui/core/Grid';
+import makeStyles from '@material-ui/styles/makeStyles';
 import PropTypes from 'prop-types';
 import SearchIcon from '@material-ui/icons/Search';
 import CloseIcon from '@material-ui/icons/Close';
