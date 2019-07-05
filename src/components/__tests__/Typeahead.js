@@ -1,15 +1,16 @@
 import React from 'react';
-import { createShallow } from '@material-ui/core/test-utils';
-import { ListItem } from '@material-ui/core';
+import { createMount } from '@material-ui/core/test-utils';
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { linnTheme } from '../../themes';
 import Typeahead from '../Typeahead';
-import Title from '../Title';
 
 describe('<Typeahead />', () => {
     let wrapper;
     let props;
-    const getListItem = () => wrapper.find(ListItem);
-    const getTitle = () => wrapper.find(Title);
-    const shallow = createShallow({ dive: true });
+    const getListItem = () => wrapper.find('ForwardRef(ListItem)');
+    const getTitle = () => wrapper.find('Title');
+    const mount = createMount();
 
     beforeEach(() => {
         props = {
@@ -22,7 +23,16 @@ describe('<Typeahead />', () => {
                 { id: 2, name: 'n2', description: 'd2', href: '/2' }
             ]
         };
-        wrapper = shallow(<Typeahead {...props} />);
+
+        const ComponentWithTheme = () => (
+            <MuiThemeProvider theme={linnTheme}>
+                <Router>
+                    <Typeahead {...props} />
+                </Router>
+            </MuiThemeProvider>
+        );
+
+        wrapper = mount(<ComponentWithTheme {...props} />);
     });
 
     it('should render title', () => {

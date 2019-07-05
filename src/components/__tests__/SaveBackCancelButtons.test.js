@@ -1,24 +1,38 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import Button from '@material-ui/core/Button';
+import { createMount } from '@material-ui/core/test-utils';
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { linnTheme } from '../../themes';
 import SaveBackCancelButtons from '../SaveBackCancelButtons';
 
-describe('SaveBackCancelButtons', () => {
+describe('<SaveBackCancelButtons />', () => {
+    let wrapper;
+    let props;
+    const getButtons = () => wrapper.find('ForwardRef(Button)');
+
+    const mount = createMount();
+
     const cancelClick = jest.fn();
     const backClick = jest.fn();
     const saveClick = jest.fn();
 
+    beforeEach(() => {
+        const ComponentWithTheme = () => (
+            <MuiThemeProvider theme={linnTheme}>
+                <Router>
+                    <SaveBackCancelButtons
+                        cancelClick={cancelClick}
+                        backClick={backClick}
+                        saveClick={saveClick}
+                    />
+                </Router>
+            </MuiThemeProvider>
+        );
+
+        wrapper = mount(<ComponentWithTheme {...props} />);
+    });
+
     it('should render without throwing an error', () => {
-        expect(
-            shallow(
-                <SaveBackCancelButtons
-                    cancelClick={cancelClick}
-                    backClick={backClick}
-                    saveClick={saveClick}
-                />
-            )
-                .dive()
-                .find(Button).length
-        ).toBe(2);
+        expect(getButtons()).toHaveLength(2);
     });
 });
