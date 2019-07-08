@@ -1,12 +1,14 @@
 import React from 'react';
-import { createShallow } from '@material-ui/core/test-utils';
+import { createMount } from '@material-ui/core/test-utils';
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import { linnTheme } from '../../themes';
 import InputField from '../InputField';
 
 describe('<InputField />', () => {
     let wrapper;
     let props;
     const getTextField = () => wrapper.find('WithStyles(ForwardRef(TextField))');
-    const shallow = createShallow({ dive: true });
+    const mount = createMount();
 
     beforeEach(() => {
         props = {
@@ -14,10 +16,17 @@ describe('<InputField />', () => {
             value: 'value',
             onChange: () => {}
         };
-        wrapper = shallow(<InputField {...props} />);
+
+        const ComponentWithTheme = () => (
+            <MuiThemeProvider theme={linnTheme}>
+                <InputField {...props} />
+            </MuiThemeProvider>
+        );
+
+        wrapper = mount(<ComponentWithTheme {...props} />);
     });
 
-    describe('when rendering text field', () => {
+    describe('when rendering input field', () => {
         it('should render text field', () => {
             expect(getTextField()).toHaveLength(1);
         });

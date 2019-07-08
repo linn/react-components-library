@@ -26,7 +26,8 @@ const styles = theme => ({
         zIndex: 10
     },
     tabLabel: {
-        fontSize: '12px'
+        fontSize: theme.typography.fontSize,
+        color: theme.palette.grey[200]
     },
     snackbarNew: {
         background: theme.palette.primary.dark,
@@ -42,7 +43,7 @@ const styles = theme => ({
         marginLeft: -12,
         marginRight: 20
     },
-    fullHeight: {
+    tab: {
         ...theme.mixins.toolbar,
         minWidth: '100px'
     },
@@ -56,6 +57,9 @@ const styles = theme => ({
     },
     container: {
         width: '100%'
+    },
+    appBar: {
+        backgroundColor: theme.palette.grey[800]
     }
 });
 
@@ -154,7 +158,7 @@ function Navigation({
                 <ClickAwayListener onClickAway={() => setSelected(false)}>
                     <div className={classes.root}>
                         {sections && !loading && (
-                            <AppBar position="static" color="default">
+                            <AppBar position="static" classes={{ root: classes.appBar }}>
                                 <Toolbar classes={{ gutters: classes.toolbar }}>
                                     <Grid
                                         container
@@ -185,7 +189,7 @@ function Navigation({
                                                     <Tab
                                                         id={item.id}
                                                         key={item.id}
-                                                        classes={{ root: classes.fullHeight }}
+                                                        classes={{ root: classes.tab }}
                                                         label={
                                                             <span className={classes.tabLabel}>
                                                                 {item.title}

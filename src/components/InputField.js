@@ -1,78 +1,118 @@
-import React, { Component } from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import TextField from '@material-ui/core/TextField';
-import withStyles from '@material-ui/styles/withStyles';
+import InputLabel from '@material-ui/core/InputLabel';
+import makeStyles from '@material-ui/styles/makeStyles';
 import moment from 'moment';
 
-const styles = () => ({});
+const useStyles = makeStyles(theme => ({
+    root: {
+        paddingTop: 0,
+        marginTop: theme.spacing(1)
+    },
+    disabled: {
+        background: theme.palette.grey[100],
+        color: theme.palette.text.secondary
+    },
+    label: {
+        fontSize: theme.typography.fontSize
+    },
+    labelAsterisk: {
+        color: theme.palette.error.main
+    },
+    required: {
+        color: theme.palette.error.main
+    },
+    error: {
+        color: theme.palette.error.main
+    }
+}));
 
 const hasValue = val => val || val === 0;
 const getValue = val => (hasValue(val) ? val : '');
 
-class InputField extends Component {
-    change(e) {
-        const { onChange, propertyName, type } = this.props;
-        const { value } = e.target;
+function InputField({
+    onChange,
+    propertyName,
+    type,
+    adornment,
+    disabled,
+    error,
+    fullWidth,
+    helperText,
+    label,
+    margin,
+    maxLength,
+    rows,
+    name,
+    placeholder,
+    required,
+    value
+}) {
+    const classes = useStyles();
 
-        let val = value;
+    const change = e => {
+        const newValue = e.target.value;
+
+        let val = newValue;
 
         if (type === 'date') {
-            val = value
-                ? moment(value)
+            val = newValue
+                ? moment(newValue)
                       .utc()
                       .format()
                 : '';
         }
 
         if (type === 'number') {
-            val = hasValue(value) ? parseFloat(value) : null;
+            val = hasValue(newValue) ? parseFloat(newValue) : null;
         }
 
         onChange(propertyName, val);
-    }
+    };
 
-    render() {
-        const {
-            adornment,
-            classes,
-            disabled,
-            error,
-            fullWidth,
-            helperText,
-            label,
-            margin,
-            maxLength,
-            rows,
-            name,
-            placeholder,
-            type,
-            value
-        } = this.props;
-
-        return (
+    return (
+        <Fragment>
+            <InputLabel
+                classes={{ root: classes.label, asterisk: classes.labelAsterisk }}
+                required={required}
+                error={error}
+            >
+                {label}
+            </InputLabel>
             <TextField
-                className={classes.root}
+                classes={{
+                    root: classes.root
+                }}
                 disabled={disabled}
                 error={error}
                 fullWidth={fullWidth}
                 helperText={helperText}
-                label={label}
                 margin={margin}
                 multiline={rows > 0}
                 name={name}
                 placeholder={placeholder}
+                required={required}
                 rows={rows}
                 type={type}
                 value={type === 'date' ? moment(value).format('YYYY-MM-DD') : getValue(value)}
-                onChange={e => this.change(e)}
-                InputLabelProps={{ shrink: true }}
+                onChange={e => change(e)}
                 InputProps={{
                     startAdornment: adornment ? (
                         <InputAdornment position="start">{adornment}</InputAdornment>
                     ) : null,
                     inputProps: {
                         maxLength
+                    },
+                    classes: {
+                        disabled: classes.disabled
+                    }
+                }}
+                FormHelperTextProps={{
+                    classes: {
+                        required: classes.required,
+                        error: classes.error
                     }
                 }}
                 onInput={e => {
@@ -84,13 +124,12 @@ class InputField extends Component {
                 }}
                 variant="outlined"
             />
-        );
-    }
+        </Fragment>
+    );
 }
 
 InputField.propTypes = {
     adornment: PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})]),
-    classes: PropTypes.shape({}).isRequired,
     disabled: PropTypes.bool,
     error: PropTypes.bool,
     fullWidth: PropTypes.bool,
@@ -98,13 +137,13 @@ InputField.propTypes = {
     label: PropTypes.string.isRequired,
     margin: PropTypes.string,
     maxLength: PropTypes.number,
+    required: PropTypes.bool,
     rows: PropTypes.number,
     name: PropTypes.string,
     placeholder: PropTypes.string,
     propertyName: PropTypes.string,
     type: PropTypes.string,
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-
     onChange: PropTypes.func
 };
 
@@ -114,8 +153,9 @@ InputField.defaultProps = {
     error: false,
     fullWidth: false,
     helperText: '',
-    margin: 'normal',
+    margin: 'dense',
     maxLength: null,
+    required: false,
     rows: null,
     name: '',
     placeholder: '',
@@ -125,4 +165,4 @@ InputField.defaultProps = {
     onChange: null
 };
 
-export default withStyles(styles)(InputField);
+export default InputField;

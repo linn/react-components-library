@@ -1,12 +1,14 @@
 import React from 'react';
-import { createShallow } from '@material-ui/core/test-utils';
+import { createMount } from '@material-ui/core/test-utils';
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import { linnTheme } from '../../themes';
 import Dropdown from '../Dropdown';
 
 describe('<Dropdown />', () => {
     let wrapper;
     let props;
     const getMenuItems = () => wrapper.find('option');
-    const shallow = createShallow({ dive: true });
+    const mount = createMount({ dive: true });
 
     describe('when items exist', () => {
         beforeEach(() => {
@@ -17,7 +19,14 @@ describe('<Dropdown />', () => {
                 onChange: jest.fn(),
                 propertyName: 'dropdownProperty'
             };
-            wrapper = shallow(<Dropdown {...props} />);
+
+            const ComponentWithTheme = () => (
+                <MuiThemeProvider theme={linnTheme}>
+                    <Dropdown {...props} />
+                </MuiThemeProvider>
+            );
+
+            wrapper = mount(<ComponentWithTheme {...props} />);
         });
 
         it('should render menu items', () => {
@@ -53,7 +62,14 @@ describe('<Dropdown />', () => {
                 onChange: jest.fn(),
                 propertyName: 'dropdownProperty'
             };
-            wrapper = shallow(<Dropdown {...props} />);
+
+            const ComponentWithTheme = () => (
+                <MuiThemeProvider theme={linnTheme}>
+                    <Dropdown {...props} />
+                </MuiThemeProvider>
+            );
+
+            wrapper = mount(<ComponentWithTheme {...props} />);
         });
 
         it('should render menu items', () => {
