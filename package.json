@@ -1,6 +1,6 @@
 {
     "name": "@linn-it/linn-form-components-library",
-    "version": "4.0.0",
+    "version": "4.0.1",
     "private": false,
     "dependencies": {
         "@material-ui/core": "^4.1.0",
@@ -81,5 +81,5 @@
         "rollup-plugin-uglify": "^6.0.0",
         "storybook-react-router": "^1.0.2"
     },
-    "main": "index.js"
+    "main": "dist/bundle.min.js"
 }
