@@ -56,7 +56,6 @@ import getUsername from './src/selectors/userSelectors';
 import { getHref, getSelfHref } from './src/utilities/index';
 import initialiseOnMount from './src/components/common/initialiseOnMount';
 import Navigation from './src/containers/Navigation';
-import MenuPage from './src/containers/MenuPage';
 import { errorTheme, linnTheme } from './src/themes';
 
 const reducers = { menu, news, fetchError: fetchErrorReducer };
@@ -118,7 +117,6 @@ export {
     getSeenNotifications,
     getUnseenNotifications,
     getNewsLoading,
-    MenuPage,
     getUsername,
     errorTheme,
     linnTheme,

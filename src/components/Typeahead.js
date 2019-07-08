@@ -2,10 +2,11 @@ import React, { Fragment, useState } from 'react';
 import makeStyles from '@material-ui/styles/makeStyles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
+import Grid from '@material-ui/core/Grid';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import useSearch from '../hooks/useSearch';
 import SearchInputField from './SearchInputField';
 
@@ -14,15 +15,14 @@ import Loading from './Loading';
 
 const useStyles = makeStyles(theme => ({
     a: {
-        textDecoration: 'none',
-        color: theme.palette.text.primary
+        textDecoration: 'none'
     },
     nameText: {
-        fontWeight: theme.typography.fontWeightMedium
+        fontWeight: theme.typography.fontWeightBold
     }
 }));
 
-function Typeahead({ fetchItems, items, title, loading, clearSearch }) {
+function Typeahead({ fetchItems, items, title, loading, clearSearch, history }) {
     const [searchTerm, setSearchTerm] = useState('');
 
     const classes = useStyles();
@@ -39,12 +39,23 @@ function Typeahead({ fetchItems, items, title, loading, clearSearch }) {
                 <List>
                     {items.map(item => (
                         <Fragment>
-                            <Link key={item.id} to={item.href} className={classes.a}>
-                                <ListItem key={item.id} button>
-                                    <Typography style={{ fontWeight: 600, width: 140 }}>
-                                        {item.name}
-                                    </Typography>
-                                    <Typography>{item.description}</Typography>
+                            <Link
+                                key={item.id}
+                                to={item.href}
+                                className={classes.a}
+                                onClick={() => history.push(item.href)}
+                            >
+                                <ListItem button>
+                                    <Grid container spacing={3}>
+                                        <Grid item xs={3}>
+                                            <Typography classes={{ root: classes.nameText }}>
+                                                {item.name}
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item xs={9}>
+                                            <Typography>{item.description}</Typography>
+                                        </Grid>
+                                    </Grid>
                                 </ListItem>
                             </Link>
                             <Divider component="li" />
@@ -83,7 +94,8 @@ Typeahead.propTypes = {
     title: PropTypes.string,
     loading: PropTypes.bool,
     fetchItems: PropTypes.func.isRequired,
-    clearSearch: PropTypes.func.isRequired
+    clearSearch: PropTypes.func.isRequired,
+    history: PropTypes.shape({}).isRequired
 };
 
 Typeahead.defaultProps = {
