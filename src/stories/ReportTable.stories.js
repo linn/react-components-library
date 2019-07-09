@@ -3,6 +3,8 @@ import { storiesOf } from '@storybook/react';
 import StoryRouter from 'storybook-react-router';
 import { withKnobs } from '@storybook/addon-knobs/react';
 import { boolean, text } from '@storybook/addon-knobs';
+import ThemeProvider from '@material-ui/styles/ThemeProvider';
+import { linnTheme } from '../themes/linnTheme';
 import ReportTable from '../components/ReportTable';
 import Page from '../components/Page';
 import small from '../SampleData/ReportTable/small';
@@ -30,6 +32,11 @@ const stories = storiesOf('ReportTable', module);
 stories.addDecorator(story => <Page {...pageProps}>{story()}</Page>);
 stories.addDecorator(withKnobs);
 stories.addDecorator(StoryRouter());
+stories.addDecorator(story => (
+    <ThemeProvider theme={linnTheme}>
+        <div>{story()}</div>)
+    </ThemeProvider>
+));
 
 stories.add('With Knobs', () => (
     <ReportTable

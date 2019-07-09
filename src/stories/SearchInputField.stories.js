@@ -1,10 +1,16 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { text } from '@storybook/addon-knobs';
+import ThemeProvider from '@material-ui/styles/ThemeProvider';
+import { linnTheme } from '../themes/linnTheme';
 import SearchInputField from '../components/SearchInputField';
 
 storiesOf('SearchInputField', module)
-    .addDecorator(story => <div>{story()}</div>)
+    .addDecorator(story => (
+        <ThemeProvider theme={linnTheme}>
+            <div>{story()}</div>)
+        </ThemeProvider>
+    ))
     .add('Label and value', () => (
         <SearchInputField
             value={text('value', 'Search')}

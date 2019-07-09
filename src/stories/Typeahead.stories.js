@@ -2,7 +2,8 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import StoryRouter from 'storybook-react-router';
 import { withKnobs, text, boolean, array } from '@storybook/addon-knobs';
-
+import ThemeProvider from '@material-ui/styles/ThemeProvider';
+import { linnTheme } from '../themes/linnTheme';
 import Typeahead from '../components/Typeahead';
 
 const items = [
@@ -17,7 +18,11 @@ const clearSearch = () => {};
 
 storiesOf('Typeahead', module)
     .addDecorator(StoryRouter())
-    .addDecorator(story => <div style={{ padding: '3rem', width: '100%' }}>{story()}</div>)
+    .addDecorator(story => (
+        <ThemeProvider theme={linnTheme}>
+            <div style={{ padding: '3rem', width: '100%' }}>{story()}</div>)
+        </ThemeProvider>
+    ))
     .addDecorator(withKnobs)
 
     .add('default ', () => (
