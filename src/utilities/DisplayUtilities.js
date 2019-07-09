@@ -2,10 +2,35 @@ import React from 'react';
 import Modal from '@material-ui/core/Modal';
 import numeral from 'numeral';
 import { Link } from 'react-router-dom';
+import makeStyles from '@material-ui/styles/makeStyles';
+
+const useStyles = makeStyles(theme => ({
+    a: {
+        textDecoration: 'none',
+        color: theme.palette.primary.main,
+        '&:hover': {
+            cursor: 'pointer',
+            textDecoration: 'underline'
+        }
+    }
+}));
 
 function LinkOrAnchor({ hasExternalLinks, text, href }) {
-    if (hasExternalLinks) return <a href={href}> {text} </a>;
-    return <Link to={href}> {text}</Link>;
+    const classes = useStyles();
+
+    if (hasExternalLinks)
+        return (
+            <a className={classes.a} href={href}>
+                {' '}
+                {text}{' '}
+            </a>
+        );
+    return (
+        <Link className={classes.a} to={href}>
+            {' '}
+            {text}
+        </Link>
+    );
 }
 
 export const format = (i, prefix, suffix, decimalPlaces) => {
