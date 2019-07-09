@@ -4,7 +4,6 @@ import Breadcrumbs from './src/components/Breadcrumbs';
 import SaveBackCancelButtons from './src/components/SaveBackCancelButtons';
 import ReportTable from './src/components/ReportTable';
 import Loading from './src/components/Loading';
-import MiniLoading from './src/components/MiniLoading';
 import Dropdown from './src/components/Dropdown';
 import ErrorCard from './src/components/ErrorCard';
 import CheckboxWithLabel from './src/components/CheckboxWithLabel';
@@ -75,7 +74,6 @@ export {
     ExportButton,
     Page,
     Loading,
-    MiniLoading,
     Title,
     InputField,
     Typeahead,
