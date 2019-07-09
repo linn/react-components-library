@@ -2,6 +2,8 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs } from '@storybook/addon-knobs';
+import ThemeProvider from '@material-ui/styles/ThemeProvider';
+import { linnTheme } from '../themes/linnTheme';
 import SaveBackCancelButtons from '../components/SaveBackCancelButtons';
 
 const actions = {
@@ -12,7 +14,9 @@ const actions = {
 
 storiesOf('SaveBackCancelButtons', module)
     .addDecorator(story => (
-        <div style={{ position: 'absolute', right: '50%', top: '50%' }}>{story()}</div>
+        <ThemeProvider theme={linnTheme}>
+            <div style={{ position: 'absolute', right: '50%', top: '50%' }}>{story()}</div>
+        </ThemeProvider>
     ))
     .addDecorator(withKnobs)
     .add('default', () => <SaveBackCancelButtons {...actions} />)

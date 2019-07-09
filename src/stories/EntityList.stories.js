@@ -3,6 +3,8 @@ import { storiesOf } from '@storybook/react';
 import { withKnobs } from '@storybook/addon-knobs/react';
 import { text, boolean, object } from '@storybook/addon-knobs';
 import StoryRouter from 'storybook-react-router';
+import ThemeProvider from '@material-ui/styles/ThemeProvider';
+import { linnTheme } from '../themes/linnTheme';
 import Page from '../components/Page';
 import EntityList from '../components/EntityList';
 
@@ -28,6 +30,11 @@ storiesOf('EntityList', module)
     .addDecorator(story => <Page {...pageProps}>{story()}</Page>)
     .addDecorator(withKnobs)
     .addDecorator(StoryRouter())
+    .addDecorator(story => (
+        <ThemeProvider theme={linnTheme}>
+            <div>{story()}</div>)
+        </ThemeProvider>
+    ))
     .add('default ', () => (
         <EntityList
             title="Entities"

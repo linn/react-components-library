@@ -4,6 +4,8 @@ import { withKnobs } from '@storybook/addon-knobs/react';
 import { text } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import Grid from '@material-ui/core/Grid';
+import ThemeProvider from '@material-ui/styles/ThemeProvider';
+import { linnTheme } from '../themes/linnTheme';
 import InputField from '../components/InputField';
 
 const actions = {
@@ -11,7 +13,11 @@ const actions = {
 };
 
 storiesOf('InputField', module)
-    .addDecorator(story => <div>{story()}</div>)
+    .addDecorator(story => (
+        <ThemeProvider theme={linnTheme}>
+            <div>{story()}</div>
+        </ThemeProvider>
+    ))
     .addDecorator(withKnobs)
     .add('Label and value', () => (
         <InputField

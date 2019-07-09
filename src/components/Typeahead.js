@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-function Typeahead({ fetchItems, items, title, loading, clearSearch, history }) {
+function Typeahead({ fetchItems, items, title, loading, clearSearch, handleClick }) {
     const [searchTerm, setSearchTerm] = useState('');
 
     const classes = useStyles();
@@ -43,7 +43,7 @@ function Typeahead({ fetchItems, items, title, loading, clearSearch, history }) 
                                 key={item.id}
                                 to={item.href}
                                 className={classes.a}
-                                onClick={() => history.push(item.href)}
+                                onClick={() => handleClick(item.href)}
                             >
                                 <ListItem button>
                                     <Grid container spacing={3}>
@@ -95,7 +95,7 @@ Typeahead.propTypes = {
     loading: PropTypes.bool,
     fetchItems: PropTypes.func.isRequired,
     clearSearch: PropTypes.func.isRequired,
-    history: PropTypes.shape({}).isRequired
+    handleClick: PropTypes.func.isRequired
 };
 
 Typeahead.defaultProps = {
