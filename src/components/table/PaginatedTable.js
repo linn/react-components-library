@@ -67,38 +67,34 @@ function PaginatedTable({
             {page.elements.length ? (
                 <TableHead>
                     <TableRow>
-                        {page.elements &&
-                            page.elements.length &&
-                            Object.keys(page.elements[0])
-                                .filter(
-                                    key =>
-                                        key !== 'elements' &&
-                                        key !== 'links' &&
-                                        key !== 'href' &&
-                                        key !== 'id'
-                                )
-                                .map(key =>
-                                    sortable ? (
-                                        <TableCell
-                                            key={key}
-                                            sortDirection={
-                                                localOrderBy.property === key
-                                                    ? localOrderBy.asc
-                                                    : false
-                                            }
+                        {Object.keys(page.elements[0])
+                            .filter(
+                                key =>
+                                    key !== 'elements' &&
+                                    key !== 'links' &&
+                                    key !== 'href' &&
+                                    key !== 'id'
+                            )
+                            .map(key =>
+                                sortable ? (
+                                    <TableCell
+                                        key={key}
+                                        sortDirection={
+                                            localOrderBy.property === key ? localOrderBy.asc : false
+                                        }
+                                    >
+                                        <TableSortLabel
+                                            active={localOrderBy.property === key}
+                                            direction={localOrderBy.asc ? 'asc' : 'desc'}
+                                            onClick={() => createSortHandler(key)}
                                         >
-                                            <TableSortLabel
-                                                active={localOrderBy.property === key}
-                                                direction={localOrderBy.asc ? 'asc' : 'desc'}
-                                                onClick={() => createSortHandler(key)}
-                                            >
-                                                {formatCamelCaseToTitleCase(key)}
-                                            </TableSortLabel>
-                                        </TableCell>
-                                    ) : (
-                                        <TableCell>{formatCamelCaseToTitleCase(key)}</TableCell>
-                                    )
-                                )}
+                                            {formatCamelCaseToTitleCase(key)}
+                                        </TableSortLabel>
+                                    </TableCell>
+                                ) : (
+                                    <TableCell>{formatCamelCaseToTitleCase(key)}</TableCell>
+                                )
+                            )}
                         {expandable && <TableCell>Actions</TableCell>}
                     </TableRow>
                 </TableHead>
