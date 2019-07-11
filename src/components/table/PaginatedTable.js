@@ -62,19 +62,22 @@ function PaginatedTable({
         setOrderBy(s => ({ property, asc: !s.asc }));
     };
 
+    const invalidElement = (key, elements) =>
+        key !== 'elements' &&
+        key !== 'links' &&
+        key !== 'href' &&
+        key !== 'id' &&
+        (typeof elements[key] === 'string' ||
+            typeof elements[key] === 'number' ||
+            elements[key] === null);
+
     return (
         <Table size="small">
             {page.elements.length ? (
                 <TableHead>
                     <TableRow>
                         {Object.keys(page.elements[0])
-                            .filter(
-                                key =>
-                                    key !== 'elements' &&
-                                    key !== 'links' &&
-                                    key !== 'href' &&
-                                    key !== 'id'
-                            )
+                            .filter(key => invalidElement(key, page.elements[0]))
                             .map(key =>
                                 sortable ? (
                                     <TableCell
@@ -105,12 +108,8 @@ function PaginatedTable({
                 <TableCell
                     colspan={
                         page.elements.length
-                            ? Object.keys(page.elements[0]).filter(
-                                  key =>
-                                      key !== 'elements' &&
-                                      key !== 'links' &&
-                                      key !== 'href' &&
-                                      key !== 'id'
+                            ? Object.keys(page.elements[0]).filter(key =>
+                                  invalidElement(key, page.elements[0])
                               ).length + 1
                             : null
                     }
@@ -132,13 +131,7 @@ function PaginatedTable({
                                     }
                                 >
                                     {Object.keys(element)
-                                        .filter(
-                                            key =>
-                                                key !== 'elements' &&
-                                                key !== 'links' &&
-                                                key !== 'href' &&
-                                                key !== 'id'
-                                        )
+                                        .filter(key => invalidElement(key, element))
                                         .map(key => (
                                             <TableCell component="th" scope="row">
                                                 {element[key]}
