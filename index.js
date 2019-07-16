@@ -17,6 +17,7 @@ import OnOffSwitch from './src/components/OnOffSwitch';
 import SnackbarMessage from './src/components/SnackbarMessage';
 import SearchInputField from './src/components/SearchInputField';
 import useSearch from './src/hooks/useSearch';
+import useTablePagination from './src/hooks/useTablePagination';
 import PaginatedTable from './src/components/table/PaginatedTable';
 import InfiniteTable from './src/components/table/InfiniteTable';
 import TypeaheadDialog from './src/components/TypeaheadDialog';
@@ -55,8 +56,7 @@ import getUsername from './src/selectors/userSelectors';
 import { getHref, getSelfHref } from './src/utilities/index';
 import initialiseOnMount from './src/components/common/initialiseOnMount';
 import Navigation from './src/containers/Navigation';
-import { errorTheme } from './src/themes/errorTheme';
-import { linnTheme } from './src/themes/linnTheme';
+import { errorTheme, linnTheme } from './src/themes/index';
 
 const reducers = { menu, news, fetchError: fetchErrorReducer };
 
@@ -82,6 +82,7 @@ export {
     SnackbarMessage,
     SearchInputField,
     useSearch,
+    useTablePagination,
     TypeaheadDialog,
     makeActionTypes,
     makeReportActionTypes,

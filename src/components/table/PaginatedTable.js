@@ -1,8 +1,5 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
-import Button from '@material-ui/core/Button';
-import EditIcon from '@material-ui/icons/Edit';
-import LinearProgress from '@material-ui/core/LinearProgress';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
 import TableBody from '@material-ui/core/TableBody';
@@ -12,7 +9,10 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import makeStyles from '@material-ui/styles/makeStyles';
-import { formatCamelCaseToTitleCase, getSelfHref } from '../../utilities/index';
+import EditIcon from '@material-ui/icons/Edit';
+import { Button } from '@material-ui/core';
+import LinearProgress from '@material-ui/core/LinearProgress';
+import { getSelfHref } from '../../utilities/index';
 import TablePaginationActions from './TablePaginationActions';
 
 const useStyles = makeStyles(() => ({
@@ -24,126 +24,109 @@ const useStyles = makeStyles(() => ({
 }));
 
 function PaginatedTable({
-    page,
     sortable,
-    pageLoad,
-    pageSortedLoad,
     handleRowLinkClick,
     expandable,
-    loading
+    loading,
+    columns,
+    rows,
+    pageOptions,
+    setPageOptions,
+    totalItemCount
 }) {
     const [rowOpen, setRowOpen] = useState();
-    const [localPage, setLocalPage] = useState(0);
-    const [localOrderBy, setOrderBy] = useState({ property: '', asc: null });
-    const [rowsPerPage, setRowsPerpage] = useState(10);
 
     const classes = useStyles();
-
-    useEffect(() => {
-        if (localOrderBy && localOrderBy.property) {
-            pageSortedLoad(localPage + 1, rowsPerPage, localOrderBy.property, localOrderBy.asc);
-        }
-    }, [localOrderBy, localPage, rowsPerPage, pageSortedLoad]);
 
     const handleRowOnClick = rowId => (rowOpen === rowId ? setRowOpen(null) : setRowOpen(rowId));
 
     const handleChangePage = (event, pge) => {
-        setLocalPage(pge);
-        pageLoad(pge + 1, rowsPerPage); // page number must be incremented because the starting index on the server is 1
+        setPageOptions(options => ({
+            ...options,
+            currentPage: pge
+        }));
     };
 
     const handleChangeRowsPerPage = event => {
-        setLocalPage(0);
-        setRowsPerpage(event.target.value);
-        pageLoad(localPage + 1, event.target.value);
+        const { value } = event.target;
+
+        setPageOptions(options => ({
+            ...options,
+            rowsPerPage: parseInt(value, 10),
+            currentPage: 0
+        }));
     };
 
-    const createSortHandler = property => {
-        setOrderBy(s => ({ property, asc: !s.asc }));
+    const handleChangeOrderBy = property => {
+        setPageOptions(options => ({
+            ...options,
+            orderBy: property,
+            orderAscending: !options.orderAscending
+        }));
     };
 
-    const invalidElement = (key, elements) =>
-        key !== 'elements' &&
-        key !== 'links' &&
-        key !== 'href' &&
-        key !== 'id' &&
-        (typeof elements[key] === 'string' ||
-            typeof elements[key] === 'number' ||
-            elements[key] === null);
+    const invalidElement = key =>
+        key !== 'elements' && key !== 'links' && key !== 'href' && key !== 'id';
 
     return (
         <Table size="small">
-            {page.elements.length ? (
-                <TableHead>
-                    <TableRow>
-                        {Object.keys(page.elements[0])
-                            .filter(key => invalidElement(key, page.elements[0]))
-                            .map(key =>
-                                sortable ? (
-                                    <TableCell
-                                        key={key}
-                                        sortDirection={
-                                            localOrderBy.property === key ? localOrderBy.asc : false
-                                        }
-                                    >
-                                        <TableSortLabel
-                                            active={localOrderBy.property === key}
-                                            direction={localOrderBy.asc ? 'asc' : 'desc'}
-                                            onClick={() => createSortHandler(key)}
-                                        >
-                                            {formatCamelCaseToTitleCase(key)}
-                                        </TableSortLabel>
-                                    </TableCell>
-                                ) : (
-                                    <TableCell>{formatCamelCaseToTitleCase(key)}</TableCell>
-                                )
-                            )}
-                        {expandable && <TableCell>Actions</TableCell>}
-                    </TableRow>
-                </TableHead>
-            ) : (
-                <TableHead />
-            )}
+            <TableHead>
+                <TableRow>
+                    {columns.map(column =>
+                        sortable ? (
+                            <TableCell
+                                key={column}
+                                sortDirection={
+                                    pageOptions.orderBy === column && pageOptions.orderAscending
+                                        ? 'asc'
+                                        : 'desc'
+                                }
+                            >
+                                <TableSortLabel
+                                    active={pageOptions.orderBy === column}
+                                    direction={pageOptions.orderAscending ? 'asc' : 'desc'}
+                                    onClick={() => handleChangeOrderBy(column)}
+                                >
+                                    {column}
+                                </TableSortLabel>
+                            </TableCell>
+                        ) : (
+                            <TableCell>{column}</TableCell>
+                        )
+                    )}
+                    {expandable && <TableCell>Actions</TableCell>}
+                </TableRow>
+            </TableHead>
             {loading ? (
-                <TableCell
-                    colspan={
-                        page.elements.length
-                            ? Object.keys(page.elements[0]).filter(key =>
-                                  invalidElement(key, page.elements[0])
-                              ).length + 1
-                            : null
-                    }
-                >
+                <TableCell colspan={columns.length + 1}>
                     <LinearProgress />
                 </TableCell>
             ) : (
                 <Fragment>
-                    {page.elements &&
-                        page.elements.map(element => (
-                            <TableBody>
+                    <TableBody>
+                        {rows.map(row => (
+                            <Fragment>
                                 <TableRow
                                     className={classes.link}
                                     hover
                                     onClick={() =>
                                         expandable
-                                            ? handleRowOnClick(element.id)
-                                            : handleRowLinkClick(getSelfHref(element))
+                                            ? handleRowOnClick(row.id)
+                                            : handleRowLinkClick(getSelfHref(row))
                                     }
                                 >
-                                    {Object.keys(element)
-                                        .filter(key => invalidElement(key, element))
+                                    {Object.keys(row)
+                                        .filter(key => invalidElement(key, row))
                                         .map(key => (
                                             <TableCell component="th" scope="row">
-                                                {element[key]}
+                                                {row[key] || '-'}
                                             </TableCell>
                                         ))}
                                     {expandable && (
                                         <TableCell>
                                             <Button
-                                                key={getSelfHref(element)}
-                                                onClick={() =>
-                                                    handleRowLinkClick(getSelfHref(element))
-                                                }
+                                                key={getSelfHref(row)}
+                                                onClick={() => handleRowLinkClick(getSelfHref(row))}
                                                 size="small"
                                                 variant="outlined"
                                                 color="primary"
@@ -154,27 +137,28 @@ function PaginatedTable({
                                     )}
                                 </TableRow>
                                 {expandable &&
-                                    rowOpen === element.id &&
-                                    element.elements &&
-                                    element.elements.map(el => (
+                                    rowOpen === row.id &&
+                                    row.elements &&
+                                    row.elements.map(el => (
                                         <tr>
                                             {Object.keys(el).map(key => (
                                                 <TableCell>
-                                                    {formatCamelCaseToTitleCase(key)}: {el[key]}
+                                                    {key}: {el[key]}
                                                 </TableCell>
                                             ))}
                                         </tr>
                                     ))}
-                            </TableBody>
+                            </Fragment>
                         ))}
+                    </TableBody>
                     <TableFooter>
-                        {page.totalItemCount && (
+                        {totalItemCount && (
                             <TableRow>
                                 <TablePagination
                                     rowsPerPageOptions={[5, 10, 25, 50]}
-                                    count={page.totalItemCount}
-                                    rowsPerPage={rowsPerPage}
-                                    page={localPage}
+                                    count={totalItemCount}
+                                    rowsPerPage={pageOptions.rowsPerPage}
+                                    page={pageOptions.currentPage}
                                     SelectProps={{
                                         native: true
                                     }}
@@ -192,22 +176,20 @@ function PaginatedTable({
 }
 
 PaginatedTable.propTypes = {
-    page: PropTypes.shape({
-        elements: PropTypes.arrayOf(
-            PropTypes.shape({
-                Id: PropTypes.string,
-                values: PropTypes.arrayOf(PropTypes.string),
-                elements: PropTypes.arrayOf(PropTypes.shape({}))
-            })
-        ).isRequired,
-        totalItemCount: PropTypes.number.isRequired
-    }).isRequired,
     sortable: PropTypes.bool,
-    pageLoad: PropTypes.func.isRequired,
-    pageSortedLoad: PropTypes.func.isRequired,
     handleRowLinkClick: PropTypes.func.isRequired,
     expandable: PropTypes.bool,
-    loading: PropTypes.bool
+    loading: PropTypes.bool,
+    columns: PropTypes.arrayOf(PropTypes.string).isRequired,
+    rows: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+    pageOptions: PropTypes.shape({
+        orderBy: PropTypes.string,
+        orderAscending: PropTypes.bool,
+        currentPage: PropTypes.number,
+        rowsPerPage: PropTypes.number
+    }).isRequired,
+    setPageOptions: PropTypes.func.isRequired,
+    totalItemCount: PropTypes.number.isRequired
 };
 
 PaginatedTable.defaultProps = {
