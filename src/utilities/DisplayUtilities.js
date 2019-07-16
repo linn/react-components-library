@@ -1,7 +1,8 @@
 import React from 'react';
 import Modal from '@material-ui/core/Modal';
 import numeral from 'numeral';
-import { Link } from 'react-router-dom';
+import Link from '@material-ui/core/Link';
+import { Link as RouterLink } from 'react-router-dom';
 import makeStyles from '@material-ui/styles/makeStyles';
 
 const useStyles = makeStyles(theme => ({
@@ -18,17 +19,19 @@ const useStyles = makeStyles(theme => ({
 function LinkOrAnchor({ hasExternalLinks, text, href }) {
     const classes = useStyles();
 
-    if (hasExternalLinks)
+    if (hasExternalLinks) {
         return (
-            <a className={classes.a} href={href}>
+            <Link className={classes.link} href={`http://${href}`}>
                 {' '}
                 {text}{' '}
-            </a>
+            </Link>
         );
+    }
+
     return (
-        <Link className={classes.a} to={href}>
+        <Link className={classes.link} component={RouterLink} to={href}>
             {' '}
-            {text}
+            {text}{' '}
         </Link>
     );
 }
