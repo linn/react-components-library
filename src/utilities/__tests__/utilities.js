@@ -1,17 +1,4 @@
-﻿import deepFreeze from 'deep-freeze';
-import { getHref, getSelfHref, formatCamelCaseToTitleCase } from '../index';
-
-describe('when formatting camel case string to title case', () => {
-    it('should convert to title case without modifying string', () => {
-        const input = 'someCamelCaseString';
-
-        const expected = 'Some Camel Case String';
-
-        deepFreeze(input);
-
-        expect(formatCamelCaseToTitleCase(input)).toEqual(expected);
-    });
-});
+﻿import { getHref, getSelfHref } from '../index';
 
 describe('when getting href', () => {
     let item;

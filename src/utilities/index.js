@@ -9,6 +9,3 @@ export const getHref = (itemWithLinks, rel) => {
 };
 
 export const getSelfHref = itemWithLinks => getHref(itemWithLinks, 'self');
-
-export const formatCamelCaseToTitleCase = str =>
-    str.charAt(0).toUpperCase() + str.slice(1).replace(/([A-Z])/g, ' $1');
