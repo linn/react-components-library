@@ -15,11 +15,18 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import { getSelfHref } from '../../utilities/index';
 import TablePaginationActions from './TablePaginationActions';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(theme => ({
     link: {
         '&:hover': {
             cursor: 'pointer'
         }
+    },
+    button: {
+        maxWidth: theme.spacing(5),
+        minWidth: theme.spacing(5),
+        maxHeight: theme.spacing(3),
+        minHeight: theme.spacing(3),
+        padding: 0
     }
 }));
 
@@ -125,13 +132,14 @@ function PaginatedTable({
                                     {expandable && (
                                         <TableCell>
                                             <Button
+                                                classes={{ root: classes.button }}
                                                 key={getSelfHref(row)}
                                                 onClick={() => handleRowLinkClick(getSelfHref(row))}
                                                 size="small"
                                                 variant="outlined"
                                                 color="primary"
                                             >
-                                                <EditIcon />
+                                                <EditIcon fontSize="small" />
                                             </Button>
                                         </TableCell>
                                     )}
