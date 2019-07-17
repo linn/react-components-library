@@ -1,13 +1,16 @@
 import React from 'react';
-import Modal from '@material-ui/core/Modal';
 import numeral from 'numeral';
-import { Link } from 'react-router-dom';
+import Button from '@material-ui/core/Button';
+import Link from '@material-ui/core/Link';
+import Modal from '@material-ui/core/Modal';
+import { Link as RouterLink } from 'react-router-dom';
 import makeStyles from '@material-ui/styles/makeStyles';
 
 const useStyles = makeStyles(theme => ({
     a: {
         textDecoration: 'none',
         color: theme.palette.primary.main,
+        padding: 0,
         '&:hover': {
             cursor: 'pointer',
             textDecoration: 'underline'
@@ -18,17 +21,20 @@ const useStyles = makeStyles(theme => ({
 function LinkOrAnchor({ hasExternalLinks, text, href }) {
     const classes = useStyles();
 
-    if (hasExternalLinks)
+    if (hasExternalLinks) {
         return (
-            <a className={classes.a} href={href}>
-                {' '}
-                {text}{' '}
+            <a style={{ textDecoration: 'none' }} href={href}>
+                <Button size="small" className={classes.link}>
+                    {text}
+                </Button>
             </a>
         );
+    }
+
     return (
-        <Link className={classes.a} to={href}>
+        <Link className={classes.link} component={RouterLink} to={href}>
             {' '}
-            {text}
+            {text}{' '}
         </Link>
     );
 }

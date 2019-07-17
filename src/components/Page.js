@@ -20,7 +20,23 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-function Page({ children, history }) {
+const pageWidth = {
+    xs: 4,
+    s: 6,
+    m: 8,
+    l: 10,
+    xl: 12
+};
+
+const columnWidth = {
+    xs: 4,
+    s: 3,
+    m: 2,
+    l: 1,
+    xl: 0
+};
+
+function Page({ children, history, width }) {
     const classes = useStyles();
 
     return (
@@ -31,23 +47,27 @@ function Page({ children, history }) {
                     <Breadcrumbs history={history} />
                 </Grid>
                 <Grid item xs={1} />
-                {/* TODO would be good to have the mid width be a variable */}
-                <Grid item xs={1} />
-                <Grid item xs={10}>
+
+                <Grid item xs={columnWidth[width]} />
+                <Grid item xs={pageWidth[width]}>
                     <Paper className={classes.root} square>
                         {children}
                     </Paper>
                 </Grid>
-                <Grid item xs={1} />
+                <Grid item xs={columnWidth[width]} />
             </Grid>
         </Fragment>
     );
 }
 
 Page.propTypes = {
-    classes: PropTypes.shape({}).isRequired,
     children: PropTypes.node.isRequired,
-    history: PropTypes.shape({}).isRequired
+    history: PropTypes.shape({}).isRequired,
+    width: PropTypes.oneOf(['xs', 's', 'm', 'l', 'xl'])
+};
+
+Page.defaultProps = {
+    width: 'l'
 };
 
 export default Page;

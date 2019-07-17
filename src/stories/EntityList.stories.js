@@ -32,7 +32,7 @@ storiesOf('EntityList', module)
     .addDecorator(StoryRouter())
     .addDecorator(story => (
         <ThemeProvider theme={linnTheme}>
-            <div>{story()}</div>)
+            <div>{story()}</div>
         </ThemeProvider>
     ))
     .add('default ', () => (

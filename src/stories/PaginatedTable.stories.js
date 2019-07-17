@@ -8,46 +8,142 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import PaginatedTable from '../components/table/PaginatedTable';
 
 const actions = {
-    pageLoad: action('pageLoad'),
-    pageSortedLoad: action('pageSortedLoad')
+    setPageOptions: action('setPageOptions'),
+    handleRowLinkClick: action('handleRowLinkClick')
 };
 
-const page = {
-    rows: [
-        {
-            Id: 'id1',
-            values: ['1', '2', '3', '4'],
-            expandableInfo: {
-                Id: 'id1',
-                elements: [
-                    {
-                        label: 'label',
-                        value: 'value'
-                    }
-                ]
-            }
-        },
-        {
-            Id: 'id2',
-            values: ['1', '2', '3', '4'],
-            expandableInfo: {
-                Id: 'id2',
-                elements: [
-                    {
-                        label: 'label',
-                        value: 'value'
-                    }
-                ]
-            }
-        }
-    ],
-    totalItemCount: 10
+const totalItemCount = 5;
+
+const columns = ['Type', 'Description'];
+
+const pageOptions = {
+    orderBy: '',
+    orderAscending: false,
+    currentPage: 0,
+    rowsPerPage: 10
 };
-const columnNames = [
-    { value: 'column 1', label: 'column 1-l' },
-    { value: 'column 2', label: 'column 2-l' },
-    { value: 'column 3', label: 'column 3-l' },
-    { value: 'column 4', label: 'column 4-l' }
+
+const rows = [
+    {
+        id: 1,
+        salesPackageId: 'KIKO',
+        description: 'KIKO PACKAGE',
+        elements: [
+            {
+                elementType: 'KIKO DSM',
+                sequence: 1,
+                quantity: 2
+            },
+            {
+                elementType: 'KIKO CABLE',
+                sequence: 3,
+                quantity: 2
+            }
+        ],
+        links: [
+            {
+                href: '/products/maint/sales-packages/1',
+                rel: 'self'
+            }
+        ],
+        href: '/products/maint/sales-packages/1'
+    },
+    {
+        id: 2,
+        salesPackageId: 'MAJIK',
+        description: 'MAJIK PACKAGE',
+        elements: [
+            {
+                elementType: 'MAJIK DSM',
+                sequence: 1,
+                quantity: 2
+            },
+            {
+                elementType: 'MAJIK CABLE',
+                sequence: 3,
+                quantity: 2
+            }
+        ],
+        links: [
+            {
+                href: '/products/maint/sales-packages/1',
+                rel: 'self'
+            }
+        ],
+        href: '/products/maint/sales-packages/1'
+    },
+    {
+        id: 3,
+        salesPackageId: 'KLIMAX',
+        description: 'KLIMAX PACKAGE',
+        elements: [
+            {
+                elementType: 'KLIMAX DSM',
+                sequence: 1,
+                quantity: 2
+            },
+            {
+                elementType: 'KLIMAX CABLE',
+                sequence: 3,
+                quantity: 2
+            }
+        ],
+        links: [
+            {
+                href: '/products/maint/sales-packages/1',
+                rel: 'self'
+            }
+        ],
+        href: '/products/maint/sales-packages/1'
+    },
+    {
+        id: 4,
+        salesPackageId: 'AKURATE',
+        description: 'AKURATE PACKAGE',
+        elements: [
+            {
+                elementType: 'AKURATE DSM',
+                sequence: 1,
+                quantity: 2
+            },
+            {
+                elementType: 'AKURATE CABLE',
+                sequence: 3,
+                quantity: 2
+            }
+        ],
+        links: [
+            {
+                href: '/products/maint/sales-packages/1',
+                rel: 'self'
+            }
+        ],
+        href: '/products/maint/sales-packages/1'
+    },
+    {
+        id: 5,
+        salesPackageId: 'SELEKT',
+        description: 'SELEKT PACKAGE',
+        elements: [
+            {
+                elementType: 'SELEKT DSM',
+                sequence: 1,
+                quantity: 2
+            },
+            {
+                elementType: 'SELEKT CABLE',
+                sequence: 3,
+                quantity: 2
+            }
+        ],
+        links: [
+            {
+                href: '/products/maint/sales-packages/1',
+                rel: 'self'
+            }
+        ],
+        href: '/products/maint/sales-packages/1'
+    }
 ];
 
 storiesOf('PaginatedTable', module)
@@ -57,11 +153,12 @@ storiesOf('PaginatedTable', module)
         <MuiThemeProvider theme={CreateMuiTheme()}>
             <Router>
                 <PaginatedTable
-                    page={page}
-                    sortable={false}
-                    columnNames={columnNames}
-                    pageLoad={actions.pageLoad}
-                    pageSortedLoad={actions.pageSortedLoad}
+                    setPageOptions={actions.setPageOptions}
+                    handleRowLinkClick={actions.handleRowLinkClick}
+                    rows={rows}
+                    columns={columns}
+                    pageOptions={pageOptions}
+                    totalItemCount={totalItemCount}
                 />
             </Router>{' '}
         </MuiThemeProvider>
@@ -70,11 +167,28 @@ storiesOf('PaginatedTable', module)
         <MuiThemeProvider theme={CreateMuiTheme()}>
             <Router>
                 <PaginatedTable
-                    page={page}
+                    setPageOptions={actions.setPageOptions}
+                    handleRowLinkClick={actions.handleRowLinkClick}
+                    rows={rows}
+                    columns={columns}
+                    pageOptions={pageOptions}
+                    totalItemCount={totalItemCount}
                     sortable
-                    columnNames={columnNames}
-                    pageLoad={actions.pageLoad}
-                    pageSortedLoad={actions.pageSortedLoad}
+                />
+            </Router>
+        </MuiThemeProvider>
+    ))
+    .add('with expandable enabled', () => (
+        <MuiThemeProvider theme={CreateMuiTheme()}>
+            <Router>
+                <PaginatedTable
+                    setPageOptions={actions.setPageOptions}
+                    handleRowLinkClick={actions.handleRowLinkClick}
+                    rows={rows}
+                    columns={columns}
+                    pageOptions={pageOptions}
+                    totalItemCount={totalItemCount}
+                    expandable
                 />
             </Router>
         </MuiThemeProvider>

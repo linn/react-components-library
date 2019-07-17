@@ -21,7 +21,7 @@ stories.addDecorator(withKnobs);
 stories.addDecorator(StoryRouter());
 stories.addDecorator(story => (
     <ThemeProvider theme={linnTheme}>
-        <div>{story()}</div>)
+        <div>{story()}</div>
     </ThemeProvider>
 ));
 

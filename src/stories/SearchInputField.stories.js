@@ -8,7 +8,7 @@ import SearchInputField from '../components/SearchInputField';
 storiesOf('SearchInputField', module)
     .addDecorator(story => (
         <ThemeProvider theme={linnTheme}>
-            <div>{story()}</div>)
+            <div>{story()}</div>
         </ThemeProvider>
     ))
     .add('Label and value', () => (

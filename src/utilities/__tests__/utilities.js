@@ -7,10 +7,8 @@ describe('when getting href', () => {
     describe('when rel present', () => {
         beforeEach(() => {
             item = {
-                links: [
-                    { rel: 'r1', href: '/1' },
-                    { rel: 'r2', href: '/2' }]
-            }
+                links: [{ rel: 'r1', href: '/1' }, { rel: 'r2', href: '/2' }]
+            };
         });
 
         test('should return href', () => {
@@ -22,10 +20,8 @@ describe('when getting href', () => {
     describe('when rel not present', () => {
         beforeEach(() => {
             item = {
-                links: [
-                    { rel: 'r1', href: '/1' },
-                    { rel: 'r2', href: '/2' }]
-            }
+                links: [{ rel: 'r1', href: '/1' }, { rel: 'r2', href: '/2' }]
+            };
         });
 
         test('should not return href', () => {
@@ -38,7 +34,7 @@ describe('when getting href', () => {
         beforeEach(() => {
             item = {
                 links: null
-            }
+            };
         });
 
         test('should not return href', () => {
@@ -49,7 +45,7 @@ describe('when getting href', () => {
 
     describe('when links not present', () => {
         beforeEach(() => {
-            item = {}
+            item = {};
         });
 
         test('should not return href', () => {
@@ -70,7 +66,6 @@ describe('when getting href', () => {
     });
 });
 
-
 describe('when getting getSelfHref', () => {
     let item;
     let expectedResult;
@@ -78,10 +73,8 @@ describe('when getting getSelfHref', () => {
     describe('when rel present', () => {
         beforeEach(() => {
             item = {
-                links: [
-                    { rel: 'r1', href: '/1' },
-                    { rel: 'self', href: 'self/2' }]
-            }
+                links: [{ rel: 'r1', href: '/1' }, { rel: 'self', href: 'self/2' }]
+            };
         });
 
         test('should return href', () => {
@@ -93,10 +86,8 @@ describe('when getting getSelfHref', () => {
     describe('when rel not present', () => {
         beforeEach(() => {
             item = {
-                links: [
-                    { rel: 'r1', href: '/1' },
-                    { rel: 'r2', href: '/2' }]
-            }
+                links: [{ rel: 'r1', href: '/1' }, { rel: 'r2', href: '/2' }]
+            };
         });
 
         test('should not return href', () => {

@@ -7,9 +7,9 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import PropTypes from 'prop-types';
+import { Link as RouterLink } from 'react-router-dom';
 import useSearch from '../hooks/useSearch';
 import SearchInputField from './SearchInputField';
-
 import Title from './Title';
 import Loading from './Loading';
 
@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-function Typeahead({ fetchItems, items, title, loading, clearSearch, handleClick }) {
+function Typeahead({ fetchItems, items, title, loading, clearSearch }) {
     const [searchTerm, setSearchTerm] = useState('');
 
     const classes = useStyles();
@@ -40,10 +40,10 @@ function Typeahead({ fetchItems, items, title, loading, clearSearch, handleClick
                     {items.map(item => (
                         <Fragment>
                             <Link
+                                className={classes.a}
+                                component={RouterLink}
                                 key={item.id}
                                 to={item.href}
-                                className={classes.a}
-                                onClick={() => handleClick(item.href)}
                             >
                                 <ListItem button>
                                     <Grid container spacing={3}>
@@ -94,8 +94,7 @@ Typeahead.propTypes = {
     title: PropTypes.string,
     loading: PropTypes.bool,
     fetchItems: PropTypes.func.isRequired,
-    clearSearch: PropTypes.func.isRequired,
-    handleClick: PropTypes.func.isRequired
+    clearSearch: PropTypes.func.isRequired
 };
 
 Typeahead.defaultProps = {

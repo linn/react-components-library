@@ -7,7 +7,7 @@ import Loading from '../components/Loading';
 storiesOf('Loading', module)
     .addDecorator(story => (
         <ThemeProvider theme={linnTheme}>
-            <div>{story()}</div>)
+            <div>{story()}</div>
         </ThemeProvider>
     ))
     .add('default', () => <Loading />);
