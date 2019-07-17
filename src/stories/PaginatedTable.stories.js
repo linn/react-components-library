@@ -4,8 +4,6 @@ import { withKnobs } from '@storybook/addon-knobs/react';
 import { action } from '@storybook/addon-actions';
 import StoryRouter from 'storybook-react-router';
 import ThemeProvider from '@material-ui/styles/ThemeProvider';
-import CreateMuiTheme from '@material-ui/core/styles/createMuiTheme';
-import { BrowserRouter as Router } from 'react-router-dom';
 import PaginatedTable from '../components/table/PaginatedTable';
 import { linnTheme } from '../themes/linnTheme';
 
@@ -16,7 +14,7 @@ const actions = {
 
 const totalItemCount = 5;
 
-const columns = ['Type', 'Description'];
+const columns = { type: 'Type', description: 'Description' };
 
 const pageOptions = {
     orderBy: '',
