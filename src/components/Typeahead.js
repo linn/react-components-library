@@ -19,6 +19,9 @@ const useStyles = makeStyles(theme => ({
     },
     nameText: {
         fontWeight: theme.typography.fontWeightBold
+    },
+    bodyText: {
+        color: theme.palette.text.primary
     }
 }));
 
@@ -36,7 +39,7 @@ function Typeahead({ fetchItems, items, title, loading, clearSearch }) {
     const results = () => {
         if (items.length > 0) {
             return (
-                <List>
+                <List dense>
                     {items.map(item => (
                         <Fragment>
                             <Link
@@ -53,7 +56,9 @@ function Typeahead({ fetchItems, items, title, loading, clearSearch }) {
                                             </Typography>
                                         </Grid>
                                         <Grid item xs={9}>
-                                            <Typography>{item.description}</Typography>
+                                            <Typography classes={{ root: classes.bodyText }}>
+                                                {item.description}
+                                            </Typography>
                                         </Grid>
                                     </Grid>
                                 </ListItem>

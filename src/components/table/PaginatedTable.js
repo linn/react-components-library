@@ -112,7 +112,7 @@ function PaginatedTable({
                 <Fragment>
                     <TableBody>
                         {rows.map(row => (
-                            <Fragment>
+                            <Fragment key={row.id}>
                                 <TableRow
                                     className={classes.link}
                                     hover
@@ -197,13 +197,14 @@ PaginatedTable.propTypes = {
         rowsPerPage: PropTypes.number
     }).isRequired,
     setPageOptions: PropTypes.func.isRequired,
-    totalItemCount: PropTypes.number.isRequired
+    totalItemCount: PropTypes.number
 };
 
 PaginatedTable.defaultProps = {
     sortable: false,
     expandable: false,
-    loading: false
+    loading: false,
+    totalItemCount: 0
 };
 
 export default PaginatedTable;
