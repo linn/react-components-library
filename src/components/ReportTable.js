@@ -6,7 +6,6 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import PropTypes from 'prop-types';
 import {
     formatTitle,
@@ -26,24 +25,6 @@ const styles = () => ({
     }
 });
 
-const theme = createMuiTheme({
-    overrides: {
-        MuiTable: {
-            root: {
-                maxWidth: 'inherit'
-            }
-        },
-        MuiTableCell: {
-            body: {
-                fontSize: '12px'
-            },
-            head: {
-                fontSize: '14px'
-            }
-        }
-    }
-});
-
 const Results = ({
     reportData,
     classes,
@@ -53,68 +34,64 @@ const Results = ({
     hasExternalLinks,
     showRowTitles
 }) => (
-    <MuiThemeProvider theme={theme}>
-        <Paper className={classes.root}>
-            <Title
-                text={formatTitle(
-                    title,
-                    showTitle,
-                    !reportData,
-                    reportData && reportData.error,
-                    reportData ? reportData.reportHelpText : ''
-                )}
-            />
-            <div style={{ backgroundColor: 'white' }}>
-                <Table className={styles.table}>
-                    <TableHead key="headers">
-                        <TableRow>
-                            {showRowTitles ? <TableCell /> : null}
-                            {reportData.headers.columnHeaders.map((header, i) => (
-                                <TableCell key={i}>{header}</TableCell>
+    <Paper className={classes.root}>
+        <Title
+            text={formatTitle(
+                title,
+                showTitle,
+                !reportData,
+                reportData && reportData.error,
+                reportData ? reportData.reportHelpText : ''
+            )}
+        />
+        <div style={{ backgroundColor: 'white' }}>
+            <Table className={styles.table} size="small">
+                <TableHead key="headers">
+                    <TableRow>
+                        {showRowTitles ? <TableCell /> : null}
+                        {reportData.headers.columnHeaders.map((header, i) => (
+                            <TableCell key={i}>{header}</TableCell>
+                        ))}
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {reportData.results.map((item, j) => (
+                        <TableRow key={j}>
+                            {showRowTitles ? (
+                                <TableCell
+                                    className="single-line-field"
+                                    data-tip={item.rowTitle.displayString}
+                                >
+                                    {setDrilldown(item.rowTitle, hasExternalLinks)}
+                                </TableCell>
+                            ) : null}
+                            {item.values.map((value, i) => (
+                                <TableCell key={i}>
+                                    {setValueDrilldown(value, hasExternalLinks)}
+                                    {setTextValueDrilldown(value, hasExternalLinks)}
+                                </TableCell>
                             ))}
                         </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {reportData.results.map((item, j) => (
-                            <TableRow key={j}>
-                                {showRowTitles ? (
-                                    <TableCell
-                                        className="single-line-field"
-                                        data-tip={item.rowTitle.displayString}
-                                    >
-                                        {setDrilldown(item.rowTitle, hasExternalLinks)}
-                                    </TableCell>
-                                ) : null}
-                                {item.values.map((value, i) => (
-                                    <TableCell key={i}>
-                                        {setValueDrilldown(value, hasExternalLinks)}
-                                        {setTextValueDrilldown(value, hasExternalLinks)}
-                                    </TableCell>
-                                ))}
-                            </TableRow>
-                        ))}
+                    ))}
 
-                        {showTotals ? (
-                            <TableRow key="totals">
-                                {showRowTitles ? (
-                                    <TableCell>
-                                        {reportData.totals.rowTitle.displayString}
-                                    </TableCell>
-                                ) : null}
-                                {reportData.totals.values.map((value, i) => (
-                                    <TableCell key={i}>
-                                        {setValueDrilldown(value, hasExternalLinks)}
-                                    </TableCell>
-                                ))}
-                            </TableRow>
-                        ) : (
-                            false
-                        )}
-                    </TableBody>
-                </Table>
-            </div>
-        </Paper>
-    </MuiThemeProvider>
+                    {showTotals ? (
+                        <TableRow key="totals">
+                            {showRowTitles ? (
+                                <TableCell>{reportData.totals.rowTitle.displayString}</TableCell>
+                            ) : null}
+                            {reportData.totals.values.map((value, i) => (
+                                <TableCell key={i}>
+                                    {setValueDrilldown(value, hasExternalLinks)}
+                                </TableCell>
+                            ))}
+                        </TableRow>
+                    ) : (
+                        false
+                    )}
+                </TableBody>
+            </Table>
+        </div>
+    </Paper>
 );
 
 function ReportTable({
