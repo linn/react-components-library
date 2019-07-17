@@ -20,7 +20,7 @@ storiesOf('Typeahead', module)
     .addDecorator(StoryRouter())
     .addDecorator(story => (
         <ThemeProvider theme={linnTheme}>
-            <div style={{ padding: '3rem', width: '100%' }}>{story()}</div>)
+            <div style={{ padding: '3rem', width: '100%' }}>{story()}</div>
         </ThemeProvider>
     ))
     .addDecorator(withKnobs)
