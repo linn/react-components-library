@@ -7,6 +7,7 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableFooter from '@material-ui/core/TableFooter';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
+import Typography from '@material-ui/core/Typography';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import makeStyles from '@material-ui/styles/makeStyles';
 import EditIcon from '@material-ui/icons/Edit';
@@ -30,6 +31,9 @@ const useStyles = makeStyles(theme => ({
     },
     exandedRow: {
         background: theme.palette.grey[100]
+    },
+    expandedTitleText: {
+        fontWeight: theme.typography.fontWeightBold
     }
 }));
 
@@ -147,21 +151,39 @@ function PaginatedTable({
                                         </TableCell>
                                     )}
                                 </TableRow>
-                                {expandable &&
-                                    rowOpen === row.id &&
-                                    row.elements &&
-                                    row.elements.map(el => (
-                                        <TableRow>
-                                            {Object.keys(el).map(key => (
-                                                <TableCell
-                                                    classes={{ root: classes.exandedRow }}
-                                                    size="small"
-                                                >
-                                                    {key}: {el[key]}
-                                                </TableCell>
-                                            ))}
-                                        </TableRow>
-                                    ))}
+                                {expandable && rowOpen === row.id && row.elements && (
+                                    <TableRow>
+                                        <TableCell colspan={columns.length + 1}>
+                                            <Table>
+                                                {row.elements.map(el => (
+                                                    <TableRow>
+                                                        {Object.keys(el).map(key => (
+                                                            <TableCell
+                                                                classes={{
+                                                                    root: classes.exandedRow
+                                                                }}
+                                                                size="small"
+                                                            >
+                                                                <Typography
+                                                                    classes={{
+                                                                        root:
+                                                                            classes.expandedTitleText
+                                                                    }}
+                                                                    variant="caption"
+                                                                >
+                                                                    {key}:
+                                                                </Typography>
+                                                                <Typography variant="caption">
+                                                                    {` ${el[key]}`}
+                                                                </Typography>
+                                                            </TableCell>
+                                                        ))}
+                                                    </TableRow>
+                                                ))}
+                                            </Table>
+                                        </TableCell>
+                                    </TableRow>
+                                )}
                             </Fragment>
                         ))}
                     </TableBody>
