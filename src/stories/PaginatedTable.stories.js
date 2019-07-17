@@ -2,10 +2,12 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withKnobs } from '@storybook/addon-knobs/react';
 import { action } from '@storybook/addon-actions';
-import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import StoryRouter from 'storybook-react-router';
+import ThemeProvider from '@material-ui/styles/ThemeProvider';
 import CreateMuiTheme from '@material-ui/core/styles/createMuiTheme';
 import { BrowserRouter as Router } from 'react-router-dom';
 import PaginatedTable from '../components/table/PaginatedTable';
+import { linnTheme } from '../themes/linnTheme';
 
 const actions = {
     setPageOptions: action('setPageOptions'),
@@ -149,47 +151,41 @@ const rows = [
 storiesOf('PaginatedTable', module)
     .addDecorator(story => <div>{story()}</div>)
     .addDecorator(withKnobs)
+    .addDecorator(StoryRouter())
+    .addDecorator(story => (
+        <ThemeProvider theme={linnTheme}>
+            <div>{story()}</div>
+        </ThemeProvider>
+    ))
     .add('default ', () => (
-        <MuiThemeProvider theme={CreateMuiTheme()}>
-            <Router>
-                <PaginatedTable
-                    setPageOptions={actions.setPageOptions}
-                    handleRowLinkClick={actions.handleRowLinkClick}
-                    rows={rows}
-                    columns={columns}
-                    pageOptions={pageOptions}
-                    totalItemCount={totalItemCount}
-                />
-            </Router>{' '}
-        </MuiThemeProvider>
+        <PaginatedTable
+            setPageOptions={actions.setPageOptions}
+            handleRowLinkClick={actions.handleRowLinkClick}
+            rows={rows}
+            columns={columns}
+            pageOptions={pageOptions}
+            totalItemCount={totalItemCount}
+        />
     ))
     .add('with sorting enabled', () => (
-        <MuiThemeProvider theme={CreateMuiTheme()}>
-            <Router>
-                <PaginatedTable
-                    setPageOptions={actions.setPageOptions}
-                    handleRowLinkClick={actions.handleRowLinkClick}
-                    rows={rows}
-                    columns={columns}
-                    pageOptions={pageOptions}
-                    totalItemCount={totalItemCount}
-                    sortable
-                />
-            </Router>
-        </MuiThemeProvider>
+        <PaginatedTable
+            setPageOptions={actions.setPageOptions}
+            handleRowLinkClick={actions.handleRowLinkClick}
+            rows={rows}
+            columns={columns}
+            pageOptions={pageOptions}
+            totalItemCount={totalItemCount}
+            sortable
+        />
     ))
     .add('with expandable enabled', () => (
-        <MuiThemeProvider theme={CreateMuiTheme()}>
-            <Router>
-                <PaginatedTable
-                    setPageOptions={actions.setPageOptions}
-                    handleRowLinkClick={actions.handleRowLinkClick}
-                    rows={rows}
-                    columns={columns}
-                    pageOptions={pageOptions}
-                    totalItemCount={totalItemCount}
-                    expandable
-                />
-            </Router>
-        </MuiThemeProvider>
+        <PaginatedTable
+            setPageOptions={actions.setPageOptions}
+            handleRowLinkClick={actions.handleRowLinkClick}
+            rows={rows}
+            columns={columns}
+            pageOptions={pageOptions}
+            totalItemCount={totalItemCount}
+            expandable
+        />
     ));

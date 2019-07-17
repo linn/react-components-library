@@ -27,6 +27,9 @@ const useStyles = makeStyles(theme => ({
         maxHeight: theme.spacing(3),
         minHeight: theme.spacing(3),
         padding: 0
+    },
+    exandedRow: {
+        background: theme.palette.grey[100]
     }
 }));
 
@@ -148,13 +151,16 @@ function PaginatedTable({
                                     rowOpen === row.id &&
                                     row.elements &&
                                     row.elements.map(el => (
-                                        <tr>
+                                        <TableRow>
                                             {Object.keys(el).map(key => (
-                                                <TableCell>
+                                                <TableCell
+                                                    classes={{ root: classes.exandedRow }}
+                                                    size="small"
+                                                >
                                                     {key}: {el[key]}
                                                 </TableCell>
                                             ))}
-                                        </tr>
+                                        </TableRow>
                                     ))}
                             </Fragment>
                         ))}
