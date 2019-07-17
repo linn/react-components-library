@@ -86,26 +86,26 @@ function PaginatedTable({
         <Table size="small">
             <TableHead>
                 <TableRow>
-                    {columns.map(column =>
+                    {Object.keys(columns).map(key =>
                         sortable ? (
                             <TableCell
-                                key={column}
+                                key={key}
                                 sortDirection={
-                                    pageOptions.orderBy === column && pageOptions.orderAscending
+                                    pageOptions.orderBy === key && pageOptions.orderAscending
                                         ? 'asc'
                                         : 'desc'
                                 }
                             >
                                 <TableSortLabel
-                                    active={pageOptions.orderBy === column}
+                                    active={pageOptions.orderBy === key}
                                     direction={pageOptions.orderAscending ? 'asc' : 'desc'}
-                                    onClick={() => handleChangeOrderBy(column)}
+                                    onClick={() => handleChangeOrderBy(key)}
                                 >
-                                    {column}
+                                    {columns[key]}
                                 </TableSortLabel>
                             </TableCell>
                         ) : (
-                            <TableCell>{column}</TableCell>
+                            <TableCell>{columns[key]}</TableCell>
                         )
                     )}
                     {expandable && <TableCell>Actions</TableCell>}
@@ -216,7 +216,7 @@ PaginatedTable.propTypes = {
     handleRowLinkClick: PropTypes.func.isRequired,
     expandable: PropTypes.bool,
     loading: PropTypes.bool,
-    columns: PropTypes.arrayOf(PropTypes.string).isRequired,
+    columns: PropTypes.shape({}).isRequired,
     rows: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
     pageOptions: PropTypes.shape({
         orderBy: PropTypes.string,
