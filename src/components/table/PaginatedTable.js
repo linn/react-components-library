@@ -153,7 +153,7 @@ function PaginatedTable({
                                 </TableRow>
                                 {expandable && rowOpen === row.id && row.elements && (
                                     <TableRow>
-                                        <TableCell colspan={columns.length + 1}>
+                                        <TableCell colspan={Object.keys(columns).length + 1}>
                                             <Table>
                                                 {row.elements.map(el => (
                                                     <TableRow>
