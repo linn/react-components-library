@@ -7,13 +7,14 @@ import { Link as RouterLink } from 'react-router-dom';
 import makeStyles from '@material-ui/styles/makeStyles';
 
 const useStyles = makeStyles(theme => ({
-    a: {
+    link: {
         textDecoration: 'none',
         color: theme.palette.primary.main,
         padding: 0,
         '&:hover': {
             cursor: 'pointer',
-            textDecoration: 'underline'
+            textDecoration: 'underline',
+            background: 'transparent'
         }
     }
 }));
