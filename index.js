@@ -53,7 +53,7 @@ import {
     getNewsLoading
 } from './src/selectors/newsSelectors';
 import getUsername from './src/selectors/userSelectors';
-import { getHref, getSelfHref } from './src/utilities/index';
+import { getHref, getSelfHref, sortEntityList, sortList } from './src/utilities/index';
 import initialiseOnMount from './src/components/common/initialiseOnMount';
 import Navigation from './src/containers/Navigation';
 import { errorTheme, linnTheme } from './src/themes/index';
@@ -120,5 +120,7 @@ export {
     getUsername,
     errorTheme,
     linnTheme,
-    reducers
+    reducers,
+    sortEntityList,
+    sortList
 };
