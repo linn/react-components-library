@@ -48,7 +48,8 @@ function InputField({
     name,
     placeholder,
     required,
-    value
+    value,
+    decimalPlaces
 }) {
     const classes = useStyles();
 
@@ -60,13 +61,27 @@ function InputField({
         if (type === 'date') {
             val = newValue
                 ? moment(newValue)
-                      .utc()
-                      .format()
+                    .utc()
+                    .format()
                 : '';
         }
 
         if (type === 'number') {
             val = hasValue(newValue) ? parseFloat(newValue) : null;
+
+            console.log(
+                `${newValue} to decimalplaces(${decimalPlaces}) new value.indexOf('.') ${newValue.indexOf(
+                    '.'
+                )} < ${newValue.length - decimalPlaces} (newValue.length - decimalPlaces)`
+            );
+            if (
+                val &&
+                decimalPlaces &&
+                newValue.indexOf('.') < newValue.length - decimalPlaces &&
+                newValue.indexOf('.') !== -1
+            ) {
+                val = parseFloat(newValue.slice(0, newValue.indexOf('.') + decimalPlaces + 1));
+            }
         }
 
         onChange(propertyName, val);
@@ -117,9 +132,7 @@ function InputField({
                 }}
                 onInput={e => {
                     if (type === 'number' && maxLength) {
-                        e.target.value = Math.max(0, parseInt(e.target.value, 10))
-                            .toString()
-                            .slice(0, maxLength);
+                        e.target.value = e.target.value.slice(0, maxLength);
                     }
                 }}
                 variant="outlined"
@@ -144,7 +157,8 @@ InputField.propTypes = {
     propertyName: PropTypes.string,
     type: PropTypes.string,
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
+    decimalPlaces: PropTypes.number
 };
 
 InputField.defaultProps = {
@@ -163,7 +177,8 @@ InputField.defaultProps = {
     propertyName: '',
     type: 'text',
     value: '',
-    onChange: null
+    onChange: null,
+    decimalPlaces: null
 };
 
 export default InputField;
