@@ -1,0 +1,1 @@
+import{h as t}from"./chunk-24be6bba.js";export default function(n,e){var o=arguments.length>2&&void 0!==arguments[2]?arguments[2]:{};return function(){var r=arguments.length>0&&void 0!==arguments[0]?arguments[0]:o,a=arguments.length>1?arguments[1]:void 0;switch(a.type){case e["REQUEST_".concat(n,"_REPORT")]:return t({},a.payload.options);default:return r}}}

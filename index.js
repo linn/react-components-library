@@ -22,11 +22,14 @@ import useTablePagination from './src/hooks/useTablePagination';
 import PaginatedTable from './src/components/table/PaginatedTable';
 import InfiniteTable from './src/components/table/InfiniteTable';
 import TypeaheadDialog from './src/components/TypeaheadDialog';
-import { makeActionTypes, makeReportActionTypes } from './src/actions/index';
+import makeActionTypes from './src/actions/makeActionTypes';
+import makeReportActionTypes from './src/actions/makeReportActionTypes';
 import FetchApiActions from './src/actions/FetchApiActions';
 import ReportActions from './src/actions/ReportActions';
 import UpdateApiActions from './src/actions/UpdateApiActions';
-import { fetchMenu, fetchNews, markNotificationSeen } from './src/actions/menuActions';
+import fetchNews from './src/actions/fetchNews';
+import markNotificationSeen from './src/actions/markNotificationSeen';
+import fetchMenu from './src/actions/fetchMenu';
 import ItemType from './src/types/ItemType';
 import CollectionSelectors from './src/selectors/CollectionSelectors';
 import PaginationSelectors from './src/selectors/PaginationSelectors';
@@ -42,19 +45,10 @@ import reportResultsFactory from './src/reducers/reducerFactories/reportResultsF
 import fetchErrorReducer from './src/reducers/fetchErrorReducer';
 import menu from './src/reducers/menu';
 import news from './src/reducers/news';
-import {
-    getSections,
-    getMenuSection,
-    getMyStuff,
-    getMenuLoading
-} from './src/selectors/menuSelectors';
-import {
-    getSeenNotifications,
-    getUnseenNotifications,
-    getNewsLoading
-} from './src/selectors/newsSelectors';
+import menuSelectors from './src/selectors/menuSelectors';
+import newsSelectors from './src/selectors/newsSelectors';
 import getUsername from './src/selectors/userSelectors';
-import { getHref, getSelfHref, sortEntityList, sortList } from './src/utilities/index';
+import utilities from './src/utilities/index';
 import initialiseOnMount from './src/components/common/initialiseOnMount';
 import Navigation from './src/containers/Navigation';
 import { errorTheme, linnTheme } from './src/themes/index';
@@ -103,8 +97,6 @@ export {
     paginationStoreFactory,
     reportOptionsFactory,
     reportResultsFactory,
-    getHref,
-    getSelfHref,
     initialiseOnMount,
     Navigation,
     fetchMenu,
@@ -112,17 +104,11 @@ export {
     menu,
     news,
     markNotificationSeen,
-    getSections,
-    getMenuSection,
-    getMyStuff,
-    getMenuLoading,
-    getSeenNotifications,
-    getUnseenNotifications,
-    getNewsLoading,
+    menuSelectors,
+    newsSelectors,
     getUsername,
     errorTheme,
     linnTheme,
     reducers,
-    sortEntityList,
-    sortList
+    utilities
 };

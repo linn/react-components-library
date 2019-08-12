@@ -1,0 +1,1 @@
+import r from"react";import{makeStyles as e}from"@material-ui/core/styles";import t from"@material-ui/core/CircularProgress";var a=e(function(r){return{outer:{textAlign:"center",margin:r.spacing(4),height:"40px"}}});export default function(){var e=a();return r.createElement("div",{className:e.outer},r.createElement(t,null))}

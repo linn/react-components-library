@@ -1,0 +1,1 @@
+export default{getSeenNotifications:function(n){var e=n.news;return e?e.seen:null},getUnseenNotifications:function(n){var e=n.news;return e?e.unseen:null},getNewsLoading:function(n){return n.news.loading}};

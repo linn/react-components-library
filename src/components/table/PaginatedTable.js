@@ -11,9 +11,9 @@ import Typography from '@material-ui/core/Typography';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import makeStyles from '@material-ui/styles/makeStyles';
 import EditIcon from '@material-ui/icons/Edit';
-import { Button } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
 import LinearProgress from '@material-ui/core/LinearProgress';
-import { getSelfHref } from '../../utilities/index';
+import utilities from '../../utilities/index';
 import TablePaginationActions from './TablePaginationActions';
 
 const useStyles = makeStyles(theme => ({
@@ -126,7 +126,7 @@ function PaginatedTable({
                                     onClick={() =>
                                         expandable
                                             ? handleRowOnClick(row.id)
-                                            : handleRowLinkClick(getSelfHref(row))
+                                            : handleRowLinkClick(utilities.getSelfHref(row))
                                     }
                                 >
                                     {Object.keys(row)
@@ -140,8 +140,10 @@ function PaginatedTable({
                                         <TableCell>
                                             <Button
                                                 classes={{ root: classes.button }}
-                                                key={getSelfHref(row)}
-                                                onClick={() => handleRowLinkClick(getSelfHref(row))}
+                                                key={utilities.getSelfHref(row)}
+                                                onClick={() =>
+                                                    handleRowLinkClick(utilities.getSelfHref(row))
+                                                }
                                                 size="small"
                                                 variant="outlined"
                                                 color="primary"

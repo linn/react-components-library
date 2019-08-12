@@ -7,7 +7,7 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import { Link } from 'react-router-dom';
 import EditIcon from '@material-ui/icons/Edit';
-import { getSelfHref } from '../../utilities/index';
+import utilities from '../../utilities/index';
 
 function InfiniteTable({ table, columnNames }) {
     const [rowOpen, setRowOpen] = useState();
@@ -19,7 +19,7 @@ function InfiniteTable({ table, columnNames }) {
         cursor: 'pointer'
     };
 
-    const identifySelfLink = row => getSelfHref(row);
+    const identifySelfLink = row => utilities.getSelfHref(row);
 
     return (
         <Table>

@@ -1,0 +1,1 @@
+export default function(t){this.getItem=function(n){var i=n[t];return i&&i.item?i.item:null},this.getLoading=function(n){var i=n[t];return i?i.loading:null},this.getEditStatus=function(n){var i=n[t];return i?i.editStatus?i.editStatus:"view":null},this.getSnackbarVisible=function(n){var i=n[t];return i?i.snackbarVisible:null}}

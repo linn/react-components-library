@@ -1,0 +1,1 @@
+import{F as r}from"./chunk-2aea02a5.js";export default function(a,t){switch(t.type){case r:return t.payload.error?{status:t.payload.error.status,statusText:t.payload.error.statusText,errors:t.payload.error.details.errors}:{statusText:t.payload};default:return t.error?{statusText:"There was an issue contacting the server, please try again later..."}:null}}
