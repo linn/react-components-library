@@ -1,1 +1,0 @@
-var n=void 0,t={getSections:function(n){var t=n.menu;return t&&t.data?t.data.sections:null},getMenuSection:function(t,e){var u=n.getSections(t);return u?u.filter(function(n){return n.id===e})[0].columns:[]},getMyStuff:function(n){var t=n.menu;return t&&t.data?t.data.myStuff:null},getMenuLoading:function(n){return!!n&&n.loading}};export default t;

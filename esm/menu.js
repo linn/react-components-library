@@ -1,1 +1,0 @@
-import{h as a}from"./chunk-24be6bba.js";import{b as t,c as n}from"./chunk-2aea02a5.js";export default function(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{loading:!1,data:null},l=arguments.length>1?arguments[1]:void 0;switch(l.type){case t:return a({},e,{loading:!0,data:null});case n:return a({},e,{loading:!1,data:l.payload.menu});default:return e}}

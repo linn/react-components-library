@@ -1,1 +1,0 @@
-import r from"react";import t from"prop-types";import e from"@material-ui/core/Typography";var o=function(t){var o=t.text;return r.createElement(e,{variant:"h4",gutterBottom:!0},o)};o.propTypes={text:t.string.isRequired};export default o;
