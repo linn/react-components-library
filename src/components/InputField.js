@@ -69,11 +69,6 @@ function InputField({
         if (type === 'number') {
             val = hasValue(newValue) ? parseFloat(newValue) : null;
 
-            console.log(
-                `${newValue} to decimalplaces(${decimalPlaces}) new value.indexOf('.') ${newValue.indexOf(
-                    '.'
-                )} < ${newValue.length - decimalPlaces} (newValue.length - decimalPlaces)`
-            );
             if (
                 val &&
                 decimalPlaces &&
