@@ -5,7 +5,7 @@ const menuSelectors = {
         return menu.data.sections;
     },
     getMenuSection: (state, sectionId) => {
-        const sections = this.getSections(state);
+        const sections = menuSelectors.getSections(state);
         if (sections) {
             const section = sections.filter(x => x.id === sectionId);
             const { columns } = section[0];
