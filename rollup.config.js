@@ -76,10 +76,6 @@ export default [
             {
                 dir: 'esm',
                 format: 'esm'
-            },
-            {
-                dir: 'cjs',
-                format: 'cjs'
             }
         ]
     }

@@ -9,7 +9,7 @@ const utilities = {
         return null;
     },
 
-    getSelfHref: itemWithLinks => this.getHref(itemWithLinks, 'self'),
+    getSelfHref: itemWithLinks => utilities.getHref(itemWithLinks, 'self'),
 
     sortList: list =>
         list.slice().sort((a, b) => {
