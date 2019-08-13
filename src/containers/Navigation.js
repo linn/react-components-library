@@ -1,20 +1,22 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import Navigation from '../components/Navigation';
-import { fetchMenu, fetchNews, markNotificationSeen } from '../actions/menuActions';
-import { getSections, getMenuLoading, getMyStuff } from '../selectors/menuSelectors';
-import { getSeenNotifications, getUnseenNotifications } from '../selectors/newsSelectors';
+import fetchMenu from '../actions/fetchMenu';
+import fetchNews from '../actions/fetchNews';
+import menuSelectors from '../selectors/menuSelectors';
+import newsSelectors from '../selectors/newsSelectors';
 import getUsername from '../selectors/userSelectors';
 import initialiseOnMount from '../components/common/initialiseOnMount';
+import markNotificationSeen from '../actions/markNotificationSeen';
 import config from '../config';
 
 const mapStateToProps = state => ({
-    sections: getSections(state),
-    myStuff: getMyStuff(state),
+    sections: menuSelectors.getSections(state),
+    myStuff: menuSelectors.getMyStuff(state),
     username: getUsername(state),
-    loading: getMenuLoading(state),
-    seenNotifications: getSeenNotifications(state),
-    unseenNotifications: getUnseenNotifications(state),
+    loading: menuSelectors.getMenuLoading(state),
+    seenNotifications: newsSelectors.getSeenNotifications(state),
+    unseenNotifications: newsSelectors.getUnseenNotifications(state),
     authRoot: config.authorityUri
 });
 

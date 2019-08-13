@@ -1,11 +1,11 @@
-import { getSelfHref } from '../../utilities/index';
+import utilities from '../../utilities/index';
 
 export default function(
     itemRoot,
     actionTypes,
     defaultState = { loading: false, page: { elements: [] } }
 ) {
-    const makeItem = item => ({ ...item, href: getSelfHref(item) });
+    const makeItem = item => ({ ...item, href: utilities.getSelfHref(item) });
 
     const getItems = items => {
         if (items.elements !== 'undefined') {

@@ -1,4 +1,4 @@
-﻿import { getHref, getSelfHref, sortEntityList, sortList } from '../index';
+﻿import utilities from '../index';
 
 describe('when getting href', () => {
     let item;
@@ -13,7 +13,7 @@ describe('when getting href', () => {
 
         test('should return href', () => {
             expectedResult = '/2';
-            expect(getHref(item, 'r2')).toEqual(expectedResult);
+            expect(utilities.getHref(item, 'r2')).toEqual(expectedResult);
         });
     });
 
@@ -26,7 +26,7 @@ describe('when getting href', () => {
 
         test('should not return href', () => {
             expectedResult = null;
-            expect(getHref(item, 'r3')).toEqual(expectedResult);
+            expect(utilities.getHref(item, 'r3')).toEqual(expectedResult);
         });
     });
 
@@ -39,7 +39,7 @@ describe('when getting href', () => {
 
         test('should not return href', () => {
             expectedResult = null;
-            expect(getHref(item, 'r3')).toEqual(expectedResult);
+            expect(utilities.getHref(item, 'r3')).toEqual(expectedResult);
         });
     });
 
@@ -50,7 +50,7 @@ describe('when getting href', () => {
 
         test('should not return href', () => {
             expectedResult = null;
-            expect(getHref(item, 'r3')).toEqual(expectedResult);
+            expect(utilities.getHref(item, 'r3')).toEqual(expectedResult);
         });
     });
 
@@ -61,12 +61,12 @@ describe('when getting href', () => {
 
         test('should not return href', () => {
             expectedResult = null;
-            expect(getHref(item, 'r3')).toEqual(expectedResult);
+            expect(utilities.getHref(item, 'r3')).toEqual(expectedResult);
         });
     });
 });
 
-describe('when getting getSelfHref', () => {
+describe('when getting utilities.getSelfHref', () => {
     let item;
     let expectedResult;
 
@@ -79,7 +79,7 @@ describe('when getting getSelfHref', () => {
 
         test('should return href', () => {
             expectedResult = 'self/2';
-            expect(getSelfHref(item, 'r2')).toEqual(expectedResult);
+            expect(utilities.getSelfHref(item, 'r2')).toEqual(expectedResult);
         });
     });
 
@@ -92,7 +92,7 @@ describe('when getting getSelfHref', () => {
 
         test('should not return href', () => {
             expectedResult = null;
-            expect(getSelfHref(item, 'r3')).toEqual(expectedResult);
+            expect(utilities.getSelfHref(item, 'r3')).toEqual(expectedResult);
         });
     });
 
@@ -103,7 +103,7 @@ describe('when getting getSelfHref', () => {
 
         test('should not return href', () => {
             expectedResult = null;
-            expect(getSelfHref(item, 'r3')).toEqual(expectedResult);
+            expect(utilities.getSelfHref(item, 'r3')).toEqual(expectedResult);
         });
     });
 });
@@ -147,7 +147,7 @@ describe('when sorting an entity list', () => {
                 }
             ];
 
-            expect(sortEntityList(entityList, 'name')).toEqual(expected);
+            expect(utilities.sortEntityList(entityList, 'name')).toEqual(expected);
         });
     });
 
@@ -171,7 +171,7 @@ describe('when sorting an entity list', () => {
                 }
             ];
 
-            expect(sortEntityList(entityList, 'age')).toEqual(expected);
+            expect(utilities.sortEntityList(entityList, 'age')).toEqual(expected);
         });
     });
 
@@ -195,7 +195,7 @@ describe('when sorting an entity list', () => {
                 }
             ];
 
-            expect(sortEntityList(entityList, 'height')).toEqual(expected);
+            expect(utilities.sortEntityList(entityList, 'height')).toEqual(expected);
         });
     });
 
@@ -219,7 +219,7 @@ describe('when sorting an entity list', () => {
                 }
             ];
 
-            expect(sortEntityList(entityList, 'created')).toEqual(expected);
+            expect(utilities.sortEntityList(entityList, 'created')).toEqual(expected);
         });
     });
 });
@@ -231,7 +231,7 @@ describe('when sorting a list', () => {
 
             const expected = ['alfie', 'lars', 'zara'];
 
-            expect(sortList(list)).toEqual(expected);
+            expect(utilities.sortList(list)).toEqual(expected);
         });
     });
 
@@ -249,7 +249,7 @@ describe('when sorting a list', () => {
                 '2010-06-05T15:00:10.0000000'
             ];
 
-            expect(sortList(list)).toEqual(expected);
+            expect(utilities.sortList(list)).toEqual(expected);
         });
     });
 });

@@ -1,26 +1,29 @@
-export const getSections = state => {
-    const { menu } = state;
-    if (!menu || !menu.data) return null;
-    return menu.data.sections;
-};
+const menuSelectors = {
+    getSections: state => {
+        const { menu } = state;
+        if (!menu || !menu.data) return null;
+        return menu.data.sections;
+    },
+    getMenuSection: (state, sectionId) => {
+        const sections = menuSelectors.getSections(state);
+        if (sections) {
+            const section = sections.filter(x => x.id === sectionId);
+            const { columns } = section[0];
+            return columns;
+        }
+        return [];
+    },
 
-export const getMenuSection = (state, sectionId) => {
-    const sections = getSections(state);
-    if (sections) {
-        const section = sections.filter(x => x.id === sectionId);
-        const { columns } = section[0];
-        return columns;
+    getMyStuff: state => {
+        const { menu } = state;
+        if (!menu || !menu.data) return null;
+        return menu.data.myStuff;
+    },
+
+    getMenuLoading: state => {
+        const menu = state;
+        return menu ? menu.loading : false;
     }
-    return [];
 };
 
-export const getMyStuff = state => {
-    const { menu } = state;
-    if (!menu || !menu.data) return null;
-    return menu.data.myStuff;
-};
-
-export const getMenuLoading = state => {
-    const menu = state;
-    return menu ? menu.loading : false;
-};
+export default menuSelectors;

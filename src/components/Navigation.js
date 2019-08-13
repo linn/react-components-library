@@ -15,7 +15,7 @@ import Button from '@material-ui/core/Button';
 import { useSnackbar } from 'notistack';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Notifications from '@material-ui/icons/Notifications';
-import { getSelfHref } from '../utilities/index';
+import utilities from '../utilities/index';
 import Panel from './Panel';
 
 const styles = theme => ({
@@ -96,7 +96,7 @@ function Navigation({
                 <Button
                     variant="contained"
                     onClick={() => {
-                        window.location = getSelfHref(e);
+                        window.location = utilities.getSelfHref(e);
                     }}
                 >
                     {'View'}
