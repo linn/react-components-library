@@ -1,12 +1,13 @@
 {
     "name": "@linn-it/linn-form-components-library",
-    "version": "4.0.9",
+    "version": "4.0.10",
     "private": false,
     "dependencies": {
         "@material-ui/core": "^4.1.0",
         "@material-ui/icons": "^4.1.0",
         "@material-ui/pickers": "^3.2.2",
         "@material-ui/styles": "^4.1.0",
+        "@testing-library/jest-dom": "^4.0.0",
         "classnames": "^2.2.6",
         "notistack": "^0.8.7",
         "numeral": "^2.0.6",
@@ -63,6 +64,7 @@
         "@storybook/addons": "^4.0.12",
         "@storybook/react": "^4.0.12",
         "@storybook/storybook-deployer": "^2.8.1",
+        "@testing-library/react": "^9.1.0",
         "babel-eslint": "^8.2.6",
         "babel-loader": "^8.0.4",
         "babel-preset-react": "^6.24.1",
