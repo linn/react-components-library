@@ -54,7 +54,7 @@ DateTimePicker.propTypes = {
     label: PropTypes.string,
     minDate: PropTypes.string,
     maxDate: PropTypes.string,
-    onChange: PropTypes.func.isRequired,
+    onChange: PropTypes.func,
     required: PropTypes.bool,
     value: PropTypes.string,
     disabled: PropTypes.bool
@@ -66,7 +66,8 @@ DateTimePicker.defaultProps = {
     maxDate: undefined,
     required: false,
     value: new Date().toISOString(),
-    disabled: false
+    disabled: false,
+    onChange: () => {}
 };
 
 export default DateTimePicker;
