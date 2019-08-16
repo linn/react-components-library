@@ -74,8 +74,8 @@ export default [
         plugins: [babel({ exclude: 'node_modules/**' }), terser()],
         output: [
             {
-                dir: 'esm',
-                format: 'esm'
+                dir: 'cjs',
+                format: 'cjs'
             }
         ]
     }
