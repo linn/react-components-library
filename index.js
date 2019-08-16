@@ -16,6 +16,7 @@ import CreateButton from './src/components/CreateButton';
 import OnOffSwitch from './src/components/OnOffSwitch';
 import SnackbarMessage from './src/components/SnackbarMessage';
 import DatePicker from './src/components/DatePicker';
+import DateTimePicker from './src/components/DateTimePicker';
 import SearchInputField from './src/components/SearchInputField';
 import useSearch from './src/hooks/useSearch';
 import useTablePagination from './src/hooks/useTablePagination';
@@ -70,6 +71,7 @@ export {
     Page,
     Loading,
     DatePicker,
+    DateTimePicker,
     Title,
     InputField,
     Typeahead,

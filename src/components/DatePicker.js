@@ -6,7 +6,6 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const labelStyles = makeStyles(theme => ({
     root: {
-        marginTop: theme.spacing(1),
         fontSize: theme.typography.fontSize
     }
 }));
@@ -15,10 +14,14 @@ const inputStyles = makeStyles(theme => ({
     root: {
         marginTop: theme.spacing(1),
         fontSize: theme.typography.fontSize
+    },
+    disabled: {
+        background: theme.palette.grey[100],
+        color: theme.palette.text.secondary
     }
 }));
 
-function DatePicker({ value, minDate, maxDate, label, onChange, required }) {
+function DatePicker({ value, minDate, maxDate, label, onChange, required, disabled }) {
     const inputClasses = inputStyles();
     const labelClasses = labelStyles();
     return (
@@ -31,14 +34,17 @@ function DatePicker({ value, minDate, maxDate, label, onChange, required }) {
                 margin="dense"
                 inputVariant="outlined"
                 autoOk
+                fullwidth
                 format="DD/MM/YYYY"
                 value={value}
                 minDate={minDate}
                 maxDate={maxDate}
                 onChange={onChange}
                 classes={inputClasses}
+                disabled={disabled}
                 className={inputClasses.root}
                 InputAdornmentProps={{ className: inputClasses.root }}
+                InputProps={{ classes: { disabled: inputClasses.disabled } }}
             />
         </Fragment>
     );
@@ -50,7 +56,8 @@ DatePicker.propTypes = {
     maxDate: PropTypes.string,
     onChange: PropTypes.func.isRequired,
     required: PropTypes.bool,
-    value: PropTypes.string
+    value: PropTypes.string,
+    disabled: PropTypes.bool
 };
 
 DatePicker.defaultProps = {
@@ -58,6 +65,8 @@ DatePicker.defaultProps = {
     minDate: undefined,
     maxDate: undefined,
     required: false,
-    value: new Date().toISOString()
+    value: new Date().toISOString(),
+    disabled: false
 };
+
 export default DatePicker;

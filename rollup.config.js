@@ -23,6 +23,7 @@ export default [
             CheckboxWithLabel: 'src/components/CheckboxWithLabel.js',
             CreateButton: 'src/components/CreateButton.js',
             DatePicker: 'src/components/DatePicker.js',
+            DateTimePicker: 'src/componnets/DateTimePicker.js',
             Dropdown: 'src/components/Dropdown.js',
             ErrorCard: 'src/components/ErrorCard.js',
             SaveBackCancelButtons: 'src/components/SaveBackCancelButtons.js',
