@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { KeyboardDatePicker } from '@material-ui/pickers';
+import { KeyboardDateTimePicker } from '@material-ui/pickers';
 import InputLabel from '@material-ui/core/InputLabel';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
@@ -21,7 +21,7 @@ const inputStyles = makeStyles(theme => ({
     }
 }));
 
-function DatePicker({ value, minDate, maxDate, label, onChange, required, disabled }) {
+function DateTimePicker({ label, value, onChange, minDate, maxDate, required, disabled }) {
     const inputClasses = inputStyles();
     const labelClasses = labelStyles();
     return (
@@ -29,38 +29,38 @@ function DatePicker({ value, minDate, maxDate, label, onChange, required, disabl
             <InputLabel classes={{ root: labelClasses.root }} required={required}>
                 {label}
             </InputLabel>
-            <KeyboardDatePicker
+            <KeyboardDateTimePicker
                 allowKeyboardControl
+                autoOk
                 margin="dense"
                 inputVariant="outlined"
-                autoOk
-                fullwidth
-                format="DD/MM/YYYY"
+                ampm={false}
                 value={value}
                 minDate={minDate}
                 maxDate={maxDate}
                 onChange={onChange}
                 classes={inputClasses}
-                disabled={disabled}
                 className={inputClasses.root}
+                disabled={disabled}
                 InputAdornmentProps={{ className: inputClasses.root }}
                 InputProps={{ classes: { disabled: inputClasses.disabled } }}
+                format="DD/MM/YYYY HH:mm"
             />
         </Fragment>
     );
 }
 
-DatePicker.propTypes = {
+DateTimePicker.propTypes = {
     label: PropTypes.string,
     minDate: PropTypes.string,
     maxDate: PropTypes.string,
+    onChange: PropTypes.func,
     required: PropTypes.bool,
     value: PropTypes.string,
-    disabled: PropTypes.bool,
-    onChange: PropTypes.func
+    disabled: PropTypes.bool
 };
 
-DatePicker.defaultProps = {
+DateTimePicker.defaultProps = {
     label: '',
     minDate: undefined,
     maxDate: undefined,
@@ -70,4 +70,4 @@ DatePicker.defaultProps = {
     onChange: () => {}
 };
 
-export default DatePicker;
+export default DateTimePicker;

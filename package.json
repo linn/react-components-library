@@ -90,6 +90,6 @@
     },
     "main": "dist/bundle.min.js",
     "files": [
-        "esm/*"
+        "cjs/*"
     ]
 }

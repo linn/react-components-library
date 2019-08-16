@@ -12,6 +12,7 @@
 /build
 /.out
 /esm
+/cjs
 *tgz
 
 # misc
