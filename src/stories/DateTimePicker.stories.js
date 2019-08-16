@@ -6,14 +6,14 @@ import { action } from '@storybook/addon-actions';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import { text, boolean } from '@storybook/addon-knobs';
 import MomentUtils from '@date-io/moment';
-import DatePicker from '../components/DatePicker';
+import DateTimePicker from '../components/DateTimePicker';
 import { linnTheme } from '../themes/linnTheme';
 
 const actions = {
     onChange: action('date changed')
 };
 
-storiesOf('DatePicker', module)
+storiesOf('DateTimePicker', module)
     .addDecorator(story => <div>{story()}</div>)
     .addDecorator(withKnobs)
     .addDecorator(story => (
@@ -24,7 +24,7 @@ storiesOf('DatePicker', module)
         </ThemeProvider>
     ))
     .add('default ', () => (
-        <DatePicker
+        <DateTimePicker
             value={text('value', new Date('01/01/2001').toISOString())}
             minDate={text('minDate', new Date('01/01/2000').toISOString())}
             maxDate={text('maxDate', new Date('01/01/2020').toISOString())}
