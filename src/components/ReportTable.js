@@ -48,7 +48,7 @@ const Results = ({
             <Table className={styles.table} size="small">
                 <TableHead key="headers">
                     <TableRow>
-                        {showRowTitles ? <TableCell /> : null}
+                        {showRowTitles ? <TableCell> {reportData.headers.rowHeader} </TableCell> : null}
                         {reportData.headers.columnHeaders.map((header, i) => (
                             <TableCell key={i}>{header}</TableCell>
                         ))}
