@@ -160,3 +160,28 @@ export const setTextValueDrilldown = (value, hasExternalLinks) => {
 
     return displayItem;
 };
+
+export const formatHeading = (title, showTitle, loading, error) => {
+    if (!showTitle) {
+        return false;
+    }
+
+    if (error) {
+        return <strong>Error</strong>;
+    }
+
+    let displayTitle;
+    if (title && title.displayString) {
+        displayTitle = title.displayString;
+    } else {
+        displayTitle = title;
+    }
+
+    if (loading) {
+        return <h5>{`${displayTitle} (loading)`}</h5>;
+    }
+
+    return <strong>{displayTitle}</strong>;
+};
+
+export const displayError = (message) => <h5 className="error-message">{message}</h5>;

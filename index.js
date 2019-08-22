@@ -3,6 +3,7 @@ import ExportButton from './src/components/ExportButton';
 import Breadcrumbs from './src/components/Breadcrumbs';
 import SaveBackCancelButtons from './src/components/SaveBackCancelButtons';
 import ReportTable from './src/components/ReportTable';
+import MultiReportTable from './src/components/MultiReportTable';
 import Loading from './src/components/Loading';
 import Dropdown from './src/components/Dropdown';
 import ErrorCard from './src/components/ErrorCard';
@@ -43,6 +44,7 @@ import itemStoreFactory from './src/reducers/reducerFactories/itemStoreFactory';
 import paginationStoreFactory from './src/reducers/reducerFactories/paginationStoreFactory';
 import reportOptionsFactory from './src/reducers/reducerFactories/reportOptionsFactory';
 import reportResultsFactory from './src/reducers/reducerFactories/reportResultsFactory';
+import reportsResultsFactory from './src/reducers/reducerFactories/reportsResultsFactory';
 import fetchErrorReducer from './src/reducers/fetchErrorReducer';
 import menu from './src/reducers/menu';
 import news from './src/reducers/news';
@@ -67,6 +69,7 @@ export {
     ErrorCard,
     SaveBackCancelButtons,
     ReportTable,
+    MultiReportTable,
     ExportButton,
     Page,
     Loading,
@@ -99,6 +102,7 @@ export {
     paginationStoreFactory,
     reportOptionsFactory,
     reportResultsFactory,
+    reportsResultsFactory,
     initialiseOnMount,
     Navigation,
     fetchMenu,
