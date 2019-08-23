@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import numeral from 'numeral';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import Modal from '@material-ui/core/Modal';
 import { Link as RouterLink } from 'react-router-dom';
 import makeStyles from '@material-ui/styles/makeStyles';
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles(theme => ({
     link: {
@@ -67,7 +68,7 @@ export const setDrilldown = (item, hasExternalLinks) => {
     } else {
         displayItem = item;
     }
-    let text = displayItem;
+    const text = displayItem;
     if (href) {
         return LinkOrAnchor({ hasExternalLinks, text, href });
     }
@@ -92,16 +93,16 @@ export const formatTitle = (title, showTitle, loading, error, helpText) => {
     }
 
     if (loading) {
-        return <h5>{`${displayTitle} (loading)`}</h5>;
+        return <Typography variant="subtitle1">{`${displayTitle} (loading)`}</Typography>;
     }
 
     return (
-        <div className="row">
-            <div className="col-xs-11">
-                <h5>{setDrilldown(title)}</h5>
+        <Fragment>
+            <div>
+                <Typography variant="subtitle1">{setDrilldown(title)}</Typography>
             </div>
             {helpText ? (
-                <div className="col-xs-1">
+                <div>
                     <Modal
                         aria-labelledby="simple-modal-title"
                         aria-describedby="simple-modal-description"
@@ -112,7 +113,7 @@ export const formatTitle = (title, showTitle, loading, error, helpText) => {
             ) : (
                 ''
             )}
-        </div>
+        </Fragment>
     );
 };
 
@@ -120,14 +121,13 @@ export const setValueDrilldown = (value, hasExternalLinks) => {
     let displayItem;
     if (value && (value.displayValue || value.displayValue === 0)) {
         if (value.drillDowns && value.drillDowns.length > 0) {
-            displayItem = format(
+            const text = format(
                 value.displayValue,
                 value.prefix,
                 value.suffix,
                 value.decimalPlaces
             );
-            let text = value.displayValue;
-            let href = value.drillDowns[0].href;
+            const { href } = value.drillDowns[0];
             displayItem = LinkOrAnchor({ hasExternalLinks, href, text });
         } else {
             displayItem = format(
@@ -148,8 +148,8 @@ export const setTextValueDrilldown = (value, hasExternalLinks) => {
     let displayItem;
     if (value && value.textDisplayValue) {
         if (value.drillDowns && value.drillDowns.length > 0) {
-            let text = value.textDisplayValue;
-            let href = value.drillDowns[0].href;
+            const text = value.textDisplayValue;
+            const { href } = value.drillDowns[0];
             displayItem = LinkOrAnchor({ hasExternalLinks, text, href });
         } else {
             displayItem = value.textDisplayValue;
@@ -184,4 +184,4 @@ export const formatHeading = (title, showTitle, loading, error) => {
     return <strong>{displayTitle}</strong>;
 };
 
-export const displayError = (message) => <h5 className="error-message">{message}</h5>;
+export const displayError = message => <h5 className="error-message">{message}</h5>;

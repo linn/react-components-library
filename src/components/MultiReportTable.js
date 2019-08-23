@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
-import { formatHeading, displayError } from '../utilities/DisplayUtilities';
+import Box from '@material-ui/core/Box';
+import { formatHeading, displayError, formatTitle } from '../utilities/DisplayUtilities';
 import ReportTable from './ReportTable';
 
 const setPageBreaks = (tableSequence, pageBreaks, defaults = []) =>
@@ -29,13 +30,14 @@ const Results = ({
     pageBreaksAfter,
     fixColumnWidths,
     containsSubtotals,
-    showRowTitles
+    showRowTitles,
+    showTitle
 }) => (
     <div>
         {reportData.error ? (
             displayError(reportData.message)
         ) : (
-            <div>
+            <Fragment>
                 {reportData
                     .sort((a, b) => {
                         if (a.displaySequence > b.displaySequence) {
@@ -49,23 +51,30 @@ const Results = ({
                         return 0;
                     })
                     .map((data, i) => (
-                        <div key={i} className={setPageBreaks(i, pageBreaksAfter)}>
-                            <div>
-                                <h3>{data.title.displayString}</h3>
-                                <ReportTable
-                                    reportData={data}
-                                    containsSubtotals={containsSubtotals}
-                                    showTitle={false}
-                                    showTotals={showTotals}
-                                    fixColumnWidths={fixColumnWidths}
-                                    placeholderRows={placeholderRows}
-                                    placeholderColumns={placeholderColumns}
-                                    showRowTitles={showRowTitles}
-                                />
-                            </div>
-                        </div>
+                        <Box
+                            paddingBottom={3}
+                            key={i}
+                            className={setPageBreaks(i, pageBreaksAfter)}
+                        >
+                            {formatTitle(
+                                data.title,
+                                showTitle,
+                                !reportData,
+                                reportData && reportData.error
+                            )}
+                            <ReportTable
+                                reportData={data}
+                                containsSubtotals={containsSubtotals}
+                                showTitle={false}
+                                showTotals={showTotals}
+                                fixColumnWidths={fixColumnWidths}
+                                placeholderRows={placeholderRows}
+                                placeholderColumns={placeholderColumns}
+                                showRowTitles={showRowTitles}
+                            />
+                        </Box>
                     ))}
-            </div>
+            </Fragment>
         )}
     </div>
 );
@@ -134,6 +143,7 @@ MultiReportTable.defaultProps = {
 Results.propTypes = {
     reportData: PropTypes.arrayOf(PropTypes.shape({})),
     showTotals: PropTypes.bool,
+    showTitle: PropTypes.bool,
     showRowTitles: PropTypes.bool,
     placeholderRows: PropTypes.number,
     placeholderColumns: PropTypes.number,
@@ -146,6 +156,7 @@ Results.defaultProps = {
     reportData: [],
     showTotals: true,
     showRowTitles: true,
+    showTitle: true,
     placeholderRows: 4,
     placeholderColumns: 4,
     pageBreaksAfter: [],
