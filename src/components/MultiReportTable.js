@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
-import { formatHeading, displayError } from '../utilities/DisplayUtilities';
+import { formatHeading, displayError, formatTitle } from '../utilities/DisplayUtilities';
 import ReportTable from './ReportTable';
 
 const setPageBreaks = (tableSequence, pageBreaks, defaults = []) =>
@@ -29,7 +29,8 @@ const Results = ({
     pageBreaksAfter,
     fixColumnWidths,
     containsSubtotals,
-    showRowTitles
+    showRowTitles,
+    showTitle
 }) => (
     <div>
         {reportData.error ? (
@@ -51,7 +52,12 @@ const Results = ({
                     .map((data, i) => (
                         <div key={i} className={setPageBreaks(i, pageBreaksAfter)}>
                             <div>
-                                <h3>{data.title.displayString}</h3>
+                                {formatTitle(
+                                    data.title,
+                                    showTitle,
+                                    !reportData,
+                                    reportData && reportData.error
+                                )}
                                 <ReportTable
                                     reportData={data}
                                     containsSubtotals={containsSubtotals}
@@ -134,6 +140,7 @@ MultiReportTable.defaultProps = {
 Results.propTypes = {
     reportData: PropTypes.arrayOf(PropTypes.shape({})),
     showTotals: PropTypes.bool,
+    showTitle: PropTypes.bool,
     showRowTitles: PropTypes.bool,
     placeholderRows: PropTypes.number,
     placeholderColumns: PropTypes.number,
@@ -146,6 +153,7 @@ Results.defaultProps = {
     reportData: [],
     showTotals: true,
     showRowTitles: true,
+    showTitle: true,
     placeholderRows: 4,
     placeholderColumns: 4,
     pageBreaksAfter: [],

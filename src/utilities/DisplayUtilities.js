@@ -67,7 +67,7 @@ export const setDrilldown = (item, hasExternalLinks) => {
     } else {
         displayItem = item;
     }
-    let text = displayItem;
+    const text = displayItem;
     if (href) {
         return LinkOrAnchor({ hasExternalLinks, text, href });
     }
@@ -126,8 +126,8 @@ export const setValueDrilldown = (value, hasExternalLinks) => {
                 value.suffix,
                 value.decimalPlaces
             );
-            let text = value.displayValue;
-            let href = value.drillDowns[0].href;
+            const text = value.displayValue;
+            const { href } = value.drillDowns[0];
             displayItem = LinkOrAnchor({ hasExternalLinks, href, text });
         } else {
             displayItem = format(
@@ -148,8 +148,8 @@ export const setTextValueDrilldown = (value, hasExternalLinks) => {
     let displayItem;
     if (value && value.textDisplayValue) {
         if (value.drillDowns && value.drillDowns.length > 0) {
-            let text = value.textDisplayValue;
-            let href = value.drillDowns[0].href;
+            const text = value.textDisplayValue;
+            const { href } = value.drillDowns[0];
             displayItem = LinkOrAnchor({ hasExternalLinks, text, href });
         } else {
             displayItem = value.textDisplayValue;
@@ -184,4 +184,4 @@ export const formatHeading = (title, showTitle, loading, error) => {
     return <strong>{displayTitle}</strong>;
 };
 
-export const displayError = (message) => <h5 className="error-message">{message}</h5>;
+export const displayError = message => <h5 className="error-message">{message}</h5>;
