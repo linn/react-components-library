@@ -20,9 +20,11 @@ export default function UpdateApiActions(actionTypeRoot, uri, actionTypes, appRo
                     payload: async (action, state, res) => ({ data: await res.json() })
                 },
                 {
-                    type: sharedActionTypes.FETCH_ERROR,
+                    type: actionTypes[`${actionTypeRoot}_FETCH_ERROR`], // TODO - GENERATE
                     payload: (action, state, res) =>
-                        res ? `Error - ${res.status} ${res.statusText}` : `Network request failed`
+                        res
+                            ? `${actionTypeRoot} Error - ${res.status} ${res.statusText}`
+                            : `Network request failed`
                 }
             ]
         }

@@ -11,7 +11,7 @@ export default function FetchApiActions(actionTypeRoot, uri, actionTypes, appRoo
         payload: async (action, state, res) => ({ data: await res.json() })
     };
     const errorResponse = {
-        type: sharedActionTypes.FETCH_ERROR,
+        type: 'FETCH_BOARD_FAIL_TYPE_ERROR', // todo - get from actiontypes for this root
         payload: (action, state, res) =>
             res ? `Error - ${res.status} ${res.statusText}` : `Network request failed`
     };
