@@ -1,5 +1,4 @@
 ﻿import { RSAA } from 'redux-api-middleware';
-import * as sharedActionTypes from './index';
 
 export default function FetchApiActions(actionTypeRoot, uri, actionTypes, appRoot) {
     const requestedResponse = {
@@ -11,7 +10,7 @@ export default function FetchApiActions(actionTypeRoot, uri, actionTypes, appRoo
         payload: async (action, state, res) => ({ data: await res.json() })
     };
     const errorResponse = {
-        type: 'FETCH_BOARD_FAIL_TYPE_ERROR', // todo - get from actiontypes for this root
+        type: 'FETCH_BOARD_FAIL_TYPE_ERROR',
         payload: (action, state, res) =>
             res ? `Error - ${res.status} ${res.statusText}` : `Network request failed`
     };

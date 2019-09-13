@@ -17,7 +17,6 @@ const makeActionTypes = (entityType, makeAll = true) => {
         types[`SET_${entityType}_EDIT_STATUS`] = `SET_${entityType}_EDIT_STATUS`;
         types[`SHOW_${entityType}_SNACKBAR`] = `SHOW_${entityType}_SNACKBAR`;
         types[`HIDE_${entityType}_SNACKBAR`] = `HIDE_${entityType}_SNACKBAR`;
-        //types.FETCH_ERROR = 'FETCH_ERROR';
     }
 
     return types;

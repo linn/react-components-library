@@ -1,14 +1,19 @@
-﻿export default (state, key) => {
+export const getActionErrorMessage = (state, key) => {
     const { errors } = state;
     if (!errors) {
         return null;
     }
-
-
-    //sometimes the action itself represents an error... See https://www.npmjs.com/package/redux-api-middleware#error
     const erroredAction = () => Object.prototype.hasOwnProperty.call(errors, key);
     if (erroredAction()) {
         return errors[key].message;
+    }
+    return null;
+};
+
+export const getFetchErrorMessage = (state, key) => {
+    const { errors } = state;
+    if (!errors) {
+        return null;
     }
 
     // the other case, a _FETCH_ERROR action has been dispatched and added a part to error state
@@ -31,6 +36,5 @@
     // if (errors.statusText) {
     //     return errors.statusText.message || errors.statusText;
     // }
-    console.log('nothing happened');
     return null;
 };

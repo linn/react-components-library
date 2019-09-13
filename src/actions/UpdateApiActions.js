@@ -1,7 +1,6 @@
 ﻿import { RSAA } from 'redux-api-middleware';
-import * as sharedActionTypes from './index';
 
-export default function UpdateApiActions(actionTypeRoot, uri, actionTypes, appRoot) {
+export default function UpdateApiActions(item, actionTypeRoot, uri, actionTypes, appRoot) {
     this.fetch = id => ({
         [RSAA]: {
             endpoint: `${appRoot}${uri}/${id}`,
@@ -20,10 +19,20 @@ export default function UpdateApiActions(actionTypeRoot, uri, actionTypes, appRo
                     payload: async (action, state, res) => ({ data: await res.json() })
                 },
                 {
-                    type: actionTypes[`${actionTypeRoot}_FETCH_ERROR`], // TODO - GENERATE
-                    payload: (action, state, res) =>
+                    // the new thing - Error action type is specific to the actionTypeRoot
+                    type: actionTypes[`${actionTypeRoot}_FETCH_ERROR`],
+                    // todo - is the error payload always the same?
+                    payload: async (action, state, res) =>
+                        // should we always return these error objects??
                         res
-                            ? `${actionTypeRoot} Error - ${res.status} ${res.statusText}`
+                            ? {
+                                  error: {
+                                      status: res.status,
+                                      statusText: `Error - ${res.status} ${res.statusText}`,
+                                      details: await res.json(),
+                                      item
+                                  }
+                              }
                             : `Network request failed`
                 }
             ]
@@ -48,7 +57,7 @@ export default function UpdateApiActions(actionTypeRoot, uri, actionTypes, appRo
                     payload: async (action, state, res) => ({ data: await res.json() })
                 },
                 {
-                    type: sharedActionTypes.FETCH_ERROR,
+                    type: actionTypes[`${actionTypeRoot}_FETCH_ERROR`],
                     payload: (action, state, res) =>
                         res ? `Error - ${res.status} ${res.statusText}` : `Network request failed`
                 }
@@ -74,7 +83,8 @@ export default function UpdateApiActions(actionTypeRoot, uri, actionTypes, appRo
                     payload: async (action, state, res) => ({ data: await res.json() })
                 },
                 {
-                    type: sharedActionTypes.FETCH_ERROR,
+                    type: actionTypes[`${actionTypeRoot}_FETCH_ERROR`],
+                    // or just a message string with the info?
                     payload: (action, state, res) =>
                         res ? `Error - ${res.status} ${res.statusText}` : `Network request failed`
                 }
@@ -102,7 +112,7 @@ export default function UpdateApiActions(actionTypeRoot, uri, actionTypes, appRo
                     payload: async (action, state, res) => ({ data: await res.json() })
                 },
                 {
-                    type: sharedActionTypes.FETCH_ERROR,
+                    type: actionTypes[`${actionTypeRoot}_FETCH_ERROR`],
                     payload: async (action, state, res) =>
                         res
                             ? {
@@ -138,7 +148,7 @@ export default function UpdateApiActions(actionTypeRoot, uri, actionTypes, appRo
                     payload: async (action, state, res) => ({ data: await res.json() })
                 },
                 {
-                    type: sharedActionTypes.FETCH_ERROR,
+                    type: actionTypes[`${actionTypeRoot}_FETCH_ERROR`],
                     payload: async (action, state, res) =>
                         res
                             ? {
@@ -162,6 +172,16 @@ export default function UpdateApiActions(actionTypeRoot, uri, actionTypes, appRo
     this.setEditStatus = editStatus => ({
         type: actionTypes[`SET_${actionTypeRoot}_EDIT_STATUS`],
         payload: editStatus
+    });
+
+    this.clearSearch = () => ({
+        type: actionTypes.clearSearch,
+        payload: {}
+    });
+
+    this.clearErrors = () => ({
+        type: actionTypes.clearErrors,
+        payload: {}
     });
 
     this.create = () => ({

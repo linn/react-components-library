@@ -32,7 +32,7 @@
                     loading: true
                 };
 
-            case actionTypes.FETCH_ERROR:
+            case actionTypes.FETCH_ERROR: // todo
                 return {
                     ...state,
                     loading: false
@@ -55,7 +55,11 @@
                     ...state,
                     loading: false,
                     item: action.payload.data,
-                    editStatus: 'view'
+                    editStatus: 'view',
+                    errors: {
+                        ...state.errors,
+                        [`${itemRoot}_FETCH_ERROR`]: null // success... clear out this part of error state here
+                    }
                 };
 
             case actionTypes[`RECEIVE_UPDATED_${itemRoot}`]:
