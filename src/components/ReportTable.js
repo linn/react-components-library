@@ -25,13 +25,46 @@ const useStyles = makeStyles(() => ({
         width: '100%',
         overflow: 'auto',
         textAlign: 'center'
+    },
+    numberField: {
+        textAlign: 'right'
     }
 }));
 
-const setCellClasses = (rowType, classes) => {
+const setCellClasses = (
+    classes,
+    displayValue,
+    textDisplayValue,
+    rowType,
+    varianceColumn,
+    textColumn,
+    totalColumn,
+    defaultClasses
+) => {
     let generatedClasses = '';
     if (rowType === 'Subtotal') {
         generatedClasses += `${classes.subTotal} `;
+    }
+
+    if (!textColumn && !textDisplayValue) {
+        generatedClasses += `${classes.numberField} `;
+    }
+
+    if (defaultClasses) {
+        generatedClasses += `${defaultClasses} `;
+    }
+
+    return generatedClasses;
+};
+
+const setHeaderCellClasses = (classes, varianceColumn, textColumn, totalColumn, defaultClasses) => {
+    let generatedClasses = '';
+    if (!textColumn) {
+        generatedClasses += `${classes.numberField} `;
+    }
+
+    if (defaultClasses) {
+        generatedClasses += `${defaultClasses} `;
     }
 
     return generatedClasses;
@@ -64,7 +97,17 @@ const Results = ({
                             <TableCell> {reportData.headers.rowHeader} </TableCell>
                         ) : null}
                         {reportData.headers.columnHeaders.map((header, i) => (
-                            <TableCell key={i}>{header}</TableCell>
+                            <TableCell
+                                className={setHeaderCellClasses(
+                                    classes,
+                                    reportData.headers.varianceColumns.includes(i),
+                                    reportData.headers.textColumns.includes(i),
+                                    reportData.headers.totalColumns.includes(i)
+                                )}
+                                key={i}
+                            >
+                                {header}
+                            </TableCell>
                         ))}
                     </TableRow>
                 </TableHead>
@@ -81,7 +124,15 @@ const Results = ({
                             ) : null}
                             {item.values.map((value, i) => (
                                 <TableCell
-                                    className={setCellClasses(item.rowType, classes)}
+                                    className={setCellClasses(
+                                        classes,
+                                        value ? value.displayValue : null,
+                                        value ? value.textDisplayValue : null,
+                                        item.rowType,
+                                        reportData.headers.varianceColumns.includes(i),
+                                        reportData.headers.textColumns.includes(i),
+                                        reportData.headers.totalColumns.includes(i)
+                                    )}
                                     key={i}
                                 >
                                     {setValueDrilldown(value, hasExternalLinks)}
