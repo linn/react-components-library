@@ -5,7 +5,8 @@ function fetchErrorReducer(state = { requestErrors: [] }, action) {
         return { ...state, [action.payload.error.item]: action.payload.error };
     }
     if (action.type.startsWith('RECEIVE_')) {
-        return { ...state, [action.payload.item]: null }; //todo - itemName
+        // clear error for this item if a request succeeds
+        return { ...state, [action.payload.item]: null };
     }
     if (action.type === 'CLEAR_ERRORS') {
         return null;

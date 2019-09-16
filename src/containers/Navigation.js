@@ -5,12 +5,10 @@ import fetchMenu from '../actions/fetchMenu';
 import fetchNews from '../actions/fetchNews';
 import menuSelectors from '../selectors/menuSelectors';
 import newsSelectors from '../selectors/newsSelectors';
-//import fetchErrorSelectors from '../selectors/fetchErrorSelectors';
 import getUsername from '../selectors/userSelectors';
 import initialiseOnMount from '../components/common/initialiseOnMount';
 import markNotificationSeen from '../actions/markNotificationSeen';
 import config from '../config';
-import { getFetchErrorMessage } from '../selectors/errorSelectors';
 
 const mapStateToProps = state => ({
     sections: menuSelectors.getSections(state),

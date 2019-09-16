@@ -1,5 +1,4 @@
 ﻿import utilities from '../../utilities/index';
-//todo - ?
 export default function(
     itemRoot,
     actionTypes,
