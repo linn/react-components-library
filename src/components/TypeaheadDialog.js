@@ -2,6 +2,7 @@ import React, { Fragment, useState } from 'react';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import Typography from '@material-ui/core/Typography';
+import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
 import Dialog from '@material-ui/core/Dialog';
 import Button from '@material-ui/core/Button';
@@ -59,6 +60,7 @@ function TypeaheadDialog({ title, loading, fetchItems, searchItems, onSelect, cl
         const handleClick = e => {
             setDialogOpen(false);
             clearSearch();
+            setSearchTerm(null);
             onSelect(e);
         };
 
@@ -91,15 +93,17 @@ function TypeaheadDialog({ title, loading, fetchItems, searchItems, onSelect, cl
 
     return (
         <Fragment>
-            <Button
-                color="primary"
-                aria-label="Search"
-                onClick={handleOpen}
-                variant="outlined"
-                className={classes.button}
-            >
-                <SearchIcon />
-            </Button>
+            <Tooltip title={title}>
+                <Button
+                    color="primary"
+                    aria-label="Search"
+                    onClick={handleOpen}
+                    variant="outlined"
+                    className={classes.button}
+                >
+                    <SearchIcon />
+                </Button>
+            </Tooltip>
 
             <Dialog open={dialogOpen} onClose={handleClose} fullWidth maxWidth="md">
                 <div>
