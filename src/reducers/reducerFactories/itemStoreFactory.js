@@ -55,11 +55,7 @@
                     ...state,
                     loading: false,
                     item: action.payload.data,
-                    editStatus: 'view',
-                    errors: {
-                        ...state.errors,
-                        [`${itemRoot}_FETCH_ERROR`]: null // success... clear out this part of error state here
-                    }
+                    editStatus: 'view'
                 };
 
             case actionTypes[`RECEIVE_UPDATED_${itemRoot}`]:

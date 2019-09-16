@@ -12,7 +12,7 @@ export default function UpdateApiActions(itemName, actionTypeRoot, uri, actionTy
             },
             types: [
                 rsaaTypes.requested(actionTypes, actionTypeRoot),
-                rsaaTypes.received(actionTypes, actionTypeRoot),
+                rsaaTypes.received(actionTypes, actionTypeRoot, itemName),
                 rsaaTypes.error(actionTypes, actionTypeRoot, itemName)
             ]
         }
@@ -28,7 +28,7 @@ export default function UpdateApiActions(itemName, actionTypeRoot, uri, actionTy
             },
             types: [
                 rsaaTypes.requested(actionTypes, actionTypeRoot),
-                rsaaTypes.received(actionTypes, actionTypeRoot),
+                rsaaTypes.received(actionTypes, actionTypeRoot, itemName),
                 rsaaTypes.error(actionTypes, actionTypeRoot, itemName)
             ]
         }
@@ -44,7 +44,7 @@ export default function UpdateApiActions(itemName, actionTypeRoot, uri, actionTy
             },
             types: [
                 rsaaTypes.requested(actionTypes, actionTypeRoot),
-                rsaaTypes.received(actionTypes, actionTypeRoot),
+                rsaaTypes.received(actionTypes, actionTypeRoot, itemName),
                 rsaaTypes.error(actionTypes, actionTypeRoot, itemName)
             ]
         }
@@ -62,7 +62,7 @@ export default function UpdateApiActions(itemName, actionTypeRoot, uri, actionTy
             body: JSON.stringify(item),
             types: [
                 rsaaTypes.requestAdd(actionTypes, actionTypeRoot),
-                rsaaTypes.receiveAdded(actionTypes, actionTypeRoot),
+                rsaaTypes.receiveAdded(actionTypes, actionTypeRoot, itemName),
                 rsaaTypes.error(actionTypes, actionTypeRoot, itemName)
             ]
         }
@@ -80,7 +80,7 @@ export default function UpdateApiActions(itemName, actionTypeRoot, uri, actionTy
             body: JSON.stringify(item),
             types: [
                 rsaaTypes.requestUpdate(actionTypes, actionTypeRoot),
-                rsaaTypes.receiveUpdated(actionTypes, actionTypeRoot),
+                rsaaTypes.receiveUpdated(actionTypes, actionTypeRoot, itemName),
                 rsaaTypes.error(actionTypes, actionTypeRoot, itemName)
             ]
         }

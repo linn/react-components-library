@@ -1,5 +1,5 @@
 ﻿import utilities from '../../utilities/index';
-
+//todo - ?
 export default function(
     itemRoot,
     actionTypes,
@@ -47,6 +47,11 @@ export default function(
                     ...state,
                     searchLoading: false,
                     searchItems: []
+                };
+            case actionTypes[`${itemRoot}_FETCH_ERROR`]:
+                return {
+                    ...state,
+                    loading: false
                 };
             default:
         }

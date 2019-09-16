@@ -1,7 +1,7 @@
 ﻿import { RSAA } from 'redux-api-middleware';
 import * as rsaaTypes from './rsaaTypes';
 
-export default function FetchApiActions(actionTypeRoot, uri, actionTypes, appRoot) {
+export default function FetchApiActions(itemName, actionTypeRoot, uri, actionTypes, appRoot) {
     this.fetch = () => ({
         [RSAA]: {
             endpoint: `${appRoot}${uri}`,
@@ -11,9 +11,9 @@ export default function FetchApiActions(actionTypeRoot, uri, actionTypes, appRoo
                 Accept: 'application/json'
             },
             types: [
-                rsaaTypes.requestedResponse(actionTypes, actionTypeRoot),
-                rsaaTypes.receivedResponse(actionTypes, actionTypeRoot),
-                rsaaTypes.errorResponse
+                rsaaTypes.requested(actionTypes, actionTypeRoot),
+                rsaaTypes.received(actionTypes, actionTypeRoot, itemName),
+                rsaaTypes.error(actionTypes, actionTypeRoot, itemName)
             ]
         }
     });
@@ -27,9 +27,9 @@ export default function FetchApiActions(actionTypeRoot, uri, actionTypes, appRoo
                 Accept: 'application/json'
             },
             types: [
-                rsaaTypes.requestedResponse(actionTypes, actionTypeRoot),
-                rsaaTypes.receivedResponse(actionTypes, actionTypeRoot),
-                rsaaTypes.errorResponse
+                rsaaTypes.requested(actionTypes, actionTypeRoot),
+                rsaaTypes.received(actionTypes, actionTypeRoot, itemName),
+                rsaaTypes.error(actionTypes, actionTypeRoot, itemName)
             ]
         }
     });
@@ -43,9 +43,9 @@ export default function FetchApiActions(actionTypeRoot, uri, actionTypes, appRoo
                 Accept: 'application/json'
             },
             types: [
-                rsaaTypes.requestedResponse(actionTypes, actionTypeRoot),
-                rsaaTypes.receivedResponse(actionTypes, actionTypeRoot),
-                rsaaTypes.errorResponse
+                rsaaTypes.requested(actionTypes, actionTypeRoot),
+                rsaaTypes.received(actionTypes, actionTypeRoot, itemName),
+                rsaaTypes.error(actionTypes, actionTypeRoot, itemName)
             ]
         }
     });
@@ -59,15 +59,9 @@ export default function FetchApiActions(actionTypeRoot, uri, actionTypes, appRoo
                 Accept: 'application/json'
             },
             types: [
-                {
-                    type: actionTypes[`REQUEST_SEARCH_${actionTypeRoot}`],
-                    payload: {}
-                },
-                {
-                    type: actionTypes[`RECEIVE_SEARCH_${actionTypeRoot}`],
-                    payload: async (action, state, res) => ({ data: await res.json() })
-                },
-                rsaaTypes.errorResponse
+                rsaaTypes.requestSearch(actionTypes, actionTypeRoot),
+                rsaaTypes.receiveSearch(actionTypes, actionTypeRoot, itemName),
+                rsaaTypes.error(actionTypes, actionTypeRoot, itemName)
             ]
         }
     });

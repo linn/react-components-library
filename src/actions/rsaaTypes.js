@@ -1,4 +1,7 @@
-const successPayload = async (action, state, res) => ({ data: await res.json() });
+const successPayload = itemName => async (action, state, res) => ({
+    data: await res.json(),
+    item: itemName
+});
 
 export const requested = (actionTypes, actionTypeRoot) => ({
     type: actionTypes[`REQUEST_${actionTypeRoot}`],
@@ -15,19 +18,19 @@ export const requestUpdate = (actionTypes, actionTypeRoot) => ({
     payload: {}
 });
 
-export const receiveUpdated = (actionTypes, actionTypeRoot) => ({
+export const receiveUpdated = (actionTypes, actionTypeRoot, itemName) => ({
     type: actionTypes[`RECEIVE_UPDATED_${actionTypeRoot}`],
-    payload: successPayload
+    payload: successPayload(itemName)
 });
 
-export const received = (actionTypes, actionTypeRoot) => ({
+export const received = (actionTypes, actionTypeRoot, itemName) => ({
     type: actionTypes[`RECEIVE_${actionTypeRoot}`],
-    payload: successPayload
+    payload: successPayload(itemName)
 });
 
-export const receiveAdded = (actionTypes, actionTypeRoot) => ({
+export const receiveAdded = (actionTypes, actionTypeRoot, itemName) => ({
     type: actionTypes[`RECEIVE_NEW_${actionTypeRoot}`],
-    payload: successPayload
+    payload: successPayload(itemName)
 });
 
 export const requestSearch = (actionTypes, actionTypeRoot) => ({
@@ -35,9 +38,9 @@ export const requestSearch = (actionTypes, actionTypeRoot) => ({
     payload: {}
 });
 
-export const receiveSearch = (actionTypes, actionTypeRoot) => ({
+export const receiveSearch = (actionTypes, actionTypeRoot, itemName) => ({
     type: actionTypes[`RECEIVE_SEARCH_${actionTypeRoot}`],
-    payload: successPayload
+    payload: successPayload(itemName)
 });
 
 export const error = (actionTypes, actionTypeRoot, itemName) => ({

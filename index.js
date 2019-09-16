@@ -54,9 +54,10 @@ import getUsername from './src/selectors/userSelectors';
 import utilities from './src/utilities/index';
 import initialiseOnMount from './src/components/common/initialiseOnMount';
 import Navigation from './src/containers/Navigation';
+import { getItemErrorMessage, getRequestErrors } from './src/selectors/errorSelectors';
 import { errorTheme, linnTheme } from './src/themes/index';
 
-const reducers = { menu, news, fetchError: fetchErrorReducer };
+const reducers = { menu, news };
 
 export {
     InfiniteTable,
@@ -96,6 +97,7 @@ export {
     ItemSelectors,
     ReportSelectors,
     fetchErrorSelectors,
+    fetchErrorReducer,
     collectionStoreFactory,
     collectionWithLinksStoreFactory,
     itemStoreFactory,
@@ -116,5 +118,7 @@ export {
     errorTheme,
     linnTheme,
     reducers,
-    utilities
+    utilities,
+    getRequestErrors,
+    getItemErrorMessage
 };
