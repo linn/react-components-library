@@ -16,7 +16,7 @@ const fetchNews = (state, root) => ({
             },
             {
                 type: actionTypes.RECEIVE_NEWS,
-                payload: async (action, state, res) => ({ news: await res.json() })
+                payload: async (action, state, res) => ({ news: await res.json(), item: 'news' })
             },
             {
                 type: actionTypes.FETCH_ERROR,

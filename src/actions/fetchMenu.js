@@ -16,7 +16,7 @@ const fetchMenu = (state, root) => ({
             },
             {
                 type: actionTypes.RECEIVE_MENU,
-                payload: async (action, state, res) => ({ menu: await res.json() })
+                payload: async (action, state, res) => ({ menu: await res.json(), item: 'menu' })
             },
             {
                 type: actionTypes.FETCH_ERROR,
