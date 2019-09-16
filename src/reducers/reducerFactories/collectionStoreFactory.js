@@ -1,4 +1,5 @@
 ﻿import utilities from '../../utilities/index';
+
 export default function(
     itemRoot,
     actionTypes,
