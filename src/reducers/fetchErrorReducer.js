@@ -1,4 +1,4 @@
-function fetchErrorReducer(state = { requestErrors: [] }, action) {
+function fetchErrorReducer(state = { requestErrors: {} }, action) {
     // the FETCH_ERROR actions are dispatched when the response has an error status code
     if (action.type.endsWith('_FETCH_ERROR')) {
         // put these in the error store keyed by the name of the itemType under request

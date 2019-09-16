@@ -5,7 +5,7 @@ export const getRequestErrors = state => {
     }
     const erroredAction = () => Object.prototype.hasOwnProperty.call(errors, 'requestErrors');
     if (erroredAction()) {
-        return errors.requestErrors; // todo - better
+        return errors.requestErrors;
     }
     return null;
 };
