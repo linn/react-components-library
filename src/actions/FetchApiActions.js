@@ -1,20 +1,7 @@
 ﻿import { RSAA } from 'redux-api-middleware';
+import * as rsaaTypes from './rsaaTypes';
 
 export default function FetchApiActions(actionTypeRoot, uri, actionTypes, appRoot) {
-    const requestedResponse = {
-        type: actionTypes[`REQUEST_${actionTypeRoot}`],
-        payload: {}
-    };
-    const receivedResponse = {
-        type: actionTypes[`RECEIVE_${actionTypeRoot}`],
-        payload: async (action, state, res) => ({ data: await res.json() })
-    };
-    const errorResponse = {
-        type: 'FETCH_BOARD_FAIL_TYPE_ERROR',
-        payload: (action, state, res) =>
-            res ? `Error - ${res.status} ${res.statusText}` : `Network request failed`
-    };
-
     this.fetch = () => ({
         [RSAA]: {
             endpoint: `${appRoot}${uri}`,
@@ -23,7 +10,11 @@ export default function FetchApiActions(actionTypeRoot, uri, actionTypes, appRoo
             headers: {
                 Accept: 'application/json'
             },
-            types: [requestedResponse, receivedResponse, errorResponse]
+            types: [
+                rsaaTypes.requestedResponse(actionTypes, actionTypeRoot),
+                rsaaTypes.receivedResponse(actionTypes, actionTypeRoot),
+                rsaaTypes.errorResponse
+            ]
         }
     });
 
@@ -35,7 +26,11 @@ export default function FetchApiActions(actionTypeRoot, uri, actionTypes, appRoo
             headers: {
                 Accept: 'application/json'
             },
-            types: [requestedResponse, receivedResponse, errorResponse]
+            types: [
+                rsaaTypes.requestedResponse(actionTypes, actionTypeRoot),
+                rsaaTypes.receivedResponse(actionTypes, actionTypeRoot),
+                rsaaTypes.errorResponse
+            ]
         }
     });
 
@@ -47,7 +42,11 @@ export default function FetchApiActions(actionTypeRoot, uri, actionTypes, appRoo
             headers: {
                 Accept: 'application/json'
             },
-            types: [requestedResponse, receivedResponse, errorResponse]
+            types: [
+                rsaaTypes.requestedResponse(actionTypes, actionTypeRoot),
+                rsaaTypes.receivedResponse(actionTypes, actionTypeRoot),
+                rsaaTypes.errorResponse
+            ]
         }
     });
 
@@ -68,7 +67,7 @@ export default function FetchApiActions(actionTypeRoot, uri, actionTypes, appRoo
                     type: actionTypes[`RECEIVE_SEARCH_${actionTypeRoot}`],
                     payload: async (action, state, res) => ({ data: await res.json() })
                 },
-                errorResponse
+                rsaaTypes.errorResponse
             ]
         }
     });

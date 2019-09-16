@@ -1,40 +1,32 @@
-export const getActionErrorMessage = (state, key) => {
+export const getRequestErrors = state => {
     const { errors } = state;
     if (!errors) {
         return null;
     }
-    const erroredAction = () => Object.prototype.hasOwnProperty.call(errors, key);
+    const erroredAction = () => Object.prototype.hasOwnProperty.call(errors, 'requestErrors');
     if (erroredAction()) {
-        return errors[key].message;
+        return errors.requestErrors; // todo - better
     }
     return null;
 };
 
-export const getFetchErrorMessage = (state, key) => {
+export const getItemErrorMessage = (state, item) => {
     const { errors } = state;
     if (!errors) {
         return null;
     }
 
-    // the other case, a _FETCH_ERROR action has been dispatched and added a part to error state
-    const hasErrorForKey = () => Object.prototype.hasOwnProperty.call(errors, key) && errors[key];
+    const hasErrorForKey = () => Object.prototype.hasOwnProperty.call(errors, item) && errors[item];
     let hasErrorProperty = false;
 
     if (hasErrorForKey()) {
-        hasErrorProperty = Object.prototype.hasOwnProperty.call(errors[key], 'error');
+        hasErrorProperty = Object.prototype.hasOwnProperty.call(errors[item], 'error');
         hasErrorProperty = true;
     }
 
     if (hasErrorProperty) {
-        return errors[key].statusText;
+        return errors[item].statusText;
     }
 
-    // if (hasErrorMessageProperty && errors.errors[0].errorMessage) {
-    //     return errors.errors[0].errorMessage;
-    // }
-
-    // if (errors.statusText) {
-    //     return errors.statusText.message || errors.statusText;
-    // }
     return null;
 };

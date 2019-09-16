@@ -32,7 +32,7 @@
                     loading: true
                 };
 
-            case actionTypes.FETCH_ERROR: // todo
+            case actionTypes[`${itemRoot}_FETCH_ERROR`]:
                 return {
                     ...state,
                     loading: false

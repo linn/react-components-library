@@ -1,15 +1,21 @@
-function fetchErrorReducer(state = {}, action) {
-    // just check if it's a FETCH_ERROR type of action here
-    // the other alterative is to pass in a whole list of actionTypes here as is done in itemStoreFactory
+function fetchErrorReducer(state = { requestErrors: [] }, action) {
+    // the FETCH_ERROR actions are dispatched when the response has an error status code
     if (action.type.endsWith('_FETCH_ERROR')) {
+        // put these in the error store keyed by the name of the itemType under request
         return { ...state, [action.payload.error.item]: action.payload.error };
     }
     if (action.type === 'CLEAR_ERRORS') {
         return null;
     }
-    // sometimes the action itself represents an error... See https://www.npmjs.com/package/redux-api-middleware#error
+    // sometimes the request action itself represents an error...
+    // e.g. if the request errors before a response is returned (server down, blocked by CORS etc)
+    // See https://www.npmjs.com/package/redux-api-middleware#error
     if (action.error) {
-        return { ...state, [action.type]: action.payload };
+        return {
+            ...state,
+            // add these to a requestErrrors part of the errors store, keyed by the action type that errored
+            requestErrors: { ...state.requestErrors, [action.type]: action.payload }
+        };
     }
     return state;
 }
