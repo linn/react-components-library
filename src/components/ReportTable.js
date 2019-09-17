@@ -148,7 +148,18 @@ const Results = ({
                                 <TableCell>{reportData.totals.rowTitle.displayString}</TableCell>
                             ) : null}
                             {reportData.totals.values.map((value, i) => (
-                                <TableCell key={i}>
+                                <TableCell
+                                    className={setCellClasses(
+                                        classes,
+                                        value ? value.displayValue : null,
+                                        value ? value.textDisplayValue : null,
+                                        'Total',
+                                        reportData.headers.varianceColumns.includes(i),
+                                        reportData.headers.textColumns.includes(i),
+                                        reportData.headers.totalColumns.includes(i)
+                                    )}
+                                    key={i}
+                                >
                                     {setValueDrilldown(value, hasExternalLinks)}
                                 </TableCell>
                             ))}
