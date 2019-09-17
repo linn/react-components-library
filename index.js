@@ -56,6 +56,8 @@ import initialiseOnMount from './src/components/common/initialiseOnMount';
 import Navigation from './src/containers/Navigation';
 import { errorTheme, linnTheme } from './src/themes/index';
 import SelectedItemsList from './src/components/SelectedItemsList';
+import PageContainer from './src/containers/PageContainer';
+import NotFound from './src/components/NotFound';
 
 const reducers = { menu, news, fetchError: fetchErrorReducer };
 
@@ -118,5 +120,7 @@ export {
     linnTheme,
     reducers,
     utilities,
-    SelectedItemsList
+    SelectedItemsList,
+    PageContainer,
+    NotFound
 };
