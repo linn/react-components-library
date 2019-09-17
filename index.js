@@ -55,6 +55,7 @@ import utilities from './src/utilities/index';
 import initialiseOnMount from './src/components/common/initialiseOnMount';
 import Navigation from './src/containers/Navigation';
 import { errorTheme, linnTheme } from './src/themes/index';
+import SelectedItemsList from './src/components/SelectedItemsList';
 
 const reducers = { menu, news, fetchError: fetchErrorReducer };
 
@@ -116,5 +117,6 @@ export {
     errorTheme,
     linnTheme,
     reducers,
-    utilities
+    utilities,
+    SelectedItemsList
 };
