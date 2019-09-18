@@ -10,7 +10,7 @@ export const getRequestErrors = state => {
     return null;
 };
 
-export const getItemErrorMessage = (state, item) => {
+export const getItemError = (state, item) => {
     const { errors } = state;
     if (!errors) {
         return null;
@@ -25,7 +25,7 @@ export const getItemErrorMessage = (state, item) => {
     }
 
     if (hasErrorProperty) {
-        return errors[item].statusText;
+        return errors[item];
     }
 
     return null;

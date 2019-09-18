@@ -2,9 +2,12 @@ function fetchErrorReducer(state = { requestErrors: {} }, action) {
     // the FETCH_ERROR actions are dispatched when the response has an error status code
     if (action.type.endsWith('_FETCH_ERROR')) {
         // put these in the error store keyed by the name of the itemType under request
-        return { ...state, [action.payload.error.item]: action.payload.error };
+        return {
+            ...state,
+            [action.payload.error ? action.payload.error.item : undefined]: action.payload.error
+        };
     }
-    if (action.type.startsWith('RECEIVE_')) {
+    if (action.type.startsWith('RECEIVE_') && !action.type.endsWith('_REPORT')) {
         // clear error for this item if a request succeeds
         return { ...state, [action.payload.item]: null };
     }
