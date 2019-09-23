@@ -54,11 +54,12 @@ import getUsername from './src/selectors/userSelectors';
 import utilities from './src/utilities/index';
 import initialiseOnMount from './src/components/common/initialiseOnMount';
 import Navigation from './src/containers/Navigation';
+import { getItemError, getRequestErrors, getItemErrors } from './src/selectors/errorSelectors';
 import { errorTheme, linnTheme } from './src/themes/index';
 import SelectedItemsList from './src/components/SelectedItemsList';
 import NotFound from './src/components/NotFound';
 
-const reducers = { menu, news, fetchError: fetchErrorReducer };
+const reducers = { menu, news };
 
 export {
     InfiniteTable,
@@ -98,6 +99,7 @@ export {
     ItemSelectors,
     ReportSelectors,
     fetchErrorSelectors,
+    fetchErrorReducer,
     collectionStoreFactory,
     collectionWithLinksStoreFactory,
     itemStoreFactory,
@@ -119,6 +121,9 @@ export {
     linnTheme,
     reducers,
     utilities,
+    getRequestErrors,
+    getItemError,
+    getItemErrors
     SelectedItemsList,
     NotFound
 };

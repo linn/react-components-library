@@ -1,7 +1,8 @@
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import makeStyles from '@material-ui/styles/makeStyles';
-import React, { Fragment } from 'react';
+import { useSnackbar } from 'notistack';
+import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Breadcrumbs from './Breadcrumbs';
 
@@ -36,8 +37,20 @@ const columnWidth = {
     xl: 0
 };
 
-function Page({ children, history, width }) {
+function Page({ children, history, width, requestErrors, showRequestErrors }) {
     const classes = useStyles();
+    const { enqueueSnackbar } = useSnackbar();
+
+    useEffect(() => {
+        if (requestErrors && showRequestErrors) {
+            requestErrors.forEach(t => {
+                enqueueSnackbar(`${t.message} - ${t.type}`, {
+                    variant: 'error',
+                    preventDuplicate: true
+                });
+            });
+        }
+    }, [requestErrors, enqueueSnackbar]);
 
     return (
         <Fragment>
@@ -63,11 +76,15 @@ function Page({ children, history, width }) {
 Page.propTypes = {
     children: PropTypes.node.isRequired,
     history: PropTypes.shape({}).isRequired,
-    width: PropTypes.oneOf(['xs', 's', 'm', 'l', 'xl'])
+    width: PropTypes.oneOf(['xs', 's', 'm', 'l', 'xl']),
+    showRequestErrors: PropTypes.bool,
+    requestErrors: PropTypes.arrayOf(PropTypes.shape({}))
 };
 
 Page.defaultProps = {
-    width: 'l'
+    width: 'l',
+    showRequestErrors: false,
+    requestErrors: []
 };
 
 export default Page;

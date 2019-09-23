@@ -5,6 +5,8 @@ const makeActionTypes = (entityType, makeAll = true) => {
     types[`REQUEST_SEARCH_${entityType}`] = `REQUEST_SEARCH_${entityType}`;
     types[`RECEIVE_SEARCH_${entityType}`] = `RECEIVE_SEARCH_${entityType}`;
     types[`CLEAR_SEARCH_${entityType}`] = `CLEAR_SEARCH_${entityType}`;
+    types[`FETCH_${entityType}_ERROR`] = `FETCH_${entityType}_ERROR`;
+    types[`CLEAR_${entityType}_ERRORS`] = `CLEAR_${entityType}_ERRORS`;
 
     if (makeAll) {
         types[`REQUEST_ADD_${entityType}`] = `REQUEST_ADD_${entityType}`;
@@ -16,7 +18,6 @@ const makeActionTypes = (entityType, makeAll = true) => {
         types[`SET_${entityType}_EDIT_STATUS`] = `SET_${entityType}_EDIT_STATUS`;
         types[`SHOW_${entityType}_SNACKBAR`] = `SHOW_${entityType}_SNACKBAR`;
         types[`HIDE_${entityType}_SNACKBAR`] = `HIDE_${entityType}_SNACKBAR`;
-        types.FETCH_ERROR = 'FETCH_ERROR';
     }
 
     return types;

@@ -32,7 +32,7 @@
                     loading: true
                 };
 
-            case actionTypes.FETCH_ERROR:
+            case actionTypes[`FETCH_${itemRoot}_ERROR`]:
                 return {
                     ...state,
                     loading: false
