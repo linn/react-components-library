@@ -78,13 +78,13 @@ Page.propTypes = {
     history: PropTypes.shape({}).isRequired,
     width: PropTypes.oneOf(['xs', 's', 'm', 'l', 'xl']),
     showRequestErrors: PropTypes.bool,
-    requestErrors: PropTypes.shape({})
+    requestErrors: PropTypes.arrayOf(PropTypes.shape({}))
 };
 
 Page.defaultProps = {
     width: 'l',
     showRequestErrors: false,
-    requestErrors: {}
+    requestErrors: []
 };
 
 export default Page;

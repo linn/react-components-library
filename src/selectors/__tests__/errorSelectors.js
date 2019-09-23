@@ -1,30 +1,32 @@
-import { getRequestErrors } from '../errorSelectors';
-import { getItemErrors, getItemError } from '../../..';
+import { getRequestErrors, getItemErrors, getItemError } from '../errorSelectors';
 
-const requestErrors = {
-    SOME_ACTION_THAT_ERRORED: {
-        name: 'requestError',
-        message: 'Failed to fetch'
+const requestErrors = [
+    {
+        SOME_ACTION_THAT_ERRORED: {
+            name: 'requestError',
+            message: 'Failed to fetch'
+        }
     }
-};
+];
 
-const someItemError = {
-    status: 404,
-    statusText: 'Error - 404 Not Found',
-    details: {
-        message: 'Not found'
+const itemErrors = [
+    {
+        status: 404,
+        statusText: 'Error - 404 Not Found',
+        details: {
+            message: 'Not found'
+        },
+        item: 'itemA'
     },
-    item: 'itemA'
-};
-
-const someOtherItemError = {
-    status: 404,
-    statusText: 'Error - 404 Not Found',
-    details: {
-        message: 'Not found'
-    },
-    item: 'itemB'
-};
+    {
+        status: 404,
+        statusText: 'Error - 404 Not Found',
+        details: {
+            message: 'Not found'
+        },
+        item: 'itemB'
+    }
+];
 
 describe('when requestErrors', () => {
     test('should return message', () => {
@@ -53,8 +55,7 @@ describe('when no requestErrors', () => {
 describe('when itemErrors', () => {
     const state = {
         errors: {
-            itemA: someItemError,
-            itemB: someOtherItemError
+            itemErrors
         }
     };
     test('should get all', () => {
@@ -71,10 +72,10 @@ describe('when itemErrors', () => {
 
 describe('when  no itemErrors', () => {
     const state = {
-        errors: {}
+        errors: { requestErrors: [], itemErrors: [] }
     };
     test('should return null', () => {
         expect(getItemError(state, 'itemA')).toEqual(null);
-        expect(getItemErrors()).toEqual(null);
+        expect(getItemErrors(state)).toEqual(null);
     });
 });
