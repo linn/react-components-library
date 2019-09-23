@@ -47,7 +47,7 @@ export default function(
                     searchLoading: false,
                     searchItems: []
                 };
-            case actionTypes[`${itemRoot}_FETCH_ERROR`]:
+            case actionTypes[`FETCH_${itemRoot}_ERROR`]:
                 return {
                     ...state,
                     loading: false

@@ -54,7 +54,7 @@ import getUsername from './src/selectors/userSelectors';
 import utilities from './src/utilities/index';
 import initialiseOnMount from './src/components/common/initialiseOnMount';
 import Navigation from './src/containers/Navigation';
-import { getItemError, getRequestErrors } from './src/selectors/errorSelectors';
+import { getItemError, getRequestErrors, getItemErrors } from './src/selectors/errorSelectors';
 import { errorTheme, linnTheme } from './src/themes/index';
 
 const reducers = { menu, news };
@@ -120,5 +120,6 @@ export {
     reducers,
     utilities,
     getRequestErrors,
-    getItemError
+    getItemError,
+    getItemErrors
 };

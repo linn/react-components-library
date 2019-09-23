@@ -44,7 +44,7 @@ export const receiveSearch = (actionTypes, actionTypeRoot, itemName) => ({
 });
 
 export const error = (actionTypes, actionTypeRoot, itemName) => ({
-    type: actionTypes[`${actionTypeRoot}_FETCH_ERROR`],
+    type: actionTypes[`FETCH_${actionTypeRoot}_ERROR`],
     payload: async (action, state, res) =>
         res
             ? {

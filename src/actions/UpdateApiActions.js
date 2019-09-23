@@ -106,6 +106,11 @@ export default function UpdateApiActions(itemName, actionTypeRoot, uri, actionTy
         payload: {}
     });
 
+    this.clearErrorsForItem = () => ({
+        type: actionTypes[`${actionTypeRoot}_CLEAR_ERRORS`],
+        payload: { item: itemName }
+    });
+
     this.create = () => ({
         type: actionTypes[`REQUEST_CREATE_${actionTypeRoot}`],
         payload: {}

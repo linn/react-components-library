@@ -1,27 +1,25 @@
 export const getRequestErrors = state => {
     const { errors } = state;
-    if (!errors) {
+    if (!errors || !errors.requestErrors) {
         return null;
     }
-    const hasRequestErrors = () => Object.prototype.hasOwnProperty.call(errors, 'requestErrors');
-    if (hasRequestErrors()) {
-        return errors.requestErrors;
+    return errors.requestErrors.length > 0 ? errors.requestErrors : null;
+};
+
+export const getItemErrors = state => {
+    const { errors } = state;
+    if (!(errors && errors.itemErrors)) {
+        return null;
     }
-    return null;
+    const arr = errors.itemErrors;
+    return arr.length > 0 ? arr : null;
 };
 
 export const getItemError = (state, item) => {
     const { errors } = state;
-    if (!errors) {
+    if (!errors || !errors.itemErrors) {
         return null;
     }
 
-    const hasErrorForItem = () =>
-        Object.prototype.hasOwnProperty.call(errors, item) && errors[item];
-
-    if (hasErrorForItem()) {
-        return errors[item];
-    }
-
-    return null;
+    return errors.itemErrors.find(i => i === item);
 };

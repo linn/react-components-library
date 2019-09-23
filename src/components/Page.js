@@ -43,8 +43,8 @@ function Page({ children, history, width, requestErrors, showRequestErrors }) {
 
     useEffect(() => {
         if (requestErrors && showRequestErrors) {
-            Object.keys(requestErrors).forEach(t => {
-                enqueueSnackbar(`${requestErrors[t].message} - ${t}`, {
+            requestErrors.forEach(t => {
+                enqueueSnackbar(`${t.message} - ${t.type}`, {
                     variant: 'error',
                     preventDuplicate: true
                 });
