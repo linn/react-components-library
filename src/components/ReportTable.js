@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import makeStyles from '@material-ui/styles/makeStyles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -17,13 +17,58 @@ import { reportResultType } from '../propTypes/index';
 import Title from './Title';
 import ErrorCard from './ErrorCard';
 
-const styles = () => ({
+const useStyles = makeStyles(() => ({
+    subTotal: {
+        fontWeight: 'bolder'
+    },
     root: {
         width: '100%',
         overflow: 'auto',
         textAlign: 'center'
+    },
+    numberField: {
+        textAlign: 'right'
     }
-});
+}));
+
+const setCellClasses = (
+    classes,
+    displayValue,
+    textDisplayValue,
+    rowType,
+    varianceColumn,
+    textColumn,
+    totalColumn,
+    defaultClasses
+) => {
+    let generatedClasses = '';
+    if (rowType === 'Subtotal') {
+        generatedClasses += `${classes.subTotal} `;
+    }
+
+    if (!textColumn && !textDisplayValue) {
+        generatedClasses += `${classes.numberField} `;
+    }
+
+    if (defaultClasses) {
+        generatedClasses += `${defaultClasses} `;
+    }
+
+    return generatedClasses;
+};
+
+const setHeaderCellClasses = (classes, varianceColumn, textColumn, totalColumn, defaultClasses) => {
+    let generatedClasses = '';
+    if (!textColumn) {
+        generatedClasses += `${classes.numberField} `;
+    }
+
+    if (defaultClasses) {
+        generatedClasses += `${defaultClasses} `;
+    }
+
+    return generatedClasses;
+};
 
 const Results = ({
     reportData,
@@ -45,12 +90,24 @@ const Results = ({
             )}
         />
         <div style={{ backgroundColor: 'white' }}>
-            <Table className={styles.table} size="small">
+            <Table size="small">
                 <TableHead key="headers">
                     <TableRow>
-                        {showRowTitles ? <TableCell> {reportData.headers.rowHeader} </TableCell> : null}
+                        {showRowTitles ? (
+                            <TableCell> {reportData.headers.rowHeader} </TableCell>
+                        ) : null}
                         {reportData.headers.columnHeaders.map((header, i) => (
-                            <TableCell key={i}>{header}</TableCell>
+                            <TableCell
+                                className={setHeaderCellClasses(
+                                    classes,
+                                    reportData.headers.varianceColumns.includes(i),
+                                    reportData.headers.textColumns.includes(i),
+                                    reportData.headers.totalColumns.includes(i)
+                                )}
+                                key={i}
+                            >
+                                {header}
+                            </TableCell>
                         ))}
                     </TableRow>
                 </TableHead>
@@ -66,7 +123,18 @@ const Results = ({
                                 </TableCell>
                             ) : null}
                             {item.values.map((value, i) => (
-                                <TableCell key={i}>
+                                <TableCell
+                                    className={setCellClasses(
+                                        classes,
+                                        value ? value.displayValue : null,
+                                        value ? value.textDisplayValue : null,
+                                        item.rowType,
+                                        reportData.headers.varianceColumns.includes(i),
+                                        reportData.headers.textColumns.includes(i),
+                                        reportData.headers.totalColumns.includes(i)
+                                    )}
+                                    key={i}
+                                >
                                     {setValueDrilldown(value, hasExternalLinks)}
                                     {setTextValueDrilldown(value, hasExternalLinks)}
                                 </TableCell>
@@ -80,7 +148,18 @@ const Results = ({
                                 <TableCell>{reportData.totals.rowTitle.displayString}</TableCell>
                             ) : null}
                             {reportData.totals.values.map((value, i) => (
-                                <TableCell key={i}>
+                                <TableCell
+                                    className={setCellClasses(
+                                        classes,
+                                        value ? value.displayValue : null,
+                                        value ? value.textDisplayValue : null,
+                                        'Total',
+                                        reportData.headers.varianceColumns.includes(i),
+                                        reportData.headers.textColumns.includes(i),
+                                        reportData.headers.totalColumns.includes(i)
+                                    )}
+                                    key={i}
+                                >
                                     {setValueDrilldown(value, hasExternalLinks)}
                                 </TableCell>
                             ))}
@@ -99,12 +178,12 @@ function ReportTable({
     placeholderColumns,
     reportData,
     hasExternalLinks,
-    classes,
     title,
     showTitle,
     showTotals,
     showRowTitles
 }) {
+    const classes = useStyles();
     if (!reportData) {
         return (
             <Paper className={classes.root}>
@@ -169,4 +248,4 @@ ReportTable.defaultProps = {
     hasExternalLinks: false
 };
 
-export default withStyles(styles)(ReportTable);
+export default ReportTable;

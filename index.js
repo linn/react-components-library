@@ -56,6 +56,8 @@ import initialiseOnMount from './src/components/common/initialiseOnMount';
 import Navigation from './src/containers/Navigation';
 import { getItemError, getRequestErrors, getItemErrors } from './src/selectors/errorSelectors';
 import { errorTheme, linnTheme } from './src/themes/index';
+import SelectedItemsList from './src/components/SelectedItemsList';
+import NotFound from './src/components/NotFound';
 
 const reducers = { menu, news };
 
@@ -122,4 +124,6 @@ export {
     getRequestErrors,
     getItemError,
     getItemErrors
+    SelectedItemsList,
+    NotFound
 };
