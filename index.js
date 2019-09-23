@@ -37,7 +37,6 @@ import CollectionSelectors from './src/selectors/CollectionSelectors';
 import PaginationSelectors from './src/selectors/PaginationSelectors';
 import ItemSelectors from './src/selectors/ItemSelectors';
 import ReportSelectors from './src/selectors/ReportSelectors';
-import fetchErrorSelectors from './src/selectors/fetchErrorSelectors';
 import collectionStoreFactory from './src/reducers/reducerFactories/collectionStoreFactory';
 import collectionWithLinksStoreFactory from './src/reducers/reducerFactories/collectionWithLinksStoreFactory';
 import itemStoreFactory from './src/reducers/reducerFactories/itemStoreFactory';
@@ -98,7 +97,6 @@ export {
     PaginationSelectors,
     ItemSelectors,
     ReportSelectors,
-    fetchErrorSelectors,
     fetchErrorReducer,
     collectionStoreFactory,
     collectionWithLinksStoreFactory,
