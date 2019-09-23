@@ -123,7 +123,7 @@ export {
     utilities,
     getRequestErrors,
     getItemError,
-    getItemErrors
+    getItemErrors,
     SelectedItemsList,
     NotFound
 };
