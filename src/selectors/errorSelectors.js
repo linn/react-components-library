@@ -20,6 +20,5 @@ export const getItemError = (state, item) => {
     if (!errors || !errors.itemErrors) {
         return null;
     }
-
-    return errors.itemErrors.find(i => i === item);
+    return errors.itemErrors.find(i => i.item && i.item === item);
 };
