@@ -1,25 +1,49 @@
-import * as actionTypes from '../actions/index';
+import * as actionTypes from '../actions';
 
-const fetchErrorReducer = (state, action) => {
-    switch (action.type) {
-        case actionTypes.FETCH_ERROR:
-            return action.payload.error
-                ? {
-                      status: action.payload.error.status,
-                      statusText: action.payload.error.statusText,
-                      errors: action.payload.error.details.errors
-                  }
-                : { statusText: action.payload };
-        default:
-            if (action.error) {
-                // this can occur when a request fails (no server response) see https://www.npmjs.com/package/redux-api-middleware#error
+const receiveTypes = root => [`RECEIVE_${root}`, `RECEIVE_NEW_${root}`, `RECEIVE_UPDATED_${root}`];
+
+function fetchErrorReducer(itemTypes, defaultState = { requestErrors: [], itemErrors: [] }) {
+    return (state = defaultState, action) => {
+        if (action.payload) {
+            if (
+                action.payload.error &&
+                itemTypes[action.payload.error.item] &&
+                action.type === `FETCH_${itemTypes[action.payload.error.item].actionType}_ERROR`
+            ) {
+                return { ...state, itemErrors: [...state.itemErrors, action.payload.error] };
+            }
+            if (
+                action.payload.item &&
+                itemTypes[action.payload.item] &&
+                receiveTypes(itemTypes[action.payload.item].actionType).indexOf(action.type) > -1
+            ) {
                 return {
-                    statusText:
-                        'There was an issue contacting the server, please try again later...'
+                    ...state,
+                    itemErrors: state.itemErrors.filter(e => e.item !== action.payload.item)
                 };
             }
-            return null;
-    }
-};
+            if (
+                action.payload.item &&
+                itemTypes[action.payload.item] &&
+                action.type === `CLEAR_${itemTypes[action.payload.item].actionType}_ERRORS`
+            ) {
+                return {
+                    ...state,
+                    itemErrors: state.itemErrors.filter(e => e.item !== action.payload.item)
+                };
+            }
+        }
+        if (action.error) {
+            return {
+                ...state,
+                requestErrors: [...state.requestErrors, { ...action.payload, type: action.type }]
+            };
+        }
+        if (action.type === actionTypes.CLEAR_ITEM_ERRORS) {
+            return { ...state, itemErrors: [] };
+        }
+        return state;
+    };
+}
 
 export default fetchErrorReducer;

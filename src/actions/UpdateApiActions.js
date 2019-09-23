@@ -1,7 +1,7 @@
 ﻿import { RSAA } from 'redux-api-middleware';
-import * as sharedActionTypes from './index';
+import * as rsaaTypes from './rsaaTypes';
 
-export default function UpdateApiActions(actionTypeRoot, uri, actionTypes, appRoot) {
+export default function UpdateApiActions(itemName, actionTypeRoot, uri, actionTypes, appRoot) {
     this.fetch = id => ({
         [RSAA]: {
             endpoint: `${appRoot}${uri}/${id}`,
@@ -11,19 +11,9 @@ export default function UpdateApiActions(actionTypeRoot, uri, actionTypes, appRo
                 Accept: 'application/json'
             },
             types: [
-                {
-                    type: actionTypes[`REQUEST_${actionTypeRoot}`],
-                    payload: {}
-                },
-                {
-                    type: actionTypes[`RECEIVE_${actionTypeRoot}`],
-                    payload: async (action, state, res) => ({ data: await res.json() })
-                },
-                {
-                    type: sharedActionTypes.FETCH_ERROR,
-                    payload: (action, state, res) =>
-                        res ? `Error - ${res.status} ${res.statusText}` : `Network request failed`
-                }
+                rsaaTypes.requested(actionTypes, actionTypeRoot),
+                rsaaTypes.received(actionTypes, actionTypeRoot, itemName),
+                rsaaTypes.error(actionTypes, actionTypeRoot, itemName)
             ]
         }
     });
@@ -37,19 +27,9 @@ export default function UpdateApiActions(actionTypeRoot, uri, actionTypes, appRo
                 Accept: 'application/json'
             },
             types: [
-                {
-                    type: actionTypes[`REQUEST_${actionTypeRoot}`],
-                    payload: {}
-                },
-                {
-                    type: actionTypes[`RECEIVE_${actionTypeRoot}`],
-                    payload: async (action, state, res) => ({ data: await res.json() })
-                },
-                {
-                    type: sharedActionTypes.FETCH_ERROR,
-                    payload: (action, state, res) =>
-                        res ? `Error - ${res.status} ${res.statusText}` : `Network request failed`
-                }
+                rsaaTypes.requested(actionTypes, actionTypeRoot),
+                rsaaTypes.received(actionTypes, actionTypeRoot, itemName),
+                rsaaTypes.error(actionTypes, actionTypeRoot, itemName)
             ]
         }
     });
@@ -63,19 +43,9 @@ export default function UpdateApiActions(actionTypeRoot, uri, actionTypes, appRo
                 Accept: 'application/json'
             },
             types: [
-                {
-                    type: actionTypes[`REQUEST_${actionTypeRoot}`],
-                    payload: {}
-                },
-                {
-                    type: actionTypes[`RECEIVE_${actionTypeRoot}`],
-                    payload: async (action, state, res) => ({ data: await res.json() })
-                },
-                {
-                    type: sharedActionTypes.FETCH_ERROR,
-                    payload: (action, state, res) =>
-                        res ? `Error - ${res.status} ${res.statusText}` : `Network request failed`
-                }
+                rsaaTypes.requested(actionTypes, actionTypeRoot),
+                rsaaTypes.received(actionTypes, actionTypeRoot, itemName),
+                rsaaTypes.error(actionTypes, actionTypeRoot, itemName)
             ]
         }
     });
@@ -91,27 +61,9 @@ export default function UpdateApiActions(actionTypeRoot, uri, actionTypes, appRo
             },
             body: JSON.stringify(item),
             types: [
-                {
-                    type: actionTypes[`REQUEST_ADD_${actionTypeRoot}`],
-                    payload: {}
-                },
-                {
-                    type: actionTypes[`RECEIVE_NEW_${actionTypeRoot}`],
-                    payload: async (action, state, res) => ({ data: await res.json() })
-                },
-                {
-                    type: sharedActionTypes.FETCH_ERROR,
-                    payload: async (action, state, res) =>
-                        res
-                            ? {
-                                  error: {
-                                      status: res.status,
-                                      statusText: `Error - ${res.status} ${res.statusText}`,
-                                      details: await res.json()
-                                  }
-                              }
-                            : `Network request failed`
-                }
+                rsaaTypes.requestAdd(actionTypes, actionTypeRoot),
+                rsaaTypes.receiveAdded(actionTypes, actionTypeRoot, itemName),
+                rsaaTypes.error(actionTypes, actionTypeRoot, itemName)
             ]
         }
     });
@@ -127,27 +79,9 @@ export default function UpdateApiActions(actionTypeRoot, uri, actionTypes, appRo
             },
             body: JSON.stringify(item),
             types: [
-                {
-                    type: actionTypes[`REQUEST_UPDATE_${actionTypeRoot}`],
-                    payload: {}
-                },
-                {
-                    type: actionTypes[`RECEIVE_UPDATED_${actionTypeRoot}`],
-                    payload: async (action, state, res) => ({ data: await res.json() })
-                },
-                {
-                    type: sharedActionTypes.FETCH_ERROR,
-                    payload: async (action, state, res) =>
-                        res
-                            ? {
-                                  error: {
-                                      status: res.status,
-                                      statusText: `Error - ${res.status} ${res.statusText}`,
-                                      details: await res.json()
-                                  }
-                              }
-                            : `Network request failed`
-                }
+                rsaaTypes.requestUpdate(actionTypes, actionTypeRoot),
+                rsaaTypes.receiveUpdated(actionTypes, actionTypeRoot, itemName),
+                rsaaTypes.error(actionTypes, actionTypeRoot, itemName)
             ]
         }
     });
@@ -160,6 +94,21 @@ export default function UpdateApiActions(actionTypeRoot, uri, actionTypes, appRo
     this.setEditStatus = editStatus => ({
         type: actionTypes[`SET_${actionTypeRoot}_EDIT_STATUS`],
         payload: editStatus
+    });
+
+    this.clearSearch = () => ({
+        type: actionTypes.clearSearch,
+        payload: {}
+    });
+
+    this.clearErrors = () => ({
+        type: actionTypes.clearErrors,
+        payload: {}
+    });
+
+    this.clearErrorsForItem = () => ({
+        type: actionTypes[`CLEAR_${actionTypeRoot}_ERRORS`],
+        payload: { item: itemName }
     });
 
     this.create = () => ({

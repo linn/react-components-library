@@ -1,77 +1,143 @@
 ﻿import deepFreeze from 'deep-freeze';
-import fetchError from '../fetchErrorReducer';
+import fetchErrorReducer from '../fetchErrorReducer';
 import * as actionTypes from '../../actions';
 
-describe('fetch error reducer', () => {
-    test('when full error received', () => {
-        const state = null;
+const itemTypes = {
+    itemOne: {
+        actionType: 'ITEM_ONE'
+    }
+};
+
+describe('when a fetch error action is dispatched', () => {
+    test('error is added to itemError array in store', () => {
+        const state = { itemErrors: [], requestErrors: [] };
 
         const action = {
-            type: actionTypes.FETCH_ERROR,
+            type: 'FETCH_ITEM_ONE_ERROR',
             payload: {
                 error: {
-                    status: 400,
-                    statusText: '400 Bad Request',
-                    details: { errors: ['Error 1', 'Error 2'] }
+                    item: 'itemOne',
+                    status: 404,
+                    statusText: '400 - NOT fOUND',
+                    details: { message: 'not found' }
                 }
             }
         };
 
         const expected = {
-            status: 400,
-            statusText: '400 Bad Request',
-            errors: ['Error 1', 'Error 2']
-        };
-
-        expect(fetchError(state, action)).toEqual(expected);
-    });
-
-    test('when other action received', () => {
-        const state = {
-            status: 400,
-            statusText: '400 Bad Request',
-            errors: ['Error 1', 'Error 2']
-        };
-
-        const action = {
-            type: 'REQUEST_ADD_CARTON_TYPE',
-            payload: {}
+            itemErrors: [
+                {
+                    status: 404,
+                    statusText: '400 - NOT fOUND',
+                    details: { message: 'not found' },
+                    item: 'itemOne'
+                }
+            ],
+            requestErrors: []
         };
 
         deepFreeze(state);
-
-        const expected = null;
-
-        expect(fetchError(state, action)).toEqual(expected);
+        const generatedReducer = fetchErrorReducer(itemTypes, state, action);
+        expect(generatedReducer(state, action)).toEqual(expected);
     });
+});
 
-    test('when partial error received', () => {
-        const state = null;
+describe('when a request action errors', () => {
+    test('error is added to requestError array in store', () => {
+        const state = { itemErrors: [], requestErrors: [] };
 
         const action = {
-            type: actionTypes.FETCH_ERROR,
-            payload: 'Network failure'
-        };
-
-        const expected = {
-            statusText: 'Network failure'
-        };
-
-        expect(fetchError(state, action)).toEqual(expected);
-    });
-
-    test('when request fails', () => {
-        const state = null;
-
-        const action = {
+            type: 'REQUEST_ITEM',
             error: true,
-            type: 'SOME_RANDOM_REQUEST'
+            payload: { name: 'RequestError', message: 'Failed to fetch' }
         };
 
         const expected = {
-            statusText: 'There was an issue contacting the server, please try again later...'
+            itemErrors: [],
+            requestErrors: [
+                { name: 'RequestError', message: 'Failed to fetch', type: 'REQUEST_ITEM' }
+            ]
         };
 
-        expect(fetchError(state, action)).toEqual(expected);
+        deepFreeze(state);
+        const generatedReducer = fetchErrorReducer(itemTypes, state, action);
+        expect(generatedReducer(state, action)).toEqual(expected);
+    });
+});
+
+describe('when a clear item errors action is dispatched', () => {
+    test('errors for that item are removed from the error array in store', () => {
+        const state = {
+            itemErrors: [
+                {
+                    status: 404,
+                    statusText: '400 - NOT fOUND',
+                    details: { message: 'not found' },
+                    item: 'itemOne'
+                }
+            ],
+            requestErrors: []
+        };
+        const action = {
+            type: 'CLEAR_ITEM_ONE_ERRORS',
+            payload: { item: 'itemOne' }
+        };
+        deepFreeze(state);
+        const expected = { itemErrors: [], requestErrors: [] };
+        const generatedReducer = fetchErrorReducer(itemTypes, state, action);
+        expect(generatedReducer(state, action)).toEqual(expected);
+    });
+});
+
+describe('when clear all item errors action dispatched', () => {
+    test('itemError array is cleared', () => {
+        const state = {
+            itemErrors: [
+                {
+                    status: 404,
+                    statusText: '400 - NOT fOUND',
+                    details: { message: 'not found' },
+                    item: 'itemOne'
+                },
+                {
+                    status: 500,
+                    statusText: '500 - INTERNAL SERVER ERROR',
+                    details: { message: 'not found' },
+                    item: 'itemTwo'
+                }
+            ],
+            requestErrors: []
+        };
+        const action = {
+            type: actionTypes.CLEAR_ITEM_ERRORS
+        };
+        deepFreeze(state);
+        const expected = { itemErrors: [], requestErrors: [] };
+        const generatedReducer = fetchErrorReducer(itemTypes, state, action);
+        expect(generatedReducer(state, action)).toEqual(expected);
+    });
+});
+
+describe('when a succseful receive action is dispatched for an item that previously errored', () => {
+    test('errors for that item are removed from the error array in store', () => {
+        const state = {
+            itemErrors: [
+                {
+                    status: 404,
+                    statusText: '400 - NOT fOUND',
+                    details: { message: 'not found' },
+                    item: 'itemOne'
+                }
+            ],
+            requestErrors: []
+        };
+        const action = {
+            type: 'RECEIVE_ITEM_ONE',
+            payload: { item: 'itemOne', data: { id: 1 } }
+        };
+        deepFreeze(state);
+        const expected = { itemErrors: [], requestErrors: [] };
+        const generatedReducer = fetchErrorReducer(itemTypes, state, action);
+        expect(generatedReducer(state, action)).toEqual(expected);
     });
 });
