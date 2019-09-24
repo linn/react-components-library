@@ -50,7 +50,6 @@ export default [
             PaginationSelectors: 'src/selectors/PaginationSelectors.js',
             ItemSelectors: 'src/selectors/ItemSelectors.js',
             ReportSelectors: 'src/selectors/ReportSelectors.js',
-            fetchErrorSelectors: 'src/selectors/fetchErrorSelectors.js',
             collectionStoreFactory: 'src/reducers/reducerFactories/collectionStoreFactory.js',
             collectionWithLinksStoreFactory:
                 'src/reducers/reducerFactories/collectionWithLinksStoreFactory.js',
@@ -70,7 +69,7 @@ export default [
             getUsername: 'src/selectors/userSelectors.js',
             errorTheme: 'src/themes/errorTheme.js',
             linnTheme: 'src/themes/linnTheme.js',
-            fetchError: 'src/reducers/fetchErrorReducer.js'
+            fetchError: 'src/reducers/reducerfactories/fetchErrorReducerFactory.js'
         },
         plugins: [babel({ exclude: 'node_modules/**' }), terser()],
         output: [
