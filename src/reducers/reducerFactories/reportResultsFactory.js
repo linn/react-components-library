@@ -14,7 +14,11 @@
                     loading: false,
                     data: action.payload.data.reportResults[0]
                 };
-
+            case actionTypes[`FETCH_${itemRoot}_ERROR`]:
+                return {
+                    ...state,
+                    loading: false
+                };
             default:
                 return state;
         }
