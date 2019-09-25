@@ -4,7 +4,6 @@ const receiveTypes = root => [`RECEIVE_${root}`, `RECEIVE_NEW_${root}`, `RECEIVE
 
 function fetchErrorReducerFactory(itemTypes, defaultState = { requestErrors: [], itemErrors: [] }) {
     return (state = defaultState, action) => {
-        console.info(JSON.stringify(action));
         // news and menu errors handling is straightforward, doesn't depend on the itemType
         if (
             action.type === actionTypes.FETCH_MENU_ERROR &&

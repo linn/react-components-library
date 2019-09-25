@@ -1,5 +1,6 @@
 ﻿export default function(itemRoot, actionTypes, defaultState = { loading: false, data: null }) {
     return (state = defaultState, action) => {
+        console.log(itemRoot);
         switch (action.type) {
             case actionTypes[`REQUEST_${itemRoot}_REPORT`]:
                 return {
@@ -14,7 +15,7 @@
                     loading: false,
                     data: action.payload.data.reportResults[0]
                 };
-            case actionTypes[`FETCH_${itemRoot}_ERROR`]:
+            case actionTypes[`FETCH_${itemRoot}_REPORT_ERROR`]:
                 return {
                     ...state,
                     loading: false

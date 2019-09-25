@@ -21,11 +21,23 @@ export default function ReportActions(reportName, actionTypeRoot, uri, actionTyp
                 {
                     type: actionTypes[`RECEIVE_${actionTypeRoot}_REPORT`],
                     payload: async (action, state, res) => ({
-                        data: await res.json(),
-                        item: reportName
+                        data: await res.json()
                     })
                 },
-                rsaaTypes.error(actionTypes, actionTypeRoot, reportName)
+                {
+                    type: actionTypes[`FETCH_${actionTypeRoot}_REPORT_ERROR`],
+                    payload: async (action, state, res) =>
+                        res
+                            ? {
+                                  error: {
+                                      status: res.status,
+                                      statusText: `Error - ${res.status} ${res.statusText}`,
+                                      details: await res.json(),
+                                      item: reportName
+                                  }
+                              }
+                            : `Network request failed`
+                }
             ]
         }
     });
