@@ -4,6 +4,21 @@ const receiveTypes = root => [`RECEIVE_${root}`, `RECEIVE_NEW_${root}`, `RECEIVE
 
 function fetchErrorReducerFactory(itemTypes, defaultState = { requestErrors: [], itemErrors: [] }) {
     return (state = defaultState, action) => {
+        console.info(JSON.stringify(action));
+        // news and menu errors handling is straightforward, doesn't depend on the itemType
+        if (
+            action.type === actionTypes.FETCH_MENU_ERROR &&
+            action.type === actionTypes.FETCH_NEWS_ERROR
+        ) {
+            return { ...state, itemErrors: [...state.itemErrors, action.payload.error] };
+        }
+        if (action.type === actionTypes.RECEIVE_MENU) {
+            return { ...state, itemErrors: state.itemErrors.filter(e => e.item !== 'menu') };
+        }
+        if (action.type === actionTypes.RECEIVE_NEWS) {
+            return { ...state, itemErrors: state.itemErrors.filter(e => e.item !== 'news') };
+        }
+
         if (action.payload) {
             // Add error to itemErrors array in store when a FETCH_ERROR action occurs
             if (
@@ -14,7 +29,7 @@ function fetchErrorReducerFactory(itemTypes, defaultState = { requestErrors: [],
                 return { ...state, itemErrors: [...state.itemErrors, action.payload.error] };
             }
 
-            // Clear remove itemError from array when a success action of any kind occurs for that item
+            // Clear itemError from array when a success action of any kind occurs for that item
             if (action.payload.item && itemTypes[action.payload.item]) {
                 const itemType = itemTypes[action.payload.item];
                 if (receiveTypes(itemType.actionType).indexOf(action.type) > -1) {

@@ -16,11 +16,14 @@ export default function ReportActions(reportName, actionTypeRoot, uri, actionTyp
             types: [
                 {
                     type: actionTypes[`REQUEST_${actionTypeRoot}_REPORT`],
-                    payload: { options }
+                    payload: { options, item: reportName }
                 },
                 {
                     type: actionTypes[`RECEIVE_${actionTypeRoot}_REPORT`],
-                    payload: async (action, state, res) => ({ data: await res.json() })
+                    payload: async (action, state, res) => ({
+                        data: await res.json(),
+                        item: reportName
+                    })
                 },
                 rsaaTypes.error(actionTypes, actionTypeRoot, reportName)
             ]

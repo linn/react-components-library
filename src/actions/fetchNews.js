@@ -1,5 +1,6 @@
 import { RSAA } from 'redux-api-middleware';
 import * as actionTypes from './index';
+import * as rsaaTypes from './rsaaTypes';
 
 const fetchNews = (state, root) => ({
     [RSAA]: {
@@ -18,11 +19,7 @@ const fetchNews = (state, root) => ({
                 type: actionTypes.RECEIVE_NEWS,
                 payload: async (action, state, res) => ({ news: await res.json(), item: 'news' })
             },
-            {
-                type: actionTypes.FETCH_ERROR,
-                payload: (action, state, res) =>
-                    res ? `Report - ${res.status} ${res.statusText}` : `Network request failed`
-            }
+            rsaaTypes.error(actionTypes, 'NEWS', 'news')
         ]
     }
 });
