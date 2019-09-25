@@ -9,3 +9,10 @@ export const FETCH_MENU_ERROR = 'FFTCH_MENU_ERROR';
 export const MARK_NOTIFICATION_SEEN = 'MARK_NOTIFICATION_SEEN';
 
 export const CLEAR_ITEM_ERRORS = 'CLEAR_ITEM_ERRORS';
+
+export const receiveTypes = root => [
+    `RECEIVE_${root}`,
+    `RECEIVE_${root}_REPORT`,
+    `RECEIVE_NEW_${root}`,
+    `RECEIVE_UPDATED_${root}`
+];

@@ -1,6 +1,5 @@
 ﻿import { RSAA } from 'redux-api-middleware';
 import queryString from 'query-string';
-import * as rsaaTypes from './rsaaTypes';
 
 export default function ReportActions(reportName, actionTypeRoot, uri, actionTypes, appRoot) {
     this.fetchReport = options => ({
