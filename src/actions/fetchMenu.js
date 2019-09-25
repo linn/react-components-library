@@ -19,7 +19,7 @@ const fetchMenu = (state, root) => ({
                 payload: async (action, state, res) => ({ menu: await res.json(), item: 'menu' })
             },
             {
-                type: actionTypes.FETCH_MENU_ERROR,
+                type: actionTypes.FETCH_ERROR,
                 payload: (action, state, res) =>
                     res ? `Report - ${res.status} ${res.statusText}` : `Network request failed`
             }

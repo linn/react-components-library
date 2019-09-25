@@ -19,7 +19,11 @@ const fetchNews = (state, root) => ({
                 type: actionTypes.RECEIVE_NEWS,
                 payload: async (action, state, res) => ({ news: await res.json(), item: 'news' })
             },
-            rsaaTypes.error(actionTypes, 'NEWS', 'news')
+            {
+                type: actionTypes.FETCH_ERROR,
+                payload: (action, state, res) =>
+                    res ? `Report - ${res.status} ${res.statusText}` : `Network request failed`
+            }
         ]
     }
 });

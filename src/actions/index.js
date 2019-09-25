@@ -10,6 +10,8 @@ export const MARK_NOTIFICATION_SEEN = 'MARK_NOTIFICATION_SEEN';
 
 export const CLEAR_ITEM_ERRORS = 'CLEAR_ITEM_ERRORS';
 
+export const FETCH_ERROR = 'FETCH_ERROR';
+
 export const receiveTypes = root => [
     `RECEIVE_${root}`,
     `RECEIVE_${root}_REPORT`,
