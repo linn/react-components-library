@@ -1,5 +1,5 @@
 ﻿import deepFreeze from 'deep-freeze';
-import fetchErrorReducer from '../fetchErrorReducer';
+import fetchErrorReducerFactory from '../reducerFactories/fetchErrorReducerFactory';
 import * as actionTypes from '../../actions';
 
 const itemTypes = {
@@ -37,7 +37,7 @@ describe('when a fetch error action is dispatched', () => {
         };
 
         deepFreeze(state);
-        const generatedReducer = fetchErrorReducer(itemTypes, state, action);
+        const generatedReducer = fetchErrorReducerFactory(itemTypes, state, action);
         expect(generatedReducer(state, action)).toEqual(expected);
     });
 });
@@ -60,7 +60,7 @@ describe('when a request action errors', () => {
         };
 
         deepFreeze(state);
-        const generatedReducer = fetchErrorReducer(itemTypes, state, action);
+        const generatedReducer = fetchErrorReducerFactory(itemTypes, state, action);
         expect(generatedReducer(state, action)).toEqual(expected);
     });
 });
@@ -84,7 +84,7 @@ describe('when a clear item errors action is dispatched', () => {
         };
         deepFreeze(state);
         const expected = { itemErrors: [], requestErrors: [] };
-        const generatedReducer = fetchErrorReducer(itemTypes, state, action);
+        const generatedReducer = fetchErrorReducerFactory(itemTypes, state, action);
         expect(generatedReducer(state, action)).toEqual(expected);
     });
 });
@@ -113,7 +113,7 @@ describe('when clear all item errors action dispatched', () => {
         };
         deepFreeze(state);
         const expected = { itemErrors: [], requestErrors: [] };
-        const generatedReducer = fetchErrorReducer(itemTypes, state, action);
+        const generatedReducer = fetchErrorReducerFactory(itemTypes, state, action);
         expect(generatedReducer(state, action)).toEqual(expected);
     });
 });
@@ -137,7 +137,7 @@ describe('when a succseful receive action is dispatched for an item that previou
         };
         deepFreeze(state);
         const expected = { itemErrors: [], requestErrors: [] };
-        const generatedReducer = fetchErrorReducer(itemTypes, state, action);
+        const generatedReducer = fetchErrorReducerFactory(itemTypes, state, action);
         expect(generatedReducer(state, action)).toEqual(expected);
     });
 });

@@ -44,7 +44,7 @@ import paginationStoreFactory from './src/reducers/reducerFactories/paginationSt
 import reportOptionsFactory from './src/reducers/reducerFactories/reportOptionsFactory';
 import reportResultsFactory from './src/reducers/reducerFactories/reportResultsFactory';
 import reportsResultsFactory from './src/reducers/reducerFactories/reportsResultsFactory';
-import fetchErrorReducer from './src/reducers/fetchErrorReducer';
+import fetchErrorReducerFactory from './src/reducers/reducerFactories/fetchErrorReducerFactory';
 import menu from './src/reducers/menu';
 import news from './src/reducers/news';
 import menuSelectors from './src/selectors/menuSelectors';
@@ -97,7 +97,7 @@ export {
     PaginationSelectors,
     ItemSelectors,
     ReportSelectors,
-    fetchErrorReducer,
+    fetchErrorReducerFactory as fetchErrorReducer,
     collectionStoreFactory,
     collectionWithLinksStoreFactory,
     itemStoreFactory,
