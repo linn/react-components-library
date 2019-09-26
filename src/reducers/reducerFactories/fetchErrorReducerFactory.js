@@ -40,14 +40,6 @@ function fetchErrorReducerFactory(itemTypes, defaultState = { requestErrors: [],
                         itemErrors: state.itemErrors.filter(e => e.item !== action.payload.item)
                     };
                 }
-
-                // the reports case
-                if (action.type === `CLEAR_${itemType.actionType}_REPORT_ERRORS`) {
-                    return {
-                        ...state,
-                        itemErrors: state.itemErrors.filter(e => e.item !== action.payload.item)
-                    };
-                }
             }
         }
 

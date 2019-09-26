@@ -38,6 +38,11 @@ export const requestSearch = (actionTypes, actionTypeRoot) => ({
     payload: {}
 });
 
+export const requestReport = (actionTypes, actionTypeRoot, options) => ({
+    type: actionTypes[`REQUEST_${actionTypeRoot}`],
+    payload: { options }
+});
+
 export const receiveSearch = (actionTypes, actionTypeRoot, itemName) => ({
     type: actionTypes[`RECEIVE_SEARCH_${actionTypeRoot}`],
     payload: successPayload(itemName)

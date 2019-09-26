@@ -12,7 +12,6 @@ export const FETCH_ERROR = 'FETCH_ERROR';
 
 export const receiveTypes = root => [
     `RECEIVE_${root}`,
-    `RECEIVE_${root}_REPORT`,
     `RECEIVE_NEW_${root}`,
     `RECEIVE_UPDATED_${root}`
 ];
