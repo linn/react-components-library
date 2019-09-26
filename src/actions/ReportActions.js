@@ -15,12 +15,13 @@ export default function ReportActions(reportName, actionTypeRoot, uri, actionTyp
             types: [
                 {
                     type: actionTypes[`REQUEST_${actionTypeRoot}_REPORT`],
-                    payload: { options, item: reportName }
+                    payload: { options }
                 },
                 {
                     type: actionTypes[`RECEIVE_${actionTypeRoot}_REPORT`],
                     payload: async (action, state, res) => ({
-                        data: await res.json()
+                        data: await res.json(),
+                        item: reportName
                     })
                 },
                 {
