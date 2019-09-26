@@ -65,6 +65,31 @@ describe('when a request action errors', () => {
     });
 });
 
+describe('when a previously errored request action succeeds', () => {
+    test('error should be removed from requestErrors', () => {
+        const state = {
+            itemErrors: [],
+            requestErrors: [
+                { name: 'RequestError', message: 'Failed to fetch', type: 'REQUEST_ITEM' }
+            ]
+        };
+
+        const action = {
+            type: 'REQUEST_ITEM',
+            payload: { data: 'something' }
+        };
+
+        const expected = {
+            itemErrors: [],
+            requestErrors: []
+        };
+
+        deepFreeze(state);
+        const generatedReducer = fetchErrorReducerFactory(itemTypes, state, action);
+        expect(generatedReducer(state, action)).toEqual(expected);
+    });
+});
+
 describe('when a clear item errors action is dispatched', () => {
     test('errors for that item are removed from the error array in store', () => {
         const state = {
