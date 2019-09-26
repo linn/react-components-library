@@ -40,6 +40,14 @@ function fetchErrorReducerFactory(itemTypes, defaultState = { requestErrors: [],
                         itemErrors: state.itemErrors.filter(e => e.item !== action.payload.item)
                     };
                 }
+
+                // the reports case
+                if (action.type === `CLEAR_${itemType.actionType}_REPORT_ERRORS`) {
+                    return {
+                        ...state,
+                        itemErrors: state.itemErrors.filter(e => e.item !== action.payload.item)
+                    };
+                }
             }
         }
 
@@ -57,7 +65,7 @@ function fetchErrorReducerFactory(itemTypes, defaultState = { requestErrors: [],
             };
         }
 
-        // remove request Error if the action the caused it is successful this time
+        // remove request for an action that previously errored if it succeeds this time round
         if (!action.error) {
             return {
                 ...state,

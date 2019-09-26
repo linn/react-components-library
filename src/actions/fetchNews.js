@@ -1,6 +1,5 @@
 import { RSAA } from 'redux-api-middleware';
 import * as actionTypes from './index';
-import * as rsaaTypes from './rsaaTypes';
 
 const fetchNews = (state, root) => ({
     [RSAA]: {
