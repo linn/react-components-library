@@ -13,16 +13,6 @@ function fetchErrorReducerFactory(itemTypes, defaultState = { requestErrors: [],
                 return { ...state, itemErrors: [...state.itemErrors, action.payload.error] };
             }
 
-            // the reports case
-            if (
-                action.payload.error &&
-                itemTypes[action.payload.error.item] &&
-                action.type ===
-                    `FETCH_${itemTypes[action.payload.error.item].actionType}_REPORT_ERROR`
-            ) {
-                return { ...state, itemErrors: [...state.itemErrors, action.payload.error] };
-            }
-
             // Clear itemError from array when a success action of any kind occurs for that item
             if (action.payload.item && itemTypes[action.payload.item]) {
                 const itemType = itemTypes[action.payload.item];
