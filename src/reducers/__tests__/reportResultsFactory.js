@@ -8,7 +8,7 @@ describe('reports results reducer factory', () => {
     };
     const defaultState = { loading: false, data: null };
 
-    const generatedReducer = reportResultsFactory('ENTITIES', actionTypes, defaultState);
+    const generatedReducer = reportResultsFactory('ENTITIES_REPORT', actionTypes, defaultState);
 
     test('when requesting report', () => {
         const state = {

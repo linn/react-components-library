@@ -1,8 +1,8 @@
 ﻿import { RSAA } from 'redux-api-middleware';
 import queryString from 'query-string';
-import * as sharedActionTypes from './index';
+import * as rsaaTypes from './rsaaTypes';
 
-export default function ReportActions(actionTypeRoot, uri, actionTypes, appRoot) {
+export default function ReportActions(reportName, actionTypeRoot, uri, actionTypes, appRoot) {
     this.fetchReport = options => ({
         [RSAA]: {
             endpoint: options
@@ -14,19 +14,9 @@ export default function ReportActions(actionTypeRoot, uri, actionTypes, appRoot)
                 Accept: 'application/json'
             },
             types: [
-                {
-                    type: actionTypes[`REQUEST_${actionTypeRoot}_REPORT`],
-                    payload: { options }
-                },
-                {
-                    type: actionTypes[`RECEIVE_${actionTypeRoot}_REPORT`],
-                    payload: async (action, state, res) => ({ data: await res.json() })
-                },
-                {
-                    type: sharedActionTypes.FETCH_ERROR,
-                    payload: (action, state, res) =>
-                        res ? `Report - ${res.status} ${res.statusText}` : `Network request failed`
-                }
+                rsaaTypes.requestReport(actionTypes, actionTypeRoot, options),
+                rsaaTypes.received(actionTypes, actionTypeRoot, reportName),
+                rsaaTypes.error(actionTypes, actionTypeRoot, reportName)
             ]
         }
     });

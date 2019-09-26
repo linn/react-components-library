@@ -1,9 +1,8 @@
 import * as actionTypes from '../../actions/index';
 
-const receiveTypes = root => [`RECEIVE_${root}`, `RECEIVE_NEW_${root}`, `RECEIVE_UPDATED_${root}`];
-
 function fetchErrorReducerFactory(itemTypes, defaultState = { requestErrors: [], itemErrors: [] }) {
     return (state = defaultState, action) => {
+        // news and menu errors handling is straightforward, doesn't depend on the itemType
         if (action.payload) {
             // Add error to itemErrors array in store when a FETCH_ERROR action occurs
             if (
@@ -14,10 +13,10 @@ function fetchErrorReducerFactory(itemTypes, defaultState = { requestErrors: [],
                 return { ...state, itemErrors: [...state.itemErrors, action.payload.error] };
             }
 
-            // Clear remove itemError from array when a success action of any kind occurs for that item
+            // Clear itemError from array when a success action of any kind occurs for that item
             if (action.payload.item && itemTypes[action.payload.item]) {
                 const itemType = itemTypes[action.payload.item];
-                if (receiveTypes(itemType.actionType).indexOf(action.type) > -1) {
+                if (actionTypes.receiveTypes(itemType.actionType).indexOf(action.type) > -1) {
                     return {
                         ...state,
                         itemErrors: state.itemErrors.filter(e => e.item !== action.payload.item)
@@ -47,6 +46,15 @@ function fetchErrorReducerFactory(itemTypes, defaultState = { requestErrors: [],
                 requestErrors: [...state.requestErrors, { ...action.payload, type: action.type }]
             };
         }
+
+        // remove request for an action that previously errored if it succeeds this time round
+        if (!action.error) {
+            return {
+                ...state,
+                requestErrors: state.requestErrors.filter(e => e.type !== action.type)
+            };
+        }
+
         return state;
     };
 }
