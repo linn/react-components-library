@@ -23,4 +23,5 @@ export const getItemError = (state, item) => {
     return errors.itemErrors.find(i => i.item && i.item === item) || null;
 };
 
-export const getItemErrorDetailMessage = (state, item) => getItemError(state, item)?.details?.errors[0];
+export const getItemErrorDetailMessage = (state, item) =>
+    getItemError(state, item)?.details?.errors[0] || null;

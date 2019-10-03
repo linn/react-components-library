@@ -86,27 +86,49 @@ describe('when  no itemErrors', () => {
 });
 
 describe('when getting item error description', () => {
-    const errorMessage = 'Production Trigger Level code not found for part CAB 053 MPL/1';
-
-    const itemType = 'worksOrderDetails';
-
-    const state = {
-        errors: {
-            requestErrors: [],
-            itemErrors: [
-                {
-                    status: 400,
-                    statusText: 'Error - 400 bad request',
-                    details: {
-                        errors: [errorMessage]
-                    },
-                    item: itemType
-                }
-            ]
-        }
-    };
-
     it('should return error message', () => {
+        const errorMessage = 'Production Trigger Level code not found for part CAB 053 MPL/1';
+
+        const itemType = 'worksOrderDetails';
+
+        const state = {
+            errors: {
+                requestErrors: [],
+                itemErrors: [
+                    {
+                        status: 400,
+                        statusText: 'Error - 400 bad request',
+                        details: {
+                            errors: [errorMessage]
+                        },
+                        item: itemType
+                    }
+                ]
+            }
+        };
+
         expect(getItemErrorDetailMessage(state, itemType)).toEqual(errorMessage);
+    });
+
+    it('should return null if no message', () => {
+        const itemType = 'worksOrderDetails';
+
+        const state = {
+            errors: {
+                requestErrors: [],
+                itemErrors: [
+                    {
+                        status: 400,
+                        statusText: 'Error - 400 bad request',
+                        details: {
+                            errors: []
+                        },
+                        item: itemType
+                    }
+                ]
+            }
+        };
+
+        expect(getItemErrorDetailMessage(state, itemType)).toEqual(null);
     });
 });
