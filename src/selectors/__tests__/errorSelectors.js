@@ -1,4 +1,9 @@
-import { getRequestErrors, getItemErrors, getItemError } from '../errorSelectors';
+import {
+    getRequestErrors,
+    getItemErrors,
+    getItemError,
+    getItemErrorDetailMessage
+} from '../errorSelectors';
 
 const requestErrors = [
     {
@@ -77,5 +82,31 @@ describe('when  no itemErrors', () => {
     test('should return null', () => {
         expect(getItemError(state, 'itemA')).toEqual(null);
         expect(getItemErrors(state)).toEqual(null);
+    });
+});
+
+describe('when getting item error description', () => {
+    const errorMessage = 'Production Trigger Level code not found for part CAB 053 MPL/1';
+
+    const itemType = 'worksOrderDetails';
+
+    const state = {
+        errors: {
+            requestErrors: [],
+            itemErrors: [
+                {
+                    status: 400,
+                    statusText: 'Error - 400 bad request',
+                    details: {
+                        errors: [errorMessage]
+                    },
+                    item: itemType
+                }
+            ]
+        }
+    };
+
+    it('should return error message', () => {
+        expect(getItemErrorDetailMessage(state, itemType)).toEqual(errorMessage);
     });
 });
