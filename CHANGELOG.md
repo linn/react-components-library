@@ -15,12 +15,25 @@
 ## [7.0.0] - 2019-09-26
 ### Added
 - Report errors
-- TODO add steps to update here + maybe an example?
+    - Report actions must add their item type as the first prop 
+    ```export default new ReportActions(
+    reportTypes.whoBuiltWhat.item,
+    reportTypes.whoBuiltWhatDetails.actionType,
+    reportTypes.whoBuiltWhatDetails.uri,
+    actionTypes,
+    config.appRoot);```
 
 ## [6.0.0] - 2019-09-23
 ### Added
 - New error style
-- TODO add steps to update here + maybe an example?
+    - Actions must add their item type as the first prop 
+    ```export default new FetchApiActions(
+    itemTypes.cits.item,
+    itemTypes.cits.actionType,
+    itemTypes.cits.uri,
+    actionTypes,
+    config.appRoot
+    );```
 
 ### Changed
 - action types to shared rsaa types
