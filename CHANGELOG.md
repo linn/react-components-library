@@ -24,14 +24,15 @@
 
 -   Report errors
     -   Report actions must add their item type as the first prop
-    ````
+    ```
     export default new ReportActions(
-    reportTypes.whoBuiltWhat.item,
-    reportTypes.whoBuiltWhatDetails.actionType,
-    reportTypes.whoBuiltWhatDetails.uri,
-    actionTypes,
-    config.appRoot);
-    ````
+        reportTypes.whoBuiltWhat.item,
+        reportTypes.whoBuiltWhatDetails.actionType,
+        reportTypes.whoBuiltWhatDetails.uri,
+        actionTypes,
+        config.appRoot
+    );
+    ```
 
 ## [6.0.0] - 2019-09-23
 
@@ -39,15 +40,15 @@
 
 -   New error style
     -   Actions must add their item type as the first prop
-    ````
+    ```
     export default new FetchApiActions(
-    itemTypes.cits.item,
-    itemTypes.cits.actionType,
-    itemTypes.cits.uri,
-    actionTypes,
-    config.appRoot
+        itemTypes.cits.item,
+        itemTypes.cits.actionType,
+        itemTypes.cits.uri,
+        actionTypes,
+        config.appRoot
     );
-    ````
+    ```
 
 ### Changed
 
