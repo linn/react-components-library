@@ -63,6 +63,11 @@
 ### Changed
 
 -   Utilites functions exported from utilites file
-    -   All imports must be updated `import { getHref } from '@linn/react-components-library'` should now be `import { utilites } from '@linn/react-components-library'` and used as `utilities.getHref(item)`
+    -   All imports must be updated
+        `import { getHref } from '@linn/react-components-library'`
+        should now be
+        `import { utilites } from '@linn/react-components-library'`
+        and used as
+        `utilities.getHref(item)`
 -   Rollup config
 -   Bundle splitting
