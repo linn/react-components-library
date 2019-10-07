@@ -30,8 +30,7 @@ const defaultProps = {
 const stories = storiesOf('ReportTable', module);
 stories.addDecorator(story => <Page {...pageProps}>{story()}</Page>);
 stories.addDecorator(withKnobs);
-stories.addDecorator(StoryRouter())
-.addDecorator(story => providers(story));
+stories.addDecorator(StoryRouter()).addDecorator(story => providers(story));
 
 stories.add('With Knobs', () => (
     <ReportTable

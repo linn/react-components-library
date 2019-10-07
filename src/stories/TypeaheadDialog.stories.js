@@ -2,6 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import StoryRouter from 'storybook-react-router';
 import { withKnobs, text, boolean, array } from '@storybook/addon-knobs';
+import providers from './renderUtils/Providers';
 
 import TypeaheadDialog from '../components/TypeaheadDialog';
 
@@ -17,11 +18,11 @@ const clearSearch = () => {};
 
 const onSelect = () => {};
 
-storiesOf('Typeahead', module)
+storiesOf('TypeaheadDialog', module)
     .addDecorator(StoryRouter())
     .addDecorator(story => <div style={{ padding: '3rem', width: '100%' }}>{story()}</div>)
     .addDecorator(withKnobs)
-
+    .addDecorator(story => providers(story))
     .add('default ', () => (
         <TypeaheadDialog
             title={text('title', 'Title Text')}
