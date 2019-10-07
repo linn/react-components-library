@@ -6,10 +6,10 @@ import providers from './renderUtils/Providers';
 
 import ValidatedInputDialog from '../components/ValidatedInputDialog';
 
-const items = [
-    { id: '1', name: 'Item 1', href: '/1', description: 'Description of item 1' },
-    { id: '2', name: 'Item 2', href: '/2', description: 'Description of item 2' },
-    { id: '3', name: 'Item 3', href: '/3', description: 'Description of item 3' }
+const invalidSinceNoMatchingItemsFound = [];
+
+const validSinceOneMatchingItem = [
+    { id: '1', name: 'Item 1', href: '/1', description: 'Description of item 1' }
 ];
 
 const fetchItems = () => {};
@@ -23,12 +23,22 @@ storiesOf('ValidatedInputDialog', module)
     .addDecorator(story => <div style={{ padding: '3rem', width: '100%' }}>{story()}</div>)
     .addDecorator(withKnobs)
     .addDecorator(story => providers(story))
-    .add('default ', () => (
+    .add('When Invalid', () => (
         <ValidatedInputDialog
-            title={text('title', 'Title Text')}
+            title={text('title', 'In this case no matches are found')}
             loading={boolean('loading', false)}
             fetchItems={fetchItems}
-            searchItems={array('items', items)}
+            searchItems={array('items', invalidSinceNoMatchingItemsFound)}
+            clearSearch={clearSearch}
+            onAccept={onSelect}
+        />
+    ))
+    .add('When Valid', () => (
+        <ValidatedInputDialog
+            title={text('title', 'In this Case Matches are found')}
+            loading={boolean('loading', false)}
+            fetchItems={fetchItems}
+            searchItems={array('items', validSinceOneMatchingItem)}
             clearSearch={clearSearch}
             onAccept={onSelect}
         />
