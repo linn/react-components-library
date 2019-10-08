@@ -62,6 +62,7 @@ import {
 import { errorTheme, linnTheme } from './src/themes/index';
 import SelectedItemsList from './src/components/SelectedItemsList';
 import NotFound from './src/components/NotFound';
+import ValidatedInputDialog from './src/components/ValidatedInputDialog';
 
 const reducers = { menu, news };
 
@@ -129,5 +130,6 @@ export {
     getItemErrors,
     SelectedItemsList,
     NotFound,
-    getItemErrorDetailMessage
+    getItemErrorDetailMessage,
+    ValidatedInputDialog
 };

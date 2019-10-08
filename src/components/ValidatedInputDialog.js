@@ -11,7 +11,10 @@ import CloseIcon from '@material-ui/icons/Close';
 import DoneIcon from '@material-ui/icons/Done';
 import ThemeProvider from '@material-ui/styles/ThemeProvider';
 import { createMuiTheme } from '@material-ui/core/styles';
-import { InputField, useSearch, Loading, linnTheme } from '../../index';
+import InputField from './InputField';
+import useSearch from '../hooks/useSearch';
+import Loading from './Loading';
+import { linnTheme } from '../themes/linnTheme';
 
 const valid = createMuiTheme({
     palette: {
@@ -121,15 +124,17 @@ function ValidatedInputDialog({ title, loading, fetchItems, searchItems, clearSe
                                 </IconButton>
                             </ThemeProvider>
                         )}
-                        <IconButton
-                            aria-label="Close"
-                            onClick={() => {
-                                clearSearch();
-                                setSearchTerm('');
-                            }}
-                        >
-                            <CloseIcon />
-                        </IconButton>
+                        {searchTerm && (
+                            <IconButton
+                                aria-label="Close"
+                                onClick={() => {
+                                    clearSearch();
+                                    setSearchTerm('');
+                                }}
+                            >
+                                <CloseIcon />
+                            </IconButton>
+                        )}
                         {loading ? <Loading /> : <Fragment />}
                     </div>
                 </div>
