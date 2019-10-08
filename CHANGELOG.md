@@ -1,4 +1,9 @@
 # Changelog
+## [7.1.1] - 2019-10-07
+
+### Added
+
+-   ProcessActions, ProcessSelectors and processStoreFactory
 
 ## [7.2.0] - 2019-10-08
 

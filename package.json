@@ -40,7 +40,9 @@
         "@date-io/moment": "^1.3.9"
     },
     "jest": {
-        "setupTestFrameworkScriptFile": "./src/setupTests.js"
+        "setupFilesAfterEnv": [
+            "./src/setupTests.js"
+          ]
     },
     "eslintConfig": {
         "extends": "react-app",

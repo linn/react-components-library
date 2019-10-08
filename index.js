@@ -27,6 +27,7 @@ import TypeaheadDialog from './src/components/TypeaheadDialog';
 import makeActionTypes from './src/actions/makeActionTypes';
 import makeReportActionTypes from './src/actions/makeReportActionTypes';
 import FetchApiActions from './src/actions/FetchApiActions';
+import ProcessActions from './src/actions/ProcessActions';
 import ReportActions from './src/actions/ReportActions';
 import UpdateApiActions from './src/actions/UpdateApiActions';
 import fetchNews from './src/actions/fetchNews';
@@ -37,8 +38,10 @@ import CollectionSelectors from './src/selectors/CollectionSelectors';
 import PaginationSelectors from './src/selectors/PaginationSelectors';
 import ItemSelectors from './src/selectors/ItemSelectors';
 import ReportSelectors from './src/selectors/ReportSelectors';
+import ProcessSelectors from './src/selectors/ProcessSelectors';
 import collectionStoreFactory from './src/reducers/reducerFactories/collectionStoreFactory';
 import collectionWithLinksStoreFactory from './src/reducers/reducerFactories/collectionWithLinksStoreFactory';
+import processStoreFactory from './src/reducers/reducerFactories/processStoreFactory';
 import itemStoreFactory from './src/reducers/reducerFactories/itemStoreFactory';
 import paginationStoreFactory from './src/reducers/reducerFactories/paginationStoreFactory';
 import reportOptionsFactory from './src/reducers/reducerFactories/reportOptionsFactory';
@@ -96,6 +99,7 @@ export {
     makeActionTypes,
     makeReportActionTypes,
     FetchApiActions,
+    ProcessActions,
     ReportActions,
     UpdateApiActions,
     ItemType,
@@ -103,9 +107,11 @@ export {
     PaginationSelectors,
     ItemSelectors,
     ReportSelectors,
+    ProcessSelectors,
     fetchErrorReducerFactory as fetchErrorReducer,
     collectionStoreFactory,
     collectionWithLinksStoreFactory,
+    processStoreFactory,
     itemStoreFactory,
     paginationStoreFactory,
     reportOptionsFactory,
