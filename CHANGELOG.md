@@ -1,5 +1,15 @@
 # Changelog
 
+## [7.2.0] - 2019-10-08
+
+### Added
+
+-   New Component - ValidatedInputDialog
+
+### Changed
+
+- Fixed broken stories.
+
 ## [7.1.0] - 2019-10-04
 
 ### Added
