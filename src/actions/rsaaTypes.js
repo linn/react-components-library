@@ -33,6 +33,11 @@ export const receiveAdded = (actionTypes, actionTypeRoot, itemName) => ({
     payload: successPayload(itemName)
 });
 
+export const receivedProcess = (actionTypes, actionTypeRoot) => ({
+    type: actionTypes[`RECEIVE_${actionTypeRoot}`],
+    payload: {}
+});
+
 export const requestSearch = (actionTypes, actionTypeRoot) => ({
     type: actionTypes[`REQUEST_SEARCH_${actionTypeRoot}`],
     payload: {}
