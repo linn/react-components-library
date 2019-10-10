@@ -1,9 +1,9 @@
 # Changelog
-## [7.1.1] - 2019-10-07
+## [7.2.1] - 2019-10-10
 
 ### Added
 
--   ProcessActions, ProcessSelectors and processStoreFactory
+- Added makeProcessActionTypes and new rsaaType for process
 
 ## [7.2.0] - 2019-10-08
 
@@ -14,6 +14,12 @@
 ### Changed
 
 - Fixed broken stories.
+
+## [7.1.1] - 2019-10-07
+
+### Added
+
+-   ProcessActions, ProcessSelectors and processStoreFactory
 
 ## [7.1.0] - 2019-10-04
 

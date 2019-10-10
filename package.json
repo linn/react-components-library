@@ -1,6 +1,6 @@
 {
     "name": "@linn-it/linn-form-components-library",
-    "version": "7.2.0",
+    "version": "7.2.1",
     "private": false,
     "dependencies": {
         "@material-ui/core": "^4.1.0",

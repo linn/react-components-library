@@ -26,6 +26,7 @@ import InfiniteTable from './src/components/table/InfiniteTable';
 import TypeaheadDialog from './src/components/TypeaheadDialog';
 import makeActionTypes from './src/actions/makeActionTypes';
 import makeReportActionTypes from './src/actions/makeReportActionTypes';
+import makeProcessActionTypes from './src/actions/makeProcessActionTypes';
 import FetchApiActions from './src/actions/FetchApiActions';
 import ProcessActions from './src/actions/ProcessActions';
 import ReportActions from './src/actions/ReportActions';
@@ -98,6 +99,7 @@ export {
     TypeaheadDialog,
     makeActionTypes,
     makeReportActionTypes,
+    makeProcessActionTypes,
     FetchApiActions,
     ProcessActions,
     ReportActions,
