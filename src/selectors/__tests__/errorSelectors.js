@@ -86,7 +86,7 @@ describe('when  no itemErrors', () => {
 });
 
 describe('when getting item error description', () => {
-    it('should return error message', () => {
+    it('should returnfirst  error message when array of messages', () => {
         const errorMessage = 'Production Trigger Level code not found for part CAB 053 MPL/1';
 
         const itemType = 'worksOrderDetails';
@@ -130,5 +130,27 @@ describe('when getting item error description', () => {
         };
 
         expect(getItemErrorDetailMessage(state, itemType)).toEqual(null);
+    });
+
+    it('should return message if only one message', () => {
+        const itemType = 'worksOrderDetails';
+
+        const state = {
+            errors: {
+                requestErrors: [],
+                itemErrors: [
+                    {
+                        status: 400,
+                        statusText: 'Error - 400 bad request',
+                        details: {
+                            message: 'message'
+                        },
+                        item: itemType
+                    }
+                ]
+            }
+        };
+
+        expect(getItemErrorDetailMessage(state, itemType)).toEqual('message');
     });
 });
