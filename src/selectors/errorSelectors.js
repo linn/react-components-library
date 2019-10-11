@@ -24,4 +24,6 @@ export const getItemError = (state, item) => {
 };
 
 export const getItemErrorDetailMessage = (state, item) =>
-    getItemError(state, item)?.details?.errors[0] || null;
+    getItemError(state, item)?.details?.message ||
+    getItemError(state, item)?.details?.errors?.[0] ||
+    null;
