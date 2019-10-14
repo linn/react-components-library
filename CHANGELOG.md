@@ -3,7 +3,8 @@
 
 ### Changed
 
-- Changed initialiseOnMount to pass props into initialise when itemId not provided.
+-   Changed initialiseOnMount to pass props into initialise when itemId not provided.
+    Fixed broken reportOptionsFactory.
 ## [7.2.1] - 2019-10-10
 
 ### Added
