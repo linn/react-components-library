@@ -12,7 +12,9 @@
                 return {
                     ...state,
                     loading: false,
-                    data: action.payload.data.reportResults[0]
+                    data: action.payload.data.reportResults
+                        ? action.payload.data.reportResults[0]
+                        : action.payload.data
                 };
             case actionTypes[`FETCH_${reportRoot}_ERROR`]:
                 return {

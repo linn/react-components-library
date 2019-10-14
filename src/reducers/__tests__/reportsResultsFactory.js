@@ -1,5 +1,5 @@
 ﻿import deepFreeze from 'deep-freeze';
-import reportResultsFactory from '../reducerFactories/reportResultsFactory';
+import reportsResultsFactory from '../reducerFactories/reportsResultsFactory';
 
 describe('reports results reducer factory', () => {
     const actionTypes = {
@@ -8,7 +8,7 @@ describe('reports results reducer factory', () => {
     };
     const defaultState = { loading: false, data: null };
 
-    const generatedReducer = reportResultsFactory('ENTITIES_REPORT', actionTypes, defaultState);
+    const generatedReducer = reportsResultsFactory('ENTITIES_REPORT', actionTypes, defaultState);
 
     test('when requesting report', () => {
         const state = {
@@ -45,29 +45,7 @@ describe('reports results reducer factory', () => {
 
         const expected = {
             loading: false,
-            data: { thing: 'this' }
-        };
-
-        deepFreeze(state);
-
-        expect(generatedReducer(state, action)).toEqual(expected);
-    });
-
-    test('when receiving non standard report', () => {
-        const state = {
-            loading: true
-        };
-
-        const action = {
-            type: actionTypes.RECEIVE_ENTITIES_REPORT,
-            payload: {
-                data: { thing: ['this'] }
-            }
-        };
-
-        const expected = {
-            loading: false,
-            data: { thing: ['this'] }
+            data: [{ thing: 'this' }]
         };
 
         deepFreeze(state);

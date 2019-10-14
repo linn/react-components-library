@@ -7,7 +7,7 @@ const initialiseOnMount = ComposedComponent =>
             if (initialise && itemId) {
                 initialise({ itemId });
             } else if (initialise) {
-                initialise();
+                initialise(props);
             }
         }, [initialise, itemId]);
 
