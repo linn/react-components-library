@@ -32,4 +32,9 @@ export default function ProcessActions(itemName, actionTypeRoot, uri, actionType
             payload: {}
         };
     };
+
+    this.clearErrorsForItem = () => ({
+        type: actionTypes[`CLEAR_${actionTypeRoot}_ERRORS`],
+        payload: { item: itemName }
+    });
 }

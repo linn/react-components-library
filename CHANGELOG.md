@@ -1,4 +1,9 @@
 # Changelog
+## [7.4.0] - 2019-10-10
+
+### Added
+
+-   Added clear error method to process actions.
 ## [7.3.0] - 2019-10-10
 
 ### Changed
