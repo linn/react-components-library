@@ -1,4 +1,7 @@
 # Changelog
+## [7.4.1]
+### Changed
+-   Added missing process action type 
 ## [7.4.0] - 2019-10-10
 
 ### Added
