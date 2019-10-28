@@ -28,6 +28,9 @@ const useStyles = makeStyles(() => ({
     },
     numberField: {
         textAlign: 'right'
+    },
+    noWrap: {
+        whiteSpace: 'nowrap'
     }
 }));
 
@@ -39,6 +42,7 @@ const setCellClasses = (
     varianceColumn,
     textColumn,
     totalColumn,
+    allowWrap,
     defaultClasses
 ) => {
     let generatedClasses = '';
@@ -48,6 +52,10 @@ const setCellClasses = (
 
     if (!textColumn && !textDisplayValue) {
         generatedClasses += `${classes.numberField} `;
+    }
+
+    if (!allowWrap) {
+        generatedClasses += `${classes.noWrap} `;
     }
 
     if (defaultClasses) {
@@ -131,7 +139,8 @@ const Results = ({
                                         item.rowType,
                                         reportData.headers.varianceColumns.includes(i),
                                         reportData.headers.textColumns.includes(i),
-                                        reportData.headers.totalColumns.includes(i)
+                                        reportData.headers.totalColumns.includes(i),
+                                        value.allowWrap
                                     )}
                                     key={i}
                                 >
@@ -156,7 +165,8 @@ const Results = ({
                                         'Total',
                                         reportData.headers.varianceColumns.includes(i),
                                         reportData.headers.textColumns.includes(i),
-                                        reportData.headers.totalColumns.includes(i)
+                                        reportData.headers.totalColumns.includes(i),
+                                        value.allowWrap
                                     )}
                                     key={i}
                                 >
