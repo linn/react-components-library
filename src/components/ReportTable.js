@@ -140,7 +140,7 @@ const Results = ({
                                         reportData.headers.varianceColumns.includes(i),
                                         reportData.headers.textColumns.includes(i),
                                         reportData.headers.totalColumns.includes(i),
-                                        value.allowWrap
+                                        value ? value.allowWrap : true
                                     )}
                                     key={i}
                                 >
@@ -166,7 +166,7 @@ const Results = ({
                                         reportData.headers.varianceColumns.includes(i),
                                         reportData.headers.textColumns.includes(i),
                                         reportData.headers.totalColumns.includes(i),
-                                        value.allowWrap
+                                        value ? value.allowWrap : true
                                     )}
                                     key={i}
                                 >
