@@ -1,4 +1,7 @@
 # Changelog
+## [7.4.2] - 2019-10-28
+### Changed
+-   Support nowrap option on report cells 
 ## [7.4.1]
 ### Changed
 -   Added missing process action type 
