@@ -5,10 +5,11 @@ import TableRow from '@material-ui/core/TableRow';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
 import TableBody from '@material-ui/core/TableBody';
-import { InputField, Dropdown } from '@linn-it/linn-form-components-library';
 import { makeStyles } from '@material-ui/styles';
-import AddIcon from '@material-ui/icons/Add'; //will be adding these two in soon
-import DeleteIcon from '@material-ui/icons/Delete';
+// import AddIcon from '@material-ui/icons/Add'; //will be adding these two in soon
+// import DeleteIcon from '@material-ui/icons/Delete';
+import InputField from './InputField';
+import Dropdown from './Dropdown';
 
 function TableWithInlineEditing({ content, columnsInfo, updateContent, allowedToEdit }) {
     const [editingCellId, setEditingCellId] = useState('');
