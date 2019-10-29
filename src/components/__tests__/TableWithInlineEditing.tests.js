@@ -231,11 +231,6 @@ describe('When not allowed to edit', () => {
     });
 });
 
-//the below was necessary because of the great redux state mutation mystery of 2019
-//which was that the state was being mutated without an action
-// because I had mutated a prop directly.
-//it just takes a copy of the content prop before anything is done and
-//compares it to the content after a change is made.
 describe('when state passed in', () => {
     test('should not mutate the state of parent component', () => {
         const copyOfContent = [...content];

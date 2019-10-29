@@ -1,13 +1,17 @@
 import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
-import { TableCell, TableRow, Table, TableHead, TableBody } from '@material-ui/core';
+import TableCell from '@material-ui/core/TableCell';
+import TableRow from '@material-ui/core/TableRow';
+import Table from '@material-ui/core/Table';
+import TableHead from '@material-ui/core/TableHead';
+import TableBody from '@material-ui/core/TableBody';
 import { InputField, Dropdown } from '@linn-it/linn-form-components-library';
 import { makeStyles } from '@material-ui/styles';
 import AddIcon from '@material-ui/icons/Add'; //will be adding these two in soon
 import DeleteIcon from '@material-ui/icons/Delete';
 
 function TableWithInlineEditing({ content, columnsInfo, updateContent, allowedToEdit }) {
-    const [editingCellId, setEditingCellId] = useState({});
+    const [editingCellId, setEditingCellId] = useState('');
 
     const handleRowChange = (propertyName, newValue, rowIndex) => {
         const updatedRow = { ...content[rowIndex], [propertyName]: newValue };
@@ -34,7 +38,7 @@ function TableWithInlineEditing({ content, columnsInfo, updateContent, allowedTo
                 <TableHead key="headers" onClick={clearEditingCell}>
                     <TableRow>
                         {columnsInfo.map(el => (
-                            <TableCell>{el.title}</TableCell>
+                            <TableCell key={el.key}>{el.title}</TableCell>
                         ))}
                     </TableRow>
                 </TableHead>
@@ -42,7 +46,7 @@ function TableWithInlineEditing({ content, columnsInfo, updateContent, allowedTo
                     {content.map((el, index) => (
                         <Row
                             rowContent={el}
-                            key={index}
+                            key={el.id}
                             rowIndex={index}
                             updateField={handleRowChange}
                             columnsInfo={columnsInfo}
@@ -53,7 +57,7 @@ function TableWithInlineEditing({ content, columnsInfo, updateContent, allowedTo
                         />
                     ))}
                     <Row
-                        rowContent={[{}]}
+                        rowContent={{ id: 'new' }}
                         key="newRow"
                         rowIndex={content.length}
                         updateField={handleRowChange}
@@ -71,7 +75,7 @@ function TableWithInlineEditing({ content, columnsInfo, updateContent, allowedTo
 }
 
 TableWithInlineEditing.propTypes = {
-    content: PropTypes.arrayOf(PropTypes.shape({})),
+    content: PropTypes.arrayOf(PropTypes.shape({ id: PropTypes.string.isRequired })),
     updateContent: PropTypes.func.isRequired,
     columnsInfo: PropTypes.arrayOf(
         PropTypes.shape({
@@ -95,10 +99,9 @@ const Row = ({
     currentlyEditing,
     changeCell,
     allowedToEdit,
-    clearEditingCell,
-    isNewRow
+    clearEditingCell
 }) => {
-    const useStyles = makeStyles(theme => ({
+    const useStyles = makeStyles(() => ({
         pointer: { cursor: 'pointer' },
         notClickable: { cursor: 'text' }
     }));
@@ -123,13 +126,13 @@ const Row = ({
 
     return (
         <Fragment>
-            <TableRow>
+            <TableRow key={rowContent.id}>
                 {rowContent !== {} &&
                     columnsInfo &&
                     (allowedToEdit ? (
                         <Fragment>
                             {columnsInfo.map((column, index) => (
-                                <Fragment>
+                                <Fragment key={columnsInfo[index].title}>
                                     <TableCell
                                         key={columnsInfo[index].title}
                                         onClick={() => changeCell(`${rowIndex}${column.key}`)}
@@ -144,49 +147,49 @@ const Row = ({
                                                 {rowContent[column.key]}
                                             </span>
                                         ) : (
-                                            <div id={`inner${rowIndex}-${index}`}>
-                                                {column.type === 'dropdown' ? (
-                                                    <Dropdown
-                                                        onChange={handleCellChange}
-                                                        items={column.options}
-                                                        value={rowContent[column.key]}
-                                                        propertyName={column.key}
-                                                    />
-                                                ) : (
-                                                    <InputField
-                                                        type={column.type}
-                                                        value={rowContent[column.key]}
-                                                        onChange={handleCellChange}
-                                                        propertyName={column.key}
-                                                    />
-                                                )}
-                                            </div>
-                                        )}
+                                                <div id={`inner${rowIndex}-${index}`}>
+                                                    {column.type === 'dropdown' ? (
+                                                        <Dropdown
+                                                            onChange={handleCellChange}
+                                                            items={column.options}
+                                                            value={rowContent[column.key]}
+                                                            propertyName={column.key}
+                                                        />
+                                                    ) : (
+                                                            <InputField
+                                                                type={column.type}
+                                                                value={rowContent[column.key]}
+                                                                onChange={handleCellChange}
+                                                                propertyName={column.key}
+                                                            />
+                                                        )}
+                                                </div>
+                                            )}
                                     </TableCell>
                                 </Fragment>
                             ))}
                         </Fragment>
                     ) : (
-                        //readonly for users without edit permission
-                        <Fragment>
-                            {columnsInfo.map((column, index) => (
-                                <Fragment>
-                                    <TableCell key={columnsInfo[index].title}>
-                                        <span name={column.key} className={classes.notClickable}>
-                                            {rowContent[column.key]}
-                                        </span>
-                                    </TableCell>
-                                </Fragment>
-                            ))}
-                        </Fragment>
-                    ))}
+                            //readonly for users without edit permission
+                            <Fragment>
+                                {columnsInfo.map((column, index) => (
+                                    <Fragment>
+                                        <TableCell key={columnsInfo[index].title}>
+                                            <span name={column.key} className={classes.notClickable}>
+                                                {rowContent[column.key]}
+                                            </span>
+                                        </TableCell>
+                                    </Fragment>
+                                ))}
+                            </Fragment>
+                        ))}
             </TableRow>
         </Fragment>
     );
 };
 
 Row.propTypes = {
-    rowContent: PropTypes.shape({}),
+    rowContent: PropTypes.shape({ id: PropTypes.string.isRequired }),
     rowIndex: PropTypes.number.isRequired,
     updateField: PropTypes.func.isRequired,
     currentlyEditing: PropTypes.string.isRequired,
@@ -199,13 +202,11 @@ Row.propTypes = {
             displayName: PropTypes.string,
             type: PropTypes.string
         })
-    ).isRequired,
-    isNewRow: PropTypes.bool
+    ).isRequired
 };
 
 Row.defaultProps = {
-    rowContent: {},
-    isNewRow: false
+    rowContent: {}
 };
 
 export default TableWithInlineEditing;
