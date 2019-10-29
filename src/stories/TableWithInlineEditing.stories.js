@@ -7,8 +7,6 @@ import ThemeProvider from '@material-ui/styles/ThemeProvider';
 import TableWithInlineEditing from '../components/TableWithInlineEditing';
 import { linnTheme } from '../themes/linnTheme';
 
-const [content, setContent] = useState({});
-
 const columnsInfo = [
     {
         title: 'Operation Number',
@@ -35,7 +33,7 @@ const pageOptions = {
     rowsPerPage: 10
 };
 
-setContent([
+let content = [
     {
         id: 1,
         operationNumber: 2,
@@ -60,13 +58,10 @@ setContent([
         description: 'qc',
         cITCode: 'cit1'
     }
-]);
+];
 
-const updateContent = newContent => {
-    setContent(newContent);
-};
 
-storiesOf('PaginatedTable', module)
+storiesOf('TableWithInlineEditing', module)
     .addDecorator(story => <div>{story()}</div>)
     .addDecorator(withKnobs)
     .addDecorator(StoryRouter())
@@ -79,7 +74,7 @@ storiesOf('PaginatedTable', module)
         <TableWithInlineEditing
             columnsInfo={columnsInfo}
             content={content}
-            updateContent={updateContent}
+            updateContent={{}}
             allowedToEdit
         />
     ))
@@ -87,7 +82,7 @@ storiesOf('PaginatedTable', module)
         <TableWithInlineEditing
             columnsInfo={columnsInfo}
             content={content}
-            updateContent={updateContent}
+            updateContent={{}}
             allowedToEdit={false}
         />
     ));
