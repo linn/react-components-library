@@ -1,4 +1,9 @@
 # Changelog
+
+## [7.5.0] - 2019-10-29
+### Added
+-   Table with inline editing
+
 ## [7.4.2] - 2019-10-28
 ### Changed
 -   Support nowrap option on report cells 
