@@ -76,7 +76,9 @@ function TableWithInlineEditing({ content, columnsInfo, updateContent, allowedTo
 }
 
 TableWithInlineEditing.propTypes = {
-    content: PropTypes.arrayOf(PropTypes.shape({ id: PropTypes.string.isRequired })),
+    content: PropTypes.arrayOf(
+        PropTypes.shape({ id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]) })
+    ),
     updateContent: PropTypes.func.isRequired,
     columnsInfo: PropTypes.arrayOf(
         PropTypes.shape({
@@ -148,49 +150,51 @@ const Row = ({
                                                 {rowContent[column.key]}
                                             </span>
                                         ) : (
-                                                <div id={`inner${rowIndex}-${index}`}>
-                                                    {column.type === 'dropdown' ? (
-                                                        <Dropdown
-                                                            onChange={handleCellChange}
-                                                            items={column.options}
-                                                            value={rowContent[column.key]}
-                                                            propertyName={column.key}
-                                                        />
-                                                    ) : (
-                                                            <InputField
-                                                                type={column.type}
-                                                                value={rowContent[column.key]}
-                                                                onChange={handleCellChange}
-                                                                propertyName={column.key}
-                                                            />
-                                                        )}
-                                                </div>
-                                            )}
+                                            <div id={`inner${rowIndex}-${index}`}>
+                                                {column.type === 'dropdown' ? (
+                                                    <Dropdown
+                                                        onChange={handleCellChange}
+                                                        items={column.options}
+                                                        value={rowContent[column.key]}
+                                                        propertyName={column.key}
+                                                    />
+                                                ) : (
+                                                    <InputField
+                                                        type={column.type}
+                                                        value={rowContent[column.key]}
+                                                        onChange={handleCellChange}
+                                                        propertyName={column.key}
+                                                    />
+                                                )}
+                                            </div>
+                                        )}
                                     </TableCell>
                                 </Fragment>
                             ))}
                         </Fragment>
                     ) : (
-                            //readonly for users without edit permission
-                            <Fragment>
-                                {columnsInfo.map((column, index) => (
-                                    <Fragment>
-                                        <TableCell key={columnsInfo[index].title}>
-                                            <span name={column.key} className={classes.notClickable}>
-                                                {rowContent[column.key]}
-                                            </span>
-                                        </TableCell>
-                                    </Fragment>
-                                ))}
-                            </Fragment>
-                        ))}
+                        //readonly for users without edit permission
+                        <Fragment>
+                            {columnsInfo.map((column, index) => (
+                                <Fragment>
+                                    <TableCell key={columnsInfo[index].title}>
+                                        <span name={column.key} className={classes.notClickable}>
+                                            {rowContent[column.key]}
+                                        </span>
+                                    </TableCell>
+                                </Fragment>
+                            ))}
+                        </Fragment>
+                    ))}
             </TableRow>
         </Fragment>
     );
 };
 
 Row.propTypes = {
-    rowContent: PropTypes.shape({ id: PropTypes.string.isRequired }),
+    rowContent: PropTypes.shape({
+        id: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    }),
     rowIndex: PropTypes.number.isRequired,
     updateField: PropTypes.func.isRequired,
     currentlyEditing: PropTypes.string.isRequired,
