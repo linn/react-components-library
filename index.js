@@ -22,7 +22,7 @@ import SearchInputField from './src/components/SearchInputField';
 import useSearch from './src/hooks/useSearch';
 import useTablePagination from './src/hooks/useTablePagination';
 import PaginatedTable from './src/components/table/PaginatedTable';
-import InfiniteTable from './src/components/table/InfiniteTable';
+import TypeaheadTable from './src/components/TypeaheadTable';
 import TypeaheadDialog from './src/components/TypeaheadDialog';
 import makeActionTypes from './src/actions/makeActionTypes';
 import makeReportActionTypes from './src/actions/makeReportActionTypes';
@@ -67,12 +67,11 @@ import { errorTheme, linnTheme } from './src/themes/index';
 import SelectedItemsList from './src/components/SelectedItemsList';
 import NotFound from './src/components/NotFound';
 import ValidatedInputDialog from './src/components/ValidatedInputDialog';
-import TableWithInlineEditing from './src/components/TableWithInlineEditing';
 
 const reducers = { menu, news };
 
 export {
-    InfiniteTable,
+    TypeaheadTable,
     PaginatedTable,
     Breadcrumbs,
     BackButton,
@@ -140,6 +139,5 @@ export {
     SelectedItemsList,
     NotFound,
     getItemErrorDetailMessage,
-    ValidatedInputDialog,
-    TableWithInlineEditing
+    ValidatedInputDialog
 };
