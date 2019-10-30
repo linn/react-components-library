@@ -73,7 +73,7 @@ describe('When loaded and matching items', () => {
 
 describe('When loaded and no matching items', () => {
     test('Should display message. not loading, not table', () => {
-        const { getByText } = render(<TypeAheadTable {...defaultProps} table={{ rows: [] }} />);
+        const { getByText } = render(<TypeAheadTable {...defaultProps} table={undefined} />);
         expect(getByText('No matching items')).toBeInTheDocument();
     });
 });
