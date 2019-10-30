@@ -22,11 +22,11 @@ function TypeaheadTable({
     history,
     placeholder
 }) {
-    const [searchTerm, setSearchTerm] = useState('');
+    const [searchTerm, setSearchTerm] = useState();
     useSearch(fetchItems, searchTerm, clearSearch);
 
-    const handleSearchTermChange = (...args) => {
-        setSearchTerm(args[1]);
+    const handleSearchTermChange = (_propertyName, newValue) => {
+        setSearchTerm(newValue);
     };
 
     const cursor = {
@@ -48,19 +48,18 @@ function TypeaheadTable({
                     <TableBody>
                         {table.rows &&
                             table.rows.map(row => (
-                                <Fragment key={row.id}>
-                                    <TableRow
-                                        style={cursor}
-                                        onClick={() => history.push(utilities.getSelfHref(row))}
-                                        hover
-                                    >
-                                        {row.values.map(cell => (
-                                            <TableCell key={cell.id} component="th" scope="row">
-                                                {cell.value}
-                                            </TableCell>
-                                        ))}
-                                    </TableRow>
-                                </Fragment>
+                                <TableRow
+                                    style={cursor}
+                                    onClick={() => history.push(utilities.getSelfHref(row))}
+                                    hover
+                                    key={row.id}
+                                >
+                                    {row.values.map(cell => (
+                                        <TableCell key={cell.id} component="th" scope="row">
+                                            {cell.value}
+                                        </TableCell>
+                                    ))}
+                                </TableRow>
                             ))}
                     </TableBody>
                 </Table>
@@ -81,7 +80,6 @@ function TypeaheadTable({
                 value={searchTerm}
                 style={{ paddingTop: '8px' }}
             />
-            {}
             {loading ? <Loading /> : results()}
         </Fragment>
     );
@@ -99,8 +97,7 @@ TypeaheadTable.propTypes = {
                     })
                 )
             })
-        ).isRequired,
-        totalItemCount: PropTypes.number.isRequired
+        ).isRequired
     }),
     columnNames: PropTypes.arrayOf(PropTypes.string).isRequired,
     history: PropTypes.shape({ push: PropTypes.func }).isRequired,

@@ -22,7 +22,7 @@ const table = {
 
 for (let i = 0; i < 100; i += 1) {
     const newItem = {
-        Id: `id${i}`,
+        id: `id${i}`,
         values: [
             { id: `0-${i}`, value: `0-${i}` },
             { id: `1-${i}`, value: `1-${i}` },
@@ -34,7 +34,7 @@ for (let i = 0; i < 100; i += 1) {
     table.rows.push(newItem);
 }
 
-const columnNames = ['Works Order', 'Part', 'Qty', 'Date Raised'];
+const columnNames = ['0', '1', '2', '3'];
 
 storiesOf('TypeaheadTable', module)
     .addDecorator(story => <Page {...pageProps}>{story()}</Page>)
