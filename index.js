@@ -67,7 +67,7 @@ import { errorTheme, linnTheme } from './src/themes/index';
 import SelectedItemsList from './src/components/SelectedItemsList';
 import NotFound from './src/components/NotFound';
 import ValidatedInputDialog from './src/components/ValidatedInputDialog';
-import TableWithInlineEditing from '../src/TableWithInlineEditing';
+import TableWithInlineEditing from './src/components/TableWithInlineEditing';
 
 const reducers = { menu, news };
 

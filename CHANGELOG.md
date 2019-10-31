@@ -1,6 +1,9 @@
 # Changelog
+## [8.0.0] - 2019-10-31
+### Fixed
+-   Added TableWithInlineEditing to the index again. I had accidentally removed it.
 
-## [0.0.0] - 2019-10-29
+## [8.0.0] - 2019-10-29
 ### Added
 -   TypeheadTable - a typeahead with tabulated results
 
