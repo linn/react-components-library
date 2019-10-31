@@ -15,7 +15,7 @@ export default [
         input: {
             index: 'index.js',
             initialiseOnMount: 'src/components/common/initialiseOnMount.js',
-            InfiniteTable: 'src/components/table/InfiniteTable.js',
+            TypeahedTable: 'src/components/TypeaheadTable.js',
             PaginatedTable: 'src/components/table/PaginatedTable.js',
             TablePaginationActions: 'src/components/table/TablePaginationActions.js',
             Breadcrumbs: 'src/components/Breadcrumbs.js',

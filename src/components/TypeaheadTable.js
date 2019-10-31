@@ -10,7 +10,7 @@ import Loading from './Loading';
 import SearchInputField from './SearchInputField';
 import Title from './Title';
 import useSearch from '../hooks/useSearch';
-import utilities from '../utilities';
+import utilities from '../utilities/index';
 
 function TypeaheadTable({
     fetchItems,
@@ -78,7 +78,6 @@ function TypeaheadTable({
                 label="Search Works Orders by Part Number"
                 variant="outlined"
                 value={searchTerm}
-                style={{ paddingTop: '8px' }}
             />
             {loading ? <Loading /> : results()}
         </Fragment>
