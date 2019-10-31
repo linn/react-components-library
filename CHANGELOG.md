@@ -1,7 +1,7 @@
 # Changelog
-## [8.0.0] - 2019-10-31
+## [8.0.1] - 2019-10-31
 ### Fixed
--   Added TableWithInlineEditing to the index again. I had accidentally removed it.
+-   Added TableWithInlineEditing to the index. I had accidentally removed it.
 
 ## [8.0.0] - 2019-10-29
 ### Added
