@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.0] - 2019-10-29
+### Added
+-   TypeheadTable - a typeahead with tabulated results
+
+### Removed
+-   InfiniteTable 
+
 ## [7.5.0] - 2019-10-29
 ### Added
 -   Table with inline editing
