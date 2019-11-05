@@ -49,7 +49,8 @@ function Breadcrumbs({ history, rootPathLength }) {
             {crumbs.map((crumb, index) => {
                 if (index < crumbs.length - 1) {
                     return (
-                        <Fragment>
+                        // eslint-disable-next-line react/no-array-index-key
+                        <Fragment key={index}>
                             <Link
                                 key={crumb.href}
                                 to={crumb.href}
@@ -64,7 +65,8 @@ function Breadcrumbs({ history, rootPathLength }) {
                     );
                 }
                 return (
-                    <Typography display="inline" variant="button">
+                    // eslint-disable-next-line react/no-array-index-key
+                    <Typography display="inline" variant="button" key={index}>
                         {crumb.caption}
                     </Typography>
                 );
