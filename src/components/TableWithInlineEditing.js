@@ -47,7 +47,7 @@ function TableWithInlineEditing({ content, columnsInfo, updateContent, allowedTo
                     {content.map((el, index) => (
                         <Row
                             rowContent={el}
-                            key={el.title}
+                            key={el.id}
                             rowIndex={index}
                             updateField={handleRowChange}
                             columnsInfo={columnsInfo}
@@ -137,7 +137,6 @@ const Row = ({
                             {columnsInfo.map((column, index) => (
                                 <Fragment key={column.title}>
                                     <TableCell
-                                        key={column.title}
                                         onClick={() => changeCell(`${rowIndex}${column.key}`)}
                                         onKeyDown={e => handleKeyPress(e, index)}
                                     >
@@ -194,7 +193,7 @@ const Row = ({
 
 Row.propTypes = {
     rowContent: PropTypes.shape({
-        title: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+        id: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
     }),
     rowIndex: PropTypes.number.isRequired,
     updateField: PropTypes.func.isRequired,

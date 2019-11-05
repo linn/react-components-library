@@ -61,8 +61,8 @@ function InputField({
         if (type === 'date') {
             val = newValue
                 ? moment(newValue)
-                    .utc()
-                    .format()
+                      .utc()
+                      .format()
                 : '';
         }
 

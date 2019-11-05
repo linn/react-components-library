@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import StoryRouter from 'storybook-react-router';
-import { withKnobs, object } from '@storybook/addon-knobs/react';
+import { withKnobs, object } from '@storybook/addon-knobs';
 import Page from '../components/Page';
 import Title from '../components/Title';
 import providers from './renderUtils/Providers';
