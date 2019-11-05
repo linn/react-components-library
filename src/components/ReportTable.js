@@ -112,7 +112,7 @@ const Results = ({
                                     reportData.headers.textColumns.includes(i),
                                     reportData.headers.totalColumns.includes(i)
                                 )}
-                                key={i}
+                                key={header}
                             >
                                 {header}
                             </TableCell>
@@ -120,8 +120,8 @@ const Results = ({
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {reportData.results.map((item, j) => (
-                        <TableRow key={j}>
+                    {reportData.results.map(item => (
+                        <TableRow key={item.rowSortOrder}>
                             {showRowTitles ? (
                                 <TableCell
                                     className="single-line-field"
@@ -142,6 +142,8 @@ const Results = ({
                                         reportData.headers.totalColumns.includes(i),
                                         value ? value.allowWrap : true
                                     )}
+                                    // remove this if we implement reordering of columns
+                                    // eslint-disable-next-line react/no-array-index-key
                                     key={i}
                                 >
                                     {setValueDrilldown(value, hasExternalLinks)}
@@ -168,6 +170,8 @@ const Results = ({
                                         reportData.headers.totalColumns.includes(i),
                                         value ? value.allowWrap : true
                                     )}
+                                    // remove this if we implement reordering of columns
+                                    // eslint-disable-next-line react/no-array-index-key
                                     key={i}
                                 >
                                     {setValueDrilldown(value, hasExternalLinks)}
@@ -228,7 +232,7 @@ function ReportTable({
 Results.propTypes = {
     hasExternalLinks: PropTypes.bool,
     reportData: reportResultType,
-    classes: PropTypes.shape({}).isRequired,
+    classes: PropTypes.shape({ root: PropTypes.shape({}) }).isRequired,
     title: PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})]),
     showTitle: PropTypes.bool,
     showTotals: PropTypes.bool,
