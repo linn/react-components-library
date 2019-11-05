@@ -47,7 +47,7 @@ function TableWithInlineEditing({ content, columnsInfo, updateContent, allowedTo
                     {content.map((el, index) => (
                         <Row
                             rowContent={el}
-                            key={el.code}
+                            key={el.title}
                             rowIndex={index}
                             updateField={handleRowChange}
                             columnsInfo={columnsInfo}
@@ -194,7 +194,7 @@ const Row = ({
 
 Row.propTypes = {
     rowContent: PropTypes.shape({
-        id: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+        title: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
     }),
     rowIndex: PropTypes.number.isRequired,
     updateField: PropTypes.func.isRequired,

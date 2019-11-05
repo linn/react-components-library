@@ -11,7 +11,7 @@ const updateContent = jest.fn();
 const content = [
     {
         title: 1,
-        description: 'Descripticon',
+        description: 'Description',
         options: 'choice1'
     },
     {
@@ -25,8 +25,8 @@ const content = [
 
 const columnsInfo = [
     {
-        title: 'Item code',
-        key: 'code',
+        title: 'Item title',
+        key: 'title',
         type: 'number'
     },
     {
@@ -68,7 +68,7 @@ describe('When loaded', () => {
 
     test('should display the text options', () => {
         const { getByText } = render(<TableWithInlineEditing {...defaultProps} />);
-        const firstItem = getByText('Descripticon');
+        const firstItem = getByText('Description');
         const secondItem = getByText('Descrip');
         const thirdItem = getByText('3rd one');
         const fourthItem = getByText('four');
@@ -123,17 +123,17 @@ describe('When allowed to edit', () => {
 
         const newContent = [
             {
-                code: 11,
-                description: 'Descripticon',
+                title: 11,
+                description: 'Description',
                 options: 'choice1'
             },
             {
-                code: 22,
+                title: 22,
                 description: 'Descrip',
                 options: 'choice2'
             },
-            { code: 333, description: '3rd one', options: 'choice1' },
-            { code: 4, description: 'four', options: 'choice1' }
+            { title: 333, description: '3rd one', options: 'choice1' },
+            { title: 4, description: 'four', options: 'choice1' }
         ];
 
         expect(updateContent).toHaveBeenCalledWith(newContent);
@@ -158,17 +158,17 @@ describe('When allowed to edit', () => {
 
         const newContent = [
             {
-                code: 1,
-                description: 'Descripticon',
+                title: 1,
+                description: 'Description',
                 options: 'choice1'
             },
             {
-                code: 22,
+                title: 22,
                 description: 'Descrip',
                 options: 'choice3'
             },
-            { code: 333, description: '3rd one', options: 'choice1' },
-            { code: 4, description: 'four', options: 'choice1' }
+            { title: 333, description: '3rd one', options: 'choice1' },
+            { title: 4, description: 'four', options: 'choice1' }
         ];
 
         expect(updateContent).toHaveBeenCalledWith(newContent);
@@ -193,17 +193,17 @@ describe('When allowed to edit', () => {
 
         const newContent = [
             {
-                code: 1,
-                description: 'Descripticon',
+                title: 1,
+                description: 'Description',
                 options: 'choice1'
             },
             {
-                code: 22,
+                title: 22,
                 description: 'Descrip',
                 options: 'choice2'
             },
-            { code: 333, description: '3rd one', options: 'choice1' },
-            { code: 4, description: 'four4', options: 'choice1' }
+            { title: 333, description: '3rd one', options: 'choice1' },
+            { title: 4, description: 'four4', options: 'choice1' }
         ];
 
         expect(updateContent).toHaveBeenCalledWith(newContent);
