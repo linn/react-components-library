@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import PropTypes, { object } from 'prop-types';
+import PropTypes from 'prop-types';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
 import TableBody from '@material-ui/core/TableBody';
@@ -221,7 +221,16 @@ PaginatedTable.propTypes = {
     expandable: PropTypes.bool,
     loading: PropTypes.bool,
     columns: PropTypes.shape({}).isRequired,
-    rows: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+    rows: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+            elements: PropTypes.arrayOf(
+                PropTypes.shape({
+                    id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired
+                })
+            )
+        })
+    ).isRequired,
     pageOptions: PropTypes.shape({
         orderBy: PropTypes.string,
         orderAscending: PropTypes.bool,
