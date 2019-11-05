@@ -4,7 +4,6 @@ import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
 import TableBody from '@material-ui/core/TableBody';
 import TablePagination from '@material-ui/core/TablePagination';
-import TableFooter from '@material-ui/core/TableFooter';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import Typography from '@material-ui/core/Typography';
@@ -158,11 +157,14 @@ function PaginatedTable({
                                     )}
                                 </TableRow>
                                 {expandable && rowOpen === row.id && row.elements && (
-                                    <TableRow colSpan={Object.keys(columns).length + 1}>
+                                    <Fragment>
                                         {row.elements.map(el => (
-                                            <Fragment key={el.id}>
+                                            <TableRow
+                                                colSpan={Object.keys(columns).length + 1}
+                                                key={el.id}
+                                            >
                                                 {Object.keys(el)
-                                                    .filter(k => !invalidElement(k))
+                                                    .filter(k => k !== 'id')
                                                     .map(key => (
                                                         <TableCell
                                                             key={key}
@@ -184,9 +186,9 @@ function PaginatedTable({
                                                             </Typography>
                                                         </TableCell>
                                                     ))}
-                                            </Fragment>
+                                            </TableRow>
                                         ))}
-                                    </TableRow>
+                                    </Fragment>
                                 )}
                             </Fragment>
                         ))}

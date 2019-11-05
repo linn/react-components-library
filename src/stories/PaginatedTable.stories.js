@@ -49,111 +49,111 @@ const rows = [
             }
         ],
         href: '/products/maint/sales-packages/1'
+    },
+    {
+        id: 2,
+        salesPackageId: 'MAJIK',
+        description: 'MAJIK PACKAGE',
+        elements: [
+            {
+                id: 1,
+                elementType: 'MAJIK DSM',
+                sequence: 1,
+                quantity: 2
+            },
+            {
+                id: 2,
+                elementType: 'MAJIK CABLE',
+                sequence: 3,
+                quantity: 2
+            }
+        ],
+        links: [
+            {
+                href: '/products/maint/sales-packages/1',
+                rel: 'self'
+            }
+        ],
+        href: '/products/maint/sales-packages/1'
+    },
+    {
+        id: 3,
+        salesPackageId: 'KLIMAX',
+        description: 'KLIMAX PACKAGE',
+        elements: [
+            {
+                id: 1,
+                elementType: 'KLIMAX DSM',
+                sequence: 1,
+                quantity: 2
+            },
+            {
+                id: 2,
+                elementType: 'KLIMAX CABLE',
+                sequence: 3,
+                quantity: 2
+            }
+        ],
+        links: [
+            {
+                href: '/products/maint/sales-packages/1',
+                rel: 'self'
+            }
+        ],
+        href: '/products/maint/sales-packages/1'
+    },
+    {
+        id: 4,
+        salesPackageId: 'AKURATE',
+        description: 'AKURATE PACKAGE',
+        elements: [
+            {
+                id: 1,
+                elementType: 'AKURATE DSM',
+                sequence: 1,
+                quantity: 2
+            },
+            {
+                id: 2,
+                elementType: 'AKURATE CABLE',
+                sequence: 3,
+                quantity: 2
+            }
+        ],
+        links: [
+            {
+                href: '/products/maint/sales-packages/1',
+                rel: 'self'
+            }
+        ],
+        href: '/products/maint/sales-packages/1'
+    },
+    {
+        id: 5,
+        salesPackageId: 'SELEKT',
+        description: 'SELEKT PACKAGE',
+        elements: [
+            {
+                id: 1,
+                elementType: 'SELEKT DSM',
+                sequence: 1,
+                quantity: 2
+            },
+            {
+                id: 2,
+                elementType: 'SELEKT CABLE',
+                sequence: 3,
+                quantity: 2
+            }
+        ],
+        links: [
+            {
+                href: '/products/maint/sales-packages/1',
+                rel: 'self'
+            }
+        ],
+        href: '/products/maint/sales-packages/1'
     }
-    // {
-    //     id: 2,
-    //     salesPackageId: 'MAJIK',
-    //     description: 'MAJIK PACKAGE',
-    //     elements: [
-    //         {
-    //             id: 1,
-    //             elementType: 'MAJIK DSM',
-    //             sequence: 1,
-    //             quantity: 2
-    //         },
-    //         {
-    //             id: 2,
-    //             elementType: 'MAJIK CABLE',
-    //             sequence: 3,
-    //             quantity: 2
-    //         }
-    //     ],
-    //     links: [
-    //         {
-    //             href: '/products/maint/sales-packages/1',
-    //             rel: 'self'
-    //         }
-    //     ],
-    //     href: '/products/maint/sales-packages/1'
-    // },
-    // {
-    //     id: 3,
-    //     salesPackageId: 'KLIMAX',
-    //     description: 'KLIMAX PACKAGE',
-    //     elements: [
-    //         {
-    //             id: 1,
-    //             elementType: 'KLIMAX DSM',
-    //             sequence: 1,
-    //             quantity: 2
-    //         },
-    //         {
-    //             id: 2,
-    //             elementType: 'KLIMAX CABLE',
-    //             sequence: 3,
-    //             quantity: 2
-    //         }
-    //     ],
-    //     links: [
-    //         {
-    //             href: '/products/maint/sales-packages/1',
-    //             rel: 'self'
-    //         }
-    //     ],
-    //     href: '/products/maint/sales-packages/1'
-    // },
-    // {
-    //     id: 4,
-    //     salesPackageId: 'AKURATE',
-    //     description: 'AKURATE PACKAGE',
-    //     elements: [
-    //         {
-    //             id: 1,
-    //             elementType: 'AKURATE DSM',
-    //             sequence: 1,
-    //             quantity: 2
-    //         },
-    //         {
-    //             id: 2,
-    //             elementType: 'AKURATE CABLE',
-    //             sequence: 3,
-    //             quantity: 2
-    //         }
-    //     ],
-    //     links: [
-    //         {
-    //             href: '/products/maint/sales-packages/1',
-    //             rel: 'self'
-    //         }
-    //     ],
-    //     href: '/products/maint/sales-packages/1'
-    // },
-    // {
-    //     id: 5,
-    //     salesPackageId: 'SELEKT',
-    //     description: 'SELEKT PACKAGE',
-    //     elements: [
-    //         {
-    //             id: 1,
-    //             elementType: 'SELEKT DSM',
-    //             sequence: 1,
-    //             quantity: 2
-    //         },
-    //         {
-    //             id: 2,
-    //             elementType: 'SELEKT CABLE',
-    //             sequence: 3,
-    //             quantity: 2
-    //         }
-    //     ],
-    //     links: [
-    //         {
-    //             href: '/products/maint/sales-packages/1',
-    //             rel: 'self'
-    //         }
-    //     ],
-    //     href: '/products/maint/sales-packages/1'
-    // }
 ];
 
 storiesOf('PaginatedTable', module)
