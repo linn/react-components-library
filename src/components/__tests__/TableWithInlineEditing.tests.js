@@ -10,17 +10,17 @@ const updateContent = jest.fn();
 
 const content = [
     {
-        code: 1,
+        title: 1,
         description: 'Descripticon',
         options: 'choice1'
     },
     {
-        code: 22,
+        title: 22,
         description: 'Descrip',
         options: 'choice2'
     },
-    { code: 333, description: '3rd one', options: 'choice1' },
-    { code: 4, description: 'four', options: 'choice1' }
+    { title: 333, description: '3rd one', options: 'choice1' },
+    { title: 4, description: 'four', options: 'choice1' }
 ];
 
 const columnsInfo = [

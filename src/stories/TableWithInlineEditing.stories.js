@@ -20,7 +20,7 @@ const columnsInfo = [
     },
     {
         title: 'CIT Code',
-        key: 'cITCode',
+        key: 'citCode',
         type: 'dropdown',
         options: ['cit1', 'cit2', 'cit3']
     }
@@ -38,28 +38,27 @@ let content = [
         id: 1,
         operationNumber: 2,
         description: 'ATE TEST',
-        cITCode: 'cit1'
+        citCode: 'cit1'
     },
     {
         id: 2,
         operationNumber: 10,
         description: 'pre build',
-        cITCode: 'cit1'
+        citCode: 'cit1'
     },
     {
         id: 3,
         operationNumber: 20,
         description: 'fit to topside',
-        cITCode: 'cit1'
+        citCode: 'cit1'
     },
     {
         id: 4,
         operationNumber: 30,
         description: 'qc',
-        cITCode: 'cit1'
+        citCode: 'cit1'
     }
 ];
-
 
 storiesOf('TableWithInlineEditing', module)
     .addDecorator(story => <div>{story()}</div>)
@@ -74,7 +73,7 @@ storiesOf('TableWithInlineEditing', module)
         <TableWithInlineEditing
             columnsInfo={columnsInfo}
             content={content}
-            updateContent={{}}
+            updateContent={() => {}}
             allowedToEdit
         />
     ))
