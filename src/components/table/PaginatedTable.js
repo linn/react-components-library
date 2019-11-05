@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { object } from 'prop-types';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
 import TableBody from '@material-ui/core/TableBody';
@@ -113,7 +113,7 @@ function PaginatedTable({
 
             {loading ? (
                 <TableBody>
-                    <TableCell colspan={columns.length + 1}>
+                    <TableCell colspan={Object.keyscolumns().length + 1}>
                         <LinearProgress />
                     </TableCell>{' '}
                 </TableBody>
