@@ -105,22 +105,26 @@ function PaginatedTable({
                                 </TableSortLabel>
                             </TableCell>
                         ) : (
-                            <TableCell>{columns[key]}</TableCell>
+                            <TableCell key={key}>{columns[key]}</TableCell>
                         )
                     )}
                     {expandable && <TableCell>Actions</TableCell>}
                 </TableRow>
             </TableHead>
+
             {loading ? (
-                <TableCell colspan={columns.length + 1}>
-                    <LinearProgress />
-                </TableCell>
+                <TableBody>
+                    <TableCell colspan={columns.length + 1}>
+                        <LinearProgress />
+                    </TableCell>{' '}
+                </TableBody>
             ) : (
                 <Fragment>
                     <TableBody>
                         {rows.map(row => (
                             <Fragment key={row.id}>
                                 <TableRow
+                                    key={row.id}
                                     className={classes.link}
                                     hover
                                     onClick={() =>
@@ -132,7 +136,7 @@ function PaginatedTable({
                                     {Object.keys(row)
                                         .filter(key => invalidElement(key, row))
                                         .map(key => (
-                                            <TableCell component="th" scope="row">
+                                            <TableCell key={key} component="th" scope="row">
                                                 {row[key] || '-'}
                                             </TableCell>
                                         ))}
@@ -154,42 +158,38 @@ function PaginatedTable({
                                     )}
                                 </TableRow>
                                 {expandable && rowOpen === row.id && row.elements && (
-                                    <TableRow>
-                                        <TableCell colspan={Object.keys(columns).length + 1}>
-                                            <Table>
-                                                {row.elements.map(el => (
-                                                    <TableRow>
-                                                        {Object.keys(el).map(key => (
-                                                            <TableCell
+                                    <TableRow colSpan={Object.keys(columns).length + 1}>
+                                        {row.elements.map(el => (
+                                            <Fragment key={el.id}>
+                                                {Object.keys(el)
+                                                    .filter(k => !invalidElement(k))
+                                                    .map(key => (
+                                                        <TableCell
+                                                            key={key}
+                                                            classes={{
+                                                                root: classes.exandedRow
+                                                            }}
+                                                            size="small"
+                                                        >
+                                                            <Typography
                                                                 classes={{
-                                                                    root: classes.exandedRow
+                                                                    root: classes.expandedTitleText
                                                                 }}
-                                                                size="small"
+                                                                variant="caption"
                                                             >
-                                                                <Typography
-                                                                    classes={{
-                                                                        root:
-                                                                            classes.expandedTitleText
-                                                                    }}
-                                                                    variant="caption"
-                                                                >
-                                                                    {key}:
-                                                                </Typography>
-                                                                <Typography variant="caption">
-                                                                    {` ${el[key]}`}
-                                                                </Typography>
-                                                            </TableCell>
-                                                        ))}
-                                                    </TableRow>
-                                                ))}
-                                            </Table>
-                                        </TableCell>
+                                                                {key}:
+                                                            </Typography>
+                                                            <Typography variant="caption">
+                                                                {` ${el[key]}`}
+                                                            </Typography>
+                                                        </TableCell>
+                                                    ))}
+                                            </Fragment>
+                                        ))}
                                     </TableRow>
                                 )}
                             </Fragment>
                         ))}
-                    </TableBody>
-                    <TableFooter>
                         {totalItemCount && (
                             <TableRow>
                                 <TablePagination
@@ -206,7 +206,7 @@ function PaginatedTable({
                                 />
                             </TableRow>
                         )}
-                    </TableFooter>
+                    </TableBody>
                 </Fragment>
             )}
         </Table>
