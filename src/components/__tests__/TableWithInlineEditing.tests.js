@@ -51,10 +51,10 @@ const defaultProps = {
 };
 
 describe('When loaded', () => {
-    // test('Should display table', () => {
-    //     const { queryByRole } = render(<TableWithInlineEditing {...defaultProps} />);
-    //     expect(queryByRole('table')).toBeInTheDocument();
-    // });
+    test('Should display table', () => {
+        const { queryByRole } = render(<TableWithInlineEditing {...defaultProps} />);
+        expect(queryByRole('table')).toBeInTheDocument();
+    });
 
     test('should display the 4 table entries, specifically the number options', () => {
         const { getByText } = render(<TableWithInlineEditing {...defaultProps} />);
