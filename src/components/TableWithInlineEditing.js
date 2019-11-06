@@ -38,8 +38,8 @@ function TableWithInlineEditing({ content, columnsInfo, updateContent, allowedTo
             <Table>
                 <TableHead key="headers" onClick={clearEditingCell}>
                     <TableRow>
-                        {columnsInfo.map(el => (
-                            <TableCell key={el.key}>{el.title}</TableCell>
+                        {columnsInfo.map(column => (
+                            <TableCell key={column.key}>{column.title}</TableCell>
                         ))}
                     </TableRow>
                 </TableHead>
