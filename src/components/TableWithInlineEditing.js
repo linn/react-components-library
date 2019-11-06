@@ -79,7 +79,7 @@ TableWithInlineEditing.propTypes = {
     content: PropTypes.arrayOf(
         PropTypes.shape({
             id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-            title: PropTypes.string
+            title: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
         })
     ),
     updateContent: PropTypes.func.isRequired,
@@ -206,7 +206,7 @@ Row.propTypes = {
     clearEditingCell: PropTypes.func.isRequired,
     columnsInfo: PropTypes.arrayOf(
         PropTypes.shape({
-            title: PropTypes.string.isRequired,
+            title: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
             key: PropTypes.string.isRequired,
             type: PropTypes.string
         })
