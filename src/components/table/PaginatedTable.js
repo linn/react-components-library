@@ -230,7 +230,7 @@ PaginatedTable.propTypes = {
                 })
             )
         })
-    ).isRequired,
+    ),
     pageOptions: PropTypes.shape({
         orderBy: PropTypes.string,
         orderAscending: PropTypes.bool,
@@ -242,6 +242,7 @@ PaginatedTable.propTypes = {
 };
 
 PaginatedTable.defaultProps = {
+    rows: [],
     sortable: false,
     expandable: false,
     loading: false,

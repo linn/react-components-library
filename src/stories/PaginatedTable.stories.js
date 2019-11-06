@@ -196,4 +196,14 @@ storiesOf('PaginatedTable', module)
             totalItemCount={totalItemCount}
             expandable
         />
+    ))
+    .add('with no rows', () => (
+        <PaginatedTable
+            setPageOptions={actions.setPageOptions}
+            handleRowLinkClick={actions.handleRowLinkClick}
+            columns={columns}
+            pageOptions={pageOptions}
+            totalItemCount={totalItemCount}
+            expandable
+        />
     ));
