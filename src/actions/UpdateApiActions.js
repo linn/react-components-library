@@ -96,16 +96,6 @@ export default function UpdateApiActions(itemName, actionTypeRoot, uri, actionTy
         payload: editStatus
     });
 
-    this.clearSearch = () => ({
-        type: actionTypes.clearSearch,
-        payload: {}
-    });
-
-    this.clearErrors = () => ({
-        type: actionTypes.clearErrors,
-        payload: {}
-    });
-
     this.clearErrorsForItem = () => ({
         type: actionTypes[`CLEAR_${actionTypeRoot}_ERRORS`],
         payload: { item: itemName }
