@@ -77,7 +77,10 @@ function TableWithInlineEditing({ content, columnsInfo, updateContent, allowedTo
 
 TableWithInlineEditing.propTypes = {
     content: PropTypes.arrayOf(
-        PropTypes.shape({ id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]) })
+        PropTypes.shape({
+            id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+            title: PropTypes.string
+        })
     ),
     updateContent: PropTypes.func.isRequired,
     columnsInfo: PropTypes.arrayOf(
