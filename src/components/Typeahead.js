@@ -86,7 +86,7 @@ Typeahead.propTypes = {
     items: PropTypes.arrayOf(
         PropTypes.shape({
             id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-            name: PropTypes.string,
+            name: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
             description: PropTypes.string,
             href: PropTypes.string
         })

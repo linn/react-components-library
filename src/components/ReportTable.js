@@ -120,8 +120,9 @@ const Results = ({
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {reportData.results.map(item => (
-                        <TableRow key={item.rowSortOrder}>
+                    {reportData.results.map((item, j) => (
+                        // eslint-disable-next-line react/no-array-index-key
+                        <TableRow key={j}>
                             {showRowTitles ? (
                                 <TableCell
                                     className="single-line-field"

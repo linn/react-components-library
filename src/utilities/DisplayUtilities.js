@@ -1,11 +1,9 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import numeral from 'numeral';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
-import Modal from '@material-ui/core/Modal';
 import { Link as RouterLink } from 'react-router-dom';
 import makeStyles from '@material-ui/styles/makeStyles';
-import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles(theme => ({
     link: {
@@ -76,9 +74,9 @@ export const setDrilldown = (item, hasExternalLinks) => {
     return displayItem;
 };
 
-export const formatTitle = (title, showTitle, loading, error, helpText) => {
+export const formatTitle = (title, showTitle, loading, error) => {
     if (error) {
-        return <strong>Error</strong>;
+        return 'Error';
     }
 
     if (!showTitle) {
@@ -86,35 +84,16 @@ export const formatTitle = (title, showTitle, loading, error, helpText) => {
     }
 
     let displayTitle;
+
     if (title && title.displayString) {
         displayTitle = title.displayString;
     } else {
         displayTitle = title;
     }
-
     if (loading) {
-        return <Typography variant="subtitle1">{`${displayTitle} (loading)`}</Typography>;
+        return `${displayTitle} (loading)`;
     }
-
-    return (
-        <Fragment>
-            <div>
-                <Typography variant="subtitle1">{setDrilldown(title)}</Typography>
-            </div>
-            {helpText ? (
-                <div>
-                    <Modal
-                        aria-labelledby="simple-modal-title"
-                        aria-describedby="simple-modal-description"
-                    >
-                        {helpText}
-                    </Modal>
-                </div>
-            ) : (
-                ''
-            )}
-        </Fragment>
-    );
+    return displayTitle;
 };
 
 export const setValueDrilldown = (value, hasExternalLinks) => {

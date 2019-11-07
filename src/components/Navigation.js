@@ -234,7 +234,7 @@ function Navigation({
                                             <MenuItem onClick={handleClose}>{username}</MenuItem>
                                             {username &&
                                                 myStuff.groups.map(item => (
-                                                    <span>
+                                                    <span key={item.items[0].href}>
                                                         <a href={item.items[0].href}>
                                                             <MenuItem onClick={handleClose}>
                                                                 {item.items[0].title}
