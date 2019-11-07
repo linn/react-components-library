@@ -28,6 +28,7 @@ storiesOf('LinnWeekPicker', module)
             value={new Date('01/01/2001')}
             disabled={boolean('disabled', false)}
             label={text('label', 'Your Label')}
+            setWeekStartDate={() => {}}
             {...actions}
         />
     ));
