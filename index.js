@@ -68,6 +68,7 @@ import SelectedItemsList from './src/components/SelectedItemsList';
 import NotFound from './src/components/NotFound';
 import ValidatedInputDialog from './src/components/ValidatedInputDialog';
 import TableWithInlineEditing from './src/components/TableWithInlineEditing';
+import LinnWeekPicker from './src/components/LinnWeekPicker';
 
 const reducers = { menu, news };
 
@@ -141,5 +142,6 @@ export {
     NotFound,
     getItemErrorDetailMessage,
     ValidatedInputDialog,
-    TableWithInlineEditing
+    TableWithInlineEditing,
+    LinnWeekPicker
 };

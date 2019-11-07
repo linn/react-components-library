@@ -1,41 +1,63 @@
 # Changelog
+
+## [8.1.0] - 2019-11-06
+
+### Added
+
+-   New Component - LinnWeekPicker
+
 ## [8.0.1] - 2019-10-31
+
 ### Fixed
+
 -   Added TableWithInlineEditing to the index. I had accidentally removed it.
 
 ## [8.0.0] - 2019-10-29
+
 ### Added
+
 -   TypeheadTable - a typeahead with tabulated results
 
 ### Removed
--   InfiniteTable 
+
+-   InfiniteTable
 
 ## [7.5.0] - 2019-10-29
+
 ### Added
+
 -   Table with inline editing
 
 ## [7.4.2] - 2019-10-28
+
 ### Changed
--   Support nowrap option on report cells 
+
+-   Support nowrap option on report cells
+
 ## [7.4.1]
+
 ### Changed
--   Added missing process action type 
+
+-   Added missing process action type
+
 ## [7.4.0] - 2019-10-10
 
 ### Added
 
 -   Added clear error method to process actions.
+
 ## [7.3.0] - 2019-10-10
 
 ### Changed
 
 -   Changed initialiseOnMount to pass props into initialise when itemId not provided.
     Fixed broken reportOptionsFactory.
+
 ## [7.2.1] - 2019-10-10
 
 ### Added
 
-- Added makeProcessActionTypes and new rsaaType for process
+-   Added makeProcessActionTypes and new rsaaType for process
 
 ## [7.2.0] - 2019-10-08
 
@@ -45,7 +67,7 @@
 
 ### Changed
 
-- Fixed broken stories.
+-   Fixed broken stories.
 
 ## [7.1.1] - 2019-10-07
 
@@ -117,10 +139,10 @@
 
 -   Utilites functions exported from utilites file
     -   All imports must be updated
-        ```import { getHref } from '@linn/react-components-library'```
+        `import { getHref } from '@linn/react-components-library'`
         should now be
-        ```import { utilites } from '@linn/react-components-library'```
+        `import { utilites } from '@linn/react-components-library'`
         and used as
-        ```utilities.getHref(item)```
+        `utilities.getHref(item)`
 -   Rollup config
 -   Bundle splitting
