@@ -167,6 +167,10 @@ Dropdown.propTypes = {
     required: PropTypes.bool,
     value: props => {
         const { items, value, allowNoValue, optionsLoading } = props;
+
+        if (value === null) {
+            return new Error('Please provide a value that is not null');
+        }
         if (!optionsLoading && !includesValue(value, getOptions(items, allowNoValue))) {
             return new Error('Please provide a value that is in the items list');
         }
