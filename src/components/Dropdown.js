@@ -34,7 +34,7 @@ const hasValue = val => val || val === 0;
 
 const getValue = val => (hasValue(val) ? val : '');
 
-const hasDisplayText = items => items.some(item => item.displayText);
+const hasDisplayText = items => items.some(item => item.displayText || item.displayText === '');
 
 const includesValue = (value, items) => {
     if (hasDisplayText(items)) {
@@ -44,13 +44,28 @@ const includesValue = (value, items) => {
     return items.includes(value);
 };
 
+const getOptions = (items, allowNoValue, optionsLoading = false) => {
+    if (optionsLoading) return ['loading...'];
+    const options = items ? [...items] : [];
+    if (allowNoValue) {
+        if (hasDisplayText(items)) {
+            options.push({ id: '', displayText: '' });
+        } else {
+            options.push('');
+        }
+    }
+    return options;
+};
+
 function Dropdown({
     onChange,
+    optionsLoading,
     propertyName,
     required,
     disabled,
     label,
-    items = [],
+    items,
+    allowNoValue,
     value,
     helperText,
     fullWidth,
@@ -117,12 +132,12 @@ function Dropdown({
                 }}
             >
                 {hasDisplayText(items)
-                    ? items.map(item => (
+                    ? getOptions(items, allowNoValue, optionsLoading).map(item => (
                           <option key={item.id} value={item.id}>
                               {item.displayText}
                           </option>
                       ))
-                    : items.map(item => (
+                    : getOptions(items, allowNoValue, optionsLoading).map(item => (
                           <option key={item} value={item}>
                               {item}
                           </option>
@@ -151,8 +166,8 @@ Dropdown.propTypes = {
     propertyName: PropTypes.string.isRequired,
     required: PropTypes.bool,
     value: props => {
-        const { items, value } = props;
-        if (!includesValue(value, items)) {
+        const { items, value, allowNoValue, optionsLoading } = props;
+        if (!optionsLoading && !includesValue(value, getOptions(items, allowNoValue))) {
             return new Error('Please provide a value that is in the items list');
         }
 
@@ -161,7 +176,9 @@ Dropdown.propTypes = {
     type: PropTypes.string,
     onChange: PropTypes.func.isRequired,
     error: PropTypes.bool,
-    margin: PropTypes.string
+    margin: PropTypes.string,
+    allowNoValue: PropTypes.bool,
+    optionsLoading: PropTypes.bool
 };
 
 Dropdown.defaultProps = {
@@ -174,7 +191,9 @@ Dropdown.defaultProps = {
     required: false,
     value: '',
     error: false,
-    margin: 'dense'
+    margin: 'dense',
+    allowNoValue: true,
+    optionsLoading: false
 };
 
 export default Dropdown;
