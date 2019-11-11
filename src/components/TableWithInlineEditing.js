@@ -177,9 +177,8 @@ const Row = ({
                 (allowedToEdit ? (
                     <Fragment>
                         {columnsInfo.map((column, index) => (
-                            <Fragment key={columnsInfo[index].title}>
+                            <Fragment key={column.title}>
                                 <TableCell
-                                    key={columnsInfo[index].title}
                                     onClick={() => changeCell(`${rowIndex}${column.key}`)}
                                     onKeyDown={e => handleKeyPress(e, index)}
                                     className={classes.pointer}
@@ -224,9 +223,9 @@ const Row = ({
                 ) : (
                     //readonly for users without edit permission
                     <Fragment>
-                        {columnsInfo.map((column, index) => (
-                            <Fragment key={columnsInfo[index].title}>
-                                <TableCell key={columnsInfo[index].title}>
+                        {columnsInfo.map(column => (
+                            <Fragment key={column.title}>
+                                <TableCell>
                                     <span name={column.key} className={classes.notClickable}>
                                         {rowContent[column.key]}
                                     </span>
@@ -252,8 +251,8 @@ Row.propTypes = {
     columnsInfo: PropTypes.arrayOf(
         PropTypes.shape({
             title: PropTypes.string,
-            displayName: PropTypes.string,
-            type: PropTypes.string
+            type: PropTypes.string,
+            key: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
         })
     ).isRequired,
     removeRow: PropTypes.func.isRequired,
