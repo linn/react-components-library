@@ -85,6 +85,7 @@ storiesOf('TableWithInlineEditing', module)
             content={content}
             updateContent={{}}
             allowedToEdit
+            allowedToCreate
         />
     ))
     .add('allowed to edit only', () => (

@@ -265,8 +265,10 @@ describe('When not allowed to create', () => {
 });
 
 describe('When not allowed to delete', () => {
-    const { queryByTestId } = render(<TableWithInlineEditing {...defaultProps} />);
-    expect(queryByTestId('deleteIcon')).not.toBeInTheDocument();
+    test('should not have delete button', () => {
+        const { queryByTestId } = render(<TableWithInlineEditing {...defaultProps} />);
+        expect(queryByTestId('deleteIcon')).not.toBeInTheDocument();
+    });
 });
 
 describe('when state passed in', () => {
