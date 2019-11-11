@@ -60,7 +60,6 @@ let content = [
     }
 ];
 
-
 storiesOf('TableWithInlineEditing', module)
     .addDecorator(story => <div>{story()}</div>)
     .addDecorator(withKnobs)
@@ -70,7 +69,17 @@ storiesOf('TableWithInlineEditing', module)
             <div>{story()}</div>
         </ThemeProvider>
     ))
-    .add('allowed to edit', () => (
+    .add('allowed to edit, add and delete', () => (
+        <TableWithInlineEditing
+            columnsInfo={columnsInfo}
+            content={content}
+            updateContent={{}}
+            allowedToEdit
+            allowedToCreate
+            allowedToDelete
+        />
+    ))
+    .add('allowed to edit and add', () => (
         <TableWithInlineEditing
             columnsInfo={columnsInfo}
             content={content}
@@ -78,11 +87,14 @@ storiesOf('TableWithInlineEditing', module)
             allowedToEdit
         />
     ))
-    .add('without edit permission', () => (
+    .add('allowed to edit only', () => (
         <TableWithInlineEditing
             columnsInfo={columnsInfo}
             content={content}
             updateContent={{}}
-            allowedToEdit={false}
+            allowedToEdit
         />
+    ))
+    .add('Not allowed to edit', () => (
+        <TableWithInlineEditing columnsInfo={columnsInfo} content={content} updateContent={{}} />
     ));

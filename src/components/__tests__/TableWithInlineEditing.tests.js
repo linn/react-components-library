@@ -12,15 +12,17 @@ const content = [
     {
         code: 1,
         description: 'Descripticon',
-        options: 'choice1'
+        options: 'choice1',
+        id: 1
     },
     {
         code: 22,
         description: 'Descrip',
-        options: 'choice2'
+        options: 'choice2',
+        id: 2
     },
-    { code: 333, description: '3rd one', options: 'choice1' },
-    { code: 4, description: 'four', options: 'choice1' }
+    { code: 333, description: '3rd one', options: 'choice1', id: 3 },
+    { code: 4, description: 'four', options: 'choice1', id: 4 }
 ];
 
 const columnsInfo = [
@@ -49,7 +51,7 @@ const defaultProps = {
 };
 
 describe('When loaded', () => {
-    test('Should display table', () => {
+    test('should display table', () => {
         const { queryByRole } = render(<TableWithInlineEditing {...defaultProps} />);
         expect(queryByRole('table')).toBeInTheDocument();
     });
@@ -125,15 +127,17 @@ describe('When allowed to edit', () => {
             {
                 code: 11,
                 description: 'Descripticon',
-                options: 'choice1'
+                options: 'choice1',
+                id: 1
             },
             {
                 code: 22,
                 description: 'Descrip',
-                options: 'choice2'
+                options: 'choice2',
+                id: 2
             },
-            { code: 333, description: '3rd one', options: 'choice1' },
-            { code: 4, description: 'four', options: 'choice1' }
+            { code: 333, description: '3rd one', options: 'choice1', id: 3 },
+            { code: 4, description: 'four', options: 'choice1', id: 4 }
         ];
 
         expect(updateContent).toHaveBeenCalledWith(newContent);
@@ -160,15 +164,17 @@ describe('When allowed to edit', () => {
             {
                 code: 1,
                 description: 'Descripticon',
-                options: 'choice1'
+                options: 'choice1',
+                id: 1
             },
             {
                 code: 22,
                 description: 'Descrip',
-                options: 'choice3'
+                options: 'choice3',
+                id: 2
             },
-            { code: 333, description: '3rd one', options: 'choice1' },
-            { code: 4, description: 'four', options: 'choice1' }
+            { code: 333, description: '3rd one', options: 'choice1', id: 3 },
+            { code: 4, description: 'four', options: 'choice1', id: 4 }
         ];
 
         expect(updateContent).toHaveBeenCalledWith(newContent);
@@ -195,18 +201,38 @@ describe('When allowed to edit', () => {
             {
                 code: 1,
                 description: 'Descripticon',
-                options: 'choice1'
+                options: 'choice1',
+                id: 1
             },
             {
                 code: 22,
                 description: 'Descrip',
-                options: 'choice2'
+                options: 'choice2',
+                id: 2
             },
-            { code: 333, description: '3rd one', options: 'choice1' },
-            { code: 4, description: 'four4', options: 'choice1' }
+            { code: 333, description: '3rd one', options: 'choice1', id: 3 },
+            { code: 4, description: 'four4', options: 'choice1', id: 4 }
         ];
 
         expect(updateContent).toHaveBeenCalledWith(newContent);
+    });
+});
+
+describe('When allowed to create', () => {
+    test('should have create button', () => {
+        const { queryByTestId } = render(
+            <TableWithInlineEditing {...defaultProps} allowedToCreate />
+        );
+        expect(queryByTestId('addIcon')).toBeInTheDocument();
+    });
+});
+
+describe('When allowed to delete', () => {
+    test('should have delete button', () => {
+        const { queryAllByTestId } = render(
+            <TableWithInlineEditing {...defaultProps} allowedToDelete />
+        );
+        expect(queryAllByTestId('deleteIcon').length).toBe(4);
     });
 });
 
@@ -229,6 +255,18 @@ describe('When not allowed to edit', () => {
         //expect input not to be there, but span still should be
         expect(queryByText('1')).toBeInTheDocument();
     });
+});
+
+describe('When not allowed to create', () => {
+    test('should not have create button', () => {
+        const { queryByTestId } = render(<TableWithInlineEditing {...defaultProps} />);
+        expect(queryByTestId('addIcon')).not.toBeInTheDocument();
+    });
+});
+
+describe('When not allowed to delete', () => {
+    const { queryByTestId } = render(<TableWithInlineEditing {...defaultProps} />);
+    expect(queryByTestId('deleteIcon')).not.toBeInTheDocument();
 });
 
 describe('when state passed in', () => {
