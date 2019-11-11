@@ -2,7 +2,6 @@ import { useEffect, useState, useRef } from 'react';
 
 function useSearch(fetchItems, searchTerm, clearSearch, queryString = null) {
     const [debounceTimer, setDebounceTimer] = useState(null);
-
     const savedFetchItems = useRef();
     const savedDebounceTimer = useRef();
     const savedClearSearch = useRef();

@@ -1,6 +1,6 @@
 {
     "name": "@linn-it/linn-form-components-library",
-    "version": "7.5.0",
+    "version": "8.1.0",
     "private": false,
     "dependencies": {
         "@material-ui/core": "^4.1.0",
@@ -9,6 +9,7 @@
         "@material-ui/styles": "^4.1.0",
         "@testing-library/jest-dom": "^4.0.0",
         "classnames": "^2.2.6",
+        "clsx": "^1.0.4",
         "notistack": "^0.8.7",
         "numeral": "^2.0.6",
         "prettier": "^1.18.2",
