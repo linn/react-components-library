@@ -1,7 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { withKnobs } from '@storybook/addon-knobs/react';
-import { text, boolean, object } from '@storybook/addon-knobs';
+import { withKnobs, text, boolean, object } from '@storybook/addon-knobs';
 import StoryRouter from 'storybook-react-router';
 import Page from '../components/Page';
 import EntityList from '../components/EntityList';
@@ -48,5 +47,11 @@ storiesOf('EntityList', module)
         />
     ))
     .add('with external Links', () => (
-        <EntityList title="Entities" entityList={entities} entityId="id" hasExternalLinks />
+        <EntityList
+            title="Entities"
+            entityList={entities}
+            entityId="id"
+            hasExternalLinks
+            descriptionFieldName={text('descriptionFieldName', 'description')}
+        />
     ));

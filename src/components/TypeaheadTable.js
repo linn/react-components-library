@@ -20,7 +20,8 @@ function TypeaheadTable({
     loading,
     clearSearch,
     history,
-    placeholder
+    placeholder,
+    label
 }) {
     const [searchTerm, setSearchTerm] = useState();
     useSearch(fetchItems, searchTerm, clearSearch);
@@ -75,7 +76,7 @@ function TypeaheadTable({
                 placeholder={placeholder}
                 onChange={handleSearchTermChange}
                 type="search"
-                label="Search Works Orders by Part Number"
+                label={label}
                 variant="outlined"
                 value={searchTerm}
             />
@@ -104,14 +105,16 @@ TypeaheadTable.propTypes = {
     clearSearch: PropTypes.func.isRequired,
     title: PropTypes.string,
     loading: PropTypes.bool,
-    placeholder: PropTypes.string
+    placeholder: PropTypes.string,
+    label: PropTypes.string
 };
 
 TypeaheadTable.defaultProps = {
     title: null,
     loading: false,
     placeholder: '',
-    table: { rows: [] }
+    table: { rows: [] },
+    label: ''
 };
 
 export default TypeaheadTable;

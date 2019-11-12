@@ -49,6 +49,7 @@ storiesOf('TypeaheadTable', module)
             title="TypeaheadTable"
             history={{ push: () => {} }}
             placeholder="placeholder text"
+            label="label"
         />
     ))
     .add('loading', () => (
@@ -61,6 +62,7 @@ storiesOf('TypeaheadTable', module)
             title="TypeaheadTable"
             history={{ push: () => {} }}
             placeholder="placeholder text"
+            label="label"
         />
     ))
     .add('with results', () => (
@@ -72,5 +74,6 @@ storiesOf('TypeaheadTable', module)
             title="TypeaheadTable"
             history={{ push: () => {} }}
             placeholder="placeholder text"
+            label="label"
         />
     ));

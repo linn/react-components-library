@@ -17,6 +17,7 @@ describe('<Dropdown />', () => {
                 value: 'two',
                 label: 'dropdown label',
                 onChange: jest.fn(),
+                allowNoValue: false,
                 propertyName: 'dropdownProperty'
             };
 
@@ -60,7 +61,8 @@ describe('<Dropdown />', () => {
                 value: 2,
                 label: 'dropdown label',
                 onChange: jest.fn(),
-                propertyName: 'dropdownProperty'
+                propertyName: 'dropdownProperty',
+                allowNoValue: false
             };
 
             const ComponentWithTheme = () => (

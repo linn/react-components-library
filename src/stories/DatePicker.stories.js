@@ -1,10 +1,9 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { withKnobs } from '@storybook/addon-knobs/react';
 import ThemeProvider from '@material-ui/styles/ThemeProvider';
 import { action } from '@storybook/addon-actions';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
-import { text, boolean } from '@storybook/addon-knobs';
+import { withKnobs, text, boolean } from '@storybook/addon-knobs';
 import MomentUtils from '@date-io/moment';
 import DatePicker from '../components/DatePicker';
 import { linnTheme } from '../themes/linnTheme';

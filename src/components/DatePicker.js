@@ -14,10 +14,6 @@ const inputStyles = makeStyles(theme => ({
     root: {
         marginTop: theme.spacing(1),
         fontSize: theme.typography.fontSize
-    },
-    disabled: {
-        background: theme.palette.grey[100],
-        color: theme.palette.text.secondary
     }
 }));
 
@@ -34,7 +30,6 @@ function DatePicker({ value, minDate, maxDate, label, onChange, required, disabl
                 margin="dense"
                 inputVariant="outlined"
                 autoOk
-                fullwidth
                 format="DD/MM/YYYY"
                 value={value}
                 minDate={minDate}

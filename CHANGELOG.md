@@ -1,5 +1,17 @@
 # Changelog
 
+## [9.0.0] - 2019-11-12
+
+### Removed
+
+- clearSearch() and clearErrors() actionCreators from UpdateApiActions.js. We don't use these.
+
+### Fixed
+
+-   Various errors that resulted in unwanted debug warnings across numerous components.
+
+-  Dropdown - Now handles an allowNoValue as well as an optionsLoading state, both passed in as props (bool).
+
 ## [8.1.0] - 2019-11-06
 
 ### Added

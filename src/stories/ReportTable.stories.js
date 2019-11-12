@@ -1,8 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import StoryRouter from 'storybook-react-router';
-import { withKnobs } from '@storybook/addon-knobs/react';
-import { boolean, text } from '@storybook/addon-knobs';
+import { withKnobs, boolean, text } from '@storybook/addon-knobs';
 import ReportTable from '../components/ReportTable';
 import Page from '../components/Page';
 import small from '../SampleData/ReportTable/small';
