@@ -22,7 +22,7 @@
     },
     "scripts": {
         "start": "react-scripts start",
-        "build": "jest src/ && rollup --config",
+        "build": "npm install && jest src/ && rollup --config",
         "deploy": "npm run build && npm publish && npm run deploy-storybook",
         "build-storybook": "build-storybook -c .storybook -o .out",
         "deploy-storybook": "storybook-to-ghpages -- --out=.out",
