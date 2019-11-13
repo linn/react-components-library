@@ -1,5 +1,16 @@
 # Changelog
 
+## [9.0.2] - 2019-11-13
+
+### Fixed
+
+- ```LinnWeekPicker``` now takes strings or date objects
+
+### Added
+
+- ```dateUtilities``` for Linn Weeks
+- Tests for ```LinnWeekPicker```
+
 ## [9.0.2] - 2019-11-12
 
 ### Changed
