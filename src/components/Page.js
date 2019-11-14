@@ -34,7 +34,7 @@ const columnWidth = {
     s: 3,
     m: 2,
     l: 1,
-    xl: 0
+    xl: false
 };
 
 function Page({ children, history, width, requestErrors, showRequestErrors }) {

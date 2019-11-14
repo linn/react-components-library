@@ -15,6 +15,11 @@ describe('<PaginatedTable />', () => {
     describe('when items exist', () => {
         beforeEach(() => {
             props = {
+                handleRowLinkClick: () => {},
+                columns: {},
+                pageOptions: {},
+                setPageOptions: () => {},
+                rows: [],
                 page: {
                     rows: [
                         {

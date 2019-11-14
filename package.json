@@ -1,11 +1,10 @@
 {
     "name": "@linn-it/linn-form-components-library",
-    "version": "8.1.0",
+    "version": "9.0.2",
     "private": false,
     "dependencies": {
         "@material-ui/core": "^4.1.0",
         "@material-ui/icons": "^4.1.0",
-        "@material-ui/pickers": "^3.2.2",
         "@material-ui/styles": "^4.1.0",
         "@testing-library/jest-dom": "^4.0.0",
         "classnames": "^2.2.6",
@@ -22,7 +21,7 @@
     },
     "scripts": {
         "start": "react-scripts start",
-        "build": "jest src/ && rollup --config",
+        "build": "npm install && jest src/ && rollup --config",
         "deploy": "npm run build && npm publish && npm run deploy-storybook",
         "build-storybook": "build-storybook -c .storybook -o .out",
         "deploy-storybook": "storybook-to-ghpages -- --out=.out",
@@ -36,8 +35,9 @@
     "peerDependencies": {
         "react": "^16.8.6",
         "react-dom": "^16.8.6",
-        "react-redux": "^7.1.0",
+        "react-redux": "^5.0.7",
         "moment": "^2.24.0",
+        "@material-ui/pickers": "^3.2.2",
         "@date-io/moment": "^1.3.9"
     },
     "jest": {
@@ -69,6 +69,7 @@
         "@storybook/addons": "^4.0.12",
         "@storybook/react": "^4.0.12",
         "@storybook/storybook-deployer": "^2.8.1",
+        "@material-ui/pickers": "^3.2.2",
         "@testing-library/react": "^9.1.0",
         "babel-eslint": "^8.2.6",
         "babel-loader": "^8.0.4",

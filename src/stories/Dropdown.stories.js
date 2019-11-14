@@ -1,7 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { withKnobs } from '@storybook/addon-knobs/react';
-import { text, array } from '@storybook/addon-knobs';
+import { withKnobs, text, array } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import ThemeProvider from '@material-ui/styles/ThemeProvider';
 import { linnTheme } from '../themes/linnTheme';
@@ -23,9 +22,10 @@ storiesOf('Dropdown', module)
     .addDecorator(withKnobs)
     .add('default ', () => (
         <Dropdown
-            value={text('value', '')}
+            value="Item One"
             label={text('label', 'Dropdown Label')}
             items={array('items', items)}
+            propertyName="name"
             {...actions}
         />
     ));

@@ -1,5 +1,29 @@
 # Changelog
 
+## [9.0.2] - 2019-11-12
+
+### Changed
+
+- Declare @material-ui/pickers as a peer dependency and a dev dependency. This is so that the tests pass in Production without there being two instances of the package AND so that the @material-ui/pickers package is available to the storybook too. I can't think of any other way to solve this problem...
+
+## [9.0.1] - 2019-11-12
+
+### Changed
+
+- Use same version of react-redux as consuming projects.
+
+## [9.0.0] - 2019-11-12
+
+### Removed
+
+- clearSearch() and clearErrors() actionCreators from UpdateApiActions.js. We don't use these.
+
+### Fixed
+
+-   Various errors that resulted in unwanted debug warnings across numerous components.
+
+-  Dropdown - Now handles an allowNoValue as well as an optionsLoading state, both passed in as props (bool).
+
 ## [8.1.0] - 2019-11-06
 
 ### Added

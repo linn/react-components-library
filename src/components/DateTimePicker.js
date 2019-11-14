@@ -14,10 +14,6 @@ const inputStyles = makeStyles(theme => ({
     root: {
         marginTop: theme.spacing(1),
         fontSize: theme.typography.fontSize
-    },
-    disabled: {
-        background: theme.palette.grey[100],
-        color: theme.palette.text.secondary
     }
 }));
 

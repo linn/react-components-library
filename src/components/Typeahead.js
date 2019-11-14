@@ -41,13 +41,8 @@ function Typeahead({ fetchItems, items, title, loading, clearSearch }) {
             return (
                 <List dense>
                     {items.map(item => (
-                        <Fragment>
-                            <Link
-                                className={classes.a}
-                                component={RouterLink}
-                                key={item.id}
-                                to={item.href}
-                            >
+                        <Fragment key={item.id}>
+                            <Link className={classes.a} component={RouterLink} to={item.href}>
                                 <ListItem button>
                                     <Grid container spacing={3}>
                                         <Grid item xs={3}>
@@ -91,7 +86,7 @@ Typeahead.propTypes = {
     items: PropTypes.arrayOf(
         PropTypes.shape({
             id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-            name: PropTypes.string,
+            name: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
             description: PropTypes.string,
             href: PropTypes.string
         })

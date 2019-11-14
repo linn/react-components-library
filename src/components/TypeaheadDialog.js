@@ -68,8 +68,8 @@ function TypeaheadDialog({ title, loading, fetchItems, searchItems, onSelect, cl
             return (
                 <List>
                     {searchItems.map(item => (
-                        <Fragment>
-                            <ListItem key={item.id} onClick={() => handleClick(item)} button>
+                        <Fragment key={item.id}>
+                            <ListItem onClick={() => handleClick(item)} button>
                                 <Grid container spacing={3}>
                                     <Grid item xs={3}>
                                         <Typography classes={{ root: classes.nameText }}>

@@ -14,7 +14,7 @@ function SelectedItemsList({ items, removeItem, title }) {
             <Typography variant="body1">{title}</Typography>
             <List dense>
                 {items.map(item => (
-                    <ListItem>
+                    <ListItem key={item.id ? item.id : item}>
                         <ListItemText primary={item.displayText ? item.displayText : item} />
                         {removeItem ? (
                             <ListItemSecondaryAction>
@@ -37,7 +37,7 @@ function SelectedItemsList({ items, removeItem, title }) {
 }
 
 SelectedItemsList.propTypes = {
-    items: PropTypes.arrayOf(PropTypes.shape({})),
+    items: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})])),
     removeItem: PropTypes.func,
     title: PropTypes.string
 };
