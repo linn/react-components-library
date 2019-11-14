@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { withKnobs } from '@storybook/addon-knobs/react';
-import { action } from '@storybook/addon-actions';
+import { withKnobs } from '@storybook/addon-knobs';
 import StoryRouter from 'storybook-react-router';
 import ThemeProvider from '@material-ui/styles/ThemeProvider';
 import TableWithInlineEditing from '../components/TableWithInlineEditing';
@@ -20,43 +19,36 @@ const columnsInfo = [
     },
     {
         title: 'CIT Code',
-        key: 'cITCode',
+        key: 'citCode',
         type: 'dropdown',
         options: ['cit1', 'cit2', 'cit3']
     }
 ];
 
-const pageOptions = {
-    orderBy: '',
-    orderAscending: false,
-    currentPage: 0,
-    rowsPerPage: 10
-};
-
-let content = [
+const content = [
     {
         id: 1,
         operationNumber: 2,
         description: 'ATE TEST',
-        cITCode: 'cit1'
+        citCode: 'cit1'
     },
     {
         id: 2,
         operationNumber: 10,
         description: 'pre build',
-        cITCode: 'cit1'
+        citCode: 'cit1'
     },
     {
         id: 3,
         operationNumber: 20,
         description: 'fit to topside',
-        cITCode: 'cit1'
+        citCode: 'cit1'
     },
     {
         id: 4,
         operationNumber: 30,
         description: 'qc',
-        cITCode: 'cit1'
+        citCode: 'cit1'
     }
 ];
 
@@ -73,7 +65,7 @@ storiesOf('TableWithInlineEditing', module)
         <TableWithInlineEditing
             columnsInfo={columnsInfo}
             content={content}
-            updateContent={{}}
+            updateContent={() => {}}
             allowedToEdit
             allowedToCreate
             allowedToDelete
@@ -83,7 +75,7 @@ storiesOf('TableWithInlineEditing', module)
         <TableWithInlineEditing
             columnsInfo={columnsInfo}
             content={content}
-            updateContent={{}}
+            updateContent={() => {}}
             allowedToEdit
             allowedToCreate
         />
@@ -92,8 +84,8 @@ storiesOf('TableWithInlineEditing', module)
         <TableWithInlineEditing
             columnsInfo={columnsInfo}
             content={content}
-            updateContent={{}}
-            allowedToEdit
+            updateContent={() => {}}
+            allowedToEdit={false}
         />
     ))
     .add('Not allowed to edit', () => (

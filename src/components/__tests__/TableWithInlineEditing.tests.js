@@ -93,13 +93,7 @@ describe('When allowed to edit', () => {
             <TableWithInlineEditing {...defaultProps} />
         );
         const item = getByText('1');
-        fireEvent(
-            item,
-            new MouseEvent('click', {
-                bubbles: true,
-                cancelable: true
-            })
-        );
+        fireEvent.click(item);
         const input = getByDisplayValue('1');
 
         expect(input).toBeInTheDocument();
@@ -111,13 +105,7 @@ describe('When allowed to edit', () => {
             <TableWithInlineEditing {...defaultProps} />
         );
         const item = getByText('1');
-        fireEvent(
-            item,
-            new MouseEvent('click', {
-                bubbles: true,
-                cancelable: true
-            })
-        );
+        fireEvent.click(item);
         const input = getByDisplayValue('1');
         fireEvent.change(input, {
             target: { value: '11' }
@@ -148,13 +136,7 @@ describe('When allowed to edit', () => {
             <TableWithInlineEditing {...defaultProps} />
         );
         const item = getByText('choice2');
-        fireEvent(
-            item,
-            new MouseEvent('click', {
-                bubbles: true,
-                cancelable: true
-            })
-        );
+        fireEvent.click(item);
         const input = getByDisplayValue('choice2');
         fireEvent.change(input, {
             target: { value: 'choice3' }
@@ -185,13 +167,7 @@ describe('When allowed to edit', () => {
             <TableWithInlineEditing {...defaultProps} />
         );
         const item = getByText('four');
-        fireEvent(
-            item,
-            new MouseEvent('click', {
-                bubbles: true,
-                cancelable: true
-            })
-        );
+        fireEvent.click(item);
         const input = getByDisplayValue('four');
         fireEvent.change(input, {
             target: { value: 'four4' }
@@ -242,13 +218,7 @@ describe('When not allowed to edit', () => {
             <TableWithInlineEditing {...defaultProps} allowedToEdit={false} />
         );
         const item = getByText('1');
-        fireEvent(
-            item,
-            new MouseEvent('click', {
-                bubbles: true,
-                cancelable: true
-            })
-        );
+        fireEvent.click(item);
 
         expect(queryByDisplayValue('1')).not.toBeInTheDocument();
         expect(queryByRole('input')).not.toBeInTheDocument();
@@ -279,13 +249,7 @@ describe('when state passed in', () => {
             <TableWithInlineEditing {...defaultProps} />
         );
         const item = getByText('1');
-        fireEvent(
-            item,
-            new MouseEvent('click', {
-                bubbles: true,
-                cancelable: true
-            })
-        );
+        fireEvent.click(item);
         const input = getByDisplayValue('1');
         fireEvent.change(input, {
             target: { value: '11' }

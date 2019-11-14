@@ -63,8 +63,8 @@ function TableWithInlineEditing({
             <Table>
                 <TableHead key="headers" onClick={clearEditingCell}>
                     <TableRow>
-                        {columnsInfo.map(el => (
-                            <TableCell key={el.key}>{el.title}</TableCell>
+                        {columnsInfo.map(column => (
+                            <TableCell key={column.key}>{column.title}</TableCell>
                         ))}
                         {allowedToDelete && <TableCell key="Deleteplaceholdercell" />}
                     </TableRow>
@@ -104,14 +104,16 @@ function TableWithInlineEditing({
 
 TableWithInlineEditing.propTypes = {
     content: PropTypes.arrayOf(
-        PropTypes.shape({ id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]) })
+        PropTypes.shape({
+            id: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+        })
     ),
     updateContent: PropTypes.func.isRequired,
     columnsInfo: PropTypes.arrayOf(
         PropTypes.shape({
             title: PropTypes.string,
-            displayName: PropTypes.string,
-            type: PropTypes.string
+            type: PropTypes.string,
+            key: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
         })
     ).isRequired,
     allowedToEdit: PropTypes.bool.isRequired,
