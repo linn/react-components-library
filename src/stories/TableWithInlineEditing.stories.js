@@ -85,9 +85,13 @@ storiesOf('TableWithInlineEditing', module)
             columnsInfo={columnsInfo}
             content={content}
             updateContent={() => {}}
-            allowedToEdit={false}
+            allowedToEdit
         />
     ))
     .add('Not allowed to edit', () => (
-        <TableWithInlineEditing columnsInfo={columnsInfo} content={content} updateContent={{}} />
+        <TableWithInlineEditing
+            columnsInfo={columnsInfo}
+            content={content}
+            updateContent={() => {}}
+        />
     ));
