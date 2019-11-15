@@ -1,5 +1,11 @@
 # Changelog
 
+## [9.0.3] - 2019-11-15
+
+### Changed
+
+- Update table with inline editing to include add and delete icons, extra props for these permissions + tests
+
 ## [9.0.2] - 2019-11-12
 
 ### Changed
