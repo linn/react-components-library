@@ -115,7 +115,7 @@ export default function LinnWeekPicker({
 }
 
 LinnWeekPicker.propTypes = {
-    weekStartDate: PropTypes.shape({}),
+    weekStartDate: PropTypes.oneOfType(PropTypes.shape({}), PropTypes.string),
     setWeekStartDate: PropTypes.func.isRequired,
     propertyName: PropTypes.string,
     label: PropTypes.string.isRequired,

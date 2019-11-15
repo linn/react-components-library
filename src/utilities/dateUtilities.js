@@ -1,7 +1,12 @@
 import moment from 'moment';
 
-export const cloneDate = date =>
-    moment.isMoment(date) ? date.clone() : moment(date, 'MM-DD-YYYY');
+export function convertToMoment(date) {
+    return moment.isMoment(date) ? date : moment(date);
+}
+
+export function cloneDate(date) {
+    return moment.isMoment(date) ? date.clone() : moment(date, 'MM-DD-YYYY');
+}
 
 export function getWeekStartDate(date) {
     const dateClone = cloneDate(date);
