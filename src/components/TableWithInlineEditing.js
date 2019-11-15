@@ -198,6 +198,7 @@ const Row = ({
                                                     value={rowContent[column.key]}
                                                     propertyName={column.key}
                                                     label=""
+                                                    allowNoValue={false}
                                                 />
                                             ) : (
                                                 <InputField
