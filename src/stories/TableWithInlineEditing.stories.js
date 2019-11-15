@@ -93,5 +93,5 @@ storiesOf('TableWithInlineEditing', module)
             columnsInfo={columnsInfo}
             content={content}
             updateContent={() => {}}
-        />
+/>
     ));
