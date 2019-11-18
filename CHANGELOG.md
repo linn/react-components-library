@@ -1,5 +1,11 @@
 # Changelog
 
+## [10.0.0] - 2019-11-18
+
+## Changed
+
+- Declared notistack and react router as peer and dev dependencies as opposed to production dependencies. This means this package will expect to find them in your consuming project at the same version as declared here. 
+
 ## [9.0.3] - 2019-11-15
 
 ### Changed
