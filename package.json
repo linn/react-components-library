@@ -9,7 +9,6 @@
         "@testing-library/jest-dom": "^4.0.0",
         "classnames": "^2.2.6",
         "clsx": "^1.0.4",
-        "notistack": "^0.8.7",
         "numeral": "^2.0.6",
         "prettier": "^1.18.2",
         "prop-types": "^15.7.2",
@@ -38,7 +37,8 @@
         "react-redux": "^5.0.7",
         "moment": "^2.24.0",
         "@material-ui/pickers": "^3.2.2",
-        "@date-io/moment": "^1.3.9"
+        "@date-io/moment": "^1.3.9",        
+         "notistack": "^0.9.6"
     },
     "jest": {
         "setupFilesAfterEnv": [
@@ -91,7 +91,9 @@
         "rollup": "^1.19.4",
         "rollup-plugin-babel": "^4.3.3",
         "rollup-plugin-uglify": "^6.0.2",
-        "storybook-react-router": "^1.0.2"
+        "storybook-react-router": "^1.0.2",
+        "notistack": "^0.9.6"
+
     },
     "main": "dist/bundle.min.js",
     "files": [
