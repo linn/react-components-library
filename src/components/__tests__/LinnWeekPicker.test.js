@@ -8,12 +8,24 @@ import LinnWeekPicker from '../LinnWeekPicker';
 afterEach(cleanup);
 
 describe('<LinnWeekPicker />', () => {
-    test('should display date when date passed as date', () => {
+    test('should display date when date passed as moment object', () => {
         const { getByDisplayValue } = render(
             <LinnWeekPicker
                 setWeekStartDate={() => {}}
                 label="Test"
                 selectedDate={moment('11-09-2019', 'MM-DD-YYYY')}
+            />
+        );
+        const item = getByDisplayValue('09/11/2019');
+        expect(item).toBeInTheDocument();
+    });
+
+    test('should display date when date passed as date object', () => {
+        const { getByDisplayValue } = render(
+            <LinnWeekPicker
+                setWeekStartDate={() => {}}
+                label="Test"
+                selectedDate={new Date('01/01/2020')}
             />
         );
         const item = getByDisplayValue('09/11/2019');
