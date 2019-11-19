@@ -28,7 +28,7 @@ describe('<LinnWeekPicker />', () => {
                 selectedDate={new Date('01/01/2020')}
             />
         );
-        const item = getByDisplayValue('09/11/2019');
+        const item = getByDisplayValue('01/01/2020');
         expect(item).toBeInTheDocument();
     });
 
