@@ -54,7 +54,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function LinnWeekPicker({
-    weekStartDate,
+    selectedDate,
     setWeekStartDate,
     propertyName,
     label,
@@ -105,7 +105,7 @@ export default function LinnWeekPicker({
                 disabled={disabled}
                 margin="dense"
                 inputVariant="outlined"
-                value={moment.isMoment(weekStartDate) ? weekStartDate : moment(weekStartDate)}
+                value={moment.isMoment(selectedDate) ? selectedDate : moment(selectedDate)}
                 onChange={handleChange}
                 renderDay={renderWeekDay}
                 format="DD/MM/YYYY"
@@ -115,7 +115,7 @@ export default function LinnWeekPicker({
 }
 
 LinnWeekPicker.propTypes = {
-    weekStartDate: PropTypes.oneOfType(PropTypes.shape({}), PropTypes.string),
+    selectedDate: PropTypes.oneOfType([PropTypes.shape({}), PropTypes.string]),
     setWeekStartDate: PropTypes.func.isRequired,
     propertyName: PropTypes.string,
     label: PropTypes.string.isRequired,
@@ -124,7 +124,7 @@ LinnWeekPicker.propTypes = {
 };
 
 LinnWeekPicker.defaultProps = {
-    weekStartDate: null,
+    selectedDate: new Date(),
     propertyName: '',
     disabled: false,
     required: false

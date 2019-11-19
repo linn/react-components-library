@@ -1,9 +1,5 @@
 import moment from 'moment';
 
-export function convertToMoment(date) {
-    return moment.isMoment(date) ? date : moment(date);
-}
-
 export function cloneDate(date) {
     return moment.isMoment(date) ? date.clone() : moment(date, 'MM-DD-YYYY');
 }

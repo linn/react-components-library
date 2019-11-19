@@ -13,7 +13,7 @@ describe('<LinnWeekPicker />', () => {
             <LinnWeekPicker
                 setWeekStartDate={() => {}}
                 label="Test"
-                weekStartDate={moment('11-09-2019', 'MM-DD-YYYY')}
+                selectedDate={moment('11-09-2019', 'MM-DD-YYYY')}
             />
         );
         const item = getByDisplayValue('09/11/2019');
@@ -25,7 +25,7 @@ describe('<LinnWeekPicker />', () => {
             <LinnWeekPicker
                 setWeekStartDate={() => {}}
                 label="Test"
-                weekStartDate={moment('11-09-2019', 'MM-DD-YYYY').toISOString()}
+                selectedDate={moment('11-09-2019', 'MM-DD-YYYY').toISOString()}
             />
         );
 

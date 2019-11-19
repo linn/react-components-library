@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { getWeekStartDate, getWeekEndDate, convertToMoment } from '../dateUtilities';
+import { getWeekStartDate, getWeekEndDate } from '../dateUtilities';
 
 describe('when getting linn week start date', () => {
     describe('when passing moment date and not a saturday', () => {
