@@ -1,7 +1,17 @@
 # Changelog
-## [10.0.1] - 2019-11-18
+
+## [10.0.2] - 2019-11-20
+
 ### Changed
+
+- added fix for side scrolling issue
+
+## [10.0.1] - 2019-11-18
+
+### Changed
+
 - Reverted formatTitle to previous version with drilldown and formatting.
+
 ## [10.0.0] - 2019-11-18
 
 ### Changed
