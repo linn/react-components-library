@@ -1,7 +1,6 @@
 @media print {
     @page {
-        /* size: 210mm 297mm ;  */
-        
+        size: 210mm 297mm ;         
         margin: 0mm;
         margin-right: 0mm; 
       }
