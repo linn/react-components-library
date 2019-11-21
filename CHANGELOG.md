@@ -1,6 +1,12 @@
 # Changelog
 
-## [10.0.2] - 2019-11-20
+## [10.0.4] - 2019-11-21
+
+### Changed
+
+- added css for printing tables and used within page
+
+## [10.0.3] - 2019-11-20
 
 ### Changed
 
