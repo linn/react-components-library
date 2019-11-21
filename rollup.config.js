@@ -69,7 +69,8 @@ export default [
             getUsername: 'src/selectors/userSelectors.js',
             errorTheme: 'src/themes/errorTheme.js',
             linnTheme: 'src/themes/linnTheme.js',
-            fetchError: 'src/reducers/reducerfactories/fetchErrorReducerFactory.js'
+            fetchError: 'src/reducers/reducerfactories/fetchErrorReducerFactory.js',
+            printCss: '/printStyles.css'
         },
         plugins: [babel({ exclude: 'node_modules/**' }), terser()],
         output: [
