@@ -1,12 +1,10 @@
 # Changelog
 
-<<<<<<< HEAD
 ## [10.1.0] - 2019-12-2
 
 ## Changed
 
 - Extended the Typeahead so that it's more flexible than as just a search that links you to other pages. It now takes an onSelect action as an optional prop such that you can define custom behaviour, and a links boolean which you can set to false to override the default behaviour of navigating to a new page onSelect. Now also takes an optional modal boolean prop which lets you display search results in a modal as opposed to below the search.
-=======
 ## [10.0.4] - 2019-11-21
 
 ### Changed
@@ -24,7 +22,6 @@
 ### Changed
 
 - Reverted formatTitle to previous version with drilldown and formatting.
->>>>>>> master
 
 ## [10.0.0] - 2019-11-18
 
