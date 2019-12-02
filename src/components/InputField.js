@@ -49,7 +49,8 @@ function InputField({
     placeholder,
     required,
     value,
-    decimalPlaces
+    decimalPlaces,
+    textFieldProps
 }) {
     const classes = useStyles();
 
@@ -131,6 +132,7 @@ function InputField({
                     }
                 }}
                 variant="outlined"
+                {...textFieldProps}
             />
         </Fragment>
     );
@@ -153,7 +155,8 @@ InputField.propTypes = {
     type: PropTypes.string,
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     onChange: PropTypes.func,
-    decimalPlaces: PropTypes.number
+    decimalPlaces: PropTypes.number,
+    textFieldProps: PropTypes.shape({})
 };
 
 InputField.defaultProps = {
@@ -173,7 +176,8 @@ InputField.defaultProps = {
     type: 'text',
     value: '',
     onChange: null,
-    decimalPlaces: null
+    decimalPlaces: null,
+    textFieldProps: null
 };
 
 export default InputField;
