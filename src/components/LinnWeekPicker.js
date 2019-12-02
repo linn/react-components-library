@@ -6,6 +6,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import moment from 'moment';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
+import { getWeekStartDate, getWeekEndDate } from '../utilities/dateUtilities';
 
 const useStyles = makeStyles(theme => ({
     dayWrapper: {
@@ -52,8 +53,8 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function LinnWeekDatePicker({
-    weekStartDate,
+export default function LinnWeekPicker({
+    selectedDate,
     setWeekStartDate,
     propertyName,
     label,
@@ -63,40 +64,12 @@ export default function LinnWeekDatePicker({
     const classes = useStyles();
 
     const handleChange = date => {
-        if (date.day() === 6) {
-            setWeekStartDate(propertyName, date.clone().endOf('week'));
-        } else {
-            setWeekStartDate(
-                propertyName,
-                date
-                    .clone()
-                    .startOf('week')
-                    .subtract(1, 'days')
-            );
-        }
+        setWeekStartDate(propertyName, getWeekStartDate(date));
     };
 
     const renderWeekDay = (date, selected, dayInCurrentMonth) => {
-        let start;
-        let end;
-
-        if (selected.day() === 6) {
-            start = selected.clone().endOf('week');
-            end = selected
-                .clone()
-                .endOf('week')
-                .add(6, 'days');
-        } else {
-            start = selected
-                .clone()
-                .startOf('week')
-                .subtract(1, 'days');
-
-            end = selected
-                .clone()
-                .endOf('week')
-                .subtract(1, 'days');
-        }
+        const start = getWeekStartDate(selected);
+        const end = getWeekEndDate(selected);
 
         const dayIsBetween = date.isBetween(start, end, 'days', '[]');
         const isFirstDay = date.isSame(start, 'day');
@@ -132,7 +105,7 @@ export default function LinnWeekDatePicker({
                 disabled={disabled}
                 margin="dense"
                 inputVariant="outlined"
-                value={moment.isMoment(weekStartDate) ? weekStartDate : null}
+                value={moment.isMoment(selectedDate) ? selectedDate : moment(selectedDate)}
                 onChange={handleChange}
                 renderDay={renderWeekDay}
                 format="DD/MM/YYYY"
@@ -141,8 +114,8 @@ export default function LinnWeekDatePicker({
     );
 }
 
-LinnWeekDatePicker.propTypes = {
-    weekStartDate: PropTypes.shape({}),
+LinnWeekPicker.propTypes = {
+    selectedDate: PropTypes.oneOfType([PropTypes.shape({}), PropTypes.string]),
     setWeekStartDate: PropTypes.func.isRequired,
     propertyName: PropTypes.string,
     label: PropTypes.string.isRequired,
@@ -150,8 +123,8 @@ LinnWeekDatePicker.propTypes = {
     required: PropTypes.bool
 };
 
-LinnWeekDatePicker.defaultProps = {
-    weekStartDate: null,
+LinnWeekPicker.defaultProps = {
+    selectedDate: new Date(),
     propertyName: '',
     disabled: false,
     required: false

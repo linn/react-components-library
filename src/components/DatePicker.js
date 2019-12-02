@@ -50,7 +50,7 @@ DatePicker.propTypes = {
     minDate: PropTypes.string,
     maxDate: PropTypes.string,
     required: PropTypes.bool,
-    value: PropTypes.string,
+    value: PropTypes.oneOfType([PropTypes.shape({}), PropTypes.string]),
     disabled: PropTypes.bool,
     onChange: PropTypes.func
 };

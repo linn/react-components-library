@@ -1,14 +1,34 @@
 # Changelog
 
+<<<<<<< HEAD
 ## [10.1.0] - 2019-12-2
 
 ## Changed
 
 - Extended the Typeahead so that it's more flexible than as just a search that links you to other pages. It now takes an onSelect action as an optional prop such that you can define custom behaviour, and a links boolean which you can set to false to override the default behaviour of navigating to a new page onSelect. Now also takes an optional modal boolean prop which lets you display search results in a modal as opposed to below the search.
+=======
+## [10.0.4] - 2019-11-21
+
+### Changed
+
+- added css for printing tables and used within page
+
+## [10.0.3] - 2019-11-20
+
+### Changed
+
+- added fix for side scrolling issue
+
+## [10.0.1] - 2019-11-18
+
+### Changed
+
+- Reverted formatTitle to previous version with drilldown and formatting.
+>>>>>>> master
 
 ## [10.0.0] - 2019-11-18
 
-## Changed
+### Changed
 
 - Declared notistack and react router as peer and dev dependencies as opposed to production dependencies. This means this package will expect to find them in your consuming project at the same version as declared here. 
 
@@ -17,6 +37,17 @@
 ### Changed
 
 - Update table with inline editing to include add and delete icons, extra props for these permissions + tests
+
+## [9.0.2] - 2019-11-13
+
+### Fixed
+
+- ```LinnWeekPicker``` now takes strings or date objects
+
+### Added
+
+- ```dateUtilities``` for Linn Weeks
+- Tests for ```LinnWeekPicker```
 
 ## [9.0.2] - 2019-11-12
 
