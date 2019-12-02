@@ -54,4 +54,16 @@ storiesOf('Typeahead', module)
             clearSearch={clearSearch}
             classes={{}}
         />
+    ))
+    .add('modal ', () => (
+        <Typeahead
+            title={text('title', 'Title Text')}
+            loading={boolean('loading', false)}
+            modal
+            label="click me and see"
+            fetchItems={fetchItems}
+            items={array('items', [])}
+            clearSearch={clearSearch}
+            classes={{}}
+        />
     ));
