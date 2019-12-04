@@ -8,7 +8,9 @@ describe('item store reducer factory', () => {
         REQUEST_UPDATE_ENTITY: 'REQUEST_UPDATE_ENTITY',
         REQUEST_ADD_ENTITY: 'REQUEST_ADD_ENTITY',
         RECEIVE_ENTITY: 'RECEIVE_ENTITY',
-        RECEIVE_NEW_ENTITY: 'RECEIVE_NEW_ENTITY'
+        RECEIVE_NEW_ENTITY: 'RECEIVE_NEW_ENTITY',
+        REQUEST_APPLICATION_STATE_ENTITY: 'REQUEST_APPLICATION_STATE_ENTITY',
+        RECEIVE_APPLICATION_STATE_ENTITY: 'RECEIVE_APPLICATION_STATE_ENTITY'
     };
     const defaultState = {
         loading: false,
@@ -31,6 +33,27 @@ describe('item store reducer factory', () => {
             loading: true,
             item: null,
             editStatus: 'view'
+        };
+
+        deepFreeze(state);
+
+        expect(generatedReducer(state, action)).toEqual(expected);
+    });
+
+    test('when requesting application state', () => {
+        const state = {
+            loading: false,
+            applicationState: { links: [] }
+        };
+
+        const action = {
+            type: actionTypes.REQUEST_APPLICATION_STATE_ENTITY,
+            payload: {}
+        };
+
+        const expected = {
+            loading: false,
+            applicationState: null
         };
 
         deepFreeze(state);
@@ -114,6 +137,28 @@ describe('item store reducer factory', () => {
             loading: false,
             item: { name: '1' },
             editStatus: 'view'
+        };
+
+        deepFreeze(state);
+
+        expect(generatedReducer(state, action)).toEqual(expected);
+    });
+
+    test('when receiving application state', () => {
+        const state = {
+            loading: false,
+            item: null
+        };
+
+        const action = {
+            type: actionTypes.RECEIVE_APPLICATION_STATE_ENTITY,
+            payload: { data: { links: [{ rel: 'create', href: '/create' }] } }
+        };
+
+        const expected = {
+            loading: false,
+            item: null,
+            applicationState: { links: [{ rel: 'create', href: '/create' }] }
         };
 
         deepFreeze(state);

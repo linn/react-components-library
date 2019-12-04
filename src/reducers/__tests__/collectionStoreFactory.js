@@ -4,7 +4,9 @@ import collectionStoreFactory from '../reducerFactories/collectionStoreFactory';
 describe('collection store reducer factory', () => {
     const actionTypes = {
         REQUEST_ENTITIES: 'REQUEST_ENTITIES',
-        RECEIVE_ENTITIES: 'RECEIVE_ENTITIES'
+        RECEIVE_ENTITIES: 'RECEIVE_ENTITIES',
+        REQUEST_APPLICATION_STATE_ENTITIES: 'REQUEST_APPLICATION_STATE_ENTITIES',
+        RECEIVE_APPLICATION_STATE_ENTITIES: 'RECEIVE_APPLICATION_STATE_ENTITIES'
     };
     const defaultState = {
         loading: false,
@@ -23,8 +25,28 @@ describe('collection store reducer factory', () => {
         };
 
         const expected = {
-            item: {},
             loading: true
+        };
+
+        deepFreeze(state);
+
+        expect(generatedReducer(state, action)).toEqual(expected);
+    });
+
+    test('when requesting application state', () => {
+        const state = {
+            loading: false,
+            applicationState: { links: [] }
+        };
+
+        const action = {
+            type: actionTypes.REQUEST_APPLICATION_STATE_ENTITIES,
+            payload: {}
+        };
+
+        const expected = {
+            loading: false,
+            applicationState: null
         };
 
         deepFreeze(state);
@@ -46,6 +68,28 @@ describe('collection store reducer factory', () => {
         const expected = {
             loading: false,
             items: [{ name: '1', href: '/1', links: [{ rel: 'self', href: '/1' }] }]
+        };
+
+        deepFreeze(state);
+
+        expect(generatedReducer(state, action)).toEqual(expected);
+    });
+
+    test('when receiving application state', () => {
+        const state = {
+            loading: false,
+            items: null
+        };
+
+        const action = {
+            type: actionTypes.RECEIVE_APPLICATION_STATE_ENTITIES,
+            payload: { data: { links: [{ rel: 'create', href: '/create' }] } }
+        };
+
+        const expected = {
+            loading: false,
+            items: null,
+            applicationState: { links: [{ rel: 'create', href: '/create' }] }
         };
 
         deepFreeze(state);

@@ -26,6 +26,12 @@
                     editStatus: 'view'
                 };
 
+            case actionTypes[`REQUEST_APPLICATION_STATE_${itemRoot}`]:
+                return {
+                    ...state,
+                    applicationState: null
+                };
+
             case actionTypes[`REQUEST_UPDATE_${itemRoot}`]:
                 return {
                     ...state,
@@ -56,6 +62,14 @@
                     loading: false,
                     item: action.payload.data,
                     editStatus: 'view'
+                };
+
+            case actionTypes[`RECEIVE_APPLICATION_STATE_${itemRoot}`]:
+                return {
+                    ...state,
+                    applicationState: {
+                        links: action.payload.data ? action.payload.data.links : []
+                    }
                 };
 
             case actionTypes[`RECEIVE_UPDATED_${itemRoot}`]:
