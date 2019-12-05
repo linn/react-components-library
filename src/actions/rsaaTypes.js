@@ -8,6 +8,11 @@ export const requested = (actionTypes, actionTypeRoot) => ({
     payload: {}
 });
 
+export const requestedState = (actionTypes, actionTypeRoot) => ({
+    type: actionTypes[`REQUEST_APPLICATION_STATE_${actionTypeRoot}`],
+    payload: {}
+});
+
 export const requestAdd = (actionTypes, actionTypeRoot) => ({
     type: actionTypes[`REQUEST_ADD_${actionTypeRoot}`],
     payload: {}
@@ -25,6 +30,11 @@ export const receiveUpdated = (actionTypes, actionTypeRoot, itemName) => ({
 
 export const received = (actionTypes, actionTypeRoot, itemName) => ({
     type: actionTypes[`RECEIVE_${actionTypeRoot}`],
+    payload: successPayload(itemName)
+});
+
+export const receivedState = (actionTypes, actionTypeRoot, itemName) => ({
+    type: actionTypes[`RECEIVE_APPLICATION_STATE_${actionTypeRoot}`],
     payload: successPayload(itemName)
 });
 

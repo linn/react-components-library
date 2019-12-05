@@ -31,6 +31,7 @@ import FetchApiActions from './src/actions/FetchApiActions';
 import ProcessActions from './src/actions/ProcessActions';
 import ReportActions from './src/actions/ReportActions';
 import UpdateApiActions from './src/actions/UpdateApiActions';
+import StateApiActions from './src/actions/StateApiActions';
 import fetchNews from './src/actions/fetchNews';
 import markNotificationSeen from './src/actions/markNotificationSeen';
 import fetchMenu from './src/actions/fetchMenu';
@@ -106,6 +107,7 @@ export {
     ProcessActions,
     ReportActions,
     UpdateApiActions,
+    StateApiActions,
     ItemType,
     CollectionSelectors,
     PaginationSelectors,

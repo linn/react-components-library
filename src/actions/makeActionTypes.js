@@ -1,7 +1,9 @@
 const makeActionTypes = (entityType, makeAll = true) => {
     const types = {};
     types[`REQUEST_${entityType}`] = `REQUEST_${entityType}`;
+    types[`REQUEST_APPLICATION_STATE_${entityType}`] = `REQUEST_APPLICATION_STATE_${entityType}`;
     types[`RECEIVE_${entityType}`] = `RECEIVE_${entityType}`;
+    types[`RECEIVE_APPLICATION_STATE_${entityType}`] = `RECEIVE_APPLICATION_STATE_${entityType}`;
     types[`REQUEST_SEARCH_${entityType}`] = `REQUEST_SEARCH_${entityType}`;
     types[`RECEIVE_SEARCH_${entityType}`] = `RECEIVE_SEARCH_${entityType}`;
     types[`CLEAR_SEARCH_${entityType}`] = `CLEAR_SEARCH_${entityType}`;
