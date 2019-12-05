@@ -5,7 +5,6 @@ import { useSnackbar } from 'notistack';
 import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Breadcrumbs from './Breadcrumbs';
-import '../../printStyles.css';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -55,7 +54,7 @@ function Page({ children, history, width, requestErrors, showRequestErrors }) {
     }, [requestErrors, enqueueSnackbar]);
 
     return (
-        <div className="pageContainer">
+        <Fragment>
             <Grid container spacing={3} className={classes.grid}>
                 <Grid item xs={1} />
                 <Grid item xs={10}>
@@ -71,7 +70,7 @@ function Page({ children, history, width, requestErrors, showRequestErrors }) {
                 </Grid>
                 <Grid item xs={columnWidth[width]} />
             </Grid>
-        </div>
+        </Fragment>
     );
 }
 
