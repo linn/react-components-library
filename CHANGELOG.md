@@ -1,4 +1,9 @@
 # Changelog
+## [10.1.0] - 2019-12-04
+### Added
+- StateApiActions
+### Changed
+- added application state to actions, reducers and selectors
 
 ## [10.1.0] - 2019-12-2
 

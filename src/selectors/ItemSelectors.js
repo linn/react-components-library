@@ -34,4 +34,13 @@
 
         return storeItem.snackbarVisible;
     };
+
+    this.getApplicationState = state => {
+        const storeItem = state[item];
+        if (!storeItem) {
+            return null;
+        }
+
+        return storeItem.applicationState ? storeItem.applicationState : null;
+    };
 }

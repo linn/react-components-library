@@ -138,3 +138,18 @@ describe('when getting privilege', () => {
         expect(collectionSelectors.hasPrivilege(state, rel)).toEqual(expectedResult);
     });
 });
+
+describe('when getting application state', () => {
+    test('should return state', () => {
+        const state = {
+            itemTypes: {
+                items: [],
+                applicationState: { links: [{ rel: 'a', href: '/b' }] }
+            }
+        };
+
+        const expectedResult = { links: [{ rel: 'a', href: '/b' }] };
+
+        expect(collectionSelectors.getApplicationState(state)).toEqual(expectedResult);
+    });
+});

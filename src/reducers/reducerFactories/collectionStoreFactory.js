@@ -20,14 +20,25 @@ export default function(
             case actionTypes[`REQUEST_${itemRoot}`]:
                 return {
                     ...state,
-                    item: {},
                     loading: true
+                };
+            case actionTypes[`REQUEST_APPLICATION_STATE_${itemRoot}`]:
+                return {
+                    ...state,
+                    applicationState: null
                 };
             case actionTypes[`RECEIVE_${itemRoot}`]:
                 return {
                     ...state,
                     loading: false,
                     items: getItems(action.payload.data)
+                };
+            case actionTypes[`RECEIVE_APPLICATION_STATE_${itemRoot}`]:
+                return {
+                    ...state,
+                    applicationState: {
+                        links: action.payload.data ? action.payload.data.links : []
+                    }
                 };
             case actionTypes[`REQUEST_SEARCH_${itemRoot}`]:
                 return {

@@ -59,4 +59,13 @@
 
         return links ? links.some(l => l.rel === rel) : false;
     };
+
+    this.getApplicationState = state => {
+        const storeItems = state[itemType];
+        if (!storeItems) {
+            return null;
+        }
+
+        return storeItems.applicationState ? storeItems.applicationState : null;
+    };
 }
