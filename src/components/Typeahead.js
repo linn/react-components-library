@@ -165,7 +165,7 @@ function Typeahead({
                                 textFieldProps={{
                                     autoFocus: true
                                 }}
-                                placeholder="Search by id or description"
+                                placeholder={placeholder}
                                 onChange={handleSearchTermChange}
                                 value={searchTerm}
                             />
