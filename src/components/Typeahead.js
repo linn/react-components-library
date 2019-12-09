@@ -14,6 +14,7 @@ import useSearch from '../hooks/useSearch';
 import Title from './Title';
 import Loading from './Loading';
 import InputField from './InputField';
+import SearchIcon from './SearchIcon';
 
 const useStyles = makeStyles(theme => ({
     a: {
@@ -63,21 +64,17 @@ function Typeahead({
     };
 
     const handleClick = e => {
-        setDialogOpen(false);
+        if (modal) {
+            setDialogOpen(false);
+        }
         if (clearSearch) {
             clearSearch();
         }
         setSearchTerm(null);
-        if (!links) {
+        if (onSelect) {
             onSelect(e);
         }
     };
-
-    const searchIcon = () => (
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-            <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
-        </svg>
-    );
 
     const Item = ({ item, onClick }) => (
         <ListItem button onClick={modal ? onClick : undefined}>
@@ -113,7 +110,7 @@ function Typeahead({
                         <Fragment key={item.id}>
                             {links ? (
                                 <Link className={classes.a} component={RouterLink} to={item.href}>
-                                    <Item item={item} />
+                                    <Item item={item} onClick={() => handleClick(item)} />
                                 </Link>
                             ) : (
                                 <Item item={item} onClick={() => handleClick(item)} />
@@ -131,7 +128,7 @@ function Typeahead({
         <Fragment>
             {!modal ? <Title text={title} /> : <Fragment />}
             <InputField
-                adornment={searchIcon()}
+                adornment={SearchIcon()}
                 textFieldProps={{
                     onClick: () => {
                         setDialogOpen(true);
@@ -141,7 +138,7 @@ function Typeahead({
                 value={modal ? value : searchTerm}
                 label={label}
                 placeholder={placeholder}
-                onChange={modal ? null : handleSearchTermChange}
+                onChange={modal ? () => setDialogOpen(true) : handleSearchTermChange}
             />
             {modal ? (
                 <Dialog
@@ -164,7 +161,7 @@ function Typeahead({
                                 {title}
                             </Typography>
                             <InputField
-                                adornment={searchIcon()}
+                                adornment={SearchIcon()}
                                 textFieldProps={{
                                     autoFocus: true
                                 }}
