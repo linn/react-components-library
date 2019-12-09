@@ -71,7 +71,7 @@ function Typeahead({
             clearSearch();
         }
         setSearchTerm(null);
-        if (onSelect) {
+        if (!links) {
             onSelect(e);
         }
     };

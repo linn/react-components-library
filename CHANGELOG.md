@@ -1,3 +1,13 @@
+## [10.2.0] - 2019-12-0
+
+## Changed
+
+- Extended the Typeahead to be more flexible than a search that just links you to other pages. It now takes an onSelect action as an optional prop such that you can define custom behaviour, and a links boolean which you can set to false to override the default behaviour of navigating to a new page onSelect. You should provide an onSelect function and a links={false} configuration if custom behaviour is required ( and conversely should not provide an onSelect and a links={true} config, since any onSelect() bheaviour is ignored if links is true anyway). 
+
+Now also takes an optional modal boolean prop which lets you display search results in a modal as opposed to below the search which is useful for using this in a form where there isn't space to displau search results in the same plane as the field.
+
+The two new props have default values such that original use cases are respected - i.e. links={true} and modal={false} - hence no breaking changes in this version.
+
 # Changelog
 ## [10.1.0] - 2019-12-04
 ### Added
@@ -5,11 +15,6 @@
 ### Changed
 - added application state to actions, reducers and selectors
 
-## [10.1.0] - 2019-12-2
-
-## Changed
-
-- Extended the Typeahead so that it's more flexible than as just a search that links you to other pages. It now takes an onSelect action as an optional prop such that you can define custom behaviour, and a links boolean which you can set to false to override the default behaviour of navigating to a new page onSelect. Now also takes an optional modal boolean prop which lets you display search results in a modal as opposed to below the search.
 ## [10.0.4] - 2019-11-21
 
 ### Changed
