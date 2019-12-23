@@ -43,4 +43,13 @@
 
         return storeItem.applicationState ? storeItem.applicationState : null;
     };
+
+    this.getApplicationStateLoading = state => {
+        const storeItem = state[item];
+        if (!storeItem) {
+            return false;
+        }
+
+        return storeItem.applicationState ? storeItem.applicationState.loading : false;
+    };
 }
