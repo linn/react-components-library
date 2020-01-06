@@ -1,16 +1,39 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import Button from '@material-ui/core/Button';
+import '@testing-library/jest-dom/extend-expect';
+import { cleanup, fireEvent } from '@testing-library/react';
+import render from '../../test-utils';
 import BackButton from '../BackButton';
 
-describe('Back Button', () => {
-    const backClick = jest.fn();
+afterEach(() => cleanup());
 
-    it('should render without throwing an error', () => {
-        expect(
-            shallow(<BackButton backClick={backClick} />)
-                .dive()
-                .find(Button).length
-        ).toBe(1);
+let props;
+const handler = jest.fn();
+
+describe('BackButton', () => {
+    beforeEach(() => {
+        props = {
+            backClick: handler
+        };
+    });
+
+    test('should call handler onClick', () => {
+        const { getByText } = render(<BackButton {...props} />);
+        const item = getByText('Back');
+        fireEvent.click(item);
+        expect(handler).toHaveBeenCalled();
+    });
+
+    describe('when no alt text provided', () => {
+        test('should default to Back', () => {
+            const { queryByText } = render(<BackButton {...props} modal />);
+            expect(queryByText('Back')).toBeInTheDocument();
+        });
+    });
+
+    describe('when alt text provided', () => {
+        test('should display text', () => {
+            const { queryByText } = render(<BackButton {...props} text="Something" modal />);
+            expect(queryByText('Something')).toBeInTheDocument();
+        });
     });
 });
