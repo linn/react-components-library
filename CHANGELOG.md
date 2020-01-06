@@ -1,3 +1,8 @@
+## [10.2.3] - 2019-12-0
+
+## Changed
+- Add loading inside application state in item & collection factory reducers and selectors
+
 ## [10.2.1] - 2019-12-0
 
 ## Changed
