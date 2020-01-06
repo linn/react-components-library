@@ -4,6 +4,7 @@
 
 ## Changed
 - Allow alternative text than 'Back' on the BackButton. This is really so that you can be more specified, e.g. 'Back to Menu'.
+- Allow a custom debounce (time in ms) to be passed into useSearch. Example of usage in TypeaheadTable.
 
 ## [10.2.1] - 2019-12-06
 
