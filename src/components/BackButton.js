@@ -1,25 +1,32 @@
 import React from 'react';
-import { withStyles } from '@material-ui/styles';
+import makeStyles from '@material-ui/styles/makeStyles';
 import Button from '@material-ui/core/Button';
 import PropTypes from 'prop-types';
 
-const styles = () => ({
+const useStyles = makeStyles(() => ({
     pullLeft: {
         float: 'left'
     }
-});
+}));
 
-const BackButton = ({ backClick, classes }) => (
-    <div className={classes.pullLeft}>
-        <Button id="back-button" onClick={() => backClick()}>
-            Back
-        </Button>
-    </div>
-);
-
-BackButton.propTypes = {
-    classes: PropTypes.shape({}).isRequired,
-    backClick: PropTypes.func.isRequired
+const BackButton = ({ backClick, text }) => {
+    const classes = useStyles();
+    return (
+        <div className={classes.pullLeft}>
+            <Button id="back-button" onClick={() => backClick()}>
+                {text || 'Back'}
+            </Button>
+        </div>
+    );
 };
 
-export default withStyles(styles)(BackButton);
+BackButton.propTypes = {
+    backClick: PropTypes.func.isRequired,
+    text: PropTypes.string
+};
+
+BackButton.defaultProps = {
+    text: null
+};
+
+export default BackButton;
