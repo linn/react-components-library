@@ -53,7 +53,7 @@ describe('item store reducer factory', () => {
 
         const expected = {
             loading: false,
-            applicationState: null
+            applicationState: { loading: true }
         };
 
         deepFreeze(state);
@@ -158,7 +158,7 @@ describe('item store reducer factory', () => {
         const expected = {
             loading: false,
             item: null,
-            applicationState: { links: [{ rel: 'create', href: '/create' }] }
+            applicationState: { links: [{ rel: 'create', href: '/create' }], loading: false }
         };
 
         deepFreeze(state);

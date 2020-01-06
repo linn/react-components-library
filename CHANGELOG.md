@@ -1,3 +1,8 @@
+## [10.2.4] - 2020-01-06
+
+## Changed
+- Fixed forgotten tests for loading inside application state 
+
 ## [10.2.3] - 2019-12-0
 
 ## Changed
