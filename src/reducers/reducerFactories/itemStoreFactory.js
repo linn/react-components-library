@@ -29,7 +29,7 @@
             case actionTypes[`REQUEST_APPLICATION_STATE_${itemRoot}`]:
                 return {
                     ...state,
-                    applicationState: null
+                    applicationState: { loading: true }
                 };
 
             case actionTypes[`REQUEST_UPDATE_${itemRoot}`]:
@@ -68,7 +68,8 @@
                 return {
                     ...state,
                     applicationState: {
-                        links: action.payload.data ? action.payload.data.links : []
+                        links: action.payload.data ? action.payload.data.links : [],
+                        loading: false
                     }
                 };
 
