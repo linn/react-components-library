@@ -1,6 +1,6 @@
 import React from 'react';
 import createMount from '@material-ui/core/test-utils/createMount';
-import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import CreateMuiTheme from '@material-ui/core/styles/createMuiTheme';
 import SnackbarMessage from '../SnackbarMessage';
 

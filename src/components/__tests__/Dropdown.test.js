@@ -1,6 +1,6 @@
 import React from 'react';
 import { createMount } from '@material-ui/core/test-utils';
-import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import { linnTheme } from '../../themes';
 import Dropdown from '../Dropdown';
 

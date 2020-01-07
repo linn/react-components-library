@@ -3,7 +3,7 @@ import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
 import Error from '@material-ui/icons/Error';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import PropTypes from 'prop-types';
 import { errorTheme } from '../themes/index';
 
