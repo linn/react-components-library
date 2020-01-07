@@ -118,7 +118,7 @@ LinnWeekPicker.propTypes = {
     selectedDate: PropTypes.oneOfType([PropTypes.shape({}), PropTypes.string]),
     setWeekStartDate: PropTypes.func.isRequired,
     propertyName: PropTypes.string,
-    label: PropTypes.string.isRequired,
+    label: PropTypes.string,
     disabled: PropTypes.bool,
     required: PropTypes.bool
 };
@@ -127,5 +127,6 @@ LinnWeekPicker.defaultProps = {
     selectedDate: new Date(),
     propertyName: '',
     disabled: false,
-    required: false
+    required: false,
+    label: ''
 };
