@@ -1,3 +1,8 @@
+## [10.2.4] - 2020-01-06
+
+## Changed
+- Fixed forgotten tests for loading inside application state + updated how we used MuiThemeProvider to most current way to get rid of warnings
+
 ## [10.2.3] - 2019-12-0
 
 ## Changed
