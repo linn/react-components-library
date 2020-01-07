@@ -1,3 +1,11 @@
+## [10.3.0] - 2020-01-07
+
+## Added
+- Editable Table component
+
+## Changed
+- Linn Week Picker component label prop is no longer required
+
 ## [10.2.3] - 2019-12-0
 
 ## Changed
