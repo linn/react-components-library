@@ -54,7 +54,7 @@ export function inputComponentFactory(row, column, onChange, rest) {
                     links={false}
                     loading={column.searchLoading}
                     modal
-                    onSelect={column.selectSearchResult}
+                    onSelect={newValue => column.selectSearchResult(column.id, newValue, row)}
                     propertyName={column.id}
                     title={column.searchTitle}
                     value={row[column.id]}
