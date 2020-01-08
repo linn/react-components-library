@@ -41,6 +41,7 @@ export function inputComponentFactory(row, column, onChange, rest) {
                     disabled={!column.editable}
                     selectedDate={row[column.id]}
                     setWeekStartDate={onChange}
+                    propertyName={column.id}
                 />
             );
         case 'search':
@@ -85,6 +86,7 @@ export function inputComponentFactory(row, column, onChange, rest) {
 export function displayComponentFactory(row, column) {
     switch (column.type) {
         case 'date':
+        case 'linnWeek':
             return moment(row[column.id]).format('DD MMM YYYY');
         default:
             return row[column.id];
