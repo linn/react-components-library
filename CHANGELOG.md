@@ -6,6 +6,11 @@
 ## Changed
 - Linn Week Picker component label prop is no longer required
 
+## [10.2.5] - 2020-01-06
+
+## Changed
+- Reverted theme provider back to old import using MuiThemeProvider
+
 ## [10.2.4] - 2020-01-06
 
 ## Changed
