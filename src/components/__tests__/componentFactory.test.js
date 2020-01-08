@@ -1,5 +1,5 @@
 import React from 'react';
-import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 import { createMount } from '@material-ui/core/test-utils';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import moment from 'moment';
