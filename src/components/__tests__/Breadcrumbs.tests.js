@@ -1,6 +1,6 @@
 import React from 'react';
 import { createMount } from '@material-ui/core/test-utils';
-import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import { MuiThemeProvider } from '@material-ui/core/styles';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { linnTheme } from '../../themes';
 import Breadcrumbs from '../Breadcrumbs';
