@@ -2,9 +2,11 @@
 
 ## Added
 - Editable Table component
+- Keyboard input to Linn Week Picker
 
 ## Changed
 - Linn Week Picker component label prop is no longer required
+- Dropdown label prop is no longer required
 
 ## [10.2.5] - 2020-01-06
 
