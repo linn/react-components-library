@@ -1,5 +1,8 @@
 ## [10.3.1] - 2020-01-09
 
+## Added
+- Editable Table stories
+
 ## Changed
 - Export Editable Table component
 
