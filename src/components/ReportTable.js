@@ -46,7 +46,7 @@ const setCellClasses = (
     defaultClasses
 ) => {
     let generatedClasses = '';
-    if (rowType === 'Subtotal') {
+    if (rowType === 'Subtotal' || totalColumn) {
         generatedClasses += `${classes.subTotal} `;
     }
 
