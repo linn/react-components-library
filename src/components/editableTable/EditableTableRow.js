@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function EditableTableRow({ row, columns, saveRow, editable, ...rest }) {
+export default function EditableTableRow({ row, columns, saveRow, editable, isNewRow, ...rest }) {
     const [editing, setEditing] = useState(false);
     const [prevItem, setPrevItem] = useState({});
     const [item, setItem] = useState({});
@@ -27,7 +27,10 @@ export default function EditableTableRow({ row, columns, saveRow, editable, ...r
     useEffect(() => {
         setItem(row);
         setPrevItem(row);
-    }, [row, editable]);
+        if (isNewRow) {
+            setEditing(true);
+        }
+    }, [row, editable, isNewRow]);
 
     const classes = useStyles();
 
@@ -122,10 +125,12 @@ EditableTableRow.propTypes = {
     row: PropTypes.shape({}).isRequired,
     columns: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
     saveRow: PropTypes.func,
-    editable: PropTypes.bool
+    editable: PropTypes.bool,
+    isNewRow: PropTypes.bool
 };
 
 EditableTableRow.defaultProps = {
     saveRow: () => {},
-    editable: true
+    editable: true,
+    isNewRow: false
 };

@@ -40,6 +40,7 @@ export default function EditableTable({ columns, rows, saveRow, createRow, edita
                             columns={columns}
                             saveRow={createRow}
                             editable={editable}
+                            isNewRow
                             {...rest}
                         />
                     ) : (
