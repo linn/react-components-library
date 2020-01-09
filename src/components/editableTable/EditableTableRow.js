@@ -44,6 +44,16 @@ export default function EditableTableRow({ row, columns, saveRow, editable, ...r
         setItem({ ...item, [propertyName]: newValue });
     };
 
+    const rowValid = () => {
+        let valid = true;
+        columns.forEach(column => {
+            if (column.required === true && !item[column.id]) {
+                valid = false;
+            }
+        });
+        return valid;
+    };
+
     return (
         <TableRow>
             {columns.map(column => (
@@ -64,6 +74,7 @@ export default function EditableTableRow({ row, columns, saveRow, editable, ...r
                             classes={{
                                 root: classes.button
                             }}
+                            disabled={!rowValid()}
                             data-testid="saveButton"
                         >
                             <Done fontSize="small" />
