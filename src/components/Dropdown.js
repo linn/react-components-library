@@ -152,7 +152,7 @@ Dropdown.propTypes = {
     disabled: PropTypes.bool,
     fullWidth: PropTypes.bool,
     helperText: PropTypes.string,
-    label: PropTypes.string.isRequired,
+    label: PropTypes.string,
     items: PropTypes.oneOfType([
         PropTypes.arrayOf(PropTypes.string),
         PropTypes.arrayOf(PropTypes.number),
@@ -197,7 +197,8 @@ Dropdown.defaultProps = {
     error: false,
     margin: 'dense',
     allowNoValue: true,
-    optionsLoading: false
+    optionsLoading: false,
+    label: ''
 };
 
 export default Dropdown;
