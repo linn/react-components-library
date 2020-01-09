@@ -15,6 +15,7 @@ export function inputComponentFactory(row, column, onChange, rest) {
                     disabled={!column.editable}
                     onChange={onChange}
                     propertyName={column.id}
+                    required={column.required}
                 />
             );
         case 'number':
@@ -25,6 +26,7 @@ export function inputComponentFactory(row, column, onChange, rest) {
                     disabled={!column.editable}
                     onChange={onChange}
                     propertyName={column.id}
+                    required={column.required}
                 />
             );
         case 'date':
@@ -33,6 +35,7 @@ export function inputComponentFactory(row, column, onChange, rest) {
                     disabled={!column.editable}
                     value={row[column.id]}
                     onChange={value => onChange(column.id, value)}
+                    required={column.required}
                 />
             );
         case 'linnWeek':
@@ -42,6 +45,7 @@ export function inputComponentFactory(row, column, onChange, rest) {
                     selectedDate={row[column.id]}
                     setWeekStartDate={onChange}
                     propertyName={column.id}
+                    required={column.required}
                 />
             );
         case 'search':
@@ -58,6 +62,7 @@ export function inputComponentFactory(row, column, onChange, rest) {
                     propertyName={column.id}
                     title={column.searchTitle}
                     value={row[column.id]}
+                    required={column.required}
                 />
             );
         case 'dropdown':
@@ -68,13 +73,15 @@ export function inputComponentFactory(row, column, onChange, rest) {
                     onChange={onChange}
                     items={column.options}
                     propertyName={column.id}
+                    required={column.required}
                 />
             );
         case 'component':
             return (
                 <column.component
                     value={row[column.id]}
-                    onChange={value => onChange(column.id, value)}
+                    onChange={newValue => onChange(column.id, newValue)}
+                    required={column.required}
                     {...rest}
                 />
             );
