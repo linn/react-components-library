@@ -1,3 +1,8 @@
+## [10.3.1] - 2020-01-09
+
+## Changed
+- Export Editable Table component
+
 ## [10.3.0] - 2020-01-07
 
 ## Added
