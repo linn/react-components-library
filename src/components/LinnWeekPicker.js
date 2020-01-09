@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { DatePicker } from '@material-ui/pickers';
+import { KeyboardDatePicker } from '@material-ui/pickers';
 import { makeStyles } from '@material-ui/styles';
 import { IconButton } from '@material-ui/core';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -100,12 +100,12 @@ export default function LinnWeekPicker({
             <InputLabel classes={{ root: classes.label }} required={required}>
                 {label}
             </InputLabel>
-            <DatePicker
+            <KeyboardDatePicker
                 autoOk
                 disabled={disabled}
                 margin="dense"
                 inputVariant="outlined"
-                value={moment.isMoment(selectedDate) ? selectedDate : moment(selectedDate)}
+                value={selectedDate ? moment(selectedDate) : null}
                 onChange={handleChange}
                 renderDay={renderWeekDay}
                 format="DD/MM/YYYY"
