@@ -5,10 +5,10 @@ import ThemeProvider from '@material-ui/styles/ThemeProvider';
 import MomentUtils from '@date-io/moment';
 import { storiesOf } from '@storybook/react';
 import { withKnobs } from '@storybook/addon-knobs';
-import Page from '../components/Page';
 import EditableTable from '../components/editableTable/EditableTable';
 import { linnTheme } from '../themes/linnTheme';
 
+// eslint-disable-next-line import/prefer-default-export
 export const component = () => (
     <div>
         <button type="button">Custom</button>
@@ -16,15 +16,6 @@ export const component = () => (
 );
 
 const options = ['one', 'two', 'three'];
-
-const pageProps = {
-    history: {
-        push: () => {},
-        location: {
-            pathname: '/Entities'
-        }
-    }
-};
 
 const columns = [
     {
