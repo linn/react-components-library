@@ -1,4 +1,4 @@
-## [10.3.31] - 2020-01-10
+## [10.3.4] - 2020-01-10
 
 ## Added
 - Unbreak navigation styles already applied
