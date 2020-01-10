@@ -1,3 +1,8 @@
+## [10.3.6] - 2020-01-10
+
+## Changed
+- EditableTable now correctly renders null dates in display mode
+
 ## [10.3.2] - 2020-01-09
 
 ## Added

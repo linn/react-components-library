@@ -94,7 +94,7 @@ export function displayComponentFactory(row, column) {
     switch (column.type) {
         case 'date':
         case 'linnWeek':
-            return moment(row[column.id]).format('DD MMM YYYY');
+            return row[column.id] ? moment(row[column.id]).format('DD MMM YYYY') : '';
         default:
             return row[column.id];
     }
