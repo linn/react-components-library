@@ -1,3 +1,6 @@
+## [10.3.5] - 2020-01-10
+## Changed
+- Default rowTitle to noWrap class in ReportTable.
 ## [10.3.4] - 2020-01-10
 
 ## Added
