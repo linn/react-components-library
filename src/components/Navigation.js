@@ -156,7 +156,7 @@ function Navigation({
         return (
             <Fragment>
                 <ClickAwayListener onClickAway={() => setSelected(false)}>
-                    <div className={classes.root}>
+                    <div className={(classes.root, 'hide-when-printing')}>
                         {sections && !loading && (
                             <AppBar position="static" classes={{ root: classes.appBar }}>
                                 <Toolbar classes={{ gutters: classes.toolbar }}>

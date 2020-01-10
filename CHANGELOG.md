@@ -1,3 +1,8 @@
+## [10.3.3] - 2020-01-09
+
+## Added
+- Classes to be used to hide Navigation and Breadcrumbs when printing
+
 ## [10.3.2] - 2020-01-09
 
 ## Added
