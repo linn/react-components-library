@@ -9,7 +9,15 @@ import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import EditableTableRow from './EditableTableRow';
 
-export default function EditableTable({ columns, rows, saveRow, createRow, editable, ...rest }) {
+export default function EditableTable({
+    columns,
+    rows,
+    saveRow,
+    createRow,
+    editable,
+    newRow,
+    ...rest
+}) {
     const [showNewRow, setShowNewRow] = useState(false);
 
     return (
@@ -36,7 +44,7 @@ export default function EditableTable({ columns, rows, saveRow, createRow, edita
                 {editable &&
                     (showNewRow ? (
                         <EditableTableRow
-                            row={{}}
+                            row={newRow}
                             columns={columns}
                             saveRow={createRow}
                             editable={editable}
@@ -66,11 +74,13 @@ EditableTable.propTypes = {
     rows: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
     saveRow: PropTypes.func,
     createRow: PropTypes.func,
-    editable: PropTypes.bool
+    editable: PropTypes.bool,
+    newRow: PropTypes.shape({})
 };
 
 EditableTable.defaultProps = {
     saveRow: () => {},
     createRow: () => {},
-    editable: true
+    editable: true,
+    newRow: {}
 };
