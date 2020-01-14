@@ -33,7 +33,7 @@ export function inputComponentFactory(row, column, onChange, rest) {
             return (
                 <DatePicker
                     disabled={!column.editable}
-                    value={row[column.id]}
+                    value={row[column.id] || null}
                     onChange={value => onChange(column.id, value)}
                     required={column.required}
                 />
@@ -42,7 +42,7 @@ export function inputComponentFactory(row, column, onChange, rest) {
             return (
                 <LinnWeekPicker
                     disabled={!column.editable}
-                    selectedDate={row[column.id]}
+                    selectedDate={row[column.id] || null}
                     setWeekStartDate={onChange}
                     propertyName={column.id}
                     required={column.required}
