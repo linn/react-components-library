@@ -1,3 +1,8 @@
+## [10.3.7] - 2020-01-14
+
+## Added
+- Disabled option for Typeahead, defaults to false. 
+
 ## [10.3.6] - 2020-01-10
 
 ## Changed
