@@ -1,4 +1,4 @@
-## [10.3.7] - 2020-01-14
+## [10.3.8] - 2020-01-14
 
 ## Fixed
 - EditableTable component factory will show null dates
