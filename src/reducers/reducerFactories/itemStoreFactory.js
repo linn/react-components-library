@@ -38,6 +38,12 @@
                     loading: true
                 };
 
+            case actionTypes[`REQUEST_DELETE_${itemRoot}`]:
+                return {
+                    ...state,
+                    loading: true
+                };
+
             case actionTypes[`FETCH_${itemRoot}_ERROR`]:
                 return {
                     ...state,
@@ -79,6 +85,15 @@
                     loading: false,
                     item: action.payload.data,
                     editStatus: 'view',
+                    snackbarVisible: true
+                };
+
+            case actionTypes[`RECEIVE_DELETED_${itemRoot}`]:
+                return {
+                    ...state,
+                    loading: false,
+                    item: action.payload.data,
+                    editStatus: 'deleted',
                     snackbarVisible: true
                 };
 

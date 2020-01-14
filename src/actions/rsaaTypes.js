@@ -23,6 +23,11 @@ export const requestUpdate = (actionTypes, actionTypeRoot) => ({
     payload: {}
 });
 
+export const requestDelete = (actionTypes, actionTypeRoot) => ({
+    type: actionTypes[`REQUEST_DELETE_${actionTypeRoot}`],
+    payload: {}
+});
+
 export const receiveUpdated = (actionTypes, actionTypeRoot, itemName) => ({
     type: actionTypes[`RECEIVE_UPDATED_${actionTypeRoot}`],
     payload: successPayload(itemName)
@@ -46,6 +51,11 @@ export const receiveAdded = (actionTypes, actionTypeRoot, itemName) => ({
 export const receivedProcess = (actionTypes, actionTypeRoot) => ({
     type: actionTypes[`RECEIVE_${actionTypeRoot}`],
     payload: {}
+});
+
+export const receiveDeleted = (actionTypes, actionTypeRoot, itemName) => ({
+    type: actionTypes[`RECEIVE_DELETED_${actionTypeRoot}`],
+    payload: successPayload(itemName)
 });
 
 export const requestSearch = (actionTypes, actionTypeRoot) => ({
