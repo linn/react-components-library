@@ -197,6 +197,7 @@ const Row = ({
                                                     items={column.options}
                                                     value={rowContent[column.key]}
                                                     disabled={column.notEditable}
+                                                    required={column.required}
                                                     propertyName={column.key}
                                                     label=""
                                                     allowNoValue={false}
@@ -206,6 +207,7 @@ const Row = ({
                                                     type={column.type}
                                                     value={rowContent[column.key]}
                                                     disabled={column.notEditable}
+                                                    required={column.required}
                                                     onChange={handleCellChange}
                                                     propertyName={column.key}
                                                 />
