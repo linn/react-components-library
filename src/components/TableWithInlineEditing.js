@@ -196,7 +196,7 @@ const Row = ({
                                                     onChange={handleCellChange}
                                                     items={column.options}
                                                     value={rowContent[column.key]}
-                                                    disabled={column.disabled}
+                                                    disabled={column.notEditable}
                                                     propertyName={column.key}
                                                     label=""
                                                     allowNoValue={false}
@@ -205,7 +205,7 @@ const Row = ({
                                                 <InputField
                                                     type={column.type}
                                                     value={rowContent[column.key]}
-                                                    disabled={column.disabled}
+                                                    disabled={column.notEditable}
                                                     onChange={handleCellChange}
                                                     propertyName={column.key}
                                                 />
@@ -258,7 +258,7 @@ Row.propTypes = {
             title: PropTypes.string,
             type: PropTypes.string,
             key: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-            disabled: PropTypes.bool
+            notEditable: PropTypes.bool
         })
     ).isRequired,
     removeRow: PropTypes.func.isRequired,
