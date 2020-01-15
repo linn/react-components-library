@@ -1,4 +1,4 @@
-## [10.3.9] - 2020-01-14
+## [10.4.0] - 2020-01-14
 
 ## Added
 - added delete into item factory and updateApiActions & makeactions
