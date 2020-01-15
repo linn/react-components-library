@@ -132,8 +132,10 @@ function Typeahead({
                 adornment={SearchIcon()}
                 textFieldProps={{
                     onClick: () => {
-                        setDialogOpen(true);
-                        clearSearch();
+                        if (!disabled) {
+                            setDialogOpen(true);
+                            clearSearch();
+                        }
                     },
                     disabled
                 }}

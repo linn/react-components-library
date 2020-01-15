@@ -1,3 +1,8 @@
+## [10.4.1] - 2020-01-15
+
+## Added
+- TableWithInlineEditing: allow disabled and required columns
+
 ## [10.4.0] - 2020-01-14
 
 ## Added
