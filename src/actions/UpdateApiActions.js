@@ -86,6 +86,22 @@ export default function UpdateApiActions(itemName, actionTypeRoot, uri, actionTy
         }
     });
 
+    this.delete = id => ({
+        [RSAA]: {
+            endpoint: `${appRoot}${uri}/${id}`,
+            method: 'DELETE',
+            options: { requiresAuth: true },
+            headers: {
+                Accept: 'application/json'
+            },
+            types: [
+                rsaaTypes.requestDelete(actionTypes, actionTypeRoot),
+                rsaaTypes.receiveDeleted(actionTypes, actionTypeRoot, itemName),
+                rsaaTypes.error(actionTypes, actionTypeRoot, itemName)
+            ]
+        }
+    });
+
     this.reset = () => ({
         type: actionTypes[`RESET_${actionTypeRoot}`],
         payload: {}

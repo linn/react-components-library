@@ -1,4 +1,4 @@
-const makeActionTypes = (entityType, makeAll = true) => {
+const makeActionTypes = (entityType, makeAll = true, makeDelete = false) => {
     const types = {};
     types[`REQUEST_${entityType}`] = `REQUEST_${entityType}`;
     types[`REQUEST_APPLICATION_STATE_${entityType}`] = `REQUEST_APPLICATION_STATE_${entityType}`;
@@ -20,6 +20,11 @@ const makeActionTypes = (entityType, makeAll = true) => {
         types[`SET_${entityType}_EDIT_STATUS`] = `SET_${entityType}_EDIT_STATUS`;
         types[`SHOW_${entityType}_SNACKBAR`] = `SHOW_${entityType}_SNACKBAR`;
         types[`HIDE_${entityType}_SNACKBAR`] = `HIDE_${entityType}_SNACKBAR`;
+    }
+
+    if (makeDelete) {
+        types[`REQUEST_DELETE_${entityType}`] = `REQUEST_DELETE_${entityType}`;
+        types[`RECEIVE_DELETED_${entityType}`] = `RECEIVE_DELETED_${entityType}`;
     }
 
     return types;

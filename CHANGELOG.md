@@ -1,3 +1,19 @@
+## [10.4.1] - 2020-01-15
+
+## Added
+- TableWithInlineEditing: allow disabled and required columns
+
+## [10.4.0] - 2020-01-14
+
+## Added
+- added delete into item factory and updateApiActions & makeactions
+
+## [10.3.8] - 2020-01-14
+
+## Fixed
+- EditableTable component factory will show null dates
+- Added missing newRow prop to EditableTable
+
 ## [10.3.7] - 2020-01-14
 
 ## Added
@@ -5,7 +21,7 @@
 
 ## [10.3.6] - 2020-01-10
 
-## Changed
+## Fixed
 - EditableTable now correctly renders null dates in display mode
 
 ## [10.3.5] - 2020-01-10
