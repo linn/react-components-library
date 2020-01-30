@@ -1,7 +1,7 @@
 ## [10.5.0] - 2020-01-30
 
 ## Added
-- UpdateApiActions: add id is optional
+- UpdateApiActions: add id parameter can take null value
 
 ## [10.4.1] - 2020-01-15
 
