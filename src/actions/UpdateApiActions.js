@@ -70,7 +70,7 @@ export default function UpdateApiActions(itemName, actionTypeRoot, uri, actionTy
 
     this.update = (id, item) => ({
         [RSAA]: {
-            endpoint: `${appRoot}${uri}/${id}`,
+            endpoint: id !== null ? `${appRoot}${uri}/${id}` : `${appRoot}${uri}`,
             method: 'PUT',
             options: { requiresAuth: true },
             headers: {
