@@ -1,6 +1,13 @@
 import { useEffect, useState, useRef } from 'react';
 
-function useSearch(fetchItems, searchTerm, clearSearch, queryString = null, debounce = 500) {
+function useSearch(
+    fetchItems,
+    searchTerm,
+    clearSearch,
+    queryString = null,
+    debounce = 500,
+    searchOnNumberOfChars = 1
+) {
     const [debounceTimer, setDebounceTimer] = useState(null);
     const savedFetchItems = useRef();
     const savedDebounceTimer = useRef();
@@ -21,7 +28,7 @@ function useSearch(fetchItems, searchTerm, clearSearch, queryString = null, debo
     }, [clearSearch]);
 
     useEffect(() => {
-        if (searchTerm) {
+        if (searchTerm && searchTerm.length >= searchOnNumberOfChars) {
             if (savedDebounceTimer.current) {
                 clearTimeout(savedDebounceTimer.current);
             }
