@@ -91,7 +91,6 @@
 - Add loading inside application state in item & collection factory reducers and selectors
 
 ## [10.2.1] - 2019-12-0
->>>>>>> master
 
 ## Changed
 - Pass placeholder text prop to the InputField in the modal as well as the main one.
