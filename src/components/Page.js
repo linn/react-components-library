@@ -57,7 +57,7 @@ function Page({ children, history, width, requestErrors, showRequestErrors }) {
         <Fragment>
             <Grid container spacing={3} className={classes.grid}>
                 <Grid item xs={1} />
-                <Grid item xs={10}>
+                <Grid item xs={10} className="hide-when-printing">
                     <Breadcrumbs history={history} />
                 </Grid>
                 <Grid item xs={1} />

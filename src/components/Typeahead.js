@@ -50,7 +50,8 @@ function Typeahead({
     label,
     onSelect,
     value,
-    placeholder
+    placeholder,
+    disabled
 }) {
     const [searchTerm, setSearchTerm] = useState('');
     const [dialogOpen, setDialogOpen] = useState(false);
@@ -131,9 +132,12 @@ function Typeahead({
                 adornment={SearchIcon()}
                 textFieldProps={{
                     onClick: () => {
-                        setDialogOpen(true);
-                        clearSearch();
-                    }
+                        if (!disabled) {
+                            setDialogOpen(true);
+                            clearSearch();
+                        }
+                    },
+                    disabled
                 }}
                 value={modal ? value : searchTerm}
                 label={label}
@@ -197,7 +201,8 @@ Typeahead.propTypes = {
     label: PropTypes.string,
     onSelect: PropTypes.func,
     value: PropTypes.string,
-    placeholder: PropTypes.string
+    placeholder: PropTypes.string,
+    disabled: PropTypes.bool
 };
 
 Typeahead.defaultProps = {
@@ -208,7 +213,8 @@ Typeahead.defaultProps = {
     label: null,
     onSelect: null,
     value: null,
-    placeholder: 'Search by id or by description'
+    placeholder: 'Search by id or by description',
+    disabled: false
 };
 
 export default Typeahead;

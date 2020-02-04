@@ -70,7 +70,7 @@ export default function UpdateApiActions(itemName, actionTypeRoot, uri, actionTy
 
     this.update = (id, item) => ({
         [RSAA]: {
-            endpoint: `${appRoot}${uri}/${id}`,
+            endpoint: id !== null ? `${appRoot}${uri}/${id}` : `${appRoot}${uri}`,
             method: 'PUT',
             options: { requiresAuth: true },
             headers: {
@@ -81,6 +81,22 @@ export default function UpdateApiActions(itemName, actionTypeRoot, uri, actionTy
             types: [
                 rsaaTypes.requestUpdate(actionTypes, actionTypeRoot),
                 rsaaTypes.receiveUpdated(actionTypes, actionTypeRoot, itemName),
+                rsaaTypes.error(actionTypes, actionTypeRoot, itemName)
+            ]
+        }
+    });
+
+    this.delete = id => ({
+        [RSAA]: {
+            endpoint: `${appRoot}${uri}/${id}`,
+            method: 'DELETE',
+            options: { requiresAuth: true },
+            headers: {
+                Accept: 'application/json'
+            },
+            types: [
+                rsaaTypes.requestDelete(actionTypes, actionTypeRoot),
+                rsaaTypes.receiveDeleted(actionTypes, actionTypeRoot, itemName),
                 rsaaTypes.error(actionTypes, actionTypeRoot, itemName)
             ]
         }

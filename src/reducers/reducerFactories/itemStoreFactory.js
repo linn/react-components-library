@@ -29,10 +29,16 @@
             case actionTypes[`REQUEST_APPLICATION_STATE_${itemRoot}`]:
                 return {
                     ...state,
-                    applicationState: null
+                    applicationState: { loading: true }
                 };
 
             case actionTypes[`REQUEST_UPDATE_${itemRoot}`]:
+                return {
+                    ...state,
+                    loading: true
+                };
+
+            case actionTypes[`REQUEST_DELETE_${itemRoot}`]:
                 return {
                     ...state,
                     loading: true
@@ -68,7 +74,8 @@
                 return {
                     ...state,
                     applicationState: {
-                        links: action.payload.data ? action.payload.data.links : []
+                        links: action.payload.data ? action.payload.data.links : [],
+                        loading: false
                     }
                 };
 
@@ -78,6 +85,15 @@
                     loading: false,
                     item: action.payload.data,
                     editStatus: 'view',
+                    snackbarVisible: true
+                };
+
+            case actionTypes[`RECEIVE_DELETED_${itemRoot}`]:
+                return {
+                    ...state,
+                    loading: false,
+                    item: action.payload.data,
+                    editStatus: 'deleted',
                     snackbarVisible: true
                 };
 

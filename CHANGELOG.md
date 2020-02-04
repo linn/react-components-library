@@ -1,12 +1,97 @@
 # Changelog
 
-## [10.3.0] - 2020-01-01
+## [10.6.0] - 2020-02-04
 
 ## Changed
 - Allow alternative text than 'Back' on the BackButton. This is really so that you can be more specified, e.g. 'Back to Menu'.
 - Allow a custom debounce (time in ms) to be passed into useSearch. Example of usage in TypeaheadTable.
 
-## [10.2.1] - 2019-12-06
+## [10.5.0] - 2020-01-30
+
+## Added
+- UpdateApiActions: add id parameter can take null value
+
+## [10.4.1] - 2020-01-15
+
+## Added
+- TableWithInlineEditing: allow disabled and required columns
+
+## [10.4.0] - 2020-01-14
+
+## Added
+- added delete into item factory and updateApiActions & makeactions
+
+## [10.3.8] - 2020-01-14
+
+## Fixed
+- EditableTable component factory will show null dates
+- Added missing newRow prop to EditableTable
+
+## [10.3.7] - 2020-01-14
+
+## Added
+- Disabled option for Typeahead, defaults to false. 
+
+## [10.3.6] - 2020-01-10
+
+## Fixed
+- EditableTable now correctly renders null dates in display mode
+
+## [10.3.5] - 2020-01-10
+
+## Changed
+- Default rowTitle to noWrap class in ReportTable.
+
+## [10.3.4] - 2020-01-10
+
+## Added
+- Unbreak navigation styles already applied
+
+## [10.3.3] - 2020-01-09
+
+## Added
+- Classes to be used to hide Navigation and Breadcrumbs when printing
+
+## [10.3.2] - 2020-01-09
+
+## Added
+- Editable Table stories
+
+## Changed
+- Export Editable Table component
+
+## [10.3.1] - 2020-01-09
+
+## Changed
+- Highlight total columns in ReportTable
+
+## [10.3.0] - 2020-01-07
+
+## Added
+- Editable Table component
+- Keyboard input to Linn Week Picker
+
+## Changed
+- Linn Week Picker component label prop is no longer required
+- Dropdown label prop is no longer required
+
+## [10.2.5] - 2020-01-06
+
+## Changed
+- Reverted theme provider back to old import using MuiThemeProvider
+
+## [10.2.4] - 2020-01-06
+
+## Changed
+- Fixed forgotten tests for loading inside application state + updated how we used MuiThemeProvider to most current way to get rid of warnings
+
+## [10.2.3] - 2019-12-0
+
+## Changed
+- Add loading inside application state in item & collection factory reducers and selectors
+
+## [10.2.1] - 2019-12-0
+>>>>>>> master
 
 ## Changed
 - Pass placeholder text prop to the InputField in the modal as well as the main one.

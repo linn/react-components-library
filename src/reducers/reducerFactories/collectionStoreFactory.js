@@ -25,7 +25,7 @@ export default function(
             case actionTypes[`REQUEST_APPLICATION_STATE_${itemRoot}`]:
                 return {
                     ...state,
-                    applicationState: null
+                    applicationState: { loading: true }
                 };
             case actionTypes[`RECEIVE_${itemRoot}`]:
                 return {
@@ -37,7 +37,8 @@ export default function(
                 return {
                     ...state,
                     applicationState: {
-                        links: action.payload.data ? action.payload.data.links : []
+                        links: action.payload.data ? action.payload.data.links : [],
+                        loading: false
                     }
                 };
             case actionTypes[`REQUEST_SEARCH_${itemRoot}`]:

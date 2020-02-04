@@ -70,6 +70,7 @@ import NotFound from './src/components/NotFound';
 import ValidatedInputDialog from './src/components/ValidatedInputDialog';
 import TableWithInlineEditing from './src/components/TableWithInlineEditing';
 import LinnWeekPicker from './src/components/LinnWeekPicker';
+import EditableTable from './src/components/editableTable/EditableTable';
 
 const reducers = { menu, news };
 
@@ -145,5 +146,6 @@ export {
     getItemErrorDetailMessage,
     ValidatedInputDialog,
     TableWithInlineEditing,
-    LinnWeekPicker
+    LinnWeekPicker,
+    EditableTable
 };

@@ -46,7 +46,7 @@ const setCellClasses = (
     defaultClasses
 ) => {
     let generatedClasses = '';
-    if (rowType === 'Subtotal') {
+    if (rowType === 'Subtotal' || totalColumn) {
         generatedClasses += `${classes.subTotal} `;
     }
 
@@ -124,10 +124,7 @@ const Results = ({
                         // eslint-disable-next-line react/no-array-index-key
                         <TableRow key={j}>
                             {showRowTitles ? (
-                                <TableCell
-                                    className="single-line-field"
-                                    data-tip={item.rowTitle.displayString}
-                                >
+                                <TableCell className={classes.noWrap}>
                                     {setDrilldown(item.rowTitle, hasExternalLinks)}
                                 </TableCell>
                             ) : null}
@@ -233,7 +230,10 @@ function ReportTable({
 Results.propTypes = {
     hasExternalLinks: PropTypes.bool,
     reportData: reportResultType,
-    classes: PropTypes.shape({ root: PropTypes.shape({}) }).isRequired,
+    classes: PropTypes.shape({
+        root: PropTypes.shape({}),
+        noWrap: PropTypes.shape({})
+    }).isRequired,
     title: PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})]),
     showTitle: PropTypes.bool,
     showTotals: PropTypes.bool,
