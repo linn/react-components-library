@@ -1,10 +1,15 @@
 import babel from 'rollup-plugin-babel';
 import { terser } from 'rollup-plugin-terser';
 
+const babelrc = {
+    presets: ['@babel/preset-env', '@babel/react'],
+    plugins: ['@babel/plugin-proposal-class-properties', '@babel/plugin-proposal-optional-chaining']
+};
+
 export default [
     {
         input: 'index.js',
-        plugins: [babel({ exclude: 'node_modules/**' }), terser()],
+        plugins: [babel({ babelrc: false, ...babelrc, exclude: 'node_modules/**' }), terser()],
         output: {
             file: 'dist/bundle.min.js',
             format: 'cjs',
@@ -71,7 +76,7 @@ export default [
             linnTheme: 'src/themes/linnTheme.js',
             fetchError: 'src/reducers/reducerfactories/fetchErrorReducerFactory.js'
         },
-        plugins: [babel({ exclude: 'node_modules/**' }), terser()],
+        plugins: [babel({ babelrc: false, ...babelrc, exclude: 'node_modules/**' }), terser()],
         output: [
             {
                 dir: 'cjs',
