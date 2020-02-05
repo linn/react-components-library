@@ -4,7 +4,7 @@ function useSearch(
     fetchItems,
     searchTerm,
     clearSearch,
-    queryString = null,
+    queryString = '',
     debounce = 500,
     searchOnNumberOfChars = 1
 ) {
