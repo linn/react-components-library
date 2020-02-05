@@ -1,6 +1,6 @@
 # Changelog
 
-## [10.7.0] - 2020-02-04
+## [10.6.0] - 2020-02-04
 
 ## Changed
 - Allow alternative text than 'Back' on the BackButton. This is really so that you can be more specified, e.g. 'Back to Menu'.
