@@ -130,7 +130,7 @@ TypeaheadTable.defaultProps = {
     label: '',
     debounce: 500,
     minimumSearchTermLength: 1,
-    queryString: null
+    queryString: ''
 };
 
 export default TypeaheadTable;
