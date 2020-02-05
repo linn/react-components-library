@@ -28,7 +28,7 @@ function useSearch(
     }, [clearSearch]);
 
     useEffect(() => {
-        if (searchTerm && searchTerm.length >= searchOnNumberOfChars) {
+        if (searchTerm && searchTerm.replace(/\s/g, '').length >= searchOnNumberOfChars) {
             if (savedDebounceTimer.current) {
                 clearTimeout(savedDebounceTimer.current);
             }
