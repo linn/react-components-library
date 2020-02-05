@@ -1,6 +1,6 @@
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
-import { cleanup, fireEvent } from '@testing-library/react';
+import { cleanup, fireEvent, wait } from '@testing-library/react';
 import render from '../../test-utils';
 import TypeAheadTable from '../TypeaheadTable';
 
@@ -42,21 +42,38 @@ const defaultProps = {
     placeholder: 'search'
 };
 
-test('should call clearSearch and fetchItems() on input', () => {
+test('should call clearSearch and fetchItems() on input', async () => {
     const { getByDisplayValue } = render(<TypeAheadTable {...defaultProps} table={{ rows: [] }} />);
     const item = getByDisplayValue('');
     fireEvent.change(item, {
         target: { value: 'part' }
     });
     // wait for the debounce
-    setTimeout(() => expect(fetchItemsMock).toHaveBeenCalledWith('part'), 1000);
-    expect(clearSearchMock).toHaveBeenCalled();
+    //setTimeout(() => expect(fetchItemsMock).toHaveBeenCalledWith('part'), 1000);
+    await wait(() => expect(fetchItemsMock).toHaveBeenCalledWith('part'));
+    await wait(() => expect(clearSearchMock).toHaveBeenCalled());
+});
+
+describe('when queryString', () => {
+    test('should call fetch items with queryString', async () => {
+        const { getByDisplayValue } = render(
+            <TypeAheadTable {...defaultProps} table={{ rows: [] }} queryString="query" />
+        );
+        const item = getByDisplayValue('');
+        fireEvent.change(item, {
+            target: { value: 'part' }
+        });
+        // wait for the debounce
+        await wait(() =>
+            expect(fetchItemsMock).toHaveBeenCalledWith({ query: 'query', searchTerm: 'part' })
+        );
+    });
 });
 
 describe('When loading', () => {
     test('Should display loading and not table', () => {
         const { queryByRole } = render(
-            <TypeAheadTable {...defaultProps} table={{ rows: [] }} loading />
+            <TypeAheadTable {...defaultProps} table={{ rows: [] }} loading queryString={null} />
         );
         expect(queryByRole('progressbar')).toBeInTheDocument();
         expect(queryByRole('table')).not.toBeInTheDocument();
