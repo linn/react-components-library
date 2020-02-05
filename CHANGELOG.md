@@ -5,7 +5,7 @@
 ## Changed
 - Allow alternative text than 'Back' on the BackButton. This is really so that you can be more specified, e.g. 'Back to Menu'.
 - Allow a custom debounce (time in ms) to be passed into useSearch. Example of usage in TypeaheadTable.
-- Allow a minimum search term length before the search gets fired off. This is useful in cases like board parts lookups, where the first 4 characters are pretty meaningless (i.e. PCAS or PCSM)
+- Allow a minimum search term length before the search gets fired off. This is useful in cases like board parts lookups, where the first 4 characters are pretty meaningless (i.e. PCAS or PCSM). Defaults to one to avoid any breakage.
 
 ## [10.5.0] - 2020-01-30
 
