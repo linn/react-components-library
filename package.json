@@ -1,12 +1,13 @@
 {
     "name": "@linn-it/linn-form-components-library",
-    "version": "10.7.0",
+    "version": "10.6.0",
     "private": false,
     "dependencies": {
         "@material-ui/core": "^4.1.0",
         "@material-ui/icons": "^4.1.0",
         "@material-ui/styles": "^4.1.0",
         "@testing-library/jest-dom": "^4.0.0",
+        "@testing-library/react-hooks": "^3.2.1",
         "classnames": "^2.2.6",
         "clsx": "^1.0.4",
         "numeral": "^2.0.6",
