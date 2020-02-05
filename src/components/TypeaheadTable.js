@@ -23,6 +23,7 @@ function TypeaheadTable({
     placeholder,
     label,
     debounce,
+    searchOptions,
     queryString,
     minimumSearchTermLength
 }) {
@@ -31,7 +32,8 @@ function TypeaheadTable({
         fetchItems,
         searchTerm,
         clearSearch,
-        `${searchTerm}&${queryString}`,
+        queryString,
+        searchOptions,
         debounce,
         minimumSearchTermLength
     );
@@ -119,7 +121,8 @@ TypeaheadTable.propTypes = {
     label: PropTypes.string,
     debounce: PropTypes.number,
     minimumSearchTermLength: PropTypes.number,
-    queryString: PropTypes.string
+    queryString: PropTypes.string,
+    searchOptions: PropTypes.string
 };
 
 TypeaheadTable.defaultProps = {
@@ -130,7 +133,8 @@ TypeaheadTable.defaultProps = {
     label: '',
     debounce: 500,
     minimumSearchTermLength: 1,
-    queryString: ''
+    queryString: '',
+    searchOptions: ''
 };
 
 export default TypeaheadTable;

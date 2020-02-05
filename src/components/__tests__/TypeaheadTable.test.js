@@ -49,24 +49,22 @@ test('should call clearSearch and fetchItems() on input', async () => {
         target: { value: 'part' }
     });
     // wait for the debounce
-    //setTimeout(() => expect(fetchItemsMock).toHaveBeenCalledWith('part'), 1000);
     await wait(() => expect(fetchItemsMock).toHaveBeenCalledWith('part'));
     await wait(() => expect(clearSearchMock).toHaveBeenCalled());
 });
 
-describe('when queryString', () => {
-    test('should call fetch items with queryString', async () => {
+describe('when searchOptions', () => {
+    test('should call fetch items with searchOptions', async () => {
         const { getByDisplayValue } = render(
-            <TypeAheadTable {...defaultProps} table={{ rows: [] }} queryString="query" />
+            <TypeAheadTable {...defaultProps} table={{ rows: [] }} searchOptions="thing=a" />
         );
         const item = getByDisplayValue('');
         fireEvent.change(item, {
             target: { value: 'part' }
         });
         // wait for the debounce
-        await wait(() =>
-            expect(fetchItemsMock).toHaveBeenCalledWith({ query: 'query', searchTerm: 'part' })
-        );
+        await wait(() => expect(fetchItemsMock).toHaveBeenCalledWith('part', 'thing=a'));
+        await wait(() => expect(clearSearchMock).toHaveBeenCalled());
     });
 });
 

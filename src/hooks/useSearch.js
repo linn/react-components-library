@@ -5,6 +5,7 @@ function useSearch(
     searchTerm,
     clearSearch,
     queryString = '',
+    options = null,
     debounce = 500,
     searchOnNumberOfChars = 1
 ) {
@@ -36,6 +37,10 @@ function useSearch(
             if (queryString) {
                 setDebounceTimer(
                     setTimeout(() => savedFetchItems.current(queryString, searchTerm), debounce)
+                );
+            } else if (options) {
+                setDebounceTimer(
+                    setTimeout(() => savedFetchItems.current(searchTerm, options), debounce)
                 );
             } else {
                 setDebounceTimer(setTimeout(() => savedFetchItems.current(searchTerm), debounce));
