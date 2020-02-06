@@ -19,7 +19,15 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function EditableTableRow({ row, columns, saveRow, editable, isNewRow, ...rest }) {
+export default function EditableTableRow({
+    row,
+    columns,
+    saveRow,
+    editable,
+    isNewRow,
+    hideNewRow,
+    ...rest
+}) {
     const [editing, setEditing] = useState(false);
     const [prevItem, setPrevItem] = useState({});
     const [item, setItem] = useState({});
@@ -41,6 +49,9 @@ export default function EditableTableRow({ row, columns, saveRow, editable, isNe
     const handleCancelClick = () => {
         setEditing(false);
         setItem(prevItem);
+        if (isNewRow) {
+            hideNewRow();
+        }
     };
 
     const handleValueChange = (propertyName, newValue) => {
@@ -126,11 +137,13 @@ EditableTableRow.propTypes = {
     columns: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
     saveRow: PropTypes.func,
     editable: PropTypes.bool,
-    isNewRow: PropTypes.bool
+    isNewRow: PropTypes.bool,
+    hideNewRow: PropTypes.func
 };
 
 EditableTableRow.defaultProps = {
     saveRow: () => {},
     editable: true,
-    isNewRow: false
+    isNewRow: false,
+    hideNewRow: null
 };
