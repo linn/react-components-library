@@ -70,7 +70,7 @@ export default function FetchApiActions(itemName, actionTypeRoot, uri, actionTyp
     this.searchWithOptions = (searchTerm, options) => {
         return {
             [RSAA]: {
-                endpoint: `${appRoot}${uri}?searchTerm=${searchTerm}?${options}`,
+                endpoint: `${appRoot}${uri}?searchTerm=${searchTerm}&${options}`,
                 method: 'GET',
                 options: { requiresAuth: true },
                 headers: {

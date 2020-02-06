@@ -29,12 +29,16 @@ function useSearch(
     }, [clearSearch]);
 
     useEffect(() => {
-        if (searchTerm && searchTerm.replace(/\s/g, '').length >= searchOnNumberOfChars) {
+        if (
+            searchTerm &&
+            searchTerm?.toString().replace(/\s/g, '').length >= searchOnNumberOfChars
+        ) {
             if (savedDebounceTimer.current) {
                 clearTimeout(savedDebounceTimer.current);
             }
 
             if (queryString) {
+
                 setDebounceTimer(
                     setTimeout(() => savedFetchItems.current(queryString, searchTerm), debounce)
                 );
