@@ -1,3 +1,12 @@
+# Changelog
+
+## [10.6.0] - 2020-02-04
+
+## Changed
+- Allow alternative text than 'Back' on the BackButton. This is really so that you can be more specified, e.g. 'Back to Menu'.
+- Allow a custom debounce (time in ms) to be passed into useSearch. Example of usage in TypeaheadTable.
+- Allow a minimum search term length before the search gets fired off. This is useful in cases like board parts lookups, where the first 4 characters are pretty meaningless (i.e. PCAS or PCSM). Defaults to one to avoid any breakage.
+
 ## [10.5.0] - 2020-01-30
 
 ## Added
@@ -87,7 +96,7 @@
 ## Changed
 - Pass placeholder text prop to the InputField in the modal as well as the main one.
 
-## [10.2.0] - 2019-12-0
+## [10.2.0] - 2019-12-06
 
 ## Changed
 
@@ -97,7 +106,6 @@ Now also takes an optional modal boolean prop which lets you display search resu
 
 The two new props have default values such that original use cases are respected - i.e. links={true} and modal={false} - hence no breaking changes in this version.
 
-# Changelog
 ## [10.1.0] - 2019-12-04
 ### Added
 - StateApiActions

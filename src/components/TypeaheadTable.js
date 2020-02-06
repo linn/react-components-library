@@ -21,10 +21,22 @@ function TypeaheadTable({
     clearSearch,
     history,
     placeholder,
-    label
+    label,
+    debounce,
+    searchOptions,
+    queryString,
+    minimumSearchTermLength
 }) {
     const [searchTerm, setSearchTerm] = useState();
-    useSearch(fetchItems, searchTerm, clearSearch);
+    useSearch(
+        fetchItems,
+        searchTerm,
+        clearSearch,
+        queryString,
+        searchOptions,
+        debounce,
+        minimumSearchTermLength
+    );
 
     const handleSearchTermChange = (_propertyName, newValue) => {
         setSearchTerm(newValue);
@@ -106,7 +118,11 @@ TypeaheadTable.propTypes = {
     title: PropTypes.string,
     loading: PropTypes.bool,
     placeholder: PropTypes.string,
-    label: PropTypes.string
+    label: PropTypes.string,
+    debounce: PropTypes.number,
+    minimumSearchTermLength: PropTypes.number,
+    queryString: PropTypes.string,
+    searchOptions: PropTypes.string
 };
 
 TypeaheadTable.defaultProps = {
@@ -114,7 +130,11 @@ TypeaheadTable.defaultProps = {
     loading: false,
     placeholder: '',
     table: { rows: [] },
-    label: ''
+    label: '',
+    debounce: 500,
+    minimumSearchTermLength: 1,
+    queryString: '',
+    searchOptions: ''
 };
 
 export default TypeaheadTable;

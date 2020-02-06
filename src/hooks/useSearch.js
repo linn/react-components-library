@@ -1,6 +1,14 @@
 import { useEffect, useState, useRef } from 'react';
 
-function useSearch(fetchItems, searchTerm, clearSearch, queryString = null) {
+function useSearch(
+    fetchItems,
+    searchTerm,
+    clearSearch,
+    queryString = '',
+    options = null,
+    debounce = 500,
+    searchOnNumberOfChars = 1
+) {
     const [debounceTimer, setDebounceTimer] = useState(null);
     const savedFetchItems = useRef();
     const savedDebounceTimer = useRef();
@@ -21,17 +29,25 @@ function useSearch(fetchItems, searchTerm, clearSearch, queryString = null) {
     }, [clearSearch]);
 
     useEffect(() => {
-        if (searchTerm) {
+        if (
+            searchTerm &&
+            searchTerm?.toString().replace(/\s/g, '').length >= searchOnNumberOfChars
+        ) {
             if (savedDebounceTimer.current) {
                 clearTimeout(savedDebounceTimer.current);
             }
 
             if (queryString) {
+
                 setDebounceTimer(
-                    setTimeout(() => savedFetchItems.current(queryString, searchTerm), 500)
+                    setTimeout(() => savedFetchItems.current(queryString, searchTerm), debounce)
+                );
+            } else if (options) {
+                setDebounceTimer(
+                    setTimeout(() => savedFetchItems.current(searchTerm, options), debounce)
                 );
             } else {
-                setDebounceTimer(setTimeout(() => savedFetchItems.current(searchTerm), 500));
+                setDebounceTimer(setTimeout(() => savedFetchItems.current(searchTerm), debounce));
             }
         } else if (savedDebounceTimer.current) {
             clearTimeout(savedDebounceTimer.current);
