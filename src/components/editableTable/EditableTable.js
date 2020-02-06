@@ -20,6 +20,8 @@ export default function EditableTable({
 }) {
     const [showNewRow, setShowNewRow] = useState(false);
 
+    const hideNewRow = () => setShowNewRow(false);
+
     return (
         <Table size="small">
             <TableHead>
@@ -49,6 +51,7 @@ export default function EditableTable({
                             saveRow={createRow}
                             editable={editable}
                             isNewRow
+                            hideNewRow={hideNewRow}
                             {...rest}
                         />
                     ) : (
