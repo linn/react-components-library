@@ -1,6 +1,6 @@
 {
     "name": "@linn-it/linn-form-components-library",
-    "version": "10.6.1",
+    "version": "10.6.2",
     "private": false,
     "dependencies": {
         "@babel/plugin-transform-runtime": "^7.8.3",
