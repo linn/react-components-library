@@ -1,5 +1,8 @@
 # Changelog
 
+## [10.6.1] - 2020-02-05
+- pass column widths to ReportData
+
 ## [10.6.0] - 2020-02-04
 
 ## Changed

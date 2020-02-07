@@ -31,6 +31,20 @@ const useStyles = makeStyles(() => ({
     },
     noWrap: {
         whiteSpace: 'nowrap'
+    },
+    smallCol: {
+        width: '100px',
+        overflow: 'auto'
+    },
+    mediumCol: {
+        width: '200px',
+        overflow: 'auto',
+        backgroundColor: 'yellow'        
+    },
+    largeCol: {
+        width: '300px',
+        overflow: 'auto',
+        backgroundColor: 'blue'
     }
 }));
 
@@ -65,10 +79,29 @@ const setCellClasses = (
     return generatedClasses;
 };
 
-const setHeaderCellClasses = (classes, varianceColumn, textColumn, totalColumn, defaultClasses) => {
+const setHeaderCellClasses = (
+    classes,
+    varianceColumn,
+    textColumn,
+    totalColumn,
+    columnClass,
+    defaultClasses
+) => {
     let generatedClasses = '';
     if (!textColumn) {
         generatedClasses += `${classes.numberField} `;
+    }
+
+    if (columnClass === 'small') {
+        generatedClasses += `${classes.smallCol} `;
+    }
+
+    if (columnClass === 'medium') {
+        generatedClasses += `${classes.mediumCol} `;
+    }
+
+    if (columnClass === 'large') {
+        generatedClasses += `${classes.largeCol} `;
     }
 
     if (defaultClasses) {
@@ -85,7 +118,8 @@ const Results = ({
     showTitle,
     showTotals,
     hasExternalLinks,
-    showRowTitles
+    showRowTitles,
+    columnClasses
 }) => (
     <Paper className={classes.root}>
         <Title
@@ -110,7 +144,8 @@ const Results = ({
                                     classes,
                                     reportData.headers.varianceColumns.includes(i),
                                     reportData.headers.textColumns.includes(i),
-                                    reportData.headers.totalColumns.includes(i)
+                                    reportData.headers.totalColumns.includes(i),
+                                    columnClasses ? columnClasses[i] : null
                                 )}
                                 key={header}
                             >
@@ -193,7 +228,8 @@ function ReportTable({
     title,
     showTitle,
     showTotals,
-    showRowTitles
+    showRowTitles,
+    columnClasses
 }) {
     const classes = useStyles();
     if (!reportData) {
@@ -223,7 +259,8 @@ function ReportTable({
         title,
         showRowTitles,
         showTitle,
-        showTotals
+        showTotals,
+        columnClasses
     });
 }
 
@@ -237,7 +274,8 @@ Results.propTypes = {
     title: PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})]),
     showTitle: PropTypes.bool,
     showTotals: PropTypes.bool,
-    showRowTitles: PropTypes.bool
+    showRowTitles: PropTypes.bool,
+    columnClasses: PropTypes.arrayOf(PropTypes.string)
 };
 
 Results.defaultProps = {
@@ -246,21 +284,24 @@ Results.defaultProps = {
     showTitle: true,
     showTotals: true,
     showRowTitles: true,
-    hasExternalLinks: false
+    hasExternalLinks: false,
+    columnClasses: null
 };
 
 ReportTable.propTypes = {
     hasExternalLinks: PropTypes.bool,
     placeholderRows: PropTypes.number.isRequired,
     placeholderColumns: PropTypes.number.isRequired,
-    reportData: PropTypes.shape({})
+    reportData: PropTypes.shape({}),
+    columnClasses: PropTypes.arrayOf(PropTypes.string)
 };
 
 ReportTable.defaultProps = {
     reportData: null,
     placeholderRows: 5,
     placeholderColumns: 6,
-    hasExternalLinks: false
+    hasExternalLinks: false,
+    columnClasses: null
 };
 
 export default ReportTable;
