@@ -24,7 +24,8 @@ const useStyles = makeStyles(() => ({
     root: {
         width: '100%',
         overflow: 'auto',
-        textAlign: 'center'
+        textAlign: 'center',
+        pageBreakInside: 'avoid'
     },
     numberField: {
         textAlign: 'right'
