@@ -5,6 +5,7 @@ function useSearch(
     searchTerm,
     clearSearch,
     queryString = '',
+    options = null,
     debounce = 500,
     searchOnNumberOfChars = 1
 ) {
@@ -28,14 +29,22 @@ function useSearch(
     }, [clearSearch]);
 
     useEffect(() => {
-        if (searchTerm && searchTerm.replace(/\s/g, '').length >= searchOnNumberOfChars) {
+        if (
+            searchTerm &&
+            searchTerm?.toString().replace(/\s/g, '').length >= searchOnNumberOfChars
+        ) {
             if (savedDebounceTimer.current) {
                 clearTimeout(savedDebounceTimer.current);
             }
 
             if (queryString) {
+
                 setDebounceTimer(
                     setTimeout(() => savedFetchItems.current(queryString, searchTerm), debounce)
+                );
+            } else if (options) {
+                setDebounceTimer(
+                    setTimeout(() => savedFetchItems.current(searchTerm, options), debounce)
                 );
             } else {
                 setDebounceTimer(setTimeout(() => savedFetchItems.current(searchTerm), debounce));

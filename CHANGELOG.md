@@ -1,7 +1,12 @@
 # Changelog
 
-## [10.6.1] - 2020-02-05
-- pass column widths to ReportData
+## [10.6.3] - 2020-02-05
+- pass column widths to ReportData in three sizes small/medium/large
+
+## [10.6.1] - 2020-02-06
+
+## Changed
+- Remove new row from EditableTable on clicking cancel button
 
 ## [10.6.0] - 2020-02-04
 

@@ -10,7 +10,7 @@ afterEach(cleanup);
 describe('When no minimum set', () => {
     test('should fire off search', async () => {
         fetchItems = jest.fn();
-        renderHook(() => useSearch(fetchItems, 'PCAS', clearSearch, '', 500, 0));
+        renderHook(() => useSearch(fetchItems, 'PCAS', clearSearch, '', '', 500, 0));
         await wait(() => expect(fetchItems).toHaveBeenCalled());
     });
 });
@@ -18,7 +18,7 @@ describe('When no minimum set', () => {
 describe('When minimum set and search term shorter than minimum', () => {
     test('should not fire off search', async () => {
         fetchItems = jest.fn();
-        renderHook(() => useSearch(fetchItems, 'PCAS', clearSearch, '', 500, 5));
+        renderHook(() => useSearch(fetchItems, 'PCAS', clearSearch, '', '', 500, 5));
         await wait(() => expect(fetchItems));
         expect(fetchItems).not.toHaveBeenCalled();
     });
@@ -27,7 +27,7 @@ describe('When minimum set and search term shorter than minimum', () => {
 describe('When minimum set and search term longer than minimum', () => {
     test('should fire off search', async () => {
         fetchItems = jest.fn();
-        renderHook(() => useSearch(fetchItems, 'PCAS 123', clearSearch, '', 500, 5));
+        renderHook(() => useSearch(fetchItems, 'PCAS 123', clearSearch, '', '', 500, 5));
         await wait(() => expect(fetchItems).toHaveBeenCalled());
     });
 
