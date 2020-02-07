@@ -38,13 +38,11 @@ const useStyles = makeStyles(() => ({
     },
     mediumCol: {
         width: '200px',
-        overflow: 'auto',
-        backgroundColor: 'yellow'        
+        overflow: 'auto'
     },
     largeCol: {
         width: '300px',
-        overflow: 'auto',
-        backgroundColor: 'blue'
+        overflow: 'auto'
     }
 }));
 
