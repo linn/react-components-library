@@ -26,8 +26,8 @@ jobs:
       - run: npm run build
   
       - run:
-        name: Publish to npm
-        command: |
+          name: Publish to npm
+          command: |
           if [ "${CIRCLE_BRANCH}" == "master" ]; then
           npm publish --dry-run 
           fi
