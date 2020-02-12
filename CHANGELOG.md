@@ -1,4 +1,6 @@
 # Changelog
+## [10.6.4] - 2020-02-12
+- Added CI. All commits now run the tests and build scripts. All commits (which should only be merge commits!) to master run build -> test -> publish -> deploy. Updated the readme, replacing the old manual change integraton manual with this new process.
 
 ## [10.6.3] - 2020-02-05
 - pass column widths to ReportData in three sizes small/medium/large
