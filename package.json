@@ -1,6 +1,6 @@
 {
     "name": "@linn-it/linn-form-components-library",
-    "version": "10.6.3",
+    "version": "10.6.4",
     "private": false,
     "dependencies": {
         "@material-ui/core": "^4.1.0",
@@ -102,7 +102,7 @@
         "gitUsername": "GH Pages Bot",
         "gitEmail": "hello@ghbot.com",
         "commitMessage": "Deploy Storybook [skip ci]"
-      },
+    },
     "main": "dist/bundle.min.js",
     "files": [
         "cjs/*"
