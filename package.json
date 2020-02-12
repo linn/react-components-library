@@ -22,7 +22,7 @@
         "build": "npm install && jest --runInBand src/ && rollup --config",
         "deploy": "npm run build && npm publish && npm run deploy-storybook",
         "build-storybook": "build-storybook -c .storybook -o .out",
-        "deploy-storybook": "storybook-to-ghpages -- --out=.out --ci",
+        "deploy-storybook": "storybook-to-ghpages -- --out=.out",
         "test:generate-output": "jest --json --outputFile=jest-test-results.json src/components/__tests__/*",
         "test": "jest src/",
         "test:watch": "jest --watch",

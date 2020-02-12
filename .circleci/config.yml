@@ -21,8 +21,6 @@ jobs:
   
       - run:
           name: Publish to npm
-          env:
-               GH_TOKEN: MyCompany:${{ secrets.GITHUB_TOKEN }}
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
                 npm publish --dry-run
