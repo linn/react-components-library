@@ -19,16 +19,18 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      - run: npm run build
+      - run: 
+          name: build and test
+          command: npm run build
   
       - run:
-          name: Publish to npm
+          name: publish to npm
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
                 npm publish --dry-run
             fi
       - run:
-          name: Deploy Storybook
+          name: deploy storybook
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
                 npm run deploy-storybook --ci
