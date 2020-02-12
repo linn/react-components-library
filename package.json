@@ -98,6 +98,11 @@
         "rollup-plugin-uglify": "^6.0.2",
         "storybook-react-router": "^1.0.2"
     },
+    "storybook-deployer": {
+        "gitUsername": "GH Pages Bot",
+        "gitEmail": "hello@ghbot.com",
+        "commitMessage": "Deploy Storybook [skip ci]"
+      },
     "main": "dist/bundle.min.js",
     "files": [
         "cjs/*"
