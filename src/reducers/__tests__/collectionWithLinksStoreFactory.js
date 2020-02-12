@@ -1,5 +1,5 @@
 ﻿import deepFreeze from 'deep-freeze';
-import collectionWithLInksStoreFactory from '../reducerFactories/collectionWithLInksStoreFactory';
+import collectionWithLInksStoreFactory from '../reducerFactories/collectionWithLinksStoreFactory';
 
 describe('collection with links store reducer factory', () => {
     const actionTypes = {
