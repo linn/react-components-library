@@ -18,7 +18,7 @@ jobs:
 
     steps:
       - checkout
-      - run:
+        - run:
           name: Install node@10.16.2
           command: |
             set +e             
