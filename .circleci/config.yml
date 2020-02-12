@@ -34,6 +34,7 @@ jobs:
       - run: npm run build
   publish:
     steps:
+      - checkout
       - run:
         name: Publish to npm
         command: |
