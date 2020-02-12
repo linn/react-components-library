@@ -39,16 +39,18 @@ describe('collection with links store reducer factory', () => {
 
         const action = {
             type: actionTypes.RECEIVE_ENTITIES,
-            payload: { data: {
-                responseData: [{ name: '1', links: [{ rel: 'self', href: '/1' }] }],
-                links: [{ rel: 'self', href : '/1' }]
-            } }
+            payload: {
+                data: {
+                    responseData: [{ name: '1', links: [{ rel: 'self', href: '/1' }] }],
+                    links: [{ rel: 'self', href: '/1' }]
+                }
+            }
         };
 
         const expected = {
             loading: false,
             items: [{ name: '1', href: '/1', links: [{ rel: 'self', href: '/1' }] }],
-            links: [{ rel: 'self', href : '/1' }]
+            links: [{ rel: 'self', href: '/1' }]
         };
 
         deepFreeze(state);

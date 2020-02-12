@@ -1,6 +1,5 @@
 ﻿import { RSAA } from 'redux-api-middleware';
 import * as rsaaTypes from './rsaaTypes';
-import { object } from 'prop-types';
 
 export default function FetchApiActions(itemName, actionTypeRoot, uri, actionTypes, appRoot) {
     this.fetch = () => ({
@@ -67,24 +66,22 @@ export default function FetchApiActions(itemName, actionTypeRoot, uri, actionTyp
         }
     });
 
-    this.searchWithOptions = (searchTerm, options) => {
-        return {
-            [RSAA]: {
-                endpoint: `${appRoot}${uri}?searchTerm=${searchTerm}&${options}`,
-                method: 'GET',
-                options: { requiresAuth: true },
-                headers: {
-                    Accept: 'application/json'
-                },
-                types: [
-                    rsaaTypes.requestSearch(actionTypes, actionTypeRoot),
-                    rsaaTypes.receiveSearch(actionTypes, actionTypeRoot, itemName),
-                    rsaaTypes.error(actionTypes, actionTypeRoot, itemName)
-                ]
-            }
-        };
-    };
- 
+    this.searchWithOptions = (searchTerm, options) => ({
+        [RSAA]: {
+            endpoint: `${appRoot}${uri}?searchTerm=${searchTerm}${options}`,
+            method: 'GET',
+            options: { requiresAuth: true },
+            headers: {
+                Accept: 'application/json'
+            },
+            types: [
+                rsaaTypes.requestSearch(actionTypes, actionTypeRoot),
+                rsaaTypes.receiveSearch(actionTypes, actionTypeRoot, itemName),
+                rsaaTypes.error(actionTypes, actionTypeRoot, itemName)
+            ]
+        }
+    });
+
     this.clearSearch = () => ({
         type: actionTypes[`CLEAR_SEARCH_${actionTypeRoot}`],
         payload: {}

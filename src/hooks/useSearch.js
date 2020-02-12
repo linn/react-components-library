@@ -38,7 +38,6 @@ function useSearch(
             }
 
             if (queryString) {
-
                 setDebounceTimer(
                     setTimeout(() => savedFetchItems.current(queryString, searchTerm), debounce)
                 );
