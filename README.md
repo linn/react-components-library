@@ -27,11 +27,7 @@ which runs the storybook dev server.
 Make a new branch and add your new components, tests and stories in the relevant directories and view them in your local storybook.
 When you are ready to share your new component, add it to the rollup.config.js following the existing syntax and it will be transpiled and presented as a module export by the build command. Up the version number in package.json and then make a pull request for review.
 
-## Build, Package and Deploy
+## Build, Test, Package and Deploy
+The build and tests will run automatically on commits to your branch. 
 
-After merging your new component branch you can build the npm package from master and deploy the public storybook in one command using:
-
-### `npm run deploy`
-
-This command runs the tests, builds the project, deploys to the storybook site and
-publishes the new package to npm for use in other projects. (n.b. if this is your first time, you'll need to make an npm account and request contribution permissions for this package.)
+When you merge to master (remember to up the package version number before you do) your changes will be published to npm and the new storybook will be deployed to github pages.
