@@ -26,5 +26,10 @@ jobs:
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
                 npm publish --dry-run
-                npm run deploy-storybook -- -- --ci
+            fi
+      - run:
+          name: Deploy Storybook
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+                npm run deploy-storybook --ci
             fi
