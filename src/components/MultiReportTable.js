@@ -31,7 +31,8 @@ const Results = ({
     fixColumnWidths,
     containsSubtotals,
     showRowTitles,
-    showTitle
+    showTitle,
+    allowPageBreakInside
 }) => (
     <div>
         {reportData.error ? (
@@ -71,6 +72,7 @@ const Results = ({
                                 placeholderRows={placeholderRows}
                                 placeholderColumns={placeholderColumns}
                                 showRowTitles={showRowTitles}
+                                allowPageBreakInside={allowPageBreakInside}
                             />
                         </Box>
                     ))}
@@ -89,7 +91,8 @@ const MultiReportTable = ({
     pageBreaksAfter,
     fixColumnWidths,
     containsSubtotals,
-    showRowTitles
+    showRowTitles,
+    allowPageBreakInside
 }) => (
     <div>
         {formatHeading(title, showTitle, !reportData, reportData && reportData.error)}
@@ -109,6 +112,7 @@ const MultiReportTable = ({
                 pageBreaksAfter={pageBreaksAfter}
                 fixColumnWidths={fixColumnWidths}
                 showTitle={showTitle}
+                allowPageBreakInside={allowPageBreakInside}
             />
         )}
     </div>
@@ -124,7 +128,8 @@ MultiReportTable.propTypes = {
     placeholderColumns: PropTypes.number,
     pageBreaksAfter: PropTypes.arrayOf(PropTypes.number),
     fixColumnWidths: PropTypes.bool,
-    containsSubtotals: PropTypes.bool
+    containsSubtotals: PropTypes.bool,
+    allowPageBreakInside: PropTypes.bool
 };
 
 MultiReportTable.defaultProps = {
@@ -137,7 +142,8 @@ MultiReportTable.defaultProps = {
     placeholderColumns: 4,
     pageBreaksAfter: [],
     fixColumnWidths: false,
-    containsSubtotals: false
+    containsSubtotals: false,
+    allowPageBreakInside: false
 };
 
 Results.propTypes = {
@@ -149,7 +155,8 @@ Results.propTypes = {
     placeholderColumns: PropTypes.number,
     pageBreaksAfter: PropTypes.arrayOf(PropTypes.number),
     fixColumnWidths: PropTypes.bool,
-    containsSubtotals: PropTypes.bool
+    containsSubtotals: PropTypes.bool,
+    allowPageBreakInside: PropTypes.bool.isRequired
 };
 
 Results.defaultProps = {

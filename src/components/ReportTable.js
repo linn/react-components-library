@@ -27,6 +27,11 @@ const useStyles = makeStyles(() => ({
         textAlign: 'center',
         pageBreakInside: 'avoid'
     },
+    rootAllowsPageBreaks: {
+        width: '100%',
+        overflow: 'auto',
+        textAlign: 'center'
+    },
     numberField: {
         textAlign: 'right'
     },
@@ -118,9 +123,10 @@ const Results = ({
     showTotals,
     hasExternalLinks,
     showRowTitles,
-    columnClasses
+    columnClasses,
+    allowPageBreakInside
 }) => (
-    <Paper className={classes.root}>
+    <Paper className={allowPageBreakInside ? classes.rootAllowsPageBreaks : classes.root}>
         <Title
             text={formatTitle(
                 title,
@@ -228,12 +234,13 @@ function ReportTable({
     showTitle,
     showTotals,
     showRowTitles,
-    columnClasses
+    columnClasses,
+    allowPageBreakInside
 }) {
     const classes = useStyles();
     if (!reportData) {
         return (
-            <Paper className={classes.root}>
+            <Paper className={allowPageBreakInside ? classes.rootAllowsPageBreaks : classes.root}>
                 <Table>
                     <TableBody>
                         {[...Array(placeholderRows).keys()].map(row => (
@@ -259,7 +266,8 @@ function ReportTable({
         showRowTitles,
         showTitle,
         showTotals,
-        columnClasses
+        columnClasses,
+        allowPageBreakInside
     });
 }
 
@@ -268,13 +276,15 @@ Results.propTypes = {
     reportData: reportResultType,
     classes: PropTypes.shape({
         root: PropTypes.shape({}),
-        noWrap: PropTypes.shape({})
+        noWrap: PropTypes.shape({}),
+        rootAllowsPageBreaks: PropTypes.shape({})
     }).isRequired,
     title: PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})]),
     showTitle: PropTypes.bool,
     showTotals: PropTypes.bool,
     showRowTitles: PropTypes.bool,
-    columnClasses: PropTypes.arrayOf(PropTypes.string)
+    columnClasses: PropTypes.arrayOf(PropTypes.string),
+    allowPageBreakInside: PropTypes.bool.isRequired
 };
 
 Results.defaultProps = {
@@ -284,7 +294,7 @@ Results.defaultProps = {
     showTotals: true,
     showRowTitles: true,
     hasExternalLinks: false,
-    columnClasses: null
+    columnClasses: null,
 };
 
 ReportTable.propTypes = {
@@ -292,7 +302,8 @@ ReportTable.propTypes = {
     placeholderRows: PropTypes.number.isRequired,
     placeholderColumns: PropTypes.number.isRequired,
     reportData: PropTypes.shape({}),
-    columnClasses: PropTypes.arrayOf(PropTypes.string)
+    columnClasses: PropTypes.arrayOf(PropTypes.string),
+    allowPageBreakInside: PropTypes.bool
 };
 
 ReportTable.defaultProps = {
@@ -300,7 +311,8 @@ ReportTable.defaultProps = {
     placeholderRows: 5,
     placeholderColumns: 6,
     hasExternalLinks: false,
-    columnClasses: null
+    columnClasses: null,
+    allowPageBreakInside: false
 };
 
 export default ReportTable;
