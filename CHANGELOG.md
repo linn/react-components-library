@@ -1,4 +1,7 @@
 # Changelog
+## [10.6.5] - 2020-02-12
+- Made report table 'avoid page break' style the default, but is now optional in report table and multi report table
+
 ## [10.6.4] - 2020-02-12
 - Added CI. All commits now run the tests and build scripts. All commits (which should only be merge commits!) to master run build -> test -> publish -> deploy. Updated the readme, replacing the old manual change integraton manual with this new process.
 
