@@ -28,6 +28,6 @@ Make a new branch and add your new components, tests and stories in the relevant
 When you are ready to share your new component, add it to the rollup.config.js following the existing syntax and it will be transpiled and presented as a module export by the build command. Up the version number in package.json and then make a pull request for review.
 
 ## Build, Test, Package and Deploy
-The build and tests will run automatically on commits to your branch. 
+The build and tests will run automatically on commits to your branch if you have a pull request open. 
 
 When you merge to master (remember to up the package version number before you do) your changes will be published to npm and the new storybook will be deployed to github pages.
