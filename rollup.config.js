@@ -58,7 +58,7 @@ export default [
             collectionStoreFactory: 'src/reducers/reducerFactories/collectionStoreFactory.js',
             collectionWithLinksStoreFactory:
                 'src/reducers/reducerFactories/collectionWithLinksStoreFactory.js',
-            itemStoreFactory: 'src/reducers/reducerFactories/itemStoreFactory.js',
+            itemStoreFactory: 'src/reducers/reducerfactories/itemStoreFactory.js',
             paginationStoreFactory: 'src/reducers/reducerFactories/paginationStoreFactory.js',
             reportOptionsFactory: 'src/reducers/reducerFactories/reportOptionsFactory.js',
             reportResultsFactory: 'src/reducers/reducerFactories/reportResultsFactory.js',
