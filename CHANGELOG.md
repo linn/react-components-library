@@ -1,4 +1,7 @@
 # Changelog
+## [11.0.0] - 2020-02-17
+- Breaking: menuActions and newsActions are now exported as FetchApiAction objects.
+
 ## [10.6.5] - 2020-02-12
 - Made report table 'avoid page break' style the default, but is now optional in report table and multi report table
 

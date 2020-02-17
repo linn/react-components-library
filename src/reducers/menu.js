@@ -13,7 +13,7 @@ function menu(state = { loading: false, data: null }, action) {
             return {
                 ...state,
                 loading: false,
-                data: action.payload.menu
+                data: action.payload.data
             };
 
         default:

@@ -7,5 +7,5 @@ export default new FetchApiActions(
     'NEWS',
     '/notifications',
     makeActionTypes('NEWS'),
-    config.appRoot
+    config.proxyRoot
 );

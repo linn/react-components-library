@@ -1,12 +1,19 @@
 ﻿import { RSAA } from 'redux-api-middleware';
 import * as rsaaTypes from './rsaaTypes';
 
-export default function FetchApiActions(itemName, actionTypeRoot, uri, actionTypes, appRoot) {
+export default function FetchApiActions(
+    itemName,
+    actionTypeRoot,
+    uri,
+    actionTypes,
+    appRoot,
+    auth = true
+) {
     this.fetch = () => ({
         [RSAA]: {
             endpoint: `${appRoot}${uri}`,
             method: 'GET',
-            options: { requiresAuth: true },
+            options: { requiresAuth: auth },
             headers: {
                 Accept: 'application/json'
             },

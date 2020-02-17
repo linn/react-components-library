@@ -20,7 +20,7 @@ const mapStateToProps = state => ({
     authRoot: config.authorityUri
 });
 
-const initialise = dispatch => {
+const initialise = state => dispatch => {
     dispatch(menuActions.fetch());
     dispatch(newsActions.fetch());
 };

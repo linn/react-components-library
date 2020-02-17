@@ -11,11 +11,11 @@ function news(state = { loading: false, seen: [], unseen: [] }, action) {
             return {
                 ...state,
                 loading: false,
-                unseen: action.payload.news.notifications
-                    ? action.payload.news.notifications.filter(n => !localStorage.getItem(n.title))
+                unseen: action.payload.data.notifications
+                    ? action.payload.data.notifications.filter(n => !localStorage.getItem(n.title))
                     : [],
-                seen: action.payload.news.notifications
-                    ? action.payload.news.notifications.filter(n => localStorage.getItem(n.title))
+                seen: action.payload.data.notifications
+                    ? action.payload.data.notifications.filter(n => localStorage.getItem(n.title))
                     : []
             };
         case MARK_NOTIFICATION_SEEN:

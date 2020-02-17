@@ -7,5 +7,6 @@ export default new FetchApiActions(
     'MENU',
     '/intranet/menu-no-auth',
     makeActionTypes('MENU'),
-    config.appRoot
+    config.proxyRoot,
+    false
 );
