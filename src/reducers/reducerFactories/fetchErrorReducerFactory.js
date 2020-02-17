@@ -38,15 +38,6 @@ function fetchErrorReducerFactory(itemTypes, defaultState = { requestErrors: [],
             return { ...state, itemErrors: [] };
         }
 
-        // sometimes the action itself represents an error e.g. CORS rejection, server is down etc.
-        // differentiate these from itemErrors in state by adding to a different requestErrors array
-        if (action.error) {
-            return {
-                ...state,
-                requestErrors: [...state.requestErrors, { ...action.payload, type: action.type }]
-            };
-        }
-
         // remove request for an action that previously errored if it succeeds this time round
         if (!action.error) {
             return {

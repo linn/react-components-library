@@ -2,7 +2,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import makeStyles from '@material-ui/styles/makeStyles';
 import { useSnackbar } from 'notistack';
-import React, { Fragment, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Breadcrumbs from './Breadcrumbs';
 
@@ -54,23 +54,21 @@ function Page({ children, history, width, requestErrors, showRequestErrors }) {
     }, [requestErrors, enqueueSnackbar]);
 
     return (
-        <Fragment>
-            <Grid container spacing={3} className={classes.grid}>
-                <Grid item xs={1} />
-                <Grid item xs={10} className="hide-when-printing">
-                    <Breadcrumbs history={history} />
-                </Grid>
-                <Grid item xs={1} />
-
-                <Grid item xs={columnWidth[width]} />
-                <Grid item xs={pageWidth[width]}>
-                    <Paper className={classes.root} square>
-                        {children}
-                    </Paper>
-                </Grid>
-                <Grid item xs={columnWidth[width]} />
+        <Grid container spacing={3} className={classes.grid}>
+            <Grid item xs={1} />
+            <Grid item xs={10} className="hide-when-printing">
+                <Breadcrumbs history={history} />
             </Grid>
-        </Fragment>
+            <Grid item xs={1} />
+
+            <Grid item xs={columnWidth[width]} />
+            <Grid item xs={pageWidth[width]}>
+                <Paper className={classes.root} square>
+                    {children}
+                </Paper>
+            </Grid>
+            <Grid item xs={columnWidth[width]} />
+        </Grid>
     );
 }
 

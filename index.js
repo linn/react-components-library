@@ -32,9 +32,9 @@ import ProcessActions from './src/actions/ProcessActions';
 import ReportActions from './src/actions/ReportActions';
 import UpdateApiActions from './src/actions/UpdateApiActions';
 import StateApiActions from './src/actions/StateApiActions';
-import fetchNews from './src/actions/fetchNews';
+import menuActions from './src/actions/menuActions';
 import markNotificationSeen from './src/actions/markNotificationSeen';
-import fetchMenu from './src/actions/fetchMenu';
+import newsActions from './src/actions/newsActions';
 import ItemType from './src/types/ItemType';
 import CollectionSelectors from './src/selectors/CollectionSelectors';
 import PaginationSelectors from './src/selectors/PaginationSelectors';
@@ -126,8 +126,8 @@ export {
     reportsResultsFactory,
     initialiseOnMount,
     Navigation,
-    fetchMenu,
-    fetchNews,
+    menuActions,
+    newsActions,
     menu,
     news,
     markNotificationSeen,
