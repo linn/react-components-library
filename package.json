@@ -1,6 +1,6 @@
 {
     "name": "@linn-it/linn-form-components-library",
-    "version": "10.6.6",
+    "version": "10.6.7",
     "private": false,
     "dependencies": {
         "@material-ui/core": "^4.9.2",
@@ -14,7 +14,7 @@
         "prettier": "^1.19.1",
         "prop-types": "^15.7.2",
         "query-string": "^6.11.0",
-        "redux-api-middleware": "^2.3.0",
+        "redux-api-middleware": "^3.2.0",
         "rollup-plugin-terser": "^5.2.0"
     },
     "scripts": {

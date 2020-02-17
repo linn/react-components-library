@@ -1,4 +1,7 @@
 # Changelog
+## [10.6.7] - 2020-02-17
+- Updated redux-api-middleware to v3.2.0
+
 ## [10.6.5] - 2020-02-12
 - Made report table 'avoid page break' style the default, but is now optional in report table and multi report table
 
