@@ -9,7 +9,10 @@ const babelrc = {
 export default [
     {
         input: 'index.js',
-        plugins: [babel({ babelrc: false, ...babelrc, exclude: 'node_modules/**' }), terser()],
+        plugins: [
+            babel({ babelrc: false, ...babelrc, exclude: 'node_modules/**' }),
+            terser({ keep_fnames: true })
+        ],
         output: {
             file: 'dist/bundle.min.js',
             format: 'cjs',
@@ -76,7 +79,10 @@ export default [
             linnTheme: 'src/themes/linnTheme.js',
             fetchError: 'src/reducers/reducerFactories/fetchErrorReducerFactory.js'
         },
-        plugins: [babel({ babelrc: false, ...babelrc, exclude: 'node_modules/**' }), terser()],
+        plugins: [
+            babel({ babelrc: false, ...babelrc, exclude: 'node_modules/**' }),
+            terser({ keep_fnames: true })
+        ],
         output: [
             {
                 dir: 'cjs',
