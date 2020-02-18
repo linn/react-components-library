@@ -16,7 +16,7 @@ describe('<LinnWeekPicker />', () => {
                 selectedDate={moment('11-09-2019', 'MM-DD-YYYY')}
             />
         );
-        const item = getByDisplayValue('2019-11-09T00:00:00+00:00');
+        const item = getByDisplayValue('09/11/2019');
         expect(item).toBeInTheDocument();
     });
 
@@ -28,7 +28,7 @@ describe('<LinnWeekPicker />', () => {
                 selectedDate={new Date('01/01/2020')}
             />
         );
-        const item = getByDisplayValue('2020-01-01T00:00:00+00:00');
+        const item = getByDisplayValue('01/01/2020');
         expect(item).toBeInTheDocument();
     });
 
@@ -41,7 +41,7 @@ describe('<LinnWeekPicker />', () => {
             />
         );
 
-        const item = getByDisplayValue('2019-11-09T00:00:00+00:00');
+        const item = getByDisplayValue('09/11/2019');
         expect(item).toBeInTheDocument();
     });
 });
