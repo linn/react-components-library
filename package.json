@@ -1,9 +1,9 @@
 {
     "name": "@linn-it/linn-form-components-library",
-    "version": "10.6.706",
+    "version": "10.6.8",
     "private": false,
     "dependencies": {
-        "@material-ui/core": "^4.9.2",
+        "@material-ui/core": "^4.9.3",
         "@material-ui/icons": "^4.9.1",
         "@material-ui/styles": "^4.9.0",
         "@testing-library/jest-dom": "^5.1.1",
