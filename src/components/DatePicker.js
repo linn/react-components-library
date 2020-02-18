@@ -21,7 +21,7 @@ function DatePicker({ value, minDate, maxDate, label, onChange, required, disabl
     const inputClasses = inputStyles();
     const labelClasses = labelStyles();
     return (
-        <Fragment>
+        <>
             <InputLabel classes={{ root: labelClasses.root }} required={required}>
                 {label}
             </InputLabel>
@@ -41,7 +41,7 @@ function DatePicker({ value, minDate, maxDate, label, onChange, required, disabl
                 InputAdornmentProps={{ className: inputClasses.root }}
                 InputProps={{ classes: { disabled: inputClasses.disabled } }}
             />
-        </Fragment>
+        </>
     );
 }
 
