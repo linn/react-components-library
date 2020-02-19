@@ -1,6 +1,6 @@
 {
     "name": "@linn-it/linn-form-components-library",
-    "version": "10.6.10",
+    "version": "10.6.11",
     "private": false,
     "dependencies": {
         "@testing-library/jest-dom": "^5.1.1",
@@ -12,6 +12,7 @@
         "prop-types": "^15.7.2",
         "query-string": "^6.11.0",
         "redux-api-middleware": "^3.2.0",
+        "rollup-plugin-postcss": "^2.0.6",
         "rollup-plugin-terser": "^5.2.0"
     },
     "scripts": {
