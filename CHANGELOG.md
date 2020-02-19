@@ -1,6 +1,6 @@
 # Changelog
 ## [10.6.11] - 2020-02-19
-- Add printStyles to the build. Importing any component from this library now gives you the print styles (which will now be centrlal maintained here) for free.
+- Add printStyles to the build. Importing any component from this library now gives you the print styles (which will now be centrally maintained here) for free.
 
 ## [10.6.7] - 2020-02-17
 - Updated redux-api-middleware to v3.2.0
