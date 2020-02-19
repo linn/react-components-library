@@ -71,6 +71,7 @@ import ValidatedInputDialog from './src/components/ValidatedInputDialog';
 import TableWithInlineEditing from './src/components/TableWithInlineEditing';
 import LinnWeekPicker from './src/components/LinnWeekPicker';
 import EditableTable from './src/components/editableTable/EditableTable';
+import './src/styles/printStyles.css';
 
 const reducers = { menu, news };
 

@@ -1,5 +1,6 @@
 import babel from 'rollup-plugin-babel';
 import { terser } from 'rollup-plugin-terser';
+import postcss from 'rollup-plugin-postcss';
 
 const babelrc = {
     presets: ['@babel/preset-env', '@babel/react'],
@@ -11,7 +12,10 @@ export default [
         input: 'index.js',
         plugins: [
             babel({ babelrc: false, ...babelrc, exclude: 'node_modules/**' }),
-            terser({ keep_fnames: true })
+            terser({ keep_fnames: true }),
+            postcss({
+                extensions: ['.css']
+            })
         ],
         output: {
             file: 'dist/bundle.min.js',
@@ -81,7 +85,10 @@ export default [
         },
         plugins: [
             babel({ babelrc: false, ...babelrc, exclude: 'node_modules/**' }),
-            terser({ keep_fnames: true })
+            terser({ keep_fnames: true }),
+            postcss({
+                extensions: ['.css']
+            })
         ],
         output: [
             {
