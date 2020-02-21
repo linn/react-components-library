@@ -25,11 +25,11 @@ function TableWithInlineEditing({
 
     const handleRowChange = (propertyName, newValue, rowIndex) => {
         const updatedRow = { ...content[rowIndex], [propertyName]: newValue };
-        const sideEffects = columnsInfo.find(c => c.key === propertyName).sideEffects?.(newValue);
+        const updateValues = columnsInfo.find(c => c.key === propertyName).updateValues?.(newValue);
 
-        if (sideEffects) {
-            for (let i = 0; i < sideEffects.length; i += 1) {
-                updatedRow[sideEffects[i].propertyName] = sideEffects[i].value;
+        if (updateValues) {
+            for (let i = 0; i < updateValues.length; i += 1) {
+                updatedRow[updateValues[i].propertyName] = updateValues[i].value;
             }
         }
 
@@ -266,12 +266,7 @@ Row.propTypes = {
             type: PropTypes.string,
             key: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
             notEditable: PropTypes.bool,
-            sideEffects: PropTypes.arrayOf(
-                PropTypes.shape({
-                    propertyName: PropTypes.string,
-                    newValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-                })
-            )
+            updateValues: PropTypes.func
         })
     ).isRequired,
     removeRow: PropTypes.func.isRequired,
