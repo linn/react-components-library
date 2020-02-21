@@ -262,7 +262,13 @@ Row.propTypes = {
             title: PropTypes.string,
             type: PropTypes.string,
             key: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-            notEditable: PropTypes.bool
+            notEditable: PropTypes.bool,
+            sideEffects: PropTypes.arrayOf(
+                PropTypes.shape({
+                    propertyName: PropTypes.string,
+                    newValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+                })
+            )
         })
     ).isRequired,
     removeRow: PropTypes.func.isRequired,
