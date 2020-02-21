@@ -1,4 +1,7 @@
 # Changelog
+## [10.6.12] - 2020-02-21
+- Added: Updating a cell in a row in the TableWithInlineEditing can now optionally trigger updates for other cells in that row. This is useful if the result of input to one cell should auto update the other cells, e.g. if you enter a partNumber you could make the description autofill.
+
 ## [10.6.11] - 2020-02-19
 - Add printStyles to the build. Importing any component from this library now gives you the print styles (which will now be centrally maintained here) for free.
 

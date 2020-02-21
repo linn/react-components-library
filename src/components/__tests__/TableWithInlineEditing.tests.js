@@ -40,7 +40,13 @@ const columnsInfo = [
         title: 'dropdown option',
         key: 'options',
         type: 'dropdown',
-        options: ['choice1', 'choice2', 'choice3']
+        options: ['choice1', 'choice2', 'choice3'],
+        updateValues: newVal => [
+            {
+                propertyName: 'code',
+                value: `options was changed to ${newVal} which caused me to change`
+            }
+        ]
     }
 ];
 const defaultProps = {
@@ -131,7 +137,7 @@ describe('When allowed to edit', () => {
         expect(updateContent).toHaveBeenCalledWith(newContent);
     });
 
-    test('should update second row dropdown', () => {
+    test('should update when second row dropdown changed', () => {
         const { getByText, getByDisplayValue } = render(
             <TableWithInlineEditing {...defaultProps} />
         );
@@ -150,7 +156,7 @@ describe('When allowed to edit', () => {
                 id: 1
             },
             {
-                code: 22,
+                code: 'options was changed to choice3 which caused me to change',
                 description: 'Descrip',
                 options: 'choice3',
                 id: 2

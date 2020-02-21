@@ -25,6 +25,13 @@ function TableWithInlineEditing({
 
     const handleRowChange = (propertyName, newValue, rowIndex) => {
         const updatedRow = { ...content[rowIndex], [propertyName]: newValue };
+        const updateValues = columnsInfo.find(c => c.key === propertyName).updateValues?.(newValue);
+
+        if (updateValues) {
+            for (let i = 0; i < updateValues.length; i += 1) {
+                updatedRow[updateValues[i].propertyName] = updateValues[i].value;
+            }
+        }
 
         updateContent(
             content
@@ -59,46 +66,44 @@ function TableWithInlineEditing({
     };
 
     return (
-        <Fragment>
-            <Table>
-                <TableHead key="headers" onClick={clearEditingCell}>
-                    <TableRow>
-                        {columnsInfo.map(column => (
-                            <TableCell key={column.key}>{column.title}</TableCell>
-                        ))}
-                        {allowedToDelete && <TableCell key="Deleteplaceholdercell" />}
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {content.map((el, index) => (
-                        <Row
-                            rowContent={el}
-                            key={el.id}
-                            rowIndex={index}
-                            updateField={handleRowChange}
-                            columnsInfo={columnsInfo}
-                            currentlyEditing={editingCellId}
-                            changeCell={switchToEditingDifferentCell}
-                            allowedToEdit={allowedToEdit}
-                            clearEditingCell={clearEditingCell}
-                            removeRow={handleRemoveRow}
-                            allowedToDelete={allowedToDelete}
-                        />
+        <Table>
+            <TableHead key="headers" onClick={clearEditingCell}>
+                <TableRow>
+                    {columnsInfo.map(column => (
+                        <TableCell key={column.key}>{column.title}</TableCell>
                     ))}
-                    {allowedToCreate && (
-                        <TableRow>
-                            <TableCell>
-                                <Tooltip title="Add new row" aria-label="add">
-                                    <Button onClick={addNewRow}>
-                                        <AddIcon data-testid="addIcon" />
-                                    </Button>
-                                </Tooltip>
-                            </TableCell>
-                        </TableRow>
-                    )}
-                </TableBody>
-            </Table>
-        </Fragment>
+                    {allowedToDelete && <TableCell key="Deleteplaceholdercell" />}
+                </TableRow>
+            </TableHead>
+            <TableBody>
+                {content.map((el, index) => (
+                    <Row
+                        rowContent={el}
+                        key={el.id}
+                        rowIndex={index}
+                        updateField={handleRowChange}
+                        columnsInfo={columnsInfo}
+                        currentlyEditing={editingCellId}
+                        changeCell={switchToEditingDifferentCell}
+                        allowedToEdit={allowedToEdit}
+                        clearEditingCell={clearEditingCell}
+                        removeRow={handleRemoveRow}
+                        allowedToDelete={allowedToDelete}
+                    />
+                ))}
+                {allowedToCreate && (
+                    <TableRow>
+                        <TableCell>
+                            <Tooltip title="Add new row" aria-label="add">
+                                <Button onClick={addNewRow}>
+                                    <AddIcon data-testid="addIcon" />
+                                </Button>
+                            </Tooltip>
+                        </TableCell>
+                    </TableRow>
+                )}
+            </TableBody>
+        </Table>
     );
 }
 
@@ -177,7 +182,7 @@ const Row = ({
             {rowContent !== {} &&
                 columnsInfo &&
                 (allowedToEdit ? (
-                    <Fragment>
+                    <>
                         {columnsInfo.map((column, index) => (
                             <Fragment key={column.title}>
                                 <TableCell
@@ -226,10 +231,10 @@ const Row = ({
                                 </Tooltip>
                             </TableCell>
                         )}
-                    </Fragment>
+                    </>
                 ) : (
                     //readonly for users without edit permission
-                    <Fragment>
+                    <>
                         {columnsInfo.map(column => (
                             <Fragment key={column.title}>
                                 <TableCell>
@@ -239,7 +244,7 @@ const Row = ({
                                 </TableCell>
                             </Fragment>
                         ))}
-                    </Fragment>
+                    </>
                 ))}
         </TableRow>
     );
@@ -260,7 +265,8 @@ Row.propTypes = {
             title: PropTypes.string,
             type: PropTypes.string,
             key: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-            notEditable: PropTypes.bool
+            notEditable: PropTypes.bool,
+            updateValues: PropTypes.func
         })
     ).isRequired,
     removeRow: PropTypes.func.isRequired,
