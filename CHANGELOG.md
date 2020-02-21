@@ -1,5 +1,5 @@
 # Changelog
-## [10.6.12] - 2020-02-21
+## [10.6.13] - 2020-02-21
 - Added a search to the Navigation component
 
 ## [10.6.12] - 2020-02-21
