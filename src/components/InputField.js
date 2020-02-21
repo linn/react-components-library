@@ -84,7 +84,7 @@ function InputField({
     };
 
     return (
-        <Fragment>
+        <>
             <InputLabel
                 classes={{ root: classes.label, asterisk: classes.labelAsterisk }}
                 required={required}
@@ -134,7 +134,7 @@ function InputField({
                 variant="outlined"
                 {...textFieldProps}
             />
-        </Fragment>
+        </>
     );
 }
 

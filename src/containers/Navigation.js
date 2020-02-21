@@ -31,8 +31,5 @@ const mapDispatchToProps = {
 };
 
 export default withRouter(
-    connect(
-        mapStateToProps,
-        mapDispatchToProps
-    )(initialiseOnMount(Navigation))
+    connect(mapStateToProps, mapDispatchToProps)(initialiseOnMount(Navigation))
 );
