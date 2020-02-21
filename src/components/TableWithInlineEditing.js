@@ -26,8 +26,11 @@ function TableWithInlineEditing({
     const handleRowChange = (propertyName, newValue, rowIndex) => {
         const updatedRow = { ...content[rowIndex], [propertyName]: newValue };
         const sideEffects = columnsInfo.find(c => c.key === propertyName).sideEffects?.(newValue);
-        for (let i = 0; i < sideEffects.length; i += 1) {
-            updatedRow[sideEffects[i].propertyName] = sideEffects[i].value;
+
+        if (sideEffects) {
+            for (let i = 0; i < sideEffects.length; i += 1) {
+                updatedRow[sideEffects[i].propertyName] = sideEffects[i].value;
+            }
         }
 
         updateContent(
