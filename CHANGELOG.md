@@ -1,4 +1,7 @@
 # Changelog
+## [10.7.0] - 2020-02-24
+- Added a search to the Navigation component
+
 ## [10.6.12] - 2020-02-21
 - Added: Updating a cell in a row in the TableWithInlineEditing can now optionally trigger updates for other cells in that row. This is useful if the result of input to one cell should auto update the other cells, e.g. if you enter a partNumber you could make the description autofill.
 

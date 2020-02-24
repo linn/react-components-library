@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Tabs from '@material-ui/core/Tabs';
@@ -14,9 +14,11 @@ import Badge from '@material-ui/core/Badge';
 import Button from '@material-ui/core/Button';
 import { useSnackbar } from 'notistack';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import Search from '@material-ui/icons/Search';
 import Notifications from '@material-ui/icons/Notifications';
 import utilities from '../utilities/index';
 import Panel from './Panel';
+import SearchPanel from './SearchPanel';
 
 const styles = theme => ({
     root: {
@@ -92,14 +94,14 @@ function Navigation({
         };
 
         const actions = (key, e) => (
-            <Fragment>
+            <>
                 <Button
                     variant="contained"
                     onClick={() => {
                         window.location = utilities.getSelfHref(e);
                     }}
                 >
-                    {'View'}
+                    View
                 </Button>
                 <Button
                     onClick={() => {
@@ -108,9 +110,9 @@ function Navigation({
                         markNotificationSeen(e);
                     }}
                 >
-                    {'Dismiss'}
+                    Dismiss
                 </Button>
-            </Fragment>
+            </>
         );
 
         const noNotifications = () => {
@@ -154,7 +156,7 @@ function Navigation({
         };
 
         return (
-            <Fragment>
+            <>
                 <ClickAwayListener onClickAway={() => setSelected(false)}>
                     <div className="hide-when-printing">
                         <div className={classes.root}>
@@ -168,7 +170,7 @@ function Navigation({
                                             spacing={3}
                                             classes={{ container: classes.container }}
                                         >
-                                            <Grid item xs={10}>
+                                            <Grid item xs={9}>
                                                 <Tabs
                                                     classes={{
                                                         root: classes.tabs
@@ -230,6 +232,13 @@ function Navigation({
                                                     </Badge>
                                                 </Typography>
                                             </Grid>
+                                            <Grid item xs={1}>
+                                                <Typography variant="h4">
+                                                    <Search
+                                                        onClick={() => setSelected(sections.length)}
+                                                    />
+                                                </Typography>
+                                            </Grid>
                                             <Menu
                                                 id="simple-menu"
                                                 anchorEl={anchorEl}
@@ -270,10 +279,13 @@ function Navigation({
                                         />
                                     )
                             )}
+                            {selected === sections.length && (
+                                <SearchPanel menu={sections} close={() => setSelected(false)} />
+                            )}
                         </div>
                     </div>
                 </ClickAwayListener>
-            </Fragment>
+            </>
         );
     }
     return (
@@ -286,12 +298,22 @@ function Navigation({
 }
 
 Navigation.propTypes = {
-    classes: PropTypes.shape({}).isRequired,
+    classes: PropTypes.shape({
+        snackbarNew: PropTypes.string,
+        snackbarSeen: PropTypes.string,
+        root: PropTypes.string,
+        tabs: PropTypes.string,
+        tab: PropTypes.string,
+        tabLabel: PropTypes.string,
+        toolbar: PropTypes.string,
+        container: PropTypes.string,
+        appBar: PropTypes.string
+    }).isRequired,
     sections: PropTypes.arrayOf(PropTypes.shape({})),
     history: PropTypes.shape({}).isRequired,
     loading: PropTypes.bool,
     username: PropTypes.string,
-    myStuff: PropTypes.shape({}),
+    myStuff: PropTypes.shape({ groups: PropTypes.arrayOf(PropTypes.shape({})) }),
     seenNotifications: PropTypes.arrayOf(PropTypes.shape({})),
     unseenNotifications: PropTypes.arrayOf(PropTypes.shape({})),
     markNotificationSeen: PropTypes.func.isRequired,

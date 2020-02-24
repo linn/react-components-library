@@ -126,8 +126,8 @@ function Typeahead({
     };
 
     return (
-        <Fragment>
-            {!modal ? <Title text={title} /> : <Fragment />}
+        <>
+            {!modal ? <Title text={title} /> : <></>}
             <InputField
                 adornment={SearchIcon()}
                 textFieldProps={{
@@ -180,7 +180,7 @@ function Typeahead({
             ) : (
                 results()
             )}
-        </Fragment>
+        </>
     );
 }
 
