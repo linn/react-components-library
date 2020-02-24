@@ -52,11 +52,11 @@ function SearchPanel({ menu, classes, close }) {
         .flat();
 
     const uniqueEntries = Object.values(
-        menuEntries.reduce((c, e) => {
-            if (!c[e.title]) {
-                return { ...c, [e.title]: e };
+        menuEntries.reduce((uniques, entry) => {
+            if (!uniques[entry.title]) {
+                return { ...uniques, [entry.title]: entry };
             }
-            return c;
+            return uniques;
         }, {})
     );
 
@@ -78,9 +78,9 @@ function SearchPanel({ menu, classes, close }) {
                         }}
                         placeholder="start typing..."
                     />
-                    {searchTerm &&
+                    {searchTerm?.length > 1 &&
                         uniqueEntries
-                            .filter(e => e.title.toLowerCase().startsWith(searchTerm.toLowerCase()))
+                            .filter(e => e.title.toLowerCase().includes(searchTerm.toLowerCase()))
                             .map(entry => (
                                 <React.Fragment key={entry.title}>
                                     <a href={entry.href} style={{ textDecoration: 'none' }}>
