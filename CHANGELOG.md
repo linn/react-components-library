@@ -1,5 +1,5 @@
 # Changelog
-## [10.7.1] - 2020-02-25
+## [10.7.2] - 2020-02-25
 - Autofocus inputs on TableWithInlineEditing
 
 ## [10.7.1] - 2020-02-25
