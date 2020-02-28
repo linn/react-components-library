@@ -72,7 +72,8 @@ function Dropdown({
     adornment,
     type,
     error,
-    margin
+    margin,
+    autoFocus
 }) {
     const classes = useStyles();
 
@@ -91,7 +92,7 @@ function Dropdown({
     };
 
     return (
-        <React.Fragment>
+        <>
             <InputLabel
                 classes={{ root: classes.label, asterisk: classes.labelAsterisk }}
                 required={required}
@@ -103,6 +104,7 @@ function Dropdown({
                 classes={{
                     root: classes.root
                 }}
+                autoFocus={autoFocus}
                 error={error}
                 id="outlined-select-currency-native"
                 type={type}
@@ -143,7 +145,7 @@ function Dropdown({
                           </option>
                       ))}
             </TextField>
-        </React.Fragment>
+        </>
     );
 }
 
@@ -182,7 +184,8 @@ Dropdown.propTypes = {
     error: PropTypes.bool,
     margin: PropTypes.string,
     allowNoValue: PropTypes.bool,
-    optionsLoading: PropTypes.bool
+    optionsLoading: PropTypes.bool,
+    autoFocus: PropTypes.bool
 };
 
 Dropdown.defaultProps = {
@@ -198,7 +201,8 @@ Dropdown.defaultProps = {
     margin: 'dense',
     allowNoValue: true,
     optionsLoading: false,
-    label: ''
+    label: '',
+    autoFocus: false
 };
 
 export default Dropdown;
