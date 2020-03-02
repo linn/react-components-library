@@ -1,4 +1,8 @@
 # Changelog
+## [10.7.2] - 2020-02-25
+- Autofocus inputs on TableWithInlineEditing
+- Can now search the menu by href, e.g. you could type 'pcbwo' to find pcb works orders
+
 ## [10.7.1] - 2020-02-25
 - Added date utilities to index
 

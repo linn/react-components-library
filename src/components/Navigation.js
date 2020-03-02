@@ -62,6 +62,10 @@ const styles = theme => ({
     },
     appBar: {
         backgroundColor: theme.palette.grey[800]
+    },
+    icons: {
+        cursor: 'pointer',
+        color: 'white'
     }
 });
 
@@ -206,6 +210,7 @@ function Navigation({
                                             <Grid item xs={1}>
                                                 <Typography variant="h4">
                                                     <AccountCircle
+                                                        className={classes.icons}
                                                         aria-owns={
                                                             anchorEl ? 'simple-menu' : undefined
                                                         }
@@ -227,6 +232,7 @@ function Navigation({
                                                         variant="dot"
                                                     >
                                                         <Notifications
+                                                            className={classes.icons}
                                                             onClick={queueNotifications}
                                                         />
                                                     </Badge>
@@ -235,6 +241,7 @@ function Navigation({
                                             <Grid item xs={1}>
                                                 <Typography variant="h4">
                                                     <Search
+                                                        className={classes.icons}
                                                         onClick={() => setSelected(sections.length)}
                                                     />
                                                 </Typography>
@@ -307,7 +314,8 @@ Navigation.propTypes = {
         tabLabel: PropTypes.string,
         toolbar: PropTypes.string,
         container: PropTypes.string,
-        appBar: PropTypes.string
+        appBar: PropTypes.string,
+        icons: PropTypes.string
     }).isRequired,
     sections: PropTypes.arrayOf(PropTypes.shape({})),
     history: PropTypes.shape({}).isRequired,

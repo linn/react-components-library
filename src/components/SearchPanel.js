@@ -42,7 +42,6 @@ const styles = {
 function SearchPanel({ menu, classes, close }) {
     const [searchTerm, setSearchTerm] = useState();
 
-    // flatten out the menu object into a single array of key value pairs
     const menuEntries = menu
         .map(s => s.columns)
         .flat()
@@ -53,8 +52,8 @@ function SearchPanel({ menu, classes, close }) {
 
     const uniqueEntries = Object.values(
         menuEntries.reduce((uniques, entry) => {
-            if (!uniques[entry.title]) {
-                return { ...uniques, [entry.title]: entry };
+            if (!uniques[entry.href]) {
+                return { ...uniques, [entry.href]: entry };
             }
             return uniques;
         }, {})
@@ -80,9 +79,13 @@ function SearchPanel({ menu, classes, close }) {
                     />
                     {searchTerm?.length > 1 &&
                         uniqueEntries
-                            .filter(e => e.title.toLowerCase().includes(searchTerm.toLowerCase()))
+                            .filter(
+                                e =>
+                                    e.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                                    e.href.toLowerCase().includes(searchTerm.toLowerCase())
+                            )
                             .map(entry => (
-                                <React.Fragment key={entry.title}>
+                                <React.Fragment key={entry.href}>
                                     <a href={entry.href} style={{ textDecoration: 'none' }}>
                                         <ListItem classes={{ root: classes.listItemText }} button>
                                             <Typography

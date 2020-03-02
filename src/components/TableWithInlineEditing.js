@@ -206,6 +206,8 @@ const Row = ({
                                                     propertyName={column.key}
                                                     label=""
                                                     allowNoValue={false}
+                                                    textFieldProps={{ autoFocus: true }}
+                                                    autoFocus
                                                 />
                                             ) : (
                                                 <InputField
@@ -213,6 +215,7 @@ const Row = ({
                                                     value={rowContent[column.key]}
                                                     disabled={column.notEditable}
                                                     required={column.required}
+                                                    textFieldProps={{ autoFocus: true }}
                                                     onChange={handleCellChange}
                                                     propertyName={column.key}
                                                 />
