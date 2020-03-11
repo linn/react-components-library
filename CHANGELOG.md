@@ -1,6 +1,6 @@
 # Changelog
 ## [10.8.0] - 2020-03-11
-- Added: smartGoBack function that can hop over the annoying oidc page to take a user to whever they came from whether that's inside the current app or not
+- Added: smartGoBack function that can hop over the annoying oidc page to take a user to wherever they came from, whether that's inside the current app or not
 - Added: previousPathsSelector - selects a list of paths the user has been to inside this app from the store.
 
 ## [10.7.2] - 2020-02-25
