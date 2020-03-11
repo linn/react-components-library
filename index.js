@@ -73,6 +73,8 @@ import LinnWeekPicker from './src/components/LinnWeekPicker';
 import EditableTable from './src/components/editableTable/EditableTable';
 import { getWeekEndDate, getWeekStartDate } from './src/utilities/dateUtilities';
 import './src/styles/printStyles.css';
+import getPreviousPaths from './src/selectors/previousPathSelectors';
+import smartGoBack from './src/utilities/smartGoBack';
 
 const reducers = { menu, news };
 
@@ -99,6 +101,7 @@ export {
     getItemError,
     getItemErrorDetailMessage,
     getItemErrors,
+    getPreviousPaths,
     getRequestErrors,
     getUsername,
     getWeekEndDate,
@@ -140,6 +143,7 @@ export {
     SaveBackCancelButtons,
     SearchInputField,
     SelectedItemsList,
+    smartGoBack,
     SnackbarMessage,
     StateApiActions,
     TableWithInlineEditing,
