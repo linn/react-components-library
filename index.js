@@ -10,6 +10,7 @@ import ErrorCard from './src/components/ErrorCard';
 import CheckboxWithLabel from './src/components/CheckboxWithLabel';
 import Title from './src/components/Title';
 import InputField from './src/components/InputField';
+import LinkButton from './src/components/LinkButton';
 import Typeahead from './src/components/Typeahead';
 import Page from './src/components/Page';
 import EntityList from './src/components/EntityList';
@@ -113,6 +114,7 @@ export {
     ItemType,
     linnTheme,
     LinnWeekPicker,
+    LinkButton,
     Loading,
     makeActionTypes,
     makeProcessActionTypes,
