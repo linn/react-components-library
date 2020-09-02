@@ -47,8 +47,7 @@ function LinkButton({ to, external, tooltip, text, disabled }) {
     if (disabled) {
         return button();
     }
-
-    const link = (
+    return (
         <div>
             {external ? (
                 <a className={classes.a} href={to}>
@@ -61,8 +60,6 @@ function LinkButton({ to, external, tooltip, text, disabled }) {
             )}
         </div>
     );
-
-    return link;
 }
 
 LinkButton.propTypes = {
