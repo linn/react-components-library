@@ -18,6 +18,6 @@ stories
     ))
     .add('default', () => <LinkButton text="Some Link" to="#" />)
     .add('external', () => <LinkButton text="Some Link" to="#" external />)
-    .add('disabled with toolip', () => (
+    .add('disabled with tooltip', () => (
         <LinkButton text="Some Link" to="#" disabled tooltip="this button is disabled" />
     ));
