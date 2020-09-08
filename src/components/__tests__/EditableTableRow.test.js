@@ -8,6 +8,7 @@ afterEach(cleanup);
 
 describe('<EditableTableRow />', () => {
     const saveRow = jest.fn();
+    const deleteRow = jest.fn();
 
     const columns = [
         {
@@ -68,8 +69,8 @@ describe('<EditableTableRow />', () => {
     });
 
     describe('when editing', () => {
-        it('should display save and cancel buttons when editing', () => {
-            const { getByTestId } = render(
+        it('should display save and cancel buttons when editing and delete prop is null', () => {
+            const { getByTestId, queryByTestId } = render(
                 <table>
                     <tbody>
                         <EditableTableRow {...defaultProps} />
@@ -83,9 +84,11 @@ describe('<EditableTableRow />', () => {
 
             const saveButton = getByTestId('saveButton');
             const clearButton = getByTestId('clearButton');
+            const deleteButton = queryByTestId('deleteButton');
 
             expect(saveButton).toBeInTheDocument();
             expect(clearButton).toBeInTheDocument();
+            expect(deleteButton).toBeNull();
         });
 
         it('should call save function when save clicked', () => {
@@ -106,6 +109,50 @@ describe('<EditableTableRow />', () => {
             fireEvent.click(saveButton);
 
             expect(saveRow).toHaveBeenCalled();
+        });
+    });
+
+    describe('when deleting', () => {
+        it('should display save, delete and cancel buttons when editing and delete prop is not null', () => {
+            const { getByTestId } = render(
+                <table>
+                    <tbody>
+                        <EditableTableRow {...defaultProps} deleteRow={deleteRow} />
+                    </tbody>
+                </table>
+            );
+
+            const editButton = getByTestId('editButton');
+
+            fireEvent.click(editButton);
+
+            const saveButton = getByTestId('saveButton');
+            const clearButton = getByTestId('clearButton');
+            const deleteButton = getByTestId('deleteButton');
+
+            expect(saveButton).toBeInTheDocument();
+            expect(clearButton).toBeInTheDocument();
+            expect(deleteButton).toBeInTheDocument();
+        });
+
+        it('should call save function when save clicked', () => {
+            const { getByTestId } = render(
+                <table>
+                    <tbody>
+                        <EditableTableRow {...defaultProps} deleteRow={deleteRow} />
+                    </tbody>
+                </table>
+            );
+
+            const editButton = getByTestId('editButton');
+
+            fireEvent.click(editButton);
+
+            const deleteButton = getByTestId('deleteButton');
+
+            fireEvent.click(deleteButton);
+
+            expect(deleteRow).toHaveBeenCalled();
         });
     });
 });

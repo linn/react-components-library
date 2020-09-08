@@ -5,7 +5,9 @@ import TableCell from '@material-ui/core/TableCell';
 import Done from '@material-ui/icons/Done';
 import EditIcon from '@material-ui/icons/Edit';
 import Clear from '@material-ui/icons/Clear';
+import Delete from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
+import { grey } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/styles';
 import { inputComponentFactory, displayComponentFactory } from './componentFactory';
 
@@ -28,6 +30,7 @@ export default function EditableTableRow({
     hideNewRow,
     updateRow,
     validateRow,
+    deleteRow,
     ...rest
 }) {
     const [editing, setEditing] = useState(false);
@@ -54,6 +57,10 @@ export default function EditableTableRow({
         if (isNewRow) {
             hideNewRow();
         }
+    };
+
+    const handleDeleteClick = () => {
+        deleteRow(item);
     };
 
     const handleValueChange = (propertyName, newValue) => {
@@ -95,7 +102,7 @@ export default function EditableTableRow({
                         <Button
                             onClick={handleSaveClick}
                             color="primary"
-                            variant="outlined"
+                            variant="contained"
                             size="small"
                             classes={{
                                 root: classes.button
@@ -103,7 +110,7 @@ export default function EditableTableRow({
                             disabled={!rowValid()}
                             data-testid="saveButton"
                         >
-                            <Done fontSize="small" />
+                            <Done style={{ color: grey[50] }} fontSize="small" />
                         </Button>
                     </TableCell>
                     <TableCell>
@@ -120,6 +127,22 @@ export default function EditableTableRow({
                             <Clear fontSize="small" />
                         </Button>
                     </TableCell>
+                    {deleteRow && (
+                        <TableCell>
+                            <Button
+                                onClick={handleDeleteClick}
+                                color="secondary"
+                                variant="contained"
+                                classes={{
+                                    root: classes.button
+                                }}
+                                size="small"
+                                data-testid="deleteButton"
+                            >
+                                <Delete fontSize="small" />
+                            </Button>
+                        </TableCell>
+                    )}
                 </>
             ) : (
                 <>
@@ -152,7 +175,8 @@ EditableTableRow.propTypes = {
     isNewRow: PropTypes.bool,
     hideNewRow: PropTypes.func,
     updateRow: PropTypes.func,
-    validateRow: PropTypes.func
+    validateRow: PropTypes.func,
+    deleteRow: PropTypes.func
 };
 
 EditableTableRow.defaultProps = {
@@ -161,5 +185,6 @@ EditableTableRow.defaultProps = {
     isNewRow: false,
     hideNewRow: null,
     updateRow: null,
-    validateRow: null
+    validateRow: null,
+    deleteRow: null
 };
