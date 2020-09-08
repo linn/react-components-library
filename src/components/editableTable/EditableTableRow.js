@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
@@ -26,6 +26,7 @@ export default function EditableTableRow({
     editable,
     isNewRow,
     hideNewRow,
+    updateRow,
     ...rest
 }) {
     const [editing, setEditing] = useState(false);
@@ -55,6 +56,11 @@ export default function EditableTableRow({
     };
 
     const handleValueChange = (propertyName, newValue) => {
+        if (updateRow) {
+            updateRow(item, setItem, propertyName, newValue);
+            return;
+        }
+
         setItem({ ...item, [propertyName]: newValue });
     };
 
@@ -78,7 +84,7 @@ export default function EditableTableRow({
                 </TableCell>
             ))}
             {editing && editable ? (
-                <Fragment>
+                <>
                     <TableCell>
                         <Button
                             onClick={handleSaveClick}
@@ -108,9 +114,9 @@ export default function EditableTableRow({
                             <Clear fontSize="small" />
                         </Button>
                     </TableCell>
-                </Fragment>
+                </>
             ) : (
-                <Fragment>
+                <>
                     <TableCell>
                         <Button
                             color="primary"
@@ -126,7 +132,7 @@ export default function EditableTableRow({
                         </Button>
                     </TableCell>
                     <TableCell />
-                </Fragment>
+                </>
             )}
         </TableRow>
     );
@@ -138,12 +144,14 @@ EditableTableRow.propTypes = {
     saveRow: PropTypes.func,
     editable: PropTypes.bool,
     isNewRow: PropTypes.bool,
-    hideNewRow: PropTypes.func
+    hideNewRow: PropTypes.func,
+    updateRow: PropTypes.func
 };
 
 EditableTableRow.defaultProps = {
     saveRow: () => {},
     editable: true,
     isNewRow: false,
-    hideNewRow: null
+    hideNewRow: null,
+    updateRow: null
 };

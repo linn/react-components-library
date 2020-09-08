@@ -16,6 +16,7 @@ export default function EditableTable({
     createRow,
     editable,
     newRow,
+    updateRow,
     ...rest
 }) {
     const [showNewRow, setShowNewRow] = useState(false);
@@ -41,6 +42,7 @@ export default function EditableTable({
                         columns={columns}
                         saveRow={saveRow}
                         editable={editable}
+                        updateRow={updateRow}
                     />
                 ))}
                 {editable &&
@@ -52,6 +54,7 @@ export default function EditableTable({
                             editable={editable}
                             isNewRow
                             hideNewRow={hideNewRow}
+                            updateRow={updateRow}
                             {...rest}
                         />
                     ) : (
@@ -78,12 +81,14 @@ EditableTable.propTypes = {
     saveRow: PropTypes.func,
     createRow: PropTypes.func,
     editable: PropTypes.bool,
-    newRow: PropTypes.shape({})
+    newRow: PropTypes.shape({}),
+    updateRow: PropTypes.func
 };
 
 EditableTable.defaultProps = {
     saveRow: () => {},
     createRow: () => {},
     editable: true,
-    newRow: {}
+    newRow: {},
+    updateRow: null
 };
