@@ -27,6 +27,7 @@ export default function EditableTableRow({
     isNewRow,
     hideNewRow,
     updateRow,
+    validateRow,
     ...rest
 }) {
     const [editing, setEditing] = useState(false);
@@ -66,6 +67,11 @@ export default function EditableTableRow({
 
     const rowValid = () => {
         let valid = true;
+
+        if (validateRow) {
+            valid = validateRow(item);
+        }
+
         columns.forEach(column => {
             if (column.required === true && !item[column.id]) {
                 valid = false;
@@ -145,7 +151,8 @@ EditableTableRow.propTypes = {
     editable: PropTypes.bool,
     isNewRow: PropTypes.bool,
     hideNewRow: PropTypes.func,
-    updateRow: PropTypes.func
+    updateRow: PropTypes.func,
+    validateRow: PropTypes.func
 };
 
 EditableTableRow.defaultProps = {
@@ -153,5 +160,6 @@ EditableTableRow.defaultProps = {
     editable: true,
     isNewRow: false,
     hideNewRow: null,
-    updateRow: null
+    updateRow: null,
+    validateRow: null
 };
