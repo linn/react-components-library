@@ -91,7 +91,8 @@ export default function EditableTableRow({
         <TableRow>
             {columns.map(column => (
                 <TableCell key={`${column.id}${item.id}`}>
-                    {editing && column.editable && editable
+                    {(editing && column.editable && editable) ||
+                    (isNewRow && editing && column.required)
                         ? inputComponentFactory(item, column, handleValueChange, rest)
                         : displayComponentFactory(item, column)}
                 </TableCell>

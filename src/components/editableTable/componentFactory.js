@@ -12,7 +12,6 @@ export function inputComponentFactory(row, column, onChange, rest) {
             return (
                 <InputField
                     value={row[column.id]}
-                    disabled={!column.editable}
                     onChange={onChange}
                     propertyName={column.id}
                     required={column.required}
@@ -23,7 +22,6 @@ export function inputComponentFactory(row, column, onChange, rest) {
                 <InputField
                     value={row[column.id]}
                     type="number"
-                    disabled={!column.editable}
                     onChange={onChange}
                     propertyName={column.id}
                     required={column.required}
@@ -32,7 +30,6 @@ export function inputComponentFactory(row, column, onChange, rest) {
         case 'date':
             return (
                 <DatePicker
-                    disabled={!column.editable}
                     value={row[column.id] || null}
                     onChange={value => onChange(column.id, value)}
                     required={column.required}
@@ -41,7 +38,6 @@ export function inputComponentFactory(row, column, onChange, rest) {
         case 'linnWeek':
             return (
                 <LinnWeekPicker
-                    disabled={!column.editable}
                     selectedDate={row[column.id] || null}
                     setWeekStartDate={onChange}
                     propertyName={column.id}
@@ -52,7 +48,6 @@ export function inputComponentFactory(row, column, onChange, rest) {
             return (
                 <Typeahead
                     clearSearch={() => column.clearSearch}
-                    disabled={!column.editable}
                     fetchItems={column.search}
                     items={column.searchResults}
                     links={false}
