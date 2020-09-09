@@ -6,7 +6,8 @@
     - Delete row functionality
     - Optional custom update row function
     - Optional validate row function
-    - Fields that are required but not editable can now be changed when creating a new row and will be read only when editing.
+    - Fields that are required but not editable can now be changed when creating a new row and will be read only when editing
+    - Update styling of Save, Cancel and Delete buttons on table rows
 
 ## [10.9.0] - 2020-09-02
 - Added: LinkButton component that can link to components inside the current (React Router) app via a Link component, or hrefs outside the current app with an html anchor. Optionally takes tooltip text as a prop if you want to display a tooltip, e.g. to inform the user why the button might be disabled.
