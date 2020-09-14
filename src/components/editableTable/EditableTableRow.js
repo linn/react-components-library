@@ -1,11 +1,13 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import Done from '@material-ui/icons/Done';
 import EditIcon from '@material-ui/icons/Edit';
 import Clear from '@material-ui/icons/Clear';
+import Delete from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
+import { grey } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/styles';
 import { inputComponentFactory, displayComponentFactory } from './componentFactory';
 
@@ -26,6 +28,9 @@ export default function EditableTableRow({
     editable,
     isNewRow,
     hideNewRow,
+    updateRow,
+    validateRow,
+    deleteRow,
     ...rest
 }) {
     const [editing, setEditing] = useState(false);
@@ -54,12 +59,26 @@ export default function EditableTableRow({
         }
     };
 
+    const handleDeleteClick = () => {
+        deleteRow(item);
+    };
+
     const handleValueChange = (propertyName, newValue) => {
+        if (updateRow) {
+            updateRow(item, setItem, propertyName, newValue);
+            return;
+        }
+
         setItem({ ...item, [propertyName]: newValue });
     };
 
     const rowValid = () => {
         let valid = true;
+
+        if (validateRow) {
+            valid = validateRow(item);
+        }
+
         columns.forEach(column => {
             if (column.required === true && !item[column.id]) {
                 valid = false;
@@ -72,18 +91,19 @@ export default function EditableTableRow({
         <TableRow>
             {columns.map(column => (
                 <TableCell key={`${column.id}${item.id}`}>
-                    {editing && column.editable && editable
+                    {(editing && column.editable && editable) ||
+                    (isNewRow && editing && column.required)
                         ? inputComponentFactory(item, column, handleValueChange, rest)
                         : displayComponentFactory(item, column)}
                 </TableCell>
             ))}
             {editing && editable ? (
-                <Fragment>
+                <>
                     <TableCell>
                         <Button
                             onClick={handleSaveClick}
                             color="primary"
-                            variant="outlined"
+                            variant="contained"
                             size="small"
                             classes={{
                                 root: classes.button
@@ -91,7 +111,7 @@ export default function EditableTableRow({
                             disabled={!rowValid()}
                             data-testid="saveButton"
                         >
-                            <Done fontSize="small" />
+                            <Done style={{ color: grey[50] }} fontSize="small" />
                         </Button>
                     </TableCell>
                     <TableCell>
@@ -108,9 +128,25 @@ export default function EditableTableRow({
                             <Clear fontSize="small" />
                         </Button>
                     </TableCell>
-                </Fragment>
+                    {deleteRow && (
+                        <TableCell>
+                            <Button
+                                onClick={handleDeleteClick}
+                                color="secondary"
+                                variant="contained"
+                                classes={{
+                                    root: classes.button
+                                }}
+                                size="small"
+                                data-testid="deleteButton"
+                            >
+                                <Delete fontSize="small" />
+                            </Button>
+                        </TableCell>
+                    )}
+                </>
             ) : (
-                <Fragment>
+                <>
                     <TableCell>
                         <Button
                             color="primary"
@@ -126,7 +162,7 @@ export default function EditableTableRow({
                         </Button>
                     </TableCell>
                     <TableCell />
-                </Fragment>
+                </>
             )}
         </TableRow>
     );
@@ -138,12 +174,18 @@ EditableTableRow.propTypes = {
     saveRow: PropTypes.func,
     editable: PropTypes.bool,
     isNewRow: PropTypes.bool,
-    hideNewRow: PropTypes.func
+    hideNewRow: PropTypes.func,
+    updateRow: PropTypes.func,
+    validateRow: PropTypes.func,
+    deleteRow: PropTypes.func
 };
 
 EditableTableRow.defaultProps = {
     saveRow: () => {},
     editable: true,
     isNewRow: false,
-    hideNewRow: null
+    hideNewRow: null,
+    updateRow: null,
+    validateRow: null,
+    deleteRow: null
 };

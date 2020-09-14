@@ -16,6 +16,9 @@ export default function EditableTable({
     createRow,
     editable,
     newRow,
+    updateRow,
+    validateRow,
+    deleteRow,
     ...rest
 }) {
     const [showNewRow, setShowNewRow] = useState(false);
@@ -31,6 +34,7 @@ export default function EditableTable({
                     ))}
                     <TableCell />
                     <TableCell />
+                    {deleteRow && <TableCell />}
                 </TableRow>
             </TableHead>
             <TableBody>
@@ -41,6 +45,9 @@ export default function EditableTable({
                         columns={columns}
                         saveRow={saveRow}
                         editable={editable}
+                        updateRow={updateRow}
+                        validateRow={validateRow}
+                        deleteRow={deleteRow}
                     />
                 ))}
                 {editable &&
@@ -52,6 +59,9 @@ export default function EditableTable({
                             editable={editable}
                             isNewRow
                             hideNewRow={hideNewRow}
+                            updateRow={updateRow}
+                            validateRow={validateRow}
+                            deleteRow={deleteRow}
                             {...rest}
                         />
                     ) : (
@@ -78,12 +88,18 @@ EditableTable.propTypes = {
     saveRow: PropTypes.func,
     createRow: PropTypes.func,
     editable: PropTypes.bool,
-    newRow: PropTypes.shape({})
+    newRow: PropTypes.shape({}),
+    updateRow: PropTypes.func,
+    validateRow: PropTypes.func,
+    deleteRow: PropTypes.func
 };
 
 EditableTable.defaultProps = {
     saveRow: () => {},
     createRow: () => {},
     editable: true,
-    newRow: {}
+    newRow: {},
+    updateRow: null,
+    validateRow: null,
+    deleteRow: null
 };

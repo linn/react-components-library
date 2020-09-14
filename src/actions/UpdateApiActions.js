@@ -88,7 +88,7 @@ export default function UpdateApiActions(itemName, actionTypeRoot, uri, actionTy
 
     this.delete = id => ({
         [RSAA]: {
-            endpoint: `${appRoot}${uri}/${id}`,
+            endpoint: id !== null ? `${appRoot}${uri}/${id}` : `${appRoot}${uri}`,
             method: 'DELETE',
             options: { requiresAuth: true },
             headers: {
