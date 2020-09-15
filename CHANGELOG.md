@@ -1,4 +1,10 @@
 # Changelog
+## [10.10.1] - 2020-09-09
+
+### Fixed
+
+- Can set body of delete action
+
 ## [10.10.0] - 2020-09-09
 
 ### Added
