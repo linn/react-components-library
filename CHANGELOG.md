@@ -1,4 +1,11 @@
 # Changelog
+## [10.10.2] - 2020-09-16
+
+### Fixed
+
+- Correctly set content type of delete body
+
+# Changelog
 ## [10.10.1] - 2020-09-09
 
 ### Fixed
