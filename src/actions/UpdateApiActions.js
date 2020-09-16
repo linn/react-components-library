@@ -92,7 +92,8 @@ export default function UpdateApiActions(itemName, actionTypeRoot, uri, actionTy
             method: 'DELETE',
             options: { requiresAuth: true },
             headers: {
-                Accept: 'application/json'
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
             },
             body: item ? JSON.stringify(item) : null,
             types: [
