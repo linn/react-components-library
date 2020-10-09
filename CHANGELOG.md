@@ -1,4 +1,7 @@
 # Changelog
+## [10.10.3] - 2020-10-09
+- Updated material-ui packages
+
 ## [10.10.2] - 2020-09-16
 
 ### Fixed
