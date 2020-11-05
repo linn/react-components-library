@@ -1,4 +1,9 @@
 # Changelog
+## [10.11.0] - 2020-11-05
+
+### Added
+- SelectedItemList optional maxHeight parameter to allow scrolling on long lists
+
 ## [10.10.3] - 2020-10-09
 - Updated material-ui packages
 
@@ -8,7 +13,6 @@
 
 - Correctly set content type of delete body
 
-# Changelog
 ## [10.10.1] - 2020-09-09
 
 ### Fixed
