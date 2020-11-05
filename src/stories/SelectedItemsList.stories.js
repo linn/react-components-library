@@ -13,6 +13,26 @@ const entities = [
 
 const entityStrings = ['First String', 'Second String'];
 
+const entitiesLong = [
+    'a',
+    'b',
+    'c',
+    'd',
+    'e',
+    'f',
+    'g',
+    'h',
+    'i',
+    'j',
+    'k',
+    'l',
+    'm',
+    'n',
+    'o',
+    'p',
+    'q'
+];
+
 const removeItem = () => {};
 
 storiesOf('SelectedItemsList', module)
@@ -28,4 +48,15 @@ storiesOf('SelectedItemsList', module)
     ))
     .add('with objects', () => (
         <SelectedItemsList title="Object Entities" items={entities} removeItem={removeItem} />
+    ))
+    .add('many objects no scrolling', () => (
+        <SelectedItemsList title="Object Entities" items={entitiesLong} removeItem={removeItem} />
+    ))
+    .add('many objects with scrolling', () => (
+        <SelectedItemsList
+            title="Object Entities"
+            items={entitiesLong}
+            removeItem={removeItem}
+            maxHeight={300}
+        />
     ));
