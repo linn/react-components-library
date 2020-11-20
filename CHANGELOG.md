@@ -1,5 +1,10 @@
 # Changelog
-## [10.11.1] - 2020-11-05
+## [10.12.1] - 2020-11-20
+### Fixed
+
+- Editable Table hides new row when it is saved and is no longer a 'new' row.
+
+## [10.12.0] - 2020-11-20
 ### Fixed
 
 - Editable Table closes row on save click

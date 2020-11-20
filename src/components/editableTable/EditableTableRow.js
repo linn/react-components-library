@@ -49,6 +49,9 @@ export default function EditableTableRow({
 
     const handleSaveClick = () => {
         setEditing(false);
+        if (isNewRow) {
+            hideNewRow();
+        }
         saveRow(item);
     };
 
