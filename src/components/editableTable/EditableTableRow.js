@@ -48,6 +48,7 @@ export default function EditableTableRow({
     const classes = useStyles();
 
     const handleSaveClick = () => {
+        setEditing(false);
         saveRow(item);
     };
 

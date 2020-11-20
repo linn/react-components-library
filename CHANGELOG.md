@@ -1,4 +1,9 @@
 # Changelog
+## [10.11.1] - 2020-11-05
+### Fixed
+
+- Editable Table closes row on save click
+
 ## [10.11.0] - 2020-11-05
 
 ### Added
