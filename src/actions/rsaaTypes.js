@@ -48,7 +48,7 @@ export const receiveAdded = (actionTypes, actionTypeRoot, itemName) => ({
     payload: successPayload(itemName)
 });
 
-export const receivedProcess = (actionTypes, actionTypeRoot) => ({
+export const receivedProcess = (actionTypes, actionTypeRoot, itemName) => ({
     type: actionTypes[`RECEIVE_${actionTypeRoot}`],
     payload: successPayload(itemName)
 });

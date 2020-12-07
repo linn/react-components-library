@@ -1,4 +1,7 @@
 # Changelog
+## [10.12.3] - 2020-12-07
+### Fixed
+- Pass itemName into process action  payload
 ## [10.12.2] - 2020-12-07
 ### Changed
 - Allow process action to have a payload

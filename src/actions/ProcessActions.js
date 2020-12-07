@@ -14,7 +14,7 @@ export default function ProcessActions(itemName, actionTypeRoot, uri, actionType
             body: body ? JSON.stringify(body) : '',
             types: [
                 rsaaTypes.requested(actionTypes, actionTypeRoot),
-                rsaaTypes.receivedProcess(actionTypes, actionTypeRoot),
+                rsaaTypes.receivedProcess(actionTypes, actionTypeRoot, itemName),
                 rsaaTypes.error(actionTypes, actionTypeRoot, itemName)
             ]
         }
