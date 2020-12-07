@@ -50,7 +50,7 @@ export const receiveAdded = (actionTypes, actionTypeRoot, itemName) => ({
 
 export const receivedProcess = (actionTypes, actionTypeRoot) => ({
     type: actionTypes[`RECEIVE_${actionTypeRoot}`],
-    payload: {}
+    payload: successPayload(itemName)
 });
 
 export const receiveDeleted = (actionTypes, actionTypeRoot, itemName) => ({

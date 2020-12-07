@@ -1,4 +1,8 @@
 # Changelog
+## [10.12.2] - 2020-12-07
+### Changed
+- Allow process action to have a payload
+
 ## [10.12.1] - 2020-11-20
 ### Fixed
 
