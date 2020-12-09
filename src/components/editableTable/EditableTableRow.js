@@ -31,6 +31,7 @@ export default function EditableTableRow({
     updateRow,
     validateRow,
     deleteRow,
+    closeEditingOnSave,
     ...rest
 }) {
     const [editing, setEditing] = useState(false);
@@ -48,10 +49,14 @@ export default function EditableTableRow({
     const classes = useStyles();
 
     const handleSaveClick = () => {
-        setEditing(false);
+        if (closeEditingOnSave){
+            setEditing(false);
+        }
+
         if (isNewRow) {
             hideNewRow();
         }
+
         saveRow(item);
     };
 
@@ -181,7 +186,8 @@ EditableTableRow.propTypes = {
     hideNewRow: PropTypes.func,
     updateRow: PropTypes.func,
     validateRow: PropTypes.func,
-    deleteRow: PropTypes.func
+    deleteRow: PropTypes.func,
+    closeEditingOnSave: PropTypes.bool
 };
 
 EditableTableRow.defaultProps = {
@@ -191,5 +197,6 @@ EditableTableRow.defaultProps = {
     hideNewRow: null,
     updateRow: null,
     validateRow: null,
-    deleteRow: null
+    deleteRow: null,
+    closeEditingOnSave: false
 };
