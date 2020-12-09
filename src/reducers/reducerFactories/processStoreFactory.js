@@ -9,7 +9,8 @@
             case actionTypes[`REQUEST_${itemRoot}`]:
                 return {
                     ...state,
-                    working: true
+                    working: true,
+                    data: null
                 };
 
             case actionTypes[`RECEIVE_${itemRoot}`]:
@@ -17,7 +18,8 @@
                     ...state,
                     working: false,
                     messageText: successMessage,
-                    messageVisible: true
+                    messageVisible: true,
+                    data: action.payload.data,
                 };
 
             case actionTypes[`SHOW_${itemRoot}_MESSAGE`]:
