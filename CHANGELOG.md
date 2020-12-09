@@ -1,4 +1,8 @@
 # Changelog
+## [10.12.4] - 2020-12-07
+### Added
+- Added closeEditingOnSave to editableTable to allow editor to remain open if validation is failed
+- Added process data to process reducer
 ## [10.12.3] - 2020-12-07
 ### Fixed
 - Pass itemName into process action  payload
