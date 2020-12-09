@@ -20,6 +20,7 @@ export default function EditableTable({
     validateRow,
     deleteRow,
     closeEditingOnSave,
+    allowNewRowCreation,
     ...rest
 }) {
     const [showNewRow, setShowNewRow] = useState(false);
@@ -53,6 +54,7 @@ export default function EditableTable({
                     />
                 ))}
                 {editable &&
+                    allowNewRowCreation &&
                     (showNewRow ? (
                         <EditableTableRow
                             row={newRow}
@@ -94,7 +96,8 @@ EditableTable.propTypes = {
     updateRow: PropTypes.func,
     validateRow: PropTypes.func,
     deleteRow: PropTypes.func,
-    closeEditingOnSave: PropTypes.bool
+    closeEditingOnSave: PropTypes.bool,
+    allowNewRowCreation: PropTypes.bool
 };
 
 EditableTable.defaultProps = {
@@ -105,5 +108,6 @@ EditableTable.defaultProps = {
     updateRow: null,
     validateRow: null,
     deleteRow: null,
-    closeEditingOnSave: false
+    closeEditingOnSave: false,
+    allowNewRowCreation: true
 };
