@@ -49,7 +49,7 @@ export default function EditableTableRow({
     const classes = useStyles();
 
     const handleSaveClick = () => {
-        if (closeEditingOnSave){
+        if (closeEditingOnSave) {
             setEditing(false);
         }
 
@@ -106,73 +106,74 @@ export default function EditableTableRow({
                         : displayComponentFactory(item, column)}
                 </TableCell>
             ))}
-            {editing && editable ? (
-                <>
-                    <TableCell>
-                        <Button
-                            onClick={handleSaveClick}
-                            color="primary"
-                            variant="contained"
-                            size="small"
-                            classes={{
-                                root: classes.button
-                            }}
-                            disabled={!rowValid()}
-                            data-testid="saveButton"
-                        >
-                            <Done style={{ color: grey[50] }} fontSize="small" />
-                        </Button>
-                    </TableCell>
-                    <TableCell>
-                        <Button
-                            onClick={handleCancelClick}
-                            color="secondary"
-                            variant="outlined"
-                            classes={{
-                                root: classes.button
-                            }}
-                            size="small"
-                            data-testid="clearButton"
-                        >
-                            <Clear fontSize="small" />
-                        </Button>
-                    </TableCell>
-                    {deleteRow && (
+            {editable &&
+                (editing ? (
+                    <>
                         <TableCell>
                             <Button
-                                onClick={handleDeleteClick}
-                                color="secondary"
+                                onClick={handleSaveClick}
+                                color="primary"
                                 variant="contained"
+                                size="small"
+                                classes={{
+                                    root: classes.button
+                                }}
+                                disabled={!rowValid()}
+                                data-testid="saveButton"
+                            >
+                                <Done style={{ color: grey[50] }} fontSize="small" />
+                            </Button>
+                        </TableCell>
+                        <TableCell>
+                            <Button
+                                onClick={handleCancelClick}
+                                color="secondary"
+                                variant="outlined"
                                 classes={{
                                     root: classes.button
                                 }}
                                 size="small"
-                                data-testid="deleteButton"
+                                data-testid="clearButton"
                             >
-                                <Delete fontSize="small" />
+                                <Clear fontSize="small" />
                             </Button>
                         </TableCell>
-                    )}
-                </>
-            ) : (
-                <>
-                    <TableCell>
-                        <Button
-                            color="primary"
-                            variant="outlined"
-                            onClick={() => setEditing(true)}
-                            size="small"
-                            classes={{
-                                root: classes.button
-                            }}
-                            data-testid="editButton"
-                        >
-                            <EditIcon fontSize="small" />
-                        </Button>
-                    </TableCell>
-                    <TableCell />
-                </>
-            )}
+                        {deleteRow && (
+                            <TableCell>
+                                <Button
+                                    onClick={handleDeleteClick}
+                                    color="secondary"
+                                    variant="contained"
+                                    classes={{
+                                        root: classes.button
+                                    }}
+                                    size="small"
+                                    data-testid="deleteButton"
+                                >
+                                    <Delete fontSize="small" />
+                                </Button>
+                            </TableCell>
+                        )}
+                    </>
+                ) : (
+                    <>
+                        <TableCell>
+                            <Button
+                                color="primary"
+                                variant="outlined"
+                                onClick={() => setEditing(true)}
+                                size="small"
+                                classes={{
+                                    root: classes.button
+                                }}
+                                data-testid="editButton"
+                            >
+                                <EditIcon fontSize="small" />
+                            </Button>
+                        </TableCell>
+                        <TableCell />
+                    </>
+                ))}
         </TableRow>
     );
 }

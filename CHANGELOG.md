@@ -1,8 +1,15 @@
 # Changelog
-## [10.12.4] - 2020-12-07
+## [10.12.5] - 2020-12-09
 ### Added
-- Added closeEditingOnSave to editableTable to allow editor to remain open if validation is failed
+- Added allowNewRowCreation option to EditableTable to stop user seeing the new row button
+### Changed
+- Changed EditableTableRow to not show edit button when table is not editable
+
+## [10.12.4] - 2020-12-09
+### Added
+- Added closeEditingOnSave option to editableTable to allow editor to remain open if validation is failed
 - Added process data to process reducer
+
 ## [10.12.3] - 2020-12-07
 ### Fixed
 - Pass itemName into process action  payload
