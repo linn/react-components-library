@@ -33,6 +33,7 @@ export default function EditableTableRow({
     deleteRow,
     groupEdit,
     isRowValid,
+    resetRow,
     ...rest
 }) {
     const [editing, setEditing] = useState(false);
@@ -89,8 +90,14 @@ export default function EditableTableRow({
     const handleCancelClick = () => {
         if (isNewRow) {
             removeRow(item.id);
+            return;
+        }
+
+        setEditing(false);
+
+        if (groupEdit) {
+            resetRow(item, prevItem);
         } else {
-            setEditing(false);
             setItem(prevItem);
         }
     };
@@ -207,7 +214,8 @@ EditableTableRow.propTypes = {
     validateRow: PropTypes.func,
     deleteRow: PropTypes.func,
     groupEdit: PropTypes.bool,
-    isRowValid: PropTypes.func
+    isRowValid: PropTypes.func,
+    resetRow: PropTypes.func
 };
 
 EditableTableRow.defaultProps = {
@@ -219,5 +227,6 @@ EditableTableRow.defaultProps = {
     validateRow: null,
     deleteRow: null,
     groupEdit: false,
-    isRowValid: null
+    isRowValid: null,
+    resetRow: null
 };

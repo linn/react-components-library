@@ -24,6 +24,7 @@ export default function EditableTable({
     addRow,
     tableValid,
     removeRow,
+    resetRow,
     ...rest
 }) {
     const [showNewRow, setShowNewRow] = useState(false);
@@ -94,6 +95,7 @@ export default function EditableTable({
                         groupEdit={groupEdit}
                         removeRow={handleRemoveRow}
                         isRowValid={handleIsRowValid}
+                        resetRow={resetRow}
                         {...rest}
                     />
                 ))}
@@ -143,7 +145,8 @@ EditableTable.propTypes = {
     groupEdit: PropTypes.bool,
     addRow: PropTypes.func,
     removeRow: PropTypes.func,
-    tableValid: PropTypes.func
+    tableValid: PropTypes.func,
+    resetRow: PropTypes.func
 };
 
 EditableTable.defaultProps = {
@@ -158,5 +161,6 @@ EditableTable.defaultProps = {
     groupEdit: false,
     addRow: null,
     removeRow: null,
-    tableValid: null
+    tableValid: null,
+    resetRow: null
 };
