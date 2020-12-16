@@ -1,8 +1,8 @@
 # Changelog
 ## [10.13.0] - 2020-12-16
 ### Added
-- groupEdit mode for EditableTable. This allows for editing and saving of multiple rows at once in the component
-
+- groupEdit mode for EditableTable. This allows for editing, adding and saving of multiple rows at once in the component
+- added validator function to validate the complete table (e.g. for external save buttons)
 
 ## [10.12.5] - 2020-12-09
 ### Added
