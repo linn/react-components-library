@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
@@ -27,16 +27,24 @@ export default function EditableTableRow({
     saveRow,
     editable,
     isNewRow,
-    hideNewRow,
+    removeRow,
     updateRow,
     validateRow,
     deleteRow,
-    closeEditingOnSave,
+    groupEdit,
+    isRowValid,
     ...rest
 }) {
     const [editing, setEditing] = useState(false);
     const [prevItem, setPrevItem] = useState({});
     const [item, setItem] = useState({});
+    const [rowValid, setRowValid] = useState();
+
+    const isRowValidRef = useRef();
+
+    useEffect(() => {
+        isRowValidRef.current = isRowValid;
+    }, [isRowValid]);
 
     useEffect(() => {
         setItem(row);
@@ -44,32 +52,55 @@ export default function EditableTableRow({
         if (isNewRow) {
             setEditing(true);
         }
-    }, [row, editable, isNewRow]);
+    }, [row, isNewRow]);
+
+    useEffect(() => {
+        if (editing) {
+            let valid = true;
+
+            if (validateRow) {
+                valid = validateRow(item);
+            }
+
+            columns.forEach(column => {
+                if (column.required === true && !item[column.id]) {
+                    valid = false;
+                }
+            });
+
+            if (isRowValidRef.current && item.id) {
+                isRowValidRef.current(valid, item.id);
+            }
+
+            setRowValid(valid);
+        }
+    }, [item, validateRow, columns, editing]);
 
     const classes = useStyles();
 
     const handleSaveClick = () => {
-        if (closeEditingOnSave) {
-            setEditing(false);
-        }
-
         if (isNewRow) {
-            hideNewRow();
+            removeRow(item.id);
         }
 
         saveRow(item);
     };
 
     const handleCancelClick = () => {
-        setEditing(false);
-        setItem(prevItem);
         if (isNewRow) {
-            hideNewRow();
+            removeRow(item.id);
+        } else {
+            setEditing(false);
+            setItem(prevItem);
         }
     };
 
     const handleDeleteClick = () => {
-        deleteRow(item);
+        if (!groupEdit) {
+            deleteRow(item);
+        } else {
+            removeRow(item.id);
+        }
     };
 
     const handleValueChange = (propertyName, newValue) => {
@@ -79,21 +110,6 @@ export default function EditableTableRow({
         }
 
         setItem({ ...item, [propertyName]: newValue });
-    };
-
-    const rowValid = () => {
-        let valid = true;
-
-        if (validateRow) {
-            valid = validateRow(item);
-        }
-
-        columns.forEach(column => {
-            if (column.required === true && !item[column.id]) {
-                valid = false;
-            }
-        });
-        return valid;
     };
 
     return (
@@ -109,21 +125,23 @@ export default function EditableTableRow({
             {editable &&
                 (editing ? (
                     <>
-                        <TableCell>
-                            <Button
-                                onClick={handleSaveClick}
-                                color="primary"
-                                variant="contained"
-                                size="small"
-                                classes={{
-                                    root: classes.button
-                                }}
-                                disabled={!rowValid()}
-                                data-testid="saveButton"
-                            >
-                                <Done style={{ color: grey[50] }} fontSize="small" />
-                            </Button>
-                        </TableCell>
+                        {!groupEdit && (
+                            <TableCell>
+                                <Button
+                                    onClick={handleSaveClick}
+                                    color="primary"
+                                    variant="contained"
+                                    size="small"
+                                    classes={{
+                                        root: classes.button
+                                    }}
+                                    disabled={!rowValid}
+                                    data-testid="saveButton"
+                                >
+                                    <Done style={{ color: grey[50] }} fontSize="small" />
+                                </Button>
+                            </TableCell>
+                        )}
                         <TableCell>
                             <Button
                                 onClick={handleCancelClick}
@@ -138,7 +156,7 @@ export default function EditableTableRow({
                                 <Clear fontSize="small" />
                             </Button>
                         </TableCell>
-                        {deleteRow && (
+                        {deleteRow && !isNewRow && (
                             <TableCell>
                                 <Button
                                     onClick={handleDeleteClick}
@@ -184,20 +202,22 @@ EditableTableRow.propTypes = {
     saveRow: PropTypes.func,
     editable: PropTypes.bool,
     isNewRow: PropTypes.bool,
-    hideNewRow: PropTypes.func,
+    removeRow: PropTypes.func,
     updateRow: PropTypes.func,
     validateRow: PropTypes.func,
     deleteRow: PropTypes.func,
-    closeEditingOnSave: PropTypes.bool
+    groupEdit: PropTypes.bool,
+    isRowValid: PropTypes.func
 };
 
 EditableTableRow.defaultProps = {
     saveRow: () => {},
     editable: true,
     isNewRow: false,
-    hideNewRow: null,
+    removeRow: null,
     updateRow: null,
     validateRow: null,
     deleteRow: null,
-    closeEditingOnSave: false
+    groupEdit: false,
+    isRowValid: null
 };
