@@ -31,7 +31,7 @@ describe('<EditableTable />', () => {
         }
     ];
 
-    const defaultProps = { columns, rows };
+    const defaultProps = { columns, rows, tableValid: jest.fn() };
 
     it('should render columns', () => {
         const { getByText } = render(<EditableTable {...defaultProps} />);

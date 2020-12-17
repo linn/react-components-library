@@ -77,6 +77,7 @@ export function inputComponentFactory(row, column, onChange, rest) {
                     value={row[column.id]}
                     onChange={newValue => onChange(column.id, newValue)}
                     required={column.required}
+                    /* eslint-disable react/jsx-props-no-spreading */
                     {...rest}
                 />
             );

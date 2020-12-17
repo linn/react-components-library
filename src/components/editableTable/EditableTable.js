@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
@@ -19,13 +19,53 @@ export default function EditableTable({
     updateRow,
     validateRow,
     deleteRow,
-    closeEditingOnSave,
     allowNewRowCreation,
+    groupEdit,
+    addRow,
+    tableValid,
+    removeRow,
+    resetRow,
     ...rest
 }) {
     const [showNewRow, setShowNewRow] = useState(false);
+    const [rowsValid, setRowsValid] = useState([]);
 
-    const hideNewRow = () => setShowNewRow(false);
+    useEffect(() => {
+        tableValid(!rowsValid.some(row => !row.valid));
+    }, [rowsValid, tableValid]);
+
+    const handleRemoveRow = id => {
+        if (!groupEdit) {
+            setShowNewRow(false);
+        } else {
+            removeRow(id);
+        }
+    };
+
+    const handleAddClick = () => {
+        if (!groupEdit) {
+            setShowNewRow(true);
+        } else {
+            addRow();
+        }
+    };
+
+    const handleIsRowValid = (valid, id) => {
+        if (rowsValid.some(row => row.id === id)) {
+            setRowsValid(
+                rowsValid.map(row => {
+                    if (row.id === id) {
+                        return { ...row, valid };
+                    }
+                    return row;
+                })
+            );
+        } else {
+            setRowsValid([...rowsValid, { id, valid }]);
+        }
+
+        tableValid(!rowsValid.some(row => !row.valid));
+    };
 
     return (
         <Table size="small">
@@ -41,6 +81,7 @@ export default function EditableTable({
             </TableHead>
             <TableBody>
                 {rows.map(row => (
+                    /* eslint-disable react/jsx-props-no-spreading */
                     <EditableTableRow
                         key={row.id}
                         row={row}
@@ -50,37 +91,41 @@ export default function EditableTable({
                         updateRow={updateRow}
                         validateRow={validateRow}
                         deleteRow={deleteRow}
-                        closeEditingOnSave={closeEditingOnSave}
+                        isNewRow={row.isNewRow}
+                        groupEdit={groupEdit}
+                        removeRow={handleRemoveRow}
+                        isRowValid={handleIsRowValid}
+                        resetRow={resetRow}
+                        {...rest}
                     />
                 ))}
-                {editable &&
-                    allowNewRowCreation &&
-                    (showNewRow ? (
-                        <EditableTableRow
-                            row={newRow}
-                            columns={columns}
-                            saveRow={createRow}
-                            editable={editable}
-                            isNewRow
-                            hideNewRow={hideNewRow}
-                            updateRow={updateRow}
-                            validateRow={validateRow}
-                            deleteRow={deleteRow}
-                            {...rest}
-                        />
-                    ) : (
-                        <TableRow>
-                            <TableCell>
-                                <Button
-                                    size="small"
-                                    onClick={() => setShowNewRow(true)}
-                                    data-testid="addButton"
-                                >
-                                    <AddIcon size="small" />
-                                </Button>
-                            </TableCell>
-                        </TableRow>
-                    ))}
+
+                {editable && allowNewRowCreation && !showNewRow && (
+                    <TableRow>
+                        <TableCell>
+                            <Button size="small" onClick={handleAddClick} data-testid="addButton">
+                                <AddIcon size="small" />
+                            </Button>
+                        </TableCell>
+                    </TableRow>
+                )}
+
+                {showNewRow && (
+                    /* eslint-disable react/jsx-props-no-spreading */
+                    <EditableTableRow
+                        row={newRow}
+                        columns={columns}
+                        saveRow={createRow}
+                        editable={editable}
+                        isNewRow
+                        removeRow={handleRemoveRow}
+                        updateRow={updateRow}
+                        validateRow={validateRow}
+                        deleteRow={deleteRow}
+                        groupEdit={groupEdit}
+                        {...rest}
+                    />
+                )}
             </TableBody>
         </Table>
     );
@@ -96,8 +141,12 @@ EditableTable.propTypes = {
     updateRow: PropTypes.func,
     validateRow: PropTypes.func,
     deleteRow: PropTypes.func,
-    closeEditingOnSave: PropTypes.bool,
-    allowNewRowCreation: PropTypes.bool
+    allowNewRowCreation: PropTypes.bool,
+    groupEdit: PropTypes.bool,
+    addRow: PropTypes.func,
+    removeRow: PropTypes.func,
+    tableValid: PropTypes.func,
+    resetRow: PropTypes.func
 };
 
 EditableTable.defaultProps = {
@@ -108,6 +157,10 @@ EditableTable.defaultProps = {
     updateRow: null,
     validateRow: null,
     deleteRow: null,
-    closeEditingOnSave: false,
-    allowNewRowCreation: true
+    allowNewRowCreation: true,
+    groupEdit: false,
+    addRow: null,
+    removeRow: null,
+    tableValid: null,
+    resetRow: null
 };
