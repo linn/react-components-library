@@ -1,4 +1,8 @@
 # Changelog
+## [10.13.1] - 2020-12-17
+### Added
+- Minor ui improvements for the Editable table. Rows open and close on click and clickaway. Tooltips for buttons.
+
 ## [10.13.0] - 2020-12-16
 ### Added
 - groupEdit mode for EditableTable. This allows for editing, adding and saving of multiple rows at once in the component
