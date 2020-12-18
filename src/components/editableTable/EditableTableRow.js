@@ -12,16 +12,6 @@ import { grey } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/styles';
 import { inputComponentFactory, displayComponentFactory } from './componentFactory';
 
-const useStyles = makeStyles(theme => ({
-    button: {
-        maxWidth: theme.spacing(5),
-        minWidth: theme.spacing(5),
-        maxHeight: theme.spacing(3),
-        minHeight: theme.spacing(3),
-        padding: 0
-    }
-}));
-
 export default function EditableTableRow({
     row,
     columns,
@@ -204,6 +194,22 @@ export default function EditableTableRow({
                                     <EditIcon fontSize="small" />
                                 </Button>
                             </TableCell>
+                            {deleteRow && !isNewRow && (
+                                <TableCell>
+                                    <Button
+                                        onClick={handleDeleteClick}
+                                        color="secondary"
+                                        variant="contained"
+                                        classes={{
+                                            root: classes.button
+                                        }}
+                                        size="small"
+                                        data-testid="deleteButton"
+                                    >
+                                        <Delete fontSize="small" />
+                                    </Button>
+                                </TableCell>
+                            )}
                             <TableCell />
                         </>
                     ))}
