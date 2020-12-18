@@ -123,7 +123,7 @@ export default function EditableTableRow({
 
     const handleClickAway = e => {
         // for some reason clicks in modals that TableRows open register as clickAways
-        // this leads to the annoying scenario where clicking in an inputin a modal closes the entire row
+        // this leads to the annoying scenario where clicking in an input inside a modal closes the entire row
         // this check stops that happening, although there is probably a better solution
         if (e.target.tagName.toUpperCase() === 'INPUT') {
             return;
