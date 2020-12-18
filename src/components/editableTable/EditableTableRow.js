@@ -8,9 +8,20 @@ import Clear from '@material-ui/icons/Clear';
 import Delete from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import Tooltip from '@material-ui/core/Tooltip';
 import { grey } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/styles';
 import { inputComponentFactory, displayComponentFactory } from './componentFactory';
+
+const useStyles = makeStyles(theme => ({
+    button: {
+        maxWidth: theme.spacing(5),
+        minWidth: theme.spacing(5),
+        maxHeight: theme.spacing(3),
+        minHeight: theme.spacing(3),
+        padding: 0
+    }
+}));
 
 export default function EditableTableRow({
     row,
@@ -110,17 +121,23 @@ export default function EditableTableRow({
         setItem({ ...item, [propertyName]: newValue });
     };
 
-    const handleClickAway = () => {
+    const handleClickAway = e => {
+        // for some reason clicks in modals that TableRows open register as clickAways
+        // this leads to the annoying scenario where clicking in an inputin a modal closes the entire row
+        // this check stops that happening, although there is probably a better solution
+        if (e.target.tagName.toUpperCase() === 'INPUT') {
+            return;
+        }
         if (closeRowOnClickAway) {
             setEditing(false);
         }
     };
 
     return (
-        <ClickAwayListener onClickAway={handleClickAway}>
+        <ClickAwayListener onClickAway={e => handleClickAway(e)}>
             <TableRow onClick={() => setEditing(true)}>
                 {columns.map(column => (
-                    <TableCell key={`${column.id}${item.id}`}>
+                    <TableCell key={`${column.id}${item.id}`} id={column.type}>
                         {(editing && column.editable && editable) ||
                         (isNewRow && editing && column.required)
                             ? inputComponentFactory(item, column, handleValueChange, rest)
@@ -148,66 +165,74 @@ export default function EditableTableRow({
                                 </TableCell>
                             )}
                             <TableCell>
-                                <Button
-                                    onClick={handleCancelClick}
-                                    color="secondary"
-                                    variant="outlined"
-                                    classes={{
-                                        root: classes.button
-                                    }}
-                                    size="small"
-                                    data-testid="clearButton"
-                                >
-                                    <Clear fontSize="small" />
-                                </Button>
-                            </TableCell>
-                            {deleteRow && !isNewRow && (
-                                <TableCell>
+                                <Tooltip title="Revert changes to row">
                                     <Button
-                                        onClick={handleDeleteClick}
+                                        onClick={handleCancelClick}
                                         color="secondary"
-                                        variant="contained"
+                                        variant="outlined"
                                         classes={{
                                             root: classes.button
                                         }}
                                         size="small"
-                                        data-testid="deleteButton"
+                                        data-testid="clearButton"
                                     >
-                                        <Delete fontSize="small" />
+                                        <Clear fontSize="small" />
                                     </Button>
+                                </Tooltip>
+                            </TableCell>
+                            {deleteRow && !isNewRow && (
+                                <TableCell>
+                                    <Tooltip title="Remove Row">
+                                        <Button
+                                            onClick={handleDeleteClick}
+                                            color="secondary"
+                                            variant="contained"
+                                            classes={{
+                                                root: classes.button
+                                            }}
+                                            size="small"
+                                            data-testid="deleteButton"
+                                        >
+                                            <Delete fontSize="small" />
+                                        </Button>
+                                    </Tooltip>
                                 </TableCell>
                             )}
                         </>
                     ) : (
                         <>
                             <TableCell>
-                                <Button
-                                    color="primary"
-                                    variant="outlined"
-                                    onClick={() => setEditing(true)}
-                                    size="small"
-                                    classes={{
-                                        root: classes.button
-                                    }}
-                                    data-testid="editButton"
-                                >
-                                    <EditIcon fontSize="small" />
-                                </Button>
-                            </TableCell>
-                            {deleteRow && !isNewRow && (
-                                <TableCell>
+                                <Tooltip title="Edit Row">
                                     <Button
-                                        onClick={handleDeleteClick}
-                                        color="secondary"
-                                        variant="contained"
+                                        color="primary"
+                                        variant="outlined"
+                                        onClick={() => setEditing(true)}
+                                        size="small"
                                         classes={{
                                             root: classes.button
                                         }}
-                                        size="small"
-                                        data-testid="deleteButton"
+                                        data-testid="editButton"
                                     >
-                                        <Delete fontSize="small" />
+                                        <EditIcon fontSize="small" />
                                     </Button>
+                                </Tooltip>
+                            </TableCell>
+                            {deleteRow && !isNewRow && (
+                                <TableCell>
+                                    <Tooltip title="Remove Row">
+                                        <Button
+                                            onClick={handleDeleteClick}
+                                            color="secondary"
+                                            variant="contained"
+                                            classes={{
+                                                root: classes.button
+                                            }}
+                                            size="small"
+                                            data-testid="deleteButton"
+                                        >
+                                            <Delete fontSize="small" />
+                                        </Button>
+                                    </Tooltip>
                                 </TableCell>
                             )}
                             <TableCell />
