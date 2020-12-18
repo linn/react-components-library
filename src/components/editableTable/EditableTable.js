@@ -25,6 +25,7 @@ export default function EditableTable({
     tableValid,
     removeRow,
     resetRow,
+    closeRowOnClickAway,
     ...rest
 }) {
     const [showNewRow, setShowNewRow] = useState(false);
@@ -80,25 +81,28 @@ export default function EditableTable({
                 </TableRow>
             </TableHead>
             <TableBody>
-                {rows.map(row => (
+                {rows.map(row => {
                     /* eslint-disable react/jsx-props-no-spreading */
-                    <EditableTableRow
-                        key={row.id}
-                        row={row}
-                        columns={columns}
-                        saveRow={saveRow}
-                        editable={editable}
-                        updateRow={updateRow}
-                        validateRow={validateRow}
-                        deleteRow={deleteRow}
-                        isNewRow={row.isNewRow}
-                        groupEdit={groupEdit}
-                        removeRow={handleRemoveRow}
-                        isRowValid={handleIsRowValid}
-                        resetRow={resetRow}
-                        {...rest}
-                    />
-                ))}
+                    return (
+                        <EditableTableRow
+                            key={row.id}
+                            row={row}
+                            columns={columns}
+                            saveRow={saveRow}
+                            editable={editable}
+                            updateRow={updateRow}
+                            validateRow={validateRow}
+                            deleteRow={deleteRow}
+                            isNewRow={row.isNewRow}
+                            groupEdit={groupEdit}
+                            removeRow={handleRemoveRow}
+                            isRowValid={handleIsRowValid}
+                            resetRow={resetRow}
+                            closeRowOnClickAway={closeRowOnClickAway}
+                            {...rest}
+                        />
+                    );
+                })}
 
                 {editable && allowNewRowCreation && !showNewRow && (
                     <TableRow>
@@ -146,7 +150,8 @@ EditableTable.propTypes = {
     addRow: PropTypes.func,
     removeRow: PropTypes.func,
     tableValid: PropTypes.func,
-    resetRow: PropTypes.func
+    resetRow: PropTypes.func,
+    closeRowOnClickAway: PropTypes.bool
 };
 
 EditableTable.defaultProps = {
@@ -162,5 +167,6 @@ EditableTable.defaultProps = {
     addRow: null,
     removeRow: null,
     tableValid: null,
-    resetRow: null
+    resetRow: null,
+    closeRowOnClickAway: false
 };
