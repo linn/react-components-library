@@ -1,4 +1,10 @@
 # Changelog
+## [10.13.2] - 2020-12-21
+### Changes
+## EditableTable
+- Fixed a weird bug where inputs were losing focus for no apparent reason
+- Added a groupEdit storybook example.
+
 ## [10.13.1] - 2020-12-17
 ### Changes
 ## EditableTable
