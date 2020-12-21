@@ -1,7 +1,10 @@
 # Changelog
 ## [10.13.1] - 2020-12-17
 ### Added
+## EditableTable
 - Minor ui improvements for the Editable table. Rows open and close on click and clickaway. Tooltips for buttons.
+- deleteRow can now be either a boolean or a function. True / a truthy function will cause delete buttons to be shown, False / null will hide delete buttons
+- optional tooltips for table cells. Ypu pass this in as part of the columns array, in the form of a function that takes a row and derives a tooltip from the row in a way that you can specify. Storybook example updated to show how this works.
 
 ## [10.13.0] - 2020-12-16
 ### Added

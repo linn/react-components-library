@@ -22,7 +22,7 @@ const rows = [
         text: 'column 1',
         extraInfo: 'some extra information about column 1',
         number: 123,
-        date: moment(),
+        date: moment('2020-12-21'),
         linnWeek: moment(),
         search: 'search',
         dropdown: 'one',
@@ -32,7 +32,7 @@ const rows = [
         text: 'column 2',
         extraInfo: 'some extra information about column 2',
         number: 123,
-        date: moment(),
+        date: moment('2020-12-25'),
         linnWeek: moment(),
         search: 'search',
         dropdown: 'one',
@@ -58,6 +58,10 @@ const columns = [
         title: 'Date',
         id: 'date',
         type: 'date',
+        tooltip: row =>
+            row.date?.month() === 11 && row.date?.date() === 25
+                ? 'Christmas Day! :)'
+                : 'Not Christmas Day :(',
         editable: true
     },
     {
