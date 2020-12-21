@@ -55,6 +55,12 @@ const initialRows = [
 
 const columns = [
     {
+        title: 'id',
+        id: 'id',
+        type: 'number',
+        editable: true
+    },
+    {
         title: 'Text',
         id: 'text',
         type: 'text',
@@ -113,7 +119,7 @@ function Wrapper() {
         setRows([
             ...rows,
             {
-                id: rows.length + 1,
+                id: rows.length,
                 text: '',
                 extraInfo: false,
                 number: 0,
@@ -124,14 +130,34 @@ function Wrapper() {
                 component
             }
         ]);
+    const removeRow = row => setRows(rows.filter(r => r.id !== row.id));
+    const resetRow = row =>
+        setRows(
+            rows.map(r => {
+                return r.id === row.id
+                    ? {
+                          id: r.id,
+                          text: '',
+                          extraInfo: false,
+                          number: 0,
+                          date: moment(),
+                          linnWeek: moment(),
+                          search: 'search',
+                          dropdown: 'one',
+                          component
+                      }
+                    : r;
+            })
+        );
     return (
         <EditableTable
             columns={columns}
             rows={rows}
             tableValid={() => true}
             closeRowOnClickAway
-            deleteRow={() => true}
+            resetRow={item => resetRow(item)}
             addRow={() => addRow()}
+            removeRow={row => removeRow(row)}
             groupEdit
         />
     );

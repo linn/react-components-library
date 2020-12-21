@@ -12,6 +12,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import { grey } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/styles';
 import { inputComponentFactory, displayComponentFactory } from './componentFactory';
+import { Fragment } from 'react';
 
 const useStyles = makeStyles(theme => ({
     button: {
@@ -95,11 +96,11 @@ export default function EditableTableRow({
             removeRow(item.id);
             return;
         }
-        setEditing(false);
 
         if (groupEdit) {
             resetRow(item, prevItem);
         } else {
+            setEditing(false);
             setItem(prevItem);
         }
     };
@@ -140,19 +141,21 @@ export default function EditableTableRow({
                 : displayComponentFactory(item, column);
         if (!column.tooltip) {
             return (
-                <TableCell id={column.type} key={`${column?.id}${item.id}`}>
-                    <>{Content()}</>
-                </TableCell>
+                <Fragment key={`${column?.id}${item.id}`}>
+                    <TableCell id={column.type}>
+                        <>{Content()}</>
+                    </TableCell>
+                </Fragment>
             );
         }
         return (
-            <Tooltip title={column.tooltip(item) || ''}>
-                <>
+            <Fragment key={`${column?.id}${item.id}`}>
+                <Tooltip title={column.tooltip(item) || ''}>
                     <TableCell id={column.type} key={`${column?.id}${item.id}`}>
                         {Content()}
                     </TableCell>
-                </>
-            </Tooltip>
+                </Tooltip>
+            </Fragment>
         );
     };
 
@@ -210,7 +213,7 @@ export default function EditableTableRow({
                                     </Button>
                                 </Tooltip>
                             </TableCell>
-                            {deleteRow && !isNewRow && (
+                            {(deleteRow || removeRow) && !isNewRow && (
                                 <TableCell>
                                     <Tooltip title="Remove Row">
                                         <Button
@@ -247,7 +250,7 @@ export default function EditableTableRow({
                                     </Button>
                                 </Tooltip>
                             </TableCell>
-                            {deleteRow && !isNewRow && (
+                            {(deleteRow || removeRow) && !isNewRow && (
                                 <TableCell>
                                     <Tooltip title="Remove Row">
                                         <Button
