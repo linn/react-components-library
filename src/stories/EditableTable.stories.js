@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import moment from 'moment';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import ThemeProvider from '@material-ui/styles/ThemeProvider';
@@ -17,7 +17,7 @@ export const component = () => (
 
 const options = ['one', 'two', 'three'];
 
-const rows = [
+const initialRows = [
     {
         id: 0,
         text: 'column 1',
@@ -107,6 +107,36 @@ const columns = [
     }
 ];
 
+function Wrapper() {
+    const [rows, setRows] = useState(initialRows);
+    const addRow = () =>
+        setRows([
+            ...rows,
+            {
+                id: rows.length + 1,
+                text: '',
+                extraInfo: false,
+                number: 0,
+                date: moment(),
+                linnWeek: moment(),
+                search: 'search',
+                dropdown: 'one',
+                component
+            }
+        ]);
+    return (
+        <EditableTable
+            columns={columns}
+            rows={rows}
+            tableValid={() => true}
+            closeRowOnClickAway
+            deleteRow={() => true}
+            addRow={() => addRow()}
+            groupEdit
+        />
+    );
+}
+
 storiesOf('Editable Table', module)
     .addDecorator(withKnobs)
     .addDecorator(story => (
@@ -119,9 +149,10 @@ storiesOf('Editable Table', module)
     .add('default', () => (
         <EditableTable
             columns={columns}
-            rows={rows}
+            rows={initialRows}
             tableValid={() => true}
             closeRowOnClickAway
-            groupedit
+            deleteRow={() => true}
         />
-    ));
+    ))
+    .add('groupEdit', () => <Wrapper />);
