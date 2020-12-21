@@ -17,12 +17,49 @@ export const component = () => (
 
 const options = ['one', 'two', 'three'];
 
+const rows = [
+    {
+        id: 0,
+        text: 'column 1',
+        extraInfo: 'some extra information about column 1',
+        number: 123,
+        date: moment('2020-12-21'),
+        linnWeek: moment(),
+        search: 'search',
+        dropdown: 'one',
+        component
+    },
+    {
+        id: 1,
+        text: 'column 2',
+        extraInfo: 'some extra information about column 2',
+        number: 123,
+        date: moment('2020-12-25'),
+        linnWeek: moment(),
+        search: 'search',
+        dropdown: 'one',
+        component
+    },
+    {
+        id: 2,
+        text: 'column with no extra info',
+        extraInfo: false,
+        number: 123,
+        date: moment('2020-12-20'),
+        linnWeek: moment(),
+        search: 'search',
+        dropdown: 'one',
+        component
+    }
+];
+
 const columns = [
     {
         title: 'Text',
         id: 'text',
         type: 'text',
-        editable: true
+        editable: true,
+        tooltip: row => row.extraInfo || false
     },
     {
         title: 'Number',
@@ -34,6 +71,10 @@ const columns = [
         title: 'Date',
         id: 'date',
         type: 'date',
+        tooltip: row =>
+            row.date?.month() === 11 && row.date?.date() === 25
+                ? 'Christmas Day! :)'
+                : 'Not Christmas Day :(',
         editable: true
     },
     {
@@ -66,18 +107,6 @@ const columns = [
     }
 ];
 
-const rows = [
-    {
-        text: 'text',
-        number: 123,
-        date: moment(),
-        linnWeek: moment(),
-        search: 'search',
-        dropdown: 'one',
-        component
-    }
-];
-
 storiesOf('Editable Table', module)
     .addDecorator(withKnobs)
     .addDecorator(story => (
@@ -87,4 +116,12 @@ storiesOf('Editable Table', module)
             </MuiPickersUtilsProvider>
         </ThemeProvider>
     ))
-    .add('default', () => <EditableTable columns={columns} rows={rows} />);
+    .add('default', () => (
+        <EditableTable
+            columns={columns}
+            rows={rows}
+            tableValid={() => true}
+            closeRowOnClickAway
+            groupedit
+        />
+    ));

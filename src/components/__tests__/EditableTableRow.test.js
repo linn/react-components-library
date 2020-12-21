@@ -73,7 +73,7 @@ describe('<EditableTableRow />', () => {
             const { getByTestId, queryByTestId } = render(
                 <table>
                     <tbody>
-                        <EditableTableRow {...defaultProps} />
+                        <EditableTableRow {...defaultProps} deleteRow={false} />
                     </tbody>
                 </table>
             );
@@ -113,11 +113,11 @@ describe('<EditableTableRow />', () => {
     });
 
     describe('when deleting', () => {
-        it('should display save, delete and cancel buttons when editing and delete prop is not null', () => {
+        it('should display save, delete and cancel buttons when editingnpm ', () => {
             const { getByTestId } = render(
                 <table>
                     <tbody>
-                        <EditableTableRow {...defaultProps} deleteRow={deleteRow} />
+                        <EditableTableRow {...defaultProps} deleteRow={() => {}} />
                     </tbody>
                 </table>
             );

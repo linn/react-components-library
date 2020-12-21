@@ -1,4 +1,11 @@
 # Changelog
+## [10.13.1] - 2020-12-17
+### Changes
+## EditableTable
+- Minor ui improvements for the Editable table. Rows open and optionally close on click and clickaway. Tooltips for buttons.
+- Delete button stays shown when row is closed if a deleteRow function is supplied.
+- Added optional tooltips for table cells. You pass this in as part of the columns array, in the form of a function that takes a row and derives a tooltip string from data in the row. You could return false from this function for some rows if they don't have any tooltips for that column. Storybook example updated to show how this works.
+
 ## [10.13.0] - 2020-12-16
 ### Added
 - groupEdit mode for EditableTable. This allows for editing, adding and saving of multiple rows at once in the component

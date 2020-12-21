@@ -1,6 +1,6 @@
 {
     "name": "@linn-it/linn-form-components-library",
-    "version": "10.13.0",
+    "version": "10.13.1",
     "private": false,
     "dependencies": {
         "@testing-library/jest-dom": "^5.1.1",

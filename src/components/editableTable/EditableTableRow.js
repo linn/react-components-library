@@ -7,6 +7,8 @@ import EditIcon from '@material-ui/icons/Edit';
 import Clear from '@material-ui/icons/Clear';
 import Delete from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import Tooltip from '@material-ui/core/Tooltip';
 import { grey } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/styles';
 import { inputComponentFactory, displayComponentFactory } from './componentFactory';
@@ -33,6 +35,7 @@ export default function EditableTableRow({
     deleteRow,
     groupEdit,
     isRowValid,
+    closeRowOnClickAway,
     resetRow,
     ...rest
 }) {
@@ -92,7 +95,6 @@ export default function EditableTableRow({
             removeRow(item.id);
             return;
         }
-
         setEditing(false);
 
         if (groupEdit) {
@@ -119,93 +121,163 @@ export default function EditableTableRow({
         setItem({ ...item, [propertyName]: newValue });
     };
 
-    return (
-        <TableRow>
-            {columns.map(column => (
-                <TableCell key={`${column.id}${item.id}`}>
-                    {(editing && column.editable && editable) ||
-                    (isNewRow && editing && column.required)
-                        ? inputComponentFactory(item, column, handleValueChange, rest)
-                        : displayComponentFactory(item, column)}
+    const handleClickAway = e => {
+        // for some reason clicks in modals that TableRows open register as clickAways
+        // this leads to the annoying scenario where clicking in an input inside a modal closes the entire row
+        // this check stops that happening, although there is probably a better solution
+        if (e.target.tagName.toUpperCase() === 'INPUT') {
+            return;
+        }
+        if (closeRowOnClickAway) {
+            setEditing(false);
+        }
+    };
+
+    const Cell = ({ column }) => {
+        const Content = () =>
+            (editing && column.editable && editable) || (isNewRow && editing && column.required)
+                ? inputComponentFactory(item, column, handleValueChange, rest)
+                : displayComponentFactory(item, column);
+        if (!column.tooltip) {
+            return (
+                <TableCell id={column.type}>
+                    <>{Content()}</>
                 </TableCell>
-            ))}
-            {editable &&
-                (editing ? (
-                    <>
-                        {!groupEdit && (
-                            <TableCell>
-                                <Button
-                                    onClick={handleSaveClick}
-                                    color="primary"
-                                    variant="contained"
-                                    size="small"
-                                    classes={{
-                                        root: classes.button
-                                    }}
-                                    disabled={!rowValid}
-                                    data-testid="saveButton"
-                                >
-                                    <Done style={{ color: grey[50] }} fontSize="small" />
-                                </Button>
-                            </TableCell>
-                        )}
-                        <TableCell>
-                            <Button
-                                onClick={handleCancelClick}
-                                color="secondary"
-                                variant="outlined"
-                                classes={{
-                                    root: classes.button
-                                }}
-                                size="small"
-                                data-testid="clearButton"
-                            >
-                                <Clear fontSize="small" />
-                            </Button>
-                        </TableCell>
-                        {deleteRow && !isNewRow && (
-                            <TableCell>
-                                <Button
-                                    onClick={handleDeleteClick}
-                                    color="secondary"
-                                    variant="contained"
-                                    classes={{
-                                        root: classes.button
-                                    }}
-                                    size="small"
-                                    data-testid="deleteButton"
-                                >
-                                    <Delete fontSize="small" />
-                                </Button>
-                            </TableCell>
-                        )}
-                    </>
-                ) : (
-                    <>
-                        <TableCell>
-                            <Button
-                                color="primary"
-                                variant="outlined"
-                                onClick={() => setEditing(true)}
-                                size="small"
-                                classes={{
-                                    root: classes.button
-                                }}
-                                data-testid="editButton"
-                            >
-                                <EditIcon fontSize="small" />
-                            </Button>
-                        </TableCell>
-                        <TableCell />
-                    </>
+            );
+        }
+        return (
+            <Tooltip title={column.tooltip(item) || ''}>
+                <TableCell id={column.type}>
+                    <>{Content()}</>
+                </TableCell>
+            </Tooltip>
+        );
+    };
+
+    Cell.propTypes = {
+        column: PropTypes.shape({
+            tooltip: PropTypes.func,
+            id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+            editable: PropTypes.bool,
+            type: PropTypes.string,
+            required: PropTypes.bool
+        })
+    };
+
+    Cell.defaultProps = {
+        column: null
+    };
+
+    return (
+        <ClickAwayListener onClickAway={e => handleClickAway(e)}>
+            <TableRow onClick={() => setEditing(true)}>
+                {columns.map(column => (
+                    <Cell key={`${column?.id}${item.id}`} column={column} />
                 ))}
-        </TableRow>
+                {editable &&
+                    (editing ? (
+                        <>
+                            {!groupEdit && (
+                                <TableCell>
+                                    <Button
+                                        onClick={handleSaveClick}
+                                        color="primary"
+                                        variant="contained"
+                                        size="small"
+                                        classes={{
+                                            root: classes.button
+                                        }}
+                                        disabled={!rowValid}
+                                        data-testid="saveButton"
+                                    >
+                                        <Done style={{ color: grey[50] }} fontSize="small" />
+                                    </Button>
+                                </TableCell>
+                            )}
+                            <TableCell>
+                                <Tooltip title="Revert changes to row">
+                                    <Button
+                                        onClick={handleCancelClick}
+                                        color="secondary"
+                                        variant="outlined"
+                                        classes={{
+                                            root: classes.button
+                                        }}
+                                        size="small"
+                                        data-testid="clearButton"
+                                    >
+                                        <Clear fontSize="small" />
+                                    </Button>
+                                </Tooltip>
+                            </TableCell>
+                            {deleteRow && !isNewRow && (
+                                <TableCell>
+                                    <Tooltip title="Remove Row">
+                                        <Button
+                                            onClick={handleDeleteClick}
+                                            color="secondary"
+                                            variant="contained"
+                                            classes={{
+                                                root: classes.button
+                                            }}
+                                            size="small"
+                                            data-testid="deleteButton"
+                                        >
+                                            <Delete fontSize="small" />
+                                        </Button>
+                                    </Tooltip>
+                                </TableCell>
+                            )}
+                        </>
+                    ) : (
+                        <>
+                            <TableCell>
+                                <Tooltip title="Edit Row">
+                                    <Button
+                                        color="primary"
+                                        variant="outlined"
+                                        onClick={() => setEditing(true)}
+                                        size="small"
+                                        classes={{
+                                            root: classes.button
+                                        }}
+                                        data-testid="editButton"
+                                    >
+                                        <EditIcon fontSize="small" />
+                                    </Button>
+                                </Tooltip>
+                            </TableCell>
+                            {deleteRow && !isNewRow && (
+                                <TableCell>
+                                    <Tooltip title="Remove Row">
+                                        <Button
+                                            onClick={handleDeleteClick}
+                                            color="secondary"
+                                            variant="contained"
+                                            classes={{
+                                                root: classes.button
+                                            }}
+                                            size="small"
+                                            data-testid="deleteButton"
+                                        >
+                                            <Delete fontSize="small" />
+                                        </Button>
+                                    </Tooltip>
+                                </TableCell>
+                            )}
+                            <TableCell />
+                        </>
+                    ))}
+            </TableRow>
+        </ClickAwayListener>
     );
 }
 
 EditableTableRow.propTypes = {
     row: PropTypes.shape({}).isRequired,
-    columns: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+    columns: PropTypes.arrayOf(
+        PropTypes.shape({ id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]) })
+    ).isRequired,
     saveRow: PropTypes.func,
     editable: PropTypes.bool,
     isNewRow: PropTypes.bool,
@@ -215,7 +287,8 @@ EditableTableRow.propTypes = {
     deleteRow: PropTypes.func,
     groupEdit: PropTypes.bool,
     isRowValid: PropTypes.func,
-    resetRow: PropTypes.func
+    resetRow: PropTypes.func,
+    closeRowOnClickAway: PropTypes.bool
 };
 
 EditableTableRow.defaultProps = {
@@ -228,5 +301,6 @@ EditableTableRow.defaultProps = {
     deleteRow: null,
     groupEdit: false,
     isRowValid: null,
-    resetRow: null
+    resetRow: null,
+    closeRowOnClickAway: false
 };
