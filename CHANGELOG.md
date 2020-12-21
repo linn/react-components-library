@@ -4,7 +4,7 @@
 ## EditableTable
 - Minor ui improvements for the Editable table. Rows open and close on click and clickaway. Tooltips for buttons.
 - deleteRow can now be either a boolean or a function. True / a truthy function will cause delete buttons to be shown, False / null will hide delete buttons
-- optional tooltips for table cells when in viewing mode. You pass this in as part of the columns array, in the form of a function that takes a row and derives a tooltip string from data in the row. Storybook example updated to show how this works.
+- optional tooltips for table cells when in viewing mode. You pass this in as part of the columns array, in the form of a function that takes a row and derives a tooltip string from data in the row. You could return false from this function for some rows if they don't have any tooltips for that column. Storybook example updated to show how this works.
 
 ## [10.13.0] - 2020-12-16
 ### Added

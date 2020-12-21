@@ -117,7 +117,7 @@ describe('<EditableTableRow />', () => {
             const { getByTestId } = render(
                 <table>
                     <tbody>
-                        <EditableTableRow {...defaultProps} />
+                        <EditableTableRow {...defaultProps} deleteRow={() => {}} />
                     </tbody>
                 </table>
             );

@@ -172,7 +172,7 @@ export default function EditableTableRow({
         <ClickAwayListener onClickAway={e => handleClickAway(e)}>
             <TableRow onClick={() => setEditing(true)}>
                 {columns.map(column => (
-                    <Cell key={`${column.id}${item.id}`} column={column} />
+                    <Cell key={`${column?.id}${item.id}`} column={column} />
                 ))}
                 {editable &&
                     (editing ? (
@@ -284,7 +284,7 @@ EditableTableRow.propTypes = {
     removeRow: PropTypes.func,
     updateRow: PropTypes.func,
     validateRow: PropTypes.func,
-    deleteRow: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
+    deleteRow: PropTypes.func,
     groupEdit: PropTypes.bool,
     isRowValid: PropTypes.func,
     resetRow: PropTypes.func,
@@ -298,7 +298,7 @@ EditableTableRow.defaultProps = {
     removeRow: null,
     updateRow: null,
     validateRow: null,
-    deleteRow: true,
+    deleteRow: null,
     groupEdit: false,
     isRowValid: null,
     resetRow: null,

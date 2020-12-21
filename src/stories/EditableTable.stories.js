@@ -39,6 +39,17 @@ const rows = [
         search: 'search',
         dropdown: 'one',
         component
+    },
+    {
+        id: 2,
+        text: 'column with no extra info',
+        extraInfo: false,
+        number: 123,
+        date: moment('2020-12-20'),
+        linnWeek: moment(),
+        search: 'search',
+        dropdown: 'one',
+        component
     }
 ];
 
@@ -48,7 +59,7 @@ const columns = [
         id: 'text',
         type: 'text',
         editable: true,
-        tooltip: row => row.extraInfo
+        tooltip: row => row.extraInfo || false
     },
     {
         title: 'Number',
@@ -106,5 +117,11 @@ storiesOf('Editable Table', module)
         </ThemeProvider>
     ))
     .add('default', () => (
-        <EditableTable columns={columns} rows={rows} tableValid={() => true} closeRowOnClickAway />
+        <EditableTable
+            columns={columns}
+            rows={rows}
+            tableValid={() => true}
+            closeRowOnClickAway
+            groupedit
+        />
     ));
