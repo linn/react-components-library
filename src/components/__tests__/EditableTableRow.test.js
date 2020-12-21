@@ -113,7 +113,7 @@ describe('<EditableTableRow />', () => {
     });
 
     describe('when deleting', () => {
-        it('should display save, delete and cancel buttons when editing and deleteRow is false', () => {
+        it('should display save, delete and cancel buttons when editingnpm ', () => {
             const { getByTestId } = render(
                 <table>
                     <tbody>
