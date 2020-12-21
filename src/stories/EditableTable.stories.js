@@ -19,6 +19,7 @@ const options = ['one', 'two', 'three'];
 
 const rows = [
     {
+        id: 0,
         text: 'column 1',
         extraInfo: 'some extra information about column 1',
         number: 123,
@@ -29,6 +30,7 @@ const rows = [
         component
     },
     {
+        id: 1,
         text: 'column 2',
         extraInfo: 'some extra information about column 2',
         number: 123,
@@ -103,4 +105,6 @@ storiesOf('Editable Table', module)
             </MuiPickersUtilsProvider>
         </ThemeProvider>
     ))
-    .add('default', () => <EditableTable columns={columns} rows={rows} tableValid={() => true} />);
+    .add('default', () => (
+        <EditableTable columns={columns} rows={rows} tableValid={() => true} closeRowOnClickAway />
+    ));

@@ -133,30 +133,47 @@ export default function EditableTableRow({
         }
     };
 
-    const tableCell = column => {
-        const content = () =>
+    const Cell = ({ column }) => {
+        const Content = () =>
             (editing && column.editable && editable) || (isNewRow && editing && column.required)
                 ? inputComponentFactory(item, column, handleValueChange, rest)
                 : displayComponentFactory(item, column);
         if (!column.tooltip) {
             return (
-                <TableCell key={`${column.id}${item.id}`} id={column.type}>
-                    {content()}
+                <TableCell id={column.type}>
+                    <>{Content()}</>
                 </TableCell>
             );
         }
         return (
-            <Tooltip title={column.tooltip(item)}>
-                <TableCell key={`${column.id}${item.id}`} id={column.type}>
-                    {content()}
+            <Tooltip title={column.tooltip(item) || ''}>
+                <TableCell id={column.type}>
+                    <>{Content()}</>
                 </TableCell>
             </Tooltip>
         );
     };
+
+    Cell.propTypes = {
+        column: PropTypes.shape({
+            tooltip: PropTypes.func,
+            id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+            editable: PropTypes.bool,
+            type: PropTypes.string,
+            required: PropTypes.bool
+        })
+    };
+
+    Cell.defaultProps = {
+        column: null
+    };
+
     return (
         <ClickAwayListener onClickAway={e => handleClickAway(e)}>
             <TableRow onClick={() => setEditing(true)}>
-                {columns.map(column => tableCell(column))}
+                {columns.map(column => (
+                    <Cell key={`${column.id}${item.id}`} column={column} />
+                ))}
                 {editable &&
                     (editing ? (
                         <>
@@ -258,14 +275,16 @@ export default function EditableTableRow({
 
 EditableTableRow.propTypes = {
     row: PropTypes.shape({}).isRequired,
-    columns: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+    columns: PropTypes.arrayOf(
+        PropTypes.shape({ id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]) })
+    ).isRequired,
     saveRow: PropTypes.func,
     editable: PropTypes.bool,
     isNewRow: PropTypes.bool,
     removeRow: PropTypes.func,
     updateRow: PropTypes.func,
     validateRow: PropTypes.func,
-    deleteRow: PropTypes.oneOfType(PropTypes.func, PropTypes.bool),
+    deleteRow: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
     groupEdit: PropTypes.bool,
     isRowValid: PropTypes.func,
     resetRow: PropTypes.func,
