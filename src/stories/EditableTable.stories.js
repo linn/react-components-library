@@ -113,6 +113,7 @@ const columns = [
     }
 ];
 
+// Wrapper for the groupEdit story. Holds table data in state and defines stateful add, delete, and reset functions.
 function Wrapper() {
     const [rows, setRows] = useState(initialRows);
     const addRow = () =>
