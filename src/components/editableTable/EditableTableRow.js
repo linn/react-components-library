@@ -133,17 +133,30 @@ export default function EditableTableRow({
         }
     };
 
+    const tableCell = column => {
+        const content = () =>
+            (editing && column.editable && editable) || (isNewRow && editing && column.required)
+                ? inputComponentFactory(item, column, handleValueChange, rest)
+                : displayComponentFactory(item, column);
+        if (!column.tooltip) {
+            return (
+                <TableCell key={`${column.id}${item.id}`} id={column.type}>
+                    {content()}
+                </TableCell>
+            );
+        }
+        return (
+            <Tooltip title={column.tooltip(item)}>
+                <TableCell key={`${column.id}${item.id}`} id={column.type}>
+                    {content()}
+                </TableCell>
+            </Tooltip>
+        );
+    };
     return (
         <ClickAwayListener onClickAway={e => handleClickAway(e)}>
             <TableRow onClick={() => setEditing(true)}>
-                {columns.map(column => (
-                    <TableCell key={`${column.id}${item.id}`} id={column.type}>
-                        {(editing && column.editable && editable) ||
-                        (isNewRow && editing && column.required)
-                            ? inputComponentFactory(item, column, handleValueChange, rest)
-                            : displayComponentFactory(item, column)}
-                    </TableCell>
-                ))}
+                {columns.map(column => tableCell(column))}
                 {editable &&
                     (editing ? (
                         <>

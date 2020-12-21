@@ -17,12 +17,36 @@ export const component = () => (
 
 const options = ['one', 'two', 'three'];
 
+const rows = [
+    {
+        text: 'column 1',
+        extraInfo: 'some extra information about column 1',
+        number: 123,
+        date: moment(),
+        linnWeek: moment(),
+        search: 'search',
+        dropdown: 'one',
+        component
+    },
+    {
+        text: 'column 2',
+        extraInfo: 'some extra information about column 2',
+        number: 123,
+        date: moment(),
+        linnWeek: moment(),
+        search: 'search',
+        dropdown: 'one',
+        component
+    }
+];
+
 const columns = [
     {
         title: 'Text',
         id: 'text',
         type: 'text',
-        editable: true
+        editable: true,
+        tooltip: row => row.extraInfo
     },
     {
         title: 'Number',
@@ -66,18 +90,6 @@ const columns = [
     }
 ];
 
-const rows = [
-    {
-        text: 'text',
-        number: 123,
-        date: moment(),
-        linnWeek: moment(),
-        search: 'search',
-        dropdown: 'one',
-        component
-    }
-];
-
 storiesOf('Editable Table', module)
     .addDecorator(withKnobs)
     .addDecorator(story => (
@@ -87,4 +99,4 @@ storiesOf('Editable Table', module)
             </MuiPickersUtilsProvider>
         </ThemeProvider>
     ))
-    .add('default', () => <EditableTable columns={columns} rows={rows} />);
+    .add('default', () => <EditableTable columns={columns} rows={rows} tableValid={() => true} />);
