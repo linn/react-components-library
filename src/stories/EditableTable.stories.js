@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import moment from 'moment';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import ThemeProvider from '@material-ui/styles/ThemeProvider';
@@ -17,7 +17,7 @@ export const component = () => (
 
 const options = ['one', 'two', 'three'];
 
-const rows = [
+const initialRows = [
     {
         id: 0,
         text: 'column 1',
@@ -54,6 +54,12 @@ const rows = [
 ];
 
 const columns = [
+    {
+        title: 'id',
+        id: 'id',
+        type: 'number',
+        editable: true
+    },
     {
         title: 'Text',
         id: 'text',
@@ -107,6 +113,57 @@ const columns = [
     }
 ];
 
+// Wrapper for the groupEdit story. Holds table data in state and defines stateful add, delete, and reset functions.
+function Wrapper() {
+    const [rows, setRows] = useState(initialRows);
+    const addRow = () =>
+        setRows([
+            ...rows,
+            {
+                id: rows.length,
+                text: '',
+                extraInfo: false,
+                number: 0,
+                date: moment(),
+                linnWeek: moment(),
+                search: 'search',
+                dropdown: 'one',
+                component
+            }
+        ]);
+    const removeRow = row => setRows(rows.filter(r => r.id !== row.id));
+    const resetRow = row =>
+        setRows(
+            rows.map(r => {
+                return r.id === row.id
+                    ? {
+                          id: r.id,
+                          text: '',
+                          extraInfo: false,
+                          number: 0,
+                          date: moment(),
+                          linnWeek: moment(),
+                          search: 'search',
+                          dropdown: 'one',
+                          component
+                      }
+                    : r;
+            })
+        );
+    return (
+        <EditableTable
+            columns={columns}
+            rows={rows}
+            tableValid={() => true}
+            closeRowOnClickAway
+            resetRow={item => resetRow(item)}
+            addRow={() => addRow()}
+            removeRow={row => removeRow(row)}
+            groupEdit
+        />
+    );
+}
+
 storiesOf('Editable Table', module)
     .addDecorator(withKnobs)
     .addDecorator(story => (
@@ -119,9 +176,10 @@ storiesOf('Editable Table', module)
     .add('default', () => (
         <EditableTable
             columns={columns}
-            rows={rows}
+            rows={initialRows}
             tableValid={() => true}
             closeRowOnClickAway
-            groupedit
+            deleteRow={() => true}
         />
-    ));
+    ))
+    .add('groupEdit', () => <Wrapper />);

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
@@ -95,11 +95,11 @@ export default function EditableTableRow({
             removeRow(item.id);
             return;
         }
-        setEditing(false);
 
         if (groupEdit) {
             resetRow(item, prevItem);
         } else {
+            setEditing(false);
             setItem(prevItem);
         }
     };
@@ -133,24 +133,28 @@ export default function EditableTableRow({
         }
     };
 
-    const Cell = ({ column }) => {
+    const Cell = column => {
         const Content = () =>
             (editing && column.editable && editable) || (isNewRow && editing && column.required)
                 ? inputComponentFactory(item, column, handleValueChange, rest)
                 : displayComponentFactory(item, column);
         if (!column.tooltip) {
             return (
-                <TableCell id={column.type}>
-                    <>{Content()}</>
-                </TableCell>
+                <Fragment key={`${column?.id}${item.id}`}>
+                    <TableCell id={column.type}>
+                        <>{Content()}</>
+                    </TableCell>
+                </Fragment>
             );
         }
         return (
-            <Tooltip title={column.tooltip(item) || ''}>
-                <TableCell id={column.type}>
-                    <>{Content()}</>
-                </TableCell>
-            </Tooltip>
+            <Fragment key={`${column?.id}${item.id}`}>
+                <Tooltip title={column.tooltip(item) || ''}>
+                    <TableCell id={column.type} key={`${column?.id}${item.id}`}>
+                        {Content()}
+                    </TableCell>
+                </Tooltip>
+            </Fragment>
         );
     };
 
@@ -171,9 +175,7 @@ export default function EditableTableRow({
     return (
         <ClickAwayListener onClickAway={e => handleClickAway(e)}>
             <TableRow onClick={() => setEditing(true)}>
-                {columns.map(column => (
-                    <Cell key={`${column?.id}${item.id}`} column={column} />
-                ))}
+                {columns.map(column => Cell(column))}
                 {editable &&
                     (editing ? (
                         <>
@@ -210,7 +212,7 @@ export default function EditableTableRow({
                                     </Button>
                                 </Tooltip>
                             </TableCell>
-                            {deleteRow && !isNewRow && (
+                            {(deleteRow || removeRow) && !isNewRow && (
                                 <TableCell>
                                     <Tooltip title="Remove Row">
                                         <Button
@@ -247,7 +249,7 @@ export default function EditableTableRow({
                                     </Button>
                                 </Tooltip>
                             </TableCell>
-                            {deleteRow && !isNewRow && (
+                            {(deleteRow || removeRow) && !isNewRow && (
                                 <TableCell>
                                     <Tooltip title="Remove Row">
                                         <Button
