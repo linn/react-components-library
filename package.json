@@ -67,6 +67,7 @@
         "@material-ui/pickers": "^3.2.10",
         "@material-ui/styles": "^4.9.0",
         "@storybook/addon-actions": "^6.1.11",
+        "@storybook/addon-docs": "^6.1.11",
         "@storybook/addon-jest": "^6.1.11",
         "@storybook/addon-knobs": "^6.1.11",
         "@storybook/addon-links": "^6.1.11",
