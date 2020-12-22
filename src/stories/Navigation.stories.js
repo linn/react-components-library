@@ -5,7 +5,7 @@ import providers from './renderUtils/Providers';
 import menu from '../../public/menu.json';
 
 export default {
-    title: 'Navigation',
+    title: 'Components/Navigation',
     decorators: [StoryRouter(), story => providers(story)]
 };
 

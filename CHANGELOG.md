@@ -1,12 +1,23 @@
 # Changelog
+## [11.0.0] - 2020-12-22
+### Changed
+- Updated to Storybook 6
+
+### Added
+- SingleEditTable
+- MulitEditTable
+
+### Removed
+- EditableTable
+
 ## [10.13.2] - 2020-12-21
-### Changes
+### Changed
 ## EditableTable
 - Fixed a weird bug where inputs were losing focus for no apparent reason
 - Added a groupEdit storybook example.
 
 ## [10.13.1] - 2020-12-17
-### Changes
+### Changed
 ## EditableTable
 - Minor ui improvements for the Editable table. Rows open and optionally close on click and clickaway. Tooltips for buttons.
 - Delete button stays shown when row is closed if a deleteRow function is supplied.

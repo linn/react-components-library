@@ -12,7 +12,7 @@ const actions = {
 };
 
 export default {
-    title: 'SaveBackCancelButtons',
+    title: 'Components/SaveBackCancelButtons',
 
     decorators: [
         story => (

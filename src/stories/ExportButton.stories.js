@@ -4,7 +4,7 @@ import { withKnobs, text } from '@storybook/addon-knobs';
 import ExportButton from '../components/ExportButton';
 
 export default {
-    title: 'ExportButton',
+    title: 'Components/ExportButton',
 
     decorators: [
         story => <div style={{ position: 'absolute', left: '50%' }}>{story()}</div>,

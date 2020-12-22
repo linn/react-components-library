@@ -4,7 +4,7 @@ import StoryRouter from 'storybook-react-router';
 import CreateButton from '../components/CreateButton';
 
 export default {
-    title: 'CreateButton',
+    title: 'Components/CreateButton',
 
     decorators: [
         StoryRouter(),

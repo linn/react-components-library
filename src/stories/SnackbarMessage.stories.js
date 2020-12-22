@@ -6,7 +6,7 @@ import CreateMuiTheme from '@material-ui/core/styles/createMuiTheme';
 import SnackbarMessage from '../components/SnackbarMessage';
 
 export default {
-    title: 'SnackbarMessage',
+    title: 'Components/SnackbarMessage',
 
     decorators: [
         story => <div style={{ padding: '3rem', width: '100%' }}>{story()}</div>,

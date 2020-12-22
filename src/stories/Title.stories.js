@@ -5,7 +5,7 @@ import { text } from '@storybook/addon-knobs';
 import Title from '../components/Title';
 
 export default {
-    title: 'Title',
+    title: 'Components/Title',
 
     decorators: [
         story => <div style={{ padding: '3rem', width: '100%' }}>{story()}</div>,

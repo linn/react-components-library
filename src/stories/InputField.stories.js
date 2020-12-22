@@ -11,7 +11,7 @@ const actions = {
 };
 
 export default {
-    title: 'InputField',
+    title: 'Components/InputField',
 
     decorators: [
         story => (

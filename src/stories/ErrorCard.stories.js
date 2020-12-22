@@ -4,7 +4,7 @@ import { withKnobs, text } from '@storybook/addon-knobs';
 import ErrorCard from '../components/ErrorCard';
 
 export default {
-    title: 'ErrorCard',
+    title: 'Components/ErrorCard',
 
     decorators: [
         story => <div style={{ padding: '3rem', width: '100%' }}>{story()}</div>,

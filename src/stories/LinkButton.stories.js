@@ -4,7 +4,7 @@ import providers from './renderUtils/Providers';
 import LinkButton from '../components/LinkButton';
 
 export default {
-    title: 'LinkButton',
+    title: 'Components/LinkButton',
     decorators: [StoryRouter(), story => providers(story)]
 };
 

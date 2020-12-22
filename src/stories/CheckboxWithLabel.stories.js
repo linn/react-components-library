@@ -9,7 +9,7 @@ const actions = {
 };
 
 export default {
-    title: 'CheckboxWithLabel',
+    title: 'Components/CheckboxWithLabel',
     decorators: [story => <div>{story()}</div>, withKnobs]
 };
 

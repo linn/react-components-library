@@ -4,7 +4,7 @@ import { linnTheme } from '../themes/linnTheme';
 import Loading from '../components/Loading';
 
 export default {
-    title: 'Loading',
+    title: 'Components/Loading',
 
     decorators: [
         story => (

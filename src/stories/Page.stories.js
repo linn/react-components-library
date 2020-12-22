@@ -15,7 +15,7 @@ const props = {
 };
 
 export default {
-    title: 'Page',
+    title: 'Components/Page',
     decorators: [withKnobs, StoryRouter(), story => providers(story)]
 };
 

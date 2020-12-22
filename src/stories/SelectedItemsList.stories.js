@@ -35,7 +35,7 @@ const entitiesLong = [
 const removeItem = () => {};
 
 export default {
-    title: 'SelectedItemsList',
+    title: 'Components/SelectedItemsList',
 
     decorators: [
         withKnobs,

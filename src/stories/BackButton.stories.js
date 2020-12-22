@@ -8,7 +8,7 @@ const actions = {
 };
 
 export default {
-    title: 'BackButton',
+    title: 'Components/BackButton',
 
     decorators: [
         story => <div style={{ position: 'absolute', left: '5%', top: '10%' }}>{story()}</div>

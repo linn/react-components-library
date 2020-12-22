@@ -16,7 +16,7 @@ const fetchItems = () => {};
 const clearSearch = () => {};
 
 export default {
-    title: 'Typeahead',
+    title: 'Components/Typeahead',
 
     decorators: [
         StoryRouter(),

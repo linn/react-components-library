@@ -12,7 +12,7 @@ const actions = {
 };
 
 export default {
-    title: 'DatePicker',
+    title: 'Components/DatePicker',
 
     decorators: [
         story => <div>{story()}</div>,

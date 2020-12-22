@@ -24,7 +24,7 @@ const pageProps = {
 };
 
 export default {
-    title: 'EntityList',
+    title: 'Components/EntityList',
 
     decorators: [
         story => <Page {...pageProps}>{story()}</Page>,

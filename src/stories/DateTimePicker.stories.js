@@ -12,7 +12,7 @@ const actions = {
 };
 
 export default {
-    title: 'DateTimePicker',
+    title: 'Components/DateTimePicker',
 
     decorators: [
         story => <div>{story()}</div>,

@@ -156,7 +156,7 @@ const rows = [
 ];
 
 export default {
-    title: 'PaginatedTable',
+    title: 'Components/PaginatedTable',
 
     decorators: [
         story => <div>{story()}</div>,

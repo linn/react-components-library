@@ -4,7 +4,7 @@ import { linnTheme } from '../themes/linnTheme';
 import NotFound from '../components/NotFound';
 
 export default {
-    title: 'NotFound',
+    title: 'Components/NotFound',
 
     decorators: [
         story => (

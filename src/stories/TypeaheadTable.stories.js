@@ -36,7 +36,7 @@ for (let i = 0; i < 100; i += 1) {
 const columnNames = ['0', '1', '2', '3'];
 
 export default {
-    title: 'TypeaheadTable',
+    title: 'Components/TypeaheadTable',
 
     decorators: [
         story => <Page {...pageProps}>{story()}</Page>,

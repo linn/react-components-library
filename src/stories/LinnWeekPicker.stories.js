@@ -13,7 +13,7 @@ const actions = {
 };
 
 export default {
-    title: 'LinnWeekPicker',
+    title: 'Components/LinnWeekPicker',
 
     decorators: [
         story => <div>{story()}</div>,

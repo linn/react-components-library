@@ -26,7 +26,7 @@ const defaultProps = {
 };
 
 export default {
-    title: 'ReportTable',
+    title: 'Components/ReportTable',
     decorators: [
         story => <Page {...pageProps}>{story()}</Page>,
         withKnobs,

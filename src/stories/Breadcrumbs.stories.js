@@ -13,7 +13,7 @@ const props = {
 };
 
 export default {
-    title: 'Breadcrumbs',
+    title: 'Components/Breadcrumbs',
 
     decorators: [
         story => <div style={{ padding: '3rem', width: '100%' }}>{story()}</div>,

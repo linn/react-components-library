@@ -52,7 +52,7 @@ const content = [
 ];
 
 export default {
-    title: 'TableWithInlineEditing',
+    title: 'Components/TableWithInlineEditing',
 
     decorators: [
         story => <div>{story()}</div>,

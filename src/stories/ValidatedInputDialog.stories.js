@@ -18,7 +18,7 @@ const clearSearch = () => {};
 const onSelect = () => {};
 
 export default {
-    title: 'ValidatedInputDialog',
+    title: 'Components/ValidatedInputDialog',
 
     decorators: [
         StoryRouter(),

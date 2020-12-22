@@ -13,7 +13,7 @@ const actions = {
 const items = ['Item One', 'Item Two', 'Item Three'];
 
 export default {
-    title: 'Dropdown',
+    title: 'Components/Dropdown',
 
     decorators: [
         story => (

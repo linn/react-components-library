@@ -18,7 +18,7 @@ const clearSearch = () => {};
 const onSelect = () => {};
 
 export default {
-    title: 'TypeaheadDialog',
+    title: 'Components/TypeaheadDialog',
 
     decorators: [
         StoryRouter(),

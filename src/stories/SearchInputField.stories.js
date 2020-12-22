@@ -5,7 +5,7 @@ import { linnTheme } from '../themes/linnTheme';
 import SearchInputField from '../components/SearchInputField';
 
 export default {
-    title: 'SearchInputField',
+    title: 'Components/SearchInputField',
 
     decorators: [
         story => (

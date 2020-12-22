@@ -164,7 +164,7 @@ function Wrapper() {
 }
 
 export default {
-    title: 'Editable Table',
+    title: 'Components/Editable Table',
 
     decorators: [
         withKnobs,
