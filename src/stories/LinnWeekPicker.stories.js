@@ -1,6 +1,5 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
-import { withKnobs } from '@storybook/addon-knobs/react';
+import { withKnobs } from '@storybook/addon-knobs';
 import ThemeProvider from '@material-ui/styles/ThemeProvider';
 import { action } from '@storybook/addon-actions';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
@@ -13,22 +12,32 @@ const actions = {
     onChange: action('date changed')
 };
 
-storiesOf('LinnWeekPicker', module)
-    .addDecorator(story => <div>{story()}</div>)
-    .addDecorator(withKnobs)
-    .addDecorator(story => (
-        <ThemeProvider theme={linnTheme}>
-            <MuiPickersUtilsProvider utils={MomentUtils}>
-                <div>{story()}</div>
-            </MuiPickersUtilsProvider>
-        </ThemeProvider>
-    ))
-    .add('default ', () => (
-        <LinnWeekPicker
-            value={new Date('01/01/2001')}
-            disabled={boolean('disabled', false)}
-            label={text('label', 'Your Label')}
-            setWeekStartDate={() => {}}
-            {...actions}
-        />
-    ));
+export default {
+    title: 'LinnWeekPicker',
+
+    decorators: [
+        story => <div>{story()}</div>,
+        withKnobs,
+        story => (
+            <ThemeProvider theme={linnTheme}>
+                <MuiPickersUtilsProvider utils={MomentUtils}>
+                    <div>{story()}</div>
+                </MuiPickersUtilsProvider>
+            </ThemeProvider>
+        )
+    ]
+};
+
+export const Default = () => (
+    <LinnWeekPicker
+        value={new Date('01/01/2001')}
+        disabled={boolean('disabled', false)}
+        label={text('label', 'Your Label')}
+        setWeekStartDate={() => {}}
+        {...actions}
+    />
+);
+
+Default.story = {
+    name: 'default '
+};

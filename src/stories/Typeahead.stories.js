@@ -1,5 +1,4 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import StoryRouter from 'storybook-react-router';
 import { withKnobs, text, boolean, array } from '@storybook/addon-knobs';
 import ThemeProvider from '@material-ui/styles/ThemeProvider';
@@ -16,54 +15,78 @@ const fetchItems = () => {};
 
 const clearSearch = () => {};
 
-storiesOf('Typeahead', module)
-    .addDecorator(StoryRouter())
-    .addDecorator(story => (
-        <ThemeProvider theme={linnTheme}>
-            <div style={{ padding: '3rem', width: '100%' }}>{story()}</div>
-        </ThemeProvider>
-    ))
-    .addDecorator(withKnobs)
+export default {
+    title: 'Typeahead',
 
-    .add('default ', () => (
-        <Typeahead
-            title={text('title', 'Title Text')}
-            loading={boolean('loading', false)}
-            fetchItems={fetchItems}
-            items={array('items', items)}
-            clearSearch={clearSearch}
-            classes={{}}
-        />
-    ))
-    .add('nothingFound ', () => (
-        <Typeahead
-            title={text('title', 'Title Text')}
-            loading={boolean('loading', false)}
-            fetchItems={fetchItems}
-            items={array('items', [])}
-            clearSearch={clearSearch}
-            classes={{}}
-        />
-    ))
-    .add('loading ', () => (
-        <Typeahead
-            title={text('title', 'Title Text')}
-            loading={boolean('loading', true)}
-            fetchItems={fetchItems}
-            items={array('items', [])}
-            clearSearch={clearSearch}
-            classes={{}}
-        />
-    ))
-    .add('modal ', () => (
-        <Typeahead
-            title={text('title', 'Title Text')}
-            loading={boolean('loading', false)}
-            modal
-            label="click me and see"
-            fetchItems={fetchItems}
-            items={array('items', [])}
-            clearSearch={clearSearch}
-            classes={{}}
-        />
-    ));
+    decorators: [
+        StoryRouter(),
+        story => (
+            <ThemeProvider theme={linnTheme}>
+                <div style={{ padding: '3rem', width: '100%' }}>{story()}</div>
+            </ThemeProvider>
+        ),
+        withKnobs
+    ]
+};
+
+export const Default = () => (
+    <Typeahead
+        title={text('title', 'Title Text')}
+        loading={boolean('loading', false)}
+        fetchItems={fetchItems}
+        items={array('items', items)}
+        clearSearch={clearSearch}
+        classes={{}}
+    />
+);
+
+Default.story = {
+    name: 'default '
+};
+
+export const NothingFound = () => (
+    <Typeahead
+        title={text('title', 'Title Text')}
+        loading={boolean('loading', false)}
+        fetchItems={fetchItems}
+        items={array('items', [])}
+        clearSearch={clearSearch}
+        classes={{}}
+    />
+);
+
+NothingFound.story = {
+    name: 'nothingFound '
+};
+
+export const Loading = () => (
+    <Typeahead
+        title={text('title', 'Title Text')}
+        loading={boolean('loading', true)}
+        fetchItems={fetchItems}
+        items={array('items', [])}
+        clearSearch={clearSearch}
+        classes={{}}
+    />
+);
+
+Loading.story = {
+    name: 'loading '
+};
+
+export const Modal = () => (
+    <Typeahead
+        title={text('title', 'Title Text')}
+        loading={boolean('loading', false)}
+        modal
+        label="click me and see"
+        fetchItems={fetchItems}
+        items={array('items', [])}
+        clearSearch={clearSearch}
+        classes={{}}
+    />
+);
+
+Modal.story = {
+    name: 'modal '
+};

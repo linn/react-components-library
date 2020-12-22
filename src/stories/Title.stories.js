@@ -1,11 +1,20 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
-import { withKnobs } from '@storybook/addon-knobs/react';
+import { withKnobs } from '@storybook/addon-knobs';
 import { text } from '@storybook/addon-knobs';
 
 import Title from '../components/Title';
 
-storiesOf('Title', module)
-    .addDecorator(story => <div style={{ padding: '3rem', width: '100%' }}>{story()}</div>)
-    .addDecorator(withKnobs)
-    .add('default ', () => <Title text={text('text', 'Title Text')} />);
+export default {
+    title: 'Title',
+
+    decorators: [
+        story => <div style={{ padding: '3rem', width: '100%' }}>{story()}</div>,
+        withKnobs
+    ]
+};
+
+export const Default = () => <Title text={text('text', 'Title Text')} />;
+
+Default.story = {
+    name: 'default '
+};

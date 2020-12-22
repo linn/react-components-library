@@ -1,5 +1,4 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import StoryRouter from 'storybook-react-router';
 import { withKnobs, object } from '@storybook/addon-knobs';
 import Page from '../components/Page';
@@ -15,12 +14,17 @@ const props = {
     }
 };
 
-const stories = storiesOf('Page', module);
-stories.addDecorator(withKnobs);
-stories.addDecorator(StoryRouter()).addDecorator(story => providers(story));
+export default {
+    title: 'Page',
+    decorators: [withKnobs, StoryRouter(), story => providers(story)]
+};
 
-stories.add('default', () => (
+export const Default = () => (
     <Page history={object('location', props.history)}>
         <Title text="Page Content Here" />
     </Page>
-));
+);
+
+Default.story = {
+    name: 'default'
+};

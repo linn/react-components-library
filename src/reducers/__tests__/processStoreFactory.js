@@ -7,7 +7,12 @@ describe('item store reducer factory', () => {
         RECEIVE_PROCESS: 'RECEIVE_PROCESS'
     };
     const defaultState = { working: false, messageText: '', messageVisible: false };
-    const generatedReducer = processStoreFactory('PROCESS', actionTypes, defaultState, 'Completed successfully');
+    const generatedReducer = processStoreFactory(
+        'PROCESS',
+        actionTypes,
+        defaultState,
+        'Completed successfully'
+    );
 
     test('when requesting PROCESS', () => {
         const state = {
@@ -43,7 +48,7 @@ describe('item store reducer factory', () => {
         };
 
         const expected = {
-            messageText: "Completed successfully",
+            messageText: 'Completed successfully',
             messageVisible: true,
             working: false,
             data: { name: '1' }

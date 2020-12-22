@@ -1,13 +1,19 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import StoryRouter from 'storybook-react-router';
 
 import CreateButton from '../components/CreateButton';
 
-storiesOf('CreateButton', module)
-    .addDecorator(StoryRouter())
+export default {
+    title: 'CreateButton',
 
-    .addDecorator(story => (
-        <div style={{ position: 'absolute', left: '5%', top: '10%' }}>{story()}</div>
-    ))
-    .add('default', () => <CreateButton createUrl="/create" />);
+    decorators: [
+        StoryRouter(),
+        story => <div style={{ position: 'absolute', left: '5%', top: '10%' }}>{story()}</div>
+    ]
+};
+
+export const Default = () => <CreateButton createUrl="/create" />;
+
+Default.story = {
+    name: 'default'
+};

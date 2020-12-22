@@ -1,14 +1,15 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import StoryRouter from 'storybook-react-router';
 import Navigation from '../components/Navigation';
 import providers from './renderUtils/Providers';
 import menu from '../../public/menu.json';
 
-const stories = storiesOf('Navigation', module);
-stories.addDecorator(StoryRouter()).addDecorator(story => providers(story));
+export default {
+    title: 'Navigation',
+    decorators: [StoryRouter(), story => providers(story)]
+};
 
-stories.add('default', () =>
+export const Default = () =>
     React.createElement(() => (
         <Navigation
             sections={menu.sections}
@@ -19,5 +20,8 @@ stories.add('default', () =>
             history={{}}
             authRoot="#"
         />
-    ))
-);
+    ));
+
+Default.story = {
+    name: 'default'
+};

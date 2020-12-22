@@ -1,6 +1,5 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
-import { withKnobs } from '@storybook/addon-knobs/react';
+import { withKnobs } from '@storybook/addon-knobs';
 import StoryRouter from 'storybook-react-router';
 import TypeaheadTable from '../components/TypeaheadTable';
 import Page from '../components/Page';
@@ -36,44 +35,64 @@ for (let i = 0; i < 100; i += 1) {
 
 const columnNames = ['0', '1', '2', '3'];
 
-storiesOf('TypeaheadTable', module)
-    .addDecorator(story => <Page {...pageProps}>{story()}</Page>)
-    .addDecorator(withKnobs)
-    .addDecorator(StoryRouter())
-    .addDecorator(story => providers(story))
-    .add('no results', () => (
-        <TypeaheadTable
-            columnNames={columnNames}
-            fetchItems={() => {}}
-            clearSearch={() => {}}
-            title="TypeaheadTable"
-            history={{ push: () => {} }}
-            placeholder="placeholder text"
-            label="label"
-        />
-    ))
-    .add('loading', () => (
-        <TypeaheadTable
-            table={table}
-            columnNames={columnNames}
-            fetchItems={() => {}}
-            clearSearch={() => {}}
-            loading
-            title="TypeaheadTable"
-            history={{ push: () => {} }}
-            placeholder="placeholder text"
-            label="label"
-        />
-    ))
-    .add('with results', () => (
-        <TypeaheadTable
-            table={table}
-            columnNames={columnNames}
-            fetchItems={() => {}}
-            clearSearch={() => {}}
-            title="TypeaheadTable"
-            history={{ push: () => {} }}
-            placeholder="placeholder text"
-            label="label"
-        />
-    ));
+export default {
+    title: 'TypeaheadTable',
+
+    decorators: [
+        story => <Page {...pageProps}>{story()}</Page>,
+        withKnobs,
+        StoryRouter(),
+        story => providers(story)
+    ]
+};
+
+export const NoResults = () => (
+    <TypeaheadTable
+        columnNames={columnNames}
+        fetchItems={() => {}}
+        clearSearch={() => {}}
+        title="TypeaheadTable"
+        history={{ push: () => {} }}
+        placeholder="placeholder text"
+        label="label"
+    />
+);
+
+NoResults.story = {
+    name: 'no results'
+};
+
+export const Loading = () => (
+    <TypeaheadTable
+        table={table}
+        columnNames={columnNames}
+        fetchItems={() => {}}
+        clearSearch={() => {}}
+        loading
+        title="TypeaheadTable"
+        history={{ push: () => {} }}
+        placeholder="placeholder text"
+        label="label"
+    />
+);
+
+Loading.story = {
+    name: 'loading'
+};
+
+export const WithResults = () => (
+    <TypeaheadTable
+        table={table}
+        columnNames={columnNames}
+        fetchItems={() => {}}
+        clearSearch={() => {}}
+        title="TypeaheadTable"
+        history={{ push: () => {} }}
+        placeholder="placeholder text"
+        label="label"
+    />
+);
+
+WithResults.story = {
+    name: 'with results'
+};

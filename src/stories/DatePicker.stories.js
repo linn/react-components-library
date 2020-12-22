@@ -1,5 +1,4 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import ThemeProvider from '@material-ui/styles/ThemeProvider';
 import { action } from '@storybook/addon-actions';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
@@ -12,23 +11,33 @@ const actions = {
     onChange: action('date changed')
 };
 
-storiesOf('DatePicker', module)
-    .addDecorator(story => <div>{story()}</div>)
-    .addDecorator(withKnobs)
-    .addDecorator(story => (
-        <ThemeProvider theme={linnTheme}>
-            <MuiPickersUtilsProvider utils={MomentUtils}>
-                <div>{story()}</div>
-            </MuiPickersUtilsProvider>
-        </ThemeProvider>
-    ))
-    .add('default ', () => (
-        <DatePicker
-            value={text('value', new Date('01/01/2001').toISOString())}
-            minDate={text('minDate', new Date('01/01/2000').toISOString())}
-            maxDate={text('maxDate', new Date('01/01/2020').toISOString())}
-            disabled={boolean('disabled', false)}
-            label={text('label', 'Your Label')}
-            {...actions}
-        />
-    ));
+export default {
+    title: 'DatePicker',
+
+    decorators: [
+        story => <div>{story()}</div>,
+        withKnobs,
+        story => (
+            <ThemeProvider theme={linnTheme}>
+                <MuiPickersUtilsProvider utils={MomentUtils}>
+                    <div>{story()}</div>
+                </MuiPickersUtilsProvider>
+            </ThemeProvider>
+        )
+    ]
+};
+
+export const Default = () => (
+    <DatePicker
+        value={text('value', new Date('01/01/2001').toISOString())}
+        minDate={text('minDate', new Date('01/01/2000').toISOString())}
+        maxDate={text('maxDate', new Date('01/01/2020').toISOString())}
+        disabled={boolean('disabled', false)}
+        label={text('label', 'Your Label')}
+        {...actions}
+    />
+);
+
+Default.story = {
+    name: 'default '
+};

@@ -1,5 +1,4 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import StoryRouter from 'storybook-react-router';
 import { withKnobs, text, boolean, array } from '@storybook/addon-knobs';
 import providers from './renderUtils/Providers';
@@ -18,18 +17,28 @@ const clearSearch = () => {};
 
 const onSelect = () => {};
 
-storiesOf('TypeaheadDialog', module)
-    .addDecorator(StoryRouter())
-    .addDecorator(story => <div style={{ padding: '3rem', width: '100%' }}>{story()}</div>)
-    .addDecorator(withKnobs)
-    .addDecorator(story => providers(story))
-    .add('default ', () => (
-        <TypeaheadDialog
-            title={text('title', 'Title Text')}
-            loading={boolean('loading', false)}
-            fetchItems={fetchItems}
-            searchItems={array('items', items)}
-            clearSearch={clearSearch}
-            onSelect={onSelect}
-        />
-    ));
+export default {
+    title: 'TypeaheadDialog',
+
+    decorators: [
+        StoryRouter(),
+        story => <div style={{ padding: '3rem', width: '100%' }}>{story()}</div>,
+        withKnobs,
+        story => providers(story)
+    ]
+};
+
+export const Default = () => (
+    <TypeaheadDialog
+        title={text('title', 'Title Text')}
+        loading={boolean('loading', false)}
+        fetchItems={fetchItems}
+        searchItems={array('items', items)}
+        clearSearch={clearSearch}
+        onSelect={onSelect}
+    />
+);
+
+Default.story = {
+    name: 'default '
+};

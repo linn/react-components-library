@@ -1,5 +1,4 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { withKnobs, text, array } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import ThemeProvider from '@material-ui/styles/ThemeProvider';
@@ -13,19 +12,29 @@ const actions = {
 
 const items = ['Item One', 'Item Two', 'Item Three'];
 
-storiesOf('Dropdown', module)
-    .addDecorator(story => (
-        <ThemeProvider theme={linnTheme}>
-            <div>{story()}</div>
-        </ThemeProvider>
-    ))
-    .addDecorator(withKnobs)
-    .add('default ', () => (
-        <Dropdown
-            value="Item One"
-            label={text('label', 'Dropdown Label')}
-            items={array('items', items)}
-            propertyName="name"
-            {...actions}
-        />
-    ));
+export default {
+    title: 'Dropdown',
+
+    decorators: [
+        story => (
+            <ThemeProvider theme={linnTheme}>
+                <div>{story()}</div>
+            </ThemeProvider>
+        ),
+        withKnobs
+    ]
+};
+
+export const Default = () => (
+    <Dropdown
+        value="Item One"
+        label={text('label', 'Dropdown Label')}
+        items={array('items', items)}
+        propertyName="name"
+        {...actions}
+    />
+);
+
+Default.story = {
+    name: 'default '
+};

@@ -1,5 +1,4 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { withKnobs } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import StoryRouter from 'storybook-react-router';
@@ -156,54 +155,79 @@ const rows = [
     }
 ];
 
-storiesOf('PaginatedTable', module)
-    .addDecorator(story => <div>{story()}</div>)
-    .addDecorator(withKnobs)
-    .addDecorator(StoryRouter())
-    .addDecorator(story => (
-        <ThemeProvider theme={linnTheme}>
-            <div>{story()}</div>
-        </ThemeProvider>
-    ))
-    .add('default ', () => (
-        <PaginatedTable
-            setPageOptions={actions.setPageOptions}
-            handleRowLinkClick={actions.handleRowLinkClick}
-            rows={rows}
-            columns={columns}
-            pageOptions={pageOptions}
-            totalItemCount={totalItemCount}
-        />
-    ))
-    .add('with sorting enabled', () => (
-        <PaginatedTable
-            setPageOptions={actions.setPageOptions}
-            handleRowLinkClick={actions.handleRowLinkClick}
-            rows={rows}
-            columns={columns}
-            pageOptions={pageOptions}
-            totalItemCount={totalItemCount}
-            sortable
-        />
-    ))
-    .add('with expandable enabled', () => (
-        <PaginatedTable
-            setPageOptions={actions.setPageOptions}
-            handleRowLinkClick={actions.handleRowLinkClick}
-            rows={rows}
-            columns={columns}
-            pageOptions={pageOptions}
-            totalItemCount={totalItemCount}
-            expandable
-        />
-    ))
-    .add('with no rows', () => (
-        <PaginatedTable
-            setPageOptions={actions.setPageOptions}
-            handleRowLinkClick={actions.handleRowLinkClick}
-            columns={columns}
-            pageOptions={pageOptions}
-            totalItemCount={totalItemCount}
-            expandable
-        />
-    ));
+export default {
+    title: 'PaginatedTable',
+
+    decorators: [
+        story => <div>{story()}</div>,
+        withKnobs,
+        StoryRouter(),
+        story => (
+            <ThemeProvider theme={linnTheme}>
+                <div>{story()}</div>
+            </ThemeProvider>
+        )
+    ]
+};
+
+export const Default = () => (
+    <PaginatedTable
+        setPageOptions={actions.setPageOptions}
+        handleRowLinkClick={actions.handleRowLinkClick}
+        rows={rows}
+        columns={columns}
+        pageOptions={pageOptions}
+        totalItemCount={totalItemCount}
+    />
+);
+
+Default.story = {
+    name: 'default '
+};
+
+export const WithSortingEnabled = () => (
+    <PaginatedTable
+        setPageOptions={actions.setPageOptions}
+        handleRowLinkClick={actions.handleRowLinkClick}
+        rows={rows}
+        columns={columns}
+        pageOptions={pageOptions}
+        totalItemCount={totalItemCount}
+        sortable
+    />
+);
+
+WithSortingEnabled.story = {
+    name: 'with sorting enabled'
+};
+
+export const WithExpandableEnabled = () => (
+    <PaginatedTable
+        setPageOptions={actions.setPageOptions}
+        handleRowLinkClick={actions.handleRowLinkClick}
+        rows={rows}
+        columns={columns}
+        pageOptions={pageOptions}
+        totalItemCount={totalItemCount}
+        expandable
+    />
+);
+
+WithExpandableEnabled.story = {
+    name: 'with expandable enabled'
+};
+
+export const WithNoRows = () => (
+    <PaginatedTable
+        setPageOptions={actions.setPageOptions}
+        handleRowLinkClick={actions.handleRowLinkClick}
+        columns={columns}
+        pageOptions={pageOptions}
+        totalItemCount={totalItemCount}
+        expandable
+    />
+);
+
+WithNoRows.story = {
+    name: 'with no rows'
+};

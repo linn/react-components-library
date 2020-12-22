@@ -1,5 +1,4 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import StoryRouter from 'storybook-react-router';
 import { withKnobs, object } from '@storybook/addon-knobs';
 import Breadcrumbs from '../components/Breadcrumbs';
@@ -13,10 +12,13 @@ const props = {
     }
 };
 
-const stories = storiesOf('Breadcrumbs', module);
-stories.addDecorator(withKnobs);
-stories.addDecorator(StoryRouter());
+export default {
+    title: 'Breadcrumbs',
 
-stories.add('default', () => (
-    <Breadcrumbs {...props} history={object('location', props.history)} />
-));
+    decorators: [
+        story => <div style={{ padding: '3rem', width: '100%' }}>{story()}</div>,
+        withKnobs
+    ]
+};
+
+export const Default = () => <Breadcrumbs {...props} history={object('location', props.history)} />;

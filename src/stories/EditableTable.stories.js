@@ -3,7 +3,6 @@ import moment from 'moment';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import ThemeProvider from '@material-ui/styles/ThemeProvider';
 import MomentUtils from '@date-io/moment';
-import { storiesOf } from '@storybook/react';
 import { withKnobs } from '@storybook/addon-knobs';
 import EditableTable from '../components/editableTable/EditableTable';
 import { linnTheme } from '../themes/linnTheme';
@@ -164,22 +163,39 @@ function Wrapper() {
     );
 }
 
-storiesOf('Editable Table', module)
-    .addDecorator(withKnobs)
-    .addDecorator(story => (
-        <ThemeProvider theme={linnTheme}>
-            <MuiPickersUtilsProvider utils={MomentUtils}>
-                <div>{story()}</div>
-            </MuiPickersUtilsProvider>
-        </ThemeProvider>
-    ))
-    .add('default', () => (
-        <EditableTable
-            columns={columns}
-            rows={initialRows}
-            tableValid={() => true}
-            closeRowOnClickAway
-            deleteRow={() => true}
-        />
-    ))
-    .add('groupEdit', () => <Wrapper />);
+export default {
+    title: 'Editable Table',
+
+    decorators: [
+        withKnobs,
+        story => (
+            <ThemeProvider theme={linnTheme}>
+                <MuiPickersUtilsProvider utils={MomentUtils}>
+                    <div>{story()}</div>
+                </MuiPickersUtilsProvider>
+            </ThemeProvider>
+        )
+    ],
+
+    excludeStories: ['component']
+};
+
+export const Default = () => (
+    <EditableTable
+        columns={columns}
+        rows={initialRows}
+        tableValid={() => true}
+        closeRowOnClickAway
+        deleteRow={() => true}
+    />
+);
+
+Default.story = {
+    name: 'default'
+};
+
+export const GroupEdit = () => <Wrapper />;
+
+GroupEdit.story = {
+    name: 'groupEdit'
+};

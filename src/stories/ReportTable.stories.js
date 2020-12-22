@@ -1,5 +1,4 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import StoryRouter from 'storybook-react-router';
 import { withKnobs, boolean, text } from '@storybook/addon-knobs';
 import ReportTable from '../components/ReportTable';
@@ -26,12 +25,17 @@ const defaultProps = {
     hasExternalLinks: boolean('showTotals', false)
 };
 
-const stories = storiesOf('ReportTable', module);
-stories.addDecorator(story => <Page {...pageProps}>{story()}</Page>);
-stories.addDecorator(withKnobs);
-stories.addDecorator(StoryRouter()).addDecorator(story => providers(story));
+export default {
+    title: 'ReportTable',
+    decorators: [
+        story => <Page {...pageProps}>{story()}</Page>,
+        withKnobs,
+        StoryRouter(),
+        story => providers(story)
+    ]
+};
 
-stories.add('With Knobs', () => (
+export const WithKnobs = () => (
     <ReportTable
         showTitle={boolean('showTitle', false)}
         title={text('title', 'Your Report Title')}
@@ -40,16 +44,23 @@ stories.add('With Knobs', () => (
         hasExternalLinks={boolean('hasExternalLinks', false)}
         reportData={small}
     />
-));
+);
 
-stories.add('When Bigger Report', () => <ReportTable {...defaultProps} reportData={big} />);
+export const WhenBiggerReport = () => <ReportTable {...defaultProps} reportData={big} />;
+export const WhenNoData = () => <ReportTable {...defaultProps} />;
 
-stories.add('When No data', () => <ReportTable {...defaultProps} />);
+WhenNoData.story = {
+    name: 'When No data'
+};
 
-stories.add('When Error Message', () => (
+export const WhenErrorMessage = () => (
     <ReportTable {...defaultProps} reportData={{ message: 'Failed to fetch data' }} />
-));
+);
 
-stories.add('When External Links in Report', () => (
+export const WhenExternalLinksInReport = () => (
     <ReportTable {...defaultProps} reportData={withExternalLinks} hasExternalLinks />
-));
+);
+
+WhenExternalLinksInReport.story = {
+    name: 'When External Links in Report'
+};
