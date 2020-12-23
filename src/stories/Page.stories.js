@@ -16,7 +16,8 @@ const props = {
 
 export default {
     title: 'Components/Page',
-    decorators: [withKnobs, StoryRouter(), story => providers(story)]
+    decorators: [withKnobs, StoryRouter(), story => providers(story)],
+    component: Page
 };
 
 export const Default = () => (

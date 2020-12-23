@@ -32,7 +32,8 @@ export default {
         withKnobs,
         StoryRouter(),
         story => providers(story)
-    ]
+    ],
+    component: ReportTable
 };
 
 export const WithKnobs = () => (

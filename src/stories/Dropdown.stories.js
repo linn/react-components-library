@@ -14,7 +14,6 @@ const items = ['Item One', 'Item Two', 'Item Three'];
 
 export default {
     title: 'Components/Dropdown',
-
     decorators: [
         story => (
             <ThemeProvider theme={linnTheme}>
@@ -22,7 +21,8 @@ export default {
             </ThemeProvider>
         ),
         withKnobs
-    ]
+    ],
+    component: Dropdown
 };
 
 export const Default = () => (

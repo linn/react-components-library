@@ -9,10 +9,10 @@ const actions = {
 
 export default {
     title: 'Components/BackButton',
-
     decorators: [
         story => <div style={{ position: 'absolute', left: '5%', top: '10%' }}>{story()}</div>
-    ]
+    ],
+    component: BackButton
 };
 
 export const Default = () => <BackButton {...actions} />;

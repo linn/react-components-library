@@ -10,7 +10,8 @@ const actions = {
 
 export default {
     title: 'Components/OnOffSwitch',
-    decorators: [story => <div>{story()}</div>, withKnobs]
+    decorators: [story => <div>{story()}</div>, withKnobs],
+    component: OnOffSwitch
 };
 
 export const Default = () => (

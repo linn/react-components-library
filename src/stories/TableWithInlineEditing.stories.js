@@ -53,7 +53,6 @@ const content = [
 
 export default {
     title: 'Components/TableWithInlineEditing',
-
     decorators: [
         story => <div>{story()}</div>,
         withKnobs,
@@ -63,7 +62,8 @@ export default {
                 <div>{story()}</div>
             </ThemeProvider>
         )
-    ]
+    ],
+    component: TableWithInlineEditing
 };
 
 export const AllowedToEditAddAndDelete = () => (

@@ -25,13 +25,13 @@ const pageProps = {
 
 export default {
     title: 'Components/EntityList',
-
     decorators: [
         story => <Page {...pageProps}>{story()}</Page>,
         withKnobs,
         StoryRouter(),
         story => providers(story)
-    ]
+    ],
+    component: EntityList
 };
 
 export const Default = () => (

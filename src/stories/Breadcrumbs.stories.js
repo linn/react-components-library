@@ -14,11 +14,12 @@ const props = {
 
 export default {
     title: 'Components/Breadcrumbs',
-
     decorators: [
+        StoryRouter(),
         story => <div style={{ padding: '3rem', width: '100%' }}>{story()}</div>,
         withKnobs
-    ]
+    ],
+    component: Breadcrumbs
 };
 
 export const Default = () => <Breadcrumbs {...props} history={object('location', props.history)} />;

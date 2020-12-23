@@ -12,7 +12,6 @@ const actions = {
 
 export default {
     title: 'Components/InputField',
-
     decorators: [
         story => (
             <ThemeProvider theme={linnTheme}>
@@ -20,7 +19,8 @@ export default {
             </ThemeProvider>
         ),
         withKnobs
-    ]
+    ],
+    component: InputField
 };
 
 export const LabelAndValue = () => (

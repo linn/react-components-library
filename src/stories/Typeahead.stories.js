@@ -17,7 +17,6 @@ const clearSearch = () => {};
 
 export default {
     title: 'Components/Typeahead',
-
     decorators: [
         StoryRouter(),
         story => (
@@ -26,7 +25,8 @@ export default {
             </ThemeProvider>
         ),
         withKnobs
-    ]
+    ],
+    component: Typeahead
 };
 
 export const Default = () => (

@@ -6,11 +6,11 @@ import Title from '../components/Title';
 
 export default {
     title: 'Components/Title',
-
     decorators: [
         story => <div style={{ padding: '3rem', width: '100%' }}>{story()}</div>,
         withKnobs
-    ]
+    ],
+    component: Title
 };
 
 export const Default = () => <Title text={text('text', 'Title Text')} />;

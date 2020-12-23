@@ -13,7 +13,6 @@ const actions = {
 
 export default {
     title: 'Components/SaveBackCancelButtons',
-
     decorators: [
         story => (
             <ThemeProvider theme={linnTheme}>
@@ -21,7 +20,8 @@ export default {
             </ThemeProvider>
         ),
         withKnobs
-    ]
+    ],
+    component: SaveBackCancelButtons
 };
 
 export const Default = () => <SaveBackCancelButtons {...actions} />;

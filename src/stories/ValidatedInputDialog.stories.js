@@ -19,13 +19,13 @@ const onSelect = () => {};
 
 export default {
     title: 'Components/ValidatedInputDialog',
-
     decorators: [
         StoryRouter(),
         story => <div style={{ padding: '3rem', width: '100%' }}>{story()}</div>,
         withKnobs,
         story => providers(story)
-    ]
+    ],
+    component: ValidatedInputDialog
 };
 
 export const WhenInvalid = () => (

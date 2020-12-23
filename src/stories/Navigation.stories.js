@@ -6,7 +6,8 @@ import menu from '../../public/menu.json';
 
 export default {
     title: 'Components/Navigation',
-    decorators: [StoryRouter(), story => providers(story)]
+    decorators: [StoryRouter(), story => providers(story)],
+    component: Navigation
 };
 
 export const Default = () =>

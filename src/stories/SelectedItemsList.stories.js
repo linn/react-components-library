@@ -36,7 +36,6 @@ const removeItem = () => {};
 
 export default {
     title: 'Components/SelectedItemsList',
-
     decorators: [
         withKnobs,
         StoryRouter(),
@@ -45,7 +44,8 @@ export default {
                 <div style={{ position: 'absolute', left: '5%', top: '10%' }}>{story()}</div>
             </ThemeProvider>
         )
-    ]
+    ],
+    component: SelectedItemsList
 };
 
 export const Default = () => (

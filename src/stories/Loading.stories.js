@@ -5,14 +5,14 @@ import Loading from '../components/Loading';
 
 export default {
     title: 'Components/Loading',
-
     decorators: [
         story => (
             <ThemeProvider theme={linnTheme}>
                 <div>{story()}</div>
             </ThemeProvider>
         )
-    ]
+    ],
+    component: Loading
 };
 
 export const Default = () => <Loading />;

@@ -165,7 +165,6 @@ function Wrapper() {
 
 export default {
     title: 'Components/Editable Table',
-
     decorators: [
         withKnobs,
         story => (
@@ -176,8 +175,8 @@ export default {
             </ThemeProvider>
         )
     ],
-
-    excludeStories: ['component']
+    excludeStories: ['component'],
+    component: EditableTable
 };
 
 export const Default = () => (

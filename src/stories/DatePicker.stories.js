@@ -13,7 +13,6 @@ const actions = {
 
 export default {
     title: 'Components/DatePicker',
-
     decorators: [
         story => <div>{story()}</div>,
         withKnobs,
@@ -24,7 +23,8 @@ export default {
                 </MuiPickersUtilsProvider>
             </ThemeProvider>
         )
-    ]
+    ],
+    component: DatePicker
 };
 
 export const Default = () => (

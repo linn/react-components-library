@@ -37,13 +37,13 @@ const columnNames = ['0', '1', '2', '3'];
 
 export default {
     title: 'Components/TypeaheadTable',
-
     decorators: [
         story => <Page {...pageProps}>{story()}</Page>,
         withKnobs,
         StoryRouter(),
         story => providers(story)
-    ]
+    ],
+    component: TypeaheadTable
 };
 
 export const NoResults = () => (

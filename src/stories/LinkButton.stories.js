@@ -5,7 +5,8 @@ import LinkButton from '../components/LinkButton';
 
 export default {
     title: 'Components/LinkButton',
-    decorators: [StoryRouter(), story => providers(story)]
+    decorators: [StoryRouter(), story => providers(story)],
+    component: LinkButton
 };
 
 export const Default = () => <LinkButton text="Some Link" to="#" />;

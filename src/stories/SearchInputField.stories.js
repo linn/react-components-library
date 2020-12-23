@@ -6,14 +6,14 @@ import SearchInputField from '../components/SearchInputField';
 
 export default {
     title: 'Components/SearchInputField',
-
     decorators: [
         story => (
             <ThemeProvider theme={linnTheme}>
                 <div>{story()}</div>
             </ThemeProvider>
         )
-    ]
+    ],
+    component: SearchInputField
 };
 
 export const LabelAndValue = () => (

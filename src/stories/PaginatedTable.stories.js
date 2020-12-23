@@ -157,7 +157,6 @@ const rows = [
 
 export default {
     title: 'Components/PaginatedTable',
-
     decorators: [
         story => <div>{story()}</div>,
         withKnobs,
@@ -167,7 +166,8 @@ export default {
                 <div>{story()}</div>
             </ThemeProvider>
         )
-    ]
+    ],
+    component: PaginatedTable
 };
 
 export const Default = () => (

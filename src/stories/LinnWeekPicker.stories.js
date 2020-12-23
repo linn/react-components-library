@@ -14,7 +14,6 @@ const actions = {
 
 export default {
     title: 'Components/LinnWeekPicker',
-
     decorators: [
         story => <div>{story()}</div>,
         withKnobs,
@@ -25,7 +24,8 @@ export default {
                 </MuiPickersUtilsProvider>
             </ThemeProvider>
         )
-    ]
+    ],
+    component: LinnWeekPicker
 };
 
 export const Default = () => (
