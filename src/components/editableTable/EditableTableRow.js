@@ -12,6 +12,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import { grey } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/styles';
 import { inputComponentFactory, displayComponentFactory } from './componentFactory';
+import columnsProps from './columnsProps';
 
 const useStyles = makeStyles(theme => ({
     button: {
@@ -139,6 +140,7 @@ export default function EditableTableRow({
             (editing && column.editable && editable) || (isNewRow && editing && column.required)
                 ? inputComponentFactory(item, column, handleValueChange, rest)
                 : displayComponentFactory(item, column);
+
         if (!column.tooltip) {
             return (
                 <Fragment key={`${column?.id}${item.id}`}>
@@ -278,9 +280,7 @@ export default function EditableTableRow({
 
 EditableTableRow.propTypes = {
     row: PropTypes.shape({}).isRequired,
-    columns: PropTypes.arrayOf(
-        PropTypes.shape({ id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]) })
-    ).isRequired,
+    columns: PropTypes.arrayOf(columnsProps).isRequired,
     saveRow: PropTypes.func,
     editable: PropTypes.bool,
     isNewRow: PropTypes.bool,

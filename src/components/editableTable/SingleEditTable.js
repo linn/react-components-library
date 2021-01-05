@@ -8,6 +8,7 @@ import TableBody from '@material-ui/core/TableBody';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import EditableTableRow from './EditableTableRow';
+import columnsProps from './columnsProps';
 
 export default function SingleEditTable({
     columns,
@@ -92,7 +93,7 @@ export default function SingleEditTable({
 }
 
 SingleEditTable.propTypes = {
-    columns: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+    columns: PropTypes.arrayOf(columnsProps).isRequired,
     rows: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
     saveRow: PropTypes.func,
     createRow: PropTypes.func,
