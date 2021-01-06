@@ -5,13 +5,16 @@ const columnsProps = PropTypes.shape({
     type: PropTypes.string.isRequired,
     component: PropTypes.func,
     editable: PropTypes.bool,
-    options: PropTypes.arrayOf(PropTypes.oneOf([PropTypes.shape({}), PropTypes.string])),
+    options: PropTypes.arrayOf(
+        PropTypes.oneOfType([PropTypes.shape({}), PropTypes.string, PropTypes.number])
+    ),
     required: PropTypes.bool,
     searchLoading: PropTypes.bool,
     searchResults: PropTypes.arrayOf(PropTypes.shape({})),
     searchTitle: PropTypes.string,
-    tooltip: PropTypes.oneOf([PropTypes.string, PropTypes.func]),
+    tooltip: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
     clearSearch: PropTypes.func,
+    closeRowOnClickAway: PropTypes.func,
     search: PropTypes.func,
     selectSearchResult: PropTypes.func
 });

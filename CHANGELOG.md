@@ -5,7 +5,7 @@
 
 ### Added
 - SingleEditTable
-- MulitEditTable
+- GroupEditTable
 
 ### Removed
 - EditableTable

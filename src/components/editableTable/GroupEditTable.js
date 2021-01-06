@@ -10,7 +10,7 @@ import AddIcon from '@material-ui/icons/Add';
 import EditableTableRow from './EditableTableRow';
 import columnsProps from './columnsProps';
 
-export default function MultiEditTable({
+export default function GroupEditTable({
     columns,
     rows,
     editable,
@@ -25,6 +25,7 @@ export default function MultiEditTable({
     resetRow,
     closeRowOnClickAway,
     deleteRowPreEdit,
+    handleEditClick,
     ...rest
 }) {
     const [rowsValid, setRowsValid] = useState([]);
@@ -86,6 +87,8 @@ export default function MultiEditTable({
                         isRowValid={handleIsRowValid}
                         resetRow={resetRow}
                         deleteRowPreEdit={deleteRowPreEdit}
+                        closeRowOnClickAway={closeRowOnClickAway}
+                        handleEditClick={handleEditClick}
                         {...rest}
                     />
                 ))}
@@ -104,9 +107,10 @@ export default function MultiEditTable({
     );
 }
 
-MultiEditTable.propTypes = {
+GroupEditTable.propTypes = {
     columns: PropTypes.arrayOf(columnsProps).isRequired,
     rows: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+    handleEditClick: PropTypes.func.isRequired,
     editable: PropTypes.bool,
     newRow: PropTypes.shape({}),
     updateRow: PropTypes.func,
@@ -121,7 +125,7 @@ MultiEditTable.propTypes = {
     deleteRowPreEdit: PropTypes.bool
 };
 
-MultiEditTable.defaultProps = {
+GroupEditTable.defaultProps = {
     editable: true,
     newRow: {},
     updateRow: null,

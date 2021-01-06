@@ -39,6 +39,7 @@ export default function EditableTableRow({
     closeRowOnClickAway,
     resetRow,
     deleteRowPreEdit,
+    handleEditClick,
     ...rest
 }) {
     const [editing, setEditing] = useState(false);
@@ -57,6 +58,8 @@ export default function EditableTableRow({
         setPrevItem(row);
         if (isNewRow) {
             setEditing(true);
+        } else if (groupEdit) {
+            setEditing(row.editing);
         }
     }, [row, isNewRow]);
 
@@ -98,17 +101,18 @@ export default function EditableTableRow({
             return;
         }
 
+        setEditing(false);
+
         if (groupEdit) {
-            resetRow(item, prevItem);
+            resetRow(item);
         } else {
-            setEditing(false);
             setItem(prevItem);
         }
     };
 
     const handleDeleteClick = () => {
         if (!groupEdit) {
-            deleteRow(item);
+            deleteRow(item.id);
         } else {
             removeRow(item.id);
         }
@@ -132,6 +136,16 @@ export default function EditableTableRow({
         }
         if (closeRowOnClickAway) {
             setEditing(false);
+            if (!groupEdit) {
+                resetRow(item, prevItem);
+            }
+        }
+    };
+
+    const handleEditButtonClick = () => {
+        setEditing(true);
+        if (groupEdit) {
+            handleEditClick(item.id, true);
         }
     };
 
@@ -177,7 +191,7 @@ export default function EditableTableRow({
 
     return (
         <ClickAwayListener onClickAway={e => handleClickAway(e)}>
-            <TableRow onClick={() => setEditing(true)}>
+            <TableRow onClick={!editing && !deleteRowPreEdit && handleEditButtonClick}>
                 {columns.map(column => Cell(column))}
                 {editable &&
                     (editing ? (
@@ -217,7 +231,7 @@ export default function EditableTableRow({
                             </TableCell>
                             {(deleteRow || removeRow) && !isNewRow && (
                                 <TableCell>
-                                    <Tooltip title="Remove Row">
+                                    <Tooltip title={groupEdit ? 'Remove Row' : 'Delete Row'}>
                                         <Button
                                             onClick={handleDeleteClick}
                                             color="secondary"
@@ -241,7 +255,7 @@ export default function EditableTableRow({
                                     <Button
                                         color="primary"
                                         variant="outlined"
-                                        onClick={() => setEditing(true)}
+                                        onClick={handleEditButtonClick}
                                         size="small"
                                         classes={{
                                             root: classes.button
@@ -254,7 +268,7 @@ export default function EditableTableRow({
                             </TableCell>
                             {(deleteRow || removeRow) && !isNewRow && deleteRowPreEdit && (
                                 <TableCell>
-                                    <Tooltip title="Remove Row">
+                                    <Tooltip title={groupEdit ? 'Remove Row' : 'Delete Row'}>
                                         <Button
                                             onClick={handleDeleteClick}
                                             color="secondary"
@@ -279,7 +293,10 @@ export default function EditableTableRow({
 }
 
 EditableTableRow.propTypes = {
-    row: PropTypes.shape({}).isRequired,
+    row: PropTypes.shape({
+        editing: PropTypes.bool,
+        id: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    }).isRequired,
     columns: PropTypes.arrayOf(columnsProps).isRequired,
     saveRow: PropTypes.func,
     editable: PropTypes.bool,
@@ -292,7 +309,8 @@ EditableTableRow.propTypes = {
     isRowValid: PropTypes.func,
     resetRow: PropTypes.func,
     closeRowOnClickAway: PropTypes.bool,
-    deleteRowPreEdit: PropTypes.bool
+    deleteRowPreEdit: PropTypes.bool,
+    handleEditClick: PropTypes.func
 };
 
 EditableTableRow.defaultProps = {
@@ -307,5 +325,6 @@ EditableTableRow.defaultProps = {
     isRowValid: null,
     resetRow: null,
     closeRowOnClickAway: false,
-    deleteRowPreEdit: false
+    deleteRowPreEdit: false,
+    handleEditClick: () => {}
 };
