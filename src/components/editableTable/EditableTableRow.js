@@ -174,7 +174,7 @@ export default function EditableTableRow({
 
     return (
         <ClickAwayListener onClickAway={e => handleClickAway(e)}>
-            <TableRow onClick={() => setEditing(true)}>
+            <TableRow>
                 {columns.map(column => Cell(column))}
                 {editable &&
                     (editing ? (
@@ -212,9 +212,9 @@ export default function EditableTableRow({
                                     </Button>
                                 </Tooltip>
                             </TableCell>
-                            {(deleteRow || removeRow) && !isNewRow && (
+                            {deleteRow && !isNewRow && (
                                 <TableCell>
-                                    <Tooltip title="Remove Row">
+                                    <Tooltip title="Delete Row">
                                         <Button
                                             onClick={handleDeleteClick}
                                             color="secondary"
@@ -249,24 +249,25 @@ export default function EditableTableRow({
                                     </Button>
                                 </Tooltip>
                             </TableCell>
-                            {(deleteRow || removeRow) && !isNewRow && (
-                                <TableCell>
-                                    <Tooltip title="Remove Row">
-                                        <Button
-                                            onClick={handleDeleteClick}
-                                            color="secondary"
-                                            variant="contained"
-                                            classes={{
-                                                root: classes.button
-                                            }}
-                                            size="small"
-                                            data-testid="deleteButton"
-                                        >
-                                            <Delete fontSize="small" />
-                                        </Button>
-                                    </Tooltip>
-                                </TableCell>
-                            )}
+                            {(deleteRow && !isNewRow) ||
+                                (removeRow && !!isNewRow && (
+                                    <TableCell>
+                                        <Tooltip title="Remove Row">
+                                            <Button
+                                                onClick={handleDeleteClick}
+                                                color="secondary"
+                                                variant="contained"
+                                                classes={{
+                                                    root: classes.button
+                                                }}
+                                                size="small"
+                                                data-testid="deleteButton"
+                                            >
+                                                <Delete fontSize="small" />
+                                            </Button>
+                                        </Tooltip>
+                                    </TableCell>
+                                ))}
                             <TableCell />
                         </>
                     ))}

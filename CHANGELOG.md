@@ -1,5 +1,9 @@
 # Changelog
-## [10.13.2] - 2020-01-07
+## [10.13.4] - 2020-01-07
+### Fixed
+- `EditableTable` delete button logic and remove click listener which was always setting edit state to true after clicking cancel button
+
+## [10.13.3] - 2020-01-07
 ### Fixed
 - Issue where not passing optional `isTableValid` to `EditableTable` would crash
 
