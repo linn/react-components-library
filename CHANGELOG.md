@@ -1,4 +1,8 @@
 # Changelog
+## [10.13.2] - 2020-01-07
+### Fixed
+- Issue where not passing optional `isTableValid` to `EditableTable` would crash
+
 ## [10.13.2] - 2020-12-21
 ### Changes
 ## EditableTable
