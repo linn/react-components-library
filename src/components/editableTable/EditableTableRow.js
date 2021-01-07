@@ -212,25 +212,24 @@ export default function EditableTableRow({
                                     </Button>
                                 </Tooltip>
                             </TableCell>
-                            {(deleteRow && !isNewRow) ||
-                                (removeRow && !!isNewRow && (
-                                    <TableCell>
-                                        <Tooltip title="Remove Row">
-                                            <Button
-                                                onClick={handleDeleteClick}
-                                                color="secondary"
-                                                variant="contained"
-                                                classes={{
-                                                    root: classes.button
-                                                }}
-                                                size="small"
-                                                data-testid="deleteButton"
-                                            >
-                                                <Delete fontSize="small" />
-                                            </Button>
-                                        </Tooltip>
-                                    </TableCell>
-                                ))}
+                            {deleteRow && !isNewRow && (
+                                <TableCell>
+                                    <Tooltip title="Delete Row">
+                                        <Button
+                                            onClick={handleDeleteClick}
+                                            color="secondary"
+                                            variant="contained"
+                                            classes={{
+                                                root: classes.button
+                                            }}
+                                            size="small"
+                                            data-testid="deleteButton"
+                                        >
+                                            <Delete fontSize="small" />
+                                        </Button>
+                                    </Tooltip>
+                                </TableCell>
+                            )}
                         </>
                     ) : (
                         <>
