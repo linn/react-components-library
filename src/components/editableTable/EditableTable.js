@@ -32,7 +32,9 @@ export default function EditableTable({
     const [rowsValid, setRowsValid] = useState([]);
 
     useEffect(() => {
-        tableValid(!rowsValid.some(row => !row.valid));
+        if (tableValid) {
+            tableValid(!rowsValid.some(row => !row.valid));
+        }
     }, [rowsValid, tableValid]);
 
     const handleRemoveRow = id => {
@@ -65,7 +67,9 @@ export default function EditableTable({
             setRowsValid([...rowsValid, { id, valid }]);
         }
 
-        tableValid(!rowsValid.some(row => !row.valid));
+        if (tableValid) {
+            tableValid(!rowsValid.some(row => !row.valid));
+        }
     };
 
     return (
