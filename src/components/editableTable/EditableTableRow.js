@@ -158,9 +158,7 @@ export default function EditableTableRow({
         if (!column.tooltip) {
             return (
                 <Fragment key={`${column?.id}${item.id}`}>
-                    <TableCell id={column.type}>
-                        <>{Content()}</>
-                    </TableCell>
+                    <TableCell id={column.type}>{Content()}</TableCell>
                 </Fragment>
             );
         }
