@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import moment from 'moment';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import ThemeProvider from '@material-ui/styles/ThemeProvider';
@@ -14,6 +14,7 @@ import {
 } from '@storybook/addon-docs/blocks';
 import GroupEditTable from '../components/editableTable/GroupEditTable';
 import { linnTheme } from '../themes/linnTheme';
+import useGroupEditTable from '../hooks/useGroupEditTable';
 
 export const component = () => (
     <div>
@@ -124,6 +125,22 @@ const columns = [
     }
 ];
 
+const defaultRow = {
+    id: rows.length,
+    text: 'default text',
+    extraInfo: false,
+    number: 99,
+    date: moment(),
+    linnWeek: moment(),
+    search: 'search',
+    dropdown: 'one',
+    component: () => (
+        <div>
+            <button type="button">Custom</button>
+        </div>
+    )
+};
+
 const GroupEditTableWrapper = ({
     // eslint-disable-next-line react/prop-types
     closeRowOnClickAway,
@@ -134,58 +151,35 @@ const GroupEditTableWrapper = ({
     // eslint-disable-next-line react/prop-types
     deleteRowPreEdit
 }) => {
-    const [localRows, setRows] = useState(rows);
+    const {
+        data,
+        setData,
+        addRow,
+        updateRow,
+        removeRow,
+        resetRow,
+        handleEditClick,
+        validateTable,
+        valid
+    } = useGroupEditTable({ rows, defaultRow });
 
-    const addRow = () => {
-        setRows([
-            ...localRows,
-            {
-                id: localRows.length,
-                text: '',
-                extraInfo: false,
-                number: 0,
-                date: moment(),
-                linnWeek: moment(),
-                search: 'search',
-                dropdown: 'one',
-                component,
-                editing: false
-            }
-        ]);
-    };
+    // const addRowCustom = () => {
+    //     setData([...data, { id: new Date().getTime(), editing: true }]);
+    // };
 
-    const updateRow = (item, setItem, propertyName, newValue) => {
-        setRows(() =>
-            localRows.map(row => (row.id === item.id ? { ...row, [propertyName]: newValue } : row))
-        );
-    };
-
-    const removeRow = id => setRows(localRows.filter(row => row.id !== id));
-
-    const resetRow = item => {
-        const updatedRow = rows.find(r => r.id === item.id);
-        setRows(() =>
-            localRows.map(row => (row.id === item.id ? { ...updatedRow, editing: false } : row))
-        );
-    };
-
-    const tableValid = () => true;
-
-    const handleEditClick = (id, editing) => {
-        setRows(localRows.map(row => (row.id === id ? { ...row, editing } : row)));
-    };
+    console.log(valid);
 
     return (
         <GroupEditTable
             columns={columns}
-            rows={localRows}
-            tableValid={tableValid}
-            resetRow={resetRow}
+            rows={data}
             updateRow={updateRow}
-            addRow={() => addRow()}
-            removeRow={row => removeRow(row)}
+            addRow={addRow}
+            removeRow={removeRow}
+            resetRow={resetRow}
             handleEditClick={handleEditClick}
             closeRowOnClickAway={closeRowOnClickAway}
+            tableValid={validateTable}
             editable={editable}
             allowNewRowCreation={allowNewRowCreation}
             deleteRowPreEdit={deleteRowPreEdit}
