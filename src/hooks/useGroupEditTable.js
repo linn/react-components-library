@@ -35,11 +35,11 @@ const useGroupEditTable = ({ rows, defaultRow }) => {
         );
     };
 
-    const validateTable = isValid => setValid(isValid);
-
-    const handleEditClick = (id, editing) => {
+    const setEditing = (id, editing) => {
         setData(data.map(row => (row.id === id ? { ...row, editing } : row)));
     };
+
+    const setTableValid = isValid => setValid(isValid);
 
     return {
         data,
@@ -48,8 +48,8 @@ const useGroupEditTable = ({ rows, defaultRow }) => {
         updateRow,
         removeRow,
         resetRow,
-        handleEditClick,
-        validateTable,
+        setEditing,
+        setTableValid,
         valid
     };
 };

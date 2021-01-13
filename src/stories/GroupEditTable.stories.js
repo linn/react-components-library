@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import moment from 'moment';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
@@ -158,8 +159,8 @@ const GroupEditTableWrapper = ({
         updateRow,
         removeRow,
         resetRow,
-        handleEditClick,
-        validateTable,
+        setEditing,
+        setTableValid,
         valid
     } = useGroupEditTable({ rows, defaultRow });
 
@@ -177,9 +178,9 @@ const GroupEditTableWrapper = ({
             addRow={addRow}
             removeRow={removeRow}
             resetRow={resetRow}
-            handleEditClick={handleEditClick}
+            handleEditClick={setEditing}
             closeRowOnClickAway={closeRowOnClickAway}
-            tableValid={validateTable}
+            tableValid={setTableValid}
             editable={editable}
             allowNewRowCreation={allowNewRowCreation}
             deleteRowPreEdit={deleteRowPreEdit}
@@ -274,7 +275,6 @@ export default {
                     <br/>
                     `}`
                     <br/><br/>
-                    *Table may be wider than the below example so you may need to scroll to see all buttons*
                     "
                     />
                     <Primary />
@@ -286,31 +286,31 @@ export default {
     }
 };
 
-export const Default = () => <GroupEditTableWrapper />;
+export const Default = args => <GroupEditTableWrapper {...args} />;
 
 Default.story = {
     name: 'Default'
 };
 
-export const ClickAway = () => <GroupEditTableWrapper closeRowOnClickAway />;
+export const ClickAway = args => <GroupEditTableWrapper closeRowOnClickAway {...args} />;
 
 ClickAway.story = {
     name: 'Close Row on Click Away'
 };
 
-export const DisplayOnly = () => <GroupEditTableWrapper editable={false} />;
+export const DisplayOnly = args => <GroupEditTableWrapper editable={false} {...args} />;
 
 DisplayOnly.story = {
     name: 'Display Only'
 };
 
-export const StaticRows = () => <GroupEditTableWrapper allowNewRowCreation={false} />;
+export const StaticRows = args => <GroupEditTableWrapper allowNewRowCreation={false} {...args} />;
 
 StaticRows.story = {
     name: 'New Row Disabled'
 };
 
-export const ShowDelete = () => <GroupEditTableWrapper deleteRowPreEdit />;
+export const ShowDelete = args => <GroupEditTableWrapper deleteRowPreEdit {...args} />;
 
 ShowDelete.story = {
     name: 'Show Delete Prior to Edit'

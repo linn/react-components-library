@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import moment from 'moment';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
@@ -210,7 +211,6 @@ export default {
                     <br/>
                     `}`
                     <br/><br/>
-                    *Table may be wider than the below example so you may need to scroll to see all buttons*
                     "
                     />
                     <Primary />
@@ -222,29 +222,42 @@ export default {
     }
 };
 
-export const Default = () => (
-    <SingleEditTable columns={columns} rows={rows} tableValid={() => true} deleteRow={() => true} />
+export const Default = args => (
+    <SingleEditTable
+        columns={columns}
+        rows={rows}
+        tableValid={() => true}
+        deleteRow={() => true}
+        {...args}
+    />
 );
 
 Default.story = {
     name: 'Default'
 };
 
-export const ClickAway = () => (
-    <SingleEditTable columns={columns} rows={rows} tableValid={() => true} deleteRow={() => true} />
+export const ClickAway = args => (
+    <SingleEditTable
+        columns={columns}
+        rows={rows}
+        tableValid={() => true}
+        deleteRow={() => true}
+        {...args}
+    />
 );
 
 ClickAway.story = {
     name: 'Close Row on Click Away'
 };
 
-export const DisplayOnly = () => (
+export const DisplayOnly = args => (
     <SingleEditTable
         columns={columns}
         rows={rows}
         tableValid={() => true}
         deleteRow={() => true}
         editable={false}
+        {...args}
     />
 );
 
@@ -252,13 +265,14 @@ DisplayOnly.story = {
     name: 'Display Only'
 };
 
-export const StaticRows = () => (
+export const StaticRows = args => (
     <SingleEditTable
         columns={columns}
         rows={rows}
         tableValid={() => true}
         deleteRow={() => true}
         allowNewRowCreation={false}
+        {...args}
     />
 );
 
@@ -266,13 +280,14 @@ StaticRows.story = {
     name: 'New Row Disabled'
 };
 
-export const ShowDelete = () => (
+export const ShowDelete = args => (
     <SingleEditTable
         columns={columns}
         rows={rows}
         tableValid={() => true}
         deleteRow={() => true}
         deleteRowPreEdit
+        {...args}
     />
 );
 
