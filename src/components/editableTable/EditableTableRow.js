@@ -88,10 +88,6 @@ export default function EditableTableRow({
     const classes = useStyles();
 
     const handleSaveClick = () => {
-        if (isNewRow) {
-            removeRow(item.id);
-        }
-
         saveRow(item);
     };
 
@@ -221,7 +217,7 @@ export default function EditableTableRow({
                                             root: classes.button
                                         }}
                                         size="small"
-                                        data-testid="clearButton"
+                                        data-testid="cancelButton"
                                     >
                                         <Clear fontSize="small" />
                                     </Button>
