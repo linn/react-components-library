@@ -7,7 +7,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableBody from '@material-ui/core/TableBody';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
-import EditableTableRow from './EditableTableRow';
+import GroupEditableTableRow from './GroupEditableTableRow';
 import columnsProps from './columnsProps';
 
 export default function GroupEditTable({
@@ -29,6 +29,8 @@ export default function GroupEditTable({
     ...rest
 }) {
     const [rowsValid, setRowsValid] = useState([]);
+
+    console.log('in component', editable);
 
     useEffect(() => {
         if (tableValid) {
@@ -78,20 +80,17 @@ export default function GroupEditTable({
             <TableBody>
                 {rows.map(row => (
                     /* eslint-disable react/jsx-props-no-spreading */
-                    <EditableTableRow
+                    <GroupEditableTableRow
                         key={row.id}
                         row={row}
                         columns={columns}
                         editable={editable}
                         updateRow={updateRow}
                         validateRow={validateRow}
-                        isNewRow={row.isNewRow}
-                        groupEdit
                         removeRow={handleRemoveRow}
                         isRowValid={handleIsRowValid}
                         resetRow={resetRow}
                         deleteRowPreEdit={deleteRowPreEdit}
-                        closeRowOnClickAway={closeRowOnClickAway}
                         handleEditClick={handleEditClick}
                         {...rest}
                     />

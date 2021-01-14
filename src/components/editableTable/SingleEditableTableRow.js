@@ -121,6 +121,8 @@ export default function SingleEditableTableRow({
                         editing={editing}
                         isNewRow={isNewRow}
                         handleValueChange={handleValueChange}
+                        // eslint-disable-next-line react/jsx-props-no-spreading
+                        {...rest}
                     />
                 ))}
                 {editable &&

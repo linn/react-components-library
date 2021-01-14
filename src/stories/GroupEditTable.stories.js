@@ -292,12 +292,6 @@ Default.story = {
     name: 'Default'
 };
 
-export const ClickAway = args => <GroupEditTableWrapper closeRowOnClickAway {...args} />;
-
-ClickAway.story = {
-    name: 'Close Row on Click Away'
-};
-
 export const DisplayOnly = args => <GroupEditTableWrapper editable={false} {...args} />;
 
 DisplayOnly.story = {
