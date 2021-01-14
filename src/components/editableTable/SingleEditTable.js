@@ -7,7 +7,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableBody from '@material-ui/core/TableBody';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
-import EditableTableRow from './EditableTableRow';
+import SingleEditableTableRow from './SingleEditableTableRow';
 import columnsProps from './columnsProps';
 
 export default function SingleEditTable({
@@ -45,7 +45,7 @@ export default function SingleEditTable({
             </TableHead>
             <TableBody>
                 {rows.map(row => (
-                    <EditableTableRow
+                    <SingleEditableTableRow
                         key={row.id}
                         row={row}
                         columns={columns}
@@ -61,7 +61,7 @@ export default function SingleEditTable({
                 {editable &&
                     allowNewRowCreation &&
                     (showNewRow ? (
-                        <EditableTableRow
+                        <SingleEditableTableRow
                             row={newRow}
                             columns={columns}
                             saveRow={createRow}
@@ -69,7 +69,6 @@ export default function SingleEditTable({
                             isNewRow
                             updateRow={updateRow}
                             validateRow={validateRow}
-                            deleteRow={deleteRow}
                             removeRow={handleRemoveRow}
                             /* eslint-disable react/jsx-props-no-spreading */
                             {...rest}
