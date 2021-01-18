@@ -26,11 +26,12 @@ export default function GroupEditTable({
     closeRowOnClickAway,
     deleteRowPreEdit,
     handleEditClick,
+    setRowToBeSaved,
+    setRowToBeDeleted,
+    removeRowOnDelete,
     ...rest
 }) {
     const [rowsValid, setRowsValid] = useState([]);
-
-    console.log('in component', editable);
 
     useEffect(() => {
         if (tableValid) {
@@ -87,11 +88,13 @@ export default function GroupEditTable({
                         editable={editable}
                         updateRow={updateRow}
                         validateRow={validateRow}
-                        removeRow={handleRemoveRow}
+                        removeRow={removeRow ? handleRemoveRow : null}
                         isRowValid={handleIsRowValid}
                         resetRow={resetRow}
                         deleteRowPreEdit={deleteRowPreEdit}
                         handleEditClick={handleEditClick}
+                        setRowToBeDeleted={setRowToBeDeleted}
+                        setRowToBeSaved={setRowToBeSaved}
                         {...rest}
                     />
                 ))}
@@ -125,7 +128,10 @@ GroupEditTable.propTypes = {
     removeRow: PropTypes.func,
     resetRow: PropTypes.func,
     closeRowOnClickAway: PropTypes.bool,
-    deleteRowPreEdit: PropTypes.bool
+    deleteRowPreEdit: PropTypes.bool,
+    setRowToBeDeleted: PropTypes.func.isRequired,
+    setRowToBeSaved: PropTypes.func.isRequired,
+    removeRowOnDelete: PropTypes.bool
 };
 
 GroupEditTable.defaultProps = {
@@ -140,5 +146,6 @@ GroupEditTable.defaultProps = {
     removeRow: null,
     resetRow: null,
     closeRowOnClickAway: false,
-    deleteRowPreEdit: false
+    deleteRowPreEdit: false,
+    removeRowOnDelete: false
 };

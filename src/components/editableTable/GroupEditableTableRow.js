@@ -1,13 +1,14 @@
-import React, { useState, useEffect, useRef, Fragment } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import EditIcon from '@material-ui/icons/Edit';
+import Save from '@material-ui/icons/Save';
 import Clear from '@material-ui/icons/Clear';
 import Delete from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
 import Tooltip from '@material-ui/core/Tooltip';
-import { grey } from '@material-ui/core/colors';
+import { green, red } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/styles';
 import EditableTableCell from './EditableTableCell';
 import columnsProps from './columnsProps';
@@ -19,6 +20,17 @@ const useStyles = makeStyles(theme => ({
         maxHeight: theme.spacing(3),
         minHeight: theme.spacing(3),
         padding: 0
+    },
+    row: {
+        backgroundColor: props => {
+            if (props.toBeSaved) {
+                return green[50];
+            }
+            if (props.toBeDeleted) {
+                return red[50];
+            }
+            return 'transparent';
+        }
     }
 }));
 
@@ -33,101 +45,110 @@ export default function GroupEditableTableRow({
     resetRow,
     deleteRowPreEdit,
     handleEditClick,
+    setRowToBeSaved,
+    setRowToBeDeleted,
+    removeRowOnDelete,
     ...rest
 }) {
-    // TODO maybe remove these states all together?
-    const [editing, setEditing] = useState(false);
-    const [item, setItem] = useState({});
     const [rowValid, setRowValid] = useState();
 
     const isRowValidRef = useRef();
+
+    const classes = useStyles({ toBeSaved: row.toBeSaved, toBeDeleted: row.toBeDeleted });
 
     useEffect(() => {
         isRowValidRef.current = isRowValid;
     }, [isRowValid]);
 
     useEffect(() => {
-        setItem(row);
-        setEditing(row.editing);
-    }, [row]);
-
-    useEffect(() => {
-        if (editing) {
+        if (row.editing) {
             let valid = true;
 
             if (validateRow) {
-                valid = validateRow(item);
+                valid = validateRow(row);
             }
 
             columns.forEach(column => {
-                if (column.required === true && !item[column.id]) {
+                if (column.required === true && !row[column.id]) {
                     valid = false;
                 }
             });
 
-            if (isRowValidRef.current && item.id) {
-                isRowValidRef.current(valid, item.id);
+            if (isRowValidRef.current && row.id) {
+                isRowValidRef.current(valid, row.id);
             }
 
             setRowValid(valid);
         }
-    }, [item, validateRow, columns, editing]);
-
-    const classes = useStyles();
+    }, [validateRow, columns, row]);
 
     const handleCancelClick = () => {
-        setEditing(false);
-        resetRow(item);
-    };
-
-    const handleDeleteClick = () => {
-        removeRow(item.id);
+        resetRow(row);
     };
 
     const handleValueChange = (propertyName, newValue) => {
-        updateRow(item, setItem, propertyName, newValue);
+        updateRow(row, null, propertyName, newValue);
     };
 
     const handleEditButtonClick = () => {
-        setEditing(true);
-        handleEditClick(item.id, true);
+        handleEditClick(row.id, true);
+    };
+
+    const handleDeleteClick = () => {
+        if (removeRowOnDelete) {
+            removeRow(row.id);
+        } else {
+            setRowToBeDeleted(row.id, true);
+        }
+    };
+
+    const handleSaveClick = () => {
+        setRowToBeSaved(row.id, true);
+    };
+
+    const saveButtonEnabled = () => {
+        return !!(rowValid && !row.toBeDeleted && !row.toBeSaved);
+    };
+
+    const deleteButtonEnabled = () => {
+        return !row.toBeDeleted && !row.toBeSaved;
     };
 
     return (
-        <TableRow onClick={!editing && !deleteRowPreEdit && handleEditButtonClick}>
+        <TableRow
+            onClick={!row.editing && !deleteRowPreEdit ? handleEditButtonClick : undefined}
+            classes={{ root: classes.row }}
+        >
             {columns.map(column => (
                 <EditableTableCell
+                    key={`${row.id}${column.id}`}
                     column={column}
-                    item={item}
+                    item={row}
                     editable={editable}
-                    editing={editing}
+                    editing={row.editing}
                     handleValueChange={handleValueChange}
                     // eslint-disable-next-line react/jsx-props-no-spreading
                     {...rest}
                 />
             ))}
-            {console.log('editable', editable)}
             {editable &&
-                (editing ? (
+                (row.editing ? (
                     <>
-                        {/* TODO the new save thing here */}
-                        {/* {!groupEdit && (
-                            <TableCell>
-                                <Button
-                                    onClick={handleSaveClick}
-                                    color="primary"
-                                    variant="contained"
-                                    size="small"
-                                    classes={{
-                                        root: classes.button
-                                    }}
-                                    disabled={!rowValid}
-                                    data-testid="saveButton"
-                                >
-                                    <Done style={{ color: grey[50] }} fontSize="small" />
-                                </Button>
-                            </TableCell>
-                        )} */}
+                        <TableCell>
+                            <Button
+                                onClick={handleSaveClick}
+                                color="primary"
+                                variant="outlined"
+                                size="small"
+                                classes={{
+                                    root: classes.button
+                                }}
+                                disabled={!saveButtonEnabled()}
+                                data-testid="saveButton"
+                            >
+                                <Save fontSize="small" />
+                            </Button>
+                        </TableCell>
                         <TableCell>
                             <Tooltip title="Revert changes to row">
                                 <Button
@@ -146,20 +167,19 @@ export default function GroupEditableTableRow({
                         </TableCell>
                         {removeRow && (
                             <TableCell>
-                                <Tooltip title="Remove Row">
-                                    <Button
-                                        onClick={handleDeleteClick}
-                                        color="secondary"
-                                        variant="contained"
-                                        classes={{
-                                            root: classes.button
-                                        }}
-                                        size="small"
-                                        data-testid="deleteButton"
-                                    >
-                                        <Delete fontSize="small" />
-                                    </Button>
-                                </Tooltip>
+                                <Button
+                                    onClick={handleDeleteClick}
+                                    color="secondary"
+                                    variant="contained"
+                                    classes={{
+                                        root: classes.button
+                                    }}
+                                    size="small"
+                                    data-testid="deleteButton"
+                                    disabled={!deleteButtonEnabled()}
+                                >
+                                    <Delete fontSize="small" />
+                                </Button>
                             </TableCell>
                         )}
                     </>
@@ -193,6 +213,7 @@ export default function GroupEditableTableRow({
                                         }}
                                         size="small"
                                         data-testid="deleteButton"
+                                        disabled={!deleteButtonEnabled()}
                                     >
                                         <Delete fontSize="small" />
                                     </Button>
@@ -209,7 +230,9 @@ export default function GroupEditableTableRow({
 GroupEditableTableRow.propTypes = {
     row: PropTypes.shape({
         editing: PropTypes.bool,
-        id: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+        id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        toBeDeleted: PropTypes.bool,
+        toBeSaved: PropTypes.bool
     }).isRequired,
     columns: PropTypes.arrayOf(columnsProps).isRequired,
     updateRow: PropTypes.func.isRequired,
@@ -219,7 +242,10 @@ GroupEditableTableRow.propTypes = {
     isRowValid: PropTypes.func,
     resetRow: PropTypes.func,
     deleteRowPreEdit: PropTypes.bool,
-    handleEditClick: PropTypes.func
+    handleEditClick: PropTypes.func,
+    setRowToBeDeleted: PropTypes.func.isRequired,
+    setRowToBeSaved: PropTypes.func.isRequired,
+    removeRowOnDelete: PropTypes.bool
 };
 
 GroupEditableTableRow.defaultProps = {
@@ -229,5 +255,6 @@ GroupEditableTableRow.defaultProps = {
     isRowValid: null,
     resetRow: null,
     deleteRowPreEdit: false,
-    handleEditClick: () => {}
+    handleEditClick: () => {},
+    removeRowOnDelete: false
 };

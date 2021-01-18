@@ -161,14 +161,14 @@ const GroupEditTableWrapper = ({
         resetRow,
         setEditing,
         setTableValid,
-        valid
+        valid,
+        setRowToBeDeleted,
+        setRowToBeSaved
     } = useGroupEditTable({ rows, defaultRow });
 
     // const addRowCustom = () => {
     //     setData([...data, { id: new Date().getTime(), editing: true }]);
     // };
-
-    console.log(valid);
 
     return (
         <GroupEditTable
@@ -184,6 +184,8 @@ const GroupEditTableWrapper = ({
             editable={editable}
             allowNewRowCreation={allowNewRowCreation}
             deleteRowPreEdit={deleteRowPreEdit}
+            setRowToBeDeleted={setRowToBeDeleted}
+            setRowToBeSaved={setRowToBeSaved}
         />
     );
 };

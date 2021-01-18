@@ -36,10 +36,26 @@ const useGroupEditTable = ({ rows, defaultRow }) => {
     };
 
     const setEditing = (id, editing) => {
-        setData(data.map(row => (row.id === id ? { ...row, editing } : row)));
+        setData(
+            data.map(row =>
+                row.id === id ? { ...row, editing, toBeSaved: false, toBeDeleted: false } : row
+            )
+        );
     };
 
     const setTableValid = isValid => setValid(isValid);
+
+    const setRowToBeSaved = (id, toBeSaved) => {
+        setData(
+            data.map(row => (row.id === id ? { ...row, toBeSaved, editing: !toBeSaved } : row))
+        );
+    };
+
+    const setRowToBeDeleted = (id, toBeDeleted) => {
+        setData(
+            data.map(row => (row.id === id ? { ...row, toBeDeleted, editing: !toBeDeleted } : row))
+        );
+    };
 
     return {
         data,
@@ -48,6 +64,8 @@ const useGroupEditTable = ({ rows, defaultRow }) => {
         updateRow,
         removeRow,
         resetRow,
+        setRowToBeDeleted,
+        setRowToBeSaved,
         setEditing,
         setTableValid,
         valid

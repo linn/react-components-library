@@ -223,8 +223,6 @@ describe('<SingleEditTable />', () => {
             expect(addButton).not.toBeInTheDocument();
             expect(getByTestId('cancelButton')).toBeInTheDocument();
             expect(getByTestId('saveButton')).toBeInTheDocument();
-
-            // get by role input
         });
 
         it('should call save function when clicked', () => {

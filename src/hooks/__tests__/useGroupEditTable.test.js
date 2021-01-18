@@ -145,3 +145,59 @@ describe('when validating table', () => {
         expect(hookData.valid).toEqual(true);
     });
 });
+
+describe('when setting rowToBeDeleted', () => {
+    describe('when setting true', () => {
+        it('should set toBeDeleted to true and editing to false', () => {
+            const hookData = setup({ rows });
+
+            act(() => {
+                hookData.setRowToBeDeleted(0, true);
+            });
+
+            expect(hookData.data[0].toBeDeleted).toEqual(true);
+            expect(hookData.data[0].editing).toEqual(false);
+        });
+    });
+
+    describe('when setting false', () => {
+        it('should set toBeDeleted to false and editing to true', () => {
+            const hookData = setup({ rows });
+
+            act(() => {
+                hookData.setRowToBeDeleted(0, false);
+            });
+
+            expect(hookData.data[0].toBeDeleted).toEqual(false);
+            expect(hookData.data[0].editing).toEqual(true);
+        });
+    });
+});
+
+describe('when marking rowToBeSaved', () => {
+    describe('when setting true', () => {
+        it('should set toBeSaved to true and editing to false', () => {
+            const hookData = setup({ rows });
+
+            act(() => {
+                hookData.setRowToBeSaved(0, true);
+            });
+
+            expect(hookData.data[0].toBeSaved).toEqual(true);
+            expect(hookData.data[0].editing).toEqual(false);
+        });
+    });
+
+    describe('when setting false', () => {
+        it('should set toBeSaved to false and editing to true', () => {
+            const hookData = setup({ rows });
+
+            act(() => {
+                hookData.setRowToBeSaved(0, false);
+            });
+
+            expect(hookData.data[0].toBeSaved).toEqual(false);
+            expect(hookData.data[0].editing).toEqual(true);
+        });
+    });
+});
