@@ -1,11 +1,14 @@
 # Changelog
 ## [11.0.0] - 2020-12-22
 ### Changed
-- Updated to Storybook 6
+- Updated to Storybook 6 and updated stories files
 
 ### Added
-- SingleEditTable
-- GroupEditTable
+- Components
+    - SingleEditTable
+    - GroupEditTable
+- Hooks
+    - useGroupEditTable
 
 ### Removed
 - EditableTable

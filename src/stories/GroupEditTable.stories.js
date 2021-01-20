@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import moment from 'moment';
@@ -5,23 +6,10 @@ import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import ThemeProvider from '@material-ui/styles/ThemeProvider';
 import MomentUtils from '@date-io/moment';
 import { withKnobs } from '@storybook/addon-knobs';
-import {
-    Title,
-    Description,
-    Primary,
-    ArgsTable,
-    Stories,
-    PRIMARY_STORY
-} from '@storybook/addon-docs/blocks';
 import GroupEditTable from '../components/editableTable/GroupEditTable';
 import { linnTheme } from '../themes/linnTheme';
 import useGroupEditTable from '../hooks/useGroupEditTable';
-
-export const component = () => (
-    <div>
-        <button type="button">Custom</button>
-    </div>
-);
+import mdx from './GroupEditTable.mdx';
 
 const rows = [
     {
@@ -117,7 +105,6 @@ const columns = [
         id: 'component',
         type: 'component',
         editable: true,
-        // eslint-disable-next-line react/prop-types
         component: ({ value }) => (
             <div>
                 <button type="button">{value}</button>
@@ -126,49 +113,24 @@ const columns = [
     }
 ];
 
-const defaultRow = {
-    id: rows.length,
-    text: 'default text',
-    extraInfo: false,
-    number: 99,
-    date: moment(),
-    linnWeek: moment(),
-    search: 'search',
-    dropdown: 'one',
-    component: () => (
-        <div>
-            <button type="button">Custom</button>
-        </div>
-    )
-};
-
 const GroupEditTableWrapper = ({
-    // eslint-disable-next-line react/prop-types
     closeRowOnClickAway,
-    // eslint-disable-next-line react/prop-types
     editable,
-    // eslint-disable-next-line react/prop-types
     allowNewRowCreation,
-    // eslint-disable-next-line react/prop-types
-    deleteRowPreEdit
+    deleteRowPreEdit,
+    removeRowOnDelete
 }) => {
     const {
         data,
-        setData,
         addRow,
         updateRow,
         removeRow,
         resetRow,
         setEditing,
         setTableValid,
-        valid,
         setRowToBeDeleted,
         setRowToBeSaved
-    } = useGroupEditTable({ rows, defaultRow });
-
-    // const addRowCustom = () => {
-    //     setData([...data, { id: new Date().getTime(), editing: true }]);
-    // };
+    } = useGroupEditTable({ rows });
 
     return (
         <GroupEditTable
@@ -186,12 +148,13 @@ const GroupEditTableWrapper = ({
             deleteRowPreEdit={deleteRowPreEdit}
             setRowToBeDeleted={setRowToBeDeleted}
             setRowToBeSaved={setRowToBeSaved}
+            removeRowOnDelete={removeRowOnDelete}
         />
     );
 };
 
 export default {
-    title: 'Components/GroupEditTable',
+    title: 'Components/EditableTable/GroupEditTable',
     decorators: [
         withKnobs,
         story => (
@@ -202,88 +165,10 @@ export default {
             </ThemeProvider>
         )
     ],
-    excludeStories: ['component'],
     component: GroupEditTable,
     parameters: {
         docs: {
-            page: () => (
-                <>
-                    <Title />
-                    <Description
-                        markdown="Editable table to support updating and creating multiple rows. This differs from `SingleEditTable` in that the rows are managed by a parent component. 
-                        Prop functions such as `updateRow` and `addRow` should take care of updating / adding rows in the collection stored in parent state.
-                    <br/><br/>
-                    Columns prop defines the shape of the table and passes in the appropriate functions for saving etc.
-                    <br/><br/>
-                    Story book doesn't currently support complex props in the arg table [but its currently being worked on](https://github.com/storybookjs/storybook/issues/12078)
-                    <br/><br/>
-                    column props:
-                    <br/><br/>
-                    `{`
-                    <br/>
-                    `id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,`
-                    <br/>
-                    `type: PropTypes.string.isRequired,`
-                    <br/>
-                    `component: PropTypes.func,`
-                    <br/>
-                    `editable: PropTypes.bool,`
-                    <br/>
-                    `options: PropTypes.arrayOf(PropTypes.oneOf([PropTypes.shape({}), PropTypes.string])),`
-                    <br/>
-                    `required: PropTypes.bool,`
-                    <br/>
-                    `searchLoading: PropTypes.bool,`
-                    <br/>
-                    `searchResults: PropTypes.arrayOf(PropTypes.shape({})),`
-                    <br/>
-                    `searchTitle: PropTypes.string,`
-                    <br/>
-                    `tooltip: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),`
-                    <br/>
-                    `clearSearch: PropTypes.func,`
-                    <br/>
-                    `closeRowOnClickAway: PropTypes.func,`
-                    <br/>
-                    `search: PropTypes.func,`
-                    <br/>
-                    `selectSearchResult: PropTypes.func`
-                    <br/>
-                    `}`
-                    <br/><br/>
-                    Each row must have a unique id and have property names relating to column ids. Values are accessed using `row[column.id]`
-                    <br/>
-                    The first row of the below examples is:
-                    <br/><br/>
-                    `{`
-                    <br/>
-                    `id: 0,`
-                    <br/>
-                    `text: 'column 1',`
-                    <br/>
-                    `extraInfo: 'some extra information about column 1',`
-                    <br/>
-                    `number: 123,`
-                    <br/>
-                    `date: moment('2020-12-21'),`
-                    <br/>
-                    `linnWeek: moment(),`
-                    <br/>
-                    `search: 'search',`
-                    <br/>
-                    `dropdown: 'one',`
-                    <br/>
-                    `component: 'custom 1'`
-                    <br/>
-                    `}`
-                    <br/><br/>
-                    "
-                    />
-                    <Primary />
-                    <ArgsTable story={PRIMARY_STORY} />
-                    <Stories />
-                </>
-            )
+            page: mdx
         }
     }
 };
@@ -294,29 +179,42 @@ Default.story = {
     name: 'Default'
 };
 
-export const DisplayOnly = args => <GroupEditTableWrapper editable={false} {...args} />;
+export const DisplayOnly = args => <GroupEditTableWrapper {...args} />;
 
 DisplayOnly.story = {
     name: 'Display Only'
 };
 
-export const StaticRows = args => <GroupEditTableWrapper allowNewRowCreation={false} {...args} />;
+DisplayOnly.args = {
+    editable: false
+};
+
+export const StaticRows = args => <GroupEditTableWrapper {...args} />;
 
 StaticRows.story = {
     name: 'New Row Disabled'
 };
 
-export const ShowDelete = args => <GroupEditTableWrapper deleteRowPreEdit {...args} />;
+StaticRows.args = {
+    allowNewRowCreation: false
+};
+
+export const ShowDelete = args => <GroupEditTableWrapper {...args} />;
 
 ShowDelete.story = {
     name: 'Show Delete Prior to Edit'
 };
 
-ShowDelete.parameters = {
-    docs: {
-        description: {
-            story:
-                'The deleteRowPreEdit prop shows the delete button prior to pressing the edit button'
-        }
-    }
+ShowDelete.args = {
+    deleteRowPreEdit: true
+};
+
+export const RemoveRowOnDelete = args => <GroupEditTableWrapper {...args} />;
+
+RemoveRowOnDelete.story = {
+    name: 'Remove Rows when Deleting'
+};
+
+RemoveRowOnDelete.args = {
+    removeRowOnDelete: true
 };

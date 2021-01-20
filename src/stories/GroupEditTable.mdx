@@ -1,0 +1,141 @@
+import { Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import GroupEditTable from '../components/editableTable/GroupEditTable';
+
+# GroupEditTable
+
+Editable table to support updating and creating multiple rows. This differs from `SingleEditTable` in that the rows are managed by a parent component.
+
+<Canvas>
+    <Story id="components-editabletable-groupedittable--default" />
+</Canvas>
+
+Prop functions such as `updateRow` and `addRow` should take care of updating / adding rows in the collection stored in parent state.
+
+The `useGroupEditTable` hook provides generic functions for adding, updating etc. tables and takes care of local state for the table data.
+
+```jsx
+const {
+    data,
+    addRow,
+    updateRow,
+    removeRow,
+    resetRow,
+    setEditing,
+    setTableValid,
+    setRowToBeDeleted,
+    setRowToBeSaved
+} = useGroupEditTable({ rows, defaltRow });
+
+<GroupEditTable
+    columns={columns}
+    rows={data}
+    updateRow={updateRow}
+    addRow={addRow}
+    removeRow={removeRow}
+    resetRow={resetRow}
+    handleEditClick={setEditing}
+    closeRowOnClickAway={closeRowOnClickAway}
+    tableValid={setTableValid}
+    editable={editable}
+    allowNewRowCreation={allowNewRowCreation}
+    deleteRowPreEdit={deleteRowPreEdit}
+    setRowToBeDeleted={setRowToBeDeleted}
+    setRowToBeSaved={setRowToBeSaved}
+/>;
+```
+
+The rows prop should be passed in as we would normally pass in props to a component. The `data` prop from the hook can be used as local state so there is no need to manually set up `useState`.
+
+Custom functions can be used along with the hook by using `data` and `setData`
+
+```jsx
+const {
+    data,
+    setData
+} = useGroupEditTable({ rows, defaltRow });
+
+const myAddRow = () => {
+    setData([...data, { id: myNewRow }])
+}
+
+<GroupEditTable
+    ...
+    addRow={myAddRow}
+/>
+
+```
+
+Columns prop defines the shape of the table and passes in the appropriate functions for saving etc.
+Story book doesn't currently support complex props in the arg table [but its currently being worked on](https://github.com/storybookjs/storybook/issues/12078)
+
+```jsx
+const columnsProps = PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+    type: PropTypes.string.isRequired,
+    component: PropTypes.func,
+    editable: PropTypes.bool,
+    options: PropTypes.arrayOf(
+        PropTypes.oneOfType([PropTypes.shape({}), PropTypes.string, PropTypes.number])
+    ),
+    required: PropTypes.bool,
+    searchLoading: PropTypes.bool,
+    searchResults: PropTypes.arrayOf(PropTypes.shape({})),
+    searchTitle: PropTypes.string,
+    tooltip: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+    clearSearch: PropTypes.func,
+    closeRowOnClickAway: PropTypes.func,
+    search: PropTypes.func,
+    selectSearchResult: PropTypes.func
+});
+```
+
+Expected shape of row prop
+
+```jsx
+const rowProps = PropTypes.shape({
+    editing: PropTypes.bool,
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    toBeDeleted: PropTypes.bool,
+    toBeSaved: PropTypes.bool,
+    isNewRow: PropTypes.bool
+});
+```
+
+<ArgsTable of={GroupEditTable} />
+
+### Display Only
+
+`editable: false`
+
+<Canvas>
+    <Story id="components-editabletable-groupedittable--display-only" />
+</Canvas>
+
+### Remove Rows When Deleting
+
+`removeRowOnDelete: true`
+
+The default behaviour is to mark rows for deletion when pressing the delete button.
+This will instead call the `removeRow` function and remove the row from the array.
+
+<Canvas>
+    <Story id="components-editabletable-groupedittable--remove-row-on-delete" />
+</Canvas>
+
+### New Row Disabled
+
+`allowNewRowCreation: false`
+
+<Canvas>
+    <Story id="components-editabletable-groupedittable--static-rows" />
+</Canvas>
+
+### Show Delete Prior to Edit
+
+`deleteRowPreEdit: true`
+
+Shows delete icon before the edit button is pressed.
+
+<Canvas>
+    <Story id="components-editabletable-groupedittable--show-delete" />
+</Canvas>

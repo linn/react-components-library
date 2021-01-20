@@ -10,9 +10,9 @@ const useGroupEditTable = ({ rows, defaultRow }) => {
 
     const addRow = () => {
         if (defaultRow) {
-            setData([...data, { ...defaultRow, editing: true }]);
+            setData([...data, { ...defaultRow, editing: true, isNewRow: true }]);
         } else {
-            setData([...data, { id: new Date().getTime(), editing: true }]);
+            setData([...data, { id: new Date().getTime(), editing: true, isNewRow: true }]);
         }
     };
 
@@ -57,6 +57,18 @@ const useGroupEditTable = ({ rows, defaultRow }) => {
         );
     };
 
+    const removeRowsToBeDeleted = () => {
+        setData(data.filter(row => row.toBeDeleted !== true));
+    };
+
+    const resetUnsavedRows = () => {
+        setData(
+            data.map(row =>
+                row.editing === true ? { ...rows.find(r => r.id === row.id), editing: false } : row
+            )
+        );
+    };
+
     return {
         data,
         setData,
@@ -68,6 +80,8 @@ const useGroupEditTable = ({ rows, defaultRow }) => {
         setRowToBeSaved,
         setEditing,
         setTableValid,
+        removeRowsToBeDeleted,
+        resetUnsavedRows,
         valid
     };
 };

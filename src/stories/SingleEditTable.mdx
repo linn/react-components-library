@@ -1,0 +1,75 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import SingleEditTable from '../components/editableTable/SingleEditTable';
+
+# SingleEditTable
+
+Editable table to support updating and creating rows individually.
+Each row is treated as an individual entity so expects to call save/update/delete actions and refetch data in our usual flow.
+
+<Canvas>
+    <Story id="components-editabletable-singleedittable--default" />
+</Canvas>
+
+Columns prop defines the shape of the table and passes in the appropriate functions for saving etc.
+Story book doesn't currently support complex props in the arg table [but its currently being worked on](https://github.com/storybookjs/storybook/issues/12078)
+
+```
+const columnsProps = PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+    type: PropTypes.string.isRequired,
+    component: PropTypes.func,
+    editable: PropTypes.bool,
+    options: PropTypes.arrayOf(
+        PropTypes.oneOfType([PropTypes.shape({}), PropTypes.string, PropTypes.number])
+    ),
+    required: PropTypes.bool,
+    searchLoading: PropTypes.bool,
+    searchResults: PropTypes.arrayOf(PropTypes.shape({})),
+    searchTitle: PropTypes.string,
+    tooltip: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+    clearSearch: PropTypes.func,
+    closeRowOnClickAway: PropTypes.func,
+    search: PropTypes.func,
+    selectSearchResult: PropTypes.func
+});
+```
+
+Expected shape of row prop
+
+```
+const rowProps = PropTypes.shape({
+    editing: PropTypes.bool,
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    toBeDeleted: PropTypes.bool,
+    toBeSaved: PropTypes.bool,
+    isNewRow: PropTypes.bool
+});
+```
+
+<ArgsTable of={SingleEditTable} />
+
+### Display Only
+
+`editable: false`
+
+<Canvas>
+    <Story id="components-editabletable-singleedittable--display-only" />
+</Canvas>
+
+### New Row Disabled
+
+`allowNewRowCreation: false`
+
+<Canvas>
+    <Story id="components-editabletable-singleedittable--static-rows" />
+</Canvas>
+
+### Show Delete Prior to Edit
+
+`deleteRowPreEdit: true`
+
+Shows delete icon before the edit button is pressed.
+
+<Canvas>
+    <Story id="components-editabletable-singleedittable--show-delete" />
+</Canvas>

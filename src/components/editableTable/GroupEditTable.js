@@ -14,7 +14,6 @@ export default function GroupEditTable({
     columns,
     rows,
     editable,
-    newRow,
     updateRow,
     validateRow,
     deleteRow,
@@ -95,6 +94,7 @@ export default function GroupEditTable({
                         handleEditClick={handleEditClick}
                         setRowToBeDeleted={setRowToBeDeleted}
                         setRowToBeSaved={setRowToBeSaved}
+                        removeRowOnDelete={removeRowOnDelete}
                         {...rest}
                     />
                 ))}
@@ -118,7 +118,6 @@ GroupEditTable.propTypes = {
     rows: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
     handleEditClick: PropTypes.func.isRequired,
     editable: PropTypes.bool,
-    newRow: PropTypes.shape({}),
     updateRow: PropTypes.func,
     validateRow: PropTypes.func,
     deleteRow: PropTypes.func,
@@ -136,7 +135,6 @@ GroupEditTable.propTypes = {
 
 GroupEditTable.defaultProps = {
     editable: true,
-    newRow: {},
     updateRow: null,
     validateRow: null,
     deleteRow: null,

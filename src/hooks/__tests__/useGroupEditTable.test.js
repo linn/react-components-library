@@ -201,3 +201,80 @@ describe('when marking rowToBeSaved', () => {
         });
     });
 });
+
+describe('when removing rows to be deleted', () => {
+    it('should remove rows marked toBeDeleted', () => {
+        const hookData = setup({
+            rows: [
+                {
+                    id: 0,
+                    text: 'text0'
+                },
+                {
+                    id: 1,
+                    text: 'text1',
+                    toBeDeleted: true
+                },
+                {
+                    id: 2,
+                    text: 'text2',
+                    toBeDeleted: true
+                },
+                {
+                    id: 3,
+                    text: 'text3'
+                }
+            ]
+        });
+
+        act(() => {
+            hookData.removeRowsToBeDeleted();
+        });
+
+        expect(hookData.data.length).toEqual(2);
+        expect(hookData.data[0].id).toEqual(0);
+        expect(hookData.data[1].id).toEqual(3);
+    });
+});
+
+describe('when resetting unsaved rows', () => {
+    it('should return rows to their original state', () => {
+        const hookData = setup({
+            rows: [
+                {
+                    id: 0,
+                    text: 'text0'
+                },
+                {
+                    id: 1,
+                    text: 'text1'
+                },
+                {
+                    id: 2,
+                    text: 'text2'
+                },
+                {
+                    id: 3,
+                    text: 'text3'
+                }
+            ]
+        });
+
+        act(() => {
+            hookData.updateRow(hookData.data[1], null, 'text', 'new text');
+        });
+        act(() => {
+            hookData.updateRow(hookData.data[2], null, 'text', 'more new text');
+        });
+
+        expect(hookData.data.find(d => d.id === 1).text).toEqual('new text');
+        expect(hookData.data.find(d => d.id === 2).text).toEqual('more new text');
+
+        act(() => {
+            hookData.resetUnsavedRows();
+        });
+
+        expect(hookData.data.find(d => d.id === 1).text).toEqual('text1');
+        expect(hookData.data.find(d => d.id === 2).text).toEqual('text2');
+    });
+});

@@ -83,7 +83,11 @@ export default function GroupEditableTableRow({
     }, [validateRow, columns, row]);
 
     const handleCancelClick = () => {
-        resetRow(row);
+        if (row.isNewRow) {
+            removeRow(row.id);
+        } else {
+            resetRow(row);
+        }
     };
 
     const handleValueChange = (propertyName, newValue) => {
@@ -95,7 +99,7 @@ export default function GroupEditableTableRow({
     };
 
     const handleDeleteClick = () => {
-        if (removeRowOnDelete) {
+        if (removeRowOnDelete || row.isNewRow) {
             removeRow(row.id);
         } else {
             setRowToBeDeleted(row.id, true);
@@ -232,7 +236,8 @@ GroupEditableTableRow.propTypes = {
         editing: PropTypes.bool,
         id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         toBeDeleted: PropTypes.bool,
-        toBeSaved: PropTypes.bool
+        toBeSaved: PropTypes.bool,
+        isNewRow: PropTypes.bool
     }).isRequired,
     columns: PropTypes.arrayOf(columnsProps).isRequired,
     updateRow: PropTypes.func.isRequired,
@@ -243,7 +248,7 @@ GroupEditableTableRow.propTypes = {
     resetRow: PropTypes.func,
     deleteRowPreEdit: PropTypes.bool,
     handleEditClick: PropTypes.func,
-    setRowToBeDeleted: PropTypes.func.isRequired,
+    setRowToBeDeleted: PropTypes.func,
     setRowToBeSaved: PropTypes.func.isRequired,
     removeRowOnDelete: PropTypes.bool
 };
@@ -256,5 +261,6 @@ GroupEditableTableRow.defaultProps = {
     resetRow: null,
     deleteRowPreEdit: false,
     handleEditClick: () => {},
-    removeRowOnDelete: false
+    removeRowOnDelete: false,
+    setRowToBeDeleted: () => {}
 };

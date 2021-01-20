@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import moment from 'moment';
@@ -5,16 +6,9 @@ import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import ThemeProvider from '@material-ui/styles/ThemeProvider';
 import MomentUtils from '@date-io/moment';
 import { withKnobs } from '@storybook/addon-knobs';
-import {
-    Title,
-    Description,
-    Primary,
-    ArgsTable,
-    Stories,
-    PRIMARY_STORY
-} from '@storybook/addon-docs/blocks';
 import SingleEditTable from '../components/editableTable/SingleEditTable';
 import { linnTheme } from '../themes/linnTheme';
+import mdx from './SingleEditTable.mdx';
 
 export const component = () => (
     <div>
@@ -116,7 +110,6 @@ const columns = [
         id: 'component',
         type: 'component',
         editable: true,
-        // eslint-disable-next-line react/prop-types
         component: ({ value }) => (
             <div>
                 <button type="button">{value}</button>
@@ -126,7 +119,7 @@ const columns = [
 ];
 
 export default {
-    title: 'Components/SingleEditTable',
+    title: 'Components/EditableTable/SingleEditTable',
     decorators: [
         withKnobs,
         story => (
@@ -137,87 +130,10 @@ export default {
             </ThemeProvider>
         )
     ],
-    excludeStories: ['component'],
     component: SingleEditTable,
     parameters: {
         docs: {
-            page: () => (
-                <>
-                    <Title />
-                    <Description
-                        markdown="Editable table to support updating and creating rows individually. Each row is treated as an individual entity so expects to call save/update/delete actions and refetch data in our usual flow.
-                    <br/><br/>
-                    Columns prop defines the shape of the table and passes in the appropriate functions for saving etc.
-                    <br/><br/>
-                    Story book doesn't currently support complex props in the arg table [but its currently being worked on](https://github.com/storybookjs/storybook/issues/12078)
-                    <br/><br/>
-                    column props:
-                    <br/><br/>
-                    `{`
-                    <br/>
-                    `id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,`
-                    <br/>
-                    `type: PropTypes.string.isRequired,`
-                    <br/>
-                    `component: PropTypes.func,`
-                    <br/>
-                    `editable: PropTypes.bool,`
-                    <br/>
-                    `options: PropTypes.arrayOf(PropTypes.oneOf([PropTypes.shape({}), PropTypes.string])),`
-                    <br/>
-                    `required: PropTypes.bool,`
-                    <br/>
-                    `searchLoading: PropTypes.bool,`
-                    <br/>
-                    `searchResults: PropTypes.arrayOf(PropTypes.shape({})),`
-                    <br/>
-                    `searchTitle: PropTypes.string,`
-                    <br/>
-                    `tooltip: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),`
-                    <br/>
-                    `clearSearch: PropTypes.func,`
-                    <br/>
-                    `closeRowOnClickAway: PropTypes.func,`
-                    <br/>
-                    `search: PropTypes.func,`
-                    <br/>
-                    `selectSearchResult: PropTypes.func`
-                    <br/>
-                    `}`
-                    <br/><br/>
-                    Each row must have a unique id and have property names relating to column ids. Values are accessed using `row[column.id]`
-                    <br/>
-                    The first row of the below examples is:
-                    <br/><br/>
-                    `{`
-                    <br/>
-                    `id: 0,`
-                    <br/>
-                    `text: 'column 1',`
-                    <br/>
-                    `extraInfo: 'some extra information about column 1',`
-                    <br/>
-                    `number: 123,`
-                    <br/>
-                    `date: moment('2020-12-21'),`
-                    <br/>
-                    `linnWeek: moment(),`
-                    <br/>
-                    `search: 'search',`
-                    <br/>
-                    `dropdown: 'one',`
-                    <br/>
-                    `component: 'custom 1'`
-                    <br/>
-                    `}`
-                    <br/><br/>
-                    "
-                    />
-                    <Primary />
-                    <ArgsTable story={PRIMARY_STORY} />
-                    <Stories />
-                </>
-            )
+            page: mdx
         }
     }
 };
@@ -236,28 +152,14 @@ Default.story = {
     name: 'Default'
 };
 
-export const ClickAway = args => (
-    <SingleEditTable
-        columns={columns}
-        rows={rows}
-        tableValid={() => true}
-        deleteRow={() => true}
-        {...args}
-    />
-);
-
-ClickAway.story = {
-    name: 'Close Row on Click Away'
-};
-
 export const DisplayOnly = args => (
     <SingleEditTable
+        {...args}
         columns={columns}
         rows={rows}
         tableValid={() => true}
         deleteRow={() => true}
         editable={false}
-        {...args}
     />
 );
 
@@ -267,12 +169,12 @@ DisplayOnly.story = {
 
 export const StaticRows = args => (
     <SingleEditTable
+        {...args}
         columns={columns}
         rows={rows}
         tableValid={() => true}
         deleteRow={() => true}
         allowNewRowCreation={false}
-        {...args}
     />
 );
 
@@ -282,24 +184,15 @@ StaticRows.story = {
 
 export const ShowDelete = args => (
     <SingleEditTable
+        {...args}
         columns={columns}
         rows={rows}
         tableValid={() => true}
         deleteRow={() => true}
         deleteRowPreEdit
-        {...args}
     />
 );
 
 ShowDelete.story = {
     name: 'Show Delete Prior to Edit'
-};
-
-ShowDelete.parameters = {
-    docs: {
-        description: {
-            story:
-                'The deleteRowPreEdit prop shows the delete button prior to pressing the edit button'
-        }
-    }
 };
