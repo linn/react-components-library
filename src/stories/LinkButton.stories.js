@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { MemoryRouter } from 'react-router';
 import providers from './renderUtils/Providers';
@@ -5,30 +6,41 @@ import LinkButton from '../components/LinkButton';
 
 export default {
     title: 'Components/LinkButton',
-    decorators: [story => providers(story)],
+    decorators: [
+        story => <MemoryRouter initialEntries={['/']}>{story()}</MemoryRouter>,
+        story => providers(story)
+    ],
     component: LinkButton
 };
 
-export const Default = () => (
-    <MemoryRouter initialEntries={['/']}>
-        <LinkButton text="Some Link" to="#" />
-    </MemoryRouter>
-);
+export const Default = args => <LinkButton {...args} />;
 
 Default.story = {
     name: 'default'
 };
 
-export const External = () => <LinkButton text="Some Link" to="#" external />;
+Default.args = {
+    text: 'Some Link',
+    to: '#'
+};
+
+export const External = args => <LinkButton {...args} />;
 
 External.story = {
     name: 'external'
 };
 
-export const DisabledWithTooltip = () => (
-    <LinkButton text="Some Link" to="#" disabled tooltip="this button is disabled" />
-);
+External.args = {
+    external: true
+};
+
+export const DisabledWithTooltip = args => <LinkButton {...args} />;
 
 DisabledWithTooltip.story = {
     name: 'disabled with tooltip'
+};
+
+DisabledWithTooltip.args = {
+    disabled: true,
+    tooltip: 'this button is disabled'
 };

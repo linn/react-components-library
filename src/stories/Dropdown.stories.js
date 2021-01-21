@@ -1,5 +1,5 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import { withKnobs, text, array } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import ThemeProvider from '@material-ui/styles/ThemeProvider';
 import { linnTheme } from '../themes/linnTheme';
@@ -10,8 +10,6 @@ const actions = {
     onChange: action('onChange')
 };
 
-const items = ['Item One', 'Item Two', 'Item Three'];
-
 export default {
     title: 'Components/Dropdown',
     decorators: [
@@ -19,22 +17,20 @@ export default {
             <ThemeProvider theme={linnTheme}>
                 <div>{story()}</div>
             </ThemeProvider>
-        ),
-        withKnobs
+        )
     ],
     component: Dropdown
 };
 
-export const Default = () => (
-    <Dropdown
-        value="Item One"
-        label={text('label', 'Dropdown Label')}
-        items={array('items', items)}
-        propertyName="name"
-        {...actions}
-    />
-);
+export const Default = args => <Dropdown {...args} {...actions} />;
 
 Default.story = {
     name: 'default '
+};
+
+Default.args = {
+    value: 'Item One',
+    label: 'Dropdown Label',
+    items: ['Item One', 'Item Two', 'Item Three'],
+    propertyName: 'name'
 };

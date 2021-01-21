@@ -1,11 +1,6 @@
 module.exports = {
     stories: ['../src/**/*.stories.@(js|mdx)'],
     addons: [
-        '@storybook/addon-knobs',
-        '@storybook/addon-actions',
-        '@storybook/addon-links',
-        '@storybook/addon-jest',
-        '@storybook/addon-essentials',
         {
             name: '@storybook/addon-docs',
             options: {
@@ -13,6 +8,8 @@ module.exports = {
                 babelOptions: {},
                 sourceLoaderOptions: null
             }
-        }
+        },
+        '@storybook/addon-essentials',
+        '@storybook/addon-actions'
     ]
 };

@@ -1,5 +1,5 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import { withKnobs, text, boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 
 import CheckboxWithLabel from '../components/CheckboxWithLabel';
@@ -10,19 +10,18 @@ const actions = {
 
 export default {
     title: 'Components/CheckboxWithLabel',
-    decorators: [story => <div>{story()}</div>, withKnobs],
+    decorators: [story => <div>{story()}</div>],
     component: CheckboxWithLabel
 };
 
-export const Default = () => (
-    <CheckboxWithLabel
-        checked={boolean('checked', true)}
-        color={text('color', 'primary')}
-        label={text('label', 'Checkbox Label')}
-        {...actions}
-    />
-);
+export const Default = args => <CheckboxWithLabel {...args} {...actions} />;
 
 Default.story = {
     name: 'default '
+};
+
+Default.args = {
+    checked: true,
+    color: 'primary',
+    label: 'Checkbox Label'
 };

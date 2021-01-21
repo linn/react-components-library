@@ -1,16 +1,7 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { MemoryRouter } from 'react-router';
-import { withKnobs, object } from '@storybook/addon-knobs';
 import Breadcrumbs from '../components/Breadcrumbs';
-
-const props = {
-    history: {
-        push: () => {},
-        location: {
-            pathname: '/a/test/path'
-        }
-    }
-};
 
 export default {
     title: 'Components/Breadcrumbs',
@@ -19,10 +10,18 @@ export default {
             <MemoryRouter initialEntries={['/']}>
                 <div style={{ padding: '3rem', width: '100%' }}>{story()}</div>
             </MemoryRouter>
-        ),
-        withKnobs
+        )
     ],
     component: Breadcrumbs
 };
 
-export const Default = () => <Breadcrumbs {...props} history={object('location', props.history)} />;
+export const Default = args => <Breadcrumbs {...args} />;
+
+Default.args = {
+    history: {
+        push: () => {},
+        location: {
+            pathname: '/a/test/path'
+        }
+    }
+};

@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import Navigation from '../components/Navigation';
 import providers from './renderUtils/Providers';
@@ -9,19 +10,18 @@ export default {
     component: Navigation
 };
 
-export const Default = () =>
-    React.createElement(() => (
-        <Navigation
-            sections={menu.sections}
-            myStuff={menu.myStuff}
-            username="username"
-            loading={false}
-            markNotificationSeen={() => {}}
-            history={{}}
-            authRoot="#"
-        />
-    ));
+export const Default = args => <Navigation {...args} />;
 
 Default.story = {
     name: 'default'
+};
+
+Default.args = {
+    sections: menu.sections,
+    myStuff: menu.myStuff,
+    username: 'username',
+    loading: false,
+    authRoot: '#',
+    history: {},
+    markNotificationSeen: () => {}
 };

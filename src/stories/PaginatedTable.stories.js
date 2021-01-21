@@ -1,5 +1,5 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import { withKnobs } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import ThemeProvider from '@material-ui/styles/ThemeProvider';
 import PaginatedTable from '../components/table/PaginatedTable';
@@ -157,8 +157,6 @@ const rows = [
 export default {
     title: 'Components/PaginatedTable',
     decorators: [
-        story => <div>{story()}</div>,
-        withKnobs,
         story => (
             <ThemeProvider theme={linnTheme}>
                 <div>{story()}</div>
@@ -168,64 +166,57 @@ export default {
     component: PaginatedTable
 };
 
-export const Default = () => (
-    <PaginatedTable
-        setPageOptions={actions.setPageOptions}
-        handleRowLinkClick={actions.handleRowLinkClick}
-        rows={rows}
-        columns={columns}
-        pageOptions={pageOptions}
-        totalItemCount={totalItemCount}
-    />
-);
+export const Default = args => <PaginatedTable {...actions} {...args} />;
 
 Default.story = {
     name: 'default '
 };
 
-export const WithSortingEnabled = () => (
-    <PaginatedTable
-        setPageOptions={actions.setPageOptions}
-        handleRowLinkClick={actions.handleRowLinkClick}
-        rows={rows}
-        columns={columns}
-        pageOptions={pageOptions}
-        totalItemCount={totalItemCount}
-        sortable
-    />
-);
+Default.args = {
+    rows,
+    columns,
+    pageOptions,
+    totalItemCount
+};
+
+export const WithSortingEnabled = args => <PaginatedTable {...actions} {...args} />;
 
 WithSortingEnabled.story = {
     name: 'with sorting enabled'
 };
 
-export const WithExpandableEnabled = () => (
-    <PaginatedTable
-        setPageOptions={actions.setPageOptions}
-        handleRowLinkClick={actions.handleRowLinkClick}
-        rows={rows}
-        columns={columns}
-        pageOptions={pageOptions}
-        totalItemCount={totalItemCount}
-        expandable
-    />
-);
+WithSortingEnabled.args = {
+    rows,
+    columns,
+    pageOptions,
+    totalItemCount,
+    sortable: true
+};
+
+export const WithExpandableEnabled = args => <PaginatedTable {...actions} {...args} />;
 
 WithExpandableEnabled.story = {
     name: 'with expandable enabled'
 };
 
-export const WithNoRows = () => (
-    <PaginatedTable
-        setPageOptions={actions.setPageOptions}
-        handleRowLinkClick={actions.handleRowLinkClick}
-        columns={columns}
-        pageOptions={pageOptions}
-        totalItemCount={totalItemCount}
-        expandable
-    />
-);
+WithExpandableEnabled.args = {
+    rows,
+    columns,
+    pageOptions,
+    totalItemCount,
+    expandable: true
+};
+
+export const WithNoRows = args => <PaginatedTable {...actions} {...args} />;
 
 WithNoRows.story = {
     name: 'with no rows'
+};
+
+WithNoRows.args = {
+    rows: null,
+    columns,
+    pageOptions,
+    totalItemCount,
+    expandable: true
 };

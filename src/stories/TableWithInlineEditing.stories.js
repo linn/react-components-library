@@ -1,5 +1,5 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import { withKnobs } from '@storybook/addon-knobs';
 import ThemeProvider from '@material-ui/styles/ThemeProvider';
 import TableWithInlineEditing from '../components/TableWithInlineEditing';
 import { linnTheme } from '../themes/linnTheme';
@@ -53,8 +53,6 @@ const content = [
 export default {
     title: 'Components/TableWithInlineEditing',
     decorators: [
-        story => <div>{story()}</div>,
-        withKnobs,
         story => (
             <ThemeProvider theme={linnTheme}>
                 <div>{story()}</div>
@@ -64,52 +62,56 @@ export default {
     component: TableWithInlineEditing
 };
 
-export const AllowedToEditAddAndDelete = () => (
-    <TableWithInlineEditing
-        columnsInfo={columnsInfo}
-        content={content}
-        updateContent={() => {}}
-        allowedToEdit
-        allowedToCreate
-        allowedToDelete
-    />
-);
+export const AllowedToEditAddAndDelete = args => <TableWithInlineEditing {...args} />;
 
 AllowedToEditAddAndDelete.story = {
     name: 'allowed to edit, add and delete'
 };
 
-export const AllowedToEditAndAdd = () => (
-    <TableWithInlineEditing
-        columnsInfo={columnsInfo}
-        content={content}
-        updateContent={() => {}}
-        allowedToEdit
-        allowedToCreate
-    />
-);
+AllowedToEditAddAndDelete.args = {
+    columnsInfo,
+    content,
+    updateContent: () => {},
+    allowedToEdit: true,
+    allowedToCreate: true,
+    allowedToDelete: true
+};
+
+export const AllowedToEditAndAdd = args => <TableWithInlineEditing {...args} />;
 
 AllowedToEditAndAdd.story = {
     name: 'allowed to edit and add'
 };
 
-export const AllowedToEditOnly = () => (
-    <TableWithInlineEditing
-        columnsInfo={columnsInfo}
-        content={content}
-        updateContent={() => {}}
-        allowedToEdit
-    />
-);
+AllowedToEditAddAndDelete.args = {
+    columnsInfo,
+    content,
+    updateContent: () => {},
+    allowedToEdit: true,
+    allowedToCreate: true
+};
+
+export const AllowedToEditOnly = args => <TableWithInlineEditing {...args} />;
 
 AllowedToEditOnly.story = {
     name: 'allowed to edit only'
 };
 
-export const NotAllowedToEdit = () => (
-    <TableWithInlineEditing columnsInfo={columnsInfo} content={content} updateContent={() => {}} />
-);
+AllowedToEditOnly.args = {
+    columnsInfo,
+    content,
+    updateContent: () => {},
+    allowedToEdit: true
+};
+
+export const NotAllowedToEdit = args => <TableWithInlineEditing {...args} />;
 
 NotAllowedToEdit.story = {
     name: 'Not allowed to edit'
+};
+
+NotAllowedToEdit.args = {
+    columnsInfo,
+    content,
+    updateContent: () => {}
 };

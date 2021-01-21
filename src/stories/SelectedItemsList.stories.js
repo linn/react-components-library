@@ -1,5 +1,5 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import { withKnobs } from '@storybook/addon-knobs';
 import ThemeProvider from '@material-ui/styles/ThemeProvider';
 import { linnTheme } from '../themes/linnTheme';
 import SelectedItemsList from '../components/SelectedItemsList';
@@ -36,7 +36,6 @@ const removeItem = () => {};
 export default {
     title: 'Components/SelectedItemsList',
     decorators: [
-        withKnobs,
         story => (
             <ThemeProvider theme={linnTheme}>
                 <div style={{ position: 'absolute', left: '5%', top: '10%' }}>{story()}</div>
@@ -46,39 +45,51 @@ export default {
     component: SelectedItemsList
 };
 
-export const Default = () => (
-    <SelectedItemsList title="String Entities" items={entityStrings} removeItem={removeItem} />
-);
+export const Default = args => <SelectedItemsList {...args} />;
 
 Default.story = {
     name: 'default '
 };
 
-export const WithObjects = () => (
-    <SelectedItemsList title="Object Entities" items={entities} removeItem={removeItem} />
-);
+Default.args = {
+    title: 'String Entities',
+    items: entityStrings,
+    removeItem
+};
+
+export const WithObjects = args => <SelectedItemsList {...args} />;
 
 WithObjects.story = {
     name: 'with objects'
 };
 
-export const ManyObjectsNoScrolling = () => (
-    <SelectedItemsList title="Object Entities" items={entitiesLong} removeItem={removeItem} />
-);
+WithObjects.args = {
+    title: 'Object Entities',
+    items: entities,
+    removeItem
+};
+
+export const ManyObjectsNoScrolling = args => <SelectedItemsList {...args} />;
 
 ManyObjectsNoScrolling.story = {
     name: 'many objects no scrolling'
 };
 
-export const ManyObjectsWithScrolling = () => (
-    <SelectedItemsList
-        title="Object Entities"
-        items={entitiesLong}
-        removeItem={removeItem}
-        maxHeight={300}
-    />
-);
+ManyObjectsNoScrolling.args = {
+    title: 'Object Entities',
+    items: entitiesLong,
+    removeItem
+};
+
+export const ManyObjectsWithScrolling = args => <SelectedItemsList {...args} />;
 
 ManyObjectsWithScrolling.story = {
     name: 'many objects with scrolling'
+};
+
+ManyObjectsWithScrolling.args = {
+    title: 'Object Entities',
+    items: entitiesLong,
+    removeItem,
+    maxHeight: 300
 };

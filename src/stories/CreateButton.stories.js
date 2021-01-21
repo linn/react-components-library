@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { MemoryRouter } from 'react-router';
 import CreateButton from '../components/CreateButton';
@@ -14,8 +15,12 @@ export default {
     component: CreateButton
 };
 
-export const Default = () => <CreateButton createUrl="/create" />;
+export const Default = args => <CreateButton {...args} />;
 
 Default.story = {
     name: 'default'
+};
+
+Default.args = {
+    creatUrl: '/create'
 };

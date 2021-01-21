@@ -1,19 +1,20 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import { withKnobs, text } from '@storybook/addon-knobs';
-
 import ExportButton from '../components/ExportButton';
 
 export default {
     title: 'Components/ExportButton',
-    decorators: [
-        story => <div style={{ position: 'absolute', left: '50%' }}>{story()}</div>,
-        withKnobs
-    ],
+    decorators: [story => <div style={{ position: 'absolute', left: '50%' }}>{story()}</div>],
     component: ExportButton
 };
 
-export const Default = () => <ExportButton text={text('href', '/href/')} href="" />;
+export const Default = args => <ExportButton {...args} />;
 
 Default.story = {
     name: 'default'
+};
+
+Default.args = {
+    text: '/href/',
+    href: ''
 };

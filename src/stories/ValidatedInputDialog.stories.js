@@ -1,5 +1,5 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import { withKnobs, text, boolean, array } from '@storybook/addon-knobs';
 import providers from './renderUtils/Providers';
 
 import ValidatedInputDialog from '../components/ValidatedInputDialog';
@@ -20,30 +20,37 @@ export default {
     title: 'Components/ValidatedInputDialog',
     decorators: [
         story => <div style={{ padding: '3rem', width: '100%' }}>{story()}</div>,
-        withKnobs,
         story => providers(story)
     ],
     component: ValidatedInputDialog
 };
 
-export const WhenInvalid = () => (
-    <ValidatedInputDialog
-        title={text('title', 'In this case no matches are found')}
-        loading={boolean('loading', false)}
-        fetchItems={fetchItems}
-        searchItems={array('items', invalidSinceNoMatchingItemsFound)}
-        clearSearch={clearSearch}
-        onAccept={onSelect}
-    />
-);
+export const WhenValid = args => <ValidatedInputDialog {...args} />;
 
-export const WhenValid = () => (
-    <ValidatedInputDialog
-        title={text('title', 'In this Case Matches are found')}
-        loading={boolean('loading', false)}
-        fetchItems={fetchItems}
-        searchItems={array('items', validSinceOneMatchingItem)}
-        clearSearch={clearSearch}
-        onAccept={onSelect}
-    />
-);
+WhenValid.story = {
+    name: 'When Valid'
+};
+
+WhenValid.args = {
+    title: 'In this case matches are found',
+    loading: false,
+    fetchItems,
+    searchItems: validSinceOneMatchingItem,
+    clearSearch,
+    onAccept: onSelect
+};
+
+export const WhenInvalid = args => <ValidatedInputDialog {...args} />;
+
+WhenInvalid.story = {
+    name: 'When Invalid'
+};
+
+WhenInvalid.args = {
+    title: 'In this case no matches are found',
+    loading: false,
+    fetchItems,
+    searchItems: invalidSinceNoMatchingItemsFound,
+    clearSearch,
+    onAccept: onSelect
+};

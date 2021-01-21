@@ -1,5 +1,5 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import { text } from '@storybook/addon-knobs';
 import ThemeProvider from '@material-ui/styles/ThemeProvider';
 import { linnTheme } from '../themes/linnTheme';
 import SearchInputField from '../components/SearchInputField';
@@ -16,34 +16,39 @@ export default {
     component: SearchInputField
 };
 
-export const LabelAndValue = () => (
-    <SearchInputField value={text('value', 'Search')} label={text('label', 'Search Input Field')} />
-);
+export const Default = args => <SearchInputField {...args} />;
 
-LabelAndValue.story = {
+Default.story = {
     name: 'Label and value'
 };
 
-export const LabelAndNoValue = () => (
-    <SearchInputField value={text('value', '')} label={text('label', 'Search Input Field')} />
-);
+Default.args = {
+    value: 'Search',
+    label: 'Search Input Field'
+};
+
+export const LabelAndNoValue = args => <SearchInputField {...args} />;
 
 LabelAndNoValue.story = {
     name: 'Label and no value'
 };
 
-export const Error = () => (
-    <SearchInputField
-        value={text('value', 'Search')}
-        label={text('label', 'Search Input Field')}
-        error
-    />
-);
+LabelAndNoValue.args = {
+    value: '',
+    label: 'No Value'
+};
 
-export const Disabled = () => (
-    <SearchInputField
-        value={text('value', 'Search')}
-        label={text('label', 'Search Input Field')}
-        disabled
-    />
-);
+export const ErrorStory = args => <SearchInputField {...args} />;
+
+ErrorStory.story = {
+    name: 'Error'
+};
+
+ErrorStory.args = {
+    error: true,
+    label: 'Error'
+};
+
+export const Disabled = args => <SearchInputField {...args} />;
+
+Disabled.args = { label: 'Disabled', disabled: true };

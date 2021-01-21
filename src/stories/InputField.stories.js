@@ -1,5 +1,5 @@
-import React, { Fragment } from 'react';
-import { withKnobs, text } from '@storybook/addon-knobs';
+/* eslint-disable react/jsx-props-no-spreading */
+import React from 'react';
 import { action } from '@storybook/addon-actions';
 import Grid from '@material-ui/core/Grid';
 import ThemeProvider from '@material-ui/styles/ThemeProvider';
@@ -17,184 +17,162 @@ export default {
             <ThemeProvider theme={linnTheme}>
                 <div>{story()}</div>
             </ThemeProvider>
-        ),
-        withKnobs
+        )
     ],
     component: InputField
 };
 
-export const LabelAndValue = () => (
-    <InputField value={text('value', 'Value')} label={text('label', 'Input Field')} {...actions} />
-);
+export const LabelAndValue = args => <InputField {...args} {...actions} />;
 
 LabelAndValue.story = {
     name: 'Label and value'
 };
 
-export const LabelNoValue = () => (
-    <InputField value={text('value', '')} label={text('label', 'No Value')} {...actions} />
-);
+LabelAndValue.args = {
+    value: 'Value',
+    label: 'Input Field'
+};
+
+export const LabelNoValue = args => <InputField {...args} {...actions} />;
 
 LabelNoValue.story = {
     name: 'Label no value'
 };
 
-export const FullWidth = () => (
-    <InputField
-        value={text('value', 'Full Width')}
-        label={text('label', 'Full Width')}
-        fullWidth
-        {...actions}
-    />
-);
+LabelNoValue.args = {
+    value: '',
+    label: 'No Value'
+};
+
+export const FullWidth = args => <InputField {...args} {...actions} />;
 
 FullWidth.story = {
     name: 'Full width'
 };
 
-export const Error = () => (
-    <InputField value={text('value', 'Error')} label={text('label', 'Error')} error {...actions} />
-);
+FullWidth.args = {
+    value: 'Full Width',
+    label: 'Full Width',
+    fullWidth: true
+};
 
-export const Disabled = () => (
-    <InputField value={text('value', 'Disabled')} label={text('label', 'Disabled')} disabled />
-);
+export const WithError = args => <InputField {...args} {...actions} />;
 
-export const Date = () => (
-    <InputField
-        value={text('value', '2011-10-05T14:48:00.000Z')}
-        label={text('label', 'Date')}
-        type="date"
-        {...actions}
-    />
-);
+WithError.args = {
+    text: 'Error',
+    label: 'Error',
+    error: true
+};
 
-export const Number = () => (
-    <InputField
-        value={text('value', '123.45')}
-        label={text('label', 'Number')}
-        type="number"
-        {...actions}
-    />
-);
+export const Disabled = args => <InputField {...args} disabled />;
 
-export const WithAdornment = () => (
-    <InputField
-        value={text('value', 'With adornment')}
-        label={text('label', 'With adornment')}
-        adornment="$"
-        {...actions}
-    />
-);
+Disabled.args = {
+    value: 'Disabled',
+    label: 'Disabled',
+    disabled: true
+};
+
+export const DateInput = args => <InputField {...args} {...actions} />;
+
+DateInput.args = {
+    value: '2011-10-05T14:48:00.000Z',
+    label: 'Date',
+    type: 'date'
+};
+
+export const NumberInput = args => <InputField {...args} {...actions} />;
+
+NumberInput.args = {
+    value: '123.45',
+    label: 'Number',
+    type: 'number'
+};
+
+export const WithAdornment = args => <InputField {...args} {...actions} />;
 
 WithAdornment.story = {
     name: 'With adornment'
 };
 
-export const MaxLength = () => (
-    <InputField
-        value={text('value', 'A')}
-        label={text('label', 'Max Length')}
-        maxLength={1}
-        {...actions}
-    />
-);
+WithAdornment.args = {
+    value: 'With adornment',
+    label: 'With adornment',
+    adornment: '$'
+};
+
+export const MaxLength = args => <InputField {...args} {...actions} />;
 
 MaxLength.story = {
     name: 'Max length'
 };
 
-export const Multiline = () => (
-    <InputField
-        value={text('value', 'Multiline')}
-        label={text('label', 'Multiline')}
-        multiline
-        {...actions}
-    />
-);
+MaxLength.args = {
+    value: 'A',
+    label: 'Max Length',
+    maxLength: 1
+};
 
-export const RegularSpacing = () => (
-    <Fragment>
-        <div style={{ width: '50%' }}>
-            <Grid container>
-                <Grid item xs={6}>
-                    <InputField
-                        value={text('value', 'value')}
-                        label={text('label', 'Normal Spacing')}
-                        {...actions}
-                    />
-                </Grid>
-                <Grid item xs={6}>
-                    <InputField
-                        value={text('value', 'value')}
-                        label={text('label', 'Normal Spacing')}
-                        {...actions}
-                    />
-                </Grid>
-                <Grid item xs={6}>
-                    <InputField
-                        value={text('value', 'value')}
-                        label={text('label', 'Normal Spacing')}
-                        {...actions}
-                    />
-                </Grid>
-                <Grid item xs={6}>
-                    <InputField
-                        value={text('value', 'value')}
-                        label={text('label', 'Normal Spacing')}
-                        {...actions}
-                    />
-                </Grid>
+export const Multiline = args => <InputField {...args} {...actions} />;
+
+Multiline.args = {
+    value: 'Multiline',
+    label: 'Multiline',
+    multiline: true
+};
+
+export const RegularSpacing = args => (
+    <div style={{ width: '50%' }}>
+        <Grid container>
+            <Grid item xs={6}>
+                <InputField {...args} {...actions} />
             </Grid>
-        </div>
-    </Fragment>
+            <Grid item xs={6}>
+                <InputField {...args} {...actions} />
+            </Grid>
+            <Grid item xs={6}>
+                <InputField {...args} {...actions} />
+            </Grid>
+            <Grid item xs={6}>
+                <InputField {...args} {...actions} />
+            </Grid>
+        </Grid>
+    </div>
 );
 
 RegularSpacing.story = {
     name: 'Regular spacing'
 };
 
-export const CompactSpacing = () => (
-    <Fragment>
-        <div style={{ width: '50%' }}>
-            <Grid container>
-                <Grid item xs={6}>
-                    <InputField
-                        value={text('value', 'value')}
-                        label={text('label', 'Compact Spacing')}
-                        margin="dense"
-                        {...actions}
-                    />
-                </Grid>
-                <Grid item xs={6}>
-                    <InputField
-                        value={text('value', 'value')}
-                        label={text('label', 'Compact Spacing')}
-                        margin="dense"
-                        {...actions}
-                    />
-                </Grid>
-                <Grid item xs={6}>
-                    <InputField
-                        value={text('value', 'value')}
-                        label={text('label', 'Compact Spacing')}
-                        margin="dense"
-                        {...actions}
-                    />
-                </Grid>
-                <Grid item xs={6}>
-                    <InputField
-                        value={text('value', 'value')}
-                        label={text('label', 'Compact Spacing')}
-                        margin="dense"
-                        {...actions}
-                    />
-                </Grid>
+RegularSpacing.args = {
+    value: 'value',
+    label: 'Normal Spacing'
+};
+
+export const CompactSpacing = args => (
+    <div style={{ width: '50%' }}>
+        <Grid container>
+            <Grid item xs={6}>
+                <InputField {...args} {...actions} />
             </Grid>
-        </div>
-    </Fragment>
+            <Grid item xs={6}>
+                <InputField {...args} {...actions} />
+            </Grid>
+            <Grid item xs={6}>
+                <InputField {...args} {...actions} />
+            </Grid>
+            <Grid item xs={6}>
+                <InputField {...args} {...actions} />
+            </Grid>
+        </Grid>
+    </div>
 );
 
 CompactSpacing.story = {
     name: 'Compact spacing'
+};
+
+CompactSpacing.args = {
+    value: 'value',
+    label: 'Compact Spacing',
+    margin: 'dense'
 };

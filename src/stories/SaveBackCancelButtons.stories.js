@@ -1,6 +1,6 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs } from '@storybook/addon-knobs';
 import ThemeProvider from '@material-ui/styles/ThemeProvider';
 import { linnTheme } from '../themes/linnTheme';
 import SaveBackCancelButtons from '../components/SaveBackCancelButtons';
@@ -18,20 +18,23 @@ export default {
             <ThemeProvider theme={linnTheme}>
                 <div style={{ position: 'absolute', right: '50%', top: '50%' }}>{story()}</div>
             </ThemeProvider>
-        ),
-        withKnobs
+        )
     ],
     component: SaveBackCancelButtons
 };
 
-export const Default = () => <SaveBackCancelButtons {...actions} />;
+export const Default = args => <SaveBackCancelButtons {...actions} {...args} />;
 
 Default.story = {
     name: 'default'
 };
 
-export const SaveDisabled = () => <SaveBackCancelButtons {...actions} saveDisabled />;
+export const SaveDisabled = args => <SaveBackCancelButtons {...actions} {...args} />;
 
 SaveDisabled.story = {
     name: 'saveDisabled'
+};
+
+SaveDisabled.args = {
+    saveDisabled: true
 };

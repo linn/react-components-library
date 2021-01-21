@@ -1,6 +1,6 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { MemoryRouter } from 'react-router';
-import { withKnobs, text, boolean, array } from '@storybook/addon-knobs';
 import ThemeProvider from '@material-ui/styles/ThemeProvider';
 import { linnTheme } from '../themes/linnTheme';
 import Typeahead from '../components/Typeahead';
@@ -24,70 +24,64 @@ export default {
                     <div style={{ padding: '3rem', width: '100%' }}>{story()}</div>
                 </ThemeProvider>
             </MemoryRouter>
-        ),
-        withKnobs
+        )
     ],
     component: Typeahead
 };
 
-export const Default = () => (
-    <Typeahead
-        title={text('title', 'Title Text')}
-        loading={boolean('loading', false)}
-        fetchItems={fetchItems}
-        items={array('items', items)}
-        clearSearch={clearSearch}
-        classes={{}}
-    />
-);
+export const Default = args => <Typeahead {...args} />;
 
 Default.story = {
     name: 'default '
 };
 
-export const NothingFound = () => (
-    <Typeahead
-        title={text('title', 'Title Text')}
-        loading={boolean('loading', false)}
-        fetchItems={fetchItems}
-        items={array('items', [])}
-        clearSearch={clearSearch}
-        classes={{}}
-    />
-);
+Default.args = {
+    title: 'Title Text',
+    loading: false,
+    fetchItems,
+    items,
+    clearSearch
+};
+
+export const NothingFound = args => <Typeahead {...args} />;
 
 NothingFound.story = {
     name: 'nothingFound '
 };
 
-export const Loading = () => (
-    <Typeahead
-        title={text('title', 'Title Text')}
-        loading={boolean('loading', true)}
-        fetchItems={fetchItems}
-        items={array('items', [])}
-        clearSearch={clearSearch}
-        classes={{}}
-    />
-);
+NothingFound.args = {
+    title: 'Title Text',
+    loading: false,
+    fetchItems,
+    items: [],
+    clearSearch
+};
+
+export const Loading = args => <Typeahead {...args} />;
 
 Loading.story = {
     name: 'loading '
 };
 
-export const Modal = () => (
-    <Typeahead
-        title={text('title', 'Title Text')}
-        loading={boolean('loading', false)}
-        modal
-        label="click me and see"
-        fetchItems={fetchItems}
-        items={array('items', [])}
-        clearSearch={clearSearch}
-        classes={{}}
-    />
-);
+Loading.args = {
+    title: 'Title Text',
+    loading: true,
+    fetchItems,
+    items,
+    clearSearch
+};
+
+export const Modal = args => <Typeahead {...args} />;
 
 Modal.story = {
     name: 'modal '
+};
+
+Modal.args = {
+    title: 'Title Text',
+    loading: true,
+    fetchItems,
+    items,
+    clearSearch,
+    modal: true
 };
