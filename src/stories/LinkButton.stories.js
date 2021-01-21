@@ -1,15 +1,19 @@
 import React from 'react';
-import StoryRouter from 'storybook-react-router';
+import { MemoryRouter } from 'react-router';
 import providers from './renderUtils/Providers';
 import LinkButton from '../components/LinkButton';
 
 export default {
     title: 'Components/LinkButton',
-    decorators: [StoryRouter(), story => providers(story)],
+    decorators: [story => providers(story)],
     component: LinkButton
 };
 
-export const Default = () => <LinkButton text="Some Link" to="#" />;
+export const Default = () => (
+    <MemoryRouter initialEntries={['/']}>
+        <LinkButton text="Some Link" to="#" />
+    </MemoryRouter>
+);
 
 Default.story = {
     name: 'default'

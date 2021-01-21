@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import Box from '@material-ui/core/Box';
@@ -38,7 +38,7 @@ const Results = ({
         {reportData.error ? (
             displayError(reportData.message)
         ) : (
-            <Fragment>
+            <>
                 {reportData
                     .sort((a, b) => {
                         if (a.displaySequence > b.displaySequence) {
@@ -76,7 +76,7 @@ const Results = ({
                             />
                         </Box>
                     ))}
-            </Fragment>
+            </>
         )}
     </div>
 );

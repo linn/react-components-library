@@ -1,6 +1,5 @@
 import React from 'react';
 import { withKnobs } from '@storybook/addon-knobs';
-import StoryRouter from 'storybook-react-router';
 import ThemeProvider from '@material-ui/styles/ThemeProvider';
 import TableWithInlineEditing from '../components/TableWithInlineEditing';
 import { linnTheme } from '../themes/linnTheme';
@@ -56,7 +55,6 @@ export default {
     decorators: [
         story => <div>{story()}</div>,
         withKnobs,
-        StoryRouter(),
         story => (
             <ThemeProvider theme={linnTheme}>
                 <div>{story()}</div>

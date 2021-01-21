@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { KeyboardDatePicker } from '@material-ui/pickers';
 import { makeStyles } from '@material-ui/styles';
 import { IconButton } from '@material-ui/core';
@@ -96,7 +96,7 @@ export default function LinnWeekPicker({
     };
 
     return (
-        <Fragment>
+        <>
             <InputLabel classes={{ root: classes.label }} required={required}>
                 {label}
             </InputLabel>
@@ -110,7 +110,7 @@ export default function LinnWeekPicker({
                 renderDay={renderWeekDay}
                 format="DD/MM/YYYY"
             />
-        </Fragment>
+        </>
     );
 }
 

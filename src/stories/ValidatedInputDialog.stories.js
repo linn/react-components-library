@@ -1,5 +1,4 @@
 import React from 'react';
-import StoryRouter from 'storybook-react-router';
 import { withKnobs, text, boolean, array } from '@storybook/addon-knobs';
 import providers from './renderUtils/Providers';
 
@@ -20,7 +19,6 @@ const onSelect = () => {};
 export default {
     title: 'Components/ValidatedInputDialog',
     decorators: [
-        StoryRouter(),
         story => <div style={{ padding: '3rem', width: '100%' }}>{story()}</div>,
         withKnobs,
         story => providers(story)

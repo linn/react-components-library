@@ -1,7 +1,6 @@
 import React from 'react';
 import { withKnobs } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
-import StoryRouter from 'storybook-react-router';
 import ThemeProvider from '@material-ui/styles/ThemeProvider';
 import PaginatedTable from '../components/table/PaginatedTable';
 import { linnTheme } from '../themes/linnTheme';
@@ -160,7 +159,6 @@ export default {
     decorators: [
         story => <div>{story()}</div>,
         withKnobs,
-        StoryRouter(),
         story => (
             <ThemeProvider theme={linnTheme}>
                 <div>{story()}</div>

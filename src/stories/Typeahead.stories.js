@@ -1,5 +1,5 @@
 import React from 'react';
-import StoryRouter from 'storybook-react-router';
+import { MemoryRouter } from 'react-router';
 import { withKnobs, text, boolean, array } from '@storybook/addon-knobs';
 import ThemeProvider from '@material-ui/styles/ThemeProvider';
 import { linnTheme } from '../themes/linnTheme';
@@ -18,11 +18,12 @@ const clearSearch = () => {};
 export default {
     title: 'Components/Typeahead',
     decorators: [
-        StoryRouter(),
         story => (
-            <ThemeProvider theme={linnTheme}>
-                <div style={{ padding: '3rem', width: '100%' }}>{story()}</div>
-            </ThemeProvider>
+            <MemoryRouter initialEntries={['/']}>
+                <ThemeProvider theme={linnTheme}>
+                    <div style={{ padding: '3rem', width: '100%' }}>{story()}</div>
+                </ThemeProvider>
+            </MemoryRouter>
         ),
         withKnobs
     ],

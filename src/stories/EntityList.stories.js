@@ -1,6 +1,6 @@
 import React from 'react';
 import { withKnobs, text, boolean, object } from '@storybook/addon-knobs';
-import StoryRouter from 'storybook-react-router';
+import { MemoryRouter } from 'react-router';
 import Page from '../components/Page';
 import EntityList from '../components/EntityList';
 import providers from './renderUtils/Providers';
@@ -26,9 +26,12 @@ const pageProps = {
 export default {
     title: 'Components/EntityList',
     decorators: [
-        story => <Page {...pageProps}>{story()}</Page>,
+        story => (
+            <MemoryRouter initialEntries={['/']}>
+                <Page {...pageProps}>{story()}</Page>
+            </MemoryRouter>
+        ),
         withKnobs,
-        StoryRouter(),
         story => providers(story)
     ],
     component: EntityList

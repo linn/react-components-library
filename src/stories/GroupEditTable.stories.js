@@ -5,7 +5,6 @@ import moment from 'moment';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import ThemeProvider from '@material-ui/styles/ThemeProvider';
 import MomentUtils from '@date-io/moment';
-import { withKnobs } from '@storybook/addon-knobs';
 import GroupEditTable from '../components/editableTable/GroupEditTable';
 import { linnTheme } from '../themes/linnTheme';
 import useGroupEditTable from '../hooks/useGroupEditTable';
@@ -156,7 +155,6 @@ const GroupEditTableWrapper = ({
 export default {
     title: 'Components/EditableTable/GroupEditTable',
     decorators: [
-        withKnobs,
         story => (
             <ThemeProvider theme={linnTheme}>
                 <MuiPickersUtilsProvider utils={MomentUtils}>

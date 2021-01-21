@@ -5,7 +5,6 @@ import moment from 'moment';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import ThemeProvider from '@material-ui/styles/ThemeProvider';
 import MomentUtils from '@date-io/moment';
-import { withKnobs } from '@storybook/addon-knobs';
 import SingleEditTable from '../components/editableTable/SingleEditTable';
 import { linnTheme } from '../themes/linnTheme';
 import mdx from './SingleEditTable.mdx';
@@ -121,7 +120,6 @@ const columns = [
 export default {
     title: 'Components/EditableTable/SingleEditTable',
     decorators: [
-        withKnobs,
         story => (
             <ThemeProvider theme={linnTheme}>
                 <MuiPickersUtilsProvider utils={MomentUtils}>
@@ -131,6 +129,7 @@ export default {
         )
     ],
     component: SingleEditTable,
+    excludeStories: ['component'],
     parameters: {
         docs: {
             page: mdx

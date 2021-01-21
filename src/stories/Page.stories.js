@@ -1,5 +1,4 @@
 import React from 'react';
-import StoryRouter from 'storybook-react-router';
 import { withKnobs, object } from '@storybook/addon-knobs';
 import Page from '../components/Page';
 import Title from '../components/Title';
@@ -16,7 +15,7 @@ const props = {
 
 export default {
     title: 'Components/Page',
-    decorators: [withKnobs, StoryRouter(), story => providers(story)],
+    decorators: [withKnobs, story => providers(story)],
     component: Page
 };
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import { withKnobs } from '@storybook/addon-knobs';
-import StoryRouter from 'storybook-react-router';
 import TypeaheadTable from '../components/TypeaheadTable';
 import Page from '../components/Page';
 import providers from './renderUtils/Providers';
@@ -40,7 +39,6 @@ export default {
     decorators: [
         story => <Page {...pageProps}>{story()}</Page>,
         withKnobs,
-        StoryRouter(),
         story => providers(story)
     ],
     component: TypeaheadTable

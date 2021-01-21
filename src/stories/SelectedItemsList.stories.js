@@ -1,6 +1,5 @@
 import React from 'react';
 import { withKnobs } from '@storybook/addon-knobs';
-import StoryRouter from 'storybook-react-router';
 import ThemeProvider from '@material-ui/styles/ThemeProvider';
 import { linnTheme } from '../themes/linnTheme';
 import SelectedItemsList from '../components/SelectedItemsList';
@@ -38,7 +37,6 @@ export default {
     title: 'Components/SelectedItemsList',
     decorators: [
         withKnobs,
-        StoryRouter(),
         story => (
             <ThemeProvider theme={linnTheme}>
                 <div style={{ position: 'absolute', left: '5%', top: '10%' }}>{story()}</div>

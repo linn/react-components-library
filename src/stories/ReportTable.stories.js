@@ -1,11 +1,12 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import StoryRouter from 'storybook-react-router';
+import { MemoryRouter } from 'react-router';
 import { withKnobs, boolean, text } from '@storybook/addon-knobs';
 import ReportTable from '../components/ReportTable';
 import Page from '../components/Page';
-import small from '../SampleData/ReportTable/small';
-import big from '../SampleData/ReportTable/big';
-import withExternalLinks from '../SampleData/ReportTable/withExternalLinks';
+import small from '../SampleData/ReportTable/small.json';
+import big from '../SampleData/ReportTable/big.json';
+import withExternalLinks from '../SampleData/ReportTable/withExternalLinks.json';
 import providers from './renderUtils/Providers';
 
 const pageProps = {
@@ -28,9 +29,12 @@ const defaultProps = {
 export default {
     title: 'Components/ReportTable',
     decorators: [
-        story => <Page {...pageProps}>{story()}</Page>,
+        story => (
+            <MemoryRouter initialEntries={['/']}>
+                <Page {...pageProps}>{story()}</Page>
+            </MemoryRouter>
+        ),
         withKnobs,
-        StoryRouter(),
         story => providers(story)
     ],
     component: ReportTable
