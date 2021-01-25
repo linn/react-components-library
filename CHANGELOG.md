@@ -1,7 +1,7 @@
 # Changelog
 ## [11.0.0] - 2020-12-22
 ### Changed
-- Updated to Storybook 6 and updated stories files
+- Updated to Storybook 6 and updated story files
 
 ### Added
 - Components
@@ -12,6 +12,14 @@
 
 ### Removed
 - EditableTable
+
+## [10.13.4] - 2020-01-07
+### Fixed
+- `EditableTable` delete button logic and remove click listener which was always setting edit state to true after clicking cancel button
+
+## [10.13.3] - 2020-01-07
+### Fixed
+- Issue where not passing optional `isTableValid` to `EditableTable` would crash
 
 ## [10.13.2] - 2020-12-21
 ### Changed
