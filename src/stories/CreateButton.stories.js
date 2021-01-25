@@ -1,13 +1,26 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import { storiesOf } from '@storybook/react';
-import StoryRouter from 'storybook-react-router';
-
+import { MemoryRouter } from 'react-router';
 import CreateButton from '../components/CreateButton';
 
-storiesOf('CreateButton', module)
-    .addDecorator(StoryRouter())
+export default {
+    title: 'Components/CreateButton',
+    decorators: [
+        story => (
+            <MemoryRouter initialEntries={['/']}>
+                <div style={{ position: 'absolute', left: '5%', top: '10%' }}>{story()}</div>
+            </MemoryRouter>
+        )
+    ],
+    component: CreateButton
+};
 
-    .addDecorator(story => (
-        <div style={{ position: 'absolute', left: '5%', top: '10%' }}>{story()}</div>
-    ))
-    .add('default', () => <CreateButton createUrl="/create" />);
+export const Default = args => <CreateButton {...args} />;
+
+Default.story = {
+    name: 'default'
+};
+
+Default.args = {
+    creatUrl: '/create'
+};

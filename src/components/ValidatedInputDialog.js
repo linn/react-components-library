@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import Typography from '@material-ui/core/Typography';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
@@ -81,7 +81,7 @@ function ValidatedInputDialog({ title, loading, fetchItems, searchItems, clearSe
     const inputValid = () => searchItems.length === 1;
 
     return (
-        <Fragment>
+        <>
             <Tooltip title={title}>
                 <Button
                     color="primary"
@@ -135,11 +135,11 @@ function ValidatedInputDialog({ title, loading, fetchItems, searchItems, clearSe
                                 <CloseIcon />
                             </IconButton>
                         )}
-                        {loading ? <Loading /> : <Fragment />}
+                        {loading && <Loading />}
                     </div>
                 </div>
             </Dialog>
-        </Fragment>
+        </>
     );
 }
 

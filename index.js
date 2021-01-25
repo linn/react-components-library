@@ -71,11 +71,12 @@ import NotFound from './src/components/NotFound';
 import ValidatedInputDialog from './src/components/ValidatedInputDialog';
 import TableWithInlineEditing from './src/components/TableWithInlineEditing';
 import LinnWeekPicker from './src/components/LinnWeekPicker';
-import EditableTable from './src/components/editableTable/EditableTable';
 import { getWeekEndDate, getWeekStartDate } from './src/utilities/dateUtilities';
 import './src/styles/printStyles.css';
 import getPreviousPaths from './src/selectors/previousPathSelectors';
 import smartGoBack from './src/utilities/smartGoBack';
+import GroupEditTable from './src/components/editableTable/GroupEditTable';
+import SingleEditTable from './src/components/editableTable/SingleEditTable';
 
 const reducers = { menu, news };
 
@@ -90,7 +91,6 @@ export {
     DatePicker,
     DateTimePicker,
     Dropdown,
-    EditableTable,
     EntityList,
     ErrorCard,
     errorTheme,
@@ -107,6 +107,7 @@ export {
     getUsername,
     getWeekEndDate,
     getWeekStartDate,
+    GroupEditTable,
     initialiseOnMount,
     InputField,
     ItemSelectors,
@@ -145,6 +146,7 @@ export {
     SaveBackCancelButtons,
     SearchInputField,
     SelectedItemsList,
+    SingleEditTable,
     smartGoBack,
     SnackbarMessage,
     StateApiActions,

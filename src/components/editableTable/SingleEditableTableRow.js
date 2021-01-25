@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, Fragment } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
@@ -11,7 +11,8 @@ import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Tooltip from '@material-ui/core/Tooltip';
 import { grey } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/styles';
-import { inputComponentFactory, displayComponentFactory } from './componentFactory';
+import EditableTableCell from './EditableTableCell';
+import columnsProps from './columnsProps';
 
 const useStyles = makeStyles(theme => ({
     button: {
@@ -23,7 +24,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function EditableTableRow({
+export default function SingleEditableTableRow({
     row,
     columns,
     saveRow,
@@ -33,22 +34,14 @@ export default function EditableTableRow({
     updateRow,
     validateRow,
     deleteRow,
-    groupEdit,
-    isRowValid,
     closeRowOnClickAway,
-    resetRow,
+    deleteRowPreEdit,
+    editOnRowClick,
     ...rest
 }) {
     const [editing, setEditing] = useState(false);
     const [prevItem, setPrevItem] = useState({});
     const [item, setItem] = useState({});
-    const [rowValid, setRowValid] = useState();
-
-    const isRowValidRef = useRef();
-
-    useEffect(() => {
-        isRowValidRef.current = isRowValid;
-    }, [isRowValid]);
 
     useEffect(() => {
         setItem(row);
@@ -58,35 +51,9 @@ export default function EditableTableRow({
         }
     }, [row, isNewRow]);
 
-    useEffect(() => {
-        if (editing) {
-            let valid = true;
-
-            if (validateRow) {
-                valid = validateRow(item);
-            }
-
-            columns.forEach(column => {
-                if (column.required === true && !item[column.id]) {
-                    valid = false;
-                }
-            });
-
-            if (isRowValidRef.current && item.id) {
-                isRowValidRef.current(valid, item.id);
-            }
-
-            setRowValid(valid);
-        }
-    }, [item, validateRow, columns, editing]);
-
     const classes = useStyles();
 
     const handleSaveClick = () => {
-        if (isNewRow) {
-            removeRow(item.id);
-        }
-
         saveRow(item);
     };
 
@@ -96,20 +63,12 @@ export default function EditableTableRow({
             return;
         }
 
-        if (groupEdit) {
-            resetRow(item, prevItem);
-        } else {
-            setEditing(false);
-            setItem(prevItem);
-        }
+        setEditing(false);
+        setItem(prevItem);
     };
 
     const handleDeleteClick = () => {
-        if (!groupEdit) {
-            deleteRow(item);
-        } else {
-            removeRow(item.id);
-        }
+        deleteRow(item.id);
     };
 
     const handleValueChange = (propertyName, newValue) => {
@@ -121,11 +80,26 @@ export default function EditableTableRow({
         setItem({ ...item, [propertyName]: newValue });
     };
 
+    const rowValid = () => {
+        let valid = true;
+
+        if (validateRow) {
+            valid = validateRow(item);
+        }
+
+        columns.forEach(column => {
+            if (column.required === true && !item[column.id]) {
+                valid = false;
+            }
+        });
+        return valid;
+    };
+
     const handleClickAway = e => {
         // for some reason clicks in modals that TableRows open register as clickAways
         // this leads to the annoying scenario where clicking in an input inside a modal closes the entire row
         // this check stops that happening, although there is probably a better solution
-        if (e.target.tagName.toUpperCase() === 'INPUT') {
+        if (e.target.tagName.toUpperCase() === 'INPUT' || !closeRowOnClickAway) {
             return;
         }
         if (closeRowOnClickAway) {
@@ -133,69 +107,46 @@ export default function EditableTableRow({
         }
     };
 
-    const Cell = column => {
-        const Content = () =>
-            (editing && column.editable && editable) || (isNewRow && editing && column.required)
-                ? inputComponentFactory(item, column, handleValueChange, rest)
-                : displayComponentFactory(item, column);
-        if (!column.tooltip) {
-            return (
-                <Fragment key={`${column?.id}${item.id}`}>
-                    <TableCell id={column.type}>
-                        <>{Content()}</>
-                    </TableCell>
-                </Fragment>
-            );
-        }
-        return (
-            <Fragment key={`${column?.id}${item.id}`}>
-                <Tooltip title={column.tooltip(item) || ''}>
-                    <TableCell id={column.type} key={`${column?.id}${item.id}`}>
-                        {Content()}
-                    </TableCell>
-                </Tooltip>
-            </Fragment>
-        );
-    };
-
-    Cell.propTypes = {
-        column: PropTypes.shape({
-            tooltip: PropTypes.func,
-            id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-            editable: PropTypes.bool,
-            type: PropTypes.string,
-            required: PropTypes.bool
-        })
-    };
-
-    Cell.defaultProps = {
-        column: null
+    const handleEditButtonClick = () => {
+        setEditing(true);
     };
 
     return (
         <ClickAwayListener onClickAway={e => handleClickAway(e)}>
-            <TableRow>
-                {columns.map(column => Cell(column))}
+            <TableRow
+                onClick={!editing && editOnRowClick && !deleteRowPreEdit && handleEditButtonClick}
+            >
+                {columns.map(column => (
+                    <EditableTableCell
+                        key={`${row.id}${column.id}`}
+                        column={column}
+                        item={item}
+                        editable={editable}
+                        editing={editing}
+                        isNewRow={isNewRow}
+                        handleValueChange={handleValueChange}
+                        // eslint-disable-next-line react/jsx-props-no-spreading
+                        {...rest}
+                    />
+                ))}
                 {editable &&
                     (editing ? (
                         <>
-                            {!groupEdit && (
-                                <TableCell>
-                                    <Button
-                                        onClick={handleSaveClick}
-                                        color="primary"
-                                        variant="contained"
-                                        size="small"
-                                        classes={{
-                                            root: classes.button
-                                        }}
-                                        disabled={!rowValid}
-                                        data-testid="saveButton"
-                                    >
-                                        <Done style={{ color: grey[50] }} fontSize="small" />
-                                    </Button>
-                                </TableCell>
-                            )}
+                            <TableCell>
+                                <Button
+                                    onClick={handleSaveClick}
+                                    color="primary"
+                                    variant="contained"
+                                    size="small"
+                                    classes={{
+                                        root: classes.button
+                                    }}
+                                    disabled={!rowValid()}
+                                    data-testid="saveButton"
+                                >
+                                    <Done style={{ color: grey[50] }} fontSize="small" />
+                                </Button>
+                            </TableCell>
                             <TableCell>
                                 <Tooltip title="Revert changes to row">
                                     <Button
@@ -206,13 +157,13 @@ export default function EditableTableRow({
                                             root: classes.button
                                         }}
                                         size="small"
-                                        data-testid="clearButton"
+                                        data-testid="cancelButton"
                                     >
                                         <Clear fontSize="small" />
                                     </Button>
                                 </Tooltip>
                             </TableCell>
-                            {deleteRow && !isNewRow && (
+                            {deleteRow && (
                                 <TableCell>
                                     <Tooltip title="Delete Row">
                                         <Button
@@ -238,7 +189,7 @@ export default function EditableTableRow({
                                     <Button
                                         color="primary"
                                         variant="outlined"
-                                        onClick={() => setEditing(true)}
+                                        onClick={handleEditButtonClick}
                                         size="small"
                                         classes={{
                                             root: classes.button
@@ -249,25 +200,24 @@ export default function EditableTableRow({
                                     </Button>
                                 </Tooltip>
                             </TableCell>
-                            {(deleteRow && !isNewRow) ||
-                                (removeRow && !!isNewRow && (
-                                    <TableCell>
-                                        <Tooltip title="Remove Row">
-                                            <Button
-                                                onClick={handleDeleteClick}
-                                                color="secondary"
-                                                variant="contained"
-                                                classes={{
-                                                    root: classes.button
-                                                }}
-                                                size="small"
-                                                data-testid="deleteButton"
-                                            >
-                                                <Delete fontSize="small" />
-                                            </Button>
-                                        </Tooltip>
-                                    </TableCell>
-                                ))}
+                            {!isNewRow && deleteRow && deleteRowPreEdit && (
+                                <TableCell>
+                                    <Tooltip title="Delete Row">
+                                        <Button
+                                            onClick={handleDeleteClick}
+                                            color="secondary"
+                                            variant="contained"
+                                            classes={{
+                                                root: classes.button
+                                            }}
+                                            size="small"
+                                            data-testid="deleteButton"
+                                        >
+                                            <Delete fontSize="small" />
+                                        </Button>
+                                    </Tooltip>
+                                </TableCell>
+                            )}
                             <TableCell />
                         </>
                     ))}
@@ -276,11 +226,12 @@ export default function EditableTableRow({
     );
 }
 
-EditableTableRow.propTypes = {
-    row: PropTypes.shape({}).isRequired,
-    columns: PropTypes.arrayOf(
-        PropTypes.shape({ id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]) })
-    ).isRequired,
+SingleEditableTableRow.propTypes = {
+    row: PropTypes.shape({
+        editing: PropTypes.bool,
+        id: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    }).isRequired,
+    columns: PropTypes.arrayOf(columnsProps).isRequired,
     saveRow: PropTypes.func,
     editable: PropTypes.bool,
     isNewRow: PropTypes.bool,
@@ -288,13 +239,12 @@ EditableTableRow.propTypes = {
     updateRow: PropTypes.func,
     validateRow: PropTypes.func,
     deleteRow: PropTypes.func,
-    groupEdit: PropTypes.bool,
-    isRowValid: PropTypes.func,
-    resetRow: PropTypes.func,
-    closeRowOnClickAway: PropTypes.bool
+    closeRowOnClickAway: PropTypes.bool,
+    deleteRowPreEdit: PropTypes.bool,
+    editOnRowClick: PropTypes.bool
 };
 
-EditableTableRow.defaultProps = {
+SingleEditableTableRow.defaultProps = {
     saveRow: () => {},
     editable: true,
     isNewRow: false,
@@ -302,8 +252,7 @@ EditableTableRow.defaultProps = {
     updateRow: null,
     validateRow: null,
     deleteRow: null,
-    groupEdit: false,
-    isRowValid: null,
-    resetRow: null,
-    closeRowOnClickAway: false
+    closeRowOnClickAway: false,
+    deleteRowPreEdit: false,
+    editOnRowClick: false
 };

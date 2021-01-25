@@ -7,7 +7,10 @@ describe('when getting href', () => {
     describe('when rel present', () => {
         beforeEach(() => {
             item = {
-                links: [{ rel: 'r1', href: '/1' }, { rel: 'r2', href: '/2' }]
+                links: [
+                    { rel: 'r1', href: '/1' },
+                    { rel: 'r2', href: '/2' }
+                ]
             };
         });
 
@@ -20,7 +23,10 @@ describe('when getting href', () => {
     describe('when rel not present', () => {
         beforeEach(() => {
             item = {
-                links: [{ rel: 'r1', href: '/1' }, { rel: 'r2', href: '/2' }]
+                links: [
+                    { rel: 'r1', href: '/1' },
+                    { rel: 'r2', href: '/2' }
+                ]
             };
         });
 
@@ -73,7 +79,10 @@ describe('when getting utilities.getSelfHref', () => {
     describe('when rel present', () => {
         beforeEach(() => {
             item = {
-                links: [{ rel: 'r1', href: '/1' }, { rel: 'self', href: 'self/2' }]
+                links: [
+                    { rel: 'r1', href: '/1' },
+                    { rel: 'self', href: 'self/2' }
+                ]
             };
         });
 
@@ -86,7 +95,10 @@ describe('when getting utilities.getSelfHref', () => {
     describe('when rel not present', () => {
         beforeEach(() => {
             item = {
-                links: [{ rel: 'r1', href: '/1' }, { rel: 'r2', href: '/2' }]
+                links: [
+                    { rel: 'r1', href: '/1' },
+                    { rel: 'r2', href: '/2' }
+                ]
             };
         });
 

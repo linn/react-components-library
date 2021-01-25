@@ -1,4 +1,18 @@
 # Changelog
+## [11.0.0] - 2020-12-22
+### Changed
+- Updated to Storybook 6 and updated story files
+
+### Added
+- Components
+    - SingleEditTable
+    - GroupEditTable
+- Hooks
+    - useGroupEditTable
+
+### Removed
+- EditableTable
+
 ## [10.13.4] - 2020-01-07
 ### Fixed
 - `EditableTable` delete button logic and remove click listener which was always setting edit state to true after clicking cancel button
@@ -8,13 +22,13 @@
 - Issue where not passing optional `isTableValid` to `EditableTable` would crash
 
 ## [10.13.2] - 2020-12-21
-### Changes
+### Changed
 ## EditableTable
 - Fixed a weird bug where inputs were losing focus for no apparent reason
 - Added a groupEdit storybook example.
 
 ## [10.13.1] - 2020-12-17
-### Changes
+### Changed
 ## EditableTable
 - Minor ui improvements for the Editable table. Rows open and optionally close on click and clickaway. Tooltips for buttons.
 - Delete button stays shown when row is closed if a deleteRow function is supplied.

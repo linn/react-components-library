@@ -1,7 +1,6 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import { storiesOf } from '@storybook/react';
-import StoryRouter from 'storybook-react-router';
-import { withKnobs, text, boolean, array } from '@storybook/addon-knobs';
+import { MemoryRouter } from 'react-router';
 import ThemeProvider from '@material-ui/styles/ThemeProvider';
 import { linnTheme } from '../themes/linnTheme';
 import Typeahead from '../components/Typeahead';
@@ -16,54 +15,73 @@ const fetchItems = () => {};
 
 const clearSearch = () => {};
 
-storiesOf('Typeahead', module)
-    .addDecorator(StoryRouter())
-    .addDecorator(story => (
-        <ThemeProvider theme={linnTheme}>
-            <div style={{ padding: '3rem', width: '100%' }}>{story()}</div>
-        </ThemeProvider>
-    ))
-    .addDecorator(withKnobs)
+export default {
+    title: 'Components/Typeahead',
+    decorators: [
+        story => (
+            <MemoryRouter initialEntries={['/']}>
+                <ThemeProvider theme={linnTheme}>
+                    <div style={{ padding: '3rem', width: '100%' }}>{story()}</div>
+                </ThemeProvider>
+            </MemoryRouter>
+        )
+    ],
+    component: Typeahead
+};
 
-    .add('default ', () => (
-        <Typeahead
-            title={text('title', 'Title Text')}
-            loading={boolean('loading', false)}
-            fetchItems={fetchItems}
-            items={array('items', items)}
-            clearSearch={clearSearch}
-            classes={{}}
-        />
-    ))
-    .add('nothingFound ', () => (
-        <Typeahead
-            title={text('title', 'Title Text')}
-            loading={boolean('loading', false)}
-            fetchItems={fetchItems}
-            items={array('items', [])}
-            clearSearch={clearSearch}
-            classes={{}}
-        />
-    ))
-    .add('loading ', () => (
-        <Typeahead
-            title={text('title', 'Title Text')}
-            loading={boolean('loading', true)}
-            fetchItems={fetchItems}
-            items={array('items', [])}
-            clearSearch={clearSearch}
-            classes={{}}
-        />
-    ))
-    .add('modal ', () => (
-        <Typeahead
-            title={text('title', 'Title Text')}
-            loading={boolean('loading', false)}
-            modal
-            label="click me and see"
-            fetchItems={fetchItems}
-            items={array('items', [])}
-            clearSearch={clearSearch}
-            classes={{}}
-        />
-    ));
+export const Default = args => <Typeahead {...args} />;
+
+Default.story = {
+    name: 'default '
+};
+
+Default.args = {
+    title: 'Title Text',
+    loading: false,
+    fetchItems,
+    items,
+    clearSearch
+};
+
+export const NothingFound = args => <Typeahead {...args} />;
+
+NothingFound.story = {
+    name: 'nothingFound '
+};
+
+NothingFound.args = {
+    title: 'Title Text',
+    loading: false,
+    fetchItems,
+    items: [],
+    clearSearch
+};
+
+export const Loading = args => <Typeahead {...args} />;
+
+Loading.story = {
+    name: 'loading '
+};
+
+Loading.args = {
+    title: 'Title Text',
+    loading: true,
+    fetchItems,
+    items,
+    clearSearch
+};
+
+export const Modal = args => <Typeahead {...args} />;
+
+Modal.story = {
+    name: 'modal '
+};
+
+Modal.args = {
+    title: 'Title Text',
+    loading: true,
+    fetchItems,
+    items,
+    clearSearch,
+    modal: true
+};

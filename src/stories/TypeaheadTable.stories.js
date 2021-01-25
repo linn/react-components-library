@@ -1,7 +1,5 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import { storiesOf } from '@storybook/react';
-import { withKnobs } from '@storybook/addon-knobs/react';
-import StoryRouter from 'storybook-react-router';
 import TypeaheadTable from '../components/TypeaheadTable';
 import Page from '../components/Page';
 import providers from './renderUtils/Providers';
@@ -36,44 +34,60 @@ for (let i = 0; i < 100; i += 1) {
 
 const columnNames = ['0', '1', '2', '3'];
 
-storiesOf('TypeaheadTable', module)
-    .addDecorator(story => <Page {...pageProps}>{story()}</Page>)
-    .addDecorator(withKnobs)
-    .addDecorator(StoryRouter())
-    .addDecorator(story => providers(story))
-    .add('no results', () => (
-        <TypeaheadTable
-            columnNames={columnNames}
-            fetchItems={() => {}}
-            clearSearch={() => {}}
-            title="TypeaheadTable"
-            history={{ push: () => {} }}
-            placeholder="placeholder text"
-            label="label"
-        />
-    ))
-    .add('loading', () => (
-        <TypeaheadTable
-            table={table}
-            columnNames={columnNames}
-            fetchItems={() => {}}
-            clearSearch={() => {}}
-            loading
-            title="TypeaheadTable"
-            history={{ push: () => {} }}
-            placeholder="placeholder text"
-            label="label"
-        />
-    ))
-    .add('with results', () => (
-        <TypeaheadTable
-            table={table}
-            columnNames={columnNames}
-            fetchItems={() => {}}
-            clearSearch={() => {}}
-            title="TypeaheadTable"
-            history={{ push: () => {} }}
-            placeholder="placeholder text"
-            label="label"
-        />
-    ));
+export default {
+    title: 'Components/TypeaheadTable',
+    decorators: [story => <Page {...pageProps}>{story()}</Page>, story => providers(story)],
+    component: TypeaheadTable
+};
+
+export const WithResults = args => <TypeaheadTable {...args} />;
+
+WithResults.story = {
+    name: 'with results'
+};
+
+WithResults.args = {
+    table,
+    columnNames,
+    fetchItems: () => {},
+    clearSearch: () => {},
+    title: 'TypeaheadTable',
+    history: { push: () => {} },
+    placeholder: 'placeholder text',
+    label: 'label',
+    loading: false
+};
+
+export const NoResults = args => <TypeaheadTable {...args} />;
+
+NoResults.story = {
+    name: 'no results'
+};
+
+NoResults.args = {
+    columnNames,
+    fetchItems: () => {},
+    clearSearch: () => {},
+    title: 'TypeaheadTable',
+    history: { push: () => {} },
+    placeholder: 'placeholder text',
+    label: 'label'
+};
+
+export const Loading = args => <TypeaheadTable {...args} />;
+
+Loading.story = {
+    name: 'loading'
+};
+
+Loading.args = {
+    table,
+    columnNames,
+    fetchItems: () => {},
+    clearSearch: () => {},
+    title: 'TypeaheadTable',
+    history: { push: () => {} },
+    placeholder: 'placeholder text',
+    label: 'label',
+    loading: true
+};

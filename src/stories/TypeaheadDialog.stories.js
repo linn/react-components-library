@@ -1,9 +1,6 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import { storiesOf } from '@storybook/react';
-import StoryRouter from 'storybook-react-router';
-import { withKnobs, text, boolean, array } from '@storybook/addon-knobs';
 import providers from './renderUtils/Providers';
-
 import TypeaheadDialog from '../components/TypeaheadDialog';
 
 const items = [
@@ -18,18 +15,26 @@ const clearSearch = () => {};
 
 const onSelect = () => {};
 
-storiesOf('TypeaheadDialog', module)
-    .addDecorator(StoryRouter())
-    .addDecorator(story => <div style={{ padding: '3rem', width: '100%' }}>{story()}</div>)
-    .addDecorator(withKnobs)
-    .addDecorator(story => providers(story))
-    .add('default ', () => (
-        <TypeaheadDialog
-            title={text('title', 'Title Text')}
-            loading={boolean('loading', false)}
-            fetchItems={fetchItems}
-            searchItems={array('items', items)}
-            clearSearch={clearSearch}
-            onSelect={onSelect}
-        />
-    ));
+export default {
+    title: 'Components/TypeaheadDialog',
+    decorators: [
+        story => <div style={{ padding: '3rem', width: '100%' }}>{story()}</div>,
+        story => providers(story)
+    ],
+    component: TypeaheadDialog
+};
+
+export const Default = args => <TypeaheadDialog {...args} />;
+
+Default.story = {
+    name: 'default '
+};
+
+Default.args = {
+    title: 'Title Text',
+    loading: false,
+    fetchItems,
+    searchItems: items,
+    clearSearch,
+    onSelect
+};

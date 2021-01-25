@@ -1,23 +1,46 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import { storiesOf } from '@storybook/react';
-import StoryRouter from 'storybook-react-router';
-import Grid from '@material-ui/core/Grid';
+import { MemoryRouter } from 'react-router';
 import providers from './renderUtils/Providers';
 import LinkButton from '../components/LinkButton';
 
-const stories = storiesOf('LinkButton', module);
+export default {
+    title: 'Components/LinkButton',
+    decorators: [
+        story => <MemoryRouter initialEntries={['/']}>{story()}</MemoryRouter>,
+        story => providers(story)
+    ],
+    component: LinkButton
+};
 
-stories.addDecorator(StoryRouter()).addDecorator(story => providers(story));
-stories
-    .addDecorator(story => (
-        <Grid container spacing={3}>
-            <Grid item xs={2}>
-                {story()}
-            </Grid>
-        </Grid>
-    ))
-    .add('default', () => <LinkButton text="Some Link" to="#" />)
-    .add('external', () => <LinkButton text="Some Link" to="#" external />)
-    .add('disabled with tooltip', () => (
-        <LinkButton text="Some Link" to="#" disabled tooltip="this button is disabled" />
-    ));
+export const Default = args => <LinkButton {...args} />;
+
+Default.story = {
+    name: 'default'
+};
+
+Default.args = {
+    text: 'Some Link',
+    to: '#'
+};
+
+export const External = args => <LinkButton {...args} />;
+
+External.story = {
+    name: 'external'
+};
+
+External.args = {
+    external: true
+};
+
+export const DisabledWithTooltip = args => <LinkButton {...args} />;
+
+DisabledWithTooltip.story = {
+    name: 'disabled with tooltip'
+};
+
+DisabledWithTooltip.args = {
+    disabled: true,
+    tooltip: 'this button is disabled'
+};

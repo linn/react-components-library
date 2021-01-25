@@ -1,55 +1,77 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import { storiesOf } from '@storybook/react';
-import StoryRouter from 'storybook-react-router';
-import { withKnobs, boolean, text } from '@storybook/addon-knobs';
+import { MemoryRouter } from 'react-router';
 import ReportTable from '../components/ReportTable';
-import Page from '../components/Page';
-import small from '../SampleData/ReportTable/small';
-import big from '../SampleData/ReportTable/big';
-import withExternalLinks from '../SampleData/ReportTable/withExternalLinks';
+import small from '../SampleData/ReportTable/small.json';
+import big from '../SampleData/ReportTable/big.json';
+import withExternalLinks from '../SampleData/ReportTable/withExternalLinks.json';
 import providers from './renderUtils/Providers';
 
-const pageProps = {
-    history: {
-        push: () => {},
-        location: {
-            pathname: '/data'
-        }
-    }
+export default {
+    title: 'Components/ReportTable',
+    decorators: [
+        story => <MemoryRouter initialEntries={['/']}>{story()}</MemoryRouter>,
+        story => providers(story)
+    ],
+    component: ReportTable
 };
 
-const defaultProps = {
-    showTitle: boolean('showTitle', false),
-    title: text('title', 'Your Report Title'),
-    showRowTitles: boolean('showRowTitles', true),
-    showTotals: boolean('showTotals', false),
-    hasExternalLinks: boolean('showTotals', false)
+export const Default = args => <ReportTable {...args} />;
+
+Default.story = {
+    name: 'default'
 };
 
-const stories = storiesOf('ReportTable', module);
-stories.addDecorator(story => <Page {...pageProps}>{story()}</Page>);
-stories.addDecorator(withKnobs);
-stories.addDecorator(StoryRouter()).addDecorator(story => providers(story));
+Default.args = {
+    showTitle: false,
+    title: 'Your Report Title',
+    showRowTitles: true,
+    showTotals: false,
+    hasExternalLinks: false,
+    reportData: small
+};
 
-stories.add('With Knobs', () => (
-    <ReportTable
-        showTitle={boolean('showTitle', false)}
-        title={text('title', 'Your Report Title')}
-        showRowTitles={boolean('showRowTitles', true)}
-        showTotals={boolean('showTotals', false)}
-        hasExternalLinks={boolean('hasExternalLinks', false)}
-        reportData={small}
-    />
-));
+export const WhenBiggerReport = args => <ReportTable {...args} />;
 
-stories.add('When Bigger Report', () => <ReportTable {...defaultProps} reportData={big} />);
+WhenBiggerReport.story = {
+    name: 'When Bigger Report'
+};
 
-stories.add('When No data', () => <ReportTable {...defaultProps} />);
+WhenBiggerReport.args = {
+    showTitle: false,
+    title: 'Your Report Title',
+    showRowTitles: true,
+    showTotals: false,
+    hasExternalLinks: false,
+    reportData: big
+};
 
-stories.add('When Error Message', () => (
-    <ReportTable {...defaultProps} reportData={{ message: 'Failed to fetch data' }} />
-));
+export const WhenErrorMessage = args => <ReportTable {...args} />;
 
-stories.add('When External Links in Report', () => (
-    <ReportTable {...defaultProps} reportData={withExternalLinks} hasExternalLinks />
-));
+WhenErrorMessage.story = {
+    showTitle: false,
+    title: 'Your Report Title',
+    showRowTitles: true,
+    showTotals: false,
+    hasExternalLinks: false,
+    name: 'When Error Message'
+};
+
+WhenErrorMessage.args = {
+    reportData: { message: 'Failed to fetch data' }
+};
+
+export const WhenExternalLinksInReport = args => <ReportTable {...args} />;
+
+WhenExternalLinksInReport.story = {
+    name: 'When External Links in Report'
+};
+
+WhenExternalLinksInReport.args = {
+    showTitle: false,
+    title: 'Your Report Title',
+    showRowTitles: true,
+    showTotals: false,
+    reportData: withExternalLinks,
+    hasExternalLinks: true
+};

@@ -1,36 +1,54 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import { storiesOf } from '@storybook/react';
-import { text } from '@storybook/addon-knobs';
 import ThemeProvider from '@material-ui/styles/ThemeProvider';
 import { linnTheme } from '../themes/linnTheme';
 import SearchInputField from '../components/SearchInputField';
 
-storiesOf('SearchInputField', module)
-    .addDecorator(story => (
-        <ThemeProvider theme={linnTheme}>
-            <div>{story()}</div>
-        </ThemeProvider>
-    ))
-    .add('Label and value', () => (
-        <SearchInputField
-            value={text('value', 'Search')}
-            label={text('label', 'Search Input Field')}
-        />
-    ))
-    .add('Label and no value', () => (
-        <SearchInputField value={text('value', '')} label={text('label', 'Search Input Field')} />
-    ))
-    .add('Error', () => (
-        <SearchInputField
-            value={text('value', 'Search')}
-            label={text('label', 'Search Input Field')}
-            error
-        />
-    ))
-    .add('Disabled', () => (
-        <SearchInputField
-            value={text('value', 'Search')}
-            label={text('label', 'Search Input Field')}
-            disabled
-        />
-    ));
+export default {
+    title: 'Components/SearchInputField',
+    decorators: [
+        story => (
+            <ThemeProvider theme={linnTheme}>
+                <div>{story()}</div>
+            </ThemeProvider>
+        )
+    ],
+    component: SearchInputField
+};
+
+export const Default = args => <SearchInputField {...args} />;
+
+Default.story = {
+    name: 'Label and value'
+};
+
+Default.args = {
+    value: 'Search',
+    label: 'Search Input Field'
+};
+
+export const LabelAndNoValue = args => <SearchInputField {...args} />;
+
+LabelAndNoValue.story = {
+    name: 'Label and no value'
+};
+
+LabelAndNoValue.args = {
+    value: '',
+    label: 'No Value'
+};
+
+export const ErrorStory = args => <SearchInputField {...args} />;
+
+ErrorStory.story = {
+    name: 'Error'
+};
+
+ErrorStory.args = {
+    error: true,
+    label: 'Error'
+};
+
+export const Disabled = args => <SearchInputField {...args} />;
+
+Disabled.args = { label: 'Disabled', disabled: true };

@@ -1,7 +1,5 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import { storiesOf } from '@storybook/react';
-import { withKnobs } from '@storybook/addon-knobs';
-import StoryRouter from 'storybook-react-router';
 import ThemeProvider from '@material-ui/styles/ThemeProvider';
 import TableWithInlineEditing from '../components/TableWithInlineEditing';
 import { linnTheme } from '../themes/linnTheme';
@@ -52,46 +50,68 @@ const content = [
     }
 ];
 
-storiesOf('TableWithInlineEditing', module)
-    .addDecorator(story => <div>{story()}</div>)
-    .addDecorator(withKnobs)
-    .addDecorator(StoryRouter())
-    .addDecorator(story => (
-        <ThemeProvider theme={linnTheme}>
-            <div>{story()}</div>
-        </ThemeProvider>
-    ))
-    .add('allowed to edit, add and delete', () => (
-        <TableWithInlineEditing
-            columnsInfo={columnsInfo}
-            content={content}
-            updateContent={() => {}}
-            allowedToEdit
-            allowedToCreate
-            allowedToDelete
-        />
-    ))
-    .add('allowed to edit and add', () => (
-        <TableWithInlineEditing
-            columnsInfo={columnsInfo}
-            content={content}
-            updateContent={() => {}}
-            allowedToEdit
-            allowedToCreate
-        />
-    ))
-    .add('allowed to edit only', () => (
-        <TableWithInlineEditing
-            columnsInfo={columnsInfo}
-            content={content}
-            updateContent={() => {}}
-            allowedToEdit
-        />
-    ))
-    .add('Not allowed to edit', () => (
-        <TableWithInlineEditing
-            columnsInfo={columnsInfo}
-            content={content}
-            updateContent={() => {}}
-/>
-    ));
+export default {
+    title: 'Components/TableWithInlineEditing',
+    decorators: [
+        story => (
+            <ThemeProvider theme={linnTheme}>
+                <div>{story()}</div>
+            </ThemeProvider>
+        )
+    ],
+    component: TableWithInlineEditing
+};
+
+export const AllowedToEditAddAndDelete = args => <TableWithInlineEditing {...args} />;
+
+AllowedToEditAddAndDelete.story = {
+    name: 'allowed to edit, add and delete'
+};
+
+AllowedToEditAddAndDelete.args = {
+    columnsInfo,
+    content,
+    updateContent: () => {},
+    allowedToEdit: true,
+    allowedToCreate: true,
+    allowedToDelete: true
+};
+
+export const AllowedToEditAndAdd = args => <TableWithInlineEditing {...args} />;
+
+AllowedToEditAndAdd.story = {
+    name: 'allowed to edit and add'
+};
+
+AllowedToEditAddAndDelete.args = {
+    columnsInfo,
+    content,
+    updateContent: () => {},
+    allowedToEdit: true,
+    allowedToCreate: true
+};
+
+export const AllowedToEditOnly = args => <TableWithInlineEditing {...args} />;
+
+AllowedToEditOnly.story = {
+    name: 'allowed to edit only'
+};
+
+AllowedToEditOnly.args = {
+    columnsInfo,
+    content,
+    updateContent: () => {},
+    allowedToEdit: true
+};
+
+export const NotAllowedToEdit = args => <TableWithInlineEditing {...args} />;
+
+NotAllowedToEdit.story = {
+    name: 'Not allowed to edit'
+};
+
+NotAllowedToEdit.args = {
+    columnsInfo,
+    content,
+    updateContent: () => {}
+};

@@ -60,7 +60,10 @@ describe('when getting item by href', () => {
     test('should return item', () => {
         const state = {
             itemTypes: {
-                items: [{ name: '1', href: '/1' }, { name: '2', href: '/2' }],
+                items: [
+                    { name: '1', href: '/1' },
+                    { name: '2', href: '/2' }
+                ],
                 loading: false
             }
         };

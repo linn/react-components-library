@@ -1,10 +1,19 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import { storiesOf } from '@storybook/react';
-import { withKnobs, text } from '@storybook/addon-knobs';
-
 import ErrorCard from '../components/ErrorCard';
 
-storiesOf('ErrorCard', module)
-    .addDecorator(story => <div style={{ padding: '3rem', width: '100%' }}>{story()}</div>)
-    .addDecorator(withKnobs)
-    .add('default ', () => <ErrorCard errorMessage={text('errorMessage', 'Error message')} />);
+export default {
+    title: 'Components/ErrorCard',
+    decorators: [story => <div style={{ padding: '3rem', width: '100%' }}>{story()}</div>],
+    component: ErrorCard
+};
+
+export const Default = args => <ErrorCard {...args} />;
+
+Default.story = {
+    name: 'default '
+};
+
+Default.args = {
+    errorMessage: 'Error Message'
+};
