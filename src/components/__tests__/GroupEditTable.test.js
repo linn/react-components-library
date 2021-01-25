@@ -351,7 +351,7 @@ describe('<GroupEditTable />', () => {
             expect(setRowToBeSaved).toHaveBeenCalled();
         });
 
-        it('should disabled save button when row not valid', () => {
+        it('should disable save button when row not valid', () => {
             const newRows = [
                 ...defaultRows,
                 { id: 2, col1: 'text5', col2: 'text6', editing: true }
@@ -366,7 +366,7 @@ describe('<GroupEditTable />', () => {
             expect(saveButton).toBeDisabled();
         });
 
-        it('should not disable delte button', () => {
+        it('should not disable delete button', () => {
             const newRows = [
                 ...defaultRows,
                 { id: 2, col1: 'text5', col2: 'text6', editing: true }
@@ -381,6 +381,31 @@ describe('<GroupEditTable />', () => {
             expect(deleteButton).not.toBeDisabled();
             fireEvent.click(deleteButton);
             expect(setRowToBeDeleted).toHaveBeenCalled();
+        });
+    });
+
+    describe('when editOnRowClick is false', () => {
+        it('should not set row editing when row is clicked', () => {
+            const { queryByTestId, getAllByRole } = render(<GroupEditTable {...defaultProps} />);
+
+            const tableRows = getAllByRole('row');
+
+            fireEvent.click(tableRows[1]);
+
+            expect(queryByTestId('saveButton')).not.toBeInTheDocument();
+            expect(queryByTestId('cancelButton')).not.toBeInTheDocument();
+        });
+    });
+
+    describe('when editOnRowClick is true', () => {
+        it('should set row editing when row is clicked', () => {
+            const { getAllByRole } = render(<GroupEditTable {...defaultProps} editOnRowClick />);
+
+            const tableRows = getAllByRole('row');
+
+            fireEvent.click(tableRows[1]);
+
+            expect(handleEditClick).toHaveBeenCalled();
         });
     });
 });

@@ -23,6 +23,7 @@ export default function SingleEditTable({
     allowNewRowCreation,
     closeRowOnClickAway,
     deleteRowPreEdit,
+    editOnRowClick,
     ...rest
 }) {
     const [showNewRow, setShowNewRow] = useState(false);
@@ -56,6 +57,7 @@ export default function SingleEditTable({
                         deleteRow={deleteRow}
                         closeRowOnClickAway={closeRowOnClickAway}
                         deleteRowPreEdit={deleteRowPreEdit}
+                        editOnRowClick={editOnRowClick}
                     />
                 ))}
                 {editable &&
@@ -70,6 +72,7 @@ export default function SingleEditTable({
                             updateRow={updateRow}
                             validateRow={validateRow}
                             removeRow={handleRemoveRow}
+                            editOnRowClick={editOnRowClick}
                             /* eslint-disable react/jsx-props-no-spreading */
                             {...rest}
                         />
@@ -104,7 +107,8 @@ SingleEditTable.propTypes = {
     closeEditingOnSave: PropTypes.bool,
     allowNewRowCreation: PropTypes.bool,
     closeRowOnClickAway: PropTypes.bool,
-    deleteRowPreEdit: PropTypes.bool
+    deleteRowPreEdit: PropTypes.bool,
+    editOnRowClick: PropTypes.bool
 };
 
 SingleEditTable.defaultProps = {
@@ -118,5 +122,6 @@ SingleEditTable.defaultProps = {
     closeEditingOnSave: false,
     allowNewRowCreation: true,
     closeRowOnClickAway: false,
-    deleteRowPreEdit: false
+    deleteRowPreEdit: false,
+    editOnRowClick: false
 };

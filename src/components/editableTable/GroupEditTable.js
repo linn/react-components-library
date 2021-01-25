@@ -28,6 +28,7 @@ export default function GroupEditTable({
     setRowToBeSaved,
     setRowToBeDeleted,
     removeRowOnDelete,
+    editOnRowClick,
     ...rest
 }) {
     const [rowsValid, setRowsValid] = useState([]);
@@ -95,6 +96,8 @@ export default function GroupEditTable({
                         setRowToBeDeleted={setRowToBeDeleted}
                         setRowToBeSaved={setRowToBeSaved}
                         removeRowOnDelete={removeRowOnDelete}
+                        closeRowOnClickAway={closeRowOnClickAway}
+                        editOnRowClick={editOnRowClick}
                         {...rest}
                     />
                 ))}
@@ -130,7 +133,8 @@ GroupEditTable.propTypes = {
     deleteRowPreEdit: PropTypes.bool,
     setRowToBeDeleted: PropTypes.func.isRequired,
     setRowToBeSaved: PropTypes.func.isRequired,
-    removeRowOnDelete: PropTypes.bool
+    removeRowOnDelete: PropTypes.bool,
+    editOnRowClick: PropTypes.bool
 };
 
 GroupEditTable.defaultProps = {
@@ -145,5 +149,6 @@ GroupEditTable.defaultProps = {
     resetRow: null,
     closeRowOnClickAway: false,
     deleteRowPreEdit: false,
-    removeRowOnDelete: false
+    removeRowOnDelete: false,
+    editOnRowClick: false
 };

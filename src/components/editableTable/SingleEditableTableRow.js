@@ -36,6 +36,7 @@ export default function SingleEditableTableRow({
     deleteRow,
     closeRowOnClickAway,
     deleteRowPreEdit,
+    editOnRowClick,
     ...rest
 }) {
     const [editing, setEditing] = useState(false);
@@ -98,7 +99,7 @@ export default function SingleEditableTableRow({
         // for some reason clicks in modals that TableRows open register as clickAways
         // this leads to the annoying scenario where clicking in an input inside a modal closes the entire row
         // this check stops that happening, although there is probably a better solution
-        if (e.target.tagName.toUpperCase() === 'INPUT') {
+        if (e.target.tagName.toUpperCase() === 'INPUT' || !closeRowOnClickAway) {
             return;
         }
         if (closeRowOnClickAway) {
@@ -112,9 +113,12 @@ export default function SingleEditableTableRow({
 
     return (
         <ClickAwayListener onClickAway={e => handleClickAway(e)}>
-            <TableRow onClick={!editing && !deleteRowPreEdit && handleEditButtonClick}>
+            <TableRow
+                onClick={!editing && editOnRowClick && !deleteRowPreEdit && handleEditButtonClick}
+            >
                 {columns.map(column => (
                     <EditableTableCell
+                        key={`${row.id}${column.id}`}
                         column={column}
                         item={item}
                         editable={editable}
@@ -236,7 +240,8 @@ SingleEditableTableRow.propTypes = {
     validateRow: PropTypes.func,
     deleteRow: PropTypes.func,
     closeRowOnClickAway: PropTypes.bool,
-    deleteRowPreEdit: PropTypes.bool
+    deleteRowPreEdit: PropTypes.bool,
+    editOnRowClick: PropTypes.bool
 };
 
 SingleEditableTableRow.defaultProps = {
@@ -248,5 +253,6 @@ SingleEditableTableRow.defaultProps = {
     validateRow: null,
     deleteRow: null,
     closeRowOnClickAway: false,
-    deleteRowPreEdit: false
+    deleteRowPreEdit: false,
+    editOnRowClick: false
 };

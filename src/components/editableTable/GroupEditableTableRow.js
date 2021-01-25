@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import EditIcon from '@material-ui/icons/Edit';
@@ -48,6 +49,8 @@ export default function GroupEditableTableRow({
     setRowToBeSaved,
     setRowToBeDeleted,
     removeRowOnDelete,
+    closeRowOnClickAway,
+    editOnRowClick,
     ...rest
 }) {
     const [rowValid, setRowValid] = useState();
@@ -111,103 +114,81 @@ export default function GroupEditableTableRow({
     };
 
     const saveButtonEnabled = () => {
-        return !!(rowValid && !row.toBeDeleted && !row.toBeSaved);
+        return rowValid && !row.toBeDeleted && !row.toBeSaved;
     };
 
     const deleteButtonEnabled = () => {
         return !row.toBeDeleted && !row.toBeSaved;
     };
 
+    const handleClickAway = e => {
+        // for some reason clicks in modals that TableRows open register as clickAways
+        // this leads to the annoying scenario where clicking in an input inside a modal closes the entire row
+        // this check stops that happening, although there is probably a better solution
+        if (e.target.tagName.toUpperCase() === 'INPUT' || !closeRowOnClickAway) {
+            return;
+        }
+        if (closeRowOnClickAway && row.editing) {
+            handleEditClick(row.id, false);
+        }
+    };
+
     return (
-        <TableRow
-            onClick={!row.editing && !deleteRowPreEdit ? handleEditButtonClick : undefined}
-            classes={{ root: classes.row }}
-        >
-            {columns.map(column => (
-                <EditableTableCell
-                    key={`${row.id}${column.id}`}
-                    column={column}
-                    item={row}
-                    editable={editable}
-                    editing={row.editing}
-                    handleValueChange={handleValueChange}
-                    // eslint-disable-next-line react/jsx-props-no-spreading
-                    {...rest}
-                />
-            ))}
-            {editable &&
-                (row.editing ? (
-                    <>
-                        <TableCell>
-                            <Button
-                                onClick={handleSaveClick}
-                                color="primary"
-                                variant="outlined"
-                                size="small"
-                                classes={{
-                                    root: classes.button
-                                }}
-                                disabled={!saveButtonEnabled()}
-                                data-testid="saveButton"
-                            >
-                                <Save fontSize="small" />
-                            </Button>
-                        </TableCell>
-                        <TableCell>
-                            <Tooltip title="Revert changes to row">
-                                <Button
-                                    onClick={handleCancelClick}
-                                    color="secondary"
-                                    variant="outlined"
-                                    classes={{
-                                        root: classes.button
-                                    }}
-                                    size="small"
-                                    data-testid="cancelButton"
-                                >
-                                    <Clear fontSize="small" />
-                                </Button>
-                            </Tooltip>
-                        </TableCell>
-                        {removeRow && (
+        <ClickAwayListener onClickAway={e => handleClickAway(e)}>
+            <TableRow
+                onClick={
+                    !row.editing && editOnRowClick && !deleteRowPreEdit && handleEditButtonClick
+                }
+                classes={{ root: classes.row }}
+            >
+                {columns.map(column => (
+                    <EditableTableCell
+                        key={`${row.id}${column.id}`}
+                        column={column}
+                        item={row}
+                        editable={editable}
+                        editing={row.editing}
+                        handleValueChange={handleValueChange}
+                        // eslint-disable-next-line react/jsx-props-no-spreading
+                        {...rest}
+                    />
+                ))}
+                {editable &&
+                    (row.editing ? (
+                        <>
                             <TableCell>
                                 <Button
-                                    onClick={handleDeleteClick}
-                                    color="secondary"
-                                    variant="contained"
-                                    classes={{
-                                        root: classes.button
-                                    }}
-                                    size="small"
-                                    data-testid="deleteButton"
-                                    disabled={!deleteButtonEnabled()}
-                                >
-                                    <Delete fontSize="small" />
-                                </Button>
-                            </TableCell>
-                        )}
-                    </>
-                ) : (
-                    <>
-                        <TableCell>
-                            <Tooltip title="Edit Row">
-                                <Button
+                                    onClick={handleSaveClick}
                                     color="primary"
                                     variant="outlined"
-                                    onClick={handleEditButtonClick}
                                     size="small"
                                     classes={{
                                         root: classes.button
                                     }}
-                                    data-testid="editButton"
+                                    disabled={!saveButtonEnabled()}
+                                    data-testid="saveButton"
                                 >
-                                    <EditIcon fontSize="small" />
+                                    <Save fontSize="small" />
                                 </Button>
-                            </Tooltip>
-                        </TableCell>
-                        {removeRow && deleteRowPreEdit && (
+                            </TableCell>
                             <TableCell>
-                                <Tooltip title="Remove Row">
+                                <Tooltip title="Revert changes to row">
+                                    <Button
+                                        onClick={handleCancelClick}
+                                        color="secondary"
+                                        variant="outlined"
+                                        classes={{
+                                            root: classes.button
+                                        }}
+                                        size="small"
+                                        data-testid="cancelButton"
+                                    >
+                                        <Clear fontSize="small" />
+                                    </Button>
+                                </Tooltip>
+                            </TableCell>
+                            {removeRow && (
+                                <TableCell>
                                     <Button
                                         onClick={handleDeleteClick}
                                         color="secondary"
@@ -221,13 +202,51 @@ export default function GroupEditableTableRow({
                                     >
                                         <Delete fontSize="small" />
                                     </Button>
+                                </TableCell>
+                            )}
+                        </>
+                    ) : (
+                        <>
+                            <TableCell>
+                                <Tooltip title="Edit Row">
+                                    <Button
+                                        color="primary"
+                                        variant="outlined"
+                                        onClick={handleEditButtonClick}
+                                        size="small"
+                                        classes={{
+                                            root: classes.button
+                                        }}
+                                        data-testid="editButton"
+                                    >
+                                        <EditIcon fontSize="small" />
+                                    </Button>
                                 </Tooltip>
                             </TableCell>
-                        )}
-                        <TableCell />
-                    </>
-                ))}
-        </TableRow>
+                            {removeRow && deleteRowPreEdit && (
+                                <TableCell>
+                                    <Tooltip title="Remove Row">
+                                        <Button
+                                            onClick={handleDeleteClick}
+                                            color="secondary"
+                                            variant="contained"
+                                            classes={{
+                                                root: classes.button
+                                            }}
+                                            size="small"
+                                            data-testid="deleteButton"
+                                            disabled={!deleteButtonEnabled()}
+                                        >
+                                            <Delete fontSize="small" />
+                                        </Button>
+                                    </Tooltip>
+                                </TableCell>
+                            )}
+                            <TableCell />
+                        </>
+                    ))}
+            </TableRow>
+        </ClickAwayListener>
     );
 }
 
@@ -250,7 +269,9 @@ GroupEditableTableRow.propTypes = {
     handleEditClick: PropTypes.func,
     setRowToBeDeleted: PropTypes.func,
     setRowToBeSaved: PropTypes.func.isRequired,
-    removeRowOnDelete: PropTypes.bool
+    removeRowOnDelete: PropTypes.bool,
+    closeRowOnClickAway: PropTypes.bool,
+    editOnRowClick: PropTypes.bool
 };
 
 GroupEditableTableRow.defaultProps = {
@@ -262,5 +283,7 @@ GroupEditableTableRow.defaultProps = {
     deleteRowPreEdit: false,
     handleEditClick: () => {},
     removeRowOnDelete: false,
-    setRowToBeDeleted: () => {}
+    setRowToBeDeleted: () => {},
+    closeRowOnClickAway: false,
+    editOnRowClick: false
 };

@@ -436,4 +436,32 @@ describe('<SingleEditTable />', () => {
             expect(getByTestId('saveButton')).toBeDisabled();
         });
     });
+
+    describe('when editOnRowClick is false', () => {
+        it('should not set row editing when row is clicked', () => {
+            const { queryByTestId, getAllByRole } = render(<SingleEditTable {...defaultProps} />);
+
+            const tableRows = getAllByRole('row');
+
+            fireEvent.click(tableRows[1]);
+
+            expect(queryByTestId('saveButton')).not.toBeInTheDocument();
+            expect(queryByTestId('cancelButton')).not.toBeInTheDocument();
+        });
+    });
+
+    describe('when editOnRowClick is true', () => {
+        it('should set row editing when row is clicked', () => {
+            const { getByTestId, getAllByRole } = render(
+                <SingleEditTable {...defaultProps} editOnRowClick />
+            );
+
+            const tableRows = getAllByRole('row');
+
+            fireEvent.click(tableRows[1]);
+
+            expect(getByTestId('saveButton')).toBeInTheDocument();
+            expect(getByTestId('cancelButton')).toBeInTheDocument();
+        });
+    });
 });
