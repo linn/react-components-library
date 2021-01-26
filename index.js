@@ -77,6 +77,7 @@ import getPreviousPaths from './src/selectors/previousPathSelectors';
 import smartGoBack from './src/utilities/smartGoBack';
 import GroupEditTable from './src/components/editableTable/GroupEditTable';
 import SingleEditTable from './src/components/editableTable/SingleEditTable';
+import useGroupEditTable from './src/hooks/useGroupEditTable';
 
 const reducers = { menu, news };
 
@@ -159,5 +160,6 @@ export {
     useSearch,
     useTablePagination,
     utilities,
-    ValidatedInputDialog
+    ValidatedInputDialog,
+    useGroupEditTable
 };
