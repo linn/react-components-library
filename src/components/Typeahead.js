@@ -51,14 +51,15 @@ function Typeahead({
     onSelect,
     value,
     placeholder,
-    disabled
+    disabled,
+    minimumSearchTermLength
 }) {
     const [searchTerm, setSearchTerm] = useState('');
     const [dialogOpen, setDialogOpen] = useState(false);
 
     const classes = useStyles();
 
-    useSearch(fetchItems, searchTerm, clearSearch);
+    useSearch(fetchItems, searchTerm, clearSearch, null, null, null, minimumSearchTermLength);
 
     const handleSearchTermChange = (...args) => {
         setSearchTerm(args[1]);
@@ -202,7 +203,8 @@ Typeahead.propTypes = {
     onSelect: PropTypes.func,
     value: PropTypes.string,
     placeholder: PropTypes.string,
-    disabled: PropTypes.bool
+    disabled: PropTypes.bool,
+    minimumSearchTermLength: PropTypes.number
 };
 
 Typeahead.defaultProps = {
@@ -214,7 +216,8 @@ Typeahead.defaultProps = {
     onSelect: null,
     value: null,
     placeholder: 'Search by id or by description',
-    disabled: false
+    disabled: false,
+    minimumSearchTermLength: 1
 };
 
 export default Typeahead;
