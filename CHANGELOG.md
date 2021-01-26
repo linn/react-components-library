@@ -1,5 +1,5 @@
 # Changelog
-## [11.0.0] - 2020-12-22
+## [11.0.1] - 2020-12-26
 ### Changed
 - Added in temp-ish fix for logistics menu as in intranet solution - pointed logistics menu to old stores aspx file
 
