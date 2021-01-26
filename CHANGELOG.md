@@ -1,4 +1,8 @@
 # Changelog
+## [11.0.1] - 2022-01-26
+### Changed
+- Support for limiting Typeahead to only fire off search after a set number of searchTerm characters. Also added support for the above in the table component.
+
 ## [11.0.0] - 2020-12-22
 ### Changed
 - Updated to Storybook 6 and updated story files
