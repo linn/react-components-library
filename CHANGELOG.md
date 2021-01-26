@@ -1,5 +1,9 @@
 # Changelog
-## [11.0.1] - 2022-01-26
+## [11.1.1] - 2022-01-26
+### Changed
+- Export useGroupEditTable hook
+
+## [11.1.0] - 2022-01-26
 ### Changed
 - Support for limiting Typeahead to only fire off search after a set number of searchTerm characters. Also added support for the above in the table component.
 
