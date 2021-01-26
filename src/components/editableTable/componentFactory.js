@@ -58,6 +58,7 @@ export function inputComponentFactory(row, column, onChange, rest) {
                     title={column.searchTitle}
                     value={row[column.id]}
                     required={column.required}
+                    minimumSearchTermLength={column.minimumSearchTermLength}
                 />
             );
         case 'dropdown':
