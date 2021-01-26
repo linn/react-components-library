@@ -1112,12 +1112,12 @@
             }
         },
         {
-            "id": "logistics",
+            "id": "stores",
             "title": "Logistics",
             "links": [
                 {
                     "rel": "landing",
-                    "href": "/logistics"
+                    "href": "/stores/index.aspx"
                 }
             ],
             "columns": [
