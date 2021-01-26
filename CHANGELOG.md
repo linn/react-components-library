@@ -1,6 +1,10 @@
 # Changelog
 ## [11.0.0] - 2020-12-22
 ### Changed
+- Added in temp-ish fix for logistics menu as in intranet solution - pointed logistics menu to old stores aspx file
+
+## [11.0.0] - 2020-12-22
+### Changed
 - Updated to Storybook 6 and updated story files
 
 ### Added
