@@ -1,9 +1,13 @@
 # Changelog
-## [11.1.1] - 2022-01-26
+## [11.1.2] - 2021-01-27
+### Changed
+- Pass in optional setEditStatus function to useGroupEditTable hook. This allows the table to set editStatus state in a parent component or redux state store.
+
+## [11.1.1] - 2021-01-26
 ### Changed
 - Export useGroupEditTable hook
 
-## [11.1.0] - 2022-01-26
+## [11.1.0] - 2021-01-26
 ### Changed
 - Support for limiting Typeahead to only fire off search after a set number of searchTerm characters. Also added support for the above in the table component.
 
