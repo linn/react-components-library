@@ -53,7 +53,7 @@ describe('when getting searchItems', () => {
 
         const expectedResult = [{ name: 'name' }, { name: 'name' }, { name: 'name' }];
 
-        expect(collectionSelectors.getSearchItems(state, 2)).toEqual(expectedResult);
+        expect(collectionSelectors.getSearchItems(state, 3)).toEqual(expectedResult);
     });
 });
 
