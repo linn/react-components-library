@@ -1,4 +1,7 @@
 # Changelog
+## [11.1.4] - 2021-01-28
+### Changed
+-  Optionally limit searchItems returned from the collectionSelectors getSearchItems() function. This is to avoid huge searchResults lists freezing up UI components like Typeaheads
 
 ## [11.1.3] - 2021-01-28
 ### Fixed

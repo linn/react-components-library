@@ -16,6 +16,47 @@ describe('when getting items', () => {
     });
 });
 
+describe('when getting searchItems', () => {
+    test('should return search items', () => {
+        const state = {
+            itemTypes: {
+                searchItems: [
+                    { name: 'name' },
+                    { name: 'name' },
+                    { name: 'name' },
+                    { name: 'name' }
+                ]
+            }
+        };
+
+        const expectedResult = [
+            { name: 'name' },
+            { name: 'name' },
+            { name: 'name' },
+            { name: 'name' }
+        ];
+
+        expect(collectionSelectors.getSearchItems(state)).toEqual(expectedResult);
+    });
+
+    test('should limit search items', () => {
+        const state = {
+            itemTypes: {
+                searchItems: [
+                    { name: 'name' },
+                    { name: 'name' },
+                    { name: 'name' },
+                    { name: 'name' }
+                ]
+            }
+        };
+
+        const expectedResult = [{ name: 'name' }, { name: 'name' }, { name: 'name' }];
+
+        expect(collectionSelectors.getSearchItems(state, 3)).toEqual(expectedResult);
+    });
+});
+
 describe('when getting nothing', () => {
     test('should return empty', () => {
         const state = {
