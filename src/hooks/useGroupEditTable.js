@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react';
 
-const useGroupEditTable = ({ rows, defaultRow }) => {
+const useGroupEditTable = ({ rows, defaultRow, setEditStatus }) => {
     const [data, setData] = useState([]);
     const [valid, setValid] = useState();
-
     useEffect(() => {
         setData(rows);
     }, [rows]);
 
     const addRow = () => {
+        if (setEditStatus) {
+            setEditStatus('edit');
+        }
         if (defaultRow) {
             setData([...data, { ...defaultRow, editing: true, isNewRow: true }]);
         } else {
@@ -17,6 +19,9 @@ const useGroupEditTable = ({ rows, defaultRow }) => {
     };
 
     const updateRow = (item, setItem, propertyName, newValue) => {
+        if (setEditStatus) {
+            setEditStatus('edit');
+        }
         setData(() =>
             data.map(row =>
                 row.id === item.id ? { ...row, [propertyName]: newValue, editing: true } : row
@@ -25,6 +30,9 @@ const useGroupEditTable = ({ rows, defaultRow }) => {
     };
 
     const removeRow = id => {
+        if (setEditStatus) {
+            setEditStatus('edit');
+        }
         setData(data.filter(row => row.id !== id));
     };
 
@@ -36,8 +44,8 @@ const useGroupEditTable = ({ rows, defaultRow }) => {
     };
 
     const setEditing = (id, editing) => {
-        setData(
-            data.map(row =>
+        setData(d =>
+            d.map(row =>
                 row.id === id ? { ...row, editing, toBeSaved: false, toBeDeleted: false } : row
             )
         );
@@ -52,6 +60,9 @@ const useGroupEditTable = ({ rows, defaultRow }) => {
     };
 
     const setRowToBeDeleted = (id, toBeDeleted) => {
+        if (setEditStatus) {
+            setEditStatus('edit');
+        }
         setData(
             data.map(row => (row.id === id ? { ...row, toBeDeleted, editing: !toBeDeleted } : row))
         );

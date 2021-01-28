@@ -19,7 +19,7 @@ const {
     setTableValid,
     setRowToBeDeleted,
     setRowToBeSaved
-} = useGroupEditTable({ rows, defaultRow });
+} = useGroupEditTable({ rows, defaultRow, setEditStatus });
 
 <GroupEditTable
     columns={columns}
@@ -48,7 +48,7 @@ Custom functions can be used along with the hook by using `data` and `setData`
 const {
     data,
     setData
-} = useGroupEditTable({ rows, defaltRow });
+} = useGroupEditTable({ rows, defaltRow, setEditData });
 
 const myAddRow = () => {
     setData([...data, { id: myNewRow }])
@@ -67,6 +67,7 @@ const myAddRow = () => {
 | ---------- | ----------------------------------------------------------------------------------------------------------------- | -------- |
 | data       | The rows to be updated. Will be copied into local state in the hook.                                              | true     |
 | defaultRow | Object to be used for a default row when adding a new row. If not used id will be set with `new Date().getTime()` | false    |
+| setEditStatus | Optional function used to setEditStatus in some parent component or, more likely, a state store e.g. redux | false    |
 
 ### Outputs:
 
