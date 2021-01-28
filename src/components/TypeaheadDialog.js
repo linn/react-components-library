@@ -92,7 +92,7 @@ function TypeaheadDialog({ title, loading, fetchItems, searchItems, onSelect, cl
     };
 
     return (
-        <Fragment>
+        <>
             <Tooltip title={title}>
                 <Button
                     color="primary"
@@ -105,7 +105,13 @@ function TypeaheadDialog({ title, loading, fetchItems, searchItems, onSelect, cl
                 </Button>
             </Tooltip>
 
-            <Dialog open={dialogOpen} onClose={handleClose} fullWidth maxWidth="md">
+            <Dialog
+                open={dialogOpen}
+                onClose={handleClose}
+                fullWidth
+                maxWidth="md"
+                disableAutoFocus
+            >
                 <div>
                     <IconButton
                         className={classes.pullRight}
@@ -123,12 +129,13 @@ function TypeaheadDialog({ title, loading, fetchItems, searchItems, onSelect, cl
                             onChange={handleSearchTermChange}
                             label=""
                             value={searchTerm}
+                            autoFocus
                         />
                         {loading ? <Loading /> : showResults()}
                     </div>
                 </div>
             </Dialog>
-        </Fragment>
+        </>
     );
 }
 

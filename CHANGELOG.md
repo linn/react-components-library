@@ -1,9 +1,14 @@
 # Changelog
-## [11.1.1] - 2022-01-26
+## [11.1.2] - 2021-01-28
+### Fixed
+- TypeAheadDialog now auto focuses on search input field
+- Updated column and row documentation in single and group edit table stories
+
+## [11.1.1] - 2021-01-26
 ### Changed
 - Export useGroupEditTable hook
 
-## [11.1.0] - 2022-01-26
+## [11.1.0] - 2021-01-26
 ### Changed
 - Support for limiting Typeahead to only fire off search after a set number of searchTerm characters. Also added support for the above in the table component.
 

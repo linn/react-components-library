@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -50,7 +51,8 @@ function InputField({
     required,
     value,
     decimalPlaces,
-    textFieldProps
+    textFieldProps,
+    autoFocus
 }) {
     const classes = useStyles();
 
@@ -132,6 +134,7 @@ function InputField({
                     }
                 }}
                 variant="outlined"
+                autoFocus={autoFocus}
                 {...textFieldProps}
             />
         </>
@@ -156,7 +159,8 @@ InputField.propTypes = {
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     onChange: PropTypes.func,
     decimalPlaces: PropTypes.number,
-    textFieldProps: PropTypes.shape({})
+    textFieldProps: PropTypes.shape({}),
+    autoFocus: PropTypes.bool
 };
 
 InputField.defaultProps = {
@@ -177,7 +181,8 @@ InputField.defaultProps = {
     value: '',
     onChange: null,
     decimalPlaces: null,
-    textFieldProps: null
+    textFieldProps: null,
+    autoFocus: false
 };
 
 export default InputField;
