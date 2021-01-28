@@ -8,10 +8,14 @@
         return storeItems.items ? storeItems.items : [];
     };
 
-    this.getSearchItems = state => {
+    this.getSearchItems = (state, limit = null) => {
         const storeItems = state[itemType];
         if (!storeItems) {
             return [];
+        }
+
+        if (limit) {
+            return storeItems.searchItems ? storeItems.searchItems.slice(0, limit) : [];
         }
 
         return storeItems.searchItems ? storeItems.searchItems : [];
