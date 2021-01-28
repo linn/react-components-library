@@ -1,4 +1,8 @@
 # Changelog
+## [11.1.3] - 2021-01-28
+### Changed
+-  Optionally limit searchItems returned from the collectionSelectors getSearchItems() function. This is to avoid huge searchResults lists freezing up UI components like Typeaheads
+
 ## [11.1.2] - 2021-01-27
 ### Changed
 - Pass in optional setEditStatus function to useGroupEditTable hook. This allows the table to set editStatus state in a parent component or redux state store.
