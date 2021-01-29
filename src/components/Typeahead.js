@@ -52,14 +52,24 @@ function Typeahead({
     value,
     placeholder,
     disabled,
-    minimumSearchTermLength
+    minimumSearchTermLength,
+    debounce
 }) {
     const [searchTerm, setSearchTerm] = useState('');
     const [dialogOpen, setDialogOpen] = useState(false);
 
     const classes = useStyles();
 
-    useSearch(fetchItems, searchTerm, clearSearch, null, null, null, minimumSearchTermLength);
+    useSearch(
+        fetchItems,
+        searchTerm,
+        clearSearch,
+        null,
+        null,
+        null,
+        minimumSearchTermLength,
+        debounce
+    );
 
     const handleSearchTermChange = (...args) => {
         setSearchTerm(args[1]);
@@ -111,7 +121,7 @@ function Typeahead({
                     {items.map(item => (
                         <Fragment key={item.id}>
                             {links ? (
-                                <Link className={classes.a} component={RouterLink} to={item.href}>
+                                <Link className={classes.a} component={RouterLink} to={item?.href}>
                                     <Item item={item} onClick={() => handleClick(item)} />
                                 </Link>
                             ) : (
@@ -185,14 +195,15 @@ function Typeahead({
     );
 }
 
+const itemShape = {
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    name: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    description: PropTypes.string,
+    href: PropTypes.string
+};
+
 Typeahead.propTypes = {
-    items: PropTypes.arrayOf(
-        PropTypes.shape({
-            id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-            name: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-            description: PropTypes.string
-        })
-    ).isRequired,
+    items: PropTypes.arrayOf(itemShape).isRequired,
     title: PropTypes.string,
     loading: PropTypes.bool,
     fetchItems: PropTypes.func.isRequired,
@@ -204,7 +215,8 @@ Typeahead.propTypes = {
     value: PropTypes.string,
     placeholder: PropTypes.string,
     disabled: PropTypes.bool,
-    minimumSearchTermLength: PropTypes.number
+    minimumSearchTermLength: PropTypes.number,
+    debounce: PropTypes.number
 };
 
 Typeahead.defaultProps = {
@@ -217,7 +229,8 @@ Typeahead.defaultProps = {
     value: null,
     placeholder: 'Search by id or by description',
     disabled: false,
-    minimumSearchTermLength: 1
+    minimumSearchTermLength: 1,
+    debounce: 500
 };
 
 export default Typeahead;
