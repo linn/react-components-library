@@ -36,13 +36,13 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-function TypeaheadDialog({ title, loading, fetchItems, searchItems, onSelect, clearSearch }) {
+function TypeaheadDialog({ title, loading, fetchItems, searchItems, onSelect, clearSearch, debounce, minimumSearchTermLength }) {
     const [searchTerm, setSearchTerm] = useState();
     const [dialogOpen, setDialogOpen] = useState(false);
 
     const classes = useStyles();
 
-    useSearch(fetchItems, searchTerm, clearSearch);
+    useSearch(fetchItems, searchTerm, clearSearch, null, null, debounce, minimumSearchTermLength);
 
     const handleOpen = () => {
         setDialogOpen(true);
@@ -145,12 +145,16 @@ TypeaheadDialog.propTypes = {
     fetchItems: PropTypes.func.isRequired,
     searchItems: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
     onSelect: PropTypes.func.isRequired,
-    clearSearch: PropTypes.func.isRequired
+    clearSearch: PropTypes.func.isRequired,
+    debounce: PropTypes.number,
+    minimumSearchTermLength: PropTypes.number
 };
 
 TypeaheadDialog.defaultProps = {
     title: 'Start typing to search',
-    loading: false
+    loading: false,
+    debounce: 500,
+    minimumSearchTermLength: 1
 };
 
 export default TypeaheadDialog;

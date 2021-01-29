@@ -40,7 +40,8 @@ Default.args = {
     loading: false,
     fetchItems,
     items,
-    clearSearch
+    clearSearch,
+    debounce: 500
 };
 
 export const NothingFound = args => <Typeahead {...args} />;
