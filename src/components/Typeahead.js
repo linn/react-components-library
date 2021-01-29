@@ -60,16 +60,7 @@ function Typeahead({
 
     const classes = useStyles();
 
-    useSearch(
-        fetchItems,
-        searchTerm,
-        clearSearch,
-        null,
-        null,
-        null,
-        minimumSearchTermLength,
-        debounce
-    );
+    useSearch(fetchItems, searchTerm, clearSearch, null, null, debounce, minimumSearchTermLength);
 
     const handleSearchTermChange = (...args) => {
         setSearchTerm(args[1]);

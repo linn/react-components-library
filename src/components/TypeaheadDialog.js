@@ -36,7 +36,16 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-function TypeaheadDialog({ title, loading, fetchItems, searchItems, onSelect, clearSearch, debounce, minimumSearchTermLength }) {
+function TypeaheadDialog({
+    title,
+    loading,
+    fetchItems,
+    searchItems,
+    onSelect,
+    clearSearch,
+    debounce,
+    minimumSearchTermLength
+}) {
     const [searchTerm, setSearchTerm] = useState();
     const [dialogOpen, setDialogOpen] = useState(false);
 
