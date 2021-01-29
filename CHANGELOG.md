@@ -1,7 +1,7 @@
 # Changelog
 ## [11.1.5] - 2021-01-29
 ### Changed
--  Allow custom debounce timer to be passed into Typeaheads. Higher debounce times mitigate against cases where searches take longer than the current debounce timer (500ms), which in turn can allow those searches late set of searchResults to arrive later than more recent searches results, and as such override the more recent and correct searchResults in redux state. This is really just a workaround but used in conjucntion with speeding up slow searches, i.e. by limiting their results sizes in the backend, it seems to solve issues in many cases.
+-  Allow custom debounce timer to be passed into Typeaheads. Higher debounce times mitigate against cases where searches take longer than the current debounce timer (500ms), which in turn can allow those searches late set of searchResults to arrive later than more recent searches results, and as such override the more recent and correct searchResults in redux state. This is really just a workaround but used in conjucntion with speeding up slow searches, e.g. by limiting their results sizes in the backend, it seems to solve issues in many cases.
 
 ## [11.1.4] - 2021-01-28
 ### Changed
