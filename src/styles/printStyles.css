@@ -9,7 +9,7 @@
         margin: 0mm;
         margin-right: 0mm;
     }
-    .landscape {
+    .print-landscape {
         page: land;
     }
     .pageContainer {
