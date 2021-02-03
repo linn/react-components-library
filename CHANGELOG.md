@@ -1,5 +1,5 @@
 # Changelog
-## [11.1.6] - 2021-01-03
+## [11.1.7] - 2021-01-03
 ### Changed
 -  Added optional "print-landscape" class to set page to print landscape
 
