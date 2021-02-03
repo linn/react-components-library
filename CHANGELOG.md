@@ -1,5 +1,5 @@
 # Changelog
-## [11.1.701] - 2021-02-03
+## [11.1.8] - 2021-02-03
 ### Changed
 - Just needed to redeploy after trying to without logging into npm
 
