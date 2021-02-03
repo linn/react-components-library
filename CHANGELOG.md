@@ -1,5 +1,9 @@
 # Changelog
-## [11.1.7] - 2021-01-03
+## [11.1.701] - 2021-02-03
+### Changed
+- Just needed to redeploy after trying to without logging into npm
+
+## [11.1.7] - 2021-02-03
 ### Changed
 -  Added optional "print-landscape" class to set page to print landscape
 
