@@ -6,13 +6,15 @@ import LinnWeekPicker from '../LinnWeekPicker';
 import Typeahead from '../Typeahead';
 import Dropdown from '../Dropdown';
 
-export function inputComponentFactory(row, column, onChange, rest) {
+export function inputComponentFactory(row, column, onChange, textFieldRows = 1, rest) {
     switch (column.type) {
         case 'text':
             return (
                 <InputField
                     value={row[column.id]}
                     onChange={onChange}
+                    fullWidth
+                    rows={textFieldRows}
                     propertyName={column.id}
                     required={column.required}
                 />

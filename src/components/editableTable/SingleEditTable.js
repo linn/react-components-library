@@ -24,6 +24,7 @@ export default function SingleEditTable({
     closeRowOnClickAway,
     deleteRowPreEdit,
     editOnRowClick,
+    newRowPosition,
     ...rest
 }) {
     const [showNewRow, setShowNewRow] = useState(false);
@@ -31,6 +32,35 @@ export default function SingleEditTable({
     const handleRemoveRow = () => {
         setShowNewRow(false);
     };
+
+    const renderNewRow = () =>
+        showNewRow ? (
+            <SingleEditableTableRow
+                row={newRow}
+                columns={columns}
+                saveRow={createRow}
+                editable={editable}
+                isNewRow
+                updateRow={updateRow}
+                validateRow={validateRow}
+                removeRow={handleRemoveRow}
+                editOnRowClick={editOnRowClick}
+                /* eslint-disable react/jsx-props-no-spreading */
+                {...rest}
+            />
+        ) : (
+            <TableRow>
+                <TableCell>
+                    <Button
+                        size="small"
+                        onClick={() => setShowNewRow(true)}
+                        data-testid="addButton"
+                    >
+                        <AddIcon size="small" />
+                    </Button>
+                </TableCell>
+            </TableRow>
+        );
 
     return (
         <Table size="small">
@@ -45,6 +75,9 @@ export default function SingleEditTable({
                 </TableRow>
             </TableHead>
             <TableBody>
+                {newRowPosition === 'top' && editable && allowNewRowCreation && (
+                    <> {renderNewRow()} </>
+                )}
                 {rows.map(row => (
                     <SingleEditableTableRow
                         key={row.id}
@@ -60,35 +93,9 @@ export default function SingleEditTable({
                         editOnRowClick={editOnRowClick}
                     />
                 ))}
-                {editable &&
-                    allowNewRowCreation &&
-                    (showNewRow ? (
-                        <SingleEditableTableRow
-                            row={newRow}
-                            columns={columns}
-                            saveRow={createRow}
-                            editable={editable}
-                            isNewRow
-                            updateRow={updateRow}
-                            validateRow={validateRow}
-                            removeRow={handleRemoveRow}
-                            editOnRowClick={editOnRowClick}
-                            /* eslint-disable react/jsx-props-no-spreading */
-                            {...rest}
-                        />
-                    ) : (
-                        <TableRow>
-                            <TableCell>
-                                <Button
-                                    size="small"
-                                    onClick={() => setShowNewRow(true)}
-                                    data-testid="addButton"
-                                >
-                                    <AddIcon size="small" />
-                                </Button>
-                            </TableCell>
-                        </TableRow>
-                    ))}
+                {newRowPosition === 'bottom' && editable && allowNewRowCreation && (
+                    <> {renderNewRow()} </>
+                )}
             </TableBody>
         </Table>
     );
@@ -108,7 +115,8 @@ SingleEditTable.propTypes = {
     allowNewRowCreation: PropTypes.bool,
     closeRowOnClickAway: PropTypes.bool,
     deleteRowPreEdit: PropTypes.bool,
-    editOnRowClick: PropTypes.bool
+    editOnRowClick: PropTypes.bool,
+    newRowPosition: PropTypes.string
 };
 
 SingleEditTable.defaultProps = {
@@ -123,5 +131,6 @@ SingleEditTable.defaultProps = {
     allowNewRowCreation: true,
     closeRowOnClickAway: false,
     deleteRowPreEdit: false,
-    editOnRowClick: false
+    editOnRowClick: false,
+    newRowPosition: 'bottom'
 };
