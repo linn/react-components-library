@@ -15,7 +15,7 @@ export default function EditableTableCell({
 }) {
     const Content = () =>
         (editing && column.editable && editable) || (isNewRow && editing && column.required)
-            ? inputComponentFactory(item, column, handleValueChange, rest)
+            ? inputComponentFactory(item, column, handleValueChange, column.textFieldRows, rest)
             : displayComponentFactory(item, column);
 
     if (!column.tooltip) {
@@ -42,7 +42,8 @@ EditableTableCell.propTypes = {
         id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
         editable: PropTypes.bool,
         type: PropTypes.string,
-        required: PropTypes.bool
+        required: PropTypes.bool,
+        textFieldRows: PropTypes.number
     }).isRequired,
     item: PropTypes.shape({
         id: PropTypes.oneOfType([PropTypes.string, PropTypes.number])

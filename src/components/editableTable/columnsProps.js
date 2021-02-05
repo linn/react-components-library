@@ -17,7 +17,8 @@ const columnsProps = PropTypes.shape({
     closeRowOnClickAway: PropTypes.func,
     search: PropTypes.func,
     selectSearchResult: PropTypes.func,
-    minimumSearchTermLength: PropTypes.number
+    minimumSearchTermLength: PropTypes.number,
+    textFieldRows: PropTypes.number
 });
 
 export default columnsProps;

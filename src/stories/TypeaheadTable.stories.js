@@ -42,6 +42,8 @@ export default {
 
 export const WithResults = args => <TypeaheadTable {...args} />;
 
+export const Modal = args => <TypeaheadTable {...args} modal />;
+
 WithResults.story = {
     name: 'with results'
 };
@@ -71,7 +73,26 @@ NoResults.args = {
     title: 'TypeaheadTable',
     history: { push: () => {} },
     placeholder: 'placeholder text',
-    label: 'label'
+    label: 'label',
+    table: {
+        rows: [],
+        totalItemCount: 0
+    }
+};
+
+Modal.story = {
+    name: 'modal'
+};
+
+Modal.args = {
+    columnNames,
+    fetchItems: () => {},
+    clearSearch: () => {},
+    title: 'TypeaheadTable',
+    history: { push: () => {} },
+    placeholder: 'placeholder text',
+    label: 'label',
+    table
 };
 
 export const Loading = args => <TypeaheadTable {...args} />;
