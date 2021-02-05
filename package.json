@@ -95,7 +95,6 @@
         "prettier": "^1.19.1",
         "react": "^16.14.0",
         "react-dom": "^16.14.0",
-        "react-router-dom": "^5.1.2",
         "rollup": "^1.31.1",
         "rollup-plugin-babel": "^4.3.3",
         "rollup-plugin-postcss": "^2.0.6",

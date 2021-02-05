@@ -8,7 +8,8 @@ import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import PropTypes from 'prop-types';
 import { Link as RouterLink } from 'react-router-dom';
-import { Dialog, IconButton } from '@material-ui/core';
+import Dialog from '@material-ui/core/Dialog';
+import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import useSearch from '../hooks/useSearch';
 import Title from './Title';
@@ -194,7 +195,7 @@ const itemShape = {
 };
 
 Typeahead.propTypes = {
-    items: PropTypes.arrayOf(itemShape).isRequired,
+    items: PropTypes.arrayOf(PropTypes.shape(itemShape)).isRequired,
     title: PropTypes.string,
     loading: PropTypes.bool,
     fetchItems: PropTypes.func.isRequired,
