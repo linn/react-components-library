@@ -19,25 +19,12 @@ import utilities from '../utilities/index';
 import SearchIcon from './SearchIcon';
 
 const useStyles = makeStyles(theme => ({
-    a: {
-        textDecoration: 'none'
-    },
-    nameText: {
-        fontWeight: theme.typography.fontWeightBold
-    },
-    bodyText: {
-        color: theme.palette.text.primary
-    },
     pullRight: {
         float: 'right'
     },
     dialog: {
         margin: theme.spacing(6),
         minWidth: theme.spacing(62)
-    },
-    button: {
-        marginLeft: theme.spacing(1),
-        marginTop: theme.spacing(1)
     }
 }));
 
