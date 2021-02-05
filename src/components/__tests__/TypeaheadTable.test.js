@@ -1,6 +1,6 @@
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
-import { cleanup, fireEvent, wait } from '@testing-library/react';
+import { cleanup, fireEvent, waitFor } from '@testing-library/react';
 import render from '../../test-utils';
 import TypeAheadTable from '../TypeaheadTable';
 
@@ -38,8 +38,9 @@ const defaultProps = {
     clearSearch: clearSearchMock,
     loading: false,
     title: 'title',
+    label: 'label',
     history: { push },
-    placeholder: 'search'
+    placeholder: 'Search by id or by description'
 };
 
 test('should call clearSearch and fetchItems() on input', async () => {
@@ -48,9 +49,9 @@ test('should call clearSearch and fetchItems() on input', async () => {
     fireEvent.change(item, {
         target: { value: 'part' }
     });
-    // wait for the debounce
-    await wait(() => expect(fetchItemsMock).toHaveBeenCalledWith('part'));
-    await wait(() => expect(clearSearchMock).toHaveBeenCalled());
+    // waitFor for the debounce
+    await waitFor(() => expect(fetchItemsMock).toHaveBeenCalledWith('part'));
+    await waitFor(() => expect(clearSearchMock).toHaveBeenCalled());
 });
 
 describe('when searchOptions', () => {
@@ -62,9 +63,9 @@ describe('when searchOptions', () => {
         fireEvent.change(item, {
             target: { value: 'part' }
         });
-        // wait for the debounce
-        await wait(() => expect(fetchItemsMock).toHaveBeenCalledWith('part', 'thing=a'));
-        await wait(() => expect(clearSearchMock).toHaveBeenCalled());
+        // waitFor for the debounce
+        await waitFor(() => expect(fetchItemsMock).toHaveBeenCalledWith('part', 'thing=a'));
+        await waitFor(() => expect(clearSearchMock).toHaveBeenCalled());
     });
 });
 
@@ -90,5 +91,41 @@ describe('When loaded and no matching items', () => {
     test('Should display message. not loading, not table', () => {
         const { getByText } = render(<TypeAheadTable {...defaultProps} table={undefined} />);
         expect(getByText('No matching items')).toBeInTheDocument();
+    });
+});
+
+describe('when modal', () => {
+    test('should not display Title', () => {
+        const { queryByText } = render(<TypeAheadTable {...defaultProps} modal />);
+        expect(queryByText('Title Text')).not.toBeInTheDocument();
+    });
+
+    test('should display label', () => {
+        const { getByText } = render(<TypeAheadTable {...defaultProps} modal />);
+        expect(getByText('label')).toBeInTheDocument();
+    });
+
+    test('should open modal onClick', () => {
+        const { getByPlaceholderText, queryByTestId } = render(
+            <TypeAheadTable {...defaultProps} modal title="modal title" />
+        );
+        const item = getByPlaceholderText('Search by id or by description');
+        fireEvent.click(item);
+        expect(queryByTestId('modal')).toBeInTheDocument();
+    });
+});
+
+describe('when not links', () => {
+    const onSelect = jest.fn();
+
+    test('should call onSelect when item selected', () => {
+        const { getByText, getByPlaceholderText } = render(
+            <TypeAheadTable {...defaultProps} links={false} onSelect={onSelect} />
+        );
+        const input = getByPlaceholderText('Search by id or by description');
+        fireEvent.click(input);
+        const item = getByText('0-0');
+        fireEvent.click(item);
+        expect(onSelect).toHaveBeenCalled();
     });
 });
