@@ -1,4 +1,8 @@
 # Changelog
+## [11.2.0] - 2021-02-03
+### Changed
+- Allow SingleEditTable to have multiline textfields. Allow newRow to be specified to render at top or bottom via new 'newRowPosition' prop. Deafults to "bottom" so no breaking/altering exsiting usages.
+
 ## [11.1.8] - 2021-02-03
 ### Changed
 - Just needed to redeploy after trying to without logging into npm
