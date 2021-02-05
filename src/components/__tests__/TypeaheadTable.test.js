@@ -115,6 +115,20 @@ describe('when modal', () => {
     });
 });
 
+describe('when links', () => {
+    test('should call history.push() when item selected', () => {
+        const history = { push: jest.fn() };
+        const { getByText, getByPlaceholderText } = render(
+            <TypeAheadTable {...defaultProps} history={history} />
+        );
+        const input = getByPlaceholderText('Search by id or by description');
+        fireEvent.click(input);
+        const item = getByText('0-0');
+        fireEvent.click(item);
+        expect(history.push).toHaveBeenCalledWith('#');
+    });
+});
+
 describe('when not links', () => {
     const onSelect = jest.fn();
 
