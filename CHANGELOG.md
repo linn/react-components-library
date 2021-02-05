@@ -1,4 +1,12 @@
 # Changelog
+## [11.1.8] - 2021-02-03
+### Changed
+- Just needed to redeploy after trying to without logging into npm
+
+## [11.1.7] - 2021-02-03
+### Changed
+-  Added optional "print-landscape" class to set page to print landscape
+
 ## [11.1.5] - 2021-01-29
 ### Changed
 -  Allow custom debounce timer to be passed into Typeaheads. Higher debounce times mitigate against cases where searches take longer than the current debounce timer (500ms), which in turn can allow those searches late set of searchResults to arrive later than more recent searches results, and as such override the more recent and correct searchResults in redux state. This is really just a workaround but used in conjucntion with speeding up slow searches, e.g. by limiting their results sizes in the backend, it seems to solve issues in many cases.
