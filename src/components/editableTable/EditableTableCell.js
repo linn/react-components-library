@@ -57,5 +57,5 @@ EditableTableCell.propTypes = {
 EditableTableCell.defaultProps = {
     editable: false,
     editing: false,
-    isNewRow: false,
+    isNewRow: false
 };
