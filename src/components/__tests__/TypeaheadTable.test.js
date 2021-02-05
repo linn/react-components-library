@@ -49,7 +49,7 @@ test('should call clearSearch and fetchItems() on input', async () => {
     fireEvent.change(item, {
         target: { value: 'part' }
     });
-    // waitFor for the debounce
+    // wait for the debounce
     await waitFor(() => expect(fetchItemsMock).toHaveBeenCalledWith('part'));
     await waitFor(() => expect(clearSearchMock).toHaveBeenCalled());
 });
@@ -63,7 +63,7 @@ describe('when searchOptions', () => {
         fireEvent.change(item, {
             target: { value: 'part' }
         });
-        // waitFor for the debounce
+        // wait for the debounce
         await waitFor(() => expect(fetchItemsMock).toHaveBeenCalledWith('part', 'thing=a'));
         await waitFor(() => expect(clearSearchMock).toHaveBeenCalled());
     });
