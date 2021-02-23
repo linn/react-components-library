@@ -29,6 +29,9 @@
     .hide-when-printing {
         display: none !important;
     }
+    .show-only-when-printing {
+        display: block !important;
+    }
     .padding-top-when-not-printing {
         padding-top: 0 !important;
         margin-top: -50px;
@@ -41,6 +44,10 @@
     top: 40px;
     position: absolute;
     font-size: small;
+}
+
+.show-only-when-printing {
+    display: none !important;
 }
 
 .padding-top-when-not-printing {
