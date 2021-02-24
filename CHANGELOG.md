@@ -1,4 +1,7 @@
 # Changelog
+## [11.3.0] - 2021-02-24
+### Added
+- Added getData option to process selectors
 ## [11.2.1] - 2021-02-16
 ### Added
 - Added wee style to hide something then show only when printing

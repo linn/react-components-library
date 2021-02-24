@@ -25,4 +25,13 @@ export default function ProcessSelectors(item) {
 
         return storeItem.messageText;
     };
+
+    this.getData = state => {
+        const storeItem = state[item];
+        if (!storeItem) {
+            return null;
+        }
+
+        return storeItem.data;
+    };
 }
