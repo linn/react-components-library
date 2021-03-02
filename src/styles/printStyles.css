@@ -30,7 +30,7 @@
         display: none !important;
     }
     .show-only-when-printing {
-        visibility: visible !important;
+        display: block !important;
     }
     .padding-top-when-not-printing {
         padding-top: 0 !important;
@@ -47,7 +47,7 @@
 }
 
 .show-only-when-printing {
-     visibility: hidden;
+     display: none;
 }
 
 .padding-top-when-not-printing {
