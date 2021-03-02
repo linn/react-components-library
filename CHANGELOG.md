@@ -1,4 +1,7 @@
 # Changelog
+## [11.3.1] - 2021-03-02
+### Changed
+- Removed !important from display none on display only when printing
 ## [11.3.0] - 2021-02-24
 ### Added
 - Added getData option to process selectors
