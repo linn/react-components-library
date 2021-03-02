@@ -47,7 +47,7 @@
 }
 
 .show-only-when-printing {
-    display: none !important;
+    display: none;
 }
 
 .padding-top-when-not-printing {
