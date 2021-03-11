@@ -1,4 +1,7 @@
 # Changelog
+## [11.3.2] - 2021-03-11
+### Changed
+- Added clear data option to processes
 ## [11.3.1] - 2021-03-02
 ### Changed
 - Removed !important from display none on display only when printing
