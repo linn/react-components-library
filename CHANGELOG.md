@@ -1,4 +1,7 @@
 # Changelog
+## [11.3.3] - 2021-03-11
+### Changed
+- Added clear data action
 ## [11.3.2] - 2021-03-11
 ### Changed
 - Added clear data option to processes
