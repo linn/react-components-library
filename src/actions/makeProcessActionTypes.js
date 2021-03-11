@@ -6,6 +6,7 @@ const makeProcessActionTypes = entityType => {
     types[`HIDE_${entityType}_MESSAGE`] = `HIDE_${entityType}_MESSAGE`;
     types[`FETCH_${entityType}_ERROR`] = `FETCH_${entityType}_ERROR`;
     types[`CLEAR_${entityType}_ERRORS`] = `CLEAR_${entityType}_ERRORS`;
+    types[`CLEAR_${entityType}_DATA`] = `CLEAR_${entityType}_DATA`;
 
     return types;
 };
