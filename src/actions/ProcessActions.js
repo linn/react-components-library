@@ -37,4 +37,9 @@ export default function ProcessActions(itemName, actionTypeRoot, uri, actionType
         type: actionTypes[`CLEAR_${actionTypeRoot}_ERRORS`],
         payload: { item: itemName }
     });
+
+    this.clearProcessData = () => ({
+        type: actionTypes[`CLEAR_${actionTypeRoot}_DATA`],
+        payload: {}
+    });
 }
