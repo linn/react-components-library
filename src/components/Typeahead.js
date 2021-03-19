@@ -11,6 +11,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import Dialog from '@material-ui/core/Dialog';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
+import Tooltip from '@material-ui/core/Tooltip';
 import useSearch from '../hooks/useSearch';
 import Title from './Title';
 import Loading from './Loading';
@@ -133,18 +134,17 @@ function Typeahead({
         <>
             {!modal ? <Title text={title} /> : <></>}
             {modal && searchButtonOnly ? (
-                <IconButton
-                    color="primary"
-                    aria-label="add to shopping cart"
-                    onClick={() => {
-                        if (!disabled) {
+                <Tooltip title={label}>
+                    <IconButton
+                        disabled={disabled}
+                        onClick={() => {
                             setDialogOpen(true);
                             clearSearch();
-                        }
-                    }}
-                >
-                    {SearchIcon()}
-                </IconButton>
+                        }}
+                    >
+                        {SearchIcon()}
+                    </IconButton>
+                </Tooltip>
             ) : (
                 <InputField
                     adornment={SearchIcon()}
