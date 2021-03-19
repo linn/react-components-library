@@ -86,3 +86,19 @@ Modal.args = {
     clearSearch,
     modal: true
 };
+
+export const ModalButton = args => <Typeahead {...args} />;
+
+ModalButton.story = {
+    name: 'modal searchButtonOnly'
+};
+
+ModalButton.args = {
+    title: 'Title Text',
+    loading: true,
+    fetchItems,
+    items,
+    clearSearch,
+    modal: true,
+    searchButtonOnly: true
+};

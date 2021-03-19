@@ -1,4 +1,7 @@
 # Changelog
+## [11.3.4] - 2021-03-19
+### Changed
+- Added searchButtonOnly to TypeAhead to show search icon button only in modal mode
 ## [11.3.3] - 2021-03-11
 ### Changed
 - Added clear data action
