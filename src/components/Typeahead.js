@@ -54,7 +54,8 @@ function Typeahead({
     placeholder,
     disabled,
     minimumSearchTermLength,
-    debounce
+    debounce,
+    searchButtonOnly
 }) {
     const [searchTerm, setSearchTerm] = useState('');
     const [dialogOpen, setDialogOpen] = useState(false);
@@ -131,22 +132,37 @@ function Typeahead({
     return (
         <>
             {!modal ? <Title text={title} /> : <></>}
-            <InputField
-                adornment={SearchIcon()}
-                textFieldProps={{
-                    onClick: () => {
+            {modal && searchButtonOnly ? (
+                <IconButton
+                    color="primary"
+                    aria-label="add to shopping cart"
+                    onClick={() => {
                         if (!disabled) {
                             setDialogOpen(true);
                             clearSearch();
                         }
-                    },
-                    disabled
-                }}
-                value={modal ? value : searchTerm}
-                label={label}
-                placeholder={placeholder}
-                onChange={modal ? () => setDialogOpen(true) : handleSearchTermChange}
-            />
+                    }}
+                >
+                    {SearchIcon()}
+                </IconButton>
+            ) : (
+                <InputField
+                    adornment={SearchIcon()}
+                    textFieldProps={{
+                        onClick: () => {
+                            if (!disabled) {
+                                setDialogOpen(true);
+                                clearSearch();
+                            }
+                        },
+                        disabled
+                    }}
+                    value={modal ? value : searchTerm}
+                    label={label}
+                    placeholder={placeholder}
+                    onChange={modal ? () => setDialogOpen(true) : handleSearchTermChange}
+                />
+            )}
             {modal ? (
                 <Dialog
                     data-testid="modal"
@@ -208,7 +224,8 @@ Typeahead.propTypes = {
     placeholder: PropTypes.string,
     disabled: PropTypes.bool,
     minimumSearchTermLength: PropTypes.number,
-    debounce: PropTypes.number
+    debounce: PropTypes.number,
+    searchButtonOnly: PropTypes.bool
 };
 
 Typeahead.defaultProps = {
@@ -222,7 +239,8 @@ Typeahead.defaultProps = {
     placeholder: 'Search by id or by description',
     disabled: false,
     minimumSearchTermLength: 1,
-    debounce: 500
+    debounce: 500,
+    searchButtonOnly: false
 };
 
 export default Typeahead;
