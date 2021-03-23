@@ -80,17 +80,17 @@ function Breadcrumbs({ history, rootPathLength, homeUrl }) {
     );
 }
 
-Breadcrumbs.defaultProps = {
-    rootPathLength: 2,
-    homeUrl: PropTypes.string
-};
-
 Breadcrumbs.propTypes = {
     history: PropTypes.shape({
         push: PropTypes.func,
         location: PropTypes.shape({ pathname: PropTypes.string })
     }).isRequired,
     rootPathLength: PropTypes.number,
+    homeUrl: PropTypes.string
+};
+
+Breadcrumbs.defaultProps = {
+    rootPathLength: 2,
     homeUrl: 'https://app.linn.co.uk'
 };
 

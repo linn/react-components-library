@@ -1,6 +1,9 @@
 # Changelog
 ## [11.3.5] - 2021-03-23
 ### Changed
+- Fixed mixed up Breadcrumbs defaultProps/PropTyopes
+## [11.3.5] - 2021-03-23
+### Changed
 - Change breadcrumbs 'HOME' crumb to redirect to a specified home url. Defaults to app.linn.co.uk
 - Page component can optionally not render Breadcrumbs with a showBreadcrumbs bool prop. Defaults to true.
 ## [11.3.4] - 2021-03-19
