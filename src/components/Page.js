@@ -38,7 +38,7 @@ const columnWidth = {
     xl: false
 };
 
-function Page({ children, history, width, requestErrors, showRequestErrors }) {
+function Page({ children, history, width, requestErrors, showRequestErrors, homeUrl }) {
     const classes = useStyles();
     const { enqueueSnackbar } = useSnackbar();
 
@@ -54,11 +54,11 @@ function Page({ children, history, width, requestErrors, showRequestErrors }) {
     }, [requestErrors, enqueueSnackbar]);
 
     return (
-        <Fragment>
+        <>
             <Grid container spacing={3} className={classes.grid}>
                 <Grid item xs={1} />
                 <Grid item xs={10} className="hide-when-printing">
-                    <Breadcrumbs history={history} />
+                    <Breadcrumbs history={history} homeUrl={homeUrl} />
                 </Grid>
                 <Grid item xs={1} />
 
@@ -70,7 +70,7 @@ function Page({ children, history, width, requestErrors, showRequestErrors }) {
                 </Grid>
                 <Grid item xs={columnWidth[width]} />
             </Grid>
-        </Fragment>
+        </>
     );
 }
 
@@ -79,13 +79,15 @@ Page.propTypes = {
     history: PropTypes.shape({}).isRequired,
     width: PropTypes.oneOf(['xs', 's', 'm', 'l', 'xl']),
     showRequestErrors: PropTypes.bool,
-    requestErrors: PropTypes.arrayOf(PropTypes.shape({}))
+    requestErrors: PropTypes.arrayOf(PropTypes.shape({})),
+    homeUrl: PropTypes.string
 };
 
 Page.defaultProps = {
     width: 'l',
     showRequestErrors: false,
-    requestErrors: []
+    requestErrors: [],
+    homeUrl: null
 };
 
 export default Page;

@@ -1,4 +1,7 @@
 # Changelog
+## [11.3.5] - 2021-03-23
+### Changed
+- Change breadcrumbs 'HOME' crumb to redirect to a specified home url. Defaults to app.linn.co.uk
 ## [11.3.4] - 2021-03-19
 ### Changed
 - Added searchButtonOnly to TypeAhead to show search icon button only in modal mode
