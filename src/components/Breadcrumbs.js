@@ -15,9 +15,9 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-const Slash = () => <Fragment> {' / '} </Fragment>;
+const Slash = () => <> {' / '} </>;
 
-function Breadcrumbs({ history, rootPathLength }) {
+function Breadcrumbs({ history, rootPathLength, homeUrl }) {
     const classes = useStyles();
 
     let path = history.location.pathname;
@@ -38,14 +38,19 @@ function Breadcrumbs({ history, rootPathLength }) {
                 }
             };
 
-            return [
-                ...sofar,
-                { key: i, caption: crumb || 'Home', href, onClick: e => handleClick(e) }
-            ];
+            return crumb
+                ? [...sofar, { key: i, caption: crumb, href, onClick: e => handleClick(e) }]
+                : sofar;
         }, []);
 
     return (
         <div className={classes.root}>
+            <>
+                <Link key="home" href={homeUrl} classes={{ root: classes.link }} variant="button">
+                    HOME
+                </Link>
+                <Slash />
+            </>
             {crumbs.map((crumb, index) => {
                 if (index < crumbs.length - 1) {
                     return (
@@ -76,12 +81,17 @@ function Breadcrumbs({ history, rootPathLength }) {
 }
 
 Breadcrumbs.defaultProps = {
-    rootPathLength: 2
+    rootPathLength: 2,
+    homeUrl: PropTypes.string
 };
 
 Breadcrumbs.propTypes = {
-    history: PropTypes.shape({}).isRequired,
-    rootPathLength: PropTypes.number
+    history: PropTypes.shape({
+        push: PropTypes.func,
+        location: PropTypes.shape({ pathname: PropTypes.string })
+    }).isRequired,
+    rootPathLength: PropTypes.number,
+    homeUrl: 'https://app.linn.co.uk'
 };
 
 export default Breadcrumbs;
