@@ -1,4 +1,7 @@
 # Changelog
+## [11.3.6] - 2021-03-23
+### Changed
+- Fixed mixed up Breadcrumbs defaultProps/PropTyopes
 ## [11.3.5] - 2021-03-23
 ### Changed
 - Change breadcrumbs 'HOME' crumb to redirect to a specified home url. Defaults to app.linn.co.uk
