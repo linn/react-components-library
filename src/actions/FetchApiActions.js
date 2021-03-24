@@ -25,6 +25,22 @@ export default function FetchApiActions(
         }
     });
 
+    this.fetchById = id => ({
+        [RSAA]: {
+            endpoint: `${appRoot}${uri}/${id}`,
+            method: 'GET',
+            options: { requiresAuth: true },
+            headers: {
+                Accept: accept ?? 'application/json'
+            },
+            types: [
+                rsaaTypes.requested(actionTypes, actionTypeRoot),
+                rsaaTypes.received(actionTypes, actionTypeRoot, itemName),
+                rsaaTypes.error(actionTypes, actionTypeRoot, itemName)
+            ]
+        }
+    });
+
     this.fetchPage = (pageNumber, rowsPerPage) => ({
         [RSAA]: {
             endpoint: `${appRoot}${uri}/${pageNumber}/${rowsPerPage}`,
