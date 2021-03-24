@@ -1,14 +1,21 @@
 ﻿import { RSAA } from 'redux-api-middleware';
 import * as rsaaTypes from './rsaaTypes';
 
-export default function UpdateApiActions(itemName, actionTypeRoot, uri, actionTypes, appRoot) {
+export default function UpdateApiActions(
+    itemName,
+    actionTypeRoot,
+    uri,
+    actionTypes,
+    appRoot,
+    accept
+) {
     this.fetch = id => ({
         [RSAA]: {
             endpoint: `${appRoot}${uri}/${id}`,
             method: 'GET',
             options: { requiresAuth: true },
             headers: {
-                Accept: 'application/json'
+                Accept: accept ?? 'application/json'
             },
             types: [
                 rsaaTypes.requested(actionTypes, actionTypeRoot),
@@ -24,7 +31,7 @@ export default function UpdateApiActions(itemName, actionTypeRoot, uri, actionTy
             method: 'GET',
             options: { requiresAuth: true },
             headers: {
-                Accept: 'application/json'
+                Accept: accept ?? 'application/json'
             },
             types: [
                 rsaaTypes.requested(actionTypes, actionTypeRoot),
@@ -40,7 +47,7 @@ export default function UpdateApiActions(itemName, actionTypeRoot, uri, actionTy
             method: 'GET',
             options: { requiresAuth: true },
             headers: {
-                Accept: 'application/json'
+                Accept: accept ?? 'application/json'
             },
             types: [
                 rsaaTypes.requested(actionTypes, actionTypeRoot),
