@@ -1,4 +1,7 @@
 # Changelog
+## [11.4.1] - 2021-03-24
+### Added
+- Added fetchById to FetchApiActions
 ## [11.4.0] - 2021-03-24
 ### Added
 - Added optional accept parameter to FetchApiActions and UpdateApiActions to allow request of different media types
