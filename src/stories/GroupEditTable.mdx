@@ -85,6 +85,7 @@ Story book doesn't currently support complex props in the arg table [but its cur
 | clearSearch             | Clear search results                                            | function                                                                       | false    |
 | tooltip                 | Tooltip message                                                 | oneOf(string, function)                                                        | false    |
 | closeRowOnClickAway     | If row is editing, set editing to false when clicking elsewhere | bool                                                                           | false    |
+| style                   | Object to pass custom styles to table cells in that column      | Object - as in a style object that would be passed to a component              | false    |
 
 Expected shape of row prop
 
@@ -133,4 +134,23 @@ Shows delete icon before the edit button is pressed.
 
 <Canvas>
     <Story id="components-editabletable-groupedittable--show-delete" />
+</Canvas>
+
+### Custom Style Column
+
+Text column here has shape
+
+```json
+{
+    "title": "Text",
+    "id": "text",
+    "type": "text",
+    "editable": true,
+    "tooltip": row => row.extraInfo || false,
+    "style": { "minWidth": "400px", "backgroundColor": "lightPink" }
+}
+```
+
+<Canvas>
+    <Story id="components-editabletable-groupedittable--custom-style-col" />
 </Canvas>

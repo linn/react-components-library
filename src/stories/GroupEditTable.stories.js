@@ -117,7 +117,8 @@ const GroupEditTableWrapper = ({
     editable,
     allowNewRowCreation,
     deleteRowPreEdit,
-    removeRowOnDelete
+    removeRowOnDelete,
+    applyCustomStyle
 }) => {
     const {
         data,
@@ -133,7 +134,18 @@ const GroupEditTableWrapper = ({
 
     return (
         <GroupEditTable
-            columns={columns}
+            columns={
+                applyCustomStyle
+                    ? columns.map(col =>
+                          col.id === 'text'
+                              ? {
+                                    ...col,
+                                    style: { minWidth: '400px', backgroundColor: 'lightPink' }
+                                }
+                              : col
+                      )
+                    : columns
+            }
             rows={data}
             updateRow={updateRow}
             addRow={addRow}
@@ -215,4 +227,14 @@ RemoveRowOnDelete.story = {
 
 RemoveRowOnDelete.args = {
     removeRowOnDelete: true
+};
+
+export const CustomStyleCol = args => <GroupEditTableWrapper {...args} />;
+
+CustomStyleCol.story = {
+    name: 'Column With Custom Style'
+};
+
+CustomStyleCol.args = {
+    applyCustomStyle: true
 };

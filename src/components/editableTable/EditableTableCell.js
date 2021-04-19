@@ -21,14 +21,16 @@ export default function EditableTableCell({
     if (!column.tooltip) {
         return (
             <Fragment key={`${column?.id}${item.id}`}>
-                <TableCell id={column.type}>{Content()}</TableCell>
+                <TableCell id={column.type} style={column.style}>
+                    {Content()}
+                </TableCell>
             </Fragment>
         );
     }
     return (
         <Fragment key={`${column?.id}${item.id}`}>
             <Tooltip title={column.tooltip(item) || ''}>
-                <TableCell id={column.type} key={`${column?.id}${item.id}`}>
+                <TableCell id={column.type} key={`${column?.id}${item.id}`} style={column.style}>
                     {Content()}
                 </TableCell>
             </Tooltip>
@@ -43,7 +45,8 @@ EditableTableCell.propTypes = {
         editable: PropTypes.bool,
         type: PropTypes.string,
         required: PropTypes.bool,
-        textFieldRows: PropTypes.number
+        textFieldRows: PropTypes.number,
+        style: PropTypes.shape({})
     }).isRequired,
     item: PropTypes.shape({
         id: PropTypes.oneOfType([PropTypes.string, PropTypes.number])

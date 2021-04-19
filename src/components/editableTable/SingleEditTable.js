@@ -6,6 +6,7 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import TableBody from '@material-ui/core/TableBody';
 import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
 import AddIcon from '@material-ui/icons/Add';
 import SingleEditableTableRow from './SingleEditableTableRow';
 import columnsProps from './columnsProps';
@@ -63,41 +64,45 @@ export default function SingleEditTable({
         );
 
     return (
-        <Table size="small">
-            <TableHead>
-                <TableRow>
-                    {columns.map(column => (
-                        <TableCell key={column.id}>{column.title}</TableCell>
+        <Paper style={{ overflow: 'auto' }}>
+            <Table tyle={{ tableLayout: 'auto' }} size="small">
+                <TableHead>
+                    <TableRow>
+                        {columns.map(column => (
+                            <TableCell key={column.id} style={column.style}>
+                                {column.title}
+                            </TableCell>
+                        ))}
+                        <TableCell />
+                        <TableCell />
+                        {deleteRow && <TableCell />}
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {newRowPosition === 'top' && editable && allowNewRowCreation && (
+                        <> {renderNewRow()} </>
+                    )}
+                    {rows.map(row => (
+                        <SingleEditableTableRow
+                            key={row.id}
+                            row={row}
+                            columns={columns}
+                            saveRow={saveRow}
+                            editable={editable}
+                            updateRow={updateRow}
+                            validateRow={validateRow}
+                            deleteRow={deleteRow}
+                            closeRowOnClickAway={closeRowOnClickAway}
+                            deleteRowPreEdit={deleteRowPreEdit}
+                            editOnRowClick={editOnRowClick}
+                        />
                     ))}
-                    <TableCell />
-                    <TableCell />
-                    {deleteRow && <TableCell />}
-                </TableRow>
-            </TableHead>
-            <TableBody>
-                {newRowPosition === 'top' && editable && allowNewRowCreation && (
-                    <> {renderNewRow()} </>
-                )}
-                {rows.map(row => (
-                    <SingleEditableTableRow
-                        key={row.id}
-                        row={row}
-                        columns={columns}
-                        saveRow={saveRow}
-                        editable={editable}
-                        updateRow={updateRow}
-                        validateRow={validateRow}
-                        deleteRow={deleteRow}
-                        closeRowOnClickAway={closeRowOnClickAway}
-                        deleteRowPreEdit={deleteRowPreEdit}
-                        editOnRowClick={editOnRowClick}
-                    />
-                ))}
-                {newRowPosition === 'bottom' && editable && allowNewRowCreation && (
-                    <> {renderNewRow()} </>
-                )}
-            </TableBody>
-        </Table>
+                    {newRowPosition === 'bottom' && editable && allowNewRowCreation && (
+                        <> {renderNewRow()} </>
+                    )}
+                </TableBody>
+            </Table>
+        </Paper>
     );
 }
 
