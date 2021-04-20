@@ -1,32 +1,45 @@
 # Changelog
+## [11.5.0] - 2021-04-19
+### Added
+- Option to add custom style to editable table columns
+
 ## [11.4.1] - 2021-03-24
 ### Added
 - Added fetchById to FetchApiActions
+
 ## [11.4.0] - 2021-03-24
 ### Added
 - Added optional accept parameter to FetchApiActions and UpdateApiActions to allow request of different media types
+
 ## [11.3.6] - 2021-03-23
 ### Changed
-- Fixed mixed up Breadcrumbs defaultProps/PropTyopes
+- Fixed mixed up Breadcrumbs defaultProps/PropTypes
+
 ## [11.3.5] - 2021-03-23
 ### Changed
 - Change breadcrumbs 'HOME' crumb to redirect to a specified home url. Defaults to app.linn.co.uk
 - Page component can optionally not render Breadcrumbs with a showBreadcrumbs bool prop. Defaults to true.
+
 ## [11.3.4] - 2021-03-19
 ### Changed
 - Added searchButtonOnly to TypeAhead to show search icon button only in modal mode
+
 ## [11.3.3] - 2021-03-11
 ### Changed
 - Added clear data action
+
 ## [11.3.2] - 2021-03-11
 ### Changed
 - Added clear data option to processes
+
 ## [11.3.1] - 2021-03-02
 ### Changed
 - Removed !important from display none on display only when printing
+
 ## [11.3.0] - 2021-02-24
 ### Added
 - Added getData option to process selectors
+
 ## [11.2.1] - 2021-02-16
 ### Added
 - Added wee style to hide something then show only when printing

@@ -195,3 +195,33 @@ export const ShowDelete = args => (
 ShowDelete.story = {
     name: 'Show Delete Prior to Edit'
 };
+
+export const CustomStyleCol = args => (
+    <SingleEditTable
+        {...args}
+        columns={columns.map(col =>
+            col.id === 'text'
+                ? {
+                      ...col,
+                      style: {
+                          body: { minWidth: '600px', backgroundColor: 'lightPink' },
+                          head: {
+                              fontSize: '20px',
+                              color: 'red',
+                              border: 'solid black',
+                              fontWeight: 'bold'
+                          }
+                      }
+                  }
+                : col
+        )}
+        rows={rows}
+        tableValid={() => true}
+        deleteRow={() => true}
+        deleteRowPreEdit
+    />
+);
+
+CustomStyleCol.story = {
+    name: 'Column With Custom Style'
+};

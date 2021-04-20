@@ -2,9 +2,19 @@
 import React from 'react';
 import providers from './renderUtils/Providers';
 import TypeaheadDialog from '../components/TypeaheadDialog';
+import Chip from '@material-ui/core/Chip';
 
 const items = [
-    { id: '1', name: 'Item 1', href: '/1', description: 'Description of item 1' },
+    {
+        id: '1',
+        name: 'Item 1',
+        href: '/1',
+        description: (
+            <div>
+                Description of item 1 <Chip label="HELLO" />
+            </div>
+        )
+    },
     { id: '2', name: 'Item 2', href: '/2', description: 'Description of item 2' },
     { id: '3', name: 'Item 3', href: '/3', description: 'Description of item 3' }
 ];

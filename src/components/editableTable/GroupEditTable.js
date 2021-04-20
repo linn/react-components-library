@@ -7,6 +7,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableBody from '@material-ui/core/TableBody';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
+import Paper from '@material-ui/core/Paper';
 import GroupEditableTableRow from './GroupEditableTableRow';
 import columnsProps from './columnsProps';
 
@@ -67,52 +68,60 @@ export default function GroupEditTable({
     };
 
     return (
-        <Table size="small">
-            <TableHead>
-                <TableRow>
-                    {columns.map(column => (
-                        <TableCell key={column.id}>{column.title}</TableCell>
-                    ))}
-                    <TableCell />
-                    <TableCell />
-                    {deleteRow && <TableCell />}
-                </TableRow>
-            </TableHead>
-            <TableBody>
-                {rows.map(row => (
-                    /* eslint-disable react/jsx-props-no-spreading */
-                    <GroupEditableTableRow
-                        key={row.id}
-                        row={row}
-                        columns={columns}
-                        editable={editable}
-                        updateRow={updateRow}
-                        validateRow={validateRow}
-                        removeRow={removeRow ? handleRemoveRow : null}
-                        isRowValid={handleIsRowValid}
-                        resetRow={resetRow}
-                        deleteRowPreEdit={deleteRowPreEdit}
-                        handleEditClick={handleEditClick}
-                        setRowToBeDeleted={setRowToBeDeleted}
-                        setRowToBeSaved={setRowToBeSaved}
-                        removeRowOnDelete={removeRowOnDelete}
-                        closeRowOnClickAway={closeRowOnClickAway}
-                        editOnRowClick={editOnRowClick}
-                        {...rest}
-                    />
-                ))}
-
-                {editable && allowNewRowCreation && (
+        <Paper style={{ overflow: 'auto' }}>
+            <Table style={{ tableLayout: 'auto' }} size="small">
+                <TableHead>
                     <TableRow>
-                        <TableCell>
-                            <Button size="small" onClick={handleAddClick} data-testid="addButton">
-                                <AddIcon size="small" />
-                            </Button>
-                        </TableCell>
+                        {columns.map(column => (
+                            <TableCell key={column.id} style={column.style?.head}>
+                                {column.title}
+                            </TableCell>
+                        ))}
+                        <TableCell />
+                        <TableCell />
+                        {deleteRow && <TableCell />}
                     </TableRow>
-                )}
-            </TableBody>
-        </Table>
+                </TableHead>
+                <TableBody>
+                    {rows.map(row => (
+                        /* eslint-disable react/jsx-props-no-spreading */
+                        <GroupEditableTableRow
+                            key={row.id}
+                            row={row}
+                            columns={columns}
+                            editable={editable}
+                            updateRow={updateRow}
+                            validateRow={validateRow}
+                            removeRow={removeRow ? handleRemoveRow : null}
+                            isRowValid={handleIsRowValid}
+                            resetRow={resetRow}
+                            deleteRowPreEdit={deleteRowPreEdit}
+                            handleEditClick={handleEditClick}
+                            setRowToBeDeleted={setRowToBeDeleted}
+                            setRowToBeSaved={setRowToBeSaved}
+                            removeRowOnDelete={removeRowOnDelete}
+                            closeRowOnClickAway={closeRowOnClickAway}
+                            editOnRowClick={editOnRowClick}
+                            {...rest}
+                        />
+                    ))}
+
+                    {editable && allowNewRowCreation && (
+                        <TableRow>
+                            <TableCell>
+                                <Button
+                                    size="small"
+                                    onClick={handleAddClick}
+                                    data-testid="addButton"
+                                >
+                                    <AddIcon size="small" />
+                                </Button>
+                            </TableCell>
+                        </TableRow>
+                    )}
+                </TableBody>
+            </Table>
+        </Paper>
     );
 }
 

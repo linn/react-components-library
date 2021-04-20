@@ -30,6 +30,7 @@ Story book doesn't currently support complex props in the arg table [but its cur
 | clearSearch             | Clear search results                                            | function                                                                       | false    |
 | tooltip                 | Tooltip message                                                 | oneOf(string, function)                                                        | false    |
 | closeRowOnClickAway     | If row is editing, set editing to false when clicking elsewhere | bool                                                                           | false    |
+| style                   | Object to pass custom styles to table cells in that column      | Object - expects nested head and body objects to describe styles               | false    |
 
 Expected shape of row prop
 
@@ -67,4 +68,31 @@ Shows delete icon before the edit button is pressed.
 
 <Canvas>
     <Story id="components-editabletable-singleedittable--show-delete" />
+</Canvas>
+
+### Custom Style Column
+
+A default min-width of 120px is applied to cells in the table body. Its recommended that all width changes are made in style.body.
+
+```json
+{
+    "title": "Text",
+    "id": "text",
+    "type": "text",
+    "editable": true,
+    "tooltip": row => row.extraInfo || false,
+    "style": {
+        "body": { "minWidth": "600px", "backgroundColor": "lightPink" },
+        "head": {
+            "fontSize": "20px",
+            "color": "red",
+            "border": "solid black",
+            "fontWeight": "bold"
+        }
+    }
+}
+```
+
+<Canvas>
+    <Story id="components-editabletable-singleedittable--custom-style-col" />
 </Canvas>
