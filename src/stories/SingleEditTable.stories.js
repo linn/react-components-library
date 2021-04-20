@@ -201,7 +201,18 @@ export const CustomStyleCol = args => (
         {...args}
         columns={columns.map(col =>
             col.id === 'text'
-                ? { ...col, style: { minWidth: '400px', backgroundColor: 'lightPink' } }
+                ? {
+                      ...col,
+                      style: {
+                          body: { minWidth: '600px', backgroundColor: 'lightPink' },
+                          head: {
+                              fontSize: '20px',
+                              color: 'red',
+                              border: 'solid black',
+                              fontWeight: 'bold'
+                          }
+                      }
+                  }
                 : col
         )}
         rows={rows}

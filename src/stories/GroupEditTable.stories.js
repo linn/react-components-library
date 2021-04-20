@@ -140,7 +140,15 @@ const GroupEditTableWrapper = ({
                           col.id === 'text'
                               ? {
                                     ...col,
-                                    style: { minWidth: '400px', backgroundColor: 'lightPink' }
+                                    style: {
+                                        body: { minWidth: '600px', backgroundColor: 'lightPink' },
+                                        head: {
+                                            fontSize: '20px',
+                                            color: 'red',
+                                            border: 'solid black',
+                                            fontWeight: 'bold'
+                                        }
+                                    }
                                 }
                               : col
                       )

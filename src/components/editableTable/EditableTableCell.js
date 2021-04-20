@@ -4,6 +4,10 @@ import TableCell from '@material-ui/core/TableCell';
 import Tooltip from '@material-ui/core/Tooltip';
 import { inputComponentFactory, displayComponentFactory } from './componentFactory';
 
+const defaultStyle = {
+    minWidth: '120px'
+};
+
 export default function EditableTableCell({
     column,
     item,
@@ -18,10 +22,12 @@ export default function EditableTableCell({
             ? inputComponentFactory(item, column, handleValueChange, column.textFieldRows, rest)
             : displayComponentFactory(item, column);
 
+    const style = column.style?.body ? { ...defaultStyle, ...column.style.body } : defaultStyle;
+
     if (!column.tooltip) {
         return (
             <Fragment key={`${column?.id}${item.id}`}>
-                <TableCell id={column.type} style={column.style}>
+                <TableCell id={column.type} style={style}>
                     {Content()}
                 </TableCell>
             </Fragment>
@@ -30,7 +36,7 @@ export default function EditableTableCell({
     return (
         <Fragment key={`${column?.id}${item.id}`}>
             <Tooltip title={column.tooltip(item) || ''}>
-                <TableCell id={column.type} key={`${column?.id}${item.id}`} style={column.style}>
+                <TableCell id={column.type} key={`${column?.id}${item.id}`} style={style}>
                     {Content()}
                 </TableCell>
             </Tooltip>
@@ -46,7 +52,9 @@ EditableTableCell.propTypes = {
         type: PropTypes.string,
         required: PropTypes.bool,
         textFieldRows: PropTypes.number,
-        style: PropTypes.shape({})
+        style: PropTypes.shape({
+            body: PropTypes.shape({})
+        })
     }).isRequired,
     item: PropTypes.shape({
         id: PropTypes.oneOfType([PropTypes.string, PropTypes.number])

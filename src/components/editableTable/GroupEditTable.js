@@ -73,7 +73,7 @@ export default function GroupEditTable({
                 <TableHead>
                     <TableRow>
                         {columns.map(column => (
-                            <TableCell key={column.id} style={column.style}>
+                            <TableCell key={column.id} style={column.style.head}>
                                 {column.title}
                             </TableCell>
                         ))}
