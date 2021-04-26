@@ -1,4 +1,8 @@
 # Changelog
+## [11.5.1] - 2021-04-26
+### Added
+- Added clearItem to update actions
+
 ## [11.5.0] - 2021-04-19
 ### Added
 - Option to add custom style to editable table columns

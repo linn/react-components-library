@@ -143,4 +143,9 @@ export default function UpdateApiActions(
             payload: {}
         };
     };
+
+    this.clearItem = () => ({
+        type: actionTypes[`CLEAR_${actionTypeRoot}_DATA`],
+        payload: {}
+    });
 }

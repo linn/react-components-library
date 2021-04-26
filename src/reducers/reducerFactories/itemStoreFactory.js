@@ -118,6 +118,9 @@
                     snackbarVisible: false
                 };
 
+            case actionTypes[`CLEAR_${itemRoot}_DATA`]:
+                return defaultState;
+
             default:
         }
 

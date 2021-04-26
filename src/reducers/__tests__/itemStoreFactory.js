@@ -10,12 +10,14 @@ describe('item store reducer factory', () => {
         RECEIVE_ENTITY: 'RECEIVE_ENTITY',
         RECEIVE_NEW_ENTITY: 'RECEIVE_NEW_ENTITY',
         REQUEST_APPLICATION_STATE_ENTITY: 'REQUEST_APPLICATION_STATE_ENTITY',
-        RECEIVE_APPLICATION_STATE_ENTITY: 'RECEIVE_APPLICATION_STATE_ENTITY'
+        RECEIVE_APPLICATION_STATE_ENTITY: 'RECEIVE_APPLICATION_STATE_ENTITY',
+        CLEAR_ENTITY_DATA: 'CLEAR_ENTITY_DATA'
     };
     const defaultState = {
         loading: false,
         item: null,
-        editStatus: 'view'
+        editStatus: 'view',
+        snackbarVisible: false
     };
     const generatedReducer = itemStoreFactory('ENTITY', actionTypes, defaultState);
 
@@ -183,6 +185,25 @@ describe('item store reducer factory', () => {
             editStatus: 'view',
             snackbarVisible: true
         };
+
+        deepFreeze(state);
+
+        expect(generatedReducer(state, action)).toEqual(expected);
+    });
+
+    test('when clearing entity', () => {
+        const state = {
+            loading: false,
+            item: { name: 'name' },
+            snackbarVisible: true
+        };
+
+        const action = {
+            type: actionTypes.CLEAR_ENTITY_DATA,
+            payload: {}
+        };
+
+        const expected = defaultState;
 
         deepFreeze(state);
 
