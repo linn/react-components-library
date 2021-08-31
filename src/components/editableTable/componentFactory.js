@@ -89,11 +89,22 @@ export function inputComponentFactory(row, column, onChange, textFieldRows = 1, 
     }
 }
 
+const componentViewDisplay = (row, column) => {
+    switch (column.componentViewDisplay) {
+        case 'nothing':
+            return '';
+        default:
+            return row[column.id];
+    }
+};
+
 export function displayComponentFactory(row, column) {
     switch (column.type) {
         case 'date':
         case 'linnWeek':
             return row[column.id] ? moment(row[column.id]).format('DD MMM YYYY') : '';
+        case 'component':
+            return componentViewDisplay(row, column);
         default:
             return row[column.id];
     }

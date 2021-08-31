@@ -109,6 +109,18 @@ const columns = [
                 <button type="button">{value}</button>
             </div>
         )
+    },
+    {
+        title: 'Edit only Component',
+        id: 'component',
+        type: 'component',
+        editable: true,
+        componentViewDisplay: 'nothing',
+        component: ({ value }) => (
+            <div>
+                <button type="button">{value}</button>
+            </div>
+        )
     }
 ];
 
