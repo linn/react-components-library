@@ -1,4 +1,10 @@
 # Changelog
+## [11.6.0] - 2021-08-31
+### Added
+- Added componentViewDisplay to editable table column options
+- Default option is 'value' which shows value in view mode as before.
+- Other option is 'nothing' which shows nothing in view mode but component when editing.
+
 ## [11.5.1] - 2021-04-26
 ### Added
 - Added clearItem to update actions

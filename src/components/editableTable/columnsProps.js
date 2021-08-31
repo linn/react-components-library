@@ -18,7 +18,8 @@ const columnsProps = PropTypes.shape({
     search: PropTypes.func,
     selectSearchResult: PropTypes.func,
     minimumSearchTermLength: PropTypes.number,
-    textFieldRows: PropTypes.number
+    textFieldRows: PropTypes.number,
+    componentViewDisplay: PropTypes.oneOf(['value', 'nothing'])
 });
 
 export default columnsProps;
