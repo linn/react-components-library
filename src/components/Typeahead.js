@@ -56,7 +56,8 @@ function Typeahead({
     disabled,
     minimumSearchTermLength,
     debounce,
-    searchButtonOnly
+    searchButtonOnly,
+    propertyName
 }) {
     const [searchTerm, setSearchTerm] = useState('');
     const [dialogOpen, setDialogOpen] = useState(false);
@@ -148,6 +149,7 @@ function Typeahead({
             ) : (
                 <InputField
                     adornment={SearchIcon()}
+                    propertyName={propertyName}
                     textFieldProps={{
                         onClick: () => {
                             if (!disabled) {
@@ -211,6 +213,7 @@ const itemShape = {
 };
 
 Typeahead.propTypes = {
+    propertyName: PropTypes.string,
     items: PropTypes.arrayOf(PropTypes.shape(itemShape)).isRequired,
     title: PropTypes.string,
     loading: PropTypes.bool,
@@ -240,7 +243,8 @@ Typeahead.defaultProps = {
     disabled: false,
     minimumSearchTermLength: 1,
     debounce: 500,
-    searchButtonOnly: false
+    searchButtonOnly: false,
+    propertyName: ''
 };
 
 export default Typeahead;

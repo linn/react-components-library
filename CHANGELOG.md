@@ -1,4 +1,8 @@
 # Changelog
+## [11.7.1] - 2021-09-03
+### Changes
+- Pass propertyName to InputField's that are wrapped in other componenets.
+
 ## [11.7.0] - 2021-09-03
 ### Changes
 - InputField's TextField and InputLabel are now linked via the propertyName prop, which is now required. This is an accesibility best practise as it allows screen readers etc. to correctly associate labels with input fields, but the benefit to us is that testing library's getByLabelText() document query now works.
