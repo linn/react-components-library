@@ -1,4 +1,9 @@
 # Changelog
+## [11.7.0] - 2021-09-03
+### Changes
+- InputField's TextField and InputLabel are now linked via the propertyName prop. This is an accesibility best practise as it allows screen readers etc. to correctly associate labels with input fields, but the benefit to us is that testing library's getByLabelText() documet query now works.
+
+
 ## [11.6.0] - 2021-08-31
 ### Added
 - Added componentViewDisplay to editable table column options
