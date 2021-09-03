@@ -91,6 +91,7 @@ function InputField({
                 classes={{ root: classes.label, asterisk: classes.labelAsterisk }}
                 required={required}
                 error={error}
+                htmlFor={propertyName}
             >
                 {label}
             </InputLabel>
@@ -105,6 +106,7 @@ function InputField({
                 margin={margin}
                 multiline={rows > 0}
                 name={name}
+                id={propertyName}
                 placeholder={placeholder}
                 required={required}
                 rows={rows}
