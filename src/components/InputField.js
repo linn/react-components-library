@@ -91,6 +91,7 @@ function InputField({
                 classes={{ root: classes.label, asterisk: classes.labelAsterisk }}
                 required={required}
                 error={error}
+                htmlFor={propertyName}
             >
                 {label}
             </InputLabel>
@@ -105,6 +106,7 @@ function InputField({
                 margin={margin}
                 multiline={rows > 0}
                 name={name}
+                id={propertyName}
                 placeholder={placeholder}
                 required={required}
                 rows={rows}
@@ -154,7 +156,7 @@ InputField.propTypes = {
     rows: PropTypes.number,
     name: PropTypes.string,
     placeholder: PropTypes.string,
-    propertyName: PropTypes.string,
+    propertyName: PropTypes.string.isRequired,
     type: PropTypes.string,
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     onChange: PropTypes.func,
@@ -176,7 +178,6 @@ InputField.defaultProps = {
     rows: null,
     name: '',
     placeholder: '',
-    propertyName: '',
     type: 'text',
     value: '',
     onChange: null,
