@@ -186,6 +186,7 @@ function Typeahead({
                                 {title}
                             </Typography>
                             <InputField
+                                propertyName={propertyName}
                                 adornment={SearchIcon()}
                                 textFieldProps={{
                                     autoFocus: true
