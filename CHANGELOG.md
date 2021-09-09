@@ -1,7 +1,7 @@
 # Changelog
-## [11.7.1] - 2021-09-03
+## [11.7.2] - 2021-09-09
 ### Changes
-- Pass propertyName to InputField's that are wrapped in other componenets.
+- Pass propertyName to InputField's that are wrapped in other components.
 
 ## [11.7.0] - 2021-09-03
 ### Changes
