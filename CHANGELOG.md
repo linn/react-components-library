@@ -1,4 +1,8 @@
 # Changelog
+## [11.8.0] - 2021-09-14
+### Changes
+- Add fetchByPath to fetch and update actions to allow GETting of uri/id/path 
+
 ## [11.7.2] - 2021-09-09
 ### Changes
 - Pass propertyName to InputField's that are wrapped in other components.
