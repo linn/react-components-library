@@ -41,6 +41,22 @@ export default function UpdateApiActions(
         }
     });
 
+    this.fetchByPath = (id, path) => ({
+        [RSAA]: {
+            endpoint: `${appRoot}${uri}/${id}/${path}`,
+            method: 'GET',
+            options: { requiresAuth: true },
+            headers: {
+                Accept: accept ?? 'application/json'
+            },
+            types: [
+                rsaaTypes.requested(actionTypes, actionTypeRoot),
+                rsaaTypes.received(actionTypes, actionTypeRoot, itemName),
+                rsaaTypes.error(actionTypes, actionTypeRoot, itemName)
+            ]
+        }
+    });
+
     this.fetchByQueryString = (queryString, id) => ({
         [RSAA]: {
             endpoint: `${appRoot}${uri}?${queryString}=${id}`,
