@@ -1,6 +1,6 @@
 {
     "name": "@linn-it/linn-form-components-library",
-    "version": "12.0.0",
+    "version": "12.0.1",
     "private": false,
     "dependencies": {
         "classnames": "^2.2.6",
@@ -27,7 +27,7 @@
         "@material-ui/icons": "^4.9.1",
         "@material-ui/pickers": "^3.2.10",
         "@material-ui/styles": "^4.11.2",
-        "notistack": "^0.9.17",
+        "notistack": "^1.0.10",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
         "react-redux": "^7.2.0",
@@ -91,7 +91,7 @@
         "jest": "^25.1.0",
         "jscodeshift": "^0.11.0",
         "moment": "^2.29.1",
-        "notistack": "^0.9.7",
+        "notistack": "^1.0.10",
         "prettier": "^1.19.1",
         "react": "^16.14.0",
         "react-dom": "^16.14.0",
