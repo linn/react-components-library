@@ -1,5 +1,5 @@
 # Changelog
-## [12.0.0] - 2021-09-15
+## [12.0.1] - 2021-09-15
 ### Changes
 - Update React to v17 and Material UI components.
 
