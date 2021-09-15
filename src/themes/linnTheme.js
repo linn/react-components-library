@@ -1,7 +1,7 @@
-import { createMuiTheme } from '@material-ui/core/styles';
+import { createTheme } from '@material-ui/core/styles';
 import pink from '@material-ui/core/colors/pink';
 
-export const linnTheme = createMuiTheme({
+export const linnTheme = createTheme({
     palette: {
         primary: {
             50: '#e0f7fa',

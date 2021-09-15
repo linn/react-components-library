@@ -1,4 +1,8 @@
 # Changelog
+## [12.0.0] - 2021-09-15
+### Changes
+- Update React to v17 and Material UI components.
+
 ## [11.8.0] - 2021-09-14
 ### Changes
 - Add fetchByPath to fetch and update actions to allow GETting of uri/id/path 

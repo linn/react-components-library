@@ -1,7 +1,6 @@
 import React from 'react';
 import createMount from '@material-ui/core/test-utils/createMount';
-import { MuiThemeProvider } from '@material-ui/core/styles';
-import CreateMuiTheme from '@material-ui/core/styles/createMuiTheme';
+import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
 import SnackbarMessage from '../SnackbarMessage';
 
 describe('<SnackbarMessage />', () => {
@@ -19,7 +18,7 @@ describe('<SnackbarMessage />', () => {
 
     it('should render snackbar', () => {
         wrapper = mount(
-            <MuiThemeProvider theme={CreateMuiTheme()}>
+            <MuiThemeProvider theme={createTheme()}>
                 <SnackbarMessage {...props} />{' '}
             </MuiThemeProvider>
         );

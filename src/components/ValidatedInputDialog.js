@@ -10,13 +10,13 @@ import EditIcon from '@material-ui/icons/Edit';
 import CloseIcon from '@material-ui/icons/Close';
 import DoneIcon from '@material-ui/icons/Done';
 import ThemeProvider from '@material-ui/styles/ThemeProvider';
-import { createMuiTheme } from '@material-ui/core/styles';
+import { createTheme } from '@material-ui/core/styles';
 import InputField from './InputField';
 import useSearch from '../hooks/useSearch';
 import Loading from './Loading';
 import { linnTheme } from '../themes/linnTheme';
 
-const valid = createMuiTheme({
+const valid = createTheme({
     palette: {
         primary: {
             main: '#4BB543'
@@ -27,7 +27,7 @@ const valid = createMuiTheme({
     }
 });
 
-const invalid = createMuiTheme({
+const invalid = createTheme({
     palette: {
         primary: {
             main: '#FF9494'

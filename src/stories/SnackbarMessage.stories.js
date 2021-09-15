@@ -1,15 +1,14 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { MuiThemeProvider } from '@material-ui/core/styles';
-import CreateMuiTheme from '@material-ui/core/styles/createMuiTheme';
+import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
 import SnackbarMessage from '../components/SnackbarMessage';
 
 export default {
     title: 'Components/SnackbarMessage',
     decorators: [
         story => (
-            <MuiThemeProvider theme={CreateMuiTheme()}>
+            <MuiThemeProvider theme={createTheme()}>
                 <div style={{ padding: '3rem', width: '100%' }}>{story()}</div>
             </MuiThemeProvider>
         )
