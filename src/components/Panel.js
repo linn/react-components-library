@@ -44,7 +44,7 @@ function Panel({ section, classes, close }) {
             <Button onClick={close} color="secondary" style={styles.closeButton}>
                 <Close />
             </Button>
-            <Grid container justify="flex-start">
+            <Grid container justifyContent="flex-start">
                 {columns.map((col, i) => (
                     <Grid item xs={12} sm={6} md={4} lg={3} xl={3} key={i}>
                         {col.categories

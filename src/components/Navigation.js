@@ -170,7 +170,7 @@ function Navigation({
                                         <Grid
                                             container
                                             alignItems="center"
-                                            justify="space-between"
+                                            justifyContent="space-between"
                                             spacing={3}
                                             classes={{ container: classes.container }}
                                         >
