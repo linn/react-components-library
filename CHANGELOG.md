@@ -1,4 +1,8 @@
 # Changelog
+## [12.1.0] - 2021-09-20
+### Changes
+- Dropdowns's TextField and InputLabel are now linked via the propertyName prop.
+
 ## [12.0.1] - 2021-09-15
 ### Changes
 - Update React to v17 and Material UI components.
