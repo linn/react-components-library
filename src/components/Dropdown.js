@@ -97,6 +97,7 @@ function Dropdown({
                 classes={{ root: classes.label, asterisk: classes.labelAsterisk }}
                 required={required}
                 error={error}
+                htmlFor={propertyName}
             >
                 {label}
             </InputLabel>
@@ -106,7 +107,7 @@ function Dropdown({
                 }}
                 autoFocus={autoFocus}
                 error={error}
-                id="outlined-select-currency-native"
+                id={propertyName}
                 type={type}
                 select
                 adornment={adornment}

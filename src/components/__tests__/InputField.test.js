@@ -18,6 +18,7 @@ describe('<InputField />', () => {
 
     describe('when rendering input field', () => {
         it('should render text field', () => {
+            //eslint-disable-next-line react/jsx-props-no-spreading
             const { getByLabelText } = render(<InputField {...props} />);
 
             expect(getByLabelText('some label')).toBeInTheDocument();
