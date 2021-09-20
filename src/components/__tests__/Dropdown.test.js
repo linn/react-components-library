@@ -1,96 +1,73 @@
 import React from 'react';
-import { createMount } from '@material-ui/core/test-utils';
-import { MuiThemeProvider } from '@material-ui/core/styles';
-import { linnTheme } from '../../themes';
+import { cleanup, screen } from '@testing-library/react';
+import '@testing-library/jest-dom/extend-expect';
+import render from '../../test-utils';
 import Dropdown from '../Dropdown';
 
-describe('<Dropdown />', () => {
-    let wrapper;
-    let props;
-    const getMenuItems = () => wrapper.find('option');
-    const mount = createMount({ dive: true });
+afterEach(() => cleanup());
 
-    describe('when items exist', () => {
-        beforeEach(() => {
-            props = {
-                items: ['one', 'two', 'three'],
-                value: 'two',
-                label: 'dropdown label',
-                onChange: jest.fn(),
-                allowNoValue: false,
-                propertyName: 'dropdownProperty'
-            };
+describe('When rendering Dropdown...', () => {
+    test('should render text field', () => {
+        const props = {
+            items: ['one', 'two', 'three'],
+            value: 'two',
+            label: 'dropdown label',
+            onChange: jest.fn(),
+            allowNoValue: false,
+            propertyName: 'dropdownProperty'
+        };
+        //eslint-disable-next-line react/jsx-props-no-spreading
+        const { getByLabelText } = render(<Dropdown {...props} />);
 
-            const ComponentWithTheme = () => (
-                <MuiThemeProvider theme={linnTheme}>
-                    <Dropdown {...props} />
-                </MuiThemeProvider>
-            );
+        expect(getByLabelText('dropdown label')).toBeInTheDocument();
+    });
+});
 
-            wrapper = mount(<ComponentWithTheme {...props} />);
-        });
-
-        it('should render menu items', () => {
-            expect(getMenuItems()).toHaveLength(3);
-            expect(
-                getMenuItems()
-                    .at(0)
-                    .props().children
-            ).toEqual('one');
-            expect(
-                getMenuItems()
-                    .at(1)
-                    .props().children
-            ).toEqual('two');
-            expect(
-                getMenuItems()
-                    .at(2)
-                    .props().children
-            ).toEqual('three');
-        });
+describe('when items exist', () => {
+    beforeEach(() => {
+        const props = {
+            items: ['one', 'two', 'three'],
+            value: 'two',
+            label: 'dropdown label',
+            onChange: jest.fn(),
+            allowNoValue: false,
+            propertyName: 'dropdownProperty'
+        };
+        //eslint-disable-next-line react/jsx-props-no-spreading
+        render(<Dropdown {...props} />);
     });
 
-    describe('when item objects exist', () => {
-        beforeEach(() => {
-            props = {
-                items: [
-                    { id: 1, displayText: 'one' },
-                    { id: 2, displayText: 'two' },
-                    { id: 3, displayText: 'three' }
-                ],
-                value: 2,
-                label: 'dropdown label',
-                onChange: jest.fn(),
-                propertyName: 'dropdownProperty',
-                allowNoValue: false
-            };
+    test('should render menu items', () => {
+        expect(screen.getAllByRole('option')).toHaveLength(3);
 
-            const ComponentWithTheme = () => (
-                <MuiThemeProvider theme={linnTheme}>
-                    <Dropdown {...props} />
-                </MuiThemeProvider>
-            );
+        expect(screen.getAllByRole('option')).toHaveLength(3);
+        expect(screen.getByText('one')).toBeInTheDocument();
+        expect(screen.getByText('two')).toBeInTheDocument();
+        expect(screen.getByText('three')).toBeInTheDocument();
+    });
+});
 
-            wrapper = mount(<ComponentWithTheme {...props} />);
-        });
-
-        it('should render menu items', () => {
-            expect(getMenuItems()).toHaveLength(3);
-            expect(
-                getMenuItems()
-                    .at(0)
-                    .props().children
-            ).toEqual('one');
-            expect(
-                getMenuItems()
-                    .at(1)
-                    .props().children
-            ).toEqual('two');
-            expect(
-                getMenuItems()
-                    .at(2)
-                    .props().children
-            ).toEqual('three');
-        });
+describe('when item objects exist...', () => {
+    beforeEach(() => {
+        const props = {
+            items: [
+                { id: 1, displayText: 'one' },
+                { id: 2, displayText: 'two' },
+                { id: 3, displayText: 'three' }
+            ],
+            value: 2,
+            label: 'dropdown label',
+            onChange: jest.fn(),
+            propertyName: 'dropdownProperty',
+            allowNoValue: false
+        };
+        //eslint-disable-next-line react/jsx-props-no-spreading
+        render(<Dropdown {...props} />);
+    });
+    test('should render menu items', () => {
+        expect(screen.getAllByRole('option')).toHaveLength(3);
+        expect(screen.getByText('one')).toBeInTheDocument();
+        expect(screen.getByText('two')).toBeInTheDocument();
+        expect(screen.getByText('three')).toBeInTheDocument();
     });
 });
