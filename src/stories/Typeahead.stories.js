@@ -29,6 +29,59 @@ export default {
     component: Typeahead
 };
 
+export const Sorted = args => <Typeahead {...args} />;
+
+Sorted.story = {
+    name: 'when sort function supplied'
+};
+
+Sorted.args = {
+    title: 'Title Text',
+    loading: false,
+    fetchItems,
+    items: [
+        { id: '2', name: 'Item 2', href: '/1', description: '2 - second' },
+        { id: '3', name: 'Item 3', href: '/2', description: '3 - third' },
+        { id: '1', name: 'Item 1', href: '/3', description: '1 - first' }
+    ],
+    clearSearch,
+    debounce: 500,
+    sortFunction: _ => (a, b) => {
+        if (a.description < b.description) {
+            return -1;
+        }
+        if (a.description > b.description) {
+            return 1;
+        }
+        return 0;
+    }
+};
+
+export const SortedUsingSearchTerm = args => <Typeahead {...args} />;
+
+SortedUsingSearchTerm.story = {
+    name: 'when sortFunction supplied that uses the searchTerm in the sort'
+};
+
+SortedUsingSearchTerm.args = {
+    title: 'Title Text',
+    loading: false,
+    fetchItems,
+    items: [
+        { id: '2', name: 'Item 2', href: '/1', description: '2 - second' },
+        { id: '3', name: 'Item 3', href: '/2', description: '3 - third' },
+        { id: '1', name: 'Item 1', href: '/3', description: '1 - first' }
+    ],
+    clearSearch,
+    debounce: 500,
+    sortFunction: searchTerm => (_, b) => {
+        if (b.description.includes(searchTerm)) {
+            return 1;
+        }
+        return -1;
+    }
+};
+
 export const Default = args => <Typeahead {...args} />;
 
 Default.story = {
@@ -42,7 +95,7 @@ Default.args = {
     items,
     clearSearch,
     debounce: 500,
-    sortFunction: searchTerm => (a, b) => {
+    sortFunction: _ => (a, b) => {
         if (a.description > b.description) {
             return -1;
         }
