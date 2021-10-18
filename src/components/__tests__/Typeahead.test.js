@@ -7,8 +7,20 @@ import Typeahead from '../Typeahead';
 afterEach(() => cleanup());
 
 const items = [
-    { id: 1, name: 'n1', description: 'd1', href: '/1' },
-    { id: 2, name: 'n2', description: 'd2', href: '/2' }
+    { id: 1, name: 'n1', description: 'desc', href: '/1' },
+    { id: 2, name: 'n2', description: 'desc', href: '/2' },
+    { id: 3, name: 'n3', description: 'desc', href: '/3' },
+    { id: 4, name: 'n4', description: 'desc', href: '/4' },
+    { id: 5, name: 'n5', description: 'desc', href: '/5' }
+];
+
+const sortableItems = [
+    { id: 1, name: 'item 1', description: 'F', href: '/1' },
+    { id: 2, name: 'item 2', description: 'A', href: '/2' },
+    { id: 3, name: 'item 3', description: 'C', href: '/3' },
+    { id: 4, name: 'item 4', description: 'B', href: '/4' },
+    { id: 5, name: 'item 5', description: 'D', href: '/5' },
+    { id: 6, name: 'item 6', description: 'E', href: '/6' }
 ];
 
 let props;
@@ -42,6 +54,63 @@ describe('when modal', () => {
         const item = getByPlaceholderText('Search by id or by description');
         fireEvent.click(item);
         expect(queryByTestId('modal')).toBeInTheDocument();
+    });
+});
+
+describe('when result limit', () => {
+    beforeEach(() => {
+        props = {
+            title: 'Title Text',
+            loading: false,
+            modal: true,
+            label: 'label',
+            fetchItems: jest.fn(),
+            clearSearch: jest.fn(),
+            items,
+            resultLimit: 3
+        };
+    });
+    test('should limit results', () => {
+        const { getAllByText, getByPlaceholderText } = render(<Typeahead {...props} />);
+        const input = getByPlaceholderText('Search by id or by description');
+        fireEvent.click(input);
+        const results = getAllByText('desc');
+        expect(results).toHaveLength(3);
+    });
+});
+
+describe('when sort function', () => {
+    beforeEach(() => {
+        props = {
+            title: 'Title Text',
+            loading: false,
+            modal: true,
+            label: 'label',
+            fetchItems: jest.fn(),
+            clearSearch: jest.fn(),
+            items: sortableItems,
+            sortFunction: (a, b) => {
+                if (a.description < b.description) {
+                    return -1;
+                }
+                if (a.description < b.description) {
+                    return 1;
+                }
+                return 0;
+            }
+        };
+    });
+    test('should sort results', () => {
+        const { getAllByRole, getByPlaceholderText } = render(<Typeahead {...props} />);
+        const input = getByPlaceholderText('Search by id or by description');
+        fireEvent.click(input);
+        const results = getAllByRole('link');
+        expect(results[0]).toContainHTML('A');
+        expect(results[1]).toContainHTML('B');
+        expect(results[2]).toContainHTML('C');
+        expect(results[3]).toContainHTML('D');
+        expect(results[4]).toContainHTML('E');
+        expect(results[5]).toContainHTML('F');
     });
 });
 
