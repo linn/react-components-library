@@ -32,7 +32,7 @@ export default {
 export const Prioritised = args => <Typeahead {...args} />;
 
 Prioritised.story = {
-    name: 'when priority function supplied'
+    name: 'when priority function supplied that prioritises closest match to search term'
 };
 
 Prioritised.args = {
