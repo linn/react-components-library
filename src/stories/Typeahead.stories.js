@@ -75,7 +75,7 @@ SortedUsingSearchTerm.args = {
     clearSearch,
     debounce: 500,
     sortFunction: searchTerm => (_, b) => {
-        if (b.description.includes(searchTerm)) {
+        if (b.name.includes(searchTerm)) {
             return 1;
         }
         return -1;
