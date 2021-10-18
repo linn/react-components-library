@@ -14,13 +14,12 @@ const items = [
     { id: 5, name: 'n5', description: 'desc', href: '/5' }
 ];
 
-const sortableItems = [
-    { id: 1, name: 'item 1', description: 'F', href: '/F' },
-    { id: 2, name: 'item 2', description: 'A', href: '/A' },
-    { id: 3, name: 'item 3', description: 'C', href: '/C' },
-    { id: 4, name: 'item 4', description: 'B', href: '/B' },
-    { id: 5, name: 'item 5', description: 'D', href: '/D' },
-    { id: 6, name: 'item 6', description: 'E', href: '/E' }
+const prioritisableItems = [
+    { id: 2, name: 'item that matches kinda', description: 'A', href: '/A' },
+    { id: 3, name: 'item that matc', description: 'C', href: '/C' },
+    { id: 4, name: 'item no matchy', description: 'B', href: '/B' },
+    { id: 5, name: 'item that hardly matches', description: 'D', href: '/D' },
+    { id: 1, name: 'item that matches perfectly', description: 'F', href: '/F' }
 ];
 
 let props;
@@ -81,6 +80,7 @@ describe('when result limit', () => {
 
 describe('when prioritFunction', () => {
     beforeEach(() => {
+        const fakeSearchTerm = 'item that matches perfectly';
         props = {
             title: 'Title Text',
             loading: false,
@@ -88,22 +88,32 @@ describe('when prioritFunction', () => {
             label: 'label',
             fetchItems: jest.fn(),
             clearSearch: jest.fn(),
-            items: sortableItems,
-            priorityFunction: item => {
-                if (item.name.includes(5)) {
-                    return 1;
+            items: prioritisableItems,
+            // function that prioritises based on closeness of match to the searchTerm
+            priorityFunction: (item, _) => {
+                let count = 0;
+                for (let i = 0; i < fakeSearchTerm.length; i += 1) {
+                    if (i === item.name.length) {
+                        break;
+                    }
+                    if (item.name.toUpperCase()[i] === fakeSearchTerm.toUpperCase()[i]) {
+                        count += 1;
+                    }
                 }
-
-                return 0;
+                return count;
             }
         };
     });
-    test('should show item with highest priority first', () => {
+    test('should sort by priority function', () => {
         const { getAllByRole, getByPlaceholderText } = render(<Typeahead {...props} />);
         const input = getByPlaceholderText('Search by id or by description');
         fireEvent.click(input);
         const results = getAllByRole('link');
-        expect(results[0]).toHaveAttribute('href', '/D');
+        expect(results[0]).toHaveAttribute('href', '/F');
+        expect(results[1]).toHaveAttribute('href', '/A');
+        expect(results[2]).toHaveAttribute('href', '/C');
+        expect(results[3]).toHaveAttribute('href', '/D');
+        expect(results[4]).toHaveAttribute('href', '/B');
     });
 });
 
