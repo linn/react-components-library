@@ -130,7 +130,7 @@ function Typeahead({
         }
 
         if (resultLimit) {
-            result = items.slice(0, resultLimit);
+            result = result.slice(0, resultLimit);
         }
 
         if (result?.length > 0) {
