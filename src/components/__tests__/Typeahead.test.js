@@ -15,12 +15,12 @@ const items = [
 ];
 
 const sortableItems = [
-    { id: 1, name: 'item 1', description: 'F', href: '/1' },
-    { id: 2, name: 'item 2', description: 'A', href: '/2' },
-    { id: 3, name: 'item 3', description: 'C', href: '/3' },
-    { id: 4, name: 'item 4', description: 'B', href: '/4' },
-    { id: 5, name: 'item 5', description: 'D', href: '/5' },
-    { id: 6, name: 'item 6', description: 'E', href: '/6' }
+    { id: 1, name: 'item 1', description: 'F', href: '/F' },
+    { id: 2, name: 'item 2', description: 'A', href: '/A' },
+    { id: 3, name: 'item 3', description: 'C', href: '/C' },
+    { id: 4, name: 'item 4', description: 'B', href: '/B' },
+    { id: 5, name: 'item 5', description: 'D', href: '/D' },
+    { id: 6, name: 'item 6', description: 'E', href: '/E' }
 ];
 
 let props;
@@ -105,12 +105,12 @@ describe('when sort function', () => {
         const input = getByPlaceholderText('Search by id or by description');
         fireEvent.click(input);
         const results = getAllByRole('link');
-        expect(results[0]).toContainHTML('A');
-        expect(results[1]).toContainHTML('B');
-        expect(results[2]).toContainHTML('C');
-        expect(results[3]).toContainHTML('D');
-        expect(results[4]).toContainHTML('E');
-        expect(results[5]).toContainHTML('F');
+        expect(results[0]).toHaveAttribute('href', '/A');
+        expect(results[1]).toHaveAttribute('href', '/B');
+        expect(results[2]).toHaveAttribute('href', '/C');
+        expect(results[3]).toHaveAttribute('href', '/D');
+        expect(results[4]).toHaveAttribute('href', '/E');
+        expect(results[5]).toHaveAttribute('href', '/F');
     });
 });
 
