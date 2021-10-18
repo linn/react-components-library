@@ -41,7 +41,16 @@ Default.args = {
     fetchItems,
     items,
     clearSearch,
-    debounce: 500
+    debounce: 500,
+    sortFunction: searchTerm => (a, b) => {
+        if (a.description > b.description) {
+            return -1;
+        }
+        if (a.description < b.description) {
+            return 1;
+        }
+        return 0;
+    }
 };
 
 export const NothingFound = args => <Typeahead {...args} />;

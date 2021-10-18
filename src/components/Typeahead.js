@@ -120,7 +120,7 @@ function Typeahead({
         }
 
         if (sortFunction) {
-            result = result.sort(sortFunction);
+            result = result.sort(sortFunction(searchTerm));
         }
 
         if (result?.length > 0) {
