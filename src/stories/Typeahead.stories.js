@@ -75,7 +75,7 @@ SortedUsingSearchTerm.args = {
     clearSearch,
     debounce: 500,
     sortFunction: searchTerm => (_, b) => {
-        if (b.name.includes(searchTerm)) {
+        if (searchTerm && b.name.toUpperCase().includes(searchTerm.toUpperCase())) {
             return 1;
         }
         return -1;
