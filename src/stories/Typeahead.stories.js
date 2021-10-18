@@ -46,7 +46,7 @@ Sorted.args = {
     ],
     clearSearch,
     debounce: 500,
-    sortFunction: _ => (a, b) => {
+    sortFunction: () => (a, b) => {
         if (a.description < b.description) {
             return -1;
         }
@@ -95,7 +95,7 @@ Default.args = {
     items,
     clearSearch,
     debounce: 500,
-    sortFunction: _ => (a, b) => {
+    sortFunction: () => (a, b) => {
         if (a.description > b.description) {
             return -1;
         }

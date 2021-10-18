@@ -89,7 +89,7 @@ describe('when sort function', () => {
             fetchItems: jest.fn(),
             clearSearch: jest.fn(),
             items: sortableItems,
-            sortFunction: _ => (a, b) => {
+            sortFunction: () => (a, b) => {
                 if (a.description < b.description) {
                     return -1;
                 }
