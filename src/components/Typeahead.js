@@ -115,12 +115,12 @@ function Typeahead({
 
         let result = items;
 
-        if (resultLimit) {
-            result = items.slice(0, resultLimit);
-        }
-
         if (sortFunction) {
             result = result.sort(sortFunction(searchTerm));
+        }
+
+        if (resultLimit) {
+            result = items.slice(0, resultLimit);
         }
 
         if (result?.length > 0) {
