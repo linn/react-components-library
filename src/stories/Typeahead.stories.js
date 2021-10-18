@@ -29,13 +29,13 @@ export default {
     component: Typeahead
 };
 
-export const Sorted = args => <Typeahead {...args} />;
+export const Prioritised = args => <Typeahead {...args} />;
 
-Sorted.story = {
-    name: 'when sort function supplied'
+Prioritised.story = {
+    name: 'when priority function supplied'
 };
 
-Sorted.args = {
+Prioritised.args = {
     title: 'Title Text',
     loading: false,
     fetchItems,
@@ -46,39 +46,14 @@ Sorted.args = {
     ],
     clearSearch,
     debounce: 500,
-    sortFunction: () => (a, b) => {
-        if (a.description < b.description) {
-            return -1;
+    priorityFunction: (item, searchTerm) => {
+        let count = 0;
+        for (let i = 0; i < searchTerm.length; i += 1) {
+            if (item.name.toUpperCase()[i] === searchTerm.toUpperCase()[i]) {
+                count += 1;
+            }
         }
-        if (a.description > b.description) {
-            return 1;
-        }
-        return 0;
-    }
-};
-
-export const SortedUsingSearchTerm = args => <Typeahead {...args} />;
-
-SortedUsingSearchTerm.story = {
-    name: 'when sortFunction supplied that uses the searchTerm in the sort'
-};
-
-SortedUsingSearchTerm.args = {
-    title: 'Title Text',
-    loading: false,
-    fetchItems,
-    items: [
-        { id: '2', name: 'Item 2', href: '/1', description: '2 - second' },
-        { id: '3', name: 'Item 3', href: '/2', description: '3 - third' },
-        { id: '1', name: 'Item 1', href: '/3', description: '1 - first' }
-    ],
-    clearSearch,
-    debounce: 500,
-    sortFunction: searchTerm => (_, b) => {
-        if (searchTerm && b.name.toUpperCase().includes(searchTerm.toUpperCase())) {
-            return 1;
-        }
-        return -1;
+        return count;
     }
 };
 

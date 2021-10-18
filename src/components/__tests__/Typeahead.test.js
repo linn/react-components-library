@@ -79,7 +79,7 @@ describe('when result limit', () => {
     });
 });
 
-describe('when sort function', () => {
+describe('when prioritFunction', () => {
     beforeEach(() => {
         props = {
             title: 'Title Text',
@@ -89,28 +89,21 @@ describe('when sort function', () => {
             fetchItems: jest.fn(),
             clearSearch: jest.fn(),
             items: sortableItems,
-            sortFunction: () => (a, b) => {
-                if (a.description < b.description) {
-                    return -1;
-                }
-                if (a.description > b.description) {
+            priorityFunction: item => {
+                if (item.name.includes(5)) {
                     return 1;
                 }
+
                 return 0;
             }
         };
     });
-    test('should sort results', () => {
+    test('should show item with highest priority first', () => {
         const { getAllByRole, getByPlaceholderText } = render(<Typeahead {...props} />);
         const input = getByPlaceholderText('Search by id or by description');
         fireEvent.click(input);
         const results = getAllByRole('link');
-        expect(results[0]).toHaveAttribute('href', '/A');
-        expect(results[1]).toHaveAttribute('href', '/B');
-        expect(results[2]).toHaveAttribute('href', '/C');
-        expect(results[3]).toHaveAttribute('href', '/D');
-        expect(results[4]).toHaveAttribute('href', '/E');
-        expect(results[5]).toHaveAttribute('href', '/F');
+        expect(results[0]).toHaveAttribute('href', '/D');
     });
 });
 

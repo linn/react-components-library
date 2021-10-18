@@ -58,7 +58,7 @@ function Typeahead({
     debounce,
     searchButtonOnly,
     propertyName,
-    sortFunction,
+    priorityFunction,
     resultLimit
 }) {
     const [searchTerm, setSearchTerm] = useState('');
@@ -115,8 +115,18 @@ function Typeahead({
 
         let result = items;
 
-        if (sortFunction) {
-            result = result.sort(sortFunction(searchTerm));
+        if (priorityFunction) {
+            result = result
+                .map(i => ({ ...i, priority: priorityFunction(i, searchTerm) }))
+                .sort((a, b) => {
+                    if (a.priority > b.priority) {
+                        return -1;
+                    }
+                    if (a.priority < b.priority) {
+                        return 1;
+                    }
+                    return 0;
+                });
         }
 
         if (resultLimit) {
@@ -243,7 +253,7 @@ Typeahead.propTypes = {
     minimumSearchTermLength: PropTypes.number,
     debounce: PropTypes.number,
     searchButtonOnly: PropTypes.bool,
-    sortFunction: PropTypes.func,
+    priorityFunction: PropTypes.func,
     resultLimit: PropTypes.number
 };
 
@@ -261,7 +271,7 @@ Typeahead.defaultProps = {
     debounce: 500,
     searchButtonOnly: false,
     propertyName: '',
-    sortFunction: null,
+    priorityFunction: null,
     resultLimit: null
 };
 
