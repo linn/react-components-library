@@ -57,7 +57,9 @@ function Typeahead({
     minimumSearchTermLength,
     debounce,
     searchButtonOnly,
-    propertyName
+    propertyName,
+    priorityFunction,
+    resultLimit
 }) {
     const [searchTerm, setSearchTerm] = useState('');
     const [dialogOpen, setDialogOpen] = useState(false);
@@ -110,10 +112,31 @@ function Typeahead({
         if (loading) {
             return <Loading />;
         }
-        if (items?.length > 0) {
+
+        let result = items;
+
+        if (priorityFunction) {
+            result = result
+                .map(i => ({ ...i, priority: priorityFunction(i, searchTerm) }))
+                .sort((a, b) => {
+                    if (a.priority > b.priority) {
+                        return -1;
+                    }
+                    if (a.priority < b.priority) {
+                        return 1;
+                    }
+                    return 0;
+                });
+        }
+
+        if (resultLimit) {
+            result = items.slice(0, resultLimit);
+        }
+
+        if (result?.length > 0) {
             return (
                 <List dense>
-                    {items.map(item => (
+                    {result.map(item => (
                         <Fragment key={item.id}>
                             {links ? (
                                 <Link className={classes.a} component={RouterLink} to={item?.href}>
@@ -229,7 +252,9 @@ Typeahead.propTypes = {
     disabled: PropTypes.bool,
     minimumSearchTermLength: PropTypes.number,
     debounce: PropTypes.number,
-    searchButtonOnly: PropTypes.bool
+    searchButtonOnly: PropTypes.bool,
+    priorityFunction: PropTypes.func,
+    resultLimit: PropTypes.number
 };
 
 Typeahead.defaultProps = {
@@ -245,7 +270,9 @@ Typeahead.defaultProps = {
     minimumSearchTermLength: 1,
     debounce: 500,
     searchButtonOnly: false,
-    propertyName: ''
+    propertyName: '',
+    priorityFunction: null,
+    resultLimit: null
 };
 
 export default Typeahead;

@@ -1,4 +1,8 @@
 # Changelog
+## [12.2.0] - 2021-10-18
+### Changes
+- Add functionality to limit and order search results in the Typeahead via passing optional number and function props respectively.
+
 ## [12.1.0] - 2021-09-20
 ### Changes
 - Dropdowns's TextField and InputLabel are now linked via the propertyName prop.
