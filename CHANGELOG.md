@@ -1,4 +1,9 @@
 # Changelog
+# Changelog
+## [12.3.0] - 2021-11-03
+### Changes
+- Add action to clear data to generic FetchApiActions action creators. Process these new actions in the collectionStore reducers.
+
 ## [12.2.0] - 2021-10-18
 ### Changes
 - Add functionality to limit and order search results in the Typeahead via passing optional number and function props respectively.

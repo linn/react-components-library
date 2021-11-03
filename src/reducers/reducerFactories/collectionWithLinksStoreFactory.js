@@ -48,6 +48,8 @@ export default function(
                     searchLoading: false,
                     searchItems: []
                 };
+            case actionTypes[`CLEAR_${itemRoot}_DATA`]:
+                return defaultState;
             case actionTypes[`FETCH_${itemRoot}_ERROR`]:
                 return {
                     ...state,

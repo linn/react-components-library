@@ -4,7 +4,8 @@ import collectionWithLInksStoreFactory from '../reducerFactories/collectionWithL
 describe('collection with links store reducer factory', () => {
     const actionTypes = {
         REQUEST_ENTITIES: 'REQUEST_ENTITIES',
-        RECEIVE_ENTITIES: 'RECEIVE_ENTITIES'
+        RECEIVE_ENTITIES: 'RECEIVE_ENTITIES',
+        CLEAR_ENTITIES_DATA: 'CLEAR_ENTITIES_DATA'
     };
     const defaultState = {
         loading: false,
@@ -52,6 +53,24 @@ describe('collection with links store reducer factory', () => {
             items: [{ name: '1', href: '/1', links: [{ rel: 'self', href: '/1' }] }],
             links: [{ rel: 'self', href: '/1' }]
         };
+
+        deepFreeze(state);
+
+        expect(generatedReducer(state, action)).toEqual(expected);
+    });
+
+    test('when clearing data', () => {
+        const state = {
+            loading: true,
+            items: null
+        };
+
+        const action = {
+            type: actionTypes.CLEAR_ENTITIES_DATA,
+            payload: {}
+        };
+
+        const expected = defaultState;
 
         deepFreeze(state);
 
