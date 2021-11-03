@@ -125,4 +125,9 @@ export default function FetchApiActions(
         type: actionTypes[`CLEAR_SEARCH_${actionTypeRoot}`],
         payload: {}
     });
+
+    this.clearItems = () => ({
+        type: actionTypes[`CLEAR_${actionTypeRoot}_DATA`],
+        payload: {}
+    });
 }
