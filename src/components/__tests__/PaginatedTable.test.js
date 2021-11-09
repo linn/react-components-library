@@ -1,16 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import Table from '@material-ui/core/Table';
-import TableRow from '@material-ui/core/TableRow';
-import createShallow from '@material-ui/core/test-utils/createShallow';
 import PaginatedTable from '../table/PaginatedTable';
+import { screen } from '@testing-library/react';
+import render from '../../test-utils';
+import '@testing-library/jest-dom/extend-expect';
 
 describe('<PaginatedTable />', () => {
-    let wrapper;
-    let props;
-    const getPaginatedTable = () => wrapper.find(Table);
-    const getRows = () => wrapper.find(TableRow);
-    const shallow = createShallow();
 
     describe('when items exist', () => {
         beforeEach(() => {
@@ -48,19 +43,18 @@ describe('<PaginatedTable />', () => {
                     { value: 'id3', label: 'id -l3' }
                 ]
             };
-            wrapper = shallow(
+            render(
                 <Router>
                     <PaginatedTable {...props} />
                 </Router>
             );
         });
 
-        it('should create a paginated table', () => {
-            expect(getPaginatedTable()).toBeDefined();
-        });
-
-        it('should find one row', () => {
-            expect(getRows()).toBeDefined();
+        it('should render table data', () => {
+            expect(screen.getByText('id -l')).toBeDefined();
+            expect(screen.getByText('1')).toBeDefined();
+            expect(screen.getByText('id -l3')).toBeDefined();
+            expect(screen.getByText('4')).toBeDefined();
         });
     });
 });

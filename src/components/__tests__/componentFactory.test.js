@@ -1,11 +1,13 @@
 import React from 'react';
 import { MuiThemeProvider } from '@material-ui/core/styles';
-import { createMount } from '@material-ui/core/test-utils';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import moment from 'moment';
 import MomentUtils from '@date-io/moment';
 import { displayComponentFactory, inputComponentFactory } from '../editableTable/componentFactory';
 import { linnTheme } from '../../themes';
+import { screen } from '@testing-library/react';
+import render from '../../test-utils';
+import '@testing-library/jest-dom/extend-expect';
 
 describe('displayComponentFactory', () => {
     describe('when type is not a date', () => {

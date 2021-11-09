@@ -1,17 +1,14 @@
 import React from 'react';
-import { createMount } from '@material-ui/core/test-utils';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { linnTheme } from '../../themes';
 import SaveBackCancelButtons from '../SaveBackCancelButtons';
+import { screen } from '@testing-library/react';
+import render from '../../test-utils';
+import '@testing-library/jest-dom/extend-expect';
+
 
 describe('<SaveBackCancelButtons />', () => {
-    let wrapper;
-    let props;
-    const getButtons = () => wrapper.find('ForwardRef(Button)');
-
-    const mount = createMount();
-
     const cancelClick = jest.fn();
     const backClick = jest.fn();
     const saveClick = jest.fn();
@@ -29,10 +26,11 @@ describe('<SaveBackCancelButtons />', () => {
             </MuiThemeProvider>
         );
 
-        wrapper = mount(<ComponentWithTheme {...props} />);
+        render(<ComponentWithTheme />);
     });
 
-    it('should render without throwing an error', () => {
-        expect(getButtons()).toHaveLength(2);
+    it('should render buttons without throwing an error', () => {
+        expect(screen.getByText('Save')).toBeInTheDocument();
+        expect(screen.getByText('Cancel')).toBeInTheDocument();
     });
 });
