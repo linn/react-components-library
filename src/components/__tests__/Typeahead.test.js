@@ -114,7 +114,7 @@ describe('when result limit', () => {
     });
 });
 
-describe('when prioritFunction', () => {
+describe('when priorityFunction', () => {
     beforeEach(() => {
         const fakeSearchTerm = 'item that matches perfectly';
         props = {
