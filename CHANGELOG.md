@@ -1,6 +1,6 @@
 # Changelog
 # Changelog
-## [12.4.0] - 2021-11-03
+## [12.4.0] - 2021-11-09
 ### Changes
 - Add openModalOnClick bool prop to Typeahead when in modal mode to set whether the modal opens as soon as the user interacts with the InputField, or only when they click the magnifying glass Icon. If you want to use it in this configuration you also need to pass a handleFieldChange function that takes the usual (propertyName, newValue) args.
 
