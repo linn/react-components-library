@@ -49,6 +49,7 @@ function Typeahead({
     clearSearch,
     modal,
     openModalOnClick,
+    handleFieldChange,
     links,
     label,
     onSelect,
@@ -109,6 +110,16 @@ function Typeahead({
     };
 
     Item.defaultProps = { onClick: null };
+
+    const onChange = () => {
+        if (modal && !openModalOnClick) {
+            return handleFieldChange;
+        }
+        if (modal && openModalOnClick) {
+            return () => setDialogOpen(true);
+        }
+        return handleSearchTermChange;
+    };
 
     const results = () => {
         if (loading) {
@@ -180,8 +191,8 @@ function Typeahead({
                             if (!disabled) {
                                 if (openModalOnClick) {
                                     setDialogOpen(true);
+                                    clearSearch();
                                 }
-                                clearSearch();
                             }
                         },
                         disabled
@@ -190,9 +201,11 @@ function Typeahead({
                     label={label}
                     placeholder={placeholder}
                     onChange={
-                        modal && openModalOnClick
-                            ? () => setDialogOpen(true)
-                            : handleSearchTermChange
+                        onChange()
+
+                        // modal && openModalOnClick
+                        //     ? () => setDialogOpen(true)
+                        //     : handleSearchTermChange
                     }
                 />
             )}
@@ -253,6 +266,7 @@ Typeahead.propTypes = {
     clearSearch: PropTypes.func.isRequired,
     modal: PropTypes.bool,
     openModalOnClick: PropTypes.bool,
+    handleFieldChange: PropTypes.func,
     links: PropTypes.bool,
     label: PropTypes.string,
     onSelect: PropTypes.func,
@@ -282,7 +296,8 @@ Typeahead.defaultProps = {
     searchButtonOnly: false,
     propertyName: '',
     priorityFunction: null,
-    resultLimit: null
+    resultLimit: null,
+    handleFieldChange: null
 };
 
 export default Typeahead;
