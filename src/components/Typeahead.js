@@ -200,13 +200,7 @@ function Typeahead({
                     value={modal ? value : searchTerm}
                     label={label}
                     placeholder={placeholder}
-                    onChange={
-                        onChange()
-
-                        // modal && openModalOnClick
-                        //     ? () => setDialogOpen(true)
-                        //     : handleSearchTermChange
-                    }
+                    onChange={onChange()}
                 />
             )}
             {modal ? (
