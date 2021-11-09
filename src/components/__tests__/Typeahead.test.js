@@ -28,6 +28,7 @@ describe('when modal', () => {
     beforeEach(() => {
         props = {
             title: 'Title Text',
+            proertyName: 'searchThing',
             loading: false,
             modal: true,
             label: 'label',
@@ -56,6 +57,41 @@ describe('when modal', () => {
     });
 });
 
+describe('when modal but not openModalOnClick', () => {
+    beforeEach(() => {
+        props = {
+            title: 'Title Text',
+            proertyName: 'searchThing',
+            loading: false,
+            modal: true,
+            label: 'label',
+            fetchItems: jest.fn(),
+            clearSearch: jest.fn(),
+            items,
+            openModalOnClick: false
+        };
+        cleanup();
+    });
+    test('should not display Title', () => {
+        const { queryByText } = render(<Typeahead {...props} />);
+        expect(queryByText('Title Text')).not.toBeInTheDocument();
+    });
+
+    test('should not open modal onClick', () => {
+        const { getByPlaceholderText, queryByTestId } = render(<Typeahead {...props} />);
+        const item = getByPlaceholderText('Search by id or by description');
+        fireEvent.click(item);
+        expect(queryByTestId('modal')).not.toBeInTheDocument();
+    });
+
+    test('should open modal on icon button click', () => {
+        const { getByRole, queryByTestId } = render(<Typeahead {...props} />);
+        const item = getByRole('button');
+        fireEvent.click(item);
+        expect(queryByTestId('modal')).toBeInTheDocument();
+    });
+});
+
 describe('when result limit', () => {
     beforeEach(() => {
         props = {
@@ -78,7 +114,7 @@ describe('when result limit', () => {
     });
 });
 
-describe('when prioritFunction', () => {
+describe('when priorityFunction', () => {
     beforeEach(() => {
         const fakeSearchTerm = 'item that matches perfectly';
         props = {

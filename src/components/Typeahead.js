@@ -48,6 +48,8 @@ function Typeahead({
     loading,
     clearSearch,
     modal,
+    openModalOnClick,
+    handleFieldChange,
     links,
     label,
     onSelect,
@@ -101,12 +103,23 @@ function Typeahead({
     Item.propTypes = {
         item: PropTypes.shape({
             name: PropTypes.string,
-            description: PropTypes.string
+            description: PropTypes.string,
+            href: PropTypes.string
         }).isRequired,
         onClick: PropTypes.func
     };
 
     Item.defaultProps = { onClick: null };
+
+    const onChange = () => {
+        if (modal && !openModalOnClick) {
+            return handleFieldChange;
+        }
+        if (modal && openModalOnClick) {
+            return () => setDialogOpen(true);
+        }
+        return handleSearchTermChange;
+    };
 
     const results = () => {
         if (loading) {
@@ -171,13 +184,15 @@ function Typeahead({
                 </Tooltip>
             ) : (
                 <InputField
-                    adornment={SearchIcon()}
+                    adornment={SearchIcon(() => setDialogOpen(true))}
                     propertyName={propertyName}
                     textFieldProps={{
                         onClick: () => {
                             if (!disabled) {
-                                setDialogOpen(true);
-                                clearSearch();
+                                if (openModalOnClick) {
+                                    setDialogOpen(true);
+                                    clearSearch();
+                                }
                             }
                         },
                         disabled
@@ -185,7 +200,7 @@ function Typeahead({
                     value={modal ? value : searchTerm}
                     label={label}
                     placeholder={placeholder}
-                    onChange={modal ? () => setDialogOpen(true) : handleSearchTermChange}
+                    onChange={onChange()}
                 />
             )}
             {modal ? (
@@ -244,6 +259,8 @@ Typeahead.propTypes = {
     fetchItems: PropTypes.func.isRequired,
     clearSearch: PropTypes.func.isRequired,
     modal: PropTypes.bool,
+    openModalOnClick: PropTypes.bool,
+    handleFieldChange: PropTypes.func,
     links: PropTypes.bool,
     label: PropTypes.string,
     onSelect: PropTypes.func,
@@ -261,6 +278,7 @@ Typeahead.defaultProps = {
     title: '',
     loading: false,
     modal: false,
+    openModalOnClick: true,
     links: true,
     label: null,
     onSelect: null,
@@ -272,7 +290,8 @@ Typeahead.defaultProps = {
     searchButtonOnly: false,
     propertyName: '',
     priorityFunction: null,
-    resultLimit: null
+    resultLimit: null,
+    handleFieldChange: null
 };
 
 export default Typeahead;
