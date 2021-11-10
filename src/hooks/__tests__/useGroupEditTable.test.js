@@ -97,6 +97,28 @@ describe('when updating row', () => {
     });
 });
 
+describe('when replacing row', () => {
+    it('should replace row with matching id', () => {
+        const hookData = setup({ rows });
+        const newRow = {
+            id: 0,
+            text: 'replaced text',
+            newThing: 'new'
+        };
+
+        expect(hookData.data).toHaveLength(2);
+
+        act(() => {
+            hookData.replaceRow(hookData.data[0], newRow);
+        });
+
+        expect(hookData.data).toHaveLength(2);
+        expect(hookData.data.find(d => d.id === 0).text).toEqual(newRow.text);
+        expect(hookData.data.find(d => d.id === 0).text).toEqual(newRow.text);
+        expect(hookData.data.find(d => d.id === 0).newThing).toEqual(newRow.newThing);
+    });
+});
+
 describe('when resetting row', () => {
     it('should return row to its original state', () => {
         const hookData = setup({ rows });
