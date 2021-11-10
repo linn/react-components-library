@@ -13,11 +13,11 @@ describe('displayComponentFactory', () => {
     describe('when type is not a date', () => {
         it('should return row value', () => {
             const row = {
-                test: 'value'
+                test: 'value',
             };
 
             const column = {
-                id: 'test'
+                id: 'test',
             };
 
             expect(displayComponentFactory(row, column)).toBe('value');
@@ -27,12 +27,12 @@ describe('displayComponentFactory', () => {
     describe('when type is a date', () => {
         it('should return a formatted date', () => {
             const row = {
-                test: moment('20-12-2019', 'DD-MM-YYYY').toISOString()
+                test: moment('20-12-2019', 'DD-MM-YYYY').toISOString(),
             };
 
             const column = {
                 id: 'test',
-                type: 'date'
+                type: 'date',
             };
 
             expect(displayComponentFactory(row, column)).toBe('20 Dec 2019');
@@ -41,23 +41,15 @@ describe('displayComponentFactory', () => {
 });
 
 describe('inputComponentFactory', () => {
-    let wrapper;
-    const getInputField = () => wrapper.find('InputField');
-    const getDateField = () => wrapper.find('DatePicker');
-    const getLinnWeekField = () => wrapper.find('LinnWeekPicker');
-    const getTypeahead = () => wrapper.find('Typeahead');
-    const getComponent = () => wrapper.find('CustomComponent');
-    const mount = createMount({ dive: true });
-
     describe('when type is text', () => {
         const column = {
             id: 'test',
             editable: true,
-            type: 'text'
+            type: 'text',
         };
 
         const row = {
-            test: 'value'
+            test: 'value',
         };
 
         beforeEach(() => {
@@ -67,11 +59,11 @@ describe('inputComponentFactory', () => {
                 </MuiThemeProvider>
             );
 
-            wrapper = mount(<ComponentWithTheme />);
+            render(<ComponentWithTheme />);
         });
 
         it('should return an inputField', () => {
-            expect(getInputField()).toHaveLength(1);
+            expect(screen.getAllByRole('textbox')).toHaveLength(1);
         });
     });
 
@@ -79,11 +71,11 @@ describe('inputComponentFactory', () => {
         const column = {
             id: 'test',
             editable: true,
-            type: 'number'
+            type: 'number',
         };
 
         const row = {
-            test: 123456
+            test: 123456,
         };
 
         beforeEach(() => {
@@ -93,11 +85,12 @@ describe('inputComponentFactory', () => {
                 </MuiThemeProvider>
             );
 
-            wrapper = mount(<ComponentWithTheme />);
+            render(<ComponentWithTheme />);
         });
 
         it('should return an inputField', () => {
-            expect(getInputField()).toHaveLength(1);
+            expect(screen.getByDisplayValue('123456')).toBeInTheDocument();
+            expect(screen.getByDisplayValue('123456').type).toBe('number');
         });
     });
 
@@ -105,11 +98,11 @@ describe('inputComponentFactory', () => {
         const column = {
             id: 'test',
             editable: true,
-            type: 'date'
+            type: 'date',
         };
 
         const row = {
-            test: moment('20-12-2019', 'DD-MM-YYYY').toISOString()
+            test: moment('20-11-2019', 'DD-MM-YYYY').toISOString(),
         };
 
         beforeEach(() => {
@@ -121,11 +114,12 @@ describe('inputComponentFactory', () => {
                 </MuiThemeProvider>
             );
 
-            wrapper = mount(<ComponentWithTheme />);
+            render(<ComponentWithTheme />);
         });
 
         it('should return a date picker', () => {
-            expect(getDateField()).toHaveLength(1);
+            expect(screen.getAllByRole('textbox')).toHaveLength(1);
+            expect(screen.getByRole('textbox')).toHaveDisplayValue('20/11/2019');
         });
     });
 
@@ -133,11 +127,11 @@ describe('inputComponentFactory', () => {
         const column = {
             id: 'test',
             editable: true,
-            type: 'linnWeek'
+            type: 'linnWeek',
         };
 
         const row = {
-            test: moment('20-12-2019', 'DD-MM-YYYY').toISOString()
+            test: moment('20-12-2019', 'DD-MM-YYYY').toISOString(),
         };
 
         beforeEach(() => {
@@ -149,11 +143,12 @@ describe('inputComponentFactory', () => {
                 </MuiThemeProvider>
             );
 
-            wrapper = mount(<ComponentWithTheme />);
+            render(<ComponentWithTheme />);
         });
 
         it('should return a linn week picker', () => {
-            expect(getLinnWeekField()).toHaveLength(1);
+            expect(screen.getAllByRole('textbox')).toHaveLength(1);
+            expect(screen.getByRole('textbox')).toHaveDisplayValue('20/12/2019');
         });
     });
 
@@ -164,11 +159,11 @@ describe('inputComponentFactory', () => {
             type: 'search',
             clearSearch: jest.fn(),
             search: jest.fn(),
-            searchResults: [{ id: 'item' }]
+            searchResults: [{ id: 'item' }],
         };
 
         const row = {
-            test: 'value'
+            test: 'value',
         };
 
         beforeEach(() => {
@@ -180,11 +175,11 @@ describe('inputComponentFactory', () => {
                 </MuiThemeProvider>
             );
 
-            wrapper = mount(<ComponentWithTheme />);
+            render(<ComponentWithTheme />);
         });
 
         it('should return a typeahead', () => {
-            expect(getTypeahead()).toHaveLength(1);
+            expect(screen.getAllByRole('textbox')).toHaveLength(1);
         });
     });
 
@@ -196,11 +191,11 @@ describe('inputComponentFactory', () => {
             id: 'test',
             editable: true,
             type: 'component',
-            component: CustomComponent
+            component: CustomComponent,
         };
 
         const row = {
-            test: 'value'
+            test: 'custom component test value',
         };
 
         beforeEach(() => {
@@ -210,12 +205,11 @@ describe('inputComponentFactory', () => {
                 </MuiThemeProvider>
             );
 
-            wrapper = mount(<ComponentWithTheme />);
+            render(<ComponentWithTheme />);
         });
 
         it('should return custom component', () => {
-            wrapper.debug();
-            expect(getComponent()).toHaveLength(1);
+            expect(screen.getByText('custom component test value')).toBeInTheDocument();
         });
     });
 });

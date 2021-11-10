@@ -9,40 +9,28 @@ describe('<PaginatedTable />', () => {
 
     describe('when items exist', () => {
         beforeEach(() => {
-            props = {
+            const props = {
                 handleRowLinkClick: () => {},
-                columns: {},
+                columns: { value: 'Le Values', label: 'The hings label' },
                 pageOptions: {},
                 setPageOptions: () => {},
-                rows: [],
-                page: {
-                    rows: [
+                rows: [
                         {
-                            Id: 'id',
-                            values: ['1', '2', '3', '4'],
-                            links: {},
-                            expandableInfo: {
-                                Id: 'id',
-                                elements: [
-                                    {
-                                        label: 'label',
-                                        value: 'value'
-                                    }
-                                ]
-                            }
+                            id: 'id1',
+                            value: 'potato',
+                            label: 'hing is potato'
+                        },
+                        {
+                            id: 'id2',
+                            value: 'chips',
+                            label: 'hing is chips'
                         }
                     ],
-                    totalItemCount: 10
-                },
                 pageLoad: jest.fn(),
                 pageSortedLoad: jest.fn(),
-                columnNames: [
-                    { value: 'id', label: 'id -l' },
-                    { value: 'id1', label: 'id -l1' },
-                    { value: 'id2', label: 'id -l2' },
-                    { value: 'id3', label: 'id -l3' }
-                ]
             };
+
+
             render(
                 <Router>
                     <PaginatedTable {...props} />
@@ -50,11 +38,16 @@ describe('<PaginatedTable />', () => {
             );
         });
 
-        it('should render table data', () => {
-            expect(screen.getByText('id -l')).toBeDefined();
-            expect(screen.getByText('1')).toBeDefined();
-            expect(screen.getByText('id -l3')).toBeDefined();
-            expect(screen.getByText('4')).toBeDefined();
+        it('should render table columns text', () => {
+            expect(screen.getByText('Le Values')).toBeInTheDocument();
+            expect(screen.getByText('The hings label')).toBeInTheDocument();
+        });
+
+        it('should render table data for two rows', () => {
+            expect(screen.getByText('potato')).toBeInTheDocument();
+            expect(screen.getByText('chips')).toBeInTheDocument();
+            expect(screen.getByText('hing is potato')).toBeInTheDocument();
+            expect(screen.getByText('hing is chips')).toBeInTheDocument();
         });
     });
 });
