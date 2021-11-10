@@ -114,8 +114,8 @@ describe('when replacing row', () => {
 
         expect(hookData.data).toHaveLength(2);
         expect(hookData.data.find(d => d.id === 0).text).toEqual(newRow.text);
-        expect(hookData.data.find(d => d.id === 0).text).toEqual(newRow.text);
         expect(hookData.data.find(d => d.id === 0).newThing).toEqual(newRow.newThing);
+        expect(hookData.data.find(d => d.id === 0).editing).toEqual(true);
     });
 });
 
