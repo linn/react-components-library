@@ -1,11 +1,13 @@
 import React from 'react';
 import { MuiThemeProvider } from '@material-ui/core/styles';
-import { createMount } from '@material-ui/core/test-utils';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import moment from 'moment';
 import MomentUtils from '@date-io/moment';
 import { displayComponentFactory, inputComponentFactory } from '../editableTable/componentFactory';
 import { linnTheme } from '../../themes';
+import { screen } from '@testing-library/react';
+import render from '../../test-utils';
+import '@testing-library/jest-dom/extend-expect';
 
 describe('displayComponentFactory', () => {
     describe('when type is not a date', () => {
@@ -39,14 +41,6 @@ describe('displayComponentFactory', () => {
 });
 
 describe('inputComponentFactory', () => {
-    let wrapper;
-    const getInputField = () => wrapper.find('InputField');
-    const getDateField = () => wrapper.find('DatePicker');
-    const getLinnWeekField = () => wrapper.find('LinnWeekPicker');
-    const getTypeahead = () => wrapper.find('Typeahead');
-    const getComponent = () => wrapper.find('CustomComponent');
-    const mount = createMount({ dive: true });
-
     describe('when type is text', () => {
         const column = {
             id: 'test',
@@ -65,11 +59,11 @@ describe('inputComponentFactory', () => {
                 </MuiThemeProvider>
             );
 
-            wrapper = mount(<ComponentWithTheme />);
+            render(<ComponentWithTheme />);
         });
 
         it('should return an inputField', () => {
-            expect(getInputField()).toHaveLength(1);
+            expect(screen.getAllByRole('textbox')).toHaveLength(1);
         });
     });
 
@@ -91,11 +85,12 @@ describe('inputComponentFactory', () => {
                 </MuiThemeProvider>
             );
 
-            wrapper = mount(<ComponentWithTheme />);
+            render(<ComponentWithTheme />);
         });
 
         it('should return an inputField', () => {
-            expect(getInputField()).toHaveLength(1);
+            expect(screen.getByDisplayValue('123456')).toBeInTheDocument();
+            expect(screen.getByDisplayValue('123456').type).toBe('number');
         });
     });
 
@@ -107,7 +102,7 @@ describe('inputComponentFactory', () => {
         };
 
         const row = {
-            test: moment('20-12-2019', 'DD-MM-YYYY').toISOString()
+            test: moment('20-11-2019', 'DD-MM-YYYY').toISOString()
         };
 
         beforeEach(() => {
@@ -119,11 +114,12 @@ describe('inputComponentFactory', () => {
                 </MuiThemeProvider>
             );
 
-            wrapper = mount(<ComponentWithTheme />);
+            render(<ComponentWithTheme />);
         });
 
         it('should return a date picker', () => {
-            expect(getDateField()).toHaveLength(1);
+            expect(screen.getAllByRole('textbox')).toHaveLength(1);
+            expect(screen.getByRole('textbox')).toHaveDisplayValue('20/11/2019');
         });
     });
 
@@ -135,7 +131,7 @@ describe('inputComponentFactory', () => {
         };
 
         const row = {
-            test: moment('20-12-2019', 'DD-MM-YYYY').toISOString()
+            test: moment('20-12-2019', 'DD-MM-YYYY').toISOString(),
         };
 
         beforeEach(() => {
@@ -147,11 +143,12 @@ describe('inputComponentFactory', () => {
                 </MuiThemeProvider>
             );
 
-            wrapper = mount(<ComponentWithTheme />);
+            render(<ComponentWithTheme />);
         });
 
         it('should return a linn week picker', () => {
-            expect(getLinnWeekField()).toHaveLength(1);
+            expect(screen.getAllByRole('textbox')).toHaveLength(1);
+            expect(screen.getByRole('textbox')).toHaveDisplayValue('20/12/2019');
         });
     });
 
@@ -178,11 +175,11 @@ describe('inputComponentFactory', () => {
                 </MuiThemeProvider>
             );
 
-            wrapper = mount(<ComponentWithTheme />);
+            render(<ComponentWithTheme />);
         });
 
         it('should return a typeahead', () => {
-            expect(getTypeahead()).toHaveLength(1);
+            expect(screen.getAllByRole('textbox')).toHaveLength(1);
         });
     });
 
@@ -198,7 +195,7 @@ describe('inputComponentFactory', () => {
         };
 
         const row = {
-            test: 'value'
+            test: 'custom component test value'
         };
 
         beforeEach(() => {
@@ -208,12 +205,11 @@ describe('inputComponentFactory', () => {
                 </MuiThemeProvider>
             );
 
-            wrapper = mount(<ComponentWithTheme />);
+            render(<ComponentWithTheme />);
         });
 
         it('should return custom component', () => {
-            wrapper.debug();
-            expect(getComponent()).toHaveLength(1);
+            expect(screen.getByText('custom component test value')).toBeInTheDocument();
         });
     });
 });

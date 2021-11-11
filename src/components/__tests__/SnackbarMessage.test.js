@@ -1,27 +1,20 @@
 import React from 'react';
-import createMount from '@material-ui/core/test-utils/createMount';
+import '@testing-library/jest-dom/extend-expect';
 import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
+import { screen } from '@testing-library/react';
 import SnackbarMessage from '../SnackbarMessage';
+import render from '../../test-utils';
 
 describe('<SnackbarMessage />', () => {
-    let wrapper;
-    let props;
-    const getSnackbar = () => wrapper.find('WithStyles(ForwardRef(Snackbar))');
-    const mount = createMount({ dive: false });
-
     beforeEach(() => {
-        props = {
-            message: 'Snackbar message',
-            onClose: jest.fn()
-        };
+        render(
+            <MuiThemeProvider theme={createTheme()}>
+                <SnackbarMessage  onClose={jest.fn()} message={'Snackbar message'} visible={true} />
+            </MuiThemeProvider>
+        );
     });
 
     it('should render snackbar', () => {
-        wrapper = mount(
-            <MuiThemeProvider theme={createTheme()}>
-                <SnackbarMessage {...props} />{' '}
-            </MuiThemeProvider>
-        );
-        expect(getSnackbar()).toHaveLength(1);
+        expect(screen.getByText('Snackbar message')).toBeInTheDocument();
     });
 });

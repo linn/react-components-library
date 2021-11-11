@@ -1,13 +1,10 @@
 import React from 'react';
-import { createShallow } from '@material-ui/core/test-utils';
 import EntityList from '../EntityList';
+import { screen } from '@testing-library/react';
+import render from '../../test-utils';
+import '@testing-library/jest-dom/extend-expect';
 
 describe('<EntityList />', () => {
-    let wrapper;
-    let props;
-    const getListItems = () => wrapper.find('WithStyles(ForwardRef(List))');
-    const shallow = createShallow({ dive: false });
-
     const entityList = [
         { id: 'one', description: 'The first item in the list', href: '/entity/1' },
         { id: 'two', description: 'The second item in the list', href: '/entity/2' },
@@ -15,15 +12,17 @@ describe('<EntityList />', () => {
     ];
 
     beforeEach(() => {
-        props = {
+        const props = {
             entityList,
             entityId: 'id',
             descriptionFieldName: null
         };
-        wrapper = shallow(<EntityList {...props} />);
+        render(<EntityList {...props} />);
     });
 
     it('should render list items', () => {
-        expect(getListItems().children()).toHaveLength(3);
+        expect(screen.getByText('one')).toBeInTheDocument();
+        expect(screen.getByText('two')).toBeInTheDocument();
+        expect(screen.getByText('three')).toBeInTheDocument();
     });
 });

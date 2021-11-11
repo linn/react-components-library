@@ -6,7 +6,7 @@ import ListItem from '@material-ui/core/ListItem';
 import Typography from '@material-ui/core/Typography';
 import Title from './Title';
 
-const getListItemtText = (entity, entityid, descriptionFieldName) =>
+const getListItemText = (entity, entityid, descriptionFieldName) =>
     descriptionFieldName
         ? `${entity[entityid]} - ${entity[descriptionFieldName]}`
         : entity[entityid];
@@ -26,7 +26,7 @@ function EntityList({ title, entityList, entityId, descriptionFieldName, hasExte
                         href={entity.href}
                     >
                         <Typography color="primary" variant="subtitle2">
-                            {getListItemtText(entity, entityId, descriptionFieldName)}
+                            {getListItemText(entity, entityId, descriptionFieldName)}
                         </Typography>
                     </ListItem>
                 ))}

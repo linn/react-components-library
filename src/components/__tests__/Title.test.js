@@ -1,23 +1,16 @@
 import React from 'react';
-import createShallow from '@material-ui/core/test-utils/createShallow';
-import Typography from '@material-ui/core/Typography';
 import Title from '../Title';
+import { screen } from '@testing-library/react';
+import render from '../../test-utils';
+import '@testing-library/jest-dom/extend-expect';
 
 describe('<Title />', () => {
-    let wrapper;
-    let props;
-    const getTypography = () => wrapper.find(Typography);
-    const shallow = createShallow();
 
     beforeEach(() => {
-        props = {
-            text: 'Title Text'
-        };
-        wrapper = shallow(<Title {...props} />);
+        render(<Title  text={'Title Text'} />);
     });
 
     it('should render title', () => {
-        expect(getTypography()).toHaveLength(1);
-        expect(getTypography().props().children).toEqual('Title Text');
+        expect(screen.getByText('Title Text')).toBeInTheDocument();
     });
 });

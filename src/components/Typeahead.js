@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import { Link as RouterLink } from 'react-router-dom';
 import Dialog from '@material-ui/core/Dialog';
 import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
 import CloseIcon from '@material-ui/icons/Close';
 import Tooltip from '@material-ui/core/Tooltip';
 import useSearch from '../hooks/useSearch';
@@ -38,7 +39,14 @@ const useStyles = makeStyles(theme => ({
     button: {
         marginLeft: theme.spacing(1),
         marginTop: theme.spacing(1)
-    }
+    },
+    clearButtonInline: {
+        marginTop: theme.spacing(1),
+        display: 'inline-block'
+    },
+    clearButton: {
+        padding: '7px 0px'
+    },
 }));
 
 function Typeahead({
@@ -61,7 +69,10 @@ function Typeahead({
     searchButtonOnly,
     propertyName,
     priorityFunction,
-    resultLimit
+    resultLimit,
+    clearable,
+    clearTooltipText,
+    onClear
 }) {
     const [searchTerm, setSearchTerm] = useState('');
     const [dialogOpen, setDialogOpen] = useState(false);
@@ -203,6 +214,20 @@ function Typeahead({
                     onChange={onChange()}
                 />
             )}
+            {clearable && (
+                 <div className={classes.clearButtonInline}>
+                 <Tooltip title={clearTooltipText}>
+                     <Button
+                         variant="outlined"
+                         onClick={onClear}
+                         disabled={disabled}
+                         className={classes.clearButton}
+                     >
+                         X
+                     </Button>
+                 </Tooltip>
+             </div>
+            )}
             {modal ? (
                 <Dialog
                     data-testid="modal"
@@ -271,7 +296,10 @@ Typeahead.propTypes = {
     debounce: PropTypes.number,
     searchButtonOnly: PropTypes.bool,
     priorityFunction: PropTypes.func,
-    resultLimit: PropTypes.number
+    resultLimit: PropTypes.number,
+    clearable: PropTypes.bool,
+    clearTooltipText: PropTypes.string,
+    onClear: PropTypes.func
 };
 
 Typeahead.defaultProps = {
@@ -291,7 +319,11 @@ Typeahead.defaultProps = {
     propertyName: '',
     priorityFunction: null,
     resultLimit: null,
-    handleFieldChange: null
+    handleFieldChange: null,
+    resultLimit: null,
+    clearable: false,
+    clearTooltipText: 'Clear',
+    onClear: () => {}
 };
 
 export default Typeahead;

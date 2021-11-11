@@ -1,24 +1,15 @@
 import React from 'react';
-import createShallow from '@material-ui/core/test-utils/createShallow';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import CheckboxWithLabel from '../CheckboxWithLabel';
+import { screen } from '@testing-library/react';
+import render from '../../test-utils';
+import '@testing-library/jest-dom/extend-expect';
 
 describe('<CheckboxWithLabel />', () => {
-    let wrapper;
-    let props;
-    const getFormControlLabel = () => wrapper.find(FormControlLabel);
-    const shallow = createShallow({ dive: true });
-
     beforeEach(() => {
-        props = {
-            label: 'checkbox label',
-            onChange: () => {}
-        };
-        wrapper = shallow(<CheckboxWithLabel {...props} />);
+        render(<CheckboxWithLabel label={'checkbox label'}    onChange={() => {}} />);
     });
 
     it('should render label', () => {
-        expect(getFormControlLabel()).toHaveLength(1);
-        expect(getFormControlLabel().props().label).toEqual('checkbox label');
+        expect(screen.getByLabelText('checkbox label')).toBeInTheDocument();
     });
 });
