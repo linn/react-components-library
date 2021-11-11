@@ -9,7 +9,7 @@ describe('<SnackbarMessage />', () => {
     beforeEach(() => {
         render(
             <MuiThemeProvider theme={createTheme()}>
-                <SnackbarMessage  onClose={jest.fn()} message={'Snackbar message'} visible={true} />{' '}
+                <SnackbarMessage  onClose={jest.fn()} message={'Snackbar message'} visible={true} />
             </MuiThemeProvider>
         );
     });
