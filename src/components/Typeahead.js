@@ -38,7 +38,14 @@ const useStyles = makeStyles(theme => ({
     button: {
         marginLeft: theme.spacing(1),
         marginTop: theme.spacing(1)
-    }
+    },
+    clearButtonInline: {
+        marginTop: theme.spacing(1),
+        display: 'inline-block'
+    },
+    clearButton: {
+        padding: '7px 0px'
+    },
 }));
 
 function Typeahead({
@@ -59,7 +66,10 @@ function Typeahead({
     searchButtonOnly,
     propertyName,
     priorityFunction,
-    resultLimit
+    resultLimit,
+    clearable,
+    clearTooltipText,
+    onClear
 }) {
     const [searchTerm, setSearchTerm] = useState('');
     const [dialogOpen, setDialogOpen] = useState(false);
@@ -188,6 +198,20 @@ function Typeahead({
                     onChange={modal ? () => setDialogOpen(true) : handleSearchTermChange}
                 />
             )}
+            {clearable && (
+                 <div className={classes.clearButtonInline}>
+                 <Tooltip title={clearTooltipText}>
+                     <Button
+                         variant="outlined"
+                         onClick={onClear}
+                         disabled={!allowedToEdit}
+                         className={classes.clearButton}
+                     >
+                         X
+                     </Button>
+                 </Tooltip>
+             </div>
+            )}
             {modal ? (
                 <Dialog
                     data-testid="modal"
@@ -254,7 +278,10 @@ Typeahead.propTypes = {
     debounce: PropTypes.number,
     searchButtonOnly: PropTypes.bool,
     priorityFunction: PropTypes.func,
-    resultLimit: PropTypes.number
+    resultLimit: PropTypes.number,
+    clearable: PropTypes.bool,
+    clearTooltipText: PropTypes.string,
+    onClear: PropTypes.func
 };
 
 Typeahead.defaultProps = {
@@ -272,7 +299,10 @@ Typeahead.defaultProps = {
     searchButtonOnly: false,
     propertyName: '',
     priorityFunction: null,
-    resultLimit: null
+    resultLimit: null,
+    clearable: false,
+    clearTooltipText: 'Clear',
+    onClear: () => {}
 };
 
 export default Typeahead;
