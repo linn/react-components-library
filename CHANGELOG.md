@@ -1,6 +1,14 @@
 # Changelog
 # Changelog
 ## [12.5.0] - 2021-11-10
+### Changes
+- Upped react version in dependencies (peer dependencies already was) to react 17
+- rewrote tests to get rid of enzyme in order to allow this & removed enzyme from npm and everywhere used
+- upgrade other npm packages
+- Add wee change to Typeahead to offer built in clear button
+
+
+## [12.5.0] - 2021-11-10
 ### Added
 - Added replaceRow method to useGroupEditTable hook to allow update of multiple fields at once. Use when changing a field requires dependent fields to also be updated.
 

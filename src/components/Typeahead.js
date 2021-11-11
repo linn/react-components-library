@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import { Link as RouterLink } from 'react-router-dom';
 import Dialog from '@material-ui/core/Dialog';
 import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
 import CloseIcon from '@material-ui/icons/Close';
 import Tooltip from '@material-ui/core/Tooltip';
 import useSearch from '../hooks/useSearch';
@@ -219,7 +220,7 @@ function Typeahead({
                      <Button
                          variant="outlined"
                          onClick={onClear}
-                         disabled={!allowedToEdit}
+                         disabled={disabled}
                          className={classes.clearButton}
                      >
                          X
@@ -318,7 +319,7 @@ Typeahead.defaultProps = {
     propertyName: '',
     priorityFunction: null,
     resultLimit: null,
-    handleFieldChange: null
+    handleFieldChange: null,
     resultLimit: null,
     clearable: false,
     clearTooltipText: 'Clear',
