@@ -12,10 +12,6 @@ describe('<ErrorCard />', () => {
         render(<ErrorCard errorMessage={'there is an error'} />);
     });
 
-    // it('should render error icon', () => {
-    //     expect(getIcon()).toHaveLength(1);
-    // });
-
     it('should render error message', () => {
         expect(screen.getByText('there is an error'));
     });

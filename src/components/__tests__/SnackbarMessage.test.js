@@ -5,10 +5,7 @@ import { screen } from '@testing-library/react';
 import SnackbarMessage from '../SnackbarMessage';
 import render from '../../test-utils';
 
-
 describe('<SnackbarMessage />', () => {
-    // const getSnackbar = () => wrapper.find('WithStyles(ForwardRef(Snackbar))');
-
     beforeEach(() => {
         render(
             <MuiThemeProvider theme={createTheme()}>
@@ -18,7 +15,6 @@ describe('<SnackbarMessage />', () => {
     });
 
     it('should render snackbar', () => {
-
         expect(screen.getByText('Snackbar message')).toBeInTheDocument();
     });
 });

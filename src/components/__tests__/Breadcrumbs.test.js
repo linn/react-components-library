@@ -7,13 +7,8 @@ import { screen } from '@testing-library/react';
 import render from '../../test-utils';
 import '@testing-library/jest-dom/extend-expect';
 
-
 describe('<Breadcrumbs />', () => {
     const mockPush = jest.fn();
-
-    const getLink = () => wrapper.find('ForwardRef(Link)');
-    const getText = () => wrapper.find('ForwardRef(Typography)');
-    const getSlash = () => wrapper.find('Slash');
 
     describe('when path does not end in report', () => {
         beforeEach(() => {
@@ -40,17 +35,8 @@ describe('<Breadcrumbs />', () => {
             expect(screen.getByText('path')).toBeInTheDocument();
         });
 
-        // it('should render the correct number of slashes', () => {
-        //     console.log(screen.getAllByText(/\//));
-        //     expect(screen.getAllByText(/ \/ /)).toHaveLength(3);
-        // });
-
-        // it('renders link to correct url', () => {
-        //     expect(
-        //         getLink()
-        //             .at(2)
-        //             .props().to
-        //     ).toEqual('/a/test');
-        // });
+        it('renders link to correct url', () => {
+            expect(screen.getByText('test')).toHaveAttribute('to', '/a/test');
+        });
     });
 });

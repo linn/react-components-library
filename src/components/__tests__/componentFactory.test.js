@@ -13,11 +13,11 @@ describe('displayComponentFactory', () => {
     describe('when type is not a date', () => {
         it('should return row value', () => {
             const row = {
-                test: 'value',
+                test: 'value'
             };
 
             const column = {
-                id: 'test',
+                id: 'test'
             };
 
             expect(displayComponentFactory(row, column)).toBe('value');
@@ -27,12 +27,12 @@ describe('displayComponentFactory', () => {
     describe('when type is a date', () => {
         it('should return a formatted date', () => {
             const row = {
-                test: moment('20-12-2019', 'DD-MM-YYYY').toISOString(),
+                test: moment('20-12-2019', 'DD-MM-YYYY').toISOString()
             };
 
             const column = {
                 id: 'test',
-                type: 'date',
+                type: 'date'
             };
 
             expect(displayComponentFactory(row, column)).toBe('20 Dec 2019');
@@ -45,11 +45,11 @@ describe('inputComponentFactory', () => {
         const column = {
             id: 'test',
             editable: true,
-            type: 'text',
+            type: 'text'
         };
 
         const row = {
-            test: 'value',
+            test: 'value'
         };
 
         beforeEach(() => {
@@ -71,11 +71,11 @@ describe('inputComponentFactory', () => {
         const column = {
             id: 'test',
             editable: true,
-            type: 'number',
+            type: 'number'
         };
 
         const row = {
-            test: 123456,
+            test: 123456
         };
 
         beforeEach(() => {
@@ -98,11 +98,11 @@ describe('inputComponentFactory', () => {
         const column = {
             id: 'test',
             editable: true,
-            type: 'date',
+            type: 'date'
         };
 
         const row = {
-            test: moment('20-11-2019', 'DD-MM-YYYY').toISOString(),
+            test: moment('20-11-2019', 'DD-MM-YYYY').toISOString()
         };
 
         beforeEach(() => {
@@ -127,7 +127,7 @@ describe('inputComponentFactory', () => {
         const column = {
             id: 'test',
             editable: true,
-            type: 'linnWeek',
+            type: 'linnWeek'
         };
 
         const row = {
@@ -159,11 +159,11 @@ describe('inputComponentFactory', () => {
             type: 'search',
             clearSearch: jest.fn(),
             search: jest.fn(),
-            searchResults: [{ id: 'item' }],
+            searchResults: [{ id: 'item' }]
         };
 
         const row = {
-            test: 'value',
+            test: 'value'
         };
 
         beforeEach(() => {
@@ -191,11 +191,11 @@ describe('inputComponentFactory', () => {
             id: 'test',
             editable: true,
             type: 'component',
-            component: CustomComponent,
+            component: CustomComponent
         };
 
         const row = {
-            test: 'custom component test value',
+            test: 'custom component test value'
         };
 
         beforeEach(() => {
