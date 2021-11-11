@@ -1,5 +1,15 @@
 # Changelog
 # Changelog
+## [12.5.0] - 2021-11-10
+### Added
+- Added replaceRow method to useGroupEditTable hook to allow update of multiple fields at once. Use when changing a field requires dependent fields to also be updated.
+
+## [12.4.0] - 2021-11-09
+### Changes
+- Add openModalOnClick bool prop to Typeahead when in modal mode to set whether the modal opens as soon as the user interacts with the InputField, or only when they click the magnifying glass Icon. If you want to use it in this configuration you also need to pass a handleFieldChange function that takes the usual (propertyName, newValue) args.
+
+Defaults to true so current behaviour is maintained, i.e. modal opens as soon as user touches field. This basically facilitates optional Typeahead behaviour so a user who doesn't need to search can just enter a value straight in.
+
 ## [12.3.0] - 2021-11-03
 ### Changes
 - Add action to clear data to generic FetchApiActions action creators. Process these new actions in the collectionStore reducers.

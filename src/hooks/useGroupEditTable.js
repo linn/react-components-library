@@ -29,6 +29,14 @@ const useGroupEditTable = ({ rows, defaultRow, setEditStatus }) => {
         );
     };
 
+    const replaceRow = (item, newItem) => {
+        if (setEditStatus) {
+            setEditStatus('edit');
+        }
+
+        setData(() => data.map(row => (row.id === item.id ? { ...newItem, editing: true } : row)));
+    };
+
     const removeRow = id => {
         if (setEditStatus) {
             setEditStatus('edit');
@@ -85,6 +93,7 @@ const useGroupEditTable = ({ rows, defaultRow, setEditStatus }) => {
         setData,
         addRow,
         updateRow,
+        replaceRow,
         removeRow,
         resetRow,
         setRowToBeDeleted,
