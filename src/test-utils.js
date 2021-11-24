@@ -10,7 +10,7 @@ const Providers = ({ children }) => (
     <MemoryRouter>
         <StyledEngineProvider injectFirst>
             <ThemeProvider theme={createTheme()}>
-            <LocalizationProvider dateAdapter={AdapterDateFns}>{children}</LocalizationProvider>
+                <LocalizationProvider dateAdapter={AdapterDateFns}>{children}</LocalizationProvider>
             </ThemeProvider>
         </StyledEngineProvider>
     </MemoryRouter>

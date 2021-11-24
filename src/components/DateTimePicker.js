@@ -6,14 +6,14 @@ import makeStyles from '@mui/styles/makeStyles';
 
 const labelStyles = makeStyles((theme) => ({
     root: {
-        fontSize: theme.typography.fontSize,
+        fontSize: theme.typography.fontSize
     },
 }));
 
 const inputStyles = makeStyles((theme) => ({
     root: {
         marginTop: theme.spacing(1),
-        fontSize: theme.typography.fontSize,
+        fontSize: theme.typography.fontSize
     },
 }));
 
