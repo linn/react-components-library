@@ -1,11 +1,13 @@
 import React from 'react';
-import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
+import { ThemeProvider, StyledEngineProvider, createTheme } from '@mui/material/styles';
 import { SnackbarProvider } from 'notistack';
 
 const providers = story => (
-    <MuiThemeProvider theme={createTheme()}>
-        <SnackbarProvider> {story()} </SnackbarProvider>{' '}
-    </MuiThemeProvider>
+    <StyledEngineProvider injectFirst>
+        <ThemeProvider theme={createTheme()}>
+            <SnackbarProvider> {story()} </SnackbarProvider>
+        </ThemeProvider>
+    </StyledEngineProvider>
 );
 
 export default providers;

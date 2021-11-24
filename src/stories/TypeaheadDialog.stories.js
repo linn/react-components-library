@@ -2,7 +2,7 @@
 import React from 'react';
 import providers from './renderUtils/Providers';
 import TypeaheadDialog from '../components/TypeaheadDialog';
-import Chip from '@material-ui/core/Chip';
+import Chip from '@mui/material/Chip';
 
 const items = [
     {

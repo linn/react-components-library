@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import makeStyles from '@material-ui/styles/makeStyles';
-import IconButton from '@material-ui/core/IconButton';
-import Snackbar from '@material-ui/core/Snackbar';
-import CloseIcon from '@material-ui/icons/Close';
+import makeStyles from '@mui/styles/makeStyles';
+import IconButton from '@mui/material/IconButton';
+import Snackbar from '@mui/material/Snackbar';
+import CloseIcon from '@mui/icons-material/Close';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -34,7 +34,7 @@ function SnackbarMessage({ message, visible, onClose, timeOut }) {
                     aria-label="Close"
                     color="inherit"
                     onClick={() => onClose(false)}
-                >
+                    size="large">
                     <CloseIcon />
                 </IconButton>
             ]}

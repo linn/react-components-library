@@ -1,17 +1,17 @@
 import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
-import Table from '@material-ui/core/Table';
-import TableHead from '@material-ui/core/TableHead';
-import TableBody from '@material-ui/core/TableBody';
-import TablePagination from '@material-ui/core/TablePagination';
-import TableRow from '@material-ui/core/TableRow';
-import TableCell from '@material-ui/core/TableCell';
-import Typography from '@material-ui/core/Typography';
-import TableSortLabel from '@material-ui/core/TableSortLabel';
-import makeStyles from '@material-ui/styles/makeStyles';
-import EditIcon from '@material-ui/icons/Edit';
-import Button from '@material-ui/core/Button';
-import LinearProgress from '@material-ui/core/LinearProgress';
+import Table from '@mui/material/Table';
+import TableHead from '@mui/material/TableHead';
+import TableBody from '@mui/material/TableBody';
+import TablePagination from '@mui/material/TablePagination';
+import TableRow from '@mui/material/TableRow';
+import TableCell from '@mui/material/TableCell';
+import Typography from '@mui/material/Typography';
+import TableSortLabel from '@mui/material/TableSortLabel';
+import makeStyles from '@mui/styles/makeStyles';
+import EditIcon from '@mui/icons-material/Edit';
+import Button from '@mui/material/Button';
+import LinearProgress from '@mui/material/LinearProgress';
 import utilities from '../../utilities/index';
 import TablePaginationActions from './TablePaginationActions';
 
@@ -202,8 +202,8 @@ function PaginatedTable({
                                     SelectProps={{
                                         native: true
                                     }}
-                                    onChangePage={handleChangePage}
-                                    onChangeRowsPerPage={handleChangeRowsPerPage}
+                                    onPageChange={handleChangePage}
+                                    onRowsPerPageChange={handleChangeRowsPerPage}
                                     ActionsComponent={TablePaginationActions}
                                 />
                             </TableRow>

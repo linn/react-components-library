@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
 import numeral from 'numeral';
-import Button from '@material-ui/core/Button';
-import Link from '@material-ui/core/Link';
-import Modal from '@material-ui/core/Modal';
+import Button from '@mui/material/Button';
+import Link from '@mui/material/Link';
+import Modal from '@mui/material/Modal';
 import { Link as RouterLink } from 'react-router-dom';
-import makeStyles from '@material-ui/styles/makeStyles';
-import Typography from '@material-ui/core/Typography';
+import makeStyles from '@mui/styles/makeStyles';
+import Typography from '@mui/material/Typography';
 
 const useStyles = makeStyles(theme => ({
     link: {

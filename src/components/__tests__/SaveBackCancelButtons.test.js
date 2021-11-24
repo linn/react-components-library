@@ -1,5 +1,5 @@
 import React from 'react';
-import { MuiThemeProvider } from '@material-ui/core/styles';
+import { ThemeProvider, StyledEngineProvider } from '@mui/material/styles';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { linnTheme } from '../../themes';
 import SaveBackCancelButtons from '../SaveBackCancelButtons';
@@ -15,15 +15,17 @@ describe('<SaveBackCancelButtons />', () => {
 
     beforeEach(() => {
         const ComponentWithTheme = () => (
-            <MuiThemeProvider theme={linnTheme}>
-                <Router>
-                    <SaveBackCancelButtons
-                        cancelClick={cancelClick}
-                        backClick={backClick}
-                        saveClick={saveClick}
-                    />
-                </Router>
-            </MuiThemeProvider>
+            <StyledEngineProvider injectFirst>
+                <ThemeProvider theme={linnTheme}>
+                    <Router>
+                        <SaveBackCancelButtons
+                            cancelClick={cancelClick}
+                            backClick={backClick}
+                            saveClick={saveClick}
+                        />
+                    </Router>
+                </ThemeProvider>
+            </StyledEngineProvider>
         );
 
         render(<ComponentWithTheme />);

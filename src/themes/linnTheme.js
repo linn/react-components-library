@@ -1,7 +1,7 @@
-import { createTheme } from '@material-ui/core/styles';
-import pink from '@material-ui/core/colors/pink';
+import { createTheme, adaptV4Theme } from '@mui/material/styles';
+import { pink } from '@mui/material/colors';
 
-export const linnTheme = createTheme({
+export const linnTheme = createTheme(adaptV4Theme({
     palette: {
         primary: {
             50: '#e0f7fa',
@@ -25,4 +25,4 @@ export const linnTheme = createTheme({
         },
         secondary: pink
     }
-});
+}));

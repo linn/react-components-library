@@ -1,7 +1,7 @@
 ﻿import React, { useEffect } from 'react';
 
 const initialiseOnMount = ComposedComponent =>
-    function HOC(props) {
+    (function HOC(props) {
         const { initialise, itemId } = props;
         useEffect(() => {
             if (initialise && itemId) {
@@ -12,6 +12,6 @@ const initialiseOnMount = ComposedComponent =>
         }, [initialise, itemId]);
 
         return <ComposedComponent {...props} />;
-    };
+    });
 
 export default initialiseOnMount;

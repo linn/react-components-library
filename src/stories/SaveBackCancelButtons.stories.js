@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import ThemeProvider from '@material-ui/styles/ThemeProvider';
+import ThemeProvider from '@mui/styles/ThemeProvider';
 import { linnTheme } from '../themes/linnTheme';
 import SaveBackCancelButtons from '../components/SaveBackCancelButtons';
 
@@ -15,9 +15,11 @@ export default {
     title: 'Components/SaveBackCancelButtons',
     decorators: [
         story => (
-            <ThemeProvider theme={linnTheme}>
-                <div style={{ position: 'absolute', right: '50%', top: '50%' }}>{story()}</div>
-            </ThemeProvider>
+            <StyledEngineProvider injectFirst>
+                <ThemeProvider theme={linnTheme}>
+                    <div style={{ position: 'absolute', right: '50%', top: '50%' }}>{story()}</div>
+                </ThemeProvider>
+            </StyledEngineProvider>
         )
     ],
     component: SaveBackCancelButtons

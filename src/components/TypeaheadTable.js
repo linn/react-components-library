@@ -1,15 +1,15 @@
 import React, { Fragment, useState } from 'react';
-import Typography from '@material-ui/core/Typography';
+import Typography from '@mui/material/Typography';
 import PropTypes from 'prop-types';
-import Table from '@material-ui/core/Table';
-import TableHead from '@material-ui/core/TableHead';
-import TableBody from '@material-ui/core/TableBody';
-import Dialog from '@material-ui/core/Dialog';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
-import TableRow from '@material-ui/core/TableRow';
-import TableCell from '@material-ui/core/TableCell';
-import makeStyles from '@material-ui/styles/makeStyles';
+import Table from '@mui/material/Table';
+import TableHead from '@mui/material/TableHead';
+import TableBody from '@mui/material/TableBody';
+import Dialog from '@mui/material/Dialog';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import TableRow from '@mui/material/TableRow';
+import TableCell from '@mui/material/TableCell';
+import makeStyles from '@mui/styles/makeStyles';
 import Loading from './Loading';
 import SearchInputField from './SearchInputField';
 import InputField from './InputField';
@@ -141,44 +141,42 @@ function TypeaheadTable({
     );
 
     if (modal) {
-        return (
-            <>
-                <InputField
-                    adornment={SearchIcon()}
-                    textFieldProps={{
-                        onClick: () => {
-                            if (!disabled) {
-                                setDialogOpen(true);
-                                clearSearch();
-                            }
-                        },
-                        disabled
-                    }}
-                    value={modal ? value : searchTerm}
-                    label={label}
-                    placeholder={placeholder}
-                    onChange={modal ? () => setDialogOpen(true) : handleSearchTermChange}
-                />
-                <Dialog
-                    data-testid="modal"
-                    open={dialogOpen}
-                    onClose={() => setDialogOpen(false)}
-                    fullWidth
-                    maxWidth="md"
-                >
-                    <div>
-                        <IconButton
-                            className={classes.pullRight}
-                            aria-label="Close"
-                            onClick={() => setDialogOpen(false)}
-                        >
-                            <CloseIcon />
-                        </IconButton>
-                        <div className={classes.dialog}>{renderTypeahead()}</div>
-                    </div>
-                </Dialog>
-            </>
-        );
+        return <>
+            <InputField
+                adornment={SearchIcon()}
+                textFieldProps={{
+                    onClick: () => {
+                        if (!disabled) {
+                            setDialogOpen(true);
+                            clearSearch();
+                        }
+                    },
+                    disabled
+                }}
+                value={modal ? value : searchTerm}
+                label={label}
+                placeholder={placeholder}
+                onChange={modal ? () => setDialogOpen(true) : handleSearchTermChange}
+            />
+            <Dialog
+                data-testid="modal"
+                open={dialogOpen}
+                onClose={() => setDialogOpen(false)}
+                fullWidth
+                maxWidth="md"
+            >
+                <div>
+                    <IconButton
+                        className={classes.pullRight}
+                        aria-label="Close"
+                        onClick={() => setDialogOpen(false)}
+                        size="large">
+                        <CloseIcon />
+                    </IconButton>
+                    <div className={classes.dialog}>{renderTypeahead()}</div>
+                </div>
+            </Dialog>
+        </>;
     }
 
     return <> {renderTypeahead()}</>;

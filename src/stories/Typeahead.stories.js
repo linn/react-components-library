@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { MemoryRouter } from 'react-router';
-import ThemeProvider from '@material-ui/styles/ThemeProvider';
+import ThemeProvider from '@mui/styles/ThemeProvider';
 import { linnTheme } from '../themes/linnTheme';
 import Typeahead from '../components/Typeahead';
 
@@ -20,9 +20,11 @@ export default {
     decorators: [
         story => (
             <MemoryRouter initialEntries={['/']}>
-                <ThemeProvider theme={linnTheme}>
-                    <div style={{ padding: '3rem', width: '100%' }}>{story()}</div>
-                </ThemeProvider>
+                <StyledEngineProvider injectFirst>
+                    <ThemeProvider theme={linnTheme}>
+                        <div style={{ padding: '3rem', width: '100%' }}>{story()}</div>
+                    </ThemeProvider>
+                </StyledEngineProvider>
             </MemoryRouter>
         )
     ],

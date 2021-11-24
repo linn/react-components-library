@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import ThemeProvider from '@material-ui/styles/ThemeProvider';
+import ThemeProvider from '@mui/styles/ThemeProvider';
 import { linnTheme } from '../themes/linnTheme';
 
 import Dropdown from '../components/Dropdown';
@@ -14,9 +14,11 @@ export default {
     title: 'Components/Dropdown',
     decorators: [
         story => (
-            <ThemeProvider theme={linnTheme}>
-                <div>{story()}</div>
-            </ThemeProvider>
+            <StyledEngineProvider injectFirst>
+                <ThemeProvider theme={linnTheme}>
+                    <div>{story()}</div>
+                </ThemeProvider>
+            </StyledEngineProvider>
         )
     ],
     component: Dropdown

@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import ThemeProvider from '@material-ui/styles/ThemeProvider';
+import ThemeProvider from '@mui/styles/ThemeProvider';
 import PaginatedTable from '../components/table/PaginatedTable';
 import { linnTheme } from '../themes/linnTheme';
 
@@ -158,9 +158,11 @@ export default {
     title: 'Components/PaginatedTable',
     decorators: [
         story => (
-            <ThemeProvider theme={linnTheme}>
-                <div>{story()}</div>
-            </ThemeProvider>
+            <StyledEngineProvider injectFirst>
+                <ThemeProvider theme={linnTheme}>
+                    <div>{story()}</div>
+                </ThemeProvider>
+            </StyledEngineProvider>
         )
     ],
     component: PaginatedTable

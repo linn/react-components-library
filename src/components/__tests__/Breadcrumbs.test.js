@@ -1,5 +1,5 @@
 import React from 'react';
-import { MuiThemeProvider } from '@material-ui/core/styles';
+import { ThemeProvider, StyledEngineProvider } from '@mui/material/styles';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { linnTheme } from '../../themes';
 import Breadcrumbs from '../Breadcrumbs';
@@ -18,11 +18,13 @@ describe('<Breadcrumbs />', () => {
             };
 
             const ComponentWithTheme = () => (
-                <MuiThemeProvider theme={linnTheme}>
-                    <Router>
-                        <Breadcrumbs history={history} />
-                    </Router>
-                </MuiThemeProvider>
+                <StyledEngineProvider injectFirst>
+                    <ThemeProvider theme={linnTheme}>
+                        <Router>
+                            <Breadcrumbs history={history} />
+                        </Router>
+                    </ThemeProvider>
+                </StyledEngineProvider>
             );
 
             render(<ComponentWithTheme />);

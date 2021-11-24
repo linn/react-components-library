@@ -1,16 +1,18 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
+import { ThemeProvider, StyledEngineProvider, createTheme } from '@mui/material/styles';
 import SnackbarMessage from '../components/SnackbarMessage';
 
 export default {
     title: 'Components/SnackbarMessage',
     decorators: [
         story => (
-            <MuiThemeProvider theme={createTheme()}>
-                <div style={{ padding: '3rem', width: '100%' }}>{story()}</div>
-            </MuiThemeProvider>
+            <StyledEngineProvider injectFirst>
+                <ThemeProvider theme={createTheme()}>
+                    <div style={{ padding: '3rem', width: '100%' }}>{story()}</div>
+                </ThemeProvider>
+            </StyledEngineProvider>
         )
     ],
     component: SnackbarMessage

@@ -1,17 +1,17 @@
 import React, { Fragment, useState } from 'react';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import Typography from '@material-ui/core/Typography';
-import Tooltip from '@material-ui/core/Tooltip';
-import IconButton from '@material-ui/core/IconButton';
-import Dialog from '@material-ui/core/Dialog';
-import Button from '@material-ui/core/Button';
-import Divider from '@material-ui/core/Divider';
-import Grid from '@material-ui/core/Grid';
-import makeStyles from '@material-ui/styles/makeStyles';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import Typography from '@mui/material/Typography';
+import Tooltip from '@mui/material/Tooltip';
+import IconButton from '@mui/material/IconButton';
+import Dialog from '@mui/material/Dialog';
+import Button from '@mui/material/Button';
+import Divider from '@mui/material/Divider';
+import Grid from '@mui/material/Grid';
+import makeStyles from '@mui/styles/makeStyles';
 import PropTypes from 'prop-types';
-import SearchIcon from '@material-ui/icons/Search';
-import CloseIcon from '@material-ui/icons/Close';
+import SearchIcon from '@mui/icons-material/Search';
+import CloseIcon from '@mui/icons-material/Close';
 import useSearch from '../hooks/useSearch';
 import Loading from './Loading';
 import SearchInputField from './SearchInputField';
@@ -100,52 +100,50 @@ function TypeaheadDialog({
         return <Typography>No matching items</Typography>;
     };
 
-    return (
-        <>
-            <Tooltip title={title}>
-                <Button
-                    color="primary"
-                    aria-label="Search"
-                    onClick={handleOpen}
-                    variant="outlined"
-                    className={classes.button}
-                >
-                    <SearchIcon />
-                </Button>
-            </Tooltip>
-
-            <Dialog
-                open={dialogOpen}
-                onClose={handleClose}
-                fullWidth
-                maxWidth="md"
-                disableAutoFocus
+    return <>
+        <Tooltip title={title}>
+            <Button
+                color="primary"
+                aria-label="Search"
+                onClick={handleOpen}
+                variant="outlined"
+                className={classes.button}
             >
-                <div>
-                    <IconButton
-                        className={classes.pullRight}
-                        aria-label="Close"
-                        onClick={handleClose}
-                    >
-                        <CloseIcon />
-                    </IconButton>
-                    <div className={classes.dialog}>
-                        <Typography variant="h5" gutterBottom>
-                            {title}
-                        </Typography>
-                        <SearchInputField
-                            placeholder="Search by id or description"
-                            onChange={handleSearchTermChange}
-                            label=""
-                            value={searchTerm}
-                            autoFocus
-                        />
-                        {loading ? <Loading /> : showResults()}
-                    </div>
+                <SearchIcon />
+            </Button>
+        </Tooltip>
+
+        <Dialog
+            open={dialogOpen}
+            onClose={handleClose}
+            fullWidth
+            maxWidth="md"
+            disableAutoFocus
+        >
+            <div>
+                <IconButton
+                    className={classes.pullRight}
+                    aria-label="Close"
+                    onClick={handleClose}
+                    size="large">
+                    <CloseIcon />
+                </IconButton>
+                <div className={classes.dialog}>
+                    <Typography variant="h5" gutterBottom>
+                        {title}
+                    </Typography>
+                    <SearchInputField
+                        placeholder="Search by id or description"
+                        onChange={handleSearchTermChange}
+                        label=""
+                        value={searchTerm}
+                        autoFocus
+                    />
+                    {loading ? <Loading /> : showResults()}
                 </div>
-            </Dialog>
-        </>
-    );
+            </div>
+        </Dialog>
+    </>;
 }
 
 TypeaheadDialog.propTypes = {

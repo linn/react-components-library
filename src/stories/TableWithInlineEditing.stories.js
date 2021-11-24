@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import ThemeProvider from '@material-ui/styles/ThemeProvider';
+import ThemeProvider from '@mui/styles/ThemeProvider';
 import TableWithInlineEditing from '../components/TableWithInlineEditing';
 import { linnTheme } from '../themes/linnTheme';
 
@@ -54,9 +54,11 @@ export default {
     title: 'Components/TableWithInlineEditing',
     decorators: [
         story => (
-            <ThemeProvider theme={linnTheme}>
-                <div>{story()}</div>
-            </ThemeProvider>
+            <StyledEngineProvider injectFirst>
+                <ThemeProvider theme={linnTheme}>
+                    <div>{story()}</div>
+                </ThemeProvider>
+            </StyledEngineProvider>
         )
     ],
     component: TableWithInlineEditing

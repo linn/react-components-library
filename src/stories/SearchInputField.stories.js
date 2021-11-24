@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import ThemeProvider from '@material-ui/styles/ThemeProvider';
+import ThemeProvider from '@mui/styles/ThemeProvider';
 import { linnTheme } from '../themes/linnTheme';
 import SearchInputField from '../components/SearchInputField';
 
@@ -8,9 +8,11 @@ export default {
     title: 'Components/SearchInputField',
     decorators: [
         story => (
-            <ThemeProvider theme={linnTheme}>
-                <div>{story()}</div>
-            </ThemeProvider>
+            <StyledEngineProvider injectFirst>
+                <ThemeProvider theme={linnTheme}>
+                    <div>{story()}</div>
+                </ThemeProvider>
+            </StyledEngineProvider>
         )
     ],
     component: SearchInputField

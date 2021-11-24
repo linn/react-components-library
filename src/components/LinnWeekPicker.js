@@ -1,8 +1,8 @@
 import React from 'react';
-import { KeyboardDatePicker } from '@material-ui/pickers';
-import { makeStyles } from '@material-ui/styles';
-import { IconButton } from '@material-ui/core';
-import InputLabel from '@material-ui/core/InputLabel';
+import DatePicker from '@mui/lab/DatePicker';
+import { makeStyles } from '@mui/styles';
+import { IconButton } from '@mui/material';
+import InputLabel from '@mui/material/InputLabel';
 import moment from 'moment';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
@@ -88,7 +88,7 @@ export default function LinnWeekPicker({
 
         return (
             <div className={wrapperClassName}>
-                <IconButton className={dayClassName}>
+                <IconButton className={dayClassName} size="large">
                     <span> {date.format('D')} </span>
                 </IconButton>
             </div>
@@ -100,7 +100,7 @@ export default function LinnWeekPicker({
             <InputLabel classes={{ root: classes.label }} required={required}>
                 {label}
             </InputLabel>
-            <KeyboardDatePicker
+            <DatePicker
                 autoOk
                 disabled={disabled}
                 margin="dense"

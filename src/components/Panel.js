@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import withStyles from '@material-ui/core/styles/withStyles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import Close from '@material-ui/icons/Close';
+import withStyles from '@mui/styles/withStyles';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import Close from '@mui/icons-material/Close';
 
 const styles = {
     listItemText: {

@@ -1,16 +1,18 @@
 ﻿import { render } from '@testing-library/react';
 import React from 'react';
-import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
+import { ThemeProvider, StyledEngineProvider, createTheme } from '@mui/material/styles';
 import { MemoryRouter } from 'react-router-dom';
-import { MuiPickersUtilsProvider } from '@material-ui/pickers';
-import MomentUtils from '@date-io/moment';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
 
 // eslint-disable-next-line react/prop-types
 const Providers = ({ children }) => (
     <MemoryRouter>
-        <MuiThemeProvider theme={createTheme()}>
-            <MuiPickersUtilsProvider utils={MomentUtils}>{children}</MuiPickersUtilsProvider>
-        </MuiThemeProvider>
+        <StyledEngineProvider injectFirst>
+            <ThemeProvider theme={createTheme()}>
+            <LocalizationProvider dateAdapter={AdapterDateFns}>{children}</LocalizationProvider>
+            </ThemeProvider>
+        </StyledEngineProvider>
     </MemoryRouter>
 );
 

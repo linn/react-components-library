@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
-import { KeyboardDateTimePicker } from '@material-ui/pickers';
-import InputLabel from '@material-ui/core/InputLabel';
+import DateTimePicker from '@mui/lab/DateTimePicker';
+import InputLabel from '@mui/material/InputLabel';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 
 const labelStyles = makeStyles(theme => ({
     root: {
@@ -17,7 +17,7 @@ const inputStyles = makeStyles(theme => ({
     }
 }));
 
-function DateTimePicker({ label, value, onChange, minDate, maxDate, required, disabled }) {
+function Picker({ label, value, onChange, minDate, maxDate, required, disabled }) {
     const inputClasses = inputStyles();
     const labelClasses = labelStyles();
     return (
@@ -25,7 +25,7 @@ function DateTimePicker({ label, value, onChange, minDate, maxDate, required, di
             <InputLabel classes={{ root: labelClasses.root }} required={required}>
                 {label}
             </InputLabel>
-            <KeyboardDateTimePicker
+            <DateTimePicker
                 allowKeyboardControl
                 autoOk
                 margin="dense"
@@ -66,4 +66,4 @@ DateTimePicker.defaultProps = {
     onChange: () => {}
 };
 
-export default DateTimePicker;
+export default Picker;

@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
-import Box from '@material-ui/core/Box';
+import Box from '@mui/material/Box';
 import { formatHeading, displayError, formatTitle } from '../utilities/DisplayUtilities';
 import ReportTable from './ReportTable';
 

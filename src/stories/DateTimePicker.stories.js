@@ -1,9 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import ThemeProvider from '@material-ui/styles/ThemeProvider';
+import ThemeProvider from '@mui/styles/ThemeProvider';
 import { action } from '@storybook/addon-actions';
-import { MuiPickersUtilsProvider } from '@material-ui/pickers';
-import MomentUtils from '@date-io/moment';
 import DateTimePicker from '../components/DateTimePicker';
 import { linnTheme } from '../themes/linnTheme';
 
@@ -15,11 +13,11 @@ export default {
     title: 'Components/DateTimePicker',
     decorators: [
         story => (
-            <ThemeProvider theme={linnTheme}>
-                <MuiPickersUtilsProvider utils={MomentUtils}>
-                    <div>{story()}</div>
-                </MuiPickersUtilsProvider>
-            </ThemeProvider>
+            <StyledEngineProvider injectFirst>
+                <ThemeProvider theme={linnTheme}>
+                        <div>{story()}</div>
+                </ThemeProvider>
+            </StyledEngineProvider>
         )
     ],
     component: DateTimePicker

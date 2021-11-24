@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import TableRow from '@material-ui/core/TableRow';
-import TableCell from '@material-ui/core/TableCell';
-import Done from '@material-ui/icons/Done';
-import EditIcon from '@material-ui/icons/Edit';
-import Clear from '@material-ui/icons/Clear';
-import Delete from '@material-ui/icons/Delete';
-import Button from '@material-ui/core/Button';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import Tooltip from '@material-ui/core/Tooltip';
-import { grey } from '@material-ui/core/colors';
-import { makeStyles } from '@material-ui/styles';
+import TableRow from '@mui/material/TableRow';
+import TableCell from '@mui/material/TableCell';
+import Done from '@mui/icons-material/Done';
+import EditIcon from '@mui/icons-material/Edit';
+import Clear from '@mui/icons-material/Clear';
+import Delete from '@mui/icons-material/Delete';
+import Button from '@mui/material/Button';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
+import Tooltip from '@mui/material/Tooltip';
+import { grey } from '@mui/material/colors';
+import { makeStyles } from '@mui/styles';
 import EditableTableCell from './EditableTableCell';
 import columnsProps from './columnsProps';
 

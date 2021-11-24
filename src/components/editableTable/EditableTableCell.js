@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import TableCell from '@material-ui/core/TableCell';
-import Tooltip from '@material-ui/core/Tooltip';
+import TableCell from '@mui/material/TableCell';
+import Tooltip from '@mui/material/Tooltip';
 import { inputComponentFactory, displayComponentFactory } from './componentFactory';
 
 const defaultStyle = {

@@ -1,6 +1,5 @@
 import React from 'react';
-import { MuiThemeProvider } from '@material-ui/core/styles';
-import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import { ThemeProvider, StyledEngineProvider } from '@mui/material/styles';
 import moment from 'moment';
 import MomentUtils from '@date-io/moment';
 import { displayComponentFactory, inputComponentFactory } from '../editableTable/componentFactory';
@@ -54,9 +53,11 @@ describe('inputComponentFactory', () => {
 
         beforeEach(() => {
             const ComponentWithTheme = () => (
-                <MuiThemeProvider theme={linnTheme}>
-                    {inputComponentFactory(row, column, jest.fn())}
-                </MuiThemeProvider>
+                <StyledEngineProvider injectFirst>
+                    <ThemeProvider theme={linnTheme}>
+                        {inputComponentFactory(row, column, jest.fn())}
+                    </ThemeProvider>
+                </StyledEngineProvider>
             );
 
             render(<ComponentWithTheme />);
@@ -80,9 +81,11 @@ describe('inputComponentFactory', () => {
 
         beforeEach(() => {
             const ComponentWithTheme = () => (
-                <MuiThemeProvider theme={linnTheme}>
-                    {inputComponentFactory(row, column, jest.fn())}
-                </MuiThemeProvider>
+                <StyledEngineProvider injectFirst>
+                    <ThemeProvider theme={linnTheme}>
+                        {inputComponentFactory(row, column, jest.fn())}
+                    </ThemeProvider>
+                </StyledEngineProvider>
             );
 
             render(<ComponentWithTheme />);
@@ -107,11 +110,11 @@ describe('inputComponentFactory', () => {
 
         beforeEach(() => {
             const ComponentWithTheme = () => (
-                <MuiThemeProvider theme={linnTheme}>
-                    <MuiPickersUtilsProvider utils={MomentUtils}>
-                        {inputComponentFactory(row, column, jest.fn())}
-                    </MuiPickersUtilsProvider>
-                </MuiThemeProvider>
+                <StyledEngineProvider injectFirst>
+                    <ThemeProvider theme={linnTheme}>
+                            {inputComponentFactory(row, column, jest.fn())}
+                    </ThemeProvider>
+                </StyledEngineProvider>
             );
 
             render(<ComponentWithTheme />);
@@ -136,11 +139,11 @@ describe('inputComponentFactory', () => {
 
         beforeEach(() => {
             const ComponentWithTheme = () => (
-                <MuiThemeProvider theme={linnTheme}>
-                    <MuiPickersUtilsProvider utils={MomentUtils}>
-                        {inputComponentFactory(row, column, jest.fn())}
-                    </MuiPickersUtilsProvider>
-                </MuiThemeProvider>
+                <StyledEngineProvider injectFirst>
+                    <ThemeProvider theme={linnTheme}>
+                            {inputComponentFactory(row, column, jest.fn())}
+                    </ThemeProvider>
+                </StyledEngineProvider>
             );
 
             render(<ComponentWithTheme />);
@@ -168,11 +171,11 @@ describe('inputComponentFactory', () => {
 
         beforeEach(() => {
             const ComponentWithTheme = () => (
-                <MuiThemeProvider theme={linnTheme}>
-                    <MuiPickersUtilsProvider utils={MomentUtils}>
-                        {inputComponentFactory(row, column, jest.fn())}
-                    </MuiPickersUtilsProvider>
-                </MuiThemeProvider>
+                <StyledEngineProvider injectFirst>
+                    <ThemeProvider theme={linnTheme}>
+                            {inputComponentFactory(row, column, jest.fn())}
+                    </ThemeProvider>
+                </StyledEngineProvider>
             );
 
             render(<ComponentWithTheme />);
@@ -200,9 +203,11 @@ describe('inputComponentFactory', () => {
 
         beforeEach(() => {
             const ComponentWithTheme = () => (
-                <MuiThemeProvider theme={linnTheme}>
-                    {inputComponentFactory(row, column, jest.fn())}
-                </MuiThemeProvider>
+                <StyledEngineProvider injectFirst>
+                    <ThemeProvider theme={linnTheme}>
+                        {inputComponentFactory(row, column, jest.fn())}
+                    </ThemeProvider>
+                </StyledEngineProvider>
             );
 
             render(<ComponentWithTheme />);

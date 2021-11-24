@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
-import Typography from '@material-ui/core/Typography';
-import Tooltip from '@material-ui/core/Tooltip';
-import IconButton from '@material-ui/core/IconButton';
-import Dialog from '@material-ui/core/Dialog';
-import Button from '@material-ui/core/Button';
-import makeStyles from '@material-ui/styles/makeStyles';
+import Typography from '@mui/material/Typography';
+import Tooltip from '@mui/material/Tooltip';
+import IconButton from '@mui/material/IconButton';
+import Dialog from '@mui/material/Dialog';
+import Button from '@mui/material/Button';
+import makeStyles from '@mui/styles/makeStyles';
 import PropTypes from 'prop-types';
-import EditIcon from '@material-ui/icons/Edit';
-import CloseIcon from '@material-ui/icons/Close';
-import DoneIcon from '@material-ui/icons/Done';
-import ThemeProvider from '@material-ui/styles/ThemeProvider';
-import { createTheme } from '@material-ui/core/styles';
+import EditIcon from '@mui/icons-material/Edit';
+import CloseIcon from '@mui/icons-material/Close';
+import DoneIcon from '@mui/icons-material/Done';
+import ThemeProvider from '@mui/styles/ThemeProvider';
+import { createTheme, adaptV4Theme } from '@mui/material/styles';
 import InputField from './InputField';
 import useSearch from '../hooks/useSearch';
 import Loading from './Loading';
 import { linnTheme } from '../themes/linnTheme';
 
-const valid = createTheme({
+const valid = createTheme(adaptV4Theme({
     palette: {
         primary: {
             main: '#4BB543'
@@ -25,15 +25,15 @@ const valid = createTheme({
             main: '#FF9494'
         }
     }
-});
+}));
 
-const invalid = createTheme({
+const invalid = createTheme(adaptV4Theme({
     palette: {
         primary: {
             main: '#FF9494'
         }
     }
-});
+}));
 const useStyles = makeStyles(theme => ({
     pullRight: {
         float: 'right'
@@ -80,33 +80,33 @@ function ValidatedInputDialog({ title, loading, fetchItems, searchItems, clearSe
 
     const inputValid = () => searchItems.length === 1;
 
-    return (
-        <>
-            <Tooltip title={title}>
-                <Button
-                    color="primary"
-                    aria-label="Search"
-                    onClick={handleOpen}
-                    variant="outlined"
-                    className={classes.button}
-                >
-                    <EditIcon />
-                </Button>
-            </Tooltip>
+    return <>
+        <Tooltip title={title}>
+            <Button
+                color="primary"
+                aria-label="Search"
+                onClick={handleOpen}
+                variant="outlined"
+                className={classes.button}
+            >
+                <EditIcon />
+            </Button>
+        </Tooltip>
 
-            <Dialog open={dialogOpen} onClose={handleClose} fullWidth maxWidth="md">
-                <div>
-                    <IconButton
-                        className={classes.pullRight}
-                        aria-label="Close"
-                        onClick={handleClose}
-                    >
-                        <CloseIcon />
-                    </IconButton>
-                    <div className={classes.dialog}>
-                        <Typography variant="h5" gutterBottom>
-                            {title}
-                        </Typography>
+        <Dialog open={dialogOpen} onClose={handleClose} fullWidth maxWidth="md">
+            <div>
+                <IconButton
+                    className={classes.pullRight}
+                    aria-label="Close"
+                    onClick={handleClose}
+                    size="large">
+                    <CloseIcon />
+                </IconButton>
+                <div className={classes.dialog}>
+                    <Typography variant="h5" gutterBottom>
+                        {title}
+                    </Typography>
+                    <StyledEngineProvider injectFirst>
                         <ThemeProvider theme={getTheme()}>
                             <InputField
                                 onChange={handleSearchTermChange}
@@ -114,33 +114,35 @@ function ValidatedInputDialog({ title, loading, fetchItems, searchItems, clearSe
                                 value={searchTerm}
                             />
                         </ThemeProvider>
-                        {inputValid() && (
+                    </StyledEngineProvider>
+                    {inputValid() && (
+                        <StyledEngineProvider injectFirst>
                             <ThemeProvider theme={valid}>
                                 <IconButton
                                     aria-label="Close"
                                     onClick={() => handleAccept(searchItems[0])}
-                                >
+                                    size="large">
                                     <DoneIcon color="primary" />
                                 </IconButton>
                             </ThemeProvider>
-                        )}
-                        {searchTerm && (
-                            <IconButton
-                                aria-label="Close"
-                                onClick={() => {
-                                    clearSearch();
-                                    setSearchTerm('');
-                                }}
-                            >
-                                <CloseIcon />
-                            </IconButton>
-                        )}
-                        {loading && <Loading />}
-                    </div>
+                        </StyledEngineProvider>
+                    )}
+                    {searchTerm && (
+                        <IconButton
+                            aria-label="Close"
+                            onClick={() => {
+                                clearSearch();
+                                setSearchTerm('');
+                            }}
+                            size="large">
+                            <CloseIcon />
+                        </IconButton>
+                    )}
+                    {loading && <Loading />}
                 </div>
-            </Dialog>
-        </>
-    );
+            </div>
+        </Dialog>
+    </>;
 }
 
 ValidatedInputDialog.propTypes = {
