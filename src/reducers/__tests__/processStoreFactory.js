@@ -5,7 +5,8 @@ describe('item store reducer factory', () => {
     const actionTypes = {
         REQUEST_PROCESS: 'REQUEST_PROCESS',
         RECEIVE_PROCESS: 'RECEIVE_PROCESS',
-        CLEAR_PROCESS_DATA: 'CLEAR_PROCESS_DATA'
+        CLEAR_PROCESS_DATA: 'CLEAR_PROCESS_DATA',
+        FETCH_PROCESS_ERROR: 'FETCH_PROCESS_ERROR'
     };
     const defaultState = { working: false, messageText: '', messageVisible: false };
     const generatedReducer = processStoreFactory(
@@ -103,6 +104,25 @@ describe('item store reducer factory', () => {
             messageVisible: false,
             working: false,
             data: null
+        };
+
+        deepFreeze(state);
+
+        expect(generatedReducer(state, action)).toEqual(expected);
+    });
+
+    test('when process errors', () => {
+        const state = {
+            working: true
+        };
+
+        const action = {
+            type: actionTypes.FETCH_PROCESS_ERROR,
+            payload: null
+        };
+
+        const expected = {
+            working: false
         };
 
         deepFreeze(state);

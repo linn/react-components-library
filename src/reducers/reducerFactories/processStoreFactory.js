@@ -51,6 +51,12 @@
                     data: null
                 };
 
+            case actionTypes[`FETCH_${itemRoot}_ERROR`]:
+                return {
+                    ...state,
+                    working: false
+                };
+
             default:
         }
 
