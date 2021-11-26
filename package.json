@@ -1,6 +1,6 @@
 {
     "name": "@linn-it/linn-form-components-library",
-    "version": "12.6.0",
+    "version": "12.7.0",
     "private": false,
     "dependencies": {
         "classnames": "^2.2.6",
