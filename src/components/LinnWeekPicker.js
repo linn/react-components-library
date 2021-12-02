@@ -3,6 +3,7 @@ import DatePicker from '@mui/lab/DatePicker';
 import { makeStyles } from '@mui/styles';
 import { IconButton } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
+import TextField from '@mui/material/TextField';
 import moment from 'moment';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
@@ -10,14 +11,14 @@ import { getWeekStartDate, getWeekEndDate } from '../utilities/dateUtilities';
 
 const useStyles = makeStyles((theme) => ({
     dayWrapper: {
-        position: 'relative',
+        position: 'relative'
     },
     day: {
         width: 36,
         height: 36,
         fontSize: theme.typography.caption.fontSize,
         margin: '0 2px',
-        color: 'inherit',
+        color: 'inherit'
     },
     customDayHighlight: {
         position: 'absolute',
@@ -26,31 +27,31 @@ const useStyles = makeStyles((theme) => ({
         left: '2px',
         right: '2px',
         border: `1px solid ${theme.palette.secondary.main}`,
-        borderRadius: '50%',
+        borderRadius: '50%'
     },
     nonCurrentMonthDay: {
-        color: theme.palette.text.disabled,
+        color: theme.palette.text.disabled
     },
     highlightNonCurrentMonthDay: {
-        color: '#676767',
+        color: '#676767'
     },
     highlight: {
         background: theme.palette.primary.main,
-        color: theme.palette.common.white,
+        color: theme.palette.common.white
     },
     firstHighlight: {
         extend: 'highlight',
         borderTopLeftRadius: '50%',
-        borderBottomLeftRadius: '50%',
+        borderBottomLeftRadius: '50%'
     },
     endHighlight: {
         extend: 'highlight',
         borderTopRightRadius: '50%',
-        borderBottomRightRadius: '50%',
+        borderBottomRightRadius: '50%'
     },
     label: {
-        fontSize: theme.typography.fontSize,
-    },
+        fontSize: theme.typography.fontSize
+    }
 }));
 
 export default function LinnWeekPicker({
@@ -59,7 +60,7 @@ export default function LinnWeekPicker({
     propertyName,
     label,
     disabled,
-    required,
+    required
 }) {
     const classes = useStyles();
 
@@ -78,12 +79,12 @@ export default function LinnWeekPicker({
         const wrapperClassName = clsx({
             [classes.highlight]: dayIsBetween,
             [classes.firstHighlight]: isFirstDay,
-            [classes.endHighlight]: isLastDay,
+            [classes.endHighlight]: isLastDay
         });
 
         const dayClassName = clsx(classes.day, {
             [classes.nonCurrentMonthDay]: !dayInCurrentMonth,
-            [classes.highlightNonCurrentMonthDay]: !dayInCurrentMonth && dayIsBetween,
+            [classes.highlightNonCurrentMonthDay]: !dayInCurrentMonth && dayIsBetween
         });
 
         return (
@@ -104,6 +105,7 @@ export default function LinnWeekPicker({
                 autoOk
                 disabled={disabled}
                 margin="dense"
+                renderInput={(props) => <TextField {...props} />}
                 inputVariant="outlined"
                 value={selectedDate ? moment(selectedDate) : null}
                 onChange={handleChange}
@@ -120,7 +122,7 @@ LinnWeekPicker.propTypes = {
     propertyName: PropTypes.string,
     label: PropTypes.string,
     disabled: PropTypes.bool,
-    required: PropTypes.bool,
+    required: PropTypes.bool
 };
 
 LinnWeekPicker.defaultProps = {
@@ -128,5 +130,5 @@ LinnWeekPicker.defaultProps = {
     propertyName: '',
     disabled: false,
     required: false,
-    label: '',
+    label: ''
 };

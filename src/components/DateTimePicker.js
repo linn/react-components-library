@@ -7,14 +7,14 @@ import makeStyles from '@mui/styles/makeStyles';
 const labelStyles = makeStyles((theme) => ({
     root: {
         fontSize: theme.typography.fontSize
-    },
+    }
 }));
 
 const inputStyles = makeStyles((theme) => ({
     root: {
         marginTop: theme.spacing(1),
         fontSize: theme.typography.fontSize
-    },
+    }
 }));
 
 function Picker({ label, value, onChange, minDate, maxDate, required, disabled }) {
@@ -53,7 +53,7 @@ Picker.propTypes = {
     onChange: PropTypes.func,
     required: PropTypes.bool,
     value: PropTypes.string,
-    disabled: PropTypes.bool,
+    disabled: PropTypes.bool
 };
 
 Picker.defaultProps = {
@@ -63,7 +63,7 @@ Picker.defaultProps = {
     required: false,
     value: new Date().toISOString(),
     disabled: false,
-    onChange: () => {},
+    onChange: () => {}
 };
 
 export default Picker;

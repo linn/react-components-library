@@ -2,6 +2,9 @@
     "name": "@linn-it/linn-form-components-library",
     "version": "12.6.0",
     "private": false,
+    "jest": {
+        "testEnvironment": "jsdom"
+    },
     "dependencies": {
         "classnames": "^2.3.1",
         "clsx": "^1.1.1",
@@ -49,12 +52,11 @@
         "@babel/core": "^7.16.0",
         "@babel/plugin-proposal-optional-chaining": "^7.16.0",
         "@babel/plugin-transform-runtime": "^7.16.4",
-        "@date-io/moment": "^2.11.0",
         "@emotion/react": "^11.6.0",
         "@emotion/styled": "^11.6.0",
         "@mui/icons-material": "^5.2.0",
         "@mui/lab": "^5.0.0-alpha.56",
-        "@mui/material": "^5.2.0",
+        "@mui/material": "^5.2.2",
         "@mui/styles": "^5.2.0",
         "@storybook/addon-actions": "^6.3.12",
         "@storybook/addon-docs": "^6.3.12",

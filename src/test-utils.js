@@ -2,19 +2,26 @@
 import React from 'react';
 import { ThemeProvider, StyledEngineProvider, createTheme } from '@mui/material/styles';
 import { MemoryRouter } from 'react-router-dom';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import AdapterDateMoment from '@mui/lab/AdapterMoment';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
+/**
+ * @jest-environment jsdom
+ */
 
 // eslint-disable-next-line react/prop-types
-const Providers = ({ children }) => (
-    <MemoryRouter>
-        <StyledEngineProvider injectFirst>
-            <ThemeProvider theme={createTheme()}>
-                <LocalizationProvider dateAdapter={AdapterDateFns}>{children}</LocalizationProvider>
-            </ThemeProvider>
-        </StyledEngineProvider>
-    </MemoryRouter>
-);
+function Providers({ children }) {
+    return (
+        <MemoryRouter>
+            <StyledEngineProvider injectFirst>
+                <ThemeProvider theme={createTheme()}>
+                    <LocalizationProvider dateAdapter={AdapterDateMoment}>
+                        {children}
+                    </LocalizationProvider>
+                </ThemeProvider>
+            </StyledEngineProvider>
+        </MemoryRouter>
+    );
+}
 
 const customRender = (ui, options) => render(ui, { wrapper: Providers, ...options });
 

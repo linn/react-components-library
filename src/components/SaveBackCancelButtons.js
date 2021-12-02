@@ -3,16 +3,15 @@ import { makeStyles } from '@mui/styles';
 import Button from '@mui/material/Button';
 import PropTypes from 'prop-types';
 
-const useStyles = makeStyles(theme => ({
-    pullRight: {
-        float: 'right'
-    },
-    cancel: {
-        marginRight: theme.spacing(1)
-    }
-}));
-
 function SaveBackCancelButtons({ saveClick, cancelClick, saveDisabled, backClick }) {
+    const useStyles = makeStyles((theme) => ({
+        pullRight: {
+            float: 'right'
+        },
+        cancel: {
+            marginRight: theme.spacing(1)
+        }
+    }));
     const classes = useStyles();
 
     const handleClick = () => {

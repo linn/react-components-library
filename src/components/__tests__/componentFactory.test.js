@@ -1,12 +1,9 @@
 import React from 'react';
-import { ThemeProvider, StyledEngineProvider } from '@mui/material/styles';
 import moment from 'moment';
-import MomentUtils from '@date-io/moment';
-import { displayComponentFactory, inputComponentFactory } from '../editableTable/componentFactory';
-import { linnTheme } from '../../themes';
 import { screen } from '@testing-library/react';
 import render from '../../test-utils';
 import '@testing-library/jest-dom/extend-expect';
+import { displayComponentFactory, inputComponentFactory } from '../editableTable/componentFactory';
 
 describe('displayComponentFactory', () => {
     describe('when type is not a date', () => {
@@ -52,15 +49,7 @@ describe('inputComponentFactory', () => {
         };
 
         beforeEach(() => {
-            const ComponentWithTheme = () => (
-                <StyledEngineProvider injectFirst>
-                    <ThemeProvider theme={linnTheme}>
-                        {inputComponentFactory(row, column, jest.fn())}
-                    </ThemeProvider>
-                </StyledEngineProvider>
-            );
-
-            render(<ComponentWithTheme />);
+            render(inputComponentFactory(row, column, jest.fn()));
         });
 
         it('should return an inputField', () => {
@@ -80,15 +69,7 @@ describe('inputComponentFactory', () => {
         };
 
         beforeEach(() => {
-            const ComponentWithTheme = () => (
-                <StyledEngineProvider injectFirst>
-                    <ThemeProvider theme={linnTheme}>
-                        {inputComponentFactory(row, column, jest.fn())}
-                    </ThemeProvider>
-                </StyledEngineProvider>
-            );
-
-            render(<ComponentWithTheme />);
+            render(inputComponentFactory(row, column, jest.fn()));
         });
 
         it('should return an inputField', () => {
@@ -109,20 +90,12 @@ describe('inputComponentFactory', () => {
         };
 
         beforeEach(() => {
-            const ComponentWithTheme = () => (
-                <StyledEngineProvider injectFirst>
-                    <ThemeProvider theme={linnTheme}>
-                            {inputComponentFactory(row, column, jest.fn())}
-                    </ThemeProvider>
-                </StyledEngineProvider>
-            );
-
-            render(<ComponentWithTheme />);
+            render(inputComponentFactory(row, column, jest.fn()));
         });
 
         it('should return a date picker', () => {
             expect(screen.getAllByRole('textbox')).toHaveLength(1);
-            expect(screen.getByRole('textbox')).toHaveDisplayValue('20/11/2019');
+            expect(screen.getByRole('textbox')).toHaveDisplayValue(['11/20/2019']);
         });
     });
 
@@ -134,24 +107,16 @@ describe('inputComponentFactory', () => {
         };
 
         const row = {
-            test: moment('20-12-2019', 'DD-MM-YYYY').toISOString(),
+            test: moment('20-12-2019', 'DD-MM-YYYY').toISOString()
         };
 
         beforeEach(() => {
-            const ComponentWithTheme = () => (
-                <StyledEngineProvider injectFirst>
-                    <ThemeProvider theme={linnTheme}>
-                            {inputComponentFactory(row, column, jest.fn())}
-                    </ThemeProvider>
-                </StyledEngineProvider>
-            );
-
-            render(<ComponentWithTheme />);
+            render(inputComponentFactory(row, column, jest.fn()));
         });
 
         it('should return a linn week picker', () => {
             expect(screen.getAllByRole('textbox')).toHaveLength(1);
-            expect(screen.getByRole('textbox')).toHaveDisplayValue('20/12/2019');
+            expect(screen.getByRole('textbox')).toHaveDisplayValue(['12/20/2019']);
         });
     });
 
@@ -170,15 +135,7 @@ describe('inputComponentFactory', () => {
         };
 
         beforeEach(() => {
-            const ComponentWithTheme = () => (
-                <StyledEngineProvider injectFirst>
-                    <ThemeProvider theme={linnTheme}>
-                            {inputComponentFactory(row, column, jest.fn())}
-                    </ThemeProvider>
-                </StyledEngineProvider>
-            );
-
-            render(<ComponentWithTheme />);
+            render(inputComponentFactory(row, column, jest.fn()));
         });
 
         it('should return a typeahead', () => {
@@ -202,15 +159,7 @@ describe('inputComponentFactory', () => {
         };
 
         beforeEach(() => {
-            const ComponentWithTheme = () => (
-                <StyledEngineProvider injectFirst>
-                    <ThemeProvider theme={linnTheme}>
-                        {inputComponentFactory(row, column, jest.fn())}
-                    </ThemeProvider>
-                </StyledEngineProvider>
-            );
-
-            render(<ComponentWithTheme />);
+            render(inputComponentFactory(row, column, jest.fn()));
         });
 
         it('should return custom component', () => {

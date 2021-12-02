@@ -33,7 +33,7 @@ export function inputComponentFactory(row, column, onChange, textFieldRows = 1, 
             return (
                 <DatePicker
                     value={row[column.id] || null}
-                    onChange={value => onChange(column.id, value)}
+                    onChange={(value) => onChange(column.id, value)}
                     required={column.required}
                 />
             );
@@ -55,7 +55,7 @@ export function inputComponentFactory(row, column, onChange, textFieldRows = 1, 
                     links={false}
                     loading={column.searchLoading}
                     modal
-                    onSelect={newValue => column.selectSearchResult(column.id, newValue, row)}
+                    onSelect={(newValue) => column.selectSearchResult(column.id, newValue, row)}
                     propertyName={column.id}
                     title={column.searchTitle}
                     value={row[column.id]}
@@ -78,7 +78,7 @@ export function inputComponentFactory(row, column, onChange, textFieldRows = 1, 
             return (
                 <column.component
                     value={row[column.id]}
-                    onChange={newValue => onChange(column.id, newValue)}
+                    onChange={(newValue) => onChange(column.id, newValue)}
                     required={column.required}
                     /* eslint-disable react/jsx-props-no-spreading */
                     {...rest}
