@@ -65,7 +65,8 @@ import {
     getItemErrors,
     getItemErrorDetailMessage
 } from './src/selectors/errorSelectors';
-import { errorTheme, linnTheme } from './src/themes/index';
+import errorTheme from './src/themes/errorTheme';
+import linnTheme from './src/themes/linnTheme';
 import SelectedItemsList from './src/components/SelectedItemsList';
 import NotFound from './src/components/NotFound';
 import ValidatedInputDialog from './src/components/ValidatedInputDialog';
