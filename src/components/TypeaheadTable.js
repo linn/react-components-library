@@ -18,7 +18,7 @@ import useSearch from '../hooks/useSearch';
 import utilities from '../utilities/index';
 import SearchIcon from './SearchIcon';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     pullRight: {
         float: 'right'
     },
@@ -71,7 +71,7 @@ function TypeaheadTable({
         textDecoration: 'none'
     };
 
-    const handleClick = e => {
+    const handleClick = (e) => {
         if (modal) {
             setDialogOpen(false);
         }
@@ -90,14 +90,14 @@ function TypeaheadTable({
                 <Table>
                     <TableHead>
                         <TableRow>
-                            {columnNames.map(columnName => (
+                            {columnNames.map((columnName) => (
                                 <TableCell key={columnName}>{columnName}</TableCell>
                             ))}
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {table.rows &&
-                            table.rows.map(row => (
+                            table.rows.map((row) => (
                                 <TableRow
                                     style={cursor}
                                     onClick={() =>
@@ -108,7 +108,7 @@ function TypeaheadTable({
                                     hover
                                     key={row.id}
                                 >
-                                    {row.values.map(cell => (
+                                    {row.values.map((cell) => (
                                         <TableCell key={cell.id} component="th" scope="row">
                                             {cell.value}
                                         </TableCell>
@@ -128,6 +128,7 @@ function TypeaheadTable({
             <SearchInputField
                 placeholder={placeholder}
                 onChange={handleSearchTermChange}
+                propertyName={`${label}-search-input`}
                 type="search"
                 label={label}
                 variant="outlined"
@@ -141,42 +142,46 @@ function TypeaheadTable({
     );
 
     if (modal) {
-        return <>
-            <InputField
-                adornment={SearchIcon()}
-                textFieldProps={{
-                    onClick: () => {
-                        if (!disabled) {
-                            setDialogOpen(true);
-                            clearSearch();
-                        }
-                    },
-                    disabled
-                }}
-                value={modal ? value : searchTerm}
-                label={label}
-                placeholder={placeholder}
-                onChange={modal ? () => setDialogOpen(true) : handleSearchTermChange}
-            />
-            <Dialog
-                data-testid="modal"
-                open={dialogOpen}
-                onClose={() => setDialogOpen(false)}
-                fullWidth
-                maxWidth="md"
-            >
-                <div>
-                    <IconButton
-                        className={classes.pullRight}
-                        aria-label="Close"
-                        onClick={() => setDialogOpen(false)}
-                        size="large">
-                        <CloseIcon />
-                    </IconButton>
-                    <div className={classes.dialog}>{renderTypeahead()}</div>
-                </div>
-            </Dialog>
-        </>;
+        return (
+            <>
+                <InputField
+                    adornment={SearchIcon()}
+                    textFieldProps={{
+                        onClick: () => {
+                            if (!disabled) {
+                                setDialogOpen(true);
+                                clearSearch();
+                            }
+                        },
+                        disabled
+                    }}
+                    value={modal ? value : searchTerm}
+                    label={label}
+                    propertyName={`${label}-search-input`}
+                    placeholder={placeholder}
+                    onChange={modal ? () => setDialogOpen(true) : handleSearchTermChange}
+                />
+                <Dialog
+                    data-testid="modal"
+                    open={dialogOpen}
+                    onClose={() => setDialogOpen(false)}
+                    fullWidth
+                    maxWidth="md"
+                >
+                    <div>
+                        <IconButton
+                            className={classes.pullRight}
+                            aria-label="Close"
+                            onClick={() => setDialogOpen(false)}
+                            size="large"
+                        >
+                            <CloseIcon />
+                        </IconButton>
+                        <div className={classes.dialog}>{renderTypeahead()}</div>
+                    </div>
+                </Dialog>
+            </>
+        );
     }
 
     return <> {renderTypeahead()}</>;
