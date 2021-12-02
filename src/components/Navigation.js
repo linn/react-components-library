@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '@mui/styles/withStyles';
@@ -20,7 +22,7 @@ import utilities from '../utilities/index';
 import Panel from './Panel';
 import SearchPanel from './SearchPanel';
 
-const styles = theme => ({
+const styles = (theme) => ({
     root: {
         position: 'absolute',
         width: '100%',
@@ -85,9 +87,9 @@ function Navigation({
     const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
     if (sections) {
-        const menuIds = sections.map(item => item.id);
+        const menuIds = sections.map((item) => item.id);
 
-        const handleClick = event => {
+        const handleClick = (event) => {
             setAnchorEl(event.currentTarget);
         };
         const handleClose = () => {
@@ -151,7 +153,7 @@ function Navigation({
                                         : classes.snackbarNew
                                 }
                             },
-                            action: key => actions(key, e),
+                            action: (key) => actions(key, e),
                             preventDuplicate: true
                         });
                     }, i * 200);
@@ -192,7 +194,7 @@ function Navigation({
                                                     indicatorColor="primary"
                                                     textColor="primary"
                                                 >
-                                                    {sections.map(item => (
+                                                    {sections.map((item) => (
                                                         <Tab
                                                             id={item.id}
                                                             key={item.id}
@@ -256,7 +258,7 @@ function Navigation({
                                                     {username}
                                                 </MenuItem>
                                                 {username &&
-                                                    myStuff.groups.map(item => (
+                                                    myStuff.groups.map((item) => (
                                                         <span key={item.items[0].href}>
                                                             <a href={item.items[0].href}>
                                                                 <MenuItem onClick={handleClose}>
@@ -278,7 +280,7 @@ function Navigation({
                                     selected === i && (
                                         <Panel
                                             key={item}
-                                            section={sections.find(e => e.id === item)}
+                                            section={sections.find((e) => e.id === item)}
                                             id={item}
                                             style={{ align: 'right' }}
                                             anchorEl={item.id}

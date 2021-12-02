@@ -1,8 +1,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import ThemeProvider from '@mui/styles/ThemeProvider';
-import { linnTheme } from '../themes/linnTheme';
 import SelectedItemsList from '../components/SelectedItemsList';
+import linnTheme from '../themes/linnTheme';
 
 const entities = [
     { id: '1', displayText: 'First Object' },
@@ -36,18 +36,16 @@ const removeItem = () => {};
 export default {
     title: 'Components/SelectedItemsList',
     decorators: [
-        story => (
-            <StyledEngineProvider injectFirst>
-                <ThemeProvider theme={linnTheme}>
-                    <div style={{ position: 'absolute', left: '5%', top: '10%' }}>{story()}</div>
-                </ThemeProvider>
-            </StyledEngineProvider>
+        (story) => (
+            <ThemeProvider theme={linnTheme}>
+                <div style={{ position: 'absolute', left: '5%', top: '10%' }}>{story()}</div>
+            </ThemeProvider>
         )
     ],
     component: SelectedItemsList
 };
 
-export const Default = args => <SelectedItemsList {...args} />;
+export const Default = (args) => <SelectedItemsList {...args} />;
 
 Default.story = {
     name: 'default '
@@ -59,7 +57,7 @@ Default.args = {
     removeItem
 };
 
-export const WithObjects = args => <SelectedItemsList {...args} />;
+export const WithObjects = (args) => <SelectedItemsList {...args} />;
 
 WithObjects.story = {
     name: 'with objects'
@@ -71,7 +69,7 @@ WithObjects.args = {
     removeItem
 };
 
-export const ManyObjectsNoScrolling = args => <SelectedItemsList {...args} />;
+export const ManyObjectsNoScrolling = (args) => <SelectedItemsList {...args} />;
 
 ManyObjectsNoScrolling.story = {
     name: 'many objects no scrolling'
@@ -83,7 +81,7 @@ ManyObjectsNoScrolling.args = {
     removeItem
 };
 
-export const ManyObjectsWithScrolling = args => <SelectedItemsList {...args} />;
+export const ManyObjectsWithScrolling = (args) => <SelectedItemsList {...args} />;
 
 ManyObjectsWithScrolling.story = {
     name: 'many objects with scrolling'

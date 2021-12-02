@@ -2,10 +2,10 @@ import React from 'react';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
 import Error from '@mui/icons-material/Error';
-import { ThemeProvider, StyledEngineProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import withStyles from '@mui/styles/withStyles';
 import PropTypes from 'prop-types';
-import { errorTheme } from '../themes/index';
+import errorTheme from '../themes/errorTheme';
 
 const styles = () => ({
     root: {
@@ -24,20 +24,22 @@ const styles = () => ({
 });
 
 const ErrorCard = ({ classes, errorMessage }) => (
-    <StyledEngineProvider injectFirst>
-        <ThemeProvider theme={errorTheme}>
-            <Card className={classes.root}>
-                <Error color="error" className={classes.icon} />
-                <Typography align="center" className={classes.typography}>
-                    {errorMessage}
-                </Typography>
-            </Card>
-        </ThemeProvider>
-    </StyledEngineProvider>
+    <ThemeProvider theme={errorTheme}>
+        <Card className={classes.root}>
+            <Error color="error" className={classes.icon} />
+            <Typography align="center" className={classes.typography}>
+                {errorMessage}
+            </Typography>
+        </Card>
+    </ThemeProvider>
 );
 
 ErrorCard.propTypes = {
-    classes: PropTypes.shape({}),
+    classes: PropTypes.shape({
+        root: PropTypes.string,
+        icon: PropTypes.string,
+        typography: PropTypes.string
+    }),
     errorMessage: PropTypes.string.isRequired
 };
 

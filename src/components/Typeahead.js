@@ -19,7 +19,7 @@ import Loading from './Loading';
 import InputField from './InputField';
 import SearchIcon from './SearchIcon';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     a: {
         textDecoration: 'none'
     },
@@ -46,7 +46,7 @@ const useStyles = makeStyles(theme => ({
     },
     clearButton: {
         padding: '7px 0px'
-    },
+    }
 }));
 
 function Typeahead({
@@ -85,7 +85,7 @@ function Typeahead({
         setSearchTerm(args[1]);
     };
 
-    const handleClick = e => {
+    const handleClick = (e) => {
         if (modal) {
             setDialogOpen(false);
         }
@@ -141,7 +141,7 @@ function Typeahead({
 
         if (priorityFunction) {
             result = result
-                .map(i => ({ ...i, priority: priorityFunction(i, searchTerm) }))
+                .map((i) => ({ ...i, priority: priorityFunction(i, searchTerm) }))
                 .sort((a, b) => {
                     if (a.priority > b.priority) {
                         return -1;
@@ -160,7 +160,7 @@ function Typeahead({
         if (result?.length > 0) {
             return (
                 <List dense>
-                    {result.map(item => (
+                    {result.map((item) => (
                         <Fragment key={item.id}>
                             {links ? (
                                 <Link className={classes.a} component={RouterLink} to={item?.href}>
@@ -178,93 +178,97 @@ function Typeahead({
         return <Typography>No matching items</Typography>;
     };
 
-    return <>
-        {!modal ? <Title text={title} /> : <></>}
-        {modal && searchButtonOnly ? (
-            <Tooltip title={label}>
-                <IconButton
-                    disabled={disabled}
-                    onClick={() => {
-                        setDialogOpen(true);
-                        clearSearch();
-                    }}
-                    size="large">
-                    {SearchIcon()}
-                </IconButton>
-            </Tooltip>
-        ) : (
-            <InputField
-                adornment={SearchIcon(() => setDialogOpen(true))}
-                propertyName={propertyName}
-                textFieldProps={{
-                    onClick: () => {
-                        if (!disabled) {
-                            if (openModalOnClick) {
-                                setDialogOpen(true);
-                                clearSearch();
-                            }
-                        }
-                    },
-                    disabled
-                }}
-                value={modal ? value : searchTerm}
-                label={label}
-                placeholder={placeholder}
-                onChange={onChange()}
-            />
-        )}
-        {clearable && (
-             <div className={classes.clearButtonInline}>
-             <Tooltip title={clearTooltipText}>
-                 <Button
-                     variant="outlined"
-                     onClick={onClear}
-                     disabled={disabled}
-                     className={classes.clearButton}
-                 >
-                     X
-                 </Button>
-             </Tooltip>
-         </div>
-        )}
-        {modal ? (
-            <Dialog
-                data-testid="modal"
-                open={dialogOpen}
-                onClose={() => setDialogOpen(false)}
-                fullWidth
-                maxWidth="md"
-            >
-                <div>
+    return (
+        <>
+            {!modal ? <Title text={title} /> : <></>}
+            {modal && searchButtonOnly ? (
+                <Tooltip title={label}>
                     <IconButton
-                        className={classes.pullRight}
-                        aria-label="Close"
-                        onClick={() => setDialogOpen(false)}
-                        size="large">
-                        <CloseIcon />
+                        disabled={disabled}
+                        onClick={() => {
+                            setDialogOpen(true);
+                            clearSearch();
+                        }}
+                        size="large"
+                    >
+                        {SearchIcon()}
                     </IconButton>
-                    <div className={classes.dialog}>
-                        <Typography variant="h5" gutterBottom>
-                            {title}
-                        </Typography>
-                        <InputField
-                            propertyName={propertyName}
-                            adornment={SearchIcon()}
-                            textFieldProps={{
-                                autoFocus: true
-                            }}
-                            placeholder={placeholder}
-                            onChange={handleSearchTermChange}
-                            value={searchTerm}
-                        />
-                        {loading ? <Loading /> : results()}
-                    </div>
+                </Tooltip>
+            ) : (
+                <InputField
+                    adornment={SearchIcon(() => setDialogOpen(true))}
+                    propertyName={propertyName}
+                    textFieldProps={{
+                        onClick: () => {
+                            if (!disabled) {
+                                if (openModalOnClick) {
+                                    setDialogOpen(true);
+                                    clearSearch();
+                                }
+                            }
+                        },
+                        disabled
+                    }}
+                    value={modal ? value : searchTerm}
+                    label={label}
+                    placeholder={placeholder}
+                    onChange={onChange()}
+                />
+            )}
+            {clearable && (
+                <div className={classes.clearButtonInline}>
+                    <Tooltip title={clearTooltipText}>
+                        <Button
+                            variant="outlined"
+                            onClick={onClear}
+                            disabled={disabled}
+                            className={classes.clearButton}
+                        >
+                            X
+                        </Button>
+                    </Tooltip>
                 </div>
-            </Dialog>
-        ) : (
-            results()
-        )}
-    </>;
+            )}
+            {modal ? (
+                <Dialog
+                    data-testid="modal"
+                    open={dialogOpen}
+                    onClose={() => setDialogOpen(false)}
+                    fullWidth
+                    maxWidth="md"
+                >
+                    <div>
+                        <IconButton
+                            className={classes.pullRight}
+                            aria-label="Close"
+                            onClick={() => setDialogOpen(false)}
+                            size="large"
+                        >
+                            <CloseIcon />
+                        </IconButton>
+                        <div className={classes.dialog}>
+                            <Typography variant="h5" gutterBottom>
+                                {title}
+                            </Typography>
+                            <InputField
+                                propertyName={propertyName}
+                                adornment={SearchIcon()}
+                                textFieldProps={{
+                                    autoFocus: true
+                                }}
+                                placeholder={placeholder}
+                                onChange={handleSearchTermChange}
+                                value={searchTerm}
+                            />
+                            {loading ? <Loading /> : results()}
+                        </div>
+                    </div>
+                </Dialog>
+            ) : (
+                results()
+            )}
+        </>
+    );
 }
 
 const itemShape = {
@@ -318,7 +322,6 @@ Typeahead.defaultProps = {
     priorityFunction: null,
     resultLimit: null,
     handleFieldChange: null,
-    resultLimit: null,
     clearable: false,
     clearTooltipText: 'Clear',
     onClear: () => {}

@@ -25,7 +25,9 @@ function TableWithInlineEditing({
 
     const handleRowChange = (propertyName, newValue, rowIndex) => {
         const updatedRow = { ...content[rowIndex], [propertyName]: newValue };
-        const updateValues = columnsInfo.find(c => c.key === propertyName).updateValues?.(newValue);
+        const updateValues = columnsInfo
+            .find((c) => c.key === propertyName)
+            .updateValues?.(newValue);
 
         if (updateValues) {
             for (let i = 0; i < updateValues.length; i += 1) {
@@ -41,7 +43,7 @@ function TableWithInlineEditing({
         );
     };
 
-    const handleRemoveRow = rowIndex => {
+    const handleRemoveRow = (rowIndex) => {
         updateContent(
             content.slice(0, rowIndex).concat(content.slice(rowIndex + 1, content.length + 1))
         );
@@ -50,14 +52,14 @@ function TableWithInlineEditing({
     const addNewRow = () => {
         let newRow = { id: new Date().getTime() };
 
-        columnsInfo.forEach(column => {
+        columnsInfo.forEach((column) => {
             newRow = { ...newRow, [column.key]: null };
         });
 
         updateContent(content.concat(newRow));
     };
 
-    const switchToEditingDifferentCell = newCellId => {
+    const switchToEditingDifferentCell = (newCellId) => {
         setEditingCellId(newCellId);
     };
 
@@ -69,7 +71,7 @@ function TableWithInlineEditing({
         <Table>
             <TableHead key="headers" onClick={clearEditingCell}>
                 <TableRow>
-                    {columnsInfo.map(column => (
+                    {columnsInfo.map((column) => (
                         <TableCell key={column.key}>{column.title}</TableCell>
                     ))}
                     {allowedToDelete && <TableCell key="Deleteplaceholdercell" />}
@@ -187,7 +189,7 @@ const Row = ({
                             <Fragment key={column.title}>
                                 <TableCell
                                     onClick={() => changeCell(`${rowIndex}${column.key}`)}
-                                    onKeyDown={e => handleKeyPress(e, index)}
+                                    onKeyDown={(e) => handleKeyPress(e, index)}
                                     className={classes.pointer}
                                 >
                                     {currentlyEditing !== `${rowIndex}${column.key}` ? (
@@ -238,7 +240,7 @@ const Row = ({
                 ) : (
                     //readonly for users without edit permission
                     <>
-                        {columnsInfo.map(column => (
+                        {columnsInfo.map((column) => (
                             <Fragment key={column.title}>
                                 <TableCell>
                                     <span name={column.key} className={classes.notClickable}>

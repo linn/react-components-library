@@ -11,7 +11,7 @@ import Divider from '@mui/material/Divider';
 import makeStyles from '@mui/styles/makeStyles';
 
 const useStyles = makeStyles(() => ({
-    list: props => {
+    list: (props) => {
         const root = {
             width: '100%',
             position: 'relative',
@@ -33,32 +33,35 @@ function SelectedItemsList({ items, removeItem, title, maxHeight }) {
 
     const classes = useStyles(styleProps);
 
-    return <>
-        <Typography variant="body1">{title}</Typography>
-        <List dense className={classes.list}>
-            {items.map(item => (
-                <>
-                    <ListItem key={item.id ? item.id : item}>
-                        <ListItemText primary={item.displayText ? item.displayText : item} />
-                        {removeItem ? (
-                            <ListItemSecondaryAction>
-                                <IconButton
-                                    edge="end"
-                                    aria-label="delete"
-                                    onClick={() => removeItem(item.Id ? item.Id : item)}
-                                    size="large">
-                                    <DeleteIcon />
-                                </IconButton>
-                            </ListItemSecondaryAction>
-                        ) : (
-                            ''
-                        )}
-                    </ListItem>
-                    <Divider />
-                </>
-            ))}
-        </List>
-    </>;
+    return (
+        <>
+            <Typography variant="body1">{title}</Typography>
+            <List dense className={classes.list}>
+                {items.map((item) => (
+                    <>
+                        <ListItem key={item.id ? item.id : item}>
+                            <ListItemText primary={item.displayText ? item.displayText : item} />
+                            {removeItem ? (
+                                <ListItemSecondaryAction>
+                                    <IconButton
+                                        edge="end"
+                                        aria-label="delete"
+                                        onClick={() => removeItem(item.Id ? item.Id : item)}
+                                        size="large"
+                                    >
+                                        <DeleteIcon />
+                                    </IconButton>
+                                </ListItemSecondaryAction>
+                            ) : (
+                                ''
+                            )}
+                        </ListItem>
+                        <Divider />
+                    </>
+                ))}
+            </List>
+        </>
+    );
 }
 
 SelectedItemsList.propTypes = {

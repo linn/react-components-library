@@ -10,17 +10,20 @@ const styles = () => ({
     }
 });
 
-const CreateButton = ({ createUrl, classes, disabled }) => (
-    <Link to={createUrl}>
-        <Button color="primary" variant="outlined" className={classes.root} disabled={disabled}>
-            Create
-        </Button>
-    </Link>
-);
+function CreateButton({ createUrl, classes, disabled }) {
+    console.log(createUrl);
+    return (
+        <Link to={createUrl}>
+            <Button color="primary" variant="outlined" className={classes.root} disabled={disabled}>
+                Create
+            </Button>
+        </Link>
+    );
+}
 
 CreateButton.propTypes = {
     createUrl: PropTypes.string.isRequired,
-    classes: PropTypes.shape({}).isRequired,
+    classes: PropTypes.shape({ root: PropTypes.string }).isRequired,
     disabled: PropTypes.bool
 };
 

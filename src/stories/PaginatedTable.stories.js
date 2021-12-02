@@ -3,7 +3,7 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import ThemeProvider from '@mui/styles/ThemeProvider';
 import PaginatedTable from '../components/table/PaginatedTable';
-import { linnTheme } from '../themes/linnTheme';
+import linnTheme from '../themes/linnTheme';
 
 const actions = {
     setPageOptions: action('setPageOptions'),
@@ -157,18 +157,16 @@ const rows = [
 export default {
     title: 'Components/PaginatedTable',
     decorators: [
-        story => (
-            <StyledEngineProvider injectFirst>
-                <ThemeProvider theme={linnTheme}>
-                    <div>{story()}</div>
-                </ThemeProvider>
-            </StyledEngineProvider>
+        (story) => (
+            <ThemeProvider theme={linnTheme}>
+                <div>{story()}</div>
+            </ThemeProvider>
         )
     ],
     component: PaginatedTable
 };
 
-export const Default = args => <PaginatedTable {...actions} {...args} />;
+export const Default = (args) => <PaginatedTable {...actions} {...args} />;
 
 Default.story = {
     name: 'default '
@@ -181,7 +179,7 @@ Default.args = {
     totalItemCount
 };
 
-export const WithSortingEnabled = args => <PaginatedTable {...actions} {...args} />;
+export const WithSortingEnabled = (args) => <PaginatedTable {...actions} {...args} />;
 
 WithSortingEnabled.story = {
     name: 'with sorting enabled'
@@ -195,7 +193,7 @@ WithSortingEnabled.args = {
     sortable: true
 };
 
-export const WithExpandableEnabled = args => <PaginatedTable {...actions} {...args} />;
+export const WithExpandableEnabled = (args) => <PaginatedTable {...actions} {...args} />;
 
 WithExpandableEnabled.story = {
     name: 'with expandable enabled'
@@ -209,14 +207,14 @@ WithExpandableEnabled.args = {
     expandable: true
 };
 
-export const WithNoRows = args => <PaginatedTable {...actions} {...args} />;
+export const WithNoRows = (args) => <PaginatedTable {...actions} {...args} />;
 
 WithNoRows.story = {
     name: 'with no rows'
 };
 
 WithNoRows.args = {
-    rows: null,
+    rows: [],
     columns,
     pageOptions,
     totalItemCount,

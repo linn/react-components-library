@@ -1,8 +1,10 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import DateTimePicker from '@mui/lab/DateTimePicker';
 import InputLabel from '@mui/material/InputLabel';
 import PropTypes from 'prop-types';
 import makeStyles from '@mui/styles/makeStyles';
+import TextField from '@mui/material/TextField';
+import moment from 'moment';
 
 const labelStyles = makeStyles((theme) => ({
     root: {
@@ -31,9 +33,10 @@ function Picker({ label, value, onChange, minDate, maxDate, required, disabled }
                 margin="dense"
                 inputVariant="outlined"
                 ampm={false}
-                value={value}
-                minDate={minDate}
-                maxDate={maxDate}
+                renderInput={(props) => <TextField {...props} />}
+                value={moment(value)}
+                minDate={moment(minDate)}
+                maxDate={moment(maxDate)}
                 onChange={onChange}
                 classes={inputClasses}
                 className={inputClasses.root}

@@ -25,6 +25,9 @@
         "storybook": "start-storybook -p 9009 -s public",
         "eslint-check": "eslint --print-config . | eslint-config-prettier-check"
     },
+    "resolutions": {
+        "**/@emotion/styled": "^11.0.0"
+    },
     "peerDependencies": {
         "notistack": "^2.0.3",
         "react": "^17.0.2",

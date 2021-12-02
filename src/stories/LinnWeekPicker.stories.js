@@ -1,10 +1,11 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import ThemeProvider from '@mui/styles/ThemeProvider';
+import AdapterDateMoment from '@mui/lab/AdapterMoment';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { action } from '@storybook/addon-actions';
-import MomentUtils from '@date-io/moment';
 import LinnWeekPicker from '../components/LinnWeekPicker';
-import { linnTheme } from '../themes/linnTheme';
+import linnTheme from '../themes/linnTheme';
 
 const actions = {
     onChange: action('date changed'),
@@ -14,18 +15,18 @@ const actions = {
 export default {
     title: 'Components/LinnWeekPicker',
     decorators: [
-        story => (
-            <StyledEngineProvider injectFirst>
+        (story) => (
+            <LocalizationProvider dateAdapter={AdapterDateMoment}>
                 <ThemeProvider theme={linnTheme}>
-                        <div>{story()}</div>
+                    <div>{story()}</div>
                 </ThemeProvider>
-            </StyledEngineProvider>
+            </LocalizationProvider>
         )
     ],
     component: LinnWeekPicker
 };
 
-export const Default = args => <LinnWeekPicker {...args} {...actions} />;
+export const Default = (args) => <LinnWeekPicker {...args} {...actions} />;
 
 Default.story = {
     name: 'default '

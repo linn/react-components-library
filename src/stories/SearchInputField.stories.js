@@ -1,24 +1,21 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import ThemeProvider from '@mui/styles/ThemeProvider';
-import { linnTheme } from '../themes/linnTheme';
+import linnTheme from '../themes/linnTheme';
 import SearchInputField from '../components/SearchInputField';
 
 export default {
     title: 'Components/SearchInputField',
     decorators: [
-        story => (
-            <StyledEngineProvider injectFirst>
-                <ThemeProvider theme={linnTheme}>
-                    <div>{story()}</div>
-                </ThemeProvider>
-            </StyledEngineProvider>
+        (story) => (
+            <ThemeProvider theme={linnTheme}>
+                <div>{story()}</div>
+            </ThemeProvider>
         )
     ],
     component: SearchInputField
 };
 
-export const Default = args => <SearchInputField {...args} />;
+export const Default = (args) => <SearchInputField {...args} />;
 
 Default.story = {
     name: 'Label and value'
@@ -29,7 +26,7 @@ Default.args = {
     label: 'Search Input Field'
 };
 
-export const LabelAndNoValue = args => <SearchInputField {...args} />;
+export const LabelAndNoValue = (args) => <SearchInputField {...args} />;
 
 LabelAndNoValue.story = {
     name: 'Label and no value'
@@ -40,7 +37,7 @@ LabelAndNoValue.args = {
     label: 'No Value'
 };
 
-export const ErrorStory = args => <SearchInputField {...args} />;
+export const ErrorStory = (args) => <SearchInputField {...args} />;
 
 ErrorStory.story = {
     name: 'Error'
@@ -51,6 +48,6 @@ ErrorStory.args = {
     label: 'Error'
 };
 
-export const Disabled = args => <SearchInputField {...args} />;
+export const Disabled = (args) => <SearchInputField {...args} />;
 
 Disabled.args = { label: 'Disabled', disabled: true };

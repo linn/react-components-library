@@ -5,7 +5,7 @@ import makeStyles from '@mui/styles/makeStyles';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     button: {
         marginLeft: theme.spacing(1),
         marginTop: theme.spacing(3)

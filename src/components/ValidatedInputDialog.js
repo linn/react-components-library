@@ -14,27 +14,31 @@ import { createTheme, adaptV4Theme } from '@mui/material/styles';
 import InputField from './InputField';
 import useSearch from '../hooks/useSearch';
 import Loading from './Loading';
-import { linnTheme } from '../themes/linnTheme';
+import linnTheme from '../themes/linnTheme';
 
-const valid = createTheme(adaptV4Theme({
-    palette: {
-        primary: {
-            main: '#4BB543'
-        },
-        secondary: {
-            main: '#FF9494'
+const valid = createTheme(
+    adaptV4Theme({
+        palette: {
+            primary: {
+                main: '#4BB543'
+            },
+            secondary: {
+                main: '#FF9494'
+            }
         }
-    }
-}));
+    })
+);
 
-const invalid = createTheme(adaptV4Theme({
-    palette: {
-        primary: {
-            main: '#FF9494'
+const invalid = createTheme(
+    adaptV4Theme({
+        palette: {
+            primary: {
+                main: '#FF9494'
+            }
         }
-    }
-}));
-const useStyles = makeStyles(theme => ({
+    })
+);
+const useStyles = makeStyles((theme) => ({
     pullRight: {
         float: 'right'
     },
@@ -64,7 +68,7 @@ function ValidatedInputDialog({ title, loading, fetchItems, searchItems, clearSe
         setDialogOpen(false);
     };
 
-    const handleAccept = accepted => {
+    const handleAccept = (accepted) => {
         onAccept(accepted);
         setDialogOpen(false);
     };
@@ -80,33 +84,34 @@ function ValidatedInputDialog({ title, loading, fetchItems, searchItems, clearSe
 
     const inputValid = () => searchItems.length === 1;
 
-    return <>
-        <Tooltip title={title}>
-            <Button
-                color="primary"
-                aria-label="Search"
-                onClick={handleOpen}
-                variant="outlined"
-                className={classes.button}
-            >
-                <EditIcon />
-            </Button>
-        </Tooltip>
+    return (
+        <>
+            <Tooltip title={title}>
+                <Button
+                    color="primary"
+                    aria-label="Search"
+                    onClick={handleOpen}
+                    variant="outlined"
+                    className={classes.button}
+                >
+                    <EditIcon />
+                </Button>
+            </Tooltip>
 
-        <Dialog open={dialogOpen} onClose={handleClose} fullWidth maxWidth="md">
-            <div>
-                <IconButton
-                    className={classes.pullRight}
-                    aria-label="Close"
-                    onClick={handleClose}
-                    size="large">
-                    <CloseIcon />
-                </IconButton>
-                <div className={classes.dialog}>
-                    <Typography variant="h5" gutterBottom>
-                        {title}
-                    </Typography>
-                    <StyledEngineProvider injectFirst>
+            <Dialog open={dialogOpen} onClose={handleClose} fullWidth maxWidth="md">
+                <div>
+                    <IconButton
+                        className={classes.pullRight}
+                        aria-label="Close"
+                        onClick={handleClose}
+                        size="large"
+                    >
+                        <CloseIcon />
+                    </IconButton>
+                    <div className={classes.dialog}>
+                        <Typography variant="h5" gutterBottom>
+                            {title}
+                        </Typography>
                         <ThemeProvider theme={getTheme()}>
                             <InputField
                                 onChange={handleSearchTermChange}
@@ -114,35 +119,35 @@ function ValidatedInputDialog({ title, loading, fetchItems, searchItems, clearSe
                                 value={searchTerm}
                             />
                         </ThemeProvider>
-                    </StyledEngineProvider>
-                    {inputValid() && (
-                        <StyledEngineProvider injectFirst>
+                        {inputValid() && (
                             <ThemeProvider theme={valid}>
                                 <IconButton
                                     aria-label="Close"
                                     onClick={() => handleAccept(searchItems[0])}
-                                    size="large">
+                                    size="large"
+                                >
                                     <DoneIcon color="primary" />
                                 </IconButton>
                             </ThemeProvider>
-                        </StyledEngineProvider>
-                    )}
-                    {searchTerm && (
-                        <IconButton
-                            aria-label="Close"
-                            onClick={() => {
-                                clearSearch();
-                                setSearchTerm('');
-                            }}
-                            size="large">
-                            <CloseIcon />
-                        </IconButton>
-                    )}
-                    {loading && <Loading />}
+                        )}
+                        {searchTerm && (
+                            <IconButton
+                                aria-label="Close"
+                                onClick={() => {
+                                    clearSearch();
+                                    setSearchTerm('');
+                                }}
+                                size="large"
+                            >
+                                <CloseIcon />
+                            </IconButton>
+                        )}
+                        {loading && <Loading />}
+                    </div>
                 </div>
-            </div>
-        </Dialog>
-    </>;
+            </Dialog>
+        </>
+    );
 }
 
 ValidatedInputDialog.propTypes = {

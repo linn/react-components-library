@@ -1,8 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import ThemeProvider from '@mui/styles/ThemeProvider';
-import { linnTheme } from '../themes/linnTheme';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 import Dropdown from '../components/Dropdown';
 
@@ -13,18 +12,16 @@ const actions = {
 export default {
     title: 'Components/Dropdown',
     decorators: [
-        story => (
-            <StyledEngineProvider injectFirst>
-                <ThemeProvider theme={linnTheme}>
-                    <div>{story()}</div>
-                </ThemeProvider>
-            </StyledEngineProvider>
+        (story) => (
+            <ThemeProvider theme={createTheme()}>
+                <div>{story()}</div>
+            </ThemeProvider>
         )
     ],
     component: Dropdown
 };
 
-export const Default = args => <Dropdown {...args} {...actions} />;
+export const Default = (args) => <Dropdown {...args} {...actions} />;
 
 Default.story = {
     name: 'default '

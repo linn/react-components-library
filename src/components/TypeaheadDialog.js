@@ -16,7 +16,7 @@ import useSearch from '../hooks/useSearch';
 import Loading from './Loading';
 import SearchInputField from './SearchInputField';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     pullRight: {
         float: 'right'
     },
@@ -66,7 +66,7 @@ function TypeaheadDialog({
     };
 
     const showResults = () => {
-        const handleClick = e => {
+        const handleClick = (e) => {
             setDialogOpen(false);
             clearSearch();
             setSearchTerm(null);
@@ -76,7 +76,7 @@ function TypeaheadDialog({
         if (searchItems.length > 0) {
             return (
                 <List>
-                    {searchItems.map(item => (
+                    {searchItems.map((item) => (
                         <Fragment key={item.id}>
                             <ListItem onClick={() => handleClick(item)} button>
                                 <Grid container spacing={3}>
@@ -100,50 +100,53 @@ function TypeaheadDialog({
         return <Typography>No matching items</Typography>;
     };
 
-    return <>
-        <Tooltip title={title}>
-            <Button
-                color="primary"
-                aria-label="Search"
-                onClick={handleOpen}
-                variant="outlined"
-                className={classes.button}
-            >
-                <SearchIcon />
-            </Button>
-        </Tooltip>
+    return (
+        <>
+            <Tooltip title={title}>
+                <Button
+                    color="primary"
+                    aria-label="Search"
+                    onClick={handleOpen}
+                    variant="outlined"
+                    className={classes.button}
+                >
+                    <SearchIcon />
+                </Button>
+            </Tooltip>
 
-        <Dialog
-            open={dialogOpen}
-            onClose={handleClose}
-            fullWidth
-            maxWidth="md"
-            disableAutoFocus
-        >
-            <div>
-                <IconButton
-                    className={classes.pullRight}
-                    aria-label="Close"
-                    onClick={handleClose}
-                    size="large">
-                    <CloseIcon />
-                </IconButton>
-                <div className={classes.dialog}>
-                    <Typography variant="h5" gutterBottom>
-                        {title}
-                    </Typography>
-                    <SearchInputField
-                        placeholder="Search by id or description"
-                        onChange={handleSearchTermChange}
-                        label=""
-                        value={searchTerm}
-                        autoFocus
-                    />
-                    {loading ? <Loading /> : showResults()}
+            <Dialog
+                open={dialogOpen}
+                onClose={handleClose}
+                fullWidth
+                maxWidth="md"
+                disableAutoFocus
+            >
+                <div>
+                    <IconButton
+                        className={classes.pullRight}
+                        aria-label="Close"
+                        onClick={handleClose}
+                        size="large"
+                    >
+                        <CloseIcon />
+                    </IconButton>
+                    <div className={classes.dialog}>
+                        <Typography variant="h5" gutterBottom>
+                            {title}
+                        </Typography>
+                        <SearchInputField
+                            placeholder="Search by id or description"
+                            onChange={handleSearchTermChange}
+                            label=""
+                            value={searchTerm}
+                            autoFocus
+                        />
+                        {loading ? <Loading /> : showResults()}
+                    </div>
                 </div>
-            </div>
-        </Dialog>
-    </>;
+            </Dialog>
+        </>
+    );
 }
 
 TypeaheadDialog.propTypes = {

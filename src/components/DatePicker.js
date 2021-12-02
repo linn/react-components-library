@@ -5,6 +5,7 @@ import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
 import PropTypes from 'prop-types';
 import makeStyles from '@mui/styles/makeStyles';
+import moment from 'moment';
 
 const labelStyles = makeStyles((theme) => ({
     root: {
@@ -22,6 +23,7 @@ const inputStyles = makeStyles((theme) => ({
 function Picker({ value, minDate, maxDate, label, onChange, required, disabled }) {
     const inputClasses = inputStyles();
     const labelClasses = labelStyles();
+
     return (
         <>
             <InputLabel classes={{ root: labelClasses.root }} required={required}>
@@ -34,9 +36,9 @@ function Picker({ value, minDate, maxDate, label, onChange, required, disabled }
                 autoOk
                 format="DD/MM/YYYY"
                 renderInput={(props) => <TextField {...props} />}
-                value={value}
-                minDate={minDate}
-                maxDate={maxDate}
+                value={moment(value)}
+                minDate={moment(minDate)}
+                maxDate={moment(maxDate)}
                 onChange={onChange}
                 classes={inputClasses}
                 disabled={disabled}

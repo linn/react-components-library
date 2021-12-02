@@ -1,9 +1,8 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 import Grid from '@mui/material/Grid';
 import ThemeProvider from '@mui/styles/ThemeProvider';
-import { linnTheme } from '../themes/linnTheme';
+import linnTheme from '../themes/linnTheme';
 import InputField from '../components/InputField';
 
 const actions = {
@@ -13,18 +12,16 @@ const actions = {
 export default {
     title: 'Components/InputField',
     decorators: [
-        story => (
-            <StyledEngineProvider injectFirst>
-                <ThemeProvider theme={linnTheme}>
-                    <div>{story()}</div>
-                </ThemeProvider>
-            </StyledEngineProvider>
+        (story) => (
+            <ThemeProvider theme={linnTheme}>
+                <div>{story()}</div>
+            </ThemeProvider>
         )
     ],
     component: InputField
 };
 
-export const LabelAndValue = args => <InputField {...args} {...actions} />;
+export const LabelAndValue = (args) => <InputField {...args} {...actions} />;
 
 LabelAndValue.story = {
     name: 'Label and value'
@@ -35,7 +32,7 @@ LabelAndValue.args = {
     label: 'Input Field'
 };
 
-export const LabelNoValue = args => <InputField {...args} {...actions} />;
+export const LabelNoValue = (args) => <InputField {...args} {...actions} />;
 
 LabelNoValue.story = {
     name: 'Label no value'
@@ -46,7 +43,7 @@ LabelNoValue.args = {
     label: 'No Value'
 };
 
-export const FullWidth = args => <InputField {...args} {...actions} />;
+export const FullWidth = (args) => <InputField {...args} {...actions} />;
 
 FullWidth.story = {
     name: 'Full width'
@@ -58,7 +55,7 @@ FullWidth.args = {
     fullWidth: true
 };
 
-export const WithError = args => <InputField {...args} {...actions} />;
+export const WithError = (args) => <InputField {...args} {...actions} />;
 
 WithError.args = {
     text: 'Error',
@@ -66,7 +63,7 @@ WithError.args = {
     error: true
 };
 
-export const Disabled = args => <InputField {...args} disabled />;
+export const Disabled = (args) => <InputField {...args} disabled />;
 
 Disabled.args = {
     value: 'Disabled',
@@ -74,7 +71,7 @@ Disabled.args = {
     disabled: true
 };
 
-export const DateInput = args => <InputField {...args} {...actions} />;
+export const DateInput = (args) => <InputField {...args} {...actions} />;
 
 DateInput.args = {
     value: '2011-10-05T14:48:00.000Z',
@@ -82,7 +79,7 @@ DateInput.args = {
     type: 'date'
 };
 
-export const NumberInput = args => <InputField {...args} {...actions} />;
+export const NumberInput = (args) => <InputField {...args} {...actions} />;
 
 NumberInput.args = {
     value: '123.45',
@@ -90,7 +87,7 @@ NumberInput.args = {
     type: 'number'
 };
 
-export const WithAdornment = args => <InputField {...args} {...actions} />;
+export const WithAdornment = (args) => <InputField {...args} {...actions} />;
 
 WithAdornment.story = {
     name: 'With adornment'
@@ -102,7 +99,7 @@ WithAdornment.args = {
     adornment: '$'
 };
 
-export const MaxLength = args => <InputField {...args} {...actions} />;
+export const MaxLength = (args) => <InputField {...args} {...actions} />;
 
 MaxLength.story = {
     name: 'Max length'
@@ -114,7 +111,7 @@ MaxLength.args = {
     maxLength: 1
 };
 
-export const Multiline = args => <InputField {...args} {...actions} />;
+export const Multiline = (args) => <InputField {...args} {...actions} />;
 
 Multiline.args = {
     value: 'Multiline',
@@ -122,7 +119,7 @@ Multiline.args = {
     multiline: true
 };
 
-export const RegularSpacing = args => (
+export const RegularSpacing = (args) => (
     <div style={{ width: '50%' }}>
         <Grid container>
             <Grid item xs={6}>
@@ -150,7 +147,7 @@ RegularSpacing.args = {
     label: 'Normal Spacing'
 };
 
-export const CompactSpacing = args => (
+export const CompactSpacing = (args) => (
     <div style={{ width: '50%' }}>
         <Grid container>
             <Grid item xs={6}>

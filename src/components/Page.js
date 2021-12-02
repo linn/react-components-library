@@ -8,18 +8,18 @@ import Breadcrumbs from './Breadcrumbs';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        padding: theme.spacing(4),
+        padding: theme.spacing(4)
     },
     breadcrumbs: {
         marginTop: theme.spacing(4),
         marginLeft: theme.spacing(4),
         marginRight: theme.spacing(4),
-        padding: theme.spacing(2),
+        padding: theme.spacing(2)
     },
     grid: {
         marginTop: theme.spacing(4),
-        width: '100%',
-    },
+        width: '100%'
+    }
 }));
 
 const pageWidth = {
@@ -27,7 +27,7 @@ const pageWidth = {
     s: 6,
     m: 8,
     l: 10,
-    xl: 12,
+    xl: 12
 };
 
 const columnWidth = {
@@ -35,7 +35,7 @@ const columnWidth = {
     s: 3,
     m: 2,
     l: 1,
-    xl: false,
+    xl: false
 };
 
 function Page({
@@ -45,7 +45,7 @@ function Page({
     requestErrors,
     showRequestErrors,
     homeUrl,
-    showBreadcrumbs,
+    showBreadcrumbs
 }) {
     const classes = useStyles();
     const { enqueueSnackbar } = useSnackbar();
@@ -55,7 +55,7 @@ function Page({
             requestErrors.forEach((t) => {
                 enqueueSnackbar(`${t.message} - ${t.type}`, {
                     variant: 'error',
-                    preventDuplicate: true,
+                    preventDuplicate: true
                 });
             });
         }
@@ -89,7 +89,7 @@ Page.propTypes = {
     showRequestErrors: PropTypes.bool,
     requestErrors: PropTypes.arrayOf(PropTypes.shape({})),
     homeUrl: PropTypes.string,
-    showBreadcrumbs: PropTypes.bool,
+    showBreadcrumbs: PropTypes.bool
 };
 
 Page.defaultProps = {
@@ -97,7 +97,7 @@ Page.defaultProps = {
     showRequestErrors: false,
     requestErrors: [],
     homeUrl: null,
-    showBreadcrumbs: true,
+    showBreadcrumbs: true
 };
 
 export default Page;

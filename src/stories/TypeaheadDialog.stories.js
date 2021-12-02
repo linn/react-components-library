@@ -1,8 +1,8 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
+import Chip from '@mui/material/Chip';
+
 import providers from './renderUtils/Providers';
 import TypeaheadDialog from '../components/TypeaheadDialog';
-import Chip from '@mui/material/Chip';
 
 const items = [
     {
@@ -28,13 +28,13 @@ const onSelect = () => {};
 export default {
     title: 'Components/TypeaheadDialog',
     decorators: [
-        story => <div style={{ padding: '3rem', width: '100%' }}>{story()}</div>,
-        story => providers(story)
+        (story) => <div style={{ padding: '3rem', width: '100%' }}>{story()}</div>,
+        (story) => providers(story)
     ],
     component: TypeaheadDialog
 };
 
-export const Default = args => <TypeaheadDialog {...args} />;
+export const Default = (args) => <TypeaheadDialog {...args} />;
 
 Default.story = {
     name: 'default '
