@@ -1,12 +1,13 @@
 import React from 'react';
 import DatePicker from '@mui/lab/DatePicker';
 import { makeStyles } from '@mui/styles';
-import { IconButton } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
 import TextField from '@mui/material/TextField';
+import { styled } from '@mui/material/styles';
 import moment from 'moment';
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
+import PickersDay from '@mui/lab/PickersDay';
+
 import { getWeekStartDate, getWeekEndDate } from '../utilities/dateUtilities';
 
 const useStyles = makeStyles((theme) => ({
@@ -68,31 +69,48 @@ export default function LinnWeekPicker({
         setWeekStartDate(propertyName, getWeekStartDate(date));
     };
 
-    const renderWeekDay = (date, selected, dayInCurrentMonth) => {
-        const start = getWeekStartDate(selected);
-        const end = getWeekEndDate(selected);
+    const CustomPickersDay = styled(PickersDay, {
+        shouldForwardProp: (prop) =>
+            prop !== 'dayIsBetween' && prop !== 'isFirstDay' && prop !== 'isLastDay'
+    })(({ theme, dayIsBetween, isFirstDay, isLastDay }) => ({
+        ...(dayIsBetween && {
+            borderRadius: 0,
+            backgroundColor: theme.palette.primary.main,
+            color: theme.palette.common.white,
+            '&:hover, &:focus': {
+                backgroundColor: theme.palette.primary.dark
+            }
+        }),
+        ...(isFirstDay && {
+            borderTopLeftRadius: '50%',
+            borderBottomLeftRadius: '50%'
+        }),
+        ...(isLastDay && {
+            borderTopRightRadius: '50%',
+            borderBottomRightRadius: '50%'
+        })
+    }));
+
+    const renderWeekPickerDay = (date, selectedDates, pickersDayProps) => {
+        if (!selectedDate) {
+            return <PickersDay {...pickersDayProps} />;
+        }
+
+        const start = getWeekStartDate(selectedDate);
+        const end = getWeekEndDate(selectedDate);
 
         const dayIsBetween = date.isBetween(start, end, 'days', '[]');
         const isFirstDay = date.isSame(start, 'day');
         const isLastDay = date.isSame(end, 'day');
 
-        const wrapperClassName = clsx({
-            [classes.highlight]: dayIsBetween,
-            [classes.firstHighlight]: isFirstDay,
-            [classes.endHighlight]: isLastDay
-        });
-
-        const dayClassName = clsx(classes.day, {
-            [classes.nonCurrentMonthDay]: !dayInCurrentMonth,
-            [classes.highlightNonCurrentMonthDay]: !dayInCurrentMonth && dayIsBetween
-        });
-
         return (
-            <div className={wrapperClassName}>
-                <IconButton className={dayClassName} size="large">
-                    <span> {date.format('D')} </span>
-                </IconButton>
-            </div>
+            <CustomPickersDay
+                {...pickersDayProps}
+                disableMargin
+                dayIsBetween={dayIsBetween}
+                isFirstDay={isFirstDay}
+                isLastDay={isLastDay}
+            />
         );
     };
 
@@ -109,7 +127,7 @@ export default function LinnWeekPicker({
                 inputVariant="outlined"
                 value={selectedDate ? moment(selectedDate) : null}
                 onChange={handleChange}
-                renderDay={renderWeekDay}
+                renderDay={renderWeekPickerDay}
                 format="DD/MM/YYYY"
             />
         </>
