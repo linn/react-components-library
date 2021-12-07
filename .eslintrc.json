@@ -1,5 +1,10 @@
 {
-    "extends": ["airbnb", "prettier/react", "plugin:jest/recommended", "prettier", "plugin:mdx/recommended"],
+    "extends": [
+        "airbnb",
+        "plugin:jest/recommended",
+        "prettier",
+        "plugin:mdx/recommended"
+    ],
     "plugins": ["prettier", "jest"],
     "parser": "babel-eslint",
     "rules": {
@@ -7,6 +12,12 @@
         "linebreak-style": ["error", "windows"],
         "react/jsx-filename-extension": 0,
         "spaced-comment": "off",
-        "import/no-extraneous-dependencies": ["error", {"devDependencies": true}]
+        "react/jsx-props-no-spreading": "off",
+        "import/no-extraneous-dependencies": [
+            "error",
+            {
+                "devDependencies": true
+            }
+        ]
     }
 }

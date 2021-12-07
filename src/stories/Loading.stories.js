@@ -1,13 +1,13 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import ThemeProvider from '@material-ui/styles/ThemeProvider';
-import { linnTheme } from '../themes/linnTheme';
+import ThemeProvider from '@mui/styles/ThemeProvider';
+import linnTheme from '../themes/linnTheme';
 import Loading from '../components/Loading';
 
 export default {
     title: 'Components/Loading',
     decorators: [
-        story => (
+        (story) => (
             <ThemeProvider theme={linnTheme}>
                 <div>{story()}</div>
             </ThemeProvider>
@@ -16,7 +16,7 @@ export default {
     component: Loading
 };
 
-export const Default = args => <Loading {...args} />;
+export const Default = (args) => <Loading {...args} />;
 
 Default.story = {
     name: 'default'

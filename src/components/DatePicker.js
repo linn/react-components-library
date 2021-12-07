@@ -1,39 +1,44 @@
-import React, { Fragment } from 'react';
-import { KeyboardDatePicker } from '@material-ui/pickers';
-import InputLabel from '@material-ui/core/InputLabel';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
+import React from 'react';
+import DatePicker from '@mui/lab/DatePicker';
+import TextField from '@mui/material/TextField';
 
-const labelStyles = makeStyles(theme => ({
+import InputLabel from '@mui/material/InputLabel';
+import PropTypes from 'prop-types';
+import makeStyles from '@mui/styles/makeStyles';
+import moment from 'moment';
+
+const labelStyles = makeStyles((theme) => ({
     root: {
         fontSize: theme.typography.fontSize
     }
 }));
 
-const inputStyles = makeStyles(theme => ({
+const inputStyles = makeStyles((theme) => ({
     root: {
         marginTop: theme.spacing(1),
         fontSize: theme.typography.fontSize
     }
 }));
 
-function DatePicker({ value, minDate, maxDate, label, onChange, required, disabled }) {
+function Picker({ value, minDate, maxDate, label, onChange, required, disabled }) {
     const inputClasses = inputStyles();
     const labelClasses = labelStyles();
+
     return (
         <>
             <InputLabel classes={{ root: labelClasses.root }} required={required}>
                 {label}
             </InputLabel>
-            <KeyboardDatePicker
+            <DatePicker
                 allowKeyboardControl
                 margin="dense"
                 inputVariant="outlined"
                 autoOk
                 format="DD/MM/YYYY"
-                value={value}
-                minDate={minDate}
-                maxDate={maxDate}
+                renderInput={(props) => <TextField {...props} />}
+                value={moment(value)}
+                minDate={moment(minDate)}
+                maxDate={moment(maxDate)}
                 onChange={onChange}
                 classes={inputClasses}
                 disabled={disabled}
@@ -45,7 +50,7 @@ function DatePicker({ value, minDate, maxDate, label, onChange, required, disabl
     );
 }
 
-DatePicker.propTypes = {
+Picker.propTypes = {
     label: PropTypes.string,
     minDate: PropTypes.string,
     maxDate: PropTypes.string,
@@ -55,7 +60,7 @@ DatePicker.propTypes = {
     onChange: PropTypes.func
 };
 
-DatePicker.defaultProps = {
+Picker.defaultProps = {
     label: '',
     minDate: undefined,
     maxDate: undefined,
@@ -65,4 +70,4 @@ DatePicker.defaultProps = {
     onChange: () => {}
 };
 
-export default DatePicker;
+export default Picker;

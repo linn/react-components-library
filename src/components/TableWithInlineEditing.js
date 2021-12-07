@@ -1,15 +1,15 @@
 import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
-import TableCell from '@material-ui/core/TableCell';
-import TableRow from '@material-ui/core/TableRow';
-import Table from '@material-ui/core/Table';
-import TableHead from '@material-ui/core/TableHead';
-import TableBody from '@material-ui/core/TableBody';
-import { makeStyles } from '@material-ui/styles';
-import Button from '@material-ui/core/Button';
-import Tooltip from '@material-ui/core/Tooltip';
-import AddIcon from '@material-ui/icons/Add';
-import DeleteIcon from '@material-ui/icons/Delete';
+import TableCell from '@mui/material/TableCell';
+import TableRow from '@mui/material/TableRow';
+import Table from '@mui/material/Table';
+import TableHead from '@mui/material/TableHead';
+import TableBody from '@mui/material/TableBody';
+import { makeStyles } from '@mui/styles';
+import Button from '@mui/material/Button';
+import Tooltip from '@mui/material/Tooltip';
+import AddIcon from '@mui/icons-material/Add';
+import DeleteIcon from '@mui/icons-material/Delete';
 import InputField from './InputField';
 import Dropdown from './Dropdown';
 
@@ -25,7 +25,9 @@ function TableWithInlineEditing({
 
     const handleRowChange = (propertyName, newValue, rowIndex) => {
         const updatedRow = { ...content[rowIndex], [propertyName]: newValue };
-        const updateValues = columnsInfo.find(c => c.key === propertyName).updateValues?.(newValue);
+        const updateValues = columnsInfo
+            .find((c) => c.key === propertyName)
+            .updateValues?.(newValue);
 
         if (updateValues) {
             for (let i = 0; i < updateValues.length; i += 1) {
@@ -41,7 +43,7 @@ function TableWithInlineEditing({
         );
     };
 
-    const handleRemoveRow = rowIndex => {
+    const handleRemoveRow = (rowIndex) => {
         updateContent(
             content.slice(0, rowIndex).concat(content.slice(rowIndex + 1, content.length + 1))
         );
@@ -50,14 +52,14 @@ function TableWithInlineEditing({
     const addNewRow = () => {
         let newRow = { id: new Date().getTime() };
 
-        columnsInfo.forEach(column => {
+        columnsInfo.forEach((column) => {
             newRow = { ...newRow, [column.key]: null };
         });
 
         updateContent(content.concat(newRow));
     };
 
-    const switchToEditingDifferentCell = newCellId => {
+    const switchToEditingDifferentCell = (newCellId) => {
         setEditingCellId(newCellId);
     };
 
@@ -69,7 +71,7 @@ function TableWithInlineEditing({
         <Table>
             <TableHead key="headers" onClick={clearEditingCell}>
                 <TableRow>
-                    {columnsInfo.map(column => (
+                    {columnsInfo.map((column) => (
                         <TableCell key={column.key}>{column.title}</TableCell>
                     ))}
                     {allowedToDelete && <TableCell key="Deleteplaceholdercell" />}
@@ -187,7 +189,7 @@ const Row = ({
                             <Fragment key={column.title}>
                                 <TableCell
                                     onClick={() => changeCell(`${rowIndex}${column.key}`)}
-                                    onKeyDown={e => handleKeyPress(e, index)}
+                                    onKeyDown={(e) => handleKeyPress(e, index)}
                                     className={classes.pointer}
                                 >
                                     {currentlyEditing !== `${rowIndex}${column.key}` ? (
@@ -238,7 +240,7 @@ const Row = ({
                 ) : (
                     //readonly for users without edit permission
                     <>
-                        {columnsInfo.map(column => (
+                        {columnsInfo.map((column) => (
                             <Fragment key={column.title}>
                                 <TableCell>
                                     <span name={column.key} className={classes.notClickable}>

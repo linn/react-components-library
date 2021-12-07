@@ -1,22 +1,22 @@
 import React, { Fragment, useState } from 'react';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import Typography from '@material-ui/core/Typography';
-import Tooltip from '@material-ui/core/Tooltip';
-import IconButton from '@material-ui/core/IconButton';
-import Dialog from '@material-ui/core/Dialog';
-import Button from '@material-ui/core/Button';
-import Divider from '@material-ui/core/Divider';
-import Grid from '@material-ui/core/Grid';
-import makeStyles from '@material-ui/styles/makeStyles';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import Typography from '@mui/material/Typography';
+import Tooltip from '@mui/material/Tooltip';
+import IconButton from '@mui/material/IconButton';
+import Dialog from '@mui/material/Dialog';
+import Button from '@mui/material/Button';
+import Divider from '@mui/material/Divider';
+import Grid from '@mui/material/Grid';
+import makeStyles from '@mui/styles/makeStyles';
 import PropTypes from 'prop-types';
-import SearchIcon from '@material-ui/icons/Search';
-import CloseIcon from '@material-ui/icons/Close';
+import SearchIcon from '@mui/icons-material/Search';
+import CloseIcon from '@mui/icons-material/Close';
 import useSearch from '../hooks/useSearch';
 import Loading from './Loading';
 import SearchInputField from './SearchInputField';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     pullRight: {
         float: 'right'
     },
@@ -66,7 +66,7 @@ function TypeaheadDialog({
     };
 
     const showResults = () => {
-        const handleClick = e => {
+        const handleClick = (e) => {
             setDialogOpen(false);
             clearSearch();
             setSearchTerm(null);
@@ -76,7 +76,7 @@ function TypeaheadDialog({
         if (searchItems.length > 0) {
             return (
                 <List>
-                    {searchItems.map(item => (
+                    {searchItems.map((item) => (
                         <Fragment key={item.id}>
                             <ListItem onClick={() => handleClick(item)} button>
                                 <Grid container spacing={3}>
@@ -126,6 +126,7 @@ function TypeaheadDialog({
                         className={classes.pullRight}
                         aria-label="Close"
                         onClick={handleClose}
+                        size="large"
                     >
                         <CloseIcon />
                     </IconButton>

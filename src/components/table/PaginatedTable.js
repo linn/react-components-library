@@ -1,21 +1,21 @@
 import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
-import Table from '@material-ui/core/Table';
-import TableHead from '@material-ui/core/TableHead';
-import TableBody from '@material-ui/core/TableBody';
-import TablePagination from '@material-ui/core/TablePagination';
-import TableRow from '@material-ui/core/TableRow';
-import TableCell from '@material-ui/core/TableCell';
-import Typography from '@material-ui/core/Typography';
-import TableSortLabel from '@material-ui/core/TableSortLabel';
-import makeStyles from '@material-ui/styles/makeStyles';
-import EditIcon from '@material-ui/icons/Edit';
-import Button from '@material-ui/core/Button';
-import LinearProgress from '@material-ui/core/LinearProgress';
+import Table from '@mui/material/Table';
+import TableHead from '@mui/material/TableHead';
+import TableBody from '@mui/material/TableBody';
+import TablePagination from '@mui/material/TablePagination';
+import TableRow from '@mui/material/TableRow';
+import TableCell from '@mui/material/TableCell';
+import Typography from '@mui/material/Typography';
+import TableSortLabel from '@mui/material/TableSortLabel';
+import makeStyles from '@mui/styles/makeStyles';
+import EditIcon from '@mui/icons-material/Edit';
+import Button from '@mui/material/Button';
+import LinearProgress from '@mui/material/LinearProgress';
 import utilities from '../../utilities/index';
 import TablePaginationActions from './TablePaginationActions';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     link: {
         '&:hover': {
             cursor: 'pointer'
@@ -51,41 +51,41 @@ function PaginatedTable({
 
     const classes = useStyles();
 
-    const handleRowOnClick = rowId => (rowOpen === rowId ? setRowOpen(null) : setRowOpen(rowId));
+    const handleRowOnClick = (rowId) => (rowOpen === rowId ? setRowOpen(null) : setRowOpen(rowId));
 
     const handleChangePage = (event, pge) => {
-        setPageOptions(options => ({
+        setPageOptions((options) => ({
             ...options,
             currentPage: pge
         }));
     };
 
-    const handleChangeRowsPerPage = event => {
+    const handleChangeRowsPerPage = (event) => {
         const { value } = event.target;
 
-        setPageOptions(options => ({
+        setPageOptions((options) => ({
             ...options,
             rowsPerPage: parseInt(value, 10),
             currentPage: 0
         }));
     };
 
-    const handleChangeOrderBy = property => {
-        setPageOptions(options => ({
+    const handleChangeOrderBy = (property) => {
+        setPageOptions((options) => ({
             ...options,
             orderBy: property,
             orderAscending: !options.orderAscending
         }));
     };
 
-    const invalidElement = key =>
+    const invalidElement = (key) =>
         key !== 'elements' && key !== 'links' && key !== 'href' && key !== 'id';
 
     return (
         <Table size="small">
             <TableHead>
                 <TableRow>
-                    {Object.keys(columns).map(key =>
+                    {Object.keys(columns).map((key) =>
                         sortable ? (
                             <TableCell
                                 key={key}
@@ -118,9 +118,9 @@ function PaginatedTable({
                     </TableCell>{' '}
                 </TableBody>
             ) : (
-                <Fragment>
+                <>
                     <TableBody>
-                        {rows.map(row => (
+                        {rows.map((row) => (
                             <Fragment key={row.id}>
                                 <TableRow
                                     key={row.id}
@@ -133,8 +133,8 @@ function PaginatedTable({
                                     }
                                 >
                                     {Object.keys(row)
-                                        .filter(key => invalidElement(key, row))
-                                        .map(key => (
+                                        .filter((key) => invalidElement(key, row))
+                                        .map((key) => (
                                             <TableCell key={key} component="th" scope="row">
                                                 {row[key] || '-'}
                                             </TableCell>
@@ -157,15 +157,15 @@ function PaginatedTable({
                                     )}
                                 </TableRow>
                                 {expandable && rowOpen === row.id && row.elements && (
-                                    <Fragment>
-                                        {row.elements.map(el => (
+                                    <>
+                                        {row.elements.map((el) => (
                                             <TableRow
                                                 colSpan={Object.keys(columns).length + 1}
                                                 key={el.id}
                                             >
                                                 {Object.keys(el)
-                                                    .filter(k => k !== 'id')
-                                                    .map(key => (
+                                                    .filter((k) => k !== 'id')
+                                                    .map((key) => (
                                                         <TableCell
                                                             key={key}
                                                             classes={{
@@ -188,7 +188,7 @@ function PaginatedTable({
                                                     ))}
                                             </TableRow>
                                         ))}
-                                    </Fragment>
+                                    </>
                                 )}
                             </Fragment>
                         ))}
@@ -202,14 +202,14 @@ function PaginatedTable({
                                     SelectProps={{
                                         native: true
                                     }}
-                                    onChangePage={handleChangePage}
-                                    onChangeRowsPerPage={handleChangeRowsPerPage}
+                                    onPageChange={handleChangePage}
+                                    onRowsPerPageChange={handleChangeRowsPerPage}
                                     ActionsComponent={TablePaginationActions}
                                 />
                             </TableRow>
                         )}
                     </TableBody>
-                </Fragment>
+                </>
             )}
         </Table>
     );

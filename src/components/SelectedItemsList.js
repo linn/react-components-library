@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import Typography from '@material-ui/core/Typography';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import ListItemText from '@material-ui/core/ListItemText';
-import DeleteIcon from '@material-ui/icons/Delete';
-import IconButton from '@material-ui/core/IconButton';
-import Divider from '@material-ui/core/Divider';
-import { makeStyles } from '@material-ui/core/styles';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import Typography from '@mui/material/Typography';
+import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
+import ListItemText from '@mui/material/ListItemText';
+import DeleteIcon from '@mui/icons-material/Delete';
+import IconButton from '@mui/material/IconButton';
+import Divider from '@mui/material/Divider';
+import makeStyles from '@mui/styles/makeStyles';
 
 const useStyles = makeStyles(() => ({
-    list: props => {
+    list: (props) => {
         const root = {
             width: '100%',
             position: 'relative',
@@ -37,7 +37,7 @@ function SelectedItemsList({ items, removeItem, title, maxHeight }) {
         <>
             <Typography variant="body1">{title}</Typography>
             <List dense className={classes.list}>
-                {items.map(item => (
+                {items.map((item) => (
                     <>
                         <ListItem key={item.id ? item.id : item}>
                             <ListItemText primary={item.displayText ? item.displayText : item} />
@@ -47,6 +47,7 @@ function SelectedItemsList({ items, removeItem, title, maxHeight }) {
                                         edge="end"
                                         aria-label="delete"
                                         onClick={() => removeItem(item.Id ? item.Id : item)}
+                                        size="large"
                                     >
                                         <DeleteIcon />
                                     </IconButton>

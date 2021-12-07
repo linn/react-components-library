@@ -1,25 +1,25 @@
 import React, { Fragment, useState } from 'react';
-import makeStyles from '@material-ui/styles/makeStyles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import Link from '@material-ui/core/Link';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import Grid from '@material-ui/core/Grid';
+import makeStyles from '@mui/styles/makeStyles';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import Link from '@mui/material/Link';
+import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
+import Grid from '@mui/material/Grid';
 import PropTypes from 'prop-types';
 import { Link as RouterLink } from 'react-router-dom';
-import Dialog from '@material-ui/core/Dialog';
-import IconButton from '@material-ui/core/IconButton';
-import Button from '@material-ui/core/Button';
-import CloseIcon from '@material-ui/icons/Close';
-import Tooltip from '@material-ui/core/Tooltip';
+import Dialog from '@mui/material/Dialog';
+import IconButton from '@mui/material/IconButton';
+import Button from '@mui/material/Button';
+import CloseIcon from '@mui/icons-material/Close';
+import Tooltip from '@mui/material/Tooltip';
 import useSearch from '../hooks/useSearch';
 import Title from './Title';
 import Loading from './Loading';
 import InputField from './InputField';
 import SearchIcon from './SearchIcon';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     a: {
         textDecoration: 'none'
     },
@@ -46,7 +46,7 @@ const useStyles = makeStyles(theme => ({
     },
     clearButton: {
         padding: '7px 0px'
-    },
+    }
 }));
 
 function Typeahead({
@@ -85,7 +85,7 @@ function Typeahead({
         setSearchTerm(args[1]);
     };
 
-    const handleClick = e => {
+    const handleClick = (e) => {
         if (modal) {
             setDialogOpen(false);
         }
@@ -141,7 +141,7 @@ function Typeahead({
 
         if (priorityFunction) {
             result = result
-                .map(i => ({ ...i, priority: priorityFunction(i, searchTerm) }))
+                .map((i) => ({ ...i, priority: priorityFunction(i, searchTerm) }))
                 .sort((a, b) => {
                     if (a.priority > b.priority) {
                         return -1;
@@ -160,7 +160,7 @@ function Typeahead({
         if (result?.length > 0) {
             return (
                 <List dense>
-                    {result.map(item => (
+                    {result.map((item) => (
                         <Fragment key={item.id}>
                             {links ? (
                                 <Link className={classes.a} component={RouterLink} to={item?.href}>
@@ -189,6 +189,7 @@ function Typeahead({
                             setDialogOpen(true);
                             clearSearch();
                         }}
+                        size="large"
                     >
                         {SearchIcon()}
                     </IconButton>
@@ -215,18 +216,18 @@ function Typeahead({
                 />
             )}
             {clearable && (
-                 <div className={classes.clearButtonInline}>
-                 <Tooltip title={clearTooltipText}>
-                     <Button
-                         variant="outlined"
-                         onClick={onClear}
-                         disabled={disabled}
-                         className={classes.clearButton}
-                     >
-                         X
-                     </Button>
-                 </Tooltip>
-             </div>
+                <div className={classes.clearButtonInline}>
+                    <Tooltip title={clearTooltipText}>
+                        <Button
+                            variant="outlined"
+                            onClick={onClear}
+                            disabled={disabled}
+                            className={classes.clearButton}
+                        >
+                            X
+                        </Button>
+                    </Tooltip>
+                </div>
             )}
             {modal ? (
                 <Dialog
@@ -241,6 +242,7 @@ function Typeahead({
                             className={classes.pullRight}
                             aria-label="Close"
                             onClick={() => setDialogOpen(false)}
+                            size="large"
                         >
                             <CloseIcon />
                         </IconButton>
@@ -320,7 +322,6 @@ Typeahead.defaultProps = {
     priorityFunction: null,
     resultLimit: null,
     handleFieldChange: null,
-    resultLimit: null,
     clearable: false,
     clearTooltipText: 'Clear',
     onClear: () => {}

@@ -2,11 +2,9 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import moment from 'moment';
-import { MuiPickersUtilsProvider } from '@material-ui/pickers';
-import ThemeProvider from '@material-ui/styles/ThemeProvider';
-import MomentUtils from '@date-io/moment';
+import ThemeProvider from '@mui/styles/ThemeProvider';
 import GroupEditTable from '../components/editableTable/GroupEditTable';
-import { linnTheme } from '../themes/linnTheme';
+import linnTheme from '../themes/linnTheme';
 import useGroupEditTable from '../hooks/useGroupEditTable';
 import mdx from './GroupEditTable.mdx';
 
@@ -58,7 +56,7 @@ const columns = [
         id: 'text',
         type: 'text',
         editable: true,
-        tooltip: row => row.extraInfo || false
+        tooltip: (row) => row.extraInfo || false
     },
     {
         title: 'Number',
@@ -148,7 +146,7 @@ const GroupEditTableWrapper = ({
         <GroupEditTable
             columns={
                 applyCustomStyle
-                    ? columns.map(col =>
+                    ? columns.map((col) =>
                           col.id === 'text'
                               ? {
                                     ...col,
@@ -187,11 +185,9 @@ const GroupEditTableWrapper = ({
 export default {
     title: 'Components/EditableTable/GroupEditTable',
     decorators: [
-        story => (
+        (story) => (
             <ThemeProvider theme={linnTheme}>
-                <MuiPickersUtilsProvider utils={MomentUtils}>
-                    <div>{story()}</div>
-                </MuiPickersUtilsProvider>
+                <div>{story()}</div>
             </ThemeProvider>
         )
     ],
@@ -203,13 +199,13 @@ export default {
     }
 };
 
-export const Default = args => <GroupEditTableWrapper {...args} />;
+export const Default = (args) => <GroupEditTableWrapper {...args} />;
 
 Default.story = {
     name: 'Default'
 };
 
-export const DisplayOnly = args => <GroupEditTableWrapper {...args} />;
+export const DisplayOnly = (args) => <GroupEditTableWrapper {...args} />;
 
 DisplayOnly.story = {
     name: 'Display Only'
@@ -219,7 +215,7 @@ DisplayOnly.args = {
     editable: false
 };
 
-export const StaticRows = args => <GroupEditTableWrapper {...args} />;
+export const StaticRows = (args) => <GroupEditTableWrapper {...args} />;
 
 StaticRows.story = {
     name: 'New Row Disabled'
@@ -229,7 +225,7 @@ StaticRows.args = {
     allowNewRowCreation: false
 };
 
-export const ShowDelete = args => <GroupEditTableWrapper {...args} />;
+export const ShowDelete = (args) => <GroupEditTableWrapper {...args} />;
 
 ShowDelete.story = {
     name: 'Show Delete Prior to Edit'
@@ -239,7 +235,7 @@ ShowDelete.args = {
     deleteRowPreEdit: true
 };
 
-export const RemoveRowOnDelete = args => <GroupEditTableWrapper {...args} />;
+export const RemoveRowOnDelete = (args) => <GroupEditTableWrapper {...args} />;
 
 RemoveRowOnDelete.story = {
     name: 'Remove Rows when Deleting'
@@ -249,7 +245,7 @@ RemoveRowOnDelete.args = {
     removeRowOnDelete: true
 };
 
-export const CustomStyleCol = args => <GroupEditTableWrapper {...args} />;
+export const CustomStyleCol = (args) => <GroupEditTableWrapper {...args} />;
 
 CustomStyleCol.story = {
     name: 'Column With Custom Style'

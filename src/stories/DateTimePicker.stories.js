@@ -1,11 +1,10 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import ThemeProvider from '@material-ui/styles/ThemeProvider';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { action } from '@storybook/addon-actions';
-import { MuiPickersUtilsProvider } from '@material-ui/pickers';
-import MomentUtils from '@date-io/moment';
+import AdapterDateMoment from '@mui/lab/AdapterMoment';
 import DateTimePicker from '../components/DateTimePicker';
-import { linnTheme } from '../themes/linnTheme';
 
 const actions = {
     onChange: action('date changed')
@@ -14,18 +13,18 @@ const actions = {
 export default {
     title: 'Components/DateTimePicker',
     decorators: [
-        story => (
-            <ThemeProvider theme={linnTheme}>
-                <MuiPickersUtilsProvider utils={MomentUtils}>
+        (story) => (
+            <LocalizationProvider dateAdapter={AdapterDateMoment}>
+                <ThemeProvider theme={createTheme()}>
                     <div>{story()}</div>
-                </MuiPickersUtilsProvider>
-            </ThemeProvider>
+                </ThemeProvider>
+            </LocalizationProvider>
         )
     ],
     component: DateTimePicker
 };
 
-export const Default = args => <DateTimePicker {...args} {...actions} />;
+export const Default = (args) => <DateTimePicker {...args} {...actions} />;
 
 Default.story = {
     name: 'default '

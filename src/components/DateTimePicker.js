@@ -1,39 +1,42 @@
-import React, { Fragment } from 'react';
-import { KeyboardDateTimePicker } from '@material-ui/pickers';
-import InputLabel from '@material-ui/core/InputLabel';
+import React from 'react';
+import DateTimePicker from '@mui/lab/DateTimePicker';
+import InputLabel from '@mui/material/InputLabel';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
+import TextField from '@mui/material/TextField';
+import moment from 'moment';
 
-const labelStyles = makeStyles(theme => ({
+const labelStyles = makeStyles((theme) => ({
     root: {
         fontSize: theme.typography.fontSize
     }
 }));
 
-const inputStyles = makeStyles(theme => ({
+const inputStyles = makeStyles((theme) => ({
     root: {
         marginTop: theme.spacing(1),
         fontSize: theme.typography.fontSize
     }
 }));
 
-function DateTimePicker({ label, value, onChange, minDate, maxDate, required, disabled }) {
+function Picker({ label, value, onChange, minDate, maxDate, required, disabled }) {
     const inputClasses = inputStyles();
     const labelClasses = labelStyles();
     return (
-        <Fragment>
+        <>
             <InputLabel classes={{ root: labelClasses.root }} required={required}>
                 {label}
             </InputLabel>
-            <KeyboardDateTimePicker
+            <DateTimePicker
                 allowKeyboardControl
                 autoOk
                 margin="dense"
                 inputVariant="outlined"
                 ampm={false}
-                value={value}
-                minDate={minDate}
-                maxDate={maxDate}
+                renderInput={(props) => <TextField {...props} />}
+                value={moment(value)}
+                minDate={moment(minDate)}
+                maxDate={moment(maxDate)}
                 onChange={onChange}
                 classes={inputClasses}
                 className={inputClasses.root}
@@ -42,11 +45,11 @@ function DateTimePicker({ label, value, onChange, minDate, maxDate, required, di
                 InputProps={{ classes: { disabled: inputClasses.disabled } }}
                 format="DD/MM/YYYY HH:mm"
             />
-        </Fragment>
+        </>
     );
 }
 
-DateTimePicker.propTypes = {
+Picker.propTypes = {
     label: PropTypes.string,
     minDate: PropTypes.string,
     maxDate: PropTypes.string,
@@ -56,7 +59,7 @@ DateTimePicker.propTypes = {
     disabled: PropTypes.bool
 };
 
-DateTimePicker.defaultProps = {
+Picker.defaultProps = {
     label: '',
     minDate: undefined,
     maxDate: undefined,
@@ -66,4 +69,4 @@ DateTimePicker.defaultProps = {
     onChange: () => {}
 };
 
-export default DateTimePicker;
+export default Picker;

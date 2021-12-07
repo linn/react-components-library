@@ -1,12 +1,8 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import moment from 'moment';
-import { MuiPickersUtilsProvider } from '@material-ui/pickers';
-import ThemeProvider from '@material-ui/styles/ThemeProvider';
-import MomentUtils from '@date-io/moment';
+import ThemeProvider from '@mui/styles/ThemeProvider';
 import SingleEditTable from '../components/editableTable/SingleEditTable';
-import { linnTheme } from '../themes/linnTheme';
+import linnTheme from '../themes/linnTheme';
 import mdx from './SingleEditTable.mdx';
 
 export const component = () => (
@@ -63,7 +59,7 @@ const columns = [
         id: 'text',
         type: 'text',
         editable: true,
-        tooltip: row => row.extraInfo || false
+        tooltip: (row) => row.extraInfo || false
     },
     {
         title: 'Number',
@@ -120,11 +116,9 @@ const columns = [
 export default {
     title: 'Components/EditableTable/SingleEditTable',
     decorators: [
-        story => (
+        (story) => (
             <ThemeProvider theme={linnTheme}>
-                <MuiPickersUtilsProvider utils={MomentUtils}>
-                    <div>{story()}</div>
-                </MuiPickersUtilsProvider>
+                <div>{story()}</div>
             </ThemeProvider>
         )
     ],
@@ -137,7 +131,7 @@ export default {
     }
 };
 
-export const Default = args => (
+export const Default = (args) => (
     <SingleEditTable
         columns={columns}
         rows={rows}
@@ -151,7 +145,7 @@ Default.story = {
     name: 'Default'
 };
 
-export const DisplayOnly = args => (
+export const DisplayOnly = (args) => (
     <SingleEditTable
         {...args}
         columns={columns}
@@ -166,7 +160,7 @@ DisplayOnly.story = {
     name: 'Display Only'
 };
 
-export const StaticRows = args => (
+export const StaticRows = (args) => (
     <SingleEditTable
         {...args}
         columns={columns}
@@ -181,7 +175,7 @@ StaticRows.story = {
     name: 'New Row Disabled'
 };
 
-export const ShowDelete = args => (
+export const ShowDelete = (args) => (
     <SingleEditTable
         {...args}
         columns={columns}
@@ -196,10 +190,10 @@ ShowDelete.story = {
     name: 'Show Delete Prior to Edit'
 };
 
-export const CustomStyleCol = args => (
+export const CustomStyleCol = (args) => (
     <SingleEditTable
         {...args}
-        columns={columns.map(col =>
+        columns={columns.map((col) =>
             col.id === 'text'
                 ? {
                       ...col,

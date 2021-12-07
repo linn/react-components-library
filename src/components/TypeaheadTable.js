@@ -1,15 +1,15 @@
 import React, { Fragment, useState } from 'react';
-import Typography from '@material-ui/core/Typography';
+import Typography from '@mui/material/Typography';
 import PropTypes from 'prop-types';
-import Table from '@material-ui/core/Table';
-import TableHead from '@material-ui/core/TableHead';
-import TableBody from '@material-ui/core/TableBody';
-import Dialog from '@material-ui/core/Dialog';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
-import TableRow from '@material-ui/core/TableRow';
-import TableCell from '@material-ui/core/TableCell';
-import makeStyles from '@material-ui/styles/makeStyles';
+import Table from '@mui/material/Table';
+import TableHead from '@mui/material/TableHead';
+import TableBody from '@mui/material/TableBody';
+import Dialog from '@mui/material/Dialog';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import TableRow from '@mui/material/TableRow';
+import TableCell from '@mui/material/TableCell';
+import makeStyles from '@mui/styles/makeStyles';
 import Loading from './Loading';
 import SearchInputField from './SearchInputField';
 import InputField from './InputField';
@@ -18,7 +18,7 @@ import useSearch from '../hooks/useSearch';
 import utilities from '../utilities/index';
 import SearchIcon from './SearchIcon';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     pullRight: {
         float: 'right'
     },
@@ -71,7 +71,7 @@ function TypeaheadTable({
         textDecoration: 'none'
     };
 
-    const handleClick = e => {
+    const handleClick = (e) => {
         if (modal) {
             setDialogOpen(false);
         }
@@ -90,14 +90,14 @@ function TypeaheadTable({
                 <Table>
                     <TableHead>
                         <TableRow>
-                            {columnNames.map(columnName => (
+                            {columnNames.map((columnName) => (
                                 <TableCell key={columnName}>{columnName}</TableCell>
                             ))}
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {table.rows &&
-                            table.rows.map(row => (
+                            table.rows.map((row) => (
                                 <TableRow
                                     style={cursor}
                                     onClick={() =>
@@ -108,7 +108,7 @@ function TypeaheadTable({
                                     hover
                                     key={row.id}
                                 >
-                                    {row.values.map(cell => (
+                                    {row.values.map((cell) => (
                                         <TableCell key={cell.id} component="th" scope="row">
                                             {cell.value}
                                         </TableCell>
@@ -128,6 +128,7 @@ function TypeaheadTable({
             <SearchInputField
                 placeholder={placeholder}
                 onChange={handleSearchTermChange}
+                propertyName={`${label}-search-input`}
                 type="search"
                 label={label}
                 variant="outlined"
@@ -156,6 +157,7 @@ function TypeaheadTable({
                     }}
                     value={modal ? value : searchTerm}
                     label={label}
+                    propertyName={`${label}-search-input`}
                     placeholder={placeholder}
                     onChange={modal ? () => setDialogOpen(true) : handleSearchTermChange}
                 />
@@ -171,6 +173,7 @@ function TypeaheadTable({
                             className={classes.pullRight}
                             aria-label="Close"
                             onClick={() => setDialogOpen(false)}
+                            size="large"
                         >
                             <CloseIcon />
                         </IconButton>

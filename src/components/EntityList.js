@@ -1,9 +1,9 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import Typography from '@material-ui/core/Typography';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import Typography from '@mui/material/Typography';
 import Title from './Title';
 
 const getListItemText = (entity, entityid, descriptionFieldName) =>
@@ -14,10 +14,10 @@ const getListItemText = (entity, entityid, descriptionFieldName) =>
 function EntityList({ title, entityList, entityId, descriptionFieldName, hasExternalLinks }) {
     const Component = hasExternalLinks ? 'a' : Link;
     return (
-        <Fragment>
+        <>
             <Title text={title} />
             <List>
-                {entityList.map(entity => (
+                {entityList.map((entity) => (
                     <ListItem
                         key={entity[entityId]}
                         button
@@ -31,7 +31,7 @@ function EntityList({ title, entityList, entityId, descriptionFieldName, hasExte
                     </ListItem>
                 ))}
             </List>
-        </Fragment>
+        </>
     );
 }
 

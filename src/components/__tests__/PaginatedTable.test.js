@@ -1,12 +1,10 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
-import PaginatedTable from '../table/PaginatedTable';
 import { screen } from '@testing-library/react';
 import render from '../../test-utils';
 import '@testing-library/jest-dom/extend-expect';
+import PaginatedTable from '../table/PaginatedTable';
 
 describe('<PaginatedTable />', () => {
-
     describe('when items exist', () => {
         beforeEach(() => {
             const props = {
@@ -15,27 +13,22 @@ describe('<PaginatedTable />', () => {
                 pageOptions: {},
                 setPageOptions: () => {},
                 rows: [
-                        {
-                            id: 'id1',
-                            value: 'potato',
-                            label: 'hing is potato'
-                        },
-                        {
-                            id: 'id2',
-                            value: 'chips',
-                            label: 'hing is chips'
-                        }
-                    ],
+                    {
+                        id: 'id1',
+                        value: 'potato',
+                        label: 'hing is potato'
+                    },
+                    {
+                        id: 'id2',
+                        value: 'chips',
+                        label: 'hing is chips'
+                    }
+                ],
                 pageLoad: jest.fn(),
-                pageSortedLoad: jest.fn(),
+                pageSortedLoad: jest.fn()
             };
 
-
-            render(
-                <Router>
-                    <PaginatedTable {...props} />
-                </Router>
-            );
+            render(<PaginatedTable {...props} />);
         });
 
         it('should render table columns text', () => {

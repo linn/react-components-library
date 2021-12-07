@@ -1,8 +1,7 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import ThemeProvider from '@material-ui/styles/ThemeProvider';
+import ThemeProvider from '@mui/styles/ThemeProvider';
 import TableWithInlineEditing from '../components/TableWithInlineEditing';
-import { linnTheme } from '../themes/linnTheme';
+import linnTheme from '../themes/linnTheme';
 
 const columnsInfo = [
     {
@@ -53,7 +52,7 @@ const content = [
 export default {
     title: 'Components/TableWithInlineEditing',
     decorators: [
-        story => (
+        (story) => (
             <ThemeProvider theme={linnTheme}>
                 <div>{story()}</div>
             </ThemeProvider>
@@ -62,7 +61,7 @@ export default {
     component: TableWithInlineEditing
 };
 
-export const AllowedToEditAddAndDelete = args => <TableWithInlineEditing {...args} />;
+export const AllowedToEditAddAndDelete = (args) => <TableWithInlineEditing {...args} />;
 
 AllowedToEditAddAndDelete.story = {
     name: 'allowed to edit, add and delete'
@@ -77,13 +76,13 @@ AllowedToEditAddAndDelete.args = {
     allowedToDelete: true
 };
 
-export const AllowedToEditAndAdd = args => <TableWithInlineEditing {...args} />;
+export const AllowedToEditAndAdd = (args) => <TableWithInlineEditing {...args} />;
 
 AllowedToEditAndAdd.story = {
     name: 'allowed to edit and add'
 };
 
-AllowedToEditAddAndDelete.args = {
+AllowedToEditAndAdd.args = {
     columnsInfo,
     content,
     updateContent: () => {},
@@ -91,7 +90,7 @@ AllowedToEditAddAndDelete.args = {
     allowedToCreate: true
 };
 
-export const AllowedToEditOnly = args => <TableWithInlineEditing {...args} />;
+export const AllowedToEditOnly = (args) => <TableWithInlineEditing {...args} />;
 
 AllowedToEditOnly.story = {
     name: 'allowed to edit only'
@@ -104,7 +103,7 @@ AllowedToEditOnly.args = {
     allowedToEdit: true
 };
 
-export const NotAllowedToEdit = args => <TableWithInlineEditing {...args} />;
+export const NotAllowedToEdit = (args) => <TableWithInlineEditing {...args} />;
 
 NotAllowedToEdit.story = {
     name: 'Not allowed to edit'

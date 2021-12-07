@@ -1,6 +1,6 @@
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
-import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
+import { ThemeProvider, StyledEngineProvider, createTheme } from '@mui/material/styles';
 import { screen } from '@testing-library/react';
 import SnackbarMessage from '../SnackbarMessage';
 import render from '../../test-utils';
@@ -8,9 +8,11 @@ import render from '../../test-utils';
 describe('<SnackbarMessage />', () => {
     beforeEach(() => {
         render(
-            <MuiThemeProvider theme={createTheme()}>
-                <SnackbarMessage  onClose={jest.fn()} message={'Snackbar message'} visible={true} />
-            </MuiThemeProvider>
+            <StyledEngineProvider injectFirst>
+                <ThemeProvider theme={createTheme()}>
+                    <SnackbarMessage  onClose={jest.fn()} message={'Snackbar message'} visible={true} />
+                </ThemeProvider>
+            </StyledEngineProvider>
         );
     });
 

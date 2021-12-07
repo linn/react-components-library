@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
-import Typography from '@material-ui/core/Typography';
-import Link from '@material-ui/core/Link';
+import Typography from '@mui/material/Typography';
+import Link from '@mui/material/Link';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -27,11 +27,11 @@ function Breadcrumbs({ history, rootPathLength, homeUrl }) {
 
     const crumbs = path
         .split('/')
-        .filter(x => x !== 'report')
+        .filter((x) => x !== 'report')
         .reduce((sofar, crumb, i, list) => {
             path = list.slice(0, i + 1);
             const href = path.join('/') || '/';
-            const handleClick = e => {
+            const handleClick = (e) => {
                 if (path.length > rootPathLength) {
                     e.preventDefault();
                     history.push(href);
@@ -39,7 +39,7 @@ function Breadcrumbs({ history, rootPathLength, homeUrl }) {
             };
 
             return crumb
-                ? [...sofar, { key: i, caption: crumb, href, onClick: e => handleClick(e) }]
+                ? [...sofar, { key: i, caption: crumb, href, onClick: (e) => handleClick(e) }]
                 : sofar;
         }, []);
 

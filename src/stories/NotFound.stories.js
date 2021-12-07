@@ -1,12 +1,12 @@
 import React from 'react';
-import ThemeProvider from '@material-ui/styles/ThemeProvider';
-import { linnTheme } from '../themes/linnTheme';
+import ThemeProvider from '@mui/styles/ThemeProvider';
+import linnTheme from '../themes/linnTheme';
 import NotFound from '../components/NotFound';
 
 export default {
     title: 'Components/NotFound',
     decorators: [
-        story => (
+        (story) => (
             <ThemeProvider theme={linnTheme}>
                 <div>{story()}</div>
             </ThemeProvider>

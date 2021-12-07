@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
-import withStyles from '@material-ui/styles/withStyles';
+import Button from '@mui/material/Button';
+import withStyles from '@mui/styles/withStyles';
 import PropTypes from 'prop-types';
 
 const styles = () => ({
@@ -10,17 +10,20 @@ const styles = () => ({
     }
 });
 
-const CreateButton = ({ createUrl, classes, disabled }) => (
-    <Link to={createUrl}>
-        <Button color="primary" variant="outlined" className={classes.root} disabled={disabled}>
-            Create
-        </Button>
-    </Link>
-);
+function CreateButton({ createUrl, classes, disabled }) {
+    console.log(createUrl);
+    return (
+        <Link to={createUrl}>
+            <Button color="primary" variant="outlined" className={classes.root} disabled={disabled}>
+                Create
+            </Button>
+        </Link>
+    );
+}
 
 CreateButton.propTypes = {
     createUrl: PropTypes.string.isRequired,
-    classes: PropTypes.shape({}).isRequired,
+    classes: PropTypes.shape({ root: PropTypes.string }).isRequired,
     disabled: PropTypes.bool
 };
 

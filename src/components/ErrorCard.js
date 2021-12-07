@@ -1,11 +1,11 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
-import Card from '@material-ui/core/Card';
-import Error from '@material-ui/icons/Error';
-import withStyles from '@material-ui/core/styles/withStyles';
-import { MuiThemeProvider } from '@material-ui/core/styles';
+import Typography from '@mui/material/Typography';
+import Card from '@mui/material/Card';
+import Error from '@mui/icons-material/Error';
+import { ThemeProvider } from '@mui/material/styles';
+import withStyles from '@mui/styles/withStyles';
 import PropTypes from 'prop-types';
-import { errorTheme } from '../themes/index';
+import errorTheme from '../themes/errorTheme';
 
 const styles = () => ({
     root: {
@@ -24,18 +24,22 @@ const styles = () => ({
 });
 
 const ErrorCard = ({ classes, errorMessage }) => (
-    <MuiThemeProvider theme={errorTheme}>
+    <ThemeProvider theme={errorTheme}>
         <Card className={classes.root}>
             <Error color="error" className={classes.icon} />
             <Typography align="center" className={classes.typography}>
                 {errorMessage}
             </Typography>
         </Card>
-    </MuiThemeProvider>
+    </ThemeProvider>
 );
 
 ErrorCard.propTypes = {
-    classes: PropTypes.shape({}),
+    classes: PropTypes.shape({
+        root: PropTypes.string,
+        icon: PropTypes.string,
+        typography: PropTypes.string
+    }),
     errorMessage: PropTypes.string.isRequired
 };
 

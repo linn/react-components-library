@@ -4,12 +4,20 @@ import PropTypes from 'prop-types';
 import InputField from './InputField';
 import SearchIcon from './SearchIcon';
 
-function SearchInputField({ autoFocus, ...rest }) {
-    return <InputField adornment={SearchIcon()} autoFocus={autoFocus} {...rest} />;
+function SearchInputField({ autoFocus, propertyName, ...rest }) {
+    return (
+        <InputField
+            adornment={SearchIcon()}
+            autoFocus={autoFocus}
+            propertyName={propertyName}
+            {...rest}
+        />
+    );
 }
 
 SearchInputField.propTypes = {
-    autoFocus: PropTypes.bool
+    autoFocus: PropTypes.bool,
+    propertyName: PropTypes.string.isRequired
 };
 
 SearchInputField.defaultProps = {

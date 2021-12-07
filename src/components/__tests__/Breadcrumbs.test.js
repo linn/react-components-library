@@ -1,11 +1,9 @@
 import React from 'react';
-import { MuiThemeProvider } from '@material-ui/core/styles';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { linnTheme } from '../../themes';
-import Breadcrumbs from '../Breadcrumbs';
 import { screen } from '@testing-library/react';
 import render from '../../test-utils';
 import '@testing-library/jest-dom/extend-expect';
+
+import Breadcrumbs from '../Breadcrumbs';
 
 describe('<Breadcrumbs />', () => {
     const mockPush = jest.fn();
@@ -14,18 +12,10 @@ describe('<Breadcrumbs />', () => {
         beforeEach(() => {
             const history = {
                 location: { pathname: '/a/test/path' },
-                push: mockPush,
+                push: mockPush
             };
 
-            const ComponentWithTheme = () => (
-                <MuiThemeProvider theme={linnTheme}>
-                    <Router>
-                        <Breadcrumbs history={history} />
-                    </Router>
-                </MuiThemeProvider>
-            );
-
-            render(<ComponentWithTheme />);
+            render(<Breadcrumbs history={history} />);
         });
 
         it('should render the correct number of breadcrumbs with correct text', () => {

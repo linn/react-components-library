@@ -1,11 +1,11 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
-import Tooltip from '@material-ui/core/Tooltip';
-import makeStyles from '@material-ui/styles/makeStyles';
+import Button from '@mui/material/Button';
+import Tooltip from '@mui/material/Tooltip';
+import makeStyles from '@mui/styles/makeStyles';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     button: {
         marginLeft: theme.spacing(1),
         marginTop: theme.spacing(3)

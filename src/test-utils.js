@@ -1,18 +1,27 @@
 ﻿import { render } from '@testing-library/react';
 import React from 'react';
-import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
+import { ThemeProvider, StyledEngineProvider, createTheme } from '@mui/material/styles';
 import { MemoryRouter } from 'react-router-dom';
-import { MuiPickersUtilsProvider } from '@material-ui/pickers';
-import MomentUtils from '@date-io/moment';
+import AdapterDateMoment from '@mui/lab/AdapterMoment';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+/**
+ * @jest-environment jsdom
+ */
 
 // eslint-disable-next-line react/prop-types
-const Providers = ({ children }) => (
-    <MemoryRouter>
-        <MuiThemeProvider theme={createTheme()}>
-            <MuiPickersUtilsProvider utils={MomentUtils}>{children}</MuiPickersUtilsProvider>
-        </MuiThemeProvider>
-    </MemoryRouter>
-);
+function Providers({ children }) {
+    return (
+        <MemoryRouter>
+            <StyledEngineProvider injectFirst>
+                <ThemeProvider theme={createTheme()}>
+                    <LocalizationProvider dateAdapter={AdapterDateMoment}>
+                        {children}
+                    </LocalizationProvider>
+                </ThemeProvider>
+            </StyledEngineProvider>
+        </MemoryRouter>
+    );
+}
 
 const customRender = (ui, options) => render(ui, { wrapper: Providers, ...options });
 
