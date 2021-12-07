@@ -3,8 +3,6 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '@mui/styles/withStyles';
 import Tabs from '@mui/material/Tabs';
-import Container from '@mui/material/Container';
-
 import Tab from '@mui/material/Tab';
 import AppBar from '@mui/material/AppBar';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
@@ -172,133 +170,122 @@ function Navigation({
                 <ClickAwayListener onClickAway={() => setSelected(false)}>
                     <div className="hide-when-printing">
                         <div className={classes.root}>
-                            <Container maxWidth={false}>
-                                <Grid container item spacing={3}>
-                                    <Grid item />
-                                    {sections && !loading && (
-                                        <AppBar
-                                            position="static"
-                                            classes={{ root: classes.appBar }}
-                                        >
-                                            <Toolbar classes={{ gutters: classes.toolbar }}>
-                                                <Grid
-                                                    container
-                                                    alignItems="center"
-                                                    justifyContent="space-between"
-                                                    spacing={0}
-                                                    classes={{ container: classes.container }}
-                                                >
-                                                    <Grid item xs={9}>
-                                                        <Tabs
-                                                            classes={{
-                                                                root: classes.tabs
-                                                            }}
-                                                            value={selected}
-                                                            onChange={(event, value) => {
-                                                                if (selected === value) {
-                                                                    setSelected(false);
-                                                                } else {
-                                                                    setSelected(value);
-                                                                }
-                                                            }}
-                                                            scrollButtons="auto"
-                                                            variant="scrollable"
-                                                            indicatorColor="primary"
-                                                            textColor="primary"
-                                                        >
-                                                            {sections.map((item) => (
-                                                                <Tab
-                                                                    id={item.id}
-                                                                    key={item.id}
-                                                                    classes={{ root: classes.tab }}
-                                                                    label={
-                                                                        <span
-                                                                            className={
-                                                                                classes.tabLabel
-                                                                            }
-                                                                        >
-                                                                            {item.title}
-                                                                        </span>
-                                                                    }
-                                                                    selected={false}
-                                                                />
-                                                            ))}
-                                                        </Tabs>
-                                                    </Grid>
-                                                    <Grid item xs={1}>
-                                                        <Typography variant="h4">
-                                                            <AccountCircle
-                                                                className={classes.icons}
-                                                                aria-owns={
-                                                                    anchorEl
-                                                                        ? 'simple-menu'
-                                                                        : undefined
-                                                                }
-                                                                onClick={handleClick}
-                                                                id={sections.length}
-                                                                key={sections.length}
-                                                            />
-                                                        </Typography>
-                                                    </Grid>
-                                                    <Grid item xs={1}>
-                                                        <Typography variant="h4">
-                                                            <Badge
-                                                                badgeContent={
-                                                                    unseenNotifications
-                                                                        ? unseenNotifications.length
-                                                                        : 0
-                                                                }
-                                                                color="primary"
-                                                                variant="dot"
-                                                            >
-                                                                <Notifications
-                                                                    className={classes.icons}
-                                                                    onClick={queueNotifications}
-                                                                />
-                                                            </Badge>
-                                                        </Typography>
-                                                    </Grid>
-                                                    <Grid item xs={1}>
-                                                        <Typography variant="h4">
-                                                            <Search
-                                                                className={classes.icons}
-                                                                onClick={() =>
-                                                                    setSelected(sections.length)
-                                                                }
-                                                            />
-                                                        </Typography>
-                                                    </Grid>
-                                                    <Menu
-                                                        id="simple-menu"
-                                                        anchorEl={anchorEl}
-                                                        open={Boolean(anchorEl)}
-                                                        onClose={handleClose}
+                            <Grid container item spacing={3}>
+                                <Grid item />
+                                {sections && !loading && (
+                                    <AppBar position="static" classes={{ root: classes.appBar }}>
+                                        <Toolbar classes={{ gutters: classes.toolbar }}>
+                                            <Grid
+                                                container
+                                                alignItems="center"
+                                                justifyContent="space-between"
+                                                spacing={0}
+                                                classes={{ container: classes.container }}
+                                            >
+                                                <Grid item xs={9}>
+                                                    <Tabs
+                                                        classes={{
+                                                            root: classes.tabs
+                                                        }}
+                                                        value={selected}
+                                                        onChange={(event, value) => {
+                                                            if (selected === value) {
+                                                                setSelected(false);
+                                                            } else {
+                                                                setSelected(value);
+                                                            }
+                                                        }}
+                                                        scrollButtons="auto"
+                                                        variant="scrollable"
+                                                        indicatorColor="primary"
+                                                        textColor="primary"
                                                     >
-                                                        <MenuItem onClick={handleClose}>
-                                                            {username}
-                                                        </MenuItem>
-                                                        {username &&
-                                                            myStuff.groups.map((item) => (
-                                                                <span key={item.items[0].href}>
-                                                                    <a href={item.items[0].href}>
-                                                                        <MenuItem
-                                                                            onClick={handleClose}
-                                                                        >
-                                                                            {item.items[0].title}
-                                                                        </MenuItem>
-                                                                    </a>
-                                                                </span>
-                                                            ))}
-                                                        <MenuItem onClick={handleSignOut}>
-                                                            Sign Out
-                                                        </MenuItem>
-                                                    </Menu>
+                                                        {sections.map((item) => (
+                                                            <Tab
+                                                                id={item.id}
+                                                                key={item.id}
+                                                                classes={{ root: classes.tab }}
+                                                                label={
+                                                                    <span
+                                                                        className={classes.tabLabel}
+                                                                    >
+                                                                        {item.title}
+                                                                    </span>
+                                                                }
+                                                                selected={false}
+                                                            />
+                                                        ))}
+                                                    </Tabs>
                                                 </Grid>
-                                            </Toolbar>
-                                        </AppBar>
-                                    )}{' '}
-                                </Grid>
-                            </Container>
+                                                <Grid item xs={1}>
+                                                    <Typography variant="h4">
+                                                        <AccountCircle
+                                                            className={classes.icons}
+                                                            aria-owns={
+                                                                anchorEl ? 'simple-menu' : undefined
+                                                            }
+                                                            onClick={handleClick}
+                                                            id={sections.length}
+                                                            key={sections.length}
+                                                        />
+                                                    </Typography>
+                                                </Grid>
+                                                <Grid item xs={1}>
+                                                    <Typography variant="h4">
+                                                        <Badge
+                                                            badgeContent={
+                                                                unseenNotifications
+                                                                    ? unseenNotifications.length
+                                                                    : 0
+                                                            }
+                                                            color="primary"
+                                                            variant="dot"
+                                                        >
+                                                            <Notifications
+                                                                className={classes.icons}
+                                                                onClick={queueNotifications}
+                                                            />
+                                                        </Badge>
+                                                    </Typography>
+                                                </Grid>
+                                                <Grid item xs={1}>
+                                                    <Typography variant="h4">
+                                                        <Search
+                                                            className={classes.icons}
+                                                            onClick={() =>
+                                                                setSelected(sections.length)
+                                                            }
+                                                        />
+                                                    </Typography>
+                                                </Grid>
+                                                <Menu
+                                                    id="simple-menu"
+                                                    anchorEl={anchorEl}
+                                                    open={Boolean(anchorEl)}
+                                                    onClose={handleClose}
+                                                >
+                                                    <MenuItem onClick={handleClose}>
+                                                        {username}
+                                                    </MenuItem>
+                                                    {username &&
+                                                        myStuff.groups.map((item) => (
+                                                            <span key={item.items[0].href}>
+                                                                <a href={item.items[0].href}>
+                                                                    <MenuItem onClick={handleClose}>
+                                                                        {item.items[0].title}
+                                                                    </MenuItem>
+                                                                </a>
+                                                            </span>
+                                                        ))}
+                                                    <MenuItem onClick={handleSignOut}>
+                                                        Sign Out
+                                                    </MenuItem>
+                                                </Menu>
+                                            </Grid>
+                                        </Toolbar>
+                                    </AppBar>
+                                )}
+                            </Grid>
                             {menuIds.map(
                                 (item, i) =>
                                     selected === i && (
