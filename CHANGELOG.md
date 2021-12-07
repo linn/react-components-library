@@ -1,5 +1,8 @@
 # Changelog
-# Changelog
+## [12.7.0] - 2021-11-26
+### Changes
+- Flip processStore working flag to false if the process request errors unexpectedly.
+
 ## [12.5.0] - 2021-11-10
 ### Changes
 - Upped react version in dependencies (peer dependencies already was) to react 17
