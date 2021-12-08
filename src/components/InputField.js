@@ -109,6 +109,7 @@ function InputField({
                 id={propertyName}
                 placeholder={placeholder}
                 required={required}
+                size="small"
                 rows={rows}
                 type={type}
                 value={type === 'date' ? moment(value).format('YYYY-MM-DD') : getValue(value)}
