@@ -118,6 +118,7 @@ function Dropdown({
                 SelectProps={{
                     native: true
                 }}
+                size="small"
                 helperText={helperText}
                 margin={margin}
                 variant="outlined"
