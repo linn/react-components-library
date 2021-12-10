@@ -1,4 +1,9 @@
 # Changelog
+## [13.0.0] - 2021-12-08
+### Changes (Breaking)
+- MUI 5
+- Integrate application state into Fetch and Update actions
+
 ## [12.7.0] - 2021-11-26
 ### Changes
 - Flip processStore working flag to false if the process request errors unexpectedly.

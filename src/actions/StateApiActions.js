@@ -1,4 +1,3 @@
-
 import { RSAA } from 'redux-api-middleware';
 import * as rsaaTypes from './rsaaTypes';
 
