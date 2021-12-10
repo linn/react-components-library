@@ -164,4 +164,20 @@ export default function UpdateApiActions(
         type: actionTypes[`CLEAR_${actionTypeRoot}_DATA`],
         payload: {}
     });
+
+    this.fetchState = () => ({
+        [RSAA]: {
+            endpoint: `${appRoot}${uri}/application-state`,
+            method: 'GET',
+            options: { requiresAuth: true },
+            headers: {
+                Accept: 'application/vnd.linn.application-state+json;version=1'
+            },
+            types: [
+                rsaaTypes.requestedState(actionTypes, actionTypeRoot),
+                rsaaTypes.receivedState(actionTypes, actionTypeRoot, itemName),
+                rsaaTypes.error(actionTypes, actionTypeRoot, itemName)
+            ]
+        }
+    });
 }
