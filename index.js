@@ -37,7 +37,7 @@ import fetchNews from './src/actions/fetchNews';
 import markNotificationSeen from './src/actions/markNotificationSeen';
 import fetchMenu from './src/actions/fetchMenu';
 import ItemType from './src/types/ItemType';
-import collectionSelectorHelpers from './src/selectors/collectionSelectorHelpers1';
+import collectionSelectorHelpers from './src/selectors/collectionSelectorHelpers';
 import paginationSelectorHelpers from './src/selectors/paginationSelectorHelpers';
 import itemSelectorHelpers from './src/selectors/itemSelectorHelpers';
 import reportSelectorHelpers from './src/selectors/reportSelectorHelpers';

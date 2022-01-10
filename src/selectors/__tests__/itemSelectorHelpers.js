@@ -1,9 +1,9 @@
 ﻿import {
     getItem,
-    getLoading,
+    getItemLoading,
     getApplicationState,
     getApplicationStateLoading,
-    getEditStatus,
+    getItemEditStatus,
     getSnackbarVisible
 } from '../itemSelectorHelpers';
 
@@ -42,7 +42,7 @@ describe('when getting loading', () => {
             }
         };
 
-        expect(getLoading(state.itemType)).toEqual(true);
+        expect(getItemLoading(state.itemType)).toEqual(true);
     });
 });
 
@@ -102,6 +102,6 @@ describe('when getting edit status', () => {
 
         const expectedResult = 'view';
 
-        expect(getEditStatus(state.itemType)).toEqual(expectedResult);
+        expect(getItemEditStatus(state.itemType)).toEqual(expectedResult);
     });
 });

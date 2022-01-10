@@ -8,7 +8,7 @@
     hasPrivilege,
     getApplicationState,
     getApplicationStateLoading
-} from '../CollectionSelectorHelpers';
+} from '../collectionSelectorHelpers';
 
 describe('when getting items', () => {
     test('should return items', () => {

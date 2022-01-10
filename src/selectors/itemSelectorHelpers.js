@@ -6,7 +6,7 @@
     return storeItem.item ? storeItem.item : null;
 };
 
-export const getLoading = storeItem => {
+export const getItemLoading = storeItem => {
     if (!storeItem) {
         return null;
     }
@@ -14,7 +14,7 @@ export const getLoading = storeItem => {
     return storeItem.loading;
 };
 
-export const getEditStatus = storeItem => {
+export const getItemEditStatus = storeItem => {
     if (!storeItem) {
         return null;
     }
