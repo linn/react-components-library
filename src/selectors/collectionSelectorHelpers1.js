@@ -41,11 +41,14 @@ export const getSearchItems = (
 };
 
 export const getItem = (storeItems, id, idField = 'id') => {
-    const items = this.getItems(storeItems);
+    const items = getItems(storeItems);
     return items.find(a => a[idField] === id);
 };
 
-export const getItemByHref = (storeItems, href) => storeItems.find(a => a.href === href);
+export const getItemByHref = (storeItems, href) => {
+    const items = getItems(storeItems);
+    return items.find(a => a.href === href);
+};
 
 export const getLoading = storeItems => {
     if (!storeItems) {

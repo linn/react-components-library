@@ -1,6 +1,4 @@
-const getUsername = state => {
-    const { oidc } = state;
-    return oidc.user ? oidc.user.profile.preferred_username : null;
-};
+export const getName = state => state.oidc?.user?.profile?.name;
 
-export default getUsername;
+export const getUserNumber = state =>
+    state.oidc?.user?.profile?.employee?.split('/employees/')?.[1];
