@@ -37,6 +37,11 @@ import fetchNews from './src/actions/fetchNews';
 import markNotificationSeen from './src/actions/markNotificationSeen';
 import fetchMenu from './src/actions/fetchMenu';
 import ItemType from './src/types/ItemType';
+import collectionSelectorHelpers from './src/selectors/collectionSelectorHelpers';
+import paginationSelectorHelpers from './src/selectors/paginationSelectorHelpers';
+import itemSelectorHelpers from './src/selectors/itemSelectorHelpers';
+import reportSelectorHelpers from './src/selectors/reportSelectorHelpers';
+import processSelectorHelpers from './src/selectors/processSelectorHelpers';
 import CollectionSelectors from './src/selectors/CollectionSelectors';
 import PaginationSelectors from './src/selectors/PaginationSelectors';
 import ItemSelectors from './src/selectors/ItemSelectors';
@@ -55,7 +60,8 @@ import menu from './src/reducers/menu';
 import news from './src/reducers/news';
 import menuSelectors from './src/selectors/menuSelectors';
 import newsSelectors from './src/selectors/newsSelectors';
-import getUsername from './src/selectors/userSelectors';
+import getUsername from './src/selectors/legacyUserSelectors';
+import { getName, getUserNumber } from './src/selectors/userSelectors';
 import utilities from './src/utilities/index';
 import initialiseOnMount from './src/components/common/initialiseOnMount';
 import Navigation from './src/containers/Navigation';
@@ -86,6 +92,7 @@ export {
     BackButton,
     Breadcrumbs,
     CheckboxWithLabel,
+    collectionSelectorHelpers,
     CollectionSelectors,
     collectionStoreFactory,
     collectionWithLinksStoreFactory,
@@ -104,14 +111,17 @@ export {
     getItemError,
     getItemErrorDetailMessage,
     getItemErrors,
+    getName,
     getPreviousPaths,
     getRequestErrors,
     getUsername,
+    getUserNumber,
     getWeekEndDate,
     getWeekStartDate,
     GroupEditTable,
     initialiseOnMount,
     InputField,
+    itemSelectorHelpers,
     ItemSelectors,
     itemStoreFactory,
     ItemType,
@@ -133,15 +143,18 @@ export {
     OnOffSwitch,
     Page,
     PaginatedTable,
+    paginationSelectorHelpers,
     PaginationSelectors,
     paginationStoreFactory,
     ProcessActions,
+    processSelectorHelpers,
     ProcessSelectors,
     processStoreFactory,
     reducers,
     ReportActions,
     reportOptionsFactory,
     reportResultsFactory,
+    reportSelectorHelpers,
     ReportSelectors,
     reportsResultsFactory,
     ReportTable,

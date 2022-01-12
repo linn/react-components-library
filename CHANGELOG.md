@@ -1,4 +1,8 @@
 # Changelog
+## [13.1.0] - 2022-01-10
+### Added
+- Selector helpers: collectionSelectorHelpers, itemSelectorHelpers, paginationSelectionHelpers, processSelectorHelpers, reportSelectorHelpers
+- Added getName and getUserNumber user selectors
 ## [13.0.0] - 2021-12-08
 ### Changes (Breaking)
 - MUI 5

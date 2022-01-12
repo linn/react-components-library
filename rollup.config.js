@@ -78,7 +78,7 @@ export default [
             markNotificationSeen: 'src/actions/markNotificationSeen.js',
             menuSelectors: 'src/selectors/menuSelectors.js',
             newsSelectors: 'src/selectors/newsSelectors.js',
-            getUsername: 'src/selectors/userSelectors.js',
+            getUsername: 'src/selectors/legacyUserSelectors.js',
             errorTheme: 'src/themes/errorTheme.js',
             linnTheme: 'src/themes/linnTheme.js',
             fetchError: 'src/reducers/reducerFactories/fetchErrorReducerFactory.js'
