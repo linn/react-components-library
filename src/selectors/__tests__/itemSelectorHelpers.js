@@ -1,11 +1,4 @@
-﻿import {
-    getItem,
-    getItemLoading,
-    getApplicationState,
-    getApplicationStateLoading,
-    getItemEditStatus,
-    getSnackbarVisible
-} from '../itemSelectorHelpers';
+﻿import itemSelectorHelpers from '../itemSelectorHelpers';
 
 describe('when getting item', () => {
     test('should return item', () => {
@@ -17,7 +10,7 @@ describe('when getting item', () => {
 
         const expectedResult = { name: 'name' };
 
-        expect(getItem(state.itemType)).toEqual(expectedResult);
+        expect(itemSelectorHelpers.getItem(state.itemType)).toEqual(expectedResult);
     });
 });
 
@@ -29,7 +22,7 @@ describe('when getting nothing', () => {
             }
         };
 
-        expect(getItem(state.itemType)).toEqual(null);
+        expect(itemSelectorHelpers.getItem(state.itemType)).toEqual(null);
     });
 });
 
@@ -42,7 +35,7 @@ describe('when getting loading', () => {
             }
         };
 
-        expect(getItemLoading(state.itemType)).toEqual(true);
+        expect(itemSelectorHelpers.getItemLoading(state.itemType)).toEqual(true);
     });
 });
 
@@ -57,7 +50,7 @@ describe('when getting application state', () => {
 
         const expectedResult = { links: [{ rel: 'a', href: '/b' }] };
 
-        expect(getApplicationState(state.itemType)).toEqual(expectedResult);
+        expect(itemSelectorHelpers.getApplicationState(state.itemType)).toEqual(expectedResult);
     });
 });
 
@@ -72,7 +65,9 @@ describe('when getting application state loading', () => {
 
         const expectedResult = true;
 
-        expect(getApplicationStateLoading(state.itemType)).toEqual(expectedResult);
+        expect(itemSelectorHelpers.getApplicationStateLoading(state.itemType)).toEqual(
+            expectedResult
+        );
     });
 });
 
@@ -87,7 +82,7 @@ describe('when getting snackbar visible', () => {
 
         const expectedResult = true;
 
-        expect(getSnackbarVisible(state.itemType)).toEqual(expectedResult);
+        expect(itemSelectorHelpers.getSnackbarVisible(state.itemType)).toEqual(expectedResult);
     });
 });
 
@@ -102,6 +97,6 @@ describe('when getting edit status', () => {
 
         const expectedResult = 'view';
 
-        expect(getItemEditStatus(state.itemType)).toEqual(expectedResult);
+        expect(itemSelectorHelpers.getItemEditStatus(state.itemType)).toEqual(expectedResult);
     });
 });

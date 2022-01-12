@@ -1,10 +1,4 @@
-﻿import {
-    getItems,
-    getLoading,
-    getItem,
-    getItemByHref,
-    getPage
-} from '../paginationSelectorHelpers';
+﻿import paginationSelectorHelpers from '../paginationSelectorHelpers';
 
 describe('when getting items', () => {
     test('should return items', () => {
@@ -18,7 +12,7 @@ describe('when getting items', () => {
 
         const expectedResult = [{ name: 'name' }];
 
-        expect(getItems(state.item)).toEqual(expectedResult);
+        expect(paginationSelectorHelpers.getItems(state.item)).toEqual(expectedResult);
     });
 });
 
@@ -33,7 +27,7 @@ describe('when getting loading', () => {
             }
         };
 
-        expect(getLoading(state.item)).toEqual(true);
+        expect(paginationSelectorHelpers.getLoading(state.item)).toEqual(true);
     });
 });
 
@@ -49,7 +43,7 @@ describe('when getting item by id', () => {
 
         const expectedResult = { id: 1, name: 'name' };
 
-        expect(getItem(state.item, 1)).toEqual(expectedResult);
+        expect(paginationSelectorHelpers.getItem(state.item, 1)).toEqual(expectedResult);
     });
 });
 
@@ -65,7 +59,7 @@ describe('when getting item by href', () => {
 
         const expectedResult = { href: '/1', name: 'name' };
 
-        expect(getItemByHref(state.item, '/1')).toEqual(expectedResult);
+        expect(paginationSelectorHelpers.getItemByHref(state.item, '/1')).toEqual(expectedResult);
     });
 });
 
@@ -81,6 +75,6 @@ describe('when getting page', () => {
 
         const expectedResult = { elements: [{ name: 'name' }] };
 
-        expect(getPage(state.item)).toEqual(expectedResult);
+        expect(paginationSelectorHelpers.getPage(state.item)).toEqual(expectedResult);
     });
 });

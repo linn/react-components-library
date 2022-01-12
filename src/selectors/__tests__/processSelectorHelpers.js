@@ -1,4 +1,4 @@
-﻿import { getData, getMessageText, getWorking, getMessageVisible } from '../processSelectorHelpers';
+﻿import processSelectorHelpers from '../processSelectorHelpers';
 
 describe('when getting data', () => {
     test('should return data', () => {
@@ -10,7 +10,7 @@ describe('when getting data', () => {
 
         const expectedResult = { name: 'name' };
 
-        expect(getData(state.processType)).toEqual(expectedResult);
+        expect(processSelectorHelpers.getData(state.processType)).toEqual(expectedResult);
     });
 });
 
@@ -24,7 +24,7 @@ describe('when getting working', () => {
 
         const expectedResult = true;
 
-        expect(getWorking(state.processType)).toEqual(expectedResult);
+        expect(processSelectorHelpers.getWorking(state.processType)).toEqual(expectedResult);
     });
 });
 
@@ -38,7 +38,7 @@ describe('when getting message', () => {
 
         const expectedResult = 'message';
 
-        expect(getMessageText(state.processType)).toEqual(expectedResult);
+        expect(processSelectorHelpers.getMessageText(state.processType)).toEqual(expectedResult);
     });
 });
 
@@ -52,6 +52,6 @@ describe('when getting message visible', () => {
 
         const expectedResult = false;
 
-        expect(getMessageVisible(state.processType)).toEqual(expectedResult);
+        expect(processSelectorHelpers.getMessageVisible(state.processType)).toEqual(expectedResult);
     });
 });

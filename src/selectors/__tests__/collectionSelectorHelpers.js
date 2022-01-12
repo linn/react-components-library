@@ -1,14 +1,4 @@
-﻿import {
-    getItems,
-    getSearchItems,
-    getLoading,
-    getItem,
-    getItemByHref,
-    getLinks,
-    hasPrivilege,
-    getApplicationState,
-    getApplicationStateLoading
-} from '../collectionSelectorHelpers';
+﻿import collectionSelectorHelpers from '../collectionSelectorHelpers';
 
 describe('when getting items', () => {
     test('should return items', () => {
@@ -20,7 +10,7 @@ describe('when getting items', () => {
 
         const expectedResult = [{ name: 'name' }];
 
-        expect(getItems(state.itemTypes)).toEqual(expectedResult);
+        expect(collectionSelectorHelpers.getItems(state.itemTypes)).toEqual(expectedResult);
     });
 });
 
@@ -44,7 +34,7 @@ describe('when getting searchItems', () => {
             { name: 'name' }
         ];
 
-        expect(getSearchItems(state.itemTypes)).toEqual(expectedResult);
+        expect(collectionSelectorHelpers.getSearchItems(state.itemTypes)).toEqual(expectedResult);
     });
 
     test('should limit search items', () => {
@@ -61,7 +51,9 @@ describe('when getting searchItems', () => {
 
         const expectedResult = [{ name: 'name' }, { name: 'name' }, { name: 'name' }];
 
-        expect(getSearchItems(state.itemTypes, 3)).toEqual(expectedResult);
+        expect(collectionSelectorHelpers.getSearchItems(state.itemTypes, 3)).toEqual(
+            expectedResult
+        );
     });
 });
 
@@ -73,7 +65,7 @@ describe('when getting nothing', () => {
             }
         };
 
-        expect(getItems(state.itemTypes)).toEqual([]);
+        expect(collectionSelectorHelpers.getItems(state.itemTypes)).toEqual([]);
     });
 });
 
@@ -86,7 +78,7 @@ describe('when getting loading', () => {
             }
         };
 
-        expect(getLoading(state.itemTypes)).toEqual(true);
+        expect(collectionSelectorHelpers.getLoading(state.itemTypes)).toEqual(true);
     });
 });
 
@@ -101,7 +93,7 @@ describe('when getting item by id', () => {
 
         const expectedResult = { id: '1' };
 
-        expect(getItem(state.itemTypes, '1')).toEqual(expectedResult);
+        expect(collectionSelectorHelpers.getItem(state.itemTypes, '1')).toEqual(expectedResult);
     });
 });
 
@@ -119,7 +111,9 @@ describe('when getting item by href', () => {
 
         const expectedResult = { name: '1', href: '/1' };
 
-        expect(getItemByHref(state.itemTypes, '/1')).toEqual(expectedResult);
+        expect(collectionSelectorHelpers.getItemByHref(state.itemTypes, '/1')).toEqual(
+            expectedResult
+        );
     });
 });
 
@@ -134,7 +128,7 @@ describe('when getting links', () => {
 
         const expectedResult = [{ rel: 'self', href: '/1' }];
 
-        expect(getLinks(state.itemTypes)).toEqual(expectedResult);
+        expect(collectionSelectorHelpers.getLinks(state.itemTypes)).toEqual(expectedResult);
     });
 });
 
@@ -154,7 +148,9 @@ describe('when getting privilege', () => {
 
         const expectedResult = true;
 
-        expect(hasPrivilege(state.itemTypes, rel)).toEqual(expectedResult);
+        expect(collectionSelectorHelpers.hasPrivilege(state.itemTypes, rel)).toEqual(
+            expectedResult
+        );
     });
 
     it('should return false if no matching privilege', () => {
@@ -172,7 +168,9 @@ describe('when getting privilege', () => {
 
         const expectedResult = false;
 
-        expect(hasPrivilege(state.itemTypes, rel)).toEqual(expectedResult);
+        expect(collectionSelectorHelpers.hasPrivilege(state.itemTypes, rel)).toEqual(
+            expectedResult
+        );
     });
 
     it('should return false if item has no links', () => {
@@ -187,7 +185,9 @@ describe('when getting privilege', () => {
 
         const expectedResult = false;
 
-        expect(hasPrivilege(state.itemTypes, rel)).toEqual(expectedResult);
+        expect(collectionSelectorHelpers.hasPrivilege(state.itemTypes, rel)).toEqual(
+            expectedResult
+        );
     });
 });
 
@@ -202,7 +202,9 @@ describe('when getting application state', () => {
 
         const expectedResult = { links: [{ rel: 'a', href: '/b' }] };
 
-        expect(getApplicationState(state.itemTypes)).toEqual(expectedResult);
+        expect(collectionSelectorHelpers.getApplicationState(state.itemTypes)).toEqual(
+            expectedResult
+        );
     });
 });
 
@@ -217,6 +219,8 @@ describe('when getting application state loading', () => {
 
         const expectedResult = true;
 
-        expect(getApplicationStateLoading(state.itemTypes)).toEqual(expectedResult);
+        expect(collectionSelectorHelpers.getApplicationStateLoading(state.itemTypes)).toEqual(
+            expectedResult
+        );
     });
 });

@@ -1,9 +1,4 @@
-﻿import {
-    getReportData,
-    getReportState,
-    getReportLoading,
-    getReportOptions
-} from '../reportSelectorHelpers';
+﻿import reportSelectorHelpers from '../reportSelectorHelpers';
 
 describe('when getting results', () => {
     test('should return results', () => {
@@ -19,7 +14,7 @@ describe('when getting results', () => {
 
         const expectedResult = { title: 't' };
 
-        expect(getReportData(state.reportName)).toEqual(expectedResult);
+        expect(reportSelectorHelpers.getReportData(state.reportName)).toEqual(expectedResult);
     });
 });
 
@@ -37,7 +32,7 @@ describe('when getting options', () => {
 
         const expectedResult = { option1: '1' };
 
-        expect(getReportOptions(state.reportName)).toEqual(expectedResult);
+        expect(reportSelectorHelpers.getReportOptions(state.reportName)).toEqual(expectedResult);
     });
 });
 
@@ -53,7 +48,7 @@ describe('when getting loading', () => {
             }
         };
 
-        expect(getReportLoading(state.reportName)).toEqual(true);
+        expect(reportSelectorHelpers.getReportLoading(state.reportName)).toEqual(true);
     });
 });
 
@@ -77,6 +72,6 @@ describe('when getting state', () => {
             options: { option1: '1' }
         };
 
-        expect(getReportState(state.reportName)).toEqual(expectedResult);
+        expect(reportSelectorHelpers.getReportState(state.reportName)).toEqual(expectedResult);
     });
 });

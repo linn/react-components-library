@@ -1,31 +1,32 @@
-export const getWorking = storeItem => {
-    if (!storeItem) {
-        return null;
-    }
+const processSelectorHelpers = {
+    getWorking: storeItem => {
+        if (!storeItem) {
+            return null;
+        }
 
-    return storeItem.working;
+        return storeItem.working;
+    },
+    getMessageVisible: storeItem => {
+        if (!storeItem) {
+            return null;
+        }
+
+        return storeItem.messageVisible;
+    },
+    getMessageText: storeItem => {
+        if (!storeItem) {
+            return null;
+        }
+
+        return storeItem.messageText;
+    },
+    getData: storeItem => {
+        if (!storeItem) {
+            return null;
+        }
+
+        return storeItem.data;
+    }
 };
 
-export const getMessageVisible = storeItem => {
-    if (!storeItem) {
-        return null;
-    }
-
-    return storeItem.messageVisible;
-};
-
-export const getMessageText = storeItem => {
-    if (!storeItem) {
-        return null;
-    }
-
-    return storeItem.messageText;
-};
-
-export const getData = storeItem => {
-    if (!storeItem) {
-        return null;
-    }
-
-    return storeItem.data;
-};
+export default processSelectorHelpers;
