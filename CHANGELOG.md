@@ -1,4 +1,7 @@
 # Changelog
+## [13.2.0] - 2022-01-13
+### Changes
+- Added userSelectors as combined object with getName and getUserNumber user selectors.
 ## [13.1.0] - 2022-01-10
 ### Added
 - Selector helpers: collectionSelectorHelpers, itemSelectorHelpers, paginationSelectionHelpers, processSelectorHelpers, reportSelectorHelpers

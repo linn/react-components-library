@@ -1,4 +1,4 @@
-import { getName, getUserNumber } from '../userSelectors';
+import userSelectors from '../userSelectors';
 
 describe('when getting name', () => {
     test('should return name', () => {
@@ -12,7 +12,7 @@ describe('when getting name', () => {
             }
         };
 
-        expect(getName(state)).toEqual('user 1');
+        expect(userSelectors.getName(state)).toEqual('user 1');
     });
 });
 
@@ -28,6 +28,6 @@ describe('when getting user number', () => {
             }
         };
 
-        expect(getUserNumber(state)).toEqual('808');
+        expect(userSelectors.getUserNumber(state)).toEqual('808');
     });
 });
