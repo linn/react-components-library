@@ -1,7 +1,8 @@
 const reportSelectorHelpers = {
     getReportState: reportState => reportState || {},
-    getReportData: reportState => (reportState.results ? reportState.results.data : null),
-    getReportLoading: reportState => (reportState.results ? reportState.results.loading : false),
+    getReportData: reportState => reportState?.results?.data,
+    getReportLoading: reportState =>
+        reportState?.results?.loading ? reportState.results.loading : false,
     getReportOptions: reportState => reportState.options
 };
 

@@ -61,7 +61,7 @@ import news from './src/reducers/news';
 import menuSelectors from './src/selectors/menuSelectors';
 import newsSelectors from './src/selectors/newsSelectors';
 import getUsername from './src/selectors/legacyUserSelectors';
-import { getName, getUserNumber } from './src/selectors/userSelectors';
+import userSelectors from './src/selectors/userSelectors';
 import utilities from './src/utilities/index';
 import initialiseOnMount from './src/components/common/initialiseOnMount';
 import Navigation from './src/containers/Navigation';
@@ -111,11 +111,9 @@ export {
     getItemError,
     getItemErrorDetailMessage,
     getItemErrors,
-    getName,
     getPreviousPaths,
     getRequestErrors,
     getUsername,
-    getUserNumber,
     getWeekEndDate,
     getWeekStartDate,
     GroupEditTable,
@@ -171,6 +169,7 @@ export {
     TypeaheadDialog,
     TypeaheadTable,
     UpdateApiActions,
+    userSelectors,
     useSearch,
     useTablePagination,
     utilities,
