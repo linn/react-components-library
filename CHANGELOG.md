@@ -1,5 +1,9 @@
 # Changelog
 ## [13.2.0] - 2022-01-13
+## [13.3.0] - 2022-01-14
+### Changes
+- Added optional newTab prop to the LinkButton component that allows external links to be set to open in a new tab. defaults to false.
+- Fixed DatePicker error when null value
 ### Changes
 - Added userSelectors as combined object with getName and getUserNumber user selectors.
 ## [13.1.0] - 2022-01-10
