@@ -5,22 +5,22 @@ import LinkButton from '../components/LinkButton';
 
 export default {
     title: 'Components/LinkButton',
-    decorators: [
-        (story) => <MemoryRouter initialEntries={['/']}>{story()}</MemoryRouter>,
-        (story) => providers(story)
-    ],
+    decorators: [(story) => providers(story)],
     component: LinkButton
 };
 
-export const Default = (args) => <LinkButton {...args} />;
+export const Default = (args) => (
+    <MemoryRouter initialEntries={['/']}>
+        <LinkButton {...args} />
+    </MemoryRouter>
+);
 
 Default.story = {
     name: 'default'
 };
 
 Default.args = {
-    text: 'Some Link',
-    to: '#'
+    text: 'Some Link'
 };
 
 export const External = (args) => <LinkButton {...args} />;
@@ -31,7 +31,21 @@ External.story = {
 
 External.args = {
     external: true,
-    text: 'Some Link'
+    text: 'Some Link',
+    to: '#'
+};
+
+export const ExternalNewTab = (args) => <LinkButton {...args} />;
+
+ExternalNewTab.story = {
+    name: 'external new tab'
+};
+
+ExternalNewTab.args = {
+    external: true,
+    text: 'Some Link',
+    to: '#',
+    newTab: true
 };
 
 export const DisabledWithTooltip = (args) => <LinkButton {...args} />;

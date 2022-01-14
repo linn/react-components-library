@@ -2,7 +2,7 @@ import React from 'react';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import makeStyles from '@mui/styles/makeStyles';
-import { Link } from 'react-router-dom';
+import Link from '@mui/material/Link';
 import PropTypes from 'prop-types';
 
 const useStyles = makeStyles((theme) => ({
@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function LinkButton({ to, external, tooltip, text, disabled }) {
+function LinkButton({ to, external, newTab, tooltip, text, disabled }) {
     const classes = useStyles();
 
     const button = () =>
@@ -50,7 +50,7 @@ function LinkButton({ to, external, tooltip, text, disabled }) {
     return (
         <div>
             {external ? (
-                <a className={classes.a} href={to}>
+                <a className={classes.a} href={to} target={newTab ? '_blank' : ''} rel="noreferrer">
                     {button()}
                 </a>
             ) : (
@@ -67,13 +67,15 @@ LinkButton.propTypes = {
     tooltip: PropTypes.string,
     to: PropTypes.string.isRequired,
     external: PropTypes.bool,
-    disabled: PropTypes.bool
+    disabled: PropTypes.bool,
+    newTab: PropTypes.bool
 };
 
 LinkButton.defaultProps = {
     external: false,
     disabled: false,
-    tooltip: null
+    tooltip: null,
+    newTab: false
 };
 
 export default LinkButton;
