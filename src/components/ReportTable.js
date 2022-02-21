@@ -294,16 +294,20 @@ Results.defaultProps = {
     showTotals: true,
     showRowTitles: true,
     hasExternalLinks: false,
-    columnClasses: null,
+    columnClasses: null
 };
 
 ReportTable.propTypes = {
     hasExternalLinks: PropTypes.bool,
-    placeholderRows: PropTypes.number.isRequired,
-    placeholderColumns: PropTypes.number.isRequired,
-    reportData: PropTypes.shape({}),
+    placeholderRows: PropTypes.number,
+    placeholderColumns: PropTypes.number,
+    reportData: PropTypes.shape({ message: PropTypes.string }),
     columnClasses: PropTypes.arrayOf(PropTypes.string),
-    allowPageBreakInside: PropTypes.bool
+    allowPageBreakInside: PropTypes.bool,
+    title: PropTypes.shape({}),
+    showTitle: PropTypes.bool,
+    showTotals: PropTypes.bool,
+    showRowTitles: PropTypes.bool
 };
 
 ReportTable.defaultProps = {
@@ -312,7 +316,11 @@ ReportTable.defaultProps = {
     placeholderColumns: 6,
     hasExternalLinks: false,
     columnClasses: null,
-    allowPageBreakInside: false
+    allowPageBreakInside: false,
+    title: '',
+    showTitle: true,
+    showTotals: false,
+    showRowTitles: false
 };
 
 export default ReportTable;

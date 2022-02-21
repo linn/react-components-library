@@ -6,17 +6,18 @@ const headersType = PropTypes.shape({
     varianceColumns: PropTypes.arrayOf(PropTypes.number).isRequired
 });
 
-const resultDetailsType = PropTypes.shape({
-    rowTitle: PropTypes.object.isRequired,
+export const resultDetailsType = PropTypes.shape({
+    rowTitle: PropTypes.shape({}).isRequired,
     rowSortOrder: PropTypes.number,
     values: PropTypes.arrayOf(PropTypes.object).isRequired
 });
 
 export const reportResultType = PropTypes.shape({
-    title: PropTypes.object,
+    title: PropTypes.shape({}),
     resultType: PropTypes.string,
     reportValueType: PropTypes.string,
     headers: headersType,
     results: PropTypes.arrayOf(resultDetailsType).isRequired,
-    totals: resultDetailsType
+    totals: resultDetailsType,
+    message: PropTypes.string
 });
