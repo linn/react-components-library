@@ -73,6 +73,16 @@ export const receiveSearch = (actionTypes, actionTypeRoot, itemName) => ({
     payload: successPayload(itemName)
 });
 
+export const requestPost = (actionTypes, actionTypeRoot) => ({
+    type: actionTypes[`REQUEST_POST_${actionTypeRoot}`],
+    payload: {}
+});
+
+export const receivePost = (actionTypes, actionTypeRoot, itemName) => ({
+    type: actionTypes[`RECEIVE_POST_${actionTypeRoot}`],
+    payload: successPayload(itemName)
+});
+
 export const error = (actionTypes, actionTypeRoot, itemName) => ({
     type: actionTypes[`FETCH_${actionTypeRoot}_ERROR`],
     payload: async (action, state, res) =>
