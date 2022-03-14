@@ -20,7 +20,7 @@ export default function ProcessActions(
 
         return {
             [RSAA]: {
-                endpoint: id ? `${appRoot}${uri}/${id}` : `${appRoot}${uri}`,
+                endpoint: id ? `${appRoot}${uri}${id}` : `${appRoot}${uri}`,
                 method: 'POST',
                 options: { requiresAuth: true },
                 headers: {
