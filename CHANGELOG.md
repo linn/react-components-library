@@ -1,4 +1,7 @@
 # Changelog
+## [13.5.0] - 2022-02-21
+### Changes
+- Support arbritrary content types in REQUEST_PROCESS_START actions. Defaults to application/json for backwards compatibility.
 ## [13.4.0] - 2022-02-21
 ### Changes
 - Support optional externalLink field on individual drill downs in ReportTable DisplayUtilites.
