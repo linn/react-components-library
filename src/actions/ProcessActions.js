@@ -10,7 +10,7 @@ export default function ProcessActions(
     appRoot,
     contentType = 'application/json'
 ) {
-    this.requestProcessStart = (body, id = null, options = null) => {
+    this.requestProcessStart = (body, options = null) => {
         const makeBody = () => {
             if (!body) return '';
             if (contentType === 'application/json') {
@@ -21,9 +21,6 @@ export default function ProcessActions(
 
         const makeEndpoint = () => {
             let endpoint = `${appRoot}${uri}`;
-            if (id) {
-                endpoint += id;
-            }
             if (options) {
                 endpoint += `?${queryString.stringify(options)}`;
             }
