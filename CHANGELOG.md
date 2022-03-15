@@ -1,4 +1,7 @@
 # Changelog
+## [13.6.0] - 2022-03-15
+### Changes
+- Support optional query parameters in the requestProcessStart creator.  Defaults to null
 ## [13.5.0] - 2022-03-14
 ### Changes
 - Support arbritrary content types in the requestProcessStart action creator. Defaults to application/json for backwards compatibility.

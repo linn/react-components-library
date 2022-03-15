@@ -1,4 +1,5 @@
 ﻿import { RSAA } from 'redux-api-middleware';
+import queryString from 'query-string';
 import * as rsaaTypes from './rsaaTypes';
 
 export default function ProcessActions(
@@ -9,7 +10,7 @@ export default function ProcessActions(
     appRoot,
     contentType = 'application/json'
 ) {
-    this.requestProcessStart = (body, id = null) => {
+    this.requestProcessStart = (body, options = null) => {
         const makeBody = () => {
             if (!body) return '';
             if (contentType === 'application/json') {
@@ -18,9 +19,17 @@ export default function ProcessActions(
             return body;
         };
 
+        const makeEndpoint = () => {
+            let endpoint = `${appRoot}${uri}`;
+            if (options) {
+                endpoint += `?${queryString.stringify(options)}`;
+            }
+            return endpoint;
+        };
+
         return {
             [RSAA]: {
-                endpoint: id ? `${appRoot}${uri}${id}` : `${appRoot}${uri}`,
+                endpoint: makeEndpoint(),
                 method: 'POST',
                 options: { requiresAuth: true },
                 headers: {
