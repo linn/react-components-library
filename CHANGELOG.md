@@ -1,4 +1,7 @@
 # Changelog
+## [13.6.1] - 2022-03-23
+### Changes
+- Add optional 'required' prop to typeahead component, defaults to false
 ## [13.6.0] - 2022-03-15
 ### Changes
 - Support optional query parameters in the requestProcessStart creator.  Defaults to null
