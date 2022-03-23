@@ -72,7 +72,8 @@ function Typeahead({
     resultLimit,
     clearable,
     clearTooltipText,
-    onClear
+    onClear,
+    required
 }) {
     const [searchTerm, setSearchTerm] = useState('');
     const [dialogOpen, setDialogOpen] = useState(false);
@@ -213,6 +214,7 @@ function Typeahead({
                     label={label}
                     placeholder={placeholder}
                     onChange={onChange()}
+                    required={required}
                 />
             )}
             {clearable && (
@@ -259,6 +261,7 @@ function Typeahead({
                                 placeholder={placeholder}
                                 onChange={handleSearchTermChange}
                                 value={searchTerm}
+                                required={required}
                             />
                             {loading ? <Loading /> : results()}
                         </div>
@@ -301,7 +304,8 @@ Typeahead.propTypes = {
     resultLimit: PropTypes.number,
     clearable: PropTypes.bool,
     clearTooltipText: PropTypes.string,
-    onClear: PropTypes.func
+    onClear: PropTypes.func,
+    required: PropTypes.bool
 };
 
 Typeahead.defaultProps = {
@@ -324,6 +328,7 @@ Typeahead.defaultProps = {
     handleFieldChange: null,
     clearable: false,
     clearTooltipText: 'Clear',
+    required: false,
     onClear: () => {}
 };
 

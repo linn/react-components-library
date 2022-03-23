@@ -46,7 +46,8 @@ function TypeaheadTable({
     links,
     disabled,
     onSelect,
-    value
+    value,
+    required
 }) {
     const [searchTerm, setSearchTerm] = useState();
     const [dialogOpen, setDialogOpen] = useState(false);
@@ -136,6 +137,7 @@ function TypeaheadTable({
                 textFieldProps={{
                     autoFocus: true
                 }}
+                required={required}
             />
             {loading ? <Loading /> : results()}
         </>
@@ -217,7 +219,8 @@ TypeaheadTable.propTypes = {
     links: PropTypes.bool,
     onSelect: PropTypes.func,
     disabled: PropTypes.bool,
-    value: PropTypes.string
+    value: PropTypes.string,
+    required: PropTypes.bool
 };
 
 TypeaheadTable.defaultProps = {
@@ -234,7 +237,8 @@ TypeaheadTable.defaultProps = {
     links: true,
     onSelect: null,
     disabled: false,
-    value: null
+    value: null,
+    required: false
 };
 
 export default TypeaheadTable;
