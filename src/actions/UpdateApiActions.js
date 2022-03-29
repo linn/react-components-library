@@ -109,6 +109,24 @@ export default function UpdateApiActions(
         }
     });
 
+    this.postByHref = (href, body = '') => ({
+        [RSAA]: {
+            endpoint: `${appRoot}${href}`,
+            method: 'POST',
+            options: { requiresAuth: true },
+            headers: {
+                Accept: accept ?? 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body),
+            types: [
+                rsaaTypes.requestPost(actionTypes, actionTypeRoot),
+                rsaaTypes.receivePost(actionTypes, actionTypeRoot, itemName),
+                rsaaTypes.error(actionTypes, actionTypeRoot, itemName)
+            ]
+        }
+    });
+
     this.delete = (id, item) => ({
         [RSAA]: {
             endpoint: id !== null ? `${appRoot}${uri}/${id}` : `${appRoot}${uri}`,
