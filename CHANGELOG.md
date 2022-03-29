@@ -1,7 +1,16 @@
 # Changelog
-## [13.4.1] - 2022-03-09
+## [13.6.2] - 2022-03-29
 ### Changes
 - Add postByHref to updateApiActions
+## [13.6.1] - 2022-03-23
+### Changes
+- Add optional 'required' prop to typeahead component & typeahead table, defaults to false
+## [13.6.0] - 2022-03-15
+### Changes
+- Support optional query parameters in the requestProcessStart creator.  Defaults to null
+## [13.5.0] - 2022-03-14
+### Changes
+- Support arbritrary content types in the requestProcessStart action creator. Defaults to application/json for backwards compatibility.
 ## [13.4.0] - 2022-02-21
 ### Changes
 - Support optional externalLink field on individual drill downs in ReportTable DisplayUtilites.

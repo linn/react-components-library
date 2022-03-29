@@ -1,24 +1,50 @@
 ﻿import { RSAA } from 'redux-api-middleware';
+import queryString from 'query-string';
 import * as rsaaTypes from './rsaaTypes';
 
-export default function ProcessActions(itemName, actionTypeRoot, uri, actionTypes, appRoot) {
-    this.requestProcessStart = body => ({
-        [RSAA]: {
-            endpoint: `${appRoot}${uri}`,
-            method: 'POST',
-            options: { requiresAuth: true },
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: body ? JSON.stringify(body) : '',
-            types: [
-                rsaaTypes.requested(actionTypes, actionTypeRoot),
-                rsaaTypes.receivedProcess(actionTypes, actionTypeRoot, itemName),
-                rsaaTypes.error(actionTypes, actionTypeRoot, itemName)
-            ]
-        }
-    });
+export default function ProcessActions(
+    itemName,
+    actionTypeRoot,
+    uri,
+    actionTypes,
+    appRoot,
+    contentType = 'application/json'
+) {
+    this.requestProcessStart = (body, options = null) => {
+        const makeBody = () => {
+            if (!body) return '';
+            if (contentType === 'application/json') {
+                return JSON.stringify(body);
+            }
+            return body;
+        };
+
+        const makeEndpoint = () => {
+            let endpoint = `${appRoot}${uri}`;
+            if (options) {
+                endpoint += `?${queryString.stringify(options)}`;
+            }
+            return endpoint;
+        };
+
+        return {
+            [RSAA]: {
+                endpoint: makeEndpoint(),
+                method: 'POST',
+                options: { requiresAuth: true },
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': contentType
+                },
+                body: makeBody(body),
+                types: [
+                    rsaaTypes.requested(actionTypes, actionTypeRoot),
+                    rsaaTypes.receivedProcess(actionTypes, actionTypeRoot, itemName),
+                    rsaaTypes.error(actionTypes, actionTypeRoot, itemName)
+                ]
+            }
+        };
+    };
 
     this.setMessageVisible = visible => {
         if (visible === true) {
