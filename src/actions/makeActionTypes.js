@@ -21,6 +21,8 @@ const makeActionTypes = (entityType, makeAll = true, makeDelete = false) => {
         types[`SET_${entityType}_EDIT_STATUS`] = `SET_${entityType}_EDIT_STATUS`;
         types[`SHOW_${entityType}_SNACKBAR`] = `SHOW_${entityType}_SNACKBAR`;
         types[`HIDE_${entityType}_SNACKBAR`] = `HIDE_${entityType}_SNACKBAR`;
+        types[`REQUEST_POST_${entityType}`] = `REQUEST_POST_${entityType}`;
+        types[`RECEIVE_POST_${entityType}`] = `RECEIVE_POST_${entityType}`;
     }
 
     if (makeDelete) {

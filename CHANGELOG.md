@@ -1,5 +1,5 @@
 # Changelog
-## [13.6.2] - 2022-03-29
+## [13.7.0] - 2022-03-29
 ### Changes
 - Add postByHref to updateApiActions
 ## [13.6.1] - 2022-03-23
