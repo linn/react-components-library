@@ -115,7 +115,7 @@ export default function UpdateApiActions(
             method: 'POST',
             options: { requiresAuth: true },
             headers: {
-                Accept: 'application/json',
+                Accept: accept ?? 'application/json',
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(body),
