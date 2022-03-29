@@ -109,7 +109,7 @@ export default function UpdateApiActions(
         }
     });
 
-    this.postByHref = href => ({
+    this.postByHref = (href, body = '') => ({
         [RSAA]: {
             endpoint: `${appRoot}${href}`,
             method: 'POST',
@@ -118,6 +118,7 @@ export default function UpdateApiActions(
                 Accept: 'application/json',
                 'Content-Type': 'application/json'
             },
+            body: JSON.stringify(body),
             types: [
                 rsaaTypes.requestPost(actionTypes, actionTypeRoot),
                 rsaaTypes.receivePost(actionTypes, actionTypeRoot, itemName),

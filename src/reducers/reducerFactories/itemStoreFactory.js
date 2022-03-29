@@ -1,4 +1,4 @@
-﻿export default function(
+﻿export default function (
     itemRoot,
     actionTypes,
     defaultState = { loading: false, item: null, editStatus: 'view', snackbarVisible: false }
@@ -98,6 +98,21 @@
                 };
 
             case actionTypes[`RECEIVE_NEW_${itemRoot}`]:
+                return {
+                    ...state,
+                    loading: false,
+                    item: action.payload.data,
+                    editStatus: 'view',
+                    snackbarVisible: true
+                };
+
+            case actionTypes[`REQUEST_POST_${itemRoot}`]:
+                return {
+                    ...state,
+                    loading: true
+                };
+
+            case actionTypes[`RECEIVE_POST_${itemRoot}`]:
                 return {
                     ...state,
                     loading: false,
