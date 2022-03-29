@@ -1,7 +1,7 @@
 # Changelog
 ## [13.7.0] - 2022-03-29
 ### Changes
-- Add postByHref to updateApiActions
+- Add postByHref to updateApiActions. Updates item in redux state on receive post
 ## [13.6.1] - 2022-03-23
 ### Changes
 - Add optional 'required' prop to typeahead component & typeahead table, defaults to false
