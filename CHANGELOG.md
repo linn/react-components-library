@@ -1,4 +1,7 @@
 # Changelog
+## [13.7.1] - 2022-04-12
+### Changes
+- Disable scroll-wheel editing on number-type InputFields
 ## [13.7.0] - 2022-03-29
 ### Changes
 - Add postByHref to updateApiActions. Updates item in redux state on receive post

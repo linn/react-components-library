@@ -62,11 +62,7 @@ function InputField({
         let val = newValue;
 
         if (type === 'date') {
-            val = newValue
-                ? moment(newValue)
-                      .utc()
-                      .format()
-                : '';
+            val = newValue ? moment(newValue).utc().format() : '';
         }
 
         if (type === 'number') {
@@ -111,6 +107,7 @@ function InputField({
                 required={required}
                 size="small"
                 rows={rows}
+                //onWheel={() => document.activeElement.blur()}
                 type={type}
                 value={type === 'date' ? moment(value).format('YYYY-MM-DD') : getValue(value)}
                 onChange={e => change(e)}
