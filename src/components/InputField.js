@@ -107,7 +107,11 @@ function InputField({
                 required={required}
                 size="small"
                 rows={rows}
-                //onWheel={() => document.activeElement.blur()}
+                onWheel={() => {
+                    if (type === 'number') {
+                        document.activeElement.blur();
+                    }
+                }}
                 type={type}
                 value={type === 'date' ? moment(value).format('YYYY-MM-DD') : getValue(value)}
                 onChange={e => change(e)}
