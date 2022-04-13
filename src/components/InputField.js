@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { Fragment } from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import InputAdornment from '@mui/material/InputAdornment';
 import TextField from '@mui/material/TextField';
@@ -55,18 +55,14 @@ function InputField({
     autoFocus
 }) {
     const classes = useStyles();
-
+    const inputRef = useRef();
     const change = e => {
         const newValue = e.target.value;
 
         let val = newValue;
 
         if (type === 'date') {
-            val = newValue
-                ? moment(newValue)
-                      .utc()
-                      .format()
-                : '';
+            val = newValue ? moment(newValue).utc().format() : '';
         }
 
         if (type === 'number') {
@@ -111,6 +107,12 @@ function InputField({
                 required={required}
                 size="small"
                 rows={rows}
+                inputRef={inputRef}
+                onWheel={() => {
+                    if (type === 'number') {
+                        inputRef.blur();
+                    }
+                }}
                 type={type}
                 value={type === 'date' ? moment(value).format('YYYY-MM-DD') : getValue(value)}
                 onChange={e => change(e)}
