@@ -109,9 +109,9 @@ export default function UpdateApiActions(
         }
     });
 
-    this.patch = item => ({
+    this.patch = (id, item) => ({
         [RSAA]: {
-            endpoint: `${appRoot}${uri}`,
+            endpoint: `${appRoot}${uri}/${id}`,
             method: 'PATCH',
             options: { requiresAuth: true },
             headers: {
