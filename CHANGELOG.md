@@ -1,4 +1,7 @@
 # Changelog
+## [13.8.1] - 2022-04-28
+### Changes
+- Update PATCH Endpoint
 ## [13.8.0] - 2022-04-28
 ### Changes
 - Add PATCH action
