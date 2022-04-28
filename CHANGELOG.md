@@ -1,4 +1,7 @@
 # Changelog
+## [13.8.0] - 2022-04-28
+### Changes
+- Add PATCH action
 ## [13.7.1] - 2022-04-12
 ### Changes
 - Disable scroll-wheel editing on number-type InputFields

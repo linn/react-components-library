@@ -109,6 +109,24 @@ export default function UpdateApiActions(
         }
     });
 
+    this.patch = (id, item) => ({
+        [RSAA]: {
+            endpoint: id !== null ? `${appRoot}${uri}/${id}` : `${appRoot}${uri}`,
+            method: 'PATCH',
+            options: { requiresAuth: true },
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(item),
+            types: [
+                rsaaTypes.requestPatch(actionTypes, actionTypeRoot),
+                rsaaTypes.receivePatch(actionTypes, actionTypeRoot, itemName),
+                rsaaTypes.error(actionTypes, actionTypeRoot, itemName)
+            ]
+        }
+    });
+
     this.postByHref = (href, body = '') => ({
         [RSAA]: {
             endpoint: `${appRoot}${href}`,

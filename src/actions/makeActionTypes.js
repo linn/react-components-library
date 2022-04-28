@@ -16,6 +16,8 @@ const makeActionTypes = (entityType, makeAll = true, makeDelete = false) => {
         types[`REQUEST_CREATE_${entityType}`] = `REQUEST_CREATE_${entityType}`;
         types[`REQUEST_UPDATE_${entityType}`] = `REQUEST_UPDATE_${entityType}`;
         types[`RECEIVE_UPDATED_${entityType}`] = `RECEIVE_UPDATED_${entityType}`;
+        types[`REQUEST_PATCH_${entityType}`] = `REQUEST_PATCH_${entityType}`;
+        types[`RECEIVE_PATCH_${entityType}`] = `RECEIVE_PATCH_${entityType}`;
         types[`RESET_${entityType}`] = `RESET_${entityType}`;
         types[`RECEIVE_NEW_${entityType}`] = `RECEIVE_NEW_${entityType}`;
         types[`SET_${entityType}_EDIT_STATUS`] = `SET_${entityType}_EDIT_STATUS`;

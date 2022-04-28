@@ -13,7 +13,9 @@ describe('item store reducer factory', () => {
         RECEIVE_APPLICATION_STATE_ENTITY: 'RECEIVE_APPLICATION_STATE_ENTITY',
         CLEAR_ENTITY_DATA: 'CLEAR_ENTITY_DATA',
         REQUEST_POST_ENTITY: 'REQUEST_POST_ENTITY',
-        RECEIVE_POST_ENTITY: 'RECEIVE_POST_ENTITY'
+        RECEIVE_POST_ENTITY: 'RECEIVE_POST_ENTITY',
+        REQUEST_PATCH_ENTITY: 'REQUEST_PATCH_ENTITY',
+        RECEIVE_PATCH_ENTITY: 'RECEIVE_PATCH_ENTITY'
     };
     const defaultState = {
         loading: false,
@@ -239,6 +241,48 @@ describe('item store reducer factory', () => {
 
         const action = {
             type: actionTypes.RECEIVE_POST_ENTITY,
+            payload: { data: { name: '1' } }
+        };
+
+        const expected = {
+            loading: false,
+            item: { name: '1' },
+            editStatus: 'view',
+            snackbarVisible: true
+        };
+
+        deepFreeze(state);
+
+        expect(generatedReducer(state, action)).toEqual(expected);
+    });
+
+    test('when requesting PATCH entity', () => {
+        const state = {
+            loading: false
+        };
+
+        const action = {
+            type: actionTypes.REQUEST_PATCH_ENTITY,
+            payload: {}
+        };
+
+        const expected = {
+            loading: true
+        };
+
+        deepFreeze(state);
+
+        expect(generatedReducer(state, action)).toEqual(expected);
+    });
+
+    test('when receiving entity from patch', () => {
+        const state = {
+            loading: true,
+            item: null
+        };
+
+        const action = {
+            type: actionTypes.RECEIVE_PATCH_ENTITY,
             payload: { data: { name: '1' } }
         };
 
