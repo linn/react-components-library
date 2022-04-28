@@ -83,6 +83,16 @@ export const receivePost = (actionTypes, actionTypeRoot, itemName) => ({
     payload: successPayload(itemName)
 });
 
+export const requestPatch = (actionTypes, actionTypeRoot) => ({
+    type: actionTypes[`REQUEST_PATCH_${actionTypeRoot}`],
+    payload: {}
+});
+
+export const receivePatch = (actionTypes, actionTypeRoot, itemName) => ({
+    type: actionTypes[`RECEIVE_PATCH_${actionTypeRoot}`],
+    payload: successPayload(itemName)
+});
+
 export const error = (actionTypes, actionTypeRoot, itemName) => ({
     type: actionTypes[`FETCH_${actionTypeRoot}_ERROR`],
     payload: async (action, state, res) =>

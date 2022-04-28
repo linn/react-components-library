@@ -38,6 +38,12 @@
                     loading: true
                 };
 
+            case actionTypes[`REQUEST_PATCH_${itemRoot}`]:
+                return {
+                    ...state,
+                    loading: true
+                };
+
             case actionTypes[`REQUEST_DELETE_${itemRoot}`]:
                 return {
                     ...state,
@@ -80,6 +86,15 @@
                 };
 
             case actionTypes[`RECEIVE_UPDATED_${itemRoot}`]:
+                return {
+                    ...state,
+                    loading: false,
+                    item: action.payload.data,
+                    editStatus: 'view',
+                    snackbarVisible: true
+                };
+
+            case actionTypes[`RECEIVE_PATCH_${itemRoot}`]:
                 return {
                     ...state,
                     loading: false,
