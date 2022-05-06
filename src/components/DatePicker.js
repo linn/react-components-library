@@ -34,7 +34,7 @@ function Picker({ value, minDate, maxDate, label, onChange, required, disabled }
                 margin="dense"
                 inputVariant="outlined"
                 autoOk
-                format="DD/MM/YYYY"
+                inputFormat="DD/MM/YYYY"
                 renderInput={(props) => <TextField {...props} />}
                 value={value ? moment(value) : null}
                 minDate={moment(minDate)}
