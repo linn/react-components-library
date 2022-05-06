@@ -95,7 +95,7 @@ describe('inputComponentFactory', () => {
 
         it('should return a date picker', () => {
             expect(screen.getAllByRole('textbox')).toHaveLength(1);
-            expect(screen.getByRole('textbox')).toHaveDisplayValue(['11/20/2019']);
+            expect(screen.getByRole('textbox')).toHaveDisplayValue(['20/11/2019']);
         });
     });
 
