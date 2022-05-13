@@ -34,7 +34,8 @@ function SnackbarMessage({ message, visible, onClose, timeOut }) {
                     aria-label="Close"
                     color="inherit"
                     onClick={() => onClose(false)}
-                    size="large">
+                    size="large"
+                >
                     <CloseIcon />
                 </IconButton>
             ]}

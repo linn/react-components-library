@@ -27,13 +27,15 @@ function FileUploader({
     setSnackbarVisible
 }) {
     const [file, setFile] = useState(null);
+    const [expanded, setExpanded] = useState(true);
+
     const onDrop = useCallback(acceptedFile => {
         setFile(acceptedFile[0]);
     }, []);
     const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
     const handleUploadClick = () => {
-        prepareUpload();
+        prepareUpload?.();
         const reader = new global.FileReader();
         reader.onload = () => {
             const binaryStr = reader.result;
@@ -45,17 +47,12 @@ function FileUploader({
 
     return (
         <>
-            {error && (
-                <Grid item xs={12}>
-                    <ErrorCard errorMessage={error.details} />
-                </Grid>
-            )}
             <SnackbarMessage
                 visible={snackbarVisible && result?.success}
                 onClose={() => setSnackbarVisible(false)}
                 message={result?.message}
             />
-            <Accordion>
+            <Accordion expanded={expanded} onChange={() => setExpanded(!expanded)}>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel2a-content"
@@ -65,6 +62,11 @@ function FileUploader({
                 </AccordionSummary>
                 <AccordionDetails>
                     <Grid container spacing={3}>
+                        {error && (
+                            <Grid item xs={12}>
+                                <ErrorCard errorMessage={error.details} />
+                            </Grid>
+                        )}
                         <Grid item xs={12}>
                             <Typography variant="subtitle1">{helperText}</Typography>
                         </Grid>
@@ -103,6 +105,15 @@ function FileUploader({
                                         <ErrorCard errorMessage={result.message} />
                                     </Grid>
                                 )}
+                                {result?.errors?.map(e => (
+                                    <Grid item xs={12}>
+                                        <ErrorCard
+                                            errorMessage={`${e.descriptor}${
+                                                e.message ? ` - ${e.message}` : ''
+                                            }`}
+                                        />
+                                    </Grid>
+                                ))}
                                 <Grid item xs={11} />
                                 <Grid item xs={1}>
                                     <Button
@@ -130,7 +141,11 @@ FileUploader.propTypes = {
     prepareUpload: PropTypes.func,
     doUpload: PropTypes.func.isRequired,
     loading: PropTypes.bool,
-    result: PropTypes.shape({ success: PropTypes.bool, message: PropTypes.string }),
+    result: PropTypes.shape({
+        success: PropTypes.bool,
+        message: PropTypes.string,
+        errors: PropTypes.arrayOf(PropTypes.shape({}))
+    }),
     error: PropTypes.shape({ details: PropTypes.string }),
     snackbarVisible: PropTypes.bool,
     setSnackbarVisible: PropTypes.func
