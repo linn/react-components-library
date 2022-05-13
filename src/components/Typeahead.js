@@ -19,7 +19,7 @@ import Loading from './Loading';
 import InputField from './InputField';
 import SearchIcon from './SearchIcon';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
     a: {
         textDecoration: 'none'
     },
@@ -73,7 +73,8 @@ function Typeahead({
     clearable,
     clearTooltipText,
     onClear,
-    required
+    required,
+    handleReturnPress
 }) {
     const [searchTerm, setSearchTerm] = useState('');
     const [dialogOpen, setDialogOpen] = useState(false);
@@ -86,7 +87,13 @@ function Typeahead({
         setSearchTerm(args[1]);
     };
 
-    const handleClick = (e) => {
+    const handleOnKeyPress = data => {
+        if (data.keyCode === 13) {
+            handleReturnPress({ id: value });
+        }
+    };
+
+    const handleClick = e => {
         if (modal) {
             setDialogOpen(false);
         }
@@ -142,7 +149,7 @@ function Typeahead({
 
         if (priorityFunction) {
             result = result
-                .map((i) => ({ ...i, priority: priorityFunction(i, searchTerm) }))
+                .map(i => ({ ...i, priority: priorityFunction(i, searchTerm) }))
                 .sort((a, b) => {
                     if (a.priority > b.priority) {
                         return -1;
@@ -161,7 +168,7 @@ function Typeahead({
         if (result?.length > 0) {
             return (
                 <List dense>
-                    {result.map((item) => (
+                    {result.map(item => (
                         <Fragment key={item.id}>
                             {links ? (
                                 <Link className={classes.a} component={RouterLink} to={item?.href}>
@@ -186,6 +193,7 @@ function Typeahead({
                 <Tooltip title={label}>
                     <IconButton
                         disabled={disabled}
+                        style={{ marginTop: '-10px' }}
                         onClick={() => {
                             setDialogOpen(true);
                             clearSearch();
@@ -196,26 +204,45 @@ function Typeahead({
                     </IconButton>
                 </Tooltip>
             ) : (
-                <InputField
-                    adornment={SearchIcon(() => setDialogOpen(true))}
-                    propertyName={propertyName}
-                    textFieldProps={{
-                        onClick: () => {
-                            if (!disabled) {
-                                if (openModalOnClick) {
-                                    setDialogOpen(true);
-                                    clearSearch();
+                <>
+                    <InputField
+                        adornment={!handleReturnPress && SearchIcon(() => setDialogOpen(true))}
+                        propertyName={propertyName}
+                        textFieldProps={{
+                            onClick: () => {
+                                if (!disabled) {
+                                    if (openModalOnClick) {
+                                        setDialogOpen(true);
+                                        clearSearch();
+                                    }
                                 }
-                            }
-                        },
-                        disabled
-                    }}
-                    value={modal ? value : searchTerm}
-                    label={label}
-                    placeholder={placeholder}
-                    onChange={onChange()}
-                    required={required}
-                />
+                            },
+                            disabled,
+                            onKeyDown: handleReturnPress ? handleOnKeyPress : null
+                        }}
+                        value={modal ? value : searchTerm}
+                        label={label}
+                        placeholder={placeholder}
+                        onChange={onChange()}
+                        required={required}
+                    />
+                    {handleReturnPress && (
+                        <Tooltip title={label}>
+                            <IconButton
+                                disabled={disabled}
+                                style={{ marginTop: '-10px' }}
+                                onClick={() => {
+                                    setDialogOpen(true);
+                                    setSearchTerm(value);
+                                    handleSearchTermChange(null, value);
+                                }}
+                                size="large"
+                            >
+                                {SearchIcon()}
+                            </IconButton>
+                        </Tooltip>
+                    )}
+                </>
             )}
             {clearable && (
                 <div className={classes.clearButtonInline}>
@@ -305,7 +332,8 @@ Typeahead.propTypes = {
     clearable: PropTypes.bool,
     clearTooltipText: PropTypes.string,
     onClear: PropTypes.func,
-    required: PropTypes.bool
+    required: PropTypes.bool,
+    handleReturnPress: PropTypes.func
 };
 
 Typeahead.defaultProps = {
@@ -329,7 +357,8 @@ Typeahead.defaultProps = {
     clearable: false,
     clearTooltipText: 'Clear',
     required: false,
-    onClear: () => {}
+    onClear: () => {},
+    handleReturnPress: null
 };
 
 export default Typeahead;
