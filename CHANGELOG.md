@@ -1,4 +1,8 @@
 # Changelog
+## [13.9.0] - 2022-05-13
+### Changes
+- Add handle Return press option to Typeahead. Requires modal, openModalOnClick={false} handleFieldChange={} handleReturnPress={}
+- If handleReturnPress is not supplied then behaviour of Typeahead should be as before
 ## [13.8.1] - 2022-04-28
 ### Changes
 - Update PATCH Endpoint
