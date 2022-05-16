@@ -5,10 +5,6 @@ import providers from './renderUtils/Providers';
 import FileUploader from '../components/FileUploader';
 import FileUploaderDocs from './FileUploaderDocs.mdx';
 
-const actions = {
-    backClick: action('Back')
-};
-
 export default {
     title: 'Components/FileUploader',
     decorators: [story => <div>{providers(story)}</div>],
