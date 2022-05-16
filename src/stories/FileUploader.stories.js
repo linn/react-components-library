@@ -32,6 +32,19 @@ export const Default = args => (
     />
 );
 
+export const NotInitiallyExpanded = args => (
+    <FileUploader
+        {...actions}
+        {...args}
+        doUpload={() => {}}
+        error={null}
+        prepareUpload={() => {}}
+        snackbarVisible={false}
+        setSnackbarVisible={() => {}}
+        initiallyExpanded={false}
+    />
+);
+
 export const FileUploadErrors = args => (
     <FileUploader
         {...actions}
@@ -64,19 +77,6 @@ export const FileUploadSuccess = args => (
         error={null}
         prepareUpload={() => {}}
         snackbarVisible
-        setSnackbarVisible={() => {}}
-    />
-);
-
-export const RequestErrors = args => (
-    <FileUploader
-        {...actions}
-        {...args}
-        result={null}
-        doUpload={() => {}}
-        error={{ details: '400 - Bad request' }}
-        prepareUpload={() => {}}
-        snackbarVisible={false}
         setSnackbarVisible={() => {}}
     />
 );

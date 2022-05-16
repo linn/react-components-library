@@ -1,18 +1,25 @@
 import React from 'react';
-import ErrorCard from '../ErrorCard';
 import { screen } from '@testing-library/react';
-import render from '../../test-utils';
 import '@testing-library/jest-dom/extend-expect';
+import render from '../../test-utils';
+import ErrorCard from '../ErrorCard';
 
 describe('<ErrorCard />', () => {
-    let wrapper;
-    let props;
-  
     beforeEach(() => {
-        render(<ErrorCard errorMessage={'there is an error'} />);
+        render(
+            <ErrorCard
+                errorMessage="there is an error"
+                detailLines={[
+                    { descriptor: 'Detail 1', message: 'Message 1' },
+                    { descriptor: 'Detail 2', message: 'Message 2' }
+                ]}
+            />
+        );
     });
 
-    it('should render error message', () => {
-        expect(screen.getByText('there is an error'));
+    it('should render error message and details', () => {
+        expect(screen.getByText('there is an error')).toBeInTheDocument();
+        expect(screen.getByText('Detail 1 - Message 1')).toBeInTheDocument();
+        expect(screen.getByText('Detail 2 - Message 2')).toBeInTheDocument();
     });
 });

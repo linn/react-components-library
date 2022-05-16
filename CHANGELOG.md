@@ -2,6 +2,7 @@
 ## [13.10.0] - 2022-05-13
 ### Changes
 - Add FileUploader component
+- Add optional detailsList to ErrorCard
 ## [13.8.1] - 2022-04-28
 ### Changes
 - Update PATCH Endpoint

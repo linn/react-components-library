@@ -18,16 +18,16 @@ import Loading from './Loading';
 function FileUploader({
     title,
     helperText,
-    prepareUpload,
     doUpload,
     loading,
     result,
-    error,
     snackbarVisible,
-    setSnackbarVisible
+    setSnackbarVisible,
+    initiallyExpanded,
+    initialFile
 }) {
-    const [file, setFile] = useState(null);
-    const [expanded, setExpanded] = useState(true);
+    const [file, setFile] = useState(initialFile);
+    const [expanded, setExpanded] = useState(initiallyExpanded);
 
     const onDrop = useCallback(acceptedFile => {
         setFile(acceptedFile[0]);
@@ -35,7 +35,6 @@ function FileUploader({
     const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
     const handleUploadClick = () => {
-        prepareUpload?.();
         const reader = new global.FileReader();
         reader.onload = () => {
             const binaryStr = reader.result;
@@ -47,11 +46,13 @@ function FileUploader({
 
     return (
         <>
-            <SnackbarMessage
-                visible={snackbarVisible && result?.success}
-                onClose={() => setSnackbarVisible(false)}
-                message={result?.message}
-            />
+            {snackbarVisible && (
+                <SnackbarMessage
+                    visible={snackbarVisible && result?.success}
+                    onClose={() => setSnackbarVisible(false)}
+                    message={result?.message}
+                />
+            )}
             <Accordion expanded={expanded} onChange={() => setExpanded(!expanded)}>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
@@ -62,11 +63,6 @@ function FileUploader({
                 </AccordionSummary>
                 <AccordionDetails>
                     <Grid container spacing={3}>
-                        {error && (
-                            <Grid item xs={12}>
-                                <ErrorCard errorMessage={error.details} />
-                            </Grid>
-                        )}
                         <Grid item xs={12}>
                             <Typography variant="subtitle1">{helperText}</Typography>
                         </Grid>
@@ -102,18 +98,13 @@ function FileUploader({
                                 </Grid>
                                 {result && !result.success && (
                                     <Grid item xs={12}>
-                                        <ErrorCard errorMessage={result.message} />
-                                    </Grid>
-                                )}
-                                {result?.errors?.map(e => (
-                                    <Grid item xs={12}>
                                         <ErrorCard
-                                            errorMessage={`${e.descriptor}${
-                                                e.message ? ` - ${e.message}` : ''
-                                            }`}
+                                            errorMessage={result.message}
+                                            detailLines={result?.errors}
                                         />
                                     </Grid>
-                                ))}
+                                )}
+
                                 <Grid item xs={11} />
                                 <Grid item xs={1}>
                                     <Button
@@ -123,7 +114,7 @@ function FileUploader({
                                         onClick={handleUploadClick}
                                         disabled={!file}
                                     >
-                                        Save
+                                        Upload
                                     </Button>
                                 </Grid>
                             </>
@@ -138,7 +129,6 @@ function FileUploader({
 FileUploader.propTypes = {
     helperText: PropTypes.string,
     title: PropTypes.string,
-    prepareUpload: PropTypes.func,
     doUpload: PropTypes.func.isRequired,
     loading: PropTypes.bool,
     result: PropTypes.shape({
@@ -146,20 +136,21 @@ FileUploader.propTypes = {
         message: PropTypes.string,
         errors: PropTypes.arrayOf(PropTypes.shape({}))
     }),
-    error: PropTypes.shape({ details: PropTypes.string }),
     snackbarVisible: PropTypes.bool,
-    setSnackbarVisible: PropTypes.func
+    setSnackbarVisible: PropTypes.func,
+    initiallyExpanded: PropTypes.bool,
+    initialFile: PropTypes.shape({})
 };
 
 FileUploader.defaultProps = {
     helperText: 'Upload a File',
     title: 'File Uploader',
-    prepareUpload: null,
+    initiallyExpanded: true,
     loading: false,
     result: null,
-    error: null,
     snackbarVisible: false,
-    setSnackbarVisible: null
+    setSnackbarVisible: null,
+    initialFile: null
 };
 
 export default FileUploader;
