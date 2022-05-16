@@ -5,6 +5,10 @@ import providers from './renderUtils/Providers';
 import FileUploader from '../components/FileUploader';
 import FileUploaderDocs from './FileUploaderDocs.mdx';
 
+const actions = {
+    doUpload: action('doUpload')
+};
+
 export default {
     title: 'Components/FileUploader',
     decorators: [story => <div>{providers(story)}</div>],
@@ -20,7 +24,6 @@ export const Default = args => (
     <FileUploader
         {...actions}
         {...args}
-        doUpload={() => {}}
         error={null}
         prepareUpload={() => {}}
         snackbarVisible={false}
@@ -28,11 +31,26 @@ export const Default = args => (
     />
 );
 
+export const WithFile = args => {
+    const blob = new Blob([''], { type: 'text/csv' });
+    blob.name = 'filename.csv';
+    return (
+        <FileUploader
+            {...actions}
+            {...args}
+            initialFile={blob}
+            error={null}
+            prepareUpload={() => {}}
+            snackbarVisible={false}
+            setSnackbarVisible={() => {}}
+        />
+    );
+};
+
 export const NotInitiallyExpanded = args => (
     <FileUploader
         {...actions}
         {...args}
-        doUpload={() => {}}
         error={null}
         prepareUpload={() => {}}
         snackbarVisible={false}
@@ -53,7 +71,6 @@ export const FileUploadErrors = args => (
                 { descriptor: 'PART B', message: 'Part too large' }
             ]
         }}
-        doUpload={() => {}}
         error={null}
         prepareUpload={() => {}}
         snackbarVisible={false}
@@ -69,7 +86,6 @@ export const FileUploadSuccess = args => (
             success: true,
             message: 'Woohoo'
         }}
-        doUpload={() => {}}
         error={null}
         prepareUpload={() => {}}
         snackbarVisible
