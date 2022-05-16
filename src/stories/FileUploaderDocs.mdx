@@ -12,7 +12,7 @@ Can render a list of errors (see the result prop) specific to your file, e.g. on
 The file uploader takes the following props
 - title: The title of the uploader. Defaults to 'File Uploader'
 - helperText: The helper text that could, for example, outline the format of the file. Defaults to 'Upload a File'
-- doUpload [REQUIRED]: The function to carry out the upload. It will be passed a binary string of the data in the file.
+- doUpload [REQUIRED]: The function to carry out the upload. It will be called with one argument, a binary string of the data in the file, which this component generates.
 - loading: a bool to decide whether to render a Loading spinner or not. Defaults to false.
 - result: The result of your upload. Defaults to null. Should be in the form  
 - initialFile: allows you to pass in a file to be uploaded from elsewhere
