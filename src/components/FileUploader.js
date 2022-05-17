@@ -96,17 +96,8 @@ function FileUploader({
                                         )}
                                     </Box>
                                 </Grid>
-                                {result && !result.success && (
-                                    <Grid item xs={12}>
-                                        <ErrorCard
-                                            errorMessage={result.message}
-                                            detailLines={result?.errors}
-                                        />
-                                    </Grid>
-                                )}
-
-                                <Grid item xs={11} />
-                                <Grid item xs={1}>
+                                <Grid item xs={10} />
+                                <Grid item xs={2}>
                                     <Button
                                         id="save-button"
                                         variant="contained"
@@ -117,6 +108,14 @@ function FileUploader({
                                         Upload
                                     </Button>
                                 </Grid>
+                                {result && !result.success && (
+                                    <Grid item xs={12}>
+                                        <ErrorCard
+                                            errorMessage={result.message}
+                                            detailLines={result?.errors}
+                                        />
+                                    </Grid>
+                                )}
                             </>
                         )}
                     </Grid>
