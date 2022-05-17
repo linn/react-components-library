@@ -96,8 +96,8 @@ function FileUploader({
                                         )}
                                     </Box>
                                 </Grid>
-                                <Grid item xs={10} />
-                                <Grid item xs={2}>
+                                <Grid item xs={11} />
+                                <Grid item xs={1}>
                                     <Button
                                         id="save-button"
                                         variant="contained"
