@@ -1,4 +1,8 @@
 # Changelog
+## [13.10.0] - 2022-05-16
+### Changes
+- Add FileUploader component
+- Add optional detailsList to ErrorCard
 ## [13.9.0] - 2022-05-13
 ### Changes
 - Add handle Return press option to Typeahead. Requires modal, openModalOnClick={false} handleFieldChange={} handleReturnPress={}

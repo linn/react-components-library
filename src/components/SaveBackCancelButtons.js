@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import PropTypes from 'prop-types';
 
 function SaveBackCancelButtons({ saveClick, cancelClick, saveDisabled, backClick }) {
-    const useStyles = makeStyles((theme) => ({
+    const useStyles = makeStyles(theme => ({
         pullRight: {
             float: 'right'
         },

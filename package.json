@@ -1,6 +1,6 @@
 {
     "name": "@linn-it/linn-form-components-library",
-    "version": "13.9.0",
+    "version": "13.10.0",
     "private": false,
     "jest": {
         "testEnvironment": "jsdom"
@@ -10,7 +10,8 @@
         "clsx": "^1.1.1",
         "numeral": "^2.0.6",
         "prop-types": "^15.7.2",
-        "query-string": "^7.0.1"
+        "query-string": "^7.0.1",
+        "react-dropzone": "^14.2.1"
     },
     "scripts": {
         "start": "react-scripts start",

@@ -85,6 +85,7 @@ import smartGoBack from './src/utilities/smartGoBack';
 import GroupEditTable from './src/components/editableTable/GroupEditTable';
 import SingleEditTable from './src/components/editableTable/SingleEditTable';
 import useGroupEditTable from './src/hooks/useGroupEditTable';
+import FileUploader from './src/components/FileUploader';
 
 const reducers = { menu, news };
 
@@ -108,6 +109,7 @@ export {
     fetchErrorReducerFactory as fetchErrorReducer,
     fetchMenu,
     fetchNews,
+    FileUploader,
     getItemError,
     getItemErrorDetailMessage,
     getItemErrors,
