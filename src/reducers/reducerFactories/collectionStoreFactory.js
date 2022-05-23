@@ -66,6 +66,28 @@ export default function(
                     ...state,
                     loading: false
                 };
+            case actionTypes[`REQUEST_UPDATE_${itemRoot}`]:
+                return {
+                    ...state,
+                    loading: true
+                };
+            case actionTypes[`RECEIVE_UPDATED_${itemRoot}`]:
+                return {
+                    ...state,
+                    loading: false,
+                    items: action.payload.data,
+                    snackbarVisible: true
+                };
+            case actionTypes[`SHOW_${itemRoot}_SNACKBAR`]:
+                return {
+                    ...state,
+                    snackbarVisible: true
+                };
+            case actionTypes[`HIDE_${itemRoot}_SNACKBAR`]:
+                return {
+                    ...state,
+                    snackbarVisible: false
+                };
             default:
         }
 

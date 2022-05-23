@@ -6,16 +6,20 @@ describe('item store reducer factory', () => {
         REQUEST_ENTITY: 'REQUEST_ENTITY',
         RESET_ENTITY: 'RESET_ENTITY',
         REQUEST_UPDATE_ENTITY: 'REQUEST_UPDATE_ENTITY',
+        REQUEST_UPDATED_ENTITY: 'REQUEST_UPDATE_ENTITY',
         REQUEST_ADD_ENTITY: 'REQUEST_ADD_ENTITY',
         RECEIVE_ENTITY: 'RECEIVE_ENTITY',
         RECEIVE_NEW_ENTITY: 'RECEIVE_NEW_ENTITY',
+        RECEIVE_UPDATED_ENTITY: 'RECEIVE_UPDATED_ENTITY',
         REQUEST_APPLICATION_STATE_ENTITY: 'REQUEST_APPLICATION_STATE_ENTITY',
         RECEIVE_APPLICATION_STATE_ENTITY: 'RECEIVE_APPLICATION_STATE_ENTITY',
         CLEAR_ENTITY_DATA: 'CLEAR_ENTITY_DATA',
         REQUEST_POST_ENTITY: 'REQUEST_POST_ENTITY',
         RECEIVE_POST_ENTITY: 'RECEIVE_POST_ENTITY',
         REQUEST_PATCH_ENTITY: 'REQUEST_PATCH_ENTITY',
-        RECEIVE_PATCH_ENTITY: 'RECEIVE_PATCH_ENTITY'
+        RECEIVE_PATCH_ENTITY: 'RECEIVE_PATCH_ENTITY',
+        SHOW_ENTITY_SNACKBAR: 'SHOW_ENTITY_SNACKBAR',
+        HIDE_ENTITY_SNACKBAR: 'HIDE_ENTITY_SNACKBAR'
     };
     const defaultState = {
         loading: false,
@@ -283,6 +287,71 @@ describe('item store reducer factory', () => {
 
         const action = {
             type: actionTypes.RECEIVE_PATCH_ENTITY,
+            payload: { data: { name: '1' } }
+        };
+
+        const expected = {
+            loading: false,
+            item: { name: '1' },
+            editStatus: 'view',
+            snackbarVisible: true
+        };
+
+        deepFreeze(state);
+
+        expect(generatedReducer(state, action)).toEqual(expected);
+    });
+
+    test('when showing snackbar', () => {
+        const state = {
+            ...defaultState,
+            snackbarVisible: false
+        };
+
+        const action = {
+            type: actionTypes.SHOW_ENTITY_SNACKBAR,
+            payload: {}
+        };
+
+        const expected = {
+            ...defaultState,
+            snackbarVisible: true
+        };
+
+        deepFreeze(state);
+
+        expect(generatedReducer(state, action)).toEqual(expected);
+    });
+
+    test('when hiding snackbar', () => {
+        const state = {
+            ...defaultState,
+            snackbarVisible: true
+        };
+
+        const action = {
+            type: actionTypes.HIDE_ENTITY_SNACKBAR,
+            payload: {}
+        };
+
+        const expected = {
+            ...defaultState,
+            snackbarVisible: false
+        };
+
+        deepFreeze(state);
+
+        expect(generatedReducer(state, action)).toEqual(expected);
+    });
+
+    test('when receiving updated entity', () => {
+        const state = {
+            loading: true,
+            item: null
+        };
+
+        const action = {
+            type: actionTypes.RECEIVE_UPDATED_ENTITY,
             payload: { data: { name: '1' } }
         };
 
