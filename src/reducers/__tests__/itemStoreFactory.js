@@ -15,7 +15,9 @@ describe('item store reducer factory', () => {
         REQUEST_POST_ENTITY: 'REQUEST_POST_ENTITY',
         RECEIVE_POST_ENTITY: 'RECEIVE_POST_ENTITY',
         REQUEST_PATCH_ENTITY: 'REQUEST_PATCH_ENTITY',
-        RECEIVE_PATCH_ENTITY: 'RECEIVE_PATCH_ENTITY'
+        RECEIVE_PATCH_ENTITY: 'RECEIVE_PATCH_ENTITY',
+        SHOW_ENTITY_SNACKBAR: 'SHOW_ENTITY_SNACKBAR',
+        HIDE_ENTITY_SNACKBAR: 'HIDE_ENTITY_SNACKBAR'
     };
     const defaultState = {
         loading: false,
@@ -291,6 +293,48 @@ describe('item store reducer factory', () => {
             item: { name: '1' },
             editStatus: 'view',
             snackbarVisible: true
+        };
+
+        deepFreeze(state);
+
+        expect(generatedReducer(state, action)).toEqual(expected);
+    });
+
+    test('when showing snackbar', () => {
+        const state = {
+            ...defaultState,
+            snackbarVisible: false
+        };
+
+        const action = {
+            type: actionTypes.SHOW_ENTITY_SNACKBAR,
+            payload: {}
+        };
+
+        const expected = {
+            ...defaultState,
+            snackbarVisible: true
+        };
+
+        deepFreeze(state);
+
+        expect(generatedReducer(state, action)).toEqual(expected);
+    });
+
+    test('when hiding snackbar', () => {
+        const state = {
+            ...defaultState,
+            snackbarVisible: true
+        };
+
+        const action = {
+            type: actionTypes.HIDE_ENTITY_SNACKBAR,
+            payload: {}
+        };
+
+        const expected = {
+            ...defaultState,
+            snackbarVisible: false
         };
 
         deepFreeze(state);
