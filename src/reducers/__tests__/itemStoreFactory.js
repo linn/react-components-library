@@ -6,9 +6,11 @@ describe('item store reducer factory', () => {
         REQUEST_ENTITY: 'REQUEST_ENTITY',
         RESET_ENTITY: 'RESET_ENTITY',
         REQUEST_UPDATE_ENTITY: 'REQUEST_UPDATE_ENTITY',
+        REQUEST_UPDATED_ENTITY: 'REQUEST_UPDATE_ENTITY',
         REQUEST_ADD_ENTITY: 'REQUEST_ADD_ENTITY',
         RECEIVE_ENTITY: 'RECEIVE_ENTITY',
         RECEIVE_NEW_ENTITY: 'RECEIVE_NEW_ENTITY',
+        RECEIVE_UPDATED_ENTITY: 'RECEIVE_UPDATED_ENTITY',
         REQUEST_APPLICATION_STATE_ENTITY: 'REQUEST_APPLICATION_STATE_ENTITY',
         RECEIVE_APPLICATION_STATE_ENTITY: 'RECEIVE_APPLICATION_STATE_ENTITY',
         CLEAR_ENTITY_DATA: 'CLEAR_ENTITY_DATA',
@@ -335,6 +337,29 @@ describe('item store reducer factory', () => {
         const expected = {
             ...defaultState,
             snackbarVisible: false
+        };
+
+        deepFreeze(state);
+
+        expect(generatedReducer(state, action)).toEqual(expected);
+    });
+
+    test('when receiving updated entity', () => {
+        const state = {
+            loading: true,
+            item: null
+        };
+
+        const action = {
+            type: actionTypes.RECEIVE_UPDATED_ENTITY,
+            payload: { data: { name: '1' } }
+        };
+
+        const expected = {
+            loading: false,
+            item: { name: '1' },
+            editStatus: 'view',
+            snackbarVisible: true
         };
 
         deepFreeze(state);
