@@ -1,4 +1,8 @@
 # Changelog
+## [13.11.0] - 2022-05-23
+### Changes
+- Add cases to allow updating collections to collectionStoreFactory
+- Add missing itemStoreFactory tests
 ## [13.10.0] - 2022-05-16
 ### Changes
 - Add FileUploader component
