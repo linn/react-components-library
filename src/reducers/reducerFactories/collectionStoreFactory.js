@@ -1,6 +1,6 @@
 ﻿import utilities from '../../utilities/index';
 
-export default function(
+export default function (
     itemRoot,
     actionTypes,
     defaultState = { loading: false, searchLoading: false, items: [], searchItems: [] }
@@ -87,6 +87,19 @@ export default function(
                 return {
                     ...state,
                     snackbarVisible: false
+                };
+            case actionTypes[`REQUEST_POST_${itemRoot}`]:
+                return {
+                    ...state,
+                    loading: true
+                };
+
+            case actionTypes[`RECEIVE_POST_${itemRoot}`]:
+                return {
+                    ...state,
+                    loading: false,
+                    items: action.payload.data,
+                    snackbarVisible: true
                 };
             default:
         }
