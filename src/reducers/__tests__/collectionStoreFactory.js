@@ -11,7 +11,9 @@ describe('collection store reducer factory', () => {
         REQUEST_UPDATE_ENTITIES: 'REQUEST_UPDATE_ENTITIES',
         RECEIVE_UPDATED_ENTITIES: 'RECEIVE_UPDATED_ENTITIES',
         SHOW_ENTITIES_SNACKBAR: 'SHOW_ENTITIES_SNACKBAR',
-        HIDE_ENTITIES_SNACKBAR: 'HIDE_ENTITIES_SNACKBAR'
+        HIDE_ENTITIES_SNACKBAR: 'HIDE_ENTITIES_SNACKBAR',
+        REQUEST_POST_ENTITIES: 'REQUEST_POST_ENTITIES',
+        RECEIVE_POST_ENTITIES: 'RECEIVE_POST_ENTITIES'
     };
     const defaultState = {
         loading: false,
@@ -196,6 +198,47 @@ describe('collection store reducer factory', () => {
         const expected = {
             ...defaultState,
             snackbarVisible: false
+        };
+
+        deepFreeze(state);
+
+        expect(generatedReducer(state, action)).toEqual(expected);
+    });
+
+    test('when requesting POST entities', () => {
+        const state = {
+            loading: false
+        };
+
+        const action = {
+            type: actionTypes.REQUEST_POST_ENTITIES,
+            payload: {}
+        };
+
+        const expected = {
+            loading: true
+        };
+
+        deepFreeze(state);
+
+        expect(generatedReducer(state, action)).toEqual(expected);
+    });
+
+    test('when receiving entities from post', () => {
+        const state = {
+            loading: true,
+            items: null
+        };
+
+        const action = {
+            type: actionTypes.RECEIVE_POST_ENTITIES,
+            payload: { data: [{ name: '1' }] }
+        };
+
+        const expected = {
+            loading: false,
+            items: [{ name: '1' }],
+            snackbarVisible: true
         };
 
         deepFreeze(state);

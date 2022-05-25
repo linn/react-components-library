@@ -1,4 +1,7 @@
 # Changelog
+## [13.12.0] - 2022-05-25
+### Changes
+- Add cases to handle POST actions collectionStoreFactory reducer
 ## [13.11.0] - 2022-05-23
 ### Changes
 - Add cases to allow updating collections to collectionStoreFactory
