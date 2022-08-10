@@ -25,9 +25,7 @@ const ExportButton = ({ href, accept, fileName, buttonText, tooltipText }) => {
                 const url = window.URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.href = url;
-                if (fileName) {
-                    a.download = `${fileName}`;
-                }
+                a.download = fileName;
                 document.body.appendChild(a);
                 a.click();
                 a.remove();
@@ -79,7 +77,7 @@ ExportButton.propTypes = {
 ExportButton.defaultProps = {
     accept: 'text/csv',
     buttonText: 'EXPORT',
-    fileName: null,
+    fileName: 'export.csv',
     tooltipText: 'Download report as CSV file'
 };
 
