@@ -1,4 +1,7 @@
 # Changelog
+## [13.13.0] - 2022-08-10
+### Changes
+- Improved export button to display a loading spinner and indicate a fail state.
 ## [13.12.0] - 2022-05-25
 ### Changes
 - Add cases to handle POST actions collectionStoreFactory reducer
