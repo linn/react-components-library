@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import PropTypes from 'prop-types';
-import Loading from './Loading';
 import Tooltip from '@mui/material/Tooltip';
 import SvgIcon from '@mui/material/SvgIcon';
+import Loading from './Loading';
 
 const ExportButton = ({ href, accept, fileName, buttonText, tooltipText }) => {
     const [loading, setLoading] = useState(false);
