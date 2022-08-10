@@ -5,7 +5,7 @@ import Loading from './Loading';
 import Tooltip from '@mui/material/Tooltip';
 import SvgIcon from '@mui/material/SvgIcon';
 
-const DownloadButton = ({ href, accept, fileName, buttonText, tooltipText }) => {
+const ExportButton = ({ href, accept, fileName, buttonText, tooltipText }) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
 
@@ -68,7 +68,7 @@ const DownloadButton = ({ href, accept, fileName, buttonText, tooltipText }) => 
     );
 };
 
-DownloadButton.propTypes = {
+ExportButton.propTypes = {
     href: PropTypes.string.isRequired,
     accept: PropTypes.string,
     fileName: PropTypes.string,
@@ -76,11 +76,11 @@ DownloadButton.propTypes = {
     tooltipText: PropTypes.string
 };
 
-DownloadButton.defaultProps = {
+ExportButton.defaultProps = {
     accept: 'text/csv',
     buttonText: 'EXPORT',
     fileName: null,
     tooltipText: 'Download report as CSV file'
 };
 
-export default DownloadButton;
+export default ExportButton;
