@@ -1,4 +1,8 @@
 # Changelog
+## [13.14.0] - 2022-08-12
+### Changes
+- Add optional showRowCount prop to ReportTable to display number of rows found
+- Allow null response in reportSelectHelpers.getReportOptions 
 ## [13.13.0] - 2022-08-10
 ### Changes
 - Improved export button to display a loading spinner and indicate a fail state.

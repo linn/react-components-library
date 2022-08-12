@@ -5,6 +5,7 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import PropTypes from 'prop-types';
 import {
@@ -124,7 +125,8 @@ const Results = ({
     hasExternalLinks,
     showRowTitles,
     columnClasses,
-    allowPageBreakInside
+    allowPageBreakInside,
+    showRowCount
 }) => (
     <Paper className={allowPageBreakInside ? classes.rootAllowsPageBreaks : classes.root}>
         <Title
@@ -221,6 +223,19 @@ const Results = ({
                     )}
                 </TableBody>
             </Table>
+            {showRowCount && reportData && reportData.results && (
+                <Typography
+                    variant="body2"
+                    style={{
+                        float: 'left',
+                        paddingLeft: '15px',
+                        paddingTop: '10px',
+                        paddingBottom: '10px'
+                    }}
+                >
+                    Number of rows: {reportData.results.length}
+                </Typography>
+            )}
         </div>
     </Paper>
 );
@@ -235,7 +250,8 @@ function ReportTable({
     showTotals,
     showRowTitles,
     columnClasses,
-    allowPageBreakInside
+    allowPageBreakInside,
+    showRowCount
 }) {
     const classes = useStyles();
     if (!reportData) {
@@ -267,7 +283,8 @@ function ReportTable({
         showTitle,
         showTotals,
         columnClasses,
-        allowPageBreakInside
+        allowPageBreakInside,
+        showRowCount
     });
 }
 
@@ -284,7 +301,8 @@ Results.propTypes = {
     showTotals: PropTypes.bool,
     showRowTitles: PropTypes.bool,
     columnClasses: PropTypes.arrayOf(PropTypes.string),
-    allowPageBreakInside: PropTypes.bool.isRequired
+    allowPageBreakInside: PropTypes.bool.isRequired,
+    showRowCount: PropTypes.bool
 };
 
 Results.defaultProps = {
@@ -294,7 +312,8 @@ Results.defaultProps = {
     showTotals: true,
     showRowTitles: true,
     hasExternalLinks: false,
-    columnClasses: null
+    columnClasses: null,
+    showRowCount: false
 };
 
 ReportTable.propTypes = {
@@ -307,7 +326,8 @@ ReportTable.propTypes = {
     title: PropTypes.shape({}),
     showTitle: PropTypes.bool,
     showTotals: PropTypes.bool,
-    showRowTitles: PropTypes.bool
+    showRowTitles: PropTypes.bool,
+    showRowCount: PropTypes.bool
 };
 
 ReportTable.defaultProps = {
@@ -320,7 +340,8 @@ ReportTable.defaultProps = {
     title: '',
     showTitle: true,
     showTotals: false,
-    showRowTitles: false
+    showRowTitles: false,
+    showRowCount: false
 };
 
 export default ReportTable;
