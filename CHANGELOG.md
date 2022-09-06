@@ -1,7 +1,7 @@
 # Changelog
 ## [13.15.0] - 2022-09-06
 ### Changes
-- Add prop to disabled ExportButton
+- Add disabled bool prop to  ExportButton
 ## [13.14.0] - 2022-08-12
 ### Changes
 - Add optional showRowCount prop to ReportTable to display number of rows found
