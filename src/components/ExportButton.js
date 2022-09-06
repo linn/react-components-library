@@ -5,7 +5,7 @@ import Tooltip from '@mui/material/Tooltip';
 import SvgIcon from '@mui/material/SvgIcon';
 import Loading from './Loading';
 
-const ExportButton = ({ href, accept, fileName, buttonText, tooltipText }) => {
+const ExportButton = ({ href, accept, fileName, buttonText, tooltipText, disabled }) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
 
@@ -45,6 +45,7 @@ const ExportButton = ({ href, accept, fileName, buttonText, tooltipText }) => {
                 ) : (
                     <Button
                         variant="outlined"
+                        disabled={disabled}
                         color={error ? 'secondary' : 'primary'}
                         onClick={() => {
                             setLoading(true);
@@ -71,14 +72,16 @@ ExportButton.propTypes = {
     accept: PropTypes.string,
     fileName: PropTypes.string,
     buttonText: PropTypes.string,
-    tooltipText: PropTypes.string
+    tooltipText: PropTypes.string,
+    disabled: PropTypes.bool
 };
 
 ExportButton.defaultProps = {
     accept: 'text/csv',
     buttonText: 'EXPORT',
     fileName: 'export.csv',
-    tooltipText: 'Download report as CSV file'
+    tooltipText: 'Download report as CSV file',
+    disabled: false
 };
 
 export default ExportButton;
