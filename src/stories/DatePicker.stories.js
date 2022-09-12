@@ -1,8 +1,8 @@
 import React from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { action } from '@storybook/addon-actions';
-import AdapterDateMoment from '@mui/lab/AdapterMoment';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import DatePicker from '../components/DatePicker';
 
 const actions = {
@@ -12,8 +12,8 @@ const actions = {
 export default {
     title: 'Components/DatePicker',
     decorators: [
-        (story) => (
-            <LocalizationProvider dateAdapter={AdapterDateMoment}>
+        story => (
+            <LocalizationProvider dateAdapter={AdapterMoment}>
                 <ThemeProvider theme={createTheme()}>
                     <div>{story()}</div>
                 </ThemeProvider>
@@ -23,7 +23,7 @@ export default {
     component: DatePicker
 };
 
-export const Default = (args) => <DatePicker {...args} {...actions} />;
+export const Default = args => <DatePicker {...args} {...actions} />;
 
 Default.story = {
     name: 'default '

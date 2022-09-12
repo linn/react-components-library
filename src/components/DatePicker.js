@@ -1,5 +1,5 @@
 import React from 'react';
-import DatePicker from '@mui/lab/DatePicker';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import TextField from '@mui/material/TextField';
 
 import InputLabel from '@mui/material/InputLabel';
@@ -7,13 +7,13 @@ import PropTypes from 'prop-types';
 import makeStyles from '@mui/styles/makeStyles';
 import moment from 'moment';
 
-const labelStyles = makeStyles((theme) => ({
+const labelStyles = makeStyles(theme => ({
     root: {
         fontSize: theme.typography.fontSize
     }
 }));
 
-const inputStyles = makeStyles((theme) => ({
+const inputStyles = makeStyles(theme => ({
     root: {
         marginTop: theme.spacing(1),
         fontSize: theme.typography.fontSize
@@ -35,7 +35,7 @@ function Picker({ value, minDate, maxDate, label, onChange, required, disabled }
                 inputVariant="outlined"
                 autoOk
                 inputFormat="DD/MM/YYYY"
-                renderInput={(props) => <TextField {...props} />}
+                renderInput={props => <TextField {...props} />}
                 value={value ? moment(value) : null}
                 minDate={moment(minDate)}
                 maxDate={moment(maxDate)}

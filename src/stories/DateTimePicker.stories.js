@@ -1,9 +1,9 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { action } from '@storybook/addon-actions';
-import AdapterDateMoment from '@mui/lab/AdapterMoment';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import DateTimePicker from '../components/DateTimePicker';
 
 const actions = {
@@ -13,8 +13,8 @@ const actions = {
 export default {
     title: 'Components/DateTimePicker',
     decorators: [
-        (story) => (
-            <LocalizationProvider dateAdapter={AdapterDateMoment}>
+        story => (
+            <LocalizationProvider dateAdapter={AdapterMoment}>
                 <ThemeProvider theme={createTheme()}>
                     <div>{story()}</div>
                 </ThemeProvider>
@@ -24,7 +24,7 @@ export default {
     component: DateTimePicker
 };
 
-export const Default = (args) => <DateTimePicker {...args} {...actions} />;
+export const Default = args => <DateTimePicker {...args} {...actions} />;
 
 Default.story = {
     name: 'default '
