@@ -3,7 +3,7 @@ import React from 'react';
 import { ThemeProvider, StyledEngineProvider, createTheme } from '@mui/material/styles';
 import { MemoryRouter } from 'react-router-dom';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
-import LocalizationProvider from '@mui/x-date-pickers/LocalizationProvider';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 /**
  * @jest-environment jsdom
  */
