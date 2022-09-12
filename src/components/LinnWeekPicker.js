@@ -1,16 +1,16 @@
 import React from 'react';
-import DatePicker from '@mui/lab/DatePicker';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { makeStyles } from '@mui/styles';
 import InputLabel from '@mui/material/InputLabel';
 import TextField from '@mui/material/TextField';
 import { styled } from '@mui/material/styles';
 import moment from 'moment';
 import PropTypes from 'prop-types';
-import PickersDay from '@mui/lab/PickersDay';
+import { PickersDay } from '@mui/x-date-pickers/PickersDay';
 
 import { getWeekStartDate, getWeekEndDate } from '../utilities/dateUtilities';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
     dayWrapper: {
         position: 'relative'
     },
@@ -65,12 +65,12 @@ export default function LinnWeekPicker({
 }) {
     const classes = useStyles();
 
-    const handleChange = (date) => {
+    const handleChange = date => {
         setWeekStartDate(propertyName, getWeekStartDate(date));
     };
 
     const CustomPickersDay = styled(PickersDay, {
-        shouldForwardProp: (prop) =>
+        shouldForwardProp: prop =>
             prop !== 'dayIsBetween' && prop !== 'isFirstDay' && prop !== 'isLastDay'
     })(({ theme, dayIsBetween, isFirstDay, isLastDay }) => ({
         ...(dayIsBetween && {
@@ -123,7 +123,7 @@ export default function LinnWeekPicker({
                 autoOk
                 disabled={disabled}
                 margin="dense"
-                renderInput={(props) => <TextField {...props} />}
+                renderInput={props => <TextField {...props} />}
                 inputVariant="outlined"
                 value={selectedDate ? moment(selectedDate) : null}
                 onChange={handleChange}

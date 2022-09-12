@@ -1,11 +1,12 @@
 {
     "name": "@linn-it/linn-form-components-library",
-    "version": "13.15.0",
+    "version": "14.0.0",
     "private": false,
     "jest": {
         "testEnvironment": "jsdom"
     },
     "dependencies": {
+        "@mui/x-date-pickers": "^5.0.1",
         "classnames": "^2.3.1",
         "clsx": "^1.1.1",
         "numeral": "^2.0.6",
@@ -33,7 +34,6 @@
         "@emotion/react": "^11.6.0",
         "@emotion/styled": "^11.6.0",
         "@mui/icons-material": "^5.2.0",
-        "@mui/lab": "5.0.0-alpha.64",
         "@mui/material": "^5.2.2",
         "@mui/styles": "^5.2.0",
         "notistack": "^2.0.3",
@@ -63,7 +63,6 @@
         "@emotion/react": "^11.6.0",
         "@emotion/styled": "^11.6.0",
         "@mui/icons-material": "^5.2.0",
-        "@mui/lab": "^5.0.0-alpha.56",
         "@mui/material": "^5.2.2",
         "@mui/styles": "^5.2.0",
         "@storybook/addon-actions": "^6.3.12",

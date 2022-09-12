@@ -2,8 +2,8 @@
 import React from 'react';
 import { ThemeProvider, StyledEngineProvider, createTheme } from '@mui/material/styles';
 import { MemoryRouter } from 'react-router-dom';
-import AdapterDateMoment from '@mui/lab/AdapterMoment';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+import LocalizationProvider from '@mui/x-date-pickers/LocalizationProvider';
 /**
  * @jest-environment jsdom
  */
@@ -14,7 +14,7 @@ function Providers({ children }) {
         <MemoryRouter>
             <StyledEngineProvider injectFirst>
                 <ThemeProvider theme={createTheme()}>
-                    <LocalizationProvider dateAdapter={AdapterDateMoment}>
+                    <LocalizationProvider dateAdapter={AdapterMoment}>
                         {children}
                     </LocalizationProvider>
                 </ThemeProvider>
