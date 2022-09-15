@@ -1,6 +1,6 @@
 {
     "name": "@linn-it/linn-form-components-library",
-    "version": "15.0.0-alpha",
+    "version": "15.0.0",
     "private": false,
     "jest": {
         "testEnvironment": "jsdom"
@@ -35,6 +35,7 @@
         "@emotion/styled": "^11.10.4",
         "@mui/icons-material": "^5.10.3",
         "@mui/material": "^5.10.5",
+        "@mui/styles": "^5.10.3",
         "notistack": "^2.0.3",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
