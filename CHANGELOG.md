@@ -1,5 +1,5 @@
 # Changelog
-## [16.0.0] - 2022-10-26
+## [16.0.1] - 2022-10-26
 ### Changes
 - Upgrade react router to v6
 ## [15.0.0] - 2022-09-15

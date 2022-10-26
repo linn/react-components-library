@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
 import Navigation from '../components/Navigation';
 import fetchMenu from '../actions/fetchMenu';
 import fetchNews from '../actions/fetchNews';
@@ -30,6 +29,4 @@ const mapDispatchToProps = {
     markNotificationSeen
 };
 
-export default withRouter(
-    connect(mapStateToProps, mapDispatchToProps)(initialiseOnMount(Navigation))
-);
+export default connect(mapStateToProps, mapDispatchToProps)(initialiseOnMount(Navigation));
