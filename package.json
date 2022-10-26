@@ -1,6 +1,6 @@
 {
     "name": "@linn-it/linn-form-components-library",
-    "version": "16.0.0",
+    "version": "16.0.1",
     "private": false,
     "jest": {
         "testEnvironment": "jsdom"

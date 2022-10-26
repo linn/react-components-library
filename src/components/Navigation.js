@@ -331,7 +331,6 @@ Navigation.propTypes = {
         icons: PropTypes.string
     }).isRequired,
     sections: PropTypes.arrayOf(PropTypes.shape({})),
-    history: PropTypes.shape({}).isRequired,
     loading: PropTypes.bool,
     username: PropTypes.string,
     myStuff: PropTypes.shape({ groups: PropTypes.arrayOf(PropTypes.shape({})) }),
