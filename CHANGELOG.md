@@ -1,4 +1,10 @@
 # Changelog
+## [16.0.0] - 2022-10-26
+### Changes
+- Upgrade react router to v6
+## [15.0.0] - 2022-09-15
+### Changes
+- Upgrade react to v18
 ## [14.0.0] - 2022-09-12
 ### Changes
 - Use mui-x DatePickers
