@@ -100,7 +100,7 @@ WithAdornment.args = {
 };
 
 export const MaxLength = args => {
-    const [value, setValue] = useState('v');
+    const [value, setValue] = useState('7 chars');
     const handleChange = newValue => {
         setValue(newValue);
     };
@@ -119,7 +119,7 @@ MaxLength.story = {
 };
 
 MaxLength.args = {
-    label: 'Max Length',
+    label: 'Max Length is 10. Try typing in more than ten characters if you dare...',
     maxLength: 10
 };
 
