@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import Grid from '@mui/material/Grid';
 import ThemeProvider from '@mui/styles/ThemeProvider';
@@ -99,16 +99,28 @@ WithAdornment.args = {
     adornment: '$'
 };
 
-export const MaxLength = args => <InputField {...args} {...actions} />;
+export const MaxLength = args => {
+    const [value, setValue] = useState('v');
+    const handleChange = newValue => {
+        setValue(newValue);
+    };
+    return (
+        <InputField
+            {...args}
+            {...actions}
+            value={value}
+            onChange={(_, newVal) => handleChange(newVal)}
+        />
+    );
+};
 
 MaxLength.story = {
     name: 'Max length'
 };
 
 MaxLength.args = {
-    value: 'A',
     label: 'Max Length',
-    maxLength: 1
+    maxLength: 10
 };
 
 export const Multiline = args => <InputField {...args} {...actions} />;

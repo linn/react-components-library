@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useRef } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import InputAdornment from '@mui/material/InputAdornment';
 import TextField from '@mui/material/TextField';
@@ -56,6 +56,12 @@ function InputField({
 }) {
     const classes = useStyles();
     const inputRef = useRef();
+    const [inErrorState, setInErrorState] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+
+    useEffect(() => {
+        setInErrorState(error);
+    }, [error]);
     const change = e => {
         const newValue = e.target.value;
 
@@ -63,9 +69,7 @@ function InputField({
 
         if (type === 'date') {
             val = newValue ? moment(newValue).utc().format() : '';
-        }
-
-        if (type === 'number') {
+        } else if (type === 'number') {
             val = hasValue(newValue) ? parseFloat(newValue) : null;
 
             if (
@@ -76,6 +80,12 @@ function InputField({
             ) {
                 val = parseFloat(newValue.slice(0, newValue.indexOf('.') + decimalPlaces + 1));
             }
+        } else if (maxLength && newValue?.length > maxLength) {
+            setInErrorState(true);
+            setErrorMessage(`MAX LENGTH (${maxLength}) EXCEEDED`);
+        } else if (maxLength && newValue?.length <= maxLength) {
+            setInErrorState(false);
+            setErrorMessage('');
         }
 
         onChange(propertyName, val);
@@ -86,7 +96,7 @@ function InputField({
             <InputLabel
                 classes={{ root: classes.label, asterisk: classes.labelAsterisk }}
                 required={required}
-                error={error}
+                error={inErrorState}
                 htmlFor={propertyName}
             >
                 {label}
@@ -96,9 +106,9 @@ function InputField({
                     root: classes.root
                 }}
                 disabled={disabled}
-                error={error}
+                error={inErrorState}
                 fullWidth={fullWidth}
-                helperText={helperText}
+                helperText={inErrorState ? errorMessage : helperText}
                 margin={margin}
                 multiline={rows > 0}
                 name={name}
@@ -120,9 +130,6 @@ function InputField({
                     startAdornment: adornment ? (
                         <InputAdornment position="start">{adornment}</InputAdornment>
                     ) : null,
-                    inputProps: {
-                        maxLength
-                    },
                     classes: {
                         disabled: classes.disabled
                     }
