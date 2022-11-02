@@ -168,14 +168,14 @@ function Typeahead({
         if (result?.length > 0) {
             return (
                 <List dense>
-                    {result.map(item => (
-                        <Fragment key={item.id}>
+                    {result.map(r => (
+                        <Fragment key={r.id}>
                             {links ? (
-                                <Link className={classes.a} component={RouterLink} to={item?.href}>
-                                    <Item item={item} onClick={() => handleClick(item)} />
+                                <Link className={classes.a} component={RouterLink} to={r?.href}>
+                                    <Item item={r} onClick={() => handleClick(r)} />
                                 </Link>
                             ) : (
-                                <Item item={item} onClick={() => handleClick(item)} />
+                                <Item item={r} onClick={() => handleClick(r)} />
                             )}
                             <Divider component="li" />
                         </Fragment>

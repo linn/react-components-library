@@ -52,7 +52,7 @@ const content = [
 export default {
     title: 'Components/TableWithInlineEditing',
     decorators: [
-        (story) => (
+        story => (
             <ThemeProvider theme={linnTheme}>
                 <div>{story()}</div>
             </ThemeProvider>
@@ -61,7 +61,7 @@ export default {
     component: TableWithInlineEditing
 };
 
-export const AllowedToEditAddAndDelete = (args) => <TableWithInlineEditing {...args} />;
+export const AllowedToEditAddAndDelete = args => <TableWithInlineEditing {...args} />;
 
 AllowedToEditAddAndDelete.story = {
     name: 'allowed to edit, add and delete'
@@ -76,7 +76,7 @@ AllowedToEditAddAndDelete.args = {
     allowedToDelete: true
 };
 
-export const AllowedToEditAndAdd = (args) => <TableWithInlineEditing {...args} />;
+export const AllowedToEditAndAdd = args => <TableWithInlineEditing {...args} />;
 
 AllowedToEditAndAdd.story = {
     name: 'allowed to edit and add'
@@ -90,7 +90,7 @@ AllowedToEditAndAdd.args = {
     allowedToCreate: true
 };
 
-export const AllowedToEditOnly = (args) => <TableWithInlineEditing {...args} />;
+export const AllowedToEditOnly = args => <TableWithInlineEditing {...args} />;
 
 AllowedToEditOnly.story = {
     name: 'allowed to edit only'
@@ -103,7 +103,7 @@ AllowedToEditOnly.args = {
     allowedToEdit: true
 };
 
-export const NotAllowedToEdit = (args) => <TableWithInlineEditing {...args} />;
+export const NotAllowedToEdit = args => <TableWithInlineEditing {...args} />;
 
 NotAllowedToEdit.story = {
     name: 'Not allowed to edit'

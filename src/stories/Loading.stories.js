@@ -7,7 +7,7 @@ import Loading from '../components/Loading';
 export default {
     title: 'Components/Loading',
     decorators: [
-        (story) => (
+        story => (
             <ThemeProvider theme={linnTheme}>
                 <div>{story()}</div>
             </ThemeProvider>
@@ -16,7 +16,7 @@ export default {
     component: Loading
 };
 
-export const Default = (args) => <Loading {...args} />;
+export const Default = args => <Loading {...args} />;
 
 Default.story = {
     name: 'default'

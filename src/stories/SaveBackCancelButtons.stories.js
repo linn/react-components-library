@@ -13,7 +13,7 @@ const actions = {
 export default {
     title: 'Components/SaveBackCancelButtons',
     decorators: [
-        (story) => (
+        story => (
             <ThemeProvider theme={linnTheme}>
                 <div style={{ position: 'absolute', right: '50%', top: '50%' }}>{story()}</div>
             </ThemeProvider>
@@ -22,13 +22,13 @@ export default {
     component: SaveBackCancelButtons
 };
 
-export const Default = (args) => <SaveBackCancelButtons {...actions} {...args} />;
+export const Default = args => <SaveBackCancelButtons {...actions} {...args} />;
 
 Default.story = {
     name: 'default'
 };
 
-export const SaveDisabled = (args) => <SaveBackCancelButtons {...actions} {...args} />;
+export const SaveDisabled = args => <SaveBackCancelButtons {...actions} {...args} />;
 
 SaveDisabled.story = {
     name: 'saveDisabled'

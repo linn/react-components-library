@@ -17,17 +17,17 @@ const pageProps = {
 export default {
     title: 'Components/EntityList',
     decorators: [
-        (story) => (
+        story => (
             <MemoryRouter initialEntries={['/']}>
                 <Page {...pageProps}>{story()}</Page>
             </MemoryRouter>
         ),
-        (story) => providers(story)
+        story => providers(story)
     ],
     component: EntityList
 };
 
-export const Default = (args) => <EntityList {...args} />;
+export const Default = args => <EntityList {...args} />;
 
 Default.story = {
     name: 'default '
@@ -57,7 +57,7 @@ Default.args = {
     ]
 };
 
-export const WithDescriptions = (args) => <EntityList {...args} />;
+export const WithDescriptions = args => <EntityList {...args} />;
 
 WithDescriptions.story = {
     name: 'with descriptions'
@@ -68,7 +68,7 @@ WithDescriptions.args = {
     entityList
 };
 
-export const WithExternalLinks = (args) => <EntityList {...args} />;
+export const WithExternalLinks = args => <EntityList {...args} />;
 
 WithExternalLinks.story = {
     name: 'with external Links'

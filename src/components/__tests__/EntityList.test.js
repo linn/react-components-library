@@ -1,6 +1,7 @@
 import React from 'react';
-import EntityList from '../EntityList';
 import { screen } from '@testing-library/react';
+
+import EntityList from '../EntityList';
 import render from '../../test-utils';
 import '@testing-library/jest-dom/extend-expect';
 

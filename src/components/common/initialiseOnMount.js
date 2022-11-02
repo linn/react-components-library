@@ -1,7 +1,8 @@
 ﻿import React, { useEffect } from 'react';
 
 const initialiseOnMount = ComposedComponent =>
-    (function HOC(props) {
+    function HOC(props) {
+        // eslint-disable-next-line react/prop-types
         const { initialise, itemId } = props;
         useEffect(() => {
             if (initialise && itemId) {
@@ -12,6 +13,6 @@ const initialiseOnMount = ComposedComponent =>
         }, [initialise, itemId]);
 
         return <ComposedComponent {...props} />;
-    });
+    };
 
 export default initialiseOnMount;

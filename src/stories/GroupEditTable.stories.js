@@ -56,7 +56,7 @@ const columns = [
         id: 'text',
         type: 'text',
         editable: true,
-        tooltip: (row) => row.extraInfo || false
+        tooltip: row => row.extraInfo || false
     },
     {
         title: 'Number',
@@ -146,7 +146,7 @@ const GroupEditTableWrapper = ({
         <GroupEditTable
             columns={
                 applyCustomStyle
-                    ? columns.map((col) =>
+                    ? columns.map(col =>
                           col.id === 'text'
                               ? {
                                     ...col,
@@ -185,7 +185,7 @@ const GroupEditTableWrapper = ({
 export default {
     title: 'Components/EditableTable/GroupEditTable',
     decorators: [
-        (story) => (
+        story => (
             <ThemeProvider theme={linnTheme}>
                 <div>{story()}</div>
             </ThemeProvider>
@@ -199,13 +199,13 @@ export default {
     }
 };
 
-export const Default = (args) => <GroupEditTableWrapper {...args} />;
+export const Default = args => <GroupEditTableWrapper {...args} />;
 
 Default.story = {
     name: 'Default'
 };
 
-export const DisplayOnly = (args) => <GroupEditTableWrapper {...args} />;
+export const DisplayOnly = args => <GroupEditTableWrapper {...args} />;
 
 DisplayOnly.story = {
     name: 'Display Only'
@@ -215,7 +215,7 @@ DisplayOnly.args = {
     editable: false
 };
 
-export const StaticRows = (args) => <GroupEditTableWrapper {...args} />;
+export const StaticRows = args => <GroupEditTableWrapper {...args} />;
 
 StaticRows.story = {
     name: 'New Row Disabled'
@@ -225,7 +225,7 @@ StaticRows.args = {
     allowNewRowCreation: false
 };
 
-export const ShowDelete = (args) => <GroupEditTableWrapper {...args} />;
+export const ShowDelete = args => <GroupEditTableWrapper {...args} />;
 
 ShowDelete.story = {
     name: 'Show Delete Prior to Edit'
@@ -235,7 +235,7 @@ ShowDelete.args = {
     deleteRowPreEdit: true
 };
 
-export const RemoveRowOnDelete = (args) => <GroupEditTableWrapper {...args} />;
+export const RemoveRowOnDelete = args => <GroupEditTableWrapper {...args} />;
 
 RemoveRowOnDelete.story = {
     name: 'Remove Rows when Deleting'
@@ -245,7 +245,7 @@ RemoveRowOnDelete.args = {
     removeRowOnDelete: true
 };
 
-export const CustomStyleCol = (args) => <GroupEditTableWrapper {...args} />;
+export const CustomStyleCol = args => <GroupEditTableWrapper {...args} />;
 
 CustomStyleCol.story = {
     name: 'Column With Custom Style'

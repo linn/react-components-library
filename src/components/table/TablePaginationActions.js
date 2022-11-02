@@ -19,21 +19,21 @@ const useStyles = makeStyles(theme => ({
 function TablePaginationActions({ count, page, rowsPerPage, onChangePage }) {
     const classes = useStyles();
 
-    function handleFirstPageButtonClick(event) {
+    const handleFirstPageButtonClick = event => {
         onChangePage(event, 0);
-    }
+    };
 
-    function handleBackButtonClick(event) {
+    const handleBackButtonClick = event => {
         onChangePage(event, page - 1);
-    }
+    };
 
-    function handleNextButtonClick(event) {
+    const handleNextButtonClick = event => {
         onChangePage(event, page + 1);
-    }
+    };
 
-    function handleLastPageButtonClick(event) {
+    const handleLastPageButtonClick = event => {
         onChangePage(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
-    }
+    };
 
     return (
         <div className={classes.root}>
@@ -41,28 +41,32 @@ function TablePaginationActions({ count, page, rowsPerPage, onChangePage }) {
                 onClick={handleFirstPageButtonClick}
                 disabled={page === 0}
                 aria-label="First Page"
-                size="large">
+                size="large"
+            >
                 {classes.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
             </IconButton>
             <IconButton
                 onClick={handleBackButtonClick}
                 disabled={page === 0}
                 aria-label="Previous Page"
-                size="large">
+                size="large"
+            >
                 {classes.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
             </IconButton>
             <IconButton
                 onClick={handleNextButtonClick}
                 disabled={page >= Math.ceil(count / rowsPerPage) - 1}
                 aria-label="Next Page"
-                size="large">
+                size="large"
+            >
                 {classes.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
             </IconButton>
             <IconButton
                 onClick={handleLastPageButtonClick}
                 disabled={page >= Math.ceil(count / rowsPerPage) - 1}
                 aria-label="Last Page"
-                size="large">
+                size="large"
+            >
                 {classes.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
             </IconButton>
         </div>

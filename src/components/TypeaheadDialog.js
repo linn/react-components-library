@@ -16,7 +16,7 @@ import useSearch from '../hooks/useSearch';
 import Loading from './Loading';
 import SearchInputField from './SearchInputField';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
     pullRight: {
         float: 'right'
     },
@@ -66,7 +66,7 @@ function TypeaheadDialog({
     };
 
     const showResults = () => {
-        const handleClick = (e) => {
+        const handleClick = e => {
             setDialogOpen(false);
             clearSearch();
             setSearchTerm(null);
@@ -76,7 +76,7 @@ function TypeaheadDialog({
         if (searchItems.length > 0) {
             return (
                 <List>
-                    {searchItems.map((item) => (
+                    {searchItems.map(item => (
                         <Fragment key={item.id}>
                             <ListItem onClick={() => handleClick(item)} button>
                                 <Grid container spacing={3}>

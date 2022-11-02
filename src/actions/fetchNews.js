@@ -1,7 +1,7 @@
 import { RSAA } from 'redux-api-middleware';
 import * as actionTypes from './index';
 
-const fetchNews = (state, root) => ({
+const fetchNews = (_, root) => ({
     [RSAA]: {
         endpoint: `${root}/notifications`,
         method: 'GET',

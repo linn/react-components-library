@@ -6,11 +6,11 @@ import providers from './renderUtils/Providers';
 
 export default {
     title: 'Components/Page',
-    decorators: [(story) => providers(story)],
+    decorators: [story => providers(story)],
     component: Page
 };
 
-export const Default = (args) => (
+export const Default = args => (
     <Page {...args}>
         <Title text="Page Content Here" />
     </Page>

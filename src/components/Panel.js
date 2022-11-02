@@ -46,6 +46,7 @@ function Panel({ section, classes, close }) {
             </Button>
             <Grid container justifyContent="flex-start">
                 {columns.map((col, i) => (
+                    //eslint-disable-next-line react/no-array-index-key
                     <Grid item xs={12} sm={6} md={4} lg={3} xl={3} key={i}>
                         {col.categories
                             .filter(e => e.items.filter(item => item.showInMenu).length > 0)
@@ -102,8 +103,15 @@ function Panel({ section, classes, close }) {
 }
 
 Panel.propTypes = {
-    classes: PropTypes.shape({}).isRequired,
-    section: PropTypes.shape({}).isRequired,
+    classes: PropTypes.shape({
+        paper: PropTypes.shape({}),
+        listItemText: PropTypes.shape({}),
+        menuItems: PropTypes.shape({})
+    }).isRequired,
+    section: PropTypes.shape({
+        id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+        columns: PropTypes.arrayOf(PropTypes.shape({}))
+    }).isRequired,
     close: PropTypes.func.isRequired
 };
 

@@ -38,7 +38,7 @@ const invalid = createTheme(
         }
     })
 );
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
     pullRight: {
         float: 'right'
     },
@@ -68,7 +68,7 @@ function ValidatedInputDialog({ title, loading, fetchItems, searchItems, clearSe
         setDialogOpen(false);
     };
 
-    const handleAccept = (accepted) => {
+    const handleAccept = accepted => {
         onAccept(accepted);
         setDialogOpen(false);
     };

@@ -17,7 +17,7 @@ function EntityList({ title, entityList, entityId, descriptionFieldName, hasExte
         <>
             <Title text={title} />
             <List>
-                {entityList.map((entity) => (
+                {entityList.map(entity => (
                     <ListItem
                         key={entity[entityId]}
                         button

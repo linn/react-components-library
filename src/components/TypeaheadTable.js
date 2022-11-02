@@ -18,7 +18,7 @@ import useSearch from '../hooks/useSearch';
 import utilities from '../utilities/index';
 import SearchIcon from './SearchIcon';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
     pullRight: {
         float: 'right'
     },
@@ -72,7 +72,7 @@ function TypeaheadTable({
         textDecoration: 'none'
     };
 
-    const handleClick = (e) => {
+    const handleClick = e => {
         if (modal) {
             setDialogOpen(false);
         }
@@ -91,14 +91,14 @@ function TypeaheadTable({
                 <Table>
                     <TableHead>
                         <TableRow>
-                            {columnNames.map((columnName) => (
+                            {columnNames.map(columnName => (
                                 <TableCell key={columnName}>{columnName}</TableCell>
                             ))}
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {table.rows &&
-                            table.rows.map((row) => (
+                            table.rows.map(row => (
                                 <TableRow
                                     style={cursor}
                                     onClick={() =>
@@ -109,7 +109,7 @@ function TypeaheadTable({
                                     hover
                                     key={row.id}
                                 >
-                                    {row.values.map((cell) => (
+                                    {row.values.map(cell => (
                                         <TableCell key={cell.id} component="th" scope="row">
                                             {cell.value}
                                         </TableCell>

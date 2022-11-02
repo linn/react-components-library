@@ -15,7 +15,7 @@ import LinearProgress from '@mui/material/LinearProgress';
 import utilities from '../../utilities/index';
 import TablePaginationActions from './TablePaginationActions';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
     link: {
         '&:hover': {
             cursor: 'pointer'
@@ -51,41 +51,41 @@ function PaginatedTable({
 
     const classes = useStyles();
 
-    const handleRowOnClick = (rowId) => (rowOpen === rowId ? setRowOpen(null) : setRowOpen(rowId));
+    const handleRowOnClick = rowId => (rowOpen === rowId ? setRowOpen(null) : setRowOpen(rowId));
 
     const handleChangePage = (event, pge) => {
-        setPageOptions((options) => ({
+        setPageOptions(options => ({
             ...options,
             currentPage: pge
         }));
     };
 
-    const handleChangeRowsPerPage = (event) => {
+    const handleChangeRowsPerPage = event => {
         const { value } = event.target;
 
-        setPageOptions((options) => ({
+        setPageOptions(options => ({
             ...options,
             rowsPerPage: parseInt(value, 10),
             currentPage: 0
         }));
     };
 
-    const handleChangeOrderBy = (property) => {
-        setPageOptions((options) => ({
+    const handleChangeOrderBy = property => {
+        setPageOptions(options => ({
             ...options,
             orderBy: property,
             orderAscending: !options.orderAscending
         }));
     };
 
-    const invalidElement = (key) =>
+    const invalidElement = key =>
         key !== 'elements' && key !== 'links' && key !== 'href' && key !== 'id';
 
     return (
         <Table size="small">
             <TableHead>
                 <TableRow>
-                    {Object.keys(columns).map((key) =>
+                    {Object.keys(columns).map(key =>
                         sortable ? (
                             <TableCell
                                 key={key}
@@ -120,7 +120,7 @@ function PaginatedTable({
             ) : (
                 <>
                     <TableBody>
-                        {rows.map((row) => (
+                        {rows.map(row => (
                             <Fragment key={row.id}>
                                 <TableRow
                                     key={row.id}
@@ -133,8 +133,8 @@ function PaginatedTable({
                                     }
                                 >
                                     {Object.keys(row)
-                                        .filter((key) => invalidElement(key, row))
-                                        .map((key) => (
+                                        .filter(key => invalidElement(key, row))
+                                        .map(key => (
                                             <TableCell key={key} component="th" scope="row">
                                                 {row[key] || '-'}
                                             </TableCell>
@@ -158,14 +158,14 @@ function PaginatedTable({
                                 </TableRow>
                                 {expandable && rowOpen === row.id && row.elements && (
                                     <>
-                                        {row.elements.map((el) => (
+                                        {row.elements.map(el => (
                                             <TableRow
                                                 colSpan={Object.keys(columns).length + 1}
                                                 key={el.id}
                                             >
                                                 {Object.keys(el)
-                                                    .filter((k) => k !== 'id')
-                                                    .map((key) => (
+                                                    .filter(k => k !== 'id')
+                                                    .map(key => (
                                                         <TableCell
                                                             key={key}
                                                             classes={{

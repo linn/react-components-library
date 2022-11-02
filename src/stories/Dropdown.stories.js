@@ -12,7 +12,7 @@ const actions = {
 export default {
     title: 'Components/Dropdown',
     decorators: [
-        (story) => (
+        story => (
             <ThemeProvider theme={createTheme()}>
                 <div>{story()}</div>
             </ThemeProvider>
@@ -21,7 +21,7 @@ export default {
     component: Dropdown
 };
 
-export const Default = (args) => <Dropdown {...args} {...actions} />;
+export const Default = args => <Dropdown {...args} {...actions} />;
 
 Default.story = {
     name: 'default '

@@ -86,3 +86,18 @@ describe('When Editing', () => {
         expect(changeMock).toHaveBeenCalledWith('cost', 1234567);
     });
 });
+
+describe('When Max Length Exceeded', () => {
+    test('should show error', () => {
+        const { getByText, getByDisplayValue } = render(
+            <InputField propertyName="test" maxLength={3} onChange={changeMock} value="ok" />
+        );
+        const input = getByDisplayValue('ok');
+
+        fireEvent.change(input, {
+            target: { value: 'not ok - longer than 3' }
+        });
+
+        expect(getByText('MAX LENGTH (3) EXCEEDED')).toBeInTheDocument();
+    });
+});

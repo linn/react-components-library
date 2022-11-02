@@ -11,7 +11,6 @@ const styles = () => ({
 });
 
 function CreateButton({ createUrl, classes, disabled }) {
-    console.log(createUrl);
     return (
         <Link to={createUrl}>
             <Button color="primary" variant="outlined" className={classes.root} disabled={disabled}>

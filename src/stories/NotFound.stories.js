@@ -6,7 +6,7 @@ import NotFound from '../components/NotFound';
 export default {
     title: 'Components/NotFound',
     decorators: [
-        (story) => (
+        story => (
             <ThemeProvider theme={linnTheme}>
                 <div>{story()}</div>
             </ThemeProvider>
