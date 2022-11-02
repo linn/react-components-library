@@ -18,7 +18,7 @@ const clearSearch = () => {};
 export default {
     title: 'Components/Typeahead',
     decorators: [
-        (story) => (
+        story => (
             <MemoryRouter initialEntries={['/']}>
                 <ThemeProvider theme={linnTheme}>
                     <div style={{ padding: '3rem', width: '100%' }}>{story()}</div>
@@ -29,7 +29,7 @@ export default {
     component: Typeahead
 };
 
-export const Prioritised = (args) => <Typeahead {...args} />;
+export const Prioritised = args => <Typeahead {...args} />;
 
 Prioritised.story = {
     name: 'when priority function supplied that prioritises closest match to search term'
@@ -57,7 +57,7 @@ Prioritised.args = {
     }
 };
 
-export const Default = (args) => <Typeahead {...args} />;
+export const Default = args => <Typeahead {...args} />;
 
 Default.story = {
     name: 'default '
@@ -81,7 +81,7 @@ Default.args = {
     }
 };
 
-export const NothingFound = (args) => <Typeahead {...args} />;
+export const NothingFound = args => <Typeahead {...args} />;
 
 NothingFound.story = {
     name: 'nothingFound '
@@ -95,7 +95,7 @@ NothingFound.args = {
     clearSearch
 };
 
-export const Loading = (args) => <Typeahead {...args} />;
+export const Loading = args => <Typeahead {...args} />;
 
 Loading.story = {
     name: 'loading '
@@ -109,7 +109,7 @@ Loading.args = {
     clearSearch
 };
 
-export const Modal = (args) => <Typeahead {...args} />;
+export const Modal = args => <Typeahead {...args} />;
 
 Modal.story = {
     name: 'modal '
@@ -124,7 +124,7 @@ Modal.args = {
     modal: true
 };
 
-export const ModalButton = (args) => <Typeahead {...args} />;
+export const ModalButton = args => <Typeahead {...args} />;
 
 ModalButton.story = {
     name: 'modal searchButtonOnly'

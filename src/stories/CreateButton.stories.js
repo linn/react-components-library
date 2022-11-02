@@ -6,7 +6,7 @@ import CreateButton from '../components/CreateButton';
 export default {
     title: 'Components/CreateButton',
     decorators: [
-        (story) => (
+        story => (
             <BrowserRouter>
                 <div style={{ position: 'absolute', left: '5%', top: '10%' }}>{story()}</div>
             </BrowserRouter>

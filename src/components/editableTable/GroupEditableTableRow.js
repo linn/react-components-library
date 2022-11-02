@@ -113,13 +113,8 @@ export default function GroupEditableTableRow({
         setRowToBeSaved(row.id, true);
     };
 
-    const saveButtonEnabled = () => {
-        return rowValid && !row.toBeDeleted && !row.toBeSaved;
-    };
-
-    const deleteButtonEnabled = () => {
-        return !row.toBeDeleted && !row.toBeSaved;
-    };
+    const saveButtonEnabled = () => rowValid && !row.toBeDeleted && !row.toBeSaved;
+    const deleteButtonEnabled = () => !row.toBeDeleted && !row.toBeSaved;
 
     const handleClickAway = e => {
         // for some reason clicks in modals that TableRows open register as clickAways

@@ -10,7 +10,7 @@ describe('<SnackbarMessage />', () => {
         render(
             <StyledEngineProvider injectFirst>
                 <ThemeProvider theme={createTheme()}>
-                    <SnackbarMessage  onClose={jest.fn()} message={'Snackbar message'} visible={true} />
+                    <SnackbarMessage onClose={jest.fn()} message="Snackbar message" visible />
                 </ThemeProvider>
             </StyledEngineProvider>
         );

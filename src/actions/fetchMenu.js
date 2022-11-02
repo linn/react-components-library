@@ -1,7 +1,7 @@
 import { RSAA } from 'redux-api-middleware';
 import * as actionTypes from './index';
 
-const fetchMenu = (state, root) => ({
+const fetchMenu = (_, root) => ({
     [RSAA]: {
         endpoint: `${root}/intranet/menu-no-auth`,
         method: 'GET',

@@ -10,11 +10,11 @@ const actions = {
 
 export default {
     title: 'Components/OnOffSwitch',
-    decorators: [(story) => <div>{story()}</div>],
+    decorators: [story => <div>{story()}</div>],
     component: OnOffSwitch
 };
 
-export const Default = (args) => <OnOffSwitch {...args} {...actions} />;
+export const Default = args => <OnOffSwitch {...args} {...actions} />;
 
 Default.story = {
     name: 'default '

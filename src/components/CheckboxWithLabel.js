@@ -20,7 +20,7 @@ const CheckboxWithLabel = ({ classes, checked, color = 'primary', label, onChang
 );
 
 CheckboxWithLabel.propTypes = {
-    classes: PropTypes.shape({}),
+    classes: PropTypes.shape({ root: PropTypes.shape({}) }),
     checked: PropTypes.bool,
     color: PropTypes.string,
     label: PropTypes.string,

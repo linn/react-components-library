@@ -157,7 +157,7 @@ const rows = [
 export default {
     title: 'Components/PaginatedTable',
     decorators: [
-        (story) => (
+        story => (
             <ThemeProvider theme={linnTheme}>
                 <div>{story()}</div>
             </ThemeProvider>
@@ -166,7 +166,7 @@ export default {
     component: PaginatedTable
 };
 
-export const Default = (args) => <PaginatedTable {...actions} {...args} />;
+export const Default = args => <PaginatedTable {...actions} {...args} />;
 
 Default.story = {
     name: 'default '
@@ -179,7 +179,7 @@ Default.args = {
     totalItemCount
 };
 
-export const WithSortingEnabled = (args) => <PaginatedTable {...actions} {...args} />;
+export const WithSortingEnabled = args => <PaginatedTable {...actions} {...args} />;
 
 WithSortingEnabled.story = {
     name: 'with sorting enabled'
@@ -193,7 +193,7 @@ WithSortingEnabled.args = {
     sortable: true
 };
 
-export const WithExpandableEnabled = (args) => <PaginatedTable {...actions} {...args} />;
+export const WithExpandableEnabled = args => <PaginatedTable {...actions} {...args} />;
 
 WithExpandableEnabled.story = {
     name: 'with expandable enabled'
@@ -207,7 +207,7 @@ WithExpandableEnabled.args = {
     expandable: true
 };
 
-export const WithNoRows = (args) => <PaginatedTable {...actions} {...args} />;
+export const WithNoRows = args => <PaginatedTable {...actions} {...args} />;
 
 WithNoRows.story = {
     name: 'with no rows'

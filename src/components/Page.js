@@ -6,7 +6,7 @@ import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Breadcrumbs from './Breadcrumbs';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
     root: {
         padding: theme.spacing(4)
     },
@@ -52,7 +52,7 @@ function Page({
 
     useEffect(() => {
         if (requestErrors && showRequestErrors) {
-            requestErrors.forEach((t) => {
+            requestErrors.forEach(t => {
                 enqueueSnackbar(`${t.message} - ${t.type}`, {
                     variant: 'error',
                     preventDuplicate: true

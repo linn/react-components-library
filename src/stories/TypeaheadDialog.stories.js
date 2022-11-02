@@ -28,13 +28,13 @@ const onSelect = () => {};
 export default {
     title: 'Components/TypeaheadDialog',
     decorators: [
-        (story) => <div style={{ padding: '3rem', width: '100%' }}>{story()}</div>,
-        (story) => providers(story)
+        story => <div style={{ padding: '3rem', width: '100%' }}>{story()}</div>,
+        story => providers(story)
     ],
     component: TypeaheadDialog
 };
 
-export const Default = (args) => <TypeaheadDialog {...args} />;
+export const Default = args => <TypeaheadDialog {...args} />;
 
 Default.story = {
     name: 'default '

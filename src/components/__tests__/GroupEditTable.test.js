@@ -312,7 +312,7 @@ describe('<GroupEditTable />', () => {
             expect(getAllByTestId('deleteButton')).toHaveLength(2);
         });
 
-        it('should not show editable ', () => {
+        it('should not show editable', () => {
             const newCols = [
                 { title: 'col1', id: 'col1', type: 'text', editable: true },
                 { title: 'col2', id: 'col2', type: 'text', editable: false }

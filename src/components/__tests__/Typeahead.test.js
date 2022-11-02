@@ -126,7 +126,7 @@ describe('when priorityFunction', () => {
             clearSearch: jest.fn(),
             items: prioritisableItems,
             // function that prioritises based on closeness of match to the searchTerm
-            priorityFunction: (item, _) => {
+            priorityFunction: item => {
                 let count = 0;
                 for (let i = 0; i < fakeSearchTerm.length; i += 1) {
                     if (i === item.name.length) {

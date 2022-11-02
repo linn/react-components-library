@@ -11,7 +11,7 @@ import Divider from '@mui/material/Divider';
 import makeStyles from '@mui/styles/makeStyles';
 
 const useStyles = makeStyles(() => ({
-    list: (props) => {
+    list: props => {
         const root = {
             width: '100%',
             position: 'relative',
@@ -37,7 +37,7 @@ function SelectedItemsList({ items, removeItem, title, maxHeight }) {
         <>
             <Typography variant="body1">{title}</Typography>
             <List dense className={classes.list}>
-                {items.map((item) => (
+                {items.map(item => (
                     <>
                         <ListItem key={item.id ? item.id : item}>
                             <ListItemText primary={item.displayText ? item.displayText : item} />

@@ -339,20 +339,16 @@ describe('<SingleEditTable />', () => {
             });
 
             it('should not allow editing of non editable columns', () => {
-                const {
-                    getAllByTestId,
-                    getByText,
-                    getByDisplayValue,
-                    queryByDisplayValue
-                } = render(
-                    <SingleEditTable
-                        columns={[
-                            { title: 'col1', id: 'col1', type: 'text', editable: true },
-                            { title: 'col2', id: 'col2', type: 'text', editable: false }
-                        ]}
-                        rows={defaultRows}
-                    />
-                );
+                const { getAllByTestId, getByText, getByDisplayValue, queryByDisplayValue } =
+                    render(
+                        <SingleEditTable
+                            columns={[
+                                { title: 'col1', id: 'col1', type: 'text', editable: true },
+                                { title: 'col2', id: 'col2', type: 'text', editable: false }
+                            ]}
+                            rows={defaultRows}
+                        />
+                    );
 
                 const editButtons = getAllByTestId('editButton');
 

@@ -36,7 +36,7 @@ const removeItem = () => {};
 export default {
     title: 'Components/SelectedItemsList',
     decorators: [
-        (story) => (
+        story => (
             <ThemeProvider theme={linnTheme}>
                 <div style={{ position: 'absolute', left: '5%', top: '10%' }}>{story()}</div>
             </ThemeProvider>
@@ -45,7 +45,7 @@ export default {
     component: SelectedItemsList
 };
 
-export const Default = (args) => <SelectedItemsList {...args} />;
+export const Default = args => <SelectedItemsList {...args} />;
 
 Default.story = {
     name: 'default '
@@ -57,7 +57,7 @@ Default.args = {
     removeItem
 };
 
-export const WithObjects = (args) => <SelectedItemsList {...args} />;
+export const WithObjects = args => <SelectedItemsList {...args} />;
 
 WithObjects.story = {
     name: 'with objects'
@@ -69,7 +69,7 @@ WithObjects.args = {
     removeItem
 };
 
-export const ManyObjectsNoScrolling = (args) => <SelectedItemsList {...args} />;
+export const ManyObjectsNoScrolling = args => <SelectedItemsList {...args} />;
 
 ManyObjectsNoScrolling.story = {
     name: 'many objects no scrolling'
@@ -81,7 +81,7 @@ ManyObjectsNoScrolling.args = {
     removeItem
 };
 
-export const ManyObjectsWithScrolling = (args) => <SelectedItemsList {...args} />;
+export const ManyObjectsWithScrolling = args => <SelectedItemsList {...args} />;
 
 ManyObjectsWithScrolling.story = {
     name: 'many objects with scrolling'

@@ -54,6 +54,7 @@ const Results = ({
                     .map((data, i) => (
                         <Box
                             paddingBottom={3}
+                            //eslint-disable-next-line react/no-array-index-key
                             key={i}
                             className={setPageBreaks(i, pageBreaksAfter)}
                         >
