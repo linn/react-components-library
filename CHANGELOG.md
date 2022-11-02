@@ -1,4 +1,7 @@
 # Changelog
+## [16.0.2] - 2022-10-26
+### Changes
+- InputField - error state if max length exceeded
 ## [16.0.1] - 2022-10-26
 ### Changes
 - Upgrade react router to v6
