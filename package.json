@@ -1,6 +1,6 @@
 {
     "name": "@linn-it/linn-form-components-library",
-    "version": "16.0.2",
+    "version": "16.1.2",
     "private": false,
     "jest": {
         "testEnvironment": "jsdom"
@@ -12,7 +12,9 @@
         "numeral": "^2.0.6",
         "prop-types": "^15.7.2",
         "query-string": "^7.0.1",
-        "react-dropzone": "^14.2.1"
+        "react-dropzone": "^14.2.1",
+        "redux-mock-store": "^1.5.4",
+        "redux-thunk": "^2.4.1"
     },
     "scripts": {
         "start": "react-scripts start",

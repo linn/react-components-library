@@ -1,27 +1,40 @@
 ﻿import { render } from '@testing-library/react';
+import { Provider } from 'react-redux';
 import React from 'react';
-import { ThemeProvider, StyledEngineProvider, createTheme } from '@mui/material/styles';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import configureMockStore from 'redux-mock-store';
 import { MemoryRouter } from 'react-router-dom';
-import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+import { SnackbarProvider } from 'notistack';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-/**
- * @jest-environment jsdom
- */
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+import { apiMiddleware as api } from 'redux-api-middleware';
+import thunkMiddleware from 'redux-thunk';
+
+const middleware = [api, thunkMiddleware];
 
 // eslint-disable-next-line react/prop-types
-function Providers({ children }) {
-    return (
-        <MemoryRouter>
-            <StyledEngineProvider injectFirst>
-                <ThemeProvider theme={createTheme()}>
-                    <LocalizationProvider dateAdapter={AdapterMoment}>
-                        {children}
-                    </LocalizationProvider>
-                </ThemeProvider>
-            </StyledEngineProvider>
-        </MemoryRouter>
+const Providers = ({ children }) => {
+    global.fetch = jest.fn(() =>
+        Promise.resolve({
+            json: () => Promise.resolve({})
+        })
     );
-}
+    const mockStore = configureMockStore(middleware);
+    const store = mockStore({ oidc: { user: { profile: {} } }, historyStore: { push: jest.fn() } });
+    return (
+        <Provider store={store}>
+            <ThemeProvider theme={createTheme()}>
+                <SnackbarProvider dense maxSnack={5}>
+                    <MemoryRouter>
+                        <LocalizationProvider dateAdapter={AdapterMoment}>
+                            {children}
+                        </LocalizationProvider>
+                    </MemoryRouter>
+                </SnackbarProvider>
+            </ThemeProvider>
+        </Provider>
+    );
+};
 
 const customRender = (ui, options) => render(ui, { wrapper: Providers, ...options });
 
