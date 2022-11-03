@@ -1,4 +1,7 @@
 # Changelog
+## [16.1.2] - 2022-11-3
+### Changes
+- Add Address Utility
 ## [16.0.2] - 2022-10-26
 ### Changes
 - InputField - error state if max length exceeded

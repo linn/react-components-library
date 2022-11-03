@@ -86,10 +86,12 @@ import GroupEditTable from './src/components/editableTable/GroupEditTable';
 import SingleEditTable from './src/components/editableTable/SingleEditTable';
 import useGroupEditTable from './src/hooks/useGroupEditTable';
 import FileUploader from './src/components/FileUploader';
+import AddressUtility from './src/components/AddressUtility';
 
 const reducers = { menu, news };
 
 export {
+    AddressUtility,
     BackButton,
     Breadcrumbs,
     CheckboxWithLabel,

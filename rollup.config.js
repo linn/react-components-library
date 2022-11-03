@@ -82,7 +82,8 @@ export default [
             errorTheme: 'src/themes/errorTheme.js',
             linnTheme: 'src/themes/linnTheme.js',
             fetchError: 'src/reducers/reducerFactories/fetchErrorReducerFactory.js',
-            FileUploader: 'src/components/FileUploader.js'
+            FileUploader: 'src/components/FileUploader.js',
+            AddressUtility: 'src/components/AddressUtility.js'
         },
         plugins: [
             babel({ babelrc: false, ...babelrc, exclude: 'node_modules/**' }),
