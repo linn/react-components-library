@@ -1,0 +1,43 @@
+# Search
+
+A customisable search field facilitating the entry of a searchTerm, the performing of a search action, the rendering of results and the handling of a result selection.
+
+## Props
+
+- <b>propertyName</b> - string - the name of the property this field concerns
+- <b>label</b> - string - label to show above the field
+- <b>value</b> - string - the value of the field
+- <b>handleValueChange</b> - func - function called when the field's value changes, takes two parameters: propertyName, newValue
+- <b>disabled</b> - bool - whether or not the field accepts input
+- <b>search</b> - func - the function called when the search is fired, takes the fields value as a parameter
+- <b>searchResults</b> - array - the search results, each having an id, name and description property
+- <b>loading</b> - bool - whether or not the search is loading
+- <b>priorityFunction</b> - string or func - how to prioritise the search results. See section below
+- <b>onResultSelect</b> - func - the function to call when a search result is selected, takes the selected result object as a parameter
+- <b>resultLimit</b> - number - optionally limit the number of results this search will display
+- <b>resultsInModal</b> - bool - whether to display the results in a popup/modal, or just under the search - defaults to false
+- <b>clearSearch</b> - func - a function that clears out the search results
+- <b>searchOnEnter</b> - bool - whether or not to call the search func when the user hits the enter key (see below)
+- <b>onKeyPressFunctions</b> - array - additional actions to be carried out on key presses (see below)
+- <b>helperText</b> - string - an extra piece of info displayed under the field to help the user - defaults to 'PRESS ENTER TO SEARCH'
+
+### Ordering/Prioritising results
+You can use the priorityFunction prop to specify how results are ranked. 
+
+This is achieved by either
+ - passing your oqn function that takes the searchTerm, and any given search result object, and calculates a numeric priority for that result. This priority number is then used to sort the results, highest first.
+
+ or 
+
+ - passing one of the following strings to specify one of the built-in priority calculation functions:
+    - 'closestMatchesFirst' - counts the number of exactly matching characters (ignoring case) between the entered search term value and each result's 'name' property. E.g. if the entered term was 'hell' and a result item's name property was 'Hello, World', that item would be reanked with a score of 4.
+
+### Key Presses
+
+By default the component fires the search function when the user presses the enter key. This behaviour can be optionally overwritten by setting searchOnEnter={false} or extended by passing additional onKeyPressFunctions, or both!
+
+The additonal functions should be passed as an array of objects each with two properties, keyCode and action. 
+
+The keyCode is the numeric key code of the desired key and the value is the function to call when that key is pressed.
+
+This site is cool for quickly determining which key maps to which code: https://www.toptal.com/developers/keycode

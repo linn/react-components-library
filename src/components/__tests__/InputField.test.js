@@ -18,6 +18,7 @@ const defaultProps = {
     editStatus: 'edit',
     value: 0
 };
+
 describe('When Editing', () => {
     test('should change input to 5 decimal places from 6', () => {
         const { getByDisplayValue } = render(
