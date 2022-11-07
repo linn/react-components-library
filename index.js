@@ -138,7 +138,6 @@ export {
     Page,
     paginationSelectorHelpers,
     PaginationSelectors,
-    paginationStoreFactory,
     ProcessActions,
     processSelectorHelpers,
     ProcessSelectors,
