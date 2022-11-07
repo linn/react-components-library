@@ -1,4 +1,10 @@
 # Changelog
+## [17.0.0] - 2022-11-3
+ - removed deprecated stuff: useTablePagination, PaginatedTable, paginationStoreFactory, TableWithInlineEditing, ValidatedInputDialog, GroupEditTable, SingleEditTable, useGroupEditTable
+ - added onErrorStateChange function prop to InputField to allow it to communicate error state to parent
+ - added new Search component. See the docs!
+### Changes
+- Add Address Utility
 ## [16.1.2] - 2022-11-3
 ### Changes
 - Add Address Utility
