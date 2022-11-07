@@ -49,7 +49,6 @@ import collectionStoreFactory from './src/reducers/reducerFactories/collectionSt
 import collectionWithLinksStoreFactory from './src/reducers/reducerFactories/collectionWithLinksStoreFactory';
 import processStoreFactory from './src/reducers/reducerFactories/processStoreFactory';
 import itemStoreFactory from './src/reducers/reducerFactories/itemStoreFactory';
-import paginationStoreFactory from './src/reducers/reducerFactories/paginationStoreFactory';
 import reportOptionsFactory from './src/reducers/reducerFactories/reportOptionsFactory';
 import reportResultsFactory from './src/reducers/reducerFactories/reportResultsFactory';
 import reportsResultsFactory from './src/reducers/reducerFactories/reportsResultsFactory';
@@ -80,6 +79,7 @@ import getPreviousPaths from './src/selectors/previousPathSelectors';
 import smartGoBack from './src/utilities/smartGoBack';
 import FileUploader from './src/components/FileUploader';
 import AddressUtility from './src/components/AddressUtility';
+import Search from './src/components/Search';
 
 const reducers = { menu, news };
 
@@ -152,6 +152,7 @@ export {
     reportsResultsFactory,
     ReportTable,
     SaveBackCancelButtons,
+    Search,
     SearchInputField,
     SelectedItemsList,
     smartGoBack,
