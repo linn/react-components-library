@@ -141,6 +141,5 @@ describe('When onErrorStateChange function supplied', () => {
         });
 
         expect(onErrorStateChange).toBeCalledWith(false);
-
     });
 });

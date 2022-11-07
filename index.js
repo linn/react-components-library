@@ -21,8 +21,6 @@ import DatePicker from './src/components/DatePicker';
 import DateTimePicker from './src/components/DateTimePicker';
 import SearchInputField from './src/components/SearchInputField';
 import useSearch from './src/hooks/useSearch';
-import useTablePagination from './src/hooks/useTablePagination';
-import PaginatedTable from './src/components/table/PaginatedTable';
 import TypeaheadTable from './src/components/TypeaheadTable';
 import TypeaheadDialog from './src/components/TypeaheadDialog';
 import makeActionTypes from './src/actions/makeActionTypes';
@@ -75,16 +73,11 @@ import errorTheme from './src/themes/errorTheme';
 import linnTheme from './src/themes/linnTheme';
 import SelectedItemsList from './src/components/SelectedItemsList';
 import NotFound from './src/components/NotFound';
-import ValidatedInputDialog from './src/components/ValidatedInputDialog';
-import TableWithInlineEditing from './src/components/TableWithInlineEditing';
 import LinnWeekPicker from './src/components/LinnWeekPicker';
 import { getWeekEndDate, getWeekStartDate } from './src/utilities/dateUtilities';
 import './src/styles/printStyles.css';
 import getPreviousPaths from './src/selectors/previousPathSelectors';
 import smartGoBack from './src/utilities/smartGoBack';
-import GroupEditTable from './src/components/editableTable/GroupEditTable';
-import SingleEditTable from './src/components/editableTable/SingleEditTable';
-import useGroupEditTable from './src/hooks/useGroupEditTable';
 import FileUploader from './src/components/FileUploader';
 import AddressUtility from './src/components/AddressUtility';
 
@@ -120,7 +113,6 @@ export {
     getUsername,
     getWeekEndDate,
     getWeekStartDate,
-    GroupEditTable,
     initialiseOnMount,
     InputField,
     itemSelectorHelpers,
@@ -144,7 +136,6 @@ export {
     NotFound,
     OnOffSwitch,
     Page,
-    PaginatedTable,
     paginationSelectorHelpers,
     PaginationSelectors,
     paginationStoreFactory,
@@ -163,11 +154,9 @@ export {
     SaveBackCancelButtons,
     SearchInputField,
     SelectedItemsList,
-    SingleEditTable,
     smartGoBack,
     SnackbarMessage,
     StateApiActions,
-    TableWithInlineEditing,
     Title,
     Typeahead,
     TypeaheadDialog,
@@ -175,8 +164,5 @@ export {
     UpdateApiActions,
     userSelectors,
     useSearch,
-    useTablePagination,
-    utilities,
-    ValidatedInputDialog,
-    useGroupEditTable
+    utilities
 };
