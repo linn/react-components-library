@@ -52,7 +52,8 @@ function InputField({
     value,
     decimalPlaces,
     textFieldProps,
-    autoFocus
+    autoFocus,
+    onErrorStateChange
 }) {
     const classes = useStyles();
     const inputRef = useRef();
@@ -83,8 +84,14 @@ function InputField({
         } else if (maxLength && newValue?.length > maxLength) {
             setInErrorState(true);
             setErrorMessage(`MAX LENGTH (${maxLength}) EXCEEDED`);
+            if (onErrorStateChange) {
+                onErrorStateChange(true);
+            }
         } else if (maxLength && newValue?.length <= maxLength) {
             setInErrorState(false);
+            if (onErrorStateChange) {
+                onErrorStateChange(false);
+            }
             setErrorMessage('');
         }
 
@@ -172,7 +179,8 @@ InputField.propTypes = {
     onChange: PropTypes.func,
     decimalPlaces: PropTypes.number,
     textFieldProps: PropTypes.shape({}),
-    autoFocus: PropTypes.bool
+    autoFocus: PropTypes.bool,
+    onErrorStateChange: PropTypes.func
 };
 
 InputField.defaultProps = {
@@ -193,7 +201,8 @@ InputField.defaultProps = {
     onChange: null,
     decimalPlaces: null,
     textFieldProps: null,
-    autoFocus: false
+    autoFocus: false,
+    onErrorStateChange: null
 };
 
 export default InputField;

@@ -8,6 +8,8 @@ afterEach(cleanup);
 
 const changeMock = jest.fn();
 
+const onErrorStateChange = jest.fn();
+
 const defaultProps = {
     label: 'Cost',
     type: 'number',
@@ -99,5 +101,46 @@ describe('When Max Length Exceeded', () => {
         });
 
         expect(getByText('MAX LENGTH (3) EXCEEDED')).toBeInTheDocument();
+    });
+});
+
+describe('When onErrorStateChange function supplied', () => {
+    test('should call function with true param when max length exceeded', () => {
+        const { getByDisplayValue } = render(
+            <InputField
+                propertyName="test"
+                maxLength={3}
+                onChange={changeMock}
+                value="ok"
+                onErrorStateChange={onErrorStateChange}
+            />
+        );
+        const input = getByDisplayValue('ok');
+
+        fireEvent.change(input, {
+            target: { value: 'not ok - longer than 3' }
+        });
+
+        expect(onErrorStateChange).toBeCalledWith(true);
+    });
+
+    test('should call function with false param when max length not exceeded', () => {
+        const { getByDisplayValue } = render(
+            <InputField
+                propertyName="test"
+                maxLength={3}
+                onChange={changeMock}
+                value="ok"
+                onErrorStateChange={onErrorStateChange}
+            />
+        );
+        const input = getByDisplayValue('ok');
+
+        fireEvent.change(input, {
+            target: { value: '123' }
+        });
+
+        expect(onErrorStateChange).toBeCalledWith(false);
+
     });
 });

@@ -110,6 +110,7 @@ export const MaxLength = args => {
             {...actions}
             value={value}
             onChange={(_, newVal) => handleChange(newVal)}
+            onErrorStateChange={action('onErrorStateChange')}
         />
     );
 };
