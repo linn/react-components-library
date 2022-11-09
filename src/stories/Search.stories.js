@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
-// import Grid from '@mui/material/Grid';
 import ThemeProvider from '@mui/styles/ThemeProvider';
 import linnTheme from '../themes/linnTheme';
 import Search from '../components/Search';

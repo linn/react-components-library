@@ -25,7 +25,7 @@ A customisable search field facilitating the entry of a searchTerm, the performi
 You can use the priorityFunction prop to specify how results are ranked. 
 
 This is achieved by either
- - passing your oqn function that takes the searchTerm, and any given search result object, and calculates a numeric priority for that result. This priority number is then used to sort the results, highest first.
+ - passing your own function that is called on each search result object as well as the current search term, and calculates a numeric priority for that result. This priority number is then used to sort the results, highest first.
 
  or 
 
@@ -38,6 +38,6 @@ By default the component fires the search function when the user presses the ent
 
 The additonal functions should be passed as an array of objects each with two properties, keyCode and action. 
 
-The keyCode is the numeric key code of the desired key and the value is the function to call when that key is pressed.
+The keyCode is the numeric key code of the desired key and the action is the function to call when that key is pressed.
 
 This site is cool for quickly determining which key maps to which code: https://www.toptal.com/developers/keycode
