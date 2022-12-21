@@ -1,8 +1,11 @@
 # Changelog
+## [17.1.0] - 2022-12-21
+### Changes
+- Add display of report attributes (text-colour, text-weight, background-colour)
 ## [17.0.0] - 2022-11-3
- - removed deprecated stuff: useTablePagination, PaginatedTable, paginationStoreFactory, TableWithInlineEditing, ValidatedInputDialog, GroupEditTable, SingleEditTable, useGroupEditTable
- - added onErrorStateChange function prop to InputField to allow it to communicate error state to parent
- - added new Search component. See the docs!
+- removed deprecated stuff: useTablePagination, PaginatedTable, paginationStoreFactory, TableWithInlineEditing, ValidatedInputDialog, GroupEditTable, SingleEditTable, useGroupEditTable
+- added onErrorStateChange function prop to InputField to allow it to communicate error state to parent
+- added new Search component. See the docs!
 ### Changes
 - Add Address Utility
 ## [16.1.2] - 2022-11-3

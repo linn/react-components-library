@@ -50,19 +50,21 @@ const useStyles = makeStyles(() => ({
     largeCol: {
         width: '300px',
         overflow: 'auto'
+    },
+    textBold: {
+        fontWeight: 'bold'
     }
 }));
 
 const setCellClasses = (
     classes,
-    displayValue,
     textDisplayValue,
     rowType,
-    varianceColumn,
     textColumn,
     totalColumn,
     allowWrap,
-    defaultClasses
+    defaultClasses,
+    attributes
 ) => {
     let generatedClasses = '';
     if (rowType === 'Subtotal' || totalColumn) {
@@ -81,17 +83,36 @@ const setCellClasses = (
         generatedClasses += `${defaultClasses} `;
     }
 
+    if (attributes?.length) {
+        const textAttribute = attributes.find(a => a.attributeType === 'text-weight');
+        if (textAttribute === 'very-bold') {
+            generatedClasses += `${classes.subTotal} `;
+        } else if (textAttribute === 'bold') {
+            generatedClasses += `${classes.textBold} `;
+        }
+    }
+
     return generatedClasses;
 };
 
-const setHeaderCellClasses = (
-    classes,
-    varianceColumn,
-    textColumn,
-    totalColumn,
-    columnClass,
-    defaultClasses
-) => {
+const getAttributeStyles = attributes => {
+    let style = {};
+    if (attributes?.length) {
+        const textAttribute = attributes.find(a => a.attributeType === 'text-colour');
+        if (textAttribute) {
+            style = { ...style, color: textAttribute?.attributeValue };
+        }
+
+        const backgroundAttribute = attributes.find(a => a.attributeType === 'background-colour');
+        if (backgroundAttribute) {
+            style = { ...style, backgroundColor: backgroundAttribute?.attributeValue };
+        }
+    }
+
+    return style;
+};
+
+const setHeaderCellClasses = (classes, textColumn, columnClass, defaultClasses) => {
     let generatedClasses = '';
     if (!textColumn) {
         generatedClasses += `${classes.numberField} `;
@@ -135,7 +156,7 @@ const Results = ({
                 showTitle,
                 !reportData,
                 reportData && reportData.error,
-                reportData ? reportData.reportHelpText : ''
+                reportData?.reportHelpText ?? ''
             )}
         />
         <div style={{ backgroundColor: 'white' }}>
@@ -149,9 +170,7 @@ const Results = ({
                             <TableCell
                                 className={setHeaderCellClasses(
                                     classes,
-                                    reportData.headers.varianceColumns.includes(i),
                                     reportData.headers.textColumns.includes(i),
-                                    reportData.headers.totalColumns.includes(i),
                                     columnClasses ? columnClasses[i] : null
                                 )}
                                 key={header}
@@ -172,15 +191,16 @@ const Results = ({
                             ) : null}
                             {item.values.map((value, i) => (
                                 <TableCell
+                                    style={getAttributeStyles(value?.attributes)}
                                     className={setCellClasses(
                                         classes,
-                                        value ? value.displayValue : null,
-                                        value ? value.textDisplayValue : null,
+                                        value?.textDisplayValue,
                                         item.rowType,
-                                        reportData.headers.varianceColumns.includes(i),
                                         reportData.headers.textColumns.includes(i),
                                         reportData.headers.totalColumns.includes(i),
-                                        value ? value.allowWrap : true
+                                        value?.allowWrap ?? true,
+                                        null,
+                                        value?.attributes
                                     )}
                                     // remove this if we implement reordering of columns
                                     // eslint-disable-next-line react/no-array-index-key
@@ -200,15 +220,16 @@ const Results = ({
                             ) : null}
                             {reportData.totals.values.map((value, i) => (
                                 <TableCell
+                                    style={getAttributeStyles(value?.attributes)}
                                     className={setCellClasses(
                                         classes,
-                                        value ? value.displayValue : null,
-                                        value ? value.textDisplayValue : null,
+                                        value?.textDisplayValue,
                                         'Total',
-                                        reportData.headers.varianceColumns.includes(i),
                                         reportData.headers.textColumns.includes(i),
                                         reportData.headers.totalColumns.includes(i),
-                                        value ? value.allowWrap : true
+                                        value?.allowWrap,
+                                        null,
+                                        value?.attributes
                                     )}
                                     // remove this if we implement reordering of columns
                                     // eslint-disable-next-line react/no-array-index-key
