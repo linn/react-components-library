@@ -85,9 +85,9 @@ const setCellClasses = (
 
     if (attributes?.length) {
         const textAttribute = attributes.find(a => a.attributeType === 'text-weight');
-        if (textAttribute === 'very-bold') {
+        if (textAttribute?.attributeValue === 'very-bold') {
             generatedClasses += `${classes.subTotal} `;
-        } else if (textAttribute === 'bold') {
+        } else if (textAttribute?.attributeValue === 'bold') {
             generatedClasses += `${classes.textBold} `;
         }
     }
