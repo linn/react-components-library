@@ -1,4 +1,6 @@
 # Changelog
+## [17.1.2] - 2023-01-06 
+- Updated version number as NPM ENV variable and Circle SSH keys were regenerated
 ## [17.1.0] - 2022-12-21
 ### Changes
 - Add display of report attributes (text-colour, text-weight, background-colour)
