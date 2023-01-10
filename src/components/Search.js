@@ -45,7 +45,8 @@ function Search({
     clearSearch,
     searchOnEnter,
     onKeyPressFunctions,
-    helperText
+    helperText,
+    autoFocus
 }) {
     const classes = useStyles();
     const [dialogOpen, setDialogOpen] = useState(false);
@@ -151,9 +152,11 @@ function Search({
                 value={value}
                 propertyName={propertyName}
                 label={label}
+                autoFocus={autoFocus}
                 adornment={<SearchIcon />}
                 onChange={handleValueChange}
                 helperText={helperText}
+                InputProps={{ autoFocus: true }}
                 textFieldProps={{
                     disabled,
                     onKeyDown: data => {
@@ -195,6 +198,7 @@ function Search({
 
 Search.propTypes = {
     propertyName: PropTypes.string.isRequired,
+    autoFocus: PropTypes.bool,
     label: PropTypes.string.isRequired,
     clearSearch: PropTypes.func.isRequired,
     handleValueChange: PropTypes.func.isRequired,
@@ -216,6 +220,7 @@ Search.propTypes = {
 Search.defaultProps = {
     searchOnEnter: true,
     onKeyPressFunctions: [],
+    autoFocus: false,
     value: null,
     disabled: false,
     searchResults: [],
