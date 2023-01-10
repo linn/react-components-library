@@ -156,7 +156,6 @@ function Search({
                 adornment={<SearchIcon />}
                 onChange={handleValueChange}
                 helperText={helperText}
-                InputProps={{ autoFocus: true }}
                 textFieldProps={{
                     disabled,
                     onKeyDown: data => {
