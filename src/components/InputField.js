@@ -53,12 +53,19 @@ function InputField({
     decimalPlaces,
     textFieldProps,
     autoFocus,
-    onErrorStateChange
+    onErrorStateChange,
+    visible
 }) {
     const classes = useStyles();
     const inputRef = useRef();
     const [inErrorState, setInErrorState] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+    useEffect(() => {
+        if (!autoFocus || !inputRef.current || !visible) return;
+        setTimeout(() => {
+            inputRef.current.focus();
+        }, 100);
+    }, [autoFocus, visible]);
 
     useEffect(() => {
         setInErrorState(error);
@@ -97,7 +104,6 @@ function InputField({
 
         onChange(propertyName, val);
     };
-
     return (
         <>
             <InputLabel
@@ -134,7 +140,6 @@ function InputField({
                 value={type === 'date' ? moment(value).format('YYYY-MM-DD') : getValue(value)}
                 onChange={e => change(e)}
                 InputProps={{
-                    autoFocus,
                     startAdornment: adornment ? (
                         <InputAdornment position="start">{adornment}</InputAdornment>
                     ) : null,
@@ -180,7 +185,8 @@ InputField.propTypes = {
     decimalPlaces: PropTypes.number,
     textFieldProps: PropTypes.shape({}),
     autoFocus: PropTypes.bool,
-    onErrorStateChange: PropTypes.func
+    onErrorStateChange: PropTypes.func,
+    visible: PropTypes.bool
 };
 
 InputField.defaultProps = {
@@ -202,7 +208,8 @@ InputField.defaultProps = {
     decimalPlaces: null,
     textFieldProps: null,
     autoFocus: false,
-    onErrorStateChange: null
+    onErrorStateChange: null,
+    visible: true
 };
 
 export default InputField;

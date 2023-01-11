@@ -46,7 +46,8 @@ function Search({
     searchOnEnter,
     onKeyPressFunctions,
     helperText,
-    autoFocus
+    autoFocus,
+    visible
 }) {
     const classes = useStyles();
     const [dialogOpen, setDialogOpen] = useState(false);
@@ -149,6 +150,7 @@ function Search({
     return (
         <>
             <InputField
+                visible={visible}
                 value={value}
                 propertyName={propertyName}
                 label={label}
@@ -214,7 +216,8 @@ Search.propTypes = {
     onKeyPressFunctions: PropTypes.arrayOf(
         PropTypes.shape({ keyCode: PropTypes.number, action: PropTypes.func })
     ),
-    helperText: PropTypes.string
+    helperText: PropTypes.string,
+    visible: PropTypes.bool
 };
 Search.defaultProps = {
     searchOnEnter: true,
@@ -227,7 +230,8 @@ Search.defaultProps = {
     priorityFunction: null,
     resultLimit: null,
     resultsInModal: false,
-    helperText: 'PRESS ENTER TO SEARCH'
+    helperText: 'PRESS ENTER TO SEARCH',
+    visible: true
 };
 
 export default Search;
