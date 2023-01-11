@@ -59,6 +59,27 @@ ResultsInline.args = {
     ...defaultArgs
 };
 
+export const AutoFocus = args => {
+    const [value, setValue] = useState('result');
+    return (
+        <Search
+            {...args}
+            {...actions}
+            value={value}
+            autoFocus
+            handleValueChange={(_, newValue) => setValue(newValue)}
+        />
+    );
+};
+
+AutoFocus.story = {
+    name: 'AutoFocus'
+};
+
+AutoFocus.args = {
+    ...defaultArgs
+};
+
 export const ResultsInModal = args => {
     const [value, setValue] = useState('result');
     return (
