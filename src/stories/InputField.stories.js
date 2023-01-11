@@ -32,6 +32,18 @@ LabelAndValue.args = {
     label: 'Input Field'
 };
 
+export const AutoFocus = args => <InputField {...args} {...actions} />;
+
+AutoFocus.story = {
+    name: 'AutoFocus'
+};
+
+AutoFocus.args = {
+    value: 'Value',
+    label: 'Input Field',
+    autoFocus: true
+};
+
 export const LabelNoValue = args => <InputField {...args} {...actions} />;
 
 LabelNoValue.story = {

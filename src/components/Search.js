@@ -222,7 +222,7 @@ Search.propTypes = {
 Search.defaultProps = {
     searchOnEnter: true,
     onKeyPressFunctions: [],
-    autoFocus: false,
+    autoFocus: true,
     value: null,
     disabled: false,
     searchResults: [],
