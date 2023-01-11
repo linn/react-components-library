@@ -1,4 +1,7 @@
 # Changelog
+## [17.2.0] - 2023-01-10 
+### Changes
+- add autofocus prop to Search component
 ## [17.1.2] - 2023-01-06 
 - Updated version number as NPM ENV variable and Circle SSH keys were regenerated
 ## [17.1.0] - 2022-12-21

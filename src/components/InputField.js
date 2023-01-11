@@ -134,6 +134,7 @@ function InputField({
                 value={type === 'date' ? moment(value).format('YYYY-MM-DD') : getValue(value)}
                 onChange={e => change(e)}
                 InputProps={{
+                    autoFocus,
                     startAdornment: adornment ? (
                         <InputAdornment position="start">{adornment}</InputAdornment>
                     ) : null,
@@ -153,7 +154,6 @@ function InputField({
                     }
                 }}
                 variant="outlined"
-                autoFocus={autoFocus}
                 {...textFieldProps}
             />
         </>
