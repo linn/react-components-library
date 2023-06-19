@@ -29,12 +29,12 @@ export default function usePreviousNextNavigation(
     }
     const goNext = nextResult
         ? () => {
-              navigateFunction.push(`${urlBuilder(nextResult)}`, { searchResults });
+              navigateFunction(`${urlBuilder(nextResult)}`, { searchResults });
           }
         : null;
     const goPrev = prevResult
         ? () => {
-              navigateFunction.push(`${urlBuilder(prevResult)}`, { searchResults });
+              navigateFunction(`${urlBuilder(prevResult)}`, { searchResults });
           }
         : null;
 
