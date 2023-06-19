@@ -1,4 +1,8 @@
-# Changelog
+# Changelog#
+## [17.3.0] - 2023-06-19
+### Changes
+- Added new PrevNextButtons component and corresponding usePreviousNextNavigation hook. 
+### Changes
 ## [17.2.1] - 2023-01-11 
 ### Changes
 - fix InputField and Search component autoFocus bugs that resulted from visibility of componenets - you can't autoFocus an input that's invisible which is the case when, for example, the input is in a modal that is currently closed - so needed some way to track the visibility of the input to implement the correct autoFocus behaviour.
