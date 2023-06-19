@@ -79,7 +79,9 @@ export default [
             linnTheme: 'src/themes/linnTheme.js',
             fetchError: 'src/reducers/reducerFactories/fetchErrorReducerFactory.js',
             FileUploader: 'src/components/FileUploader.js',
-            AddressUtility: 'src/components/AddressUtility.js'
+            AddressUtility: 'src/components/AddressUtility.js',
+            UsePreviousNextNavigation: 'src/hooks/usePreviousNextNavigation',
+            PrevNextButtons: 'src/components/PrevNextButtons'
         },
         plugins: [
             babel({ babelrc: false, ...babelrc, exclude: 'node_modules/**' }),

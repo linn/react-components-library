@@ -80,6 +80,8 @@ import smartGoBack from './src/utilities/smartGoBack';
 import FileUploader from './src/components/FileUploader';
 import AddressUtility from './src/components/AddressUtility';
 import Search from './src/components/Search';
+import usePreviousNextNavigation from './src/hooks/usePreviousNextNavigation';
+import PrevNextButtons from './src/components/PrevNextButtons';
 
 const reducers = { menu, news };
 
@@ -138,6 +140,7 @@ export {
     Page,
     paginationSelectorHelpers,
     PaginationSelectors,
+    PrevNextButtons,
     ProcessActions,
     processSelectorHelpers,
     ProcessSelectors,
@@ -163,6 +166,7 @@ export {
     TypeaheadTable,
     UpdateApiActions,
     userSelectors,
+    usePreviousNextNavigation,
     useSearch,
     utilities
 };
