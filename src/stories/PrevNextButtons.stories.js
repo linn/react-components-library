@@ -42,5 +42,6 @@ Default.args = {
     goPrev: action('goPrev'),
     goNext: action('goNext'),
     nextResult: 'NEXT',
-    prevResult: 'PREV'
+    prevResult: 'PREV',
+    disabled: false
 };

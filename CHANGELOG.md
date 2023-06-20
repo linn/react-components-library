@@ -1,7 +1,9 @@
 # Changelog#
+## [17.3.1] - 2023-06-20
+### Changes
 ## [17.3.0] - 2023-06-19
 ### Changes
-- Added new PrevNextButtons component and corresponding usePreviousNextNavigation hook. 
+- Added new disabled prop to PrevNextButtons component
 ### Changes
 ## [17.2.1] - 2023-01-11 
 ### Changes

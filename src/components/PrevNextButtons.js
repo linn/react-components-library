@@ -5,22 +5,22 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import PropTypes from 'prop-types';
 
-function PrevNextButtons({ goPrev, goNext, nextResult, prevResult }) {
+function PrevNextButtons({ goPrev, goNext, nextResult, prevResult, disabled }) {
     return (
         <>
             {goPrev ? (
                 <Grid item xs={2}>
-                    <Button startIcon={<ArrowLeftIcon />} onClick={goPrev}>
+                    <Button disabled={disabled} startIcon={<ArrowLeftIcon />} onClick={goPrev}>
                         {prevResult}
                     </Button>
                 </Grid>
             ) : (
-                <Grid itemx xs={2} />
+                <Grid item xs={2} />
             )}
             <Grid item xs={8} />
             {goNext ? (
                 <Grid item xs={2}>
-                    <Button endIcon={<ArrowRightIcon />} onClick={goNext}>
+                    <Button disabled={disabled} endIcon={<ArrowRightIcon />} onClick={goNext}>
                         {nextResult}
                     </Button>
                 </Grid>
@@ -35,14 +35,16 @@ PrevNextButtons.propTypes = {
     goPrev: PropTypes.func,
     goNext: PropTypes.func,
     nextResult: PropTypes.string,
-    prevResult: PropTypes.string
+    prevResult: PropTypes.string,
+    disabled: PropTypes.bool
 };
 
 PrevNextButtons.defaultProps = {
     goPrev: null,
     goNext: null,
     nextResult: '',
-    prevResult: ''
+    prevResult: '',
+    disabled: false
 };
 
 export default PrevNextButtons;
