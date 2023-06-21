@@ -1,4 +1,7 @@
 # Changelog#
+## [17.3.3] - 2023-06-21
+### Changes
+- Revert package-lock updates that seemed to break storybook
 ## [17.3.2] - 2023-06-21
 ### Changes
 - Additionally return the id of the 'current' result from the usePrevNextNavigation() hook
