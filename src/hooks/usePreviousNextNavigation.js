@@ -21,6 +21,7 @@ export default function usePreviousNextNavigation(
     }
 
     const currentIndex = searchResults?.indexOf(idField);
+    const currentResult = searchResults?.[currentIndex];
     const nextResult = searchResults?.[currentIndex + 1];
     const prevResult = searchResults?.[currentIndex - 1];
 
@@ -38,5 +39,5 @@ export default function usePreviousNextNavigation(
           }
         : null;
 
-    return [goPrev, goNext, prevResult, nextResult];
+    return [goPrev, goNext, prevResult, nextResult, currentResult];
 }

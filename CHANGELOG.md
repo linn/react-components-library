@@ -1,4 +1,7 @@
 # Changelog#
+## [17.3.2] - 2023-06-21
+### Changes
+- Additionally return the id of the 'current' result from the usePrevNextNavigation() hook
 ## [17.3.1] - 2023-06-20
 ### Changes
 - Added new disabled prop to PrevNextButtons component
