@@ -22,31 +22,33 @@ const inputStyles = makeStyles(theme => ({
 function Picker({ label, value, onChange, minDate, maxDate, required, disabled }) {
     const inputClasses = inputStyles();
     const labelClasses = labelStyles();
-    return (
-        <>
-            <InputLabel classes={{ root: labelClasses.root }} required={required}>
-                {label}
-            </InputLabel>
-            <DateTimePicker
-                allowKeyboardControl
-                autoOk
-                margin="dense"
-                inputVariant="outlined"
-                ampm={false}
-                renderInput={props => <TextField {...props} />}
-                value={moment(value)}
-                minDate={moment(minDate)}
-                maxDate={moment(maxDate)}
-                onChange={onChange}
-                classes={inputClasses}
-                className={inputClasses.root}
-                disabled={disabled}
-                InputAdornmentProps={{ className: inputClasses.root }}
-                InputProps={{ classes: { disabled: inputClasses.disabled } }}
-                format="DD/MM/YYYY HH:mm"
-            />
-        </>
-    );
+    return <>
+        <InputLabel classes={{ root: labelClasses.root }} required={required}>
+            {label}
+        </InputLabel>
+        <DateTimePicker
+            allowKeyboardControl
+            autoOk
+            margin="dense"
+            inputVariant="outlined"
+            ampm={false}
+            renderInput={props => <TextField {...props} />}
+            value={moment(value)}
+            minDate={moment(minDate)}
+            maxDate={moment(maxDate)}
+            onChange={onChange}
+            classes={inputClasses}
+            className={inputClasses.root}
+            disabled={disabled}
+            format="DD/MM/YYYY HH:mm"
+            componentsProps={{
+                inputAdornment: { className: inputClasses.root },
+
+                textField: {
+                    InputProps: { classes: { disabled: inputClasses.disabled } },
+                },
+            }} />
+    </>;
 }
 
 Picker.propTypes = {
