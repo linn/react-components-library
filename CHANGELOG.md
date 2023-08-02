@@ -1,4 +1,7 @@
-# Changelog#
+# Changelog
+## [18.0.0] - 2023-08-02
+### Changes
+- Various npm package updates
 ## [17.3.3] - 2023-06-21
 ### Changes
 - Revert package-lock updates that seemed to break storybook
