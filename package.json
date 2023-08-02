@@ -98,6 +98,8 @@
         "jscodeshift": "^0.15.0",
         "moment": "^2.29.4",
         "notistack": "^3.0.1",
+        "postcss": "^8.1.9",
+        "postcss-import": "12.0.1",
         "prettier": "^3.0.0",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
@@ -106,7 +108,7 @@
         "redux": "^4.2.1",
         "rollup": "^1.31.1",
         "rollup-plugin-babel": "^4.4.0",
-        "rollup-plugin-postcss": "^4.0.2",
+        "rollup-plugin-postcss": "^2.0.6",
         "rollup-plugin-terser": "^5.2.0",
         "rollup-plugin-uglify": "^6.0.4",
         "sb": "^6.3.12"
