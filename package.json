@@ -111,7 +111,7 @@
         "rollup-plugin-postcss": "^2.0.6",
         "rollup-plugin-terser": "^5.2.0",
         "rollup-plugin-uglify": "^6.0.4",
-        "sb": "^6.3.12"
+        "sb": "^7.2.0"
     },
     "storybook-deployer": {
         "gitUsername": "GH Pages Bot",
