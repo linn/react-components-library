@@ -24,30 +24,32 @@ function Picker({ value, minDate, maxDate, label, onChange, required, disabled }
     const inputClasses = inputStyles();
     const labelClasses = labelStyles();
 
-    return (
-        <>
-            <InputLabel classes={{ root: labelClasses.root }} required={required}>
-                {label}
-            </InputLabel>
-            <DatePicker
-                allowKeyboardControl
-                margin="dense"
-                inputVariant="outlined"
-                autoOk
-                inputFormat="DD/MM/YYYY"
-                renderInput={props => <TextField {...props} />}
-                value={value ? moment(value) : null}
-                minDate={moment(minDate)}
-                maxDate={moment(maxDate)}
-                onChange={onChange}
-                classes={inputClasses}
-                disabled={disabled}
-                className={inputClasses.root}
-                InputAdornmentProps={{ className: inputClasses.root }}
-                InputProps={{ classes: { disabled: inputClasses.disabled } }}
-            />
-        </>
-    );
+    return <>
+        <InputLabel classes={{ root: labelClasses.root }} required={required}>
+            {label}
+        </InputLabel>
+        <DatePicker
+            allowKeyboardControl
+            margin="dense"
+            inputVariant="outlined"
+            autoOk
+            format="DD/MM/YYYY"
+            renderInput={props => <TextField {...props} />}
+            value={value ? moment(value) : null}
+            minDate={moment(minDate)}
+            maxDate={moment(maxDate)}
+            onChange={onChange}
+            classes={inputClasses}
+            disabled={disabled}
+            className={inputClasses.root}
+            componentsProps={{
+                inputAdornment: { className: inputClasses.root },
+
+                textField: {
+                    InputProps: { classes: { disabled: inputClasses.disabled } },
+                },
+            }} />
+    </>;
 }
 
 Picker.propTypes = {
