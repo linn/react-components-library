@@ -1,6 +1,6 @@
 {
     "name": "@linn-it/linn-form-components-library",
-    "version": "18.0.1",
+    "version": "18.0.2",
     "private": false,
     "jest": {
         "testEnvironment": "jsdom"
@@ -12,7 +12,7 @@
         "jest-environment-jsdom": "^29.6.2",
         "numeral": "^2.0.6",
         "prop-types": "^15.8.1",
-        "query-string": "^8.1.0",
+        "query-string": "^7.0.1",
         "react-dropzone": "^14.2.3",
         "redux-mock-store": "^1.5.4",
         "redux-thunk": "^2.4.2"

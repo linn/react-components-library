@@ -1,4 +1,8 @@
 # Changelog
+## [18.0.2] - 2023-08-14
+### Changes
+- Revert query string to before they made the package pure ESM to avoid test failures for now
+## [18.0.0] - 2023-08-02
 ## [18.0.1] - 2023-08-14
 ### Changes
 - Make usePreviousNextNavigation hook still return the currentResult when there is only one search result
