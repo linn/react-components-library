@@ -19,7 +19,7 @@
     },
     "scripts": {
         "start": "react-scripts start",
-        "build": "npm install --legacy-peer-deps && && npm install --only=dev && jest --runInBand src/ && rollup --config",
+        "build": "npm install --legacy-peer-deps && npm install --only=dev && jest --runInBand src/ && rollup --config",
         "deploy": "npm run build && npm publish && npm run deploy-storybook",
         "build-storybook": "build-storybook -c .storybook -o .out",
         "deploy-storybook": "storybook-to-ghpages -- --out=.out",
