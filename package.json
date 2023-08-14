@@ -1,6 +1,6 @@
 {
     "name": "@linn-it/linn-form-components-library",
-    "version": "18.0.0",
+    "version": "18.0.1",
     "private": false,
     "jest": {
         "testEnvironment": "jsdom"
@@ -19,7 +19,7 @@
     },
     "scripts": {
         "start": "react-scripts start",
-        "build": "npm install && jest --runInBand src/ && rollup --config",
+        "build": "npm install --legacy-peer-deps && npm install --only=dev && jest --runInBand src/ && rollup --config",
         "deploy": "npm run build && npm publish && npm run deploy-storybook",
         "build-storybook": "build-storybook -c .storybook -o .out",
         "deploy-storybook": "storybook-to-ghpages -- --out=.out",
@@ -31,7 +31,8 @@
         "eslint-check": "eslint --print-config . | eslint-config-prettier-check"
     },
     "resolutions": {
-        "**/@emotion/styled": "^11.0.0"
+        "**/@emotion/styled": "^11.0.0",
+        "webpack": "5.88.2"
     },
     "peerDependencies": {
         "@emotion/react": "^11.11.1",
@@ -72,7 +73,9 @@
         "@storybook/addon-docs": "^6.3.12",
         "@storybook/addon-essentials": "^6.3.12",
         "@storybook/addons": "^6.3.12",
+        "@storybook/builder-webpack5": "^6.5.16",
         "@storybook/codemod": "^6.3.12",
+        "@storybook/manager-webpack5": "^6.5.16",
         "@storybook/react": "^6.3.12",
         "@storybook/storybook-deployer": "^2.8.10",
         "@storybook/theming": "^6.3.12",

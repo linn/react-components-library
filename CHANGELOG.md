@@ -1,4 +1,7 @@
 # Changelog
+## [18.0.1] - 2023-08-14
+### Changes
+- Make usePreviousNextNavigation hook still return the currentResult when there is only one search result
 ## [18.0.0] - 2023-08-02
 ### Changes
 - Various npm package updates
