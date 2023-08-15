@@ -5,15 +5,21 @@ import Tooltip from '@mui/material/Tooltip';
 import SvgIcon from '@mui/material/SvgIcon';
 import Loading from './Loading';
 
-const ExportButton = ({ href, accept, fileName, buttonText, tooltipText, disabled }) => {
+function ExportButton({ href, accept, fileName, buttonText, tooltipText, disabled, accessToken }) {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
 
+    let h = {
+        Accept: accept
+    };
+
+    if (accessToken) {
+        h = { ...h, Authorization: `Bearer ${accessToken}` };
+    }
+
     const download = () =>
         fetch(href, {
-            headers: new Headers({
-                Accept: accept
-            })
+            headers: new Headers(h)
         })
             .then(response => {
                 if (!response.ok) {
@@ -65,7 +71,7 @@ const ExportButton = ({ href, accept, fileName, buttonText, tooltipText, disable
             </Tooltip>
         </div>
     );
-};
+}
 
 ExportButton.propTypes = {
     href: PropTypes.string.isRequired,
@@ -73,7 +79,8 @@ ExportButton.propTypes = {
     fileName: PropTypes.string,
     buttonText: PropTypes.string,
     tooltipText: PropTypes.string,
-    disabled: PropTypes.bool
+    disabled: PropTypes.bool,
+    accessToken: PropTypes.string
 };
 
 ExportButton.defaultProps = {
@@ -81,7 +88,8 @@ ExportButton.defaultProps = {
     buttonText: 'EXPORT',
     fileName: 'export.csv',
     tooltipText: 'Download report as CSV file',
-    disabled: false
+    disabled: false,
+    accessToken: null
 };
 
 export default ExportButton;

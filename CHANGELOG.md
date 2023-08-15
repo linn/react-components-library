@@ -1,4 +1,7 @@
 # Changelog
+## [18.1.0] - 2023-08-15
+### Changes
+- Add optional oidc access token auth header to the request submitted by the ExportButton, to allow it to access protected resources
 ## [18.0.2] - 2023-08-14
 ### Changes
 - Revert query string to before they made the package pure ESM to avoid test failures for now
