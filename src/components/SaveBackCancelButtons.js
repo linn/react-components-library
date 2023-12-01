@@ -3,7 +3,13 @@ import { makeStyles } from '@mui/styles';
 import Button from '@mui/material/Button';
 import PropTypes from 'prop-types';
 
-function SaveBackCancelButtons({ saveClick, cancelClick, saveDisabled, backClick }) {
+function SaveBackCancelButtons({
+    saveClick,
+    cancelClick,
+    saveDisabled,
+    backClick,
+    showBackButton
+}) {
     const useStyles = makeStyles(theme => ({
         pullRight: {
             float: 'right'
@@ -24,15 +30,16 @@ function SaveBackCancelButtons({ saveClick, cancelClick, saveDisabled, backClick
 
     return (
         <div className={classes.pullRight}>
-            <Button
-                id="cancel-button"
-                onClick={() => handleClick()}
-                variant="outlined"
-                className={classes.cancel}
-            >
-                {saveDisabled ? 'Back' : 'Cancel'}
-            </Button>
-
+            {(!saveDisabled || showBackButton) && (
+                <Button
+                    id="cancel-button"
+                    onClick={() => handleClick()}
+                    variant="outlined"
+                    className={classes.cancel}
+                >
+                    {saveDisabled ? 'Back' : 'Cancel'}
+                </Button>
+            )}
             <Button
                 id="save-button"
                 variant="contained"
@@ -50,11 +57,13 @@ SaveBackCancelButtons.propTypes = {
     saveClick: PropTypes.func.isRequired,
     cancelClick: PropTypes.func.isRequired,
     backClick: PropTypes.func.isRequired,
-    saveDisabled: PropTypes.bool
+    saveDisabled: PropTypes.bool,
+    showBackButton: PropTypes.bool
 };
 
 SaveBackCancelButtons.defaultProps = {
-    saveDisabled: false
+    saveDisabled: false,
+    showBackButton: true
 };
 
 export default SaveBackCancelButtons;

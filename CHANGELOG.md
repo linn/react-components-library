@@ -1,4 +1,7 @@
 # Changelog
+## [18.2.0] - 2023-12-01
+### Changes
+- Add showBackButton prop to SaveBackCancelButtons to optionally not show the back button
 ## [18.1.0] - 2023-08-15
 ### Changes
 - Add optional oidc access token auth header to the request submitted by the ExportButton, to allow it to access protected resources
