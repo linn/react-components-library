@@ -1,15 +1,17 @@
-import React, { useState, Fragment } from 'react';
-import PropTypes from 'prop-types';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
+import CloseIcon from '@mui/icons-material/Close';
 import SearchIcon from '@mui/icons-material/Search';
+import Dialog from '@mui/material/Dialog';
 import Divider from '@mui/material/Divider';
-import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
-import Dialog from '@mui/material/Dialog';
+import Chip from '@mui/material/Chip';
+import Stack from '@mui/material/Stack';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import Typography from '@mui/material/Typography';
 import makeStyles from '@mui/styles/makeStyles';
+import PropTypes from 'prop-types';
+import React, { Fragment, useState } from 'react';
 import InputField from './InputField';
 import Loading from './Loading';
 
@@ -23,12 +25,14 @@ const useStyles = makeStyles(theme => ({
     pullRight: {
         float: 'right'
     },
+
     dialog: {
         margin: theme.spacing(6),
         minWidth: theme.spacing(62)
     },
     pad: { padding: theme.spacing(2) }
 }));
+
 function Search({
     propertyName,
     label,
@@ -47,7 +51,8 @@ function Search({
     onKeyPressFunctions,
     helperText,
     autoFocus,
-    visible
+    visible,
+    displayChips
 }) {
     const classes = useStyles();
     const [dialogOpen, setDialogOpen] = useState(false);
@@ -66,7 +71,7 @@ function Search({
         return count;
     };
 
-    const Item = ({ item }) => (
+    const resultItem = item => (
         <ListItem
             className={classes.pad}
             button
@@ -83,19 +88,31 @@ function Search({
                 <Grid item xs={3}>
                     <Typography classes={{ root: classes.nameText }}>{item.name}</Typography>
                 </Grid>
-                <Grid item xs={9}>
+                <Grid item xs={displayChips ? 3 : 9}>
                     <Typography classes={{ root: classes.bodyText }}>{item.description}</Typography>
                 </Grid>
+                {displayChips && (
+                    <Grid item xs={6}>
+                        <Stack
+                            direction="row"
+                            justifyContent="flex-start"
+                            alignItems="flex-start"
+                            spacing={1}
+                            divider={<Divider orientation="vertical" flexItem />}
+                        >
+                            {item.chips?.map(c => (
+                                <Chip
+                                    id={c.text}
+                                    label={c.text}
+                                    style={{ backgroundColor: c.color }}
+                                />
+                            ))}
+                        </Stack>
+                    </Grid>
+                )}
             </Grid>
         </ListItem>
     );
-
-    Item.propTypes = {
-        item: PropTypes.shape({
-            name: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-            description: PropTypes.string
-        }).isRequired
-    };
 
     const priority = (item, searchTerm) => {
         if (priorityFunction === 'closestMatchesFirst') {
@@ -138,7 +155,7 @@ function Search({
                 <List dense>
                     {result.map(r => (
                         <Fragment key={r.id}>
-                            <Item item={r} />
+                            {resultItem(r)}
                             <Divider component="li" />
                         </Fragment>
                     ))}
@@ -217,8 +234,10 @@ Search.propTypes = {
         PropTypes.shape({ keyCode: PropTypes.number, action: PropTypes.func })
     ),
     helperText: PropTypes.string,
-    visible: PropTypes.bool
+    visible: PropTypes.bool,
+    displayChips: PropTypes.bool
 };
+
 Search.defaultProps = {
     searchOnEnter: true,
     onKeyPressFunctions: [],
@@ -231,7 +250,8 @@ Search.defaultProps = {
     resultLimit: null,
     resultsInModal: false,
     helperText: 'PRESS ENTER TO SEARCH',
-    visible: true
+    visible: true,
+    displayChips: false
 };
 
 export default Search;

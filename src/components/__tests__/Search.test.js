@@ -114,3 +114,32 @@ describe('When custom priorityFunction Specified', () => {
         expect(screen.getAllByRole('button')[0]).toHaveTextContent('RESULT D');
     });
 });
+
+describe('When chips', () => {
+    beforeEach(() => {
+        render(
+            <Search
+                {...defaultProps}
+                value="RESULT A"
+                displayChips
+                searchResults={[
+                    {
+                        id: 'c',
+                        name: 'RESULT C',
+                        expired: true,
+                        chips: [{ text: 'chip 1' }, { text: 'chip 2' }, { text: 'chip 3' }]
+                    },
+                    { id: 'b', name: 'RESULT B', expired: true },
+                    { id: 'a', name: 'RESULT A', expired: true },
+                    { id: 'd', name: 'RESULT D', expired: false }
+                ]}
+            />
+        );
+    });
+
+    test('should render chips', () => {
+        expect(screen.getByText('chip 1')).toBeInTheDocument();
+        expect(screen.getByText('chip 2')).toBeInTheDocument();
+        expect(screen.getByText('chip 3')).toBeInTheDocument();
+    });
+});

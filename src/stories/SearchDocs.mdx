@@ -10,7 +10,7 @@ A customisable search field facilitating the entry of a searchTerm, the performi
 - <b>handleValueChange</b> - func - function called when the field's value changes, takes two parameters: propertyName, newValue
 - <b>disabled</b> - bool - whether or not the field accepts input
 - <b>search</b> - func - the function called when the search is fired, takes the fields value as a parameter
-- <b>searchResults</b> - array - the search results, each having an id, name and description property
+- <b>searchResults</b> - array - the search results, each having an id, name and description property, and an optional array of chips: [{text, colour}]
 - <b>loading</b> - bool - whether or not the search is loading
 - <b>priorityFunction</b> - string or func - how to prioritise the search results. See section below
 - <b>onResultSelect</b> - func - the function to call when a search result is selected, takes the selected result object as a parameter

@@ -1,4 +1,7 @@
 # Changelog
+## [18.3.0] - 2023-12-05
+### Changes
+- Add optional display chips to Search components results
 ## [18.2.0] - 2023-12-01
 ### Changes
 - Add showBackButton prop to SaveBackCancelButtons to optionally not show the back button
