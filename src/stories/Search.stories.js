@@ -39,7 +39,7 @@ export default {
     component: Search
 };
 
-export const ResultsInline = args => {
+export const resultsInline = args => {
     const [value, setValue] = useState('result');
     return (
         <Search
@@ -51,15 +51,57 @@ export const ResultsInline = args => {
     );
 };
 
-ResultsInline.story = {
+resultsInline.story = {
     name: 'Results Inline'
 };
 
-ResultsInline.args = {
+resultsInline.args = {
     ...defaultArgs
 };
 
-export const AutoFocus = args => {
+export const withChips = args => {
+    const [value, setValue] = useState('result');
+    return (
+        <Search
+            {...args}
+            {...actions}
+            value={value}
+            handleValueChange={(_, newValue) => setValue(newValue)}
+        />
+    );
+};
+
+withChips.story = {
+    name: 'With Chips'
+};
+
+withChips.args = {
+    ...defaultArgs,
+    displayChips: true,
+    searchResults: [
+        {
+            id: 'a',
+            name: 'A',
+            description: 'A Result has chips',
+            chips: [{ text: 'chip 1' }, { text: 'chip 2' }, { text: 'chip 3' }]
+        },
+        {
+            id: 'b',
+            name: 'b',
+            description: 'B Result has chips',
+            chips: [{ text: 'cool', color: 'green' }]
+        },
+        { id: 'c', name: 'c', description: 'C Result no chips' },
+        {
+            id: 'd',
+            name: 'd',
+            description: 'D Result has chips',
+            chips: [{ text: 'not cool', color: 'red' }]
+        }
+    ]
+};
+
+export const autoFocus = args => {
     const [value, setValue] = useState('result');
     return (
         <Search
@@ -72,15 +114,15 @@ export const AutoFocus = args => {
     );
 };
 
-AutoFocus.story = {
+autoFocus.story = {
     name: 'AutoFocus'
 };
 
-AutoFocus.args = {
+autoFocus.args = {
     ...defaultArgs
 };
 
-export const ResultsInModal = args => {
+export const resultsInModal = args => {
     const [value, setValue] = useState('result');
     return (
         <Search
@@ -93,10 +135,10 @@ export const ResultsInModal = args => {
     );
 };
 
-ResultsInModal.story = {
+resultsInModal.story = {
     name: 'Results In Modal'
 };
 
-ResultsInModal.args = {
+resultsInModal.args = {
     ...defaultArgs
 };
