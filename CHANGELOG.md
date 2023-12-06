@@ -1,4 +1,7 @@
 # Changelog
+## [18.3.1] - 2023-12-06
+### Changes
+- fix Search component docs display bug
 ## [18.3.0] - 2023-12-05
 ### Changes
 - Add optional display chips to Search components results
