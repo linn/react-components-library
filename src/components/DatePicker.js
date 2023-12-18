@@ -1,7 +1,5 @@
 import React from 'react';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import TextField from '@mui/material/TextField';
-
 import InputLabel from '@mui/material/InputLabel';
 import PropTypes from 'prop-types';
 import makeStyles from '@mui/styles/makeStyles';
@@ -24,38 +22,34 @@ function Picker({ value, minDate, maxDate, label, onChange, required, disabled }
     const inputClasses = inputStyles();
     const labelClasses = labelStyles();
 
-    return <>
-        <InputLabel classes={{ root: labelClasses.root }} required={required}>
-            {label}
-        </InputLabel>
-        <DatePicker
-            allowKeyboardControl
-            margin="dense"
-            inputVariant="outlined"
-            autoOk
-            format="DD/MM/YYYY"
-            renderInput={props => <TextField {...props} />}
-            value={value ? moment(value) : null}
-            minDate={moment(minDate)}
-            maxDate={moment(maxDate)}
-            onChange={onChange}
-            classes={inputClasses}
-            disabled={disabled}
-            className={inputClasses.root}
-            componentsProps={{
-                inputAdornment: { className: inputClasses.root },
-
-                textField: {
-                    InputProps: { classes: { disabled: inputClasses.disabled } },
-                },
-            }} />
-    </>;
+    return (
+        <>
+            <InputLabel classes={{ root: labelClasses.root }} required={required}>
+                {label}
+            </InputLabel>
+            <DatePicker
+                allowKeyboardControl
+                margin="dense"
+                inputVariant="outlined"
+                autoOk
+                format="DD/MM/YYYY"
+                slotProps={{ textField: { variant: 'outlined', size: 'small' } }}
+                value={value ? moment(value) : null}
+                minDate={minDate ? moment(minDate) : null}
+                maxDate={maxDate ? moment(maxDate) : null}
+                onChange={onChange}
+                classes={inputClasses}
+                disabled={disabled}
+                className={inputClasses.root}
+            />
+        </>
+    );
 }
 
 Picker.propTypes = {
     label: PropTypes.string,
-    minDate: PropTypes.string,
-    maxDate: PropTypes.string,
+    minDate: PropTypes.oneOfType([PropTypes.shape({}), PropTypes.string]),
+    maxDate: PropTypes.oneOfType([PropTypes.shape({}), PropTypes.string]),
     required: PropTypes.bool,
     value: PropTypes.oneOfType([PropTypes.shape({}), PropTypes.string]),
     disabled: PropTypes.bool,
@@ -64,8 +58,8 @@ Picker.propTypes = {
 
 Picker.defaultProps = {
     label: '',
-    minDate: undefined,
-    maxDate: undefined,
+    minDate: null,
+    maxDate: null,
     required: false,
     value: new Date().toISOString(),
     disabled: false,

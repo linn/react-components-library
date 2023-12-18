@@ -1,9 +1,11 @@
 import React from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import moment from 'moment';
 import { action } from '@storybook/addon-actions';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import DatePicker from '../components/DatePicker';
+import DatePickerDocs from './DatePickerDocs.mdx';
 
 const actions = {
     onChange: action('date changed')
@@ -20,7 +22,12 @@ export default {
             </LocalizationProvider>
         )
     ],
-    component: DatePicker
+    component: DatePicker,
+    parameters: {
+        docs: {
+            page: DatePickerDocs
+        }
+    }
 };
 
 export const Default = args => <DatePicker {...args} {...actions} />;
@@ -31,8 +38,20 @@ Default.story = {
 
 Default.args = {
     value: new Date().toISOString(),
-    minDate: new Date('01/01/2000').toISOString(),
-    maxDate: new Date('01/01/2030').toISOString(),
+    disabled: false,
+    label: 'Your Label'
+};
+
+export const WithLimits = args => <DatePicker {...args} {...actions} />;
+
+WithLimits.story = {
+    name: 'with limits'
+};
+
+WithLimits.args = {
+    value: new Date().toISOString(),
+    maxDate: moment(),
+    minDate: moment().subtract(1, 'months'),
     disabled: false,
     label: 'Your Label'
 };
