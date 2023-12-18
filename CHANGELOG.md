@@ -1,7 +1,7 @@
 # Changelog
-## [18.3.1] - 2023-12-18
+## [18.3.2] - 2023-12-18
 ### Changes
-- Datepicker component - handle cases where no min/maxDate props are passed, add some docs
+- Datepicker component - tidy up, handle cases where no min/maxDate props are passed, add some documentation
 ## [18.3.1] - 2023-12-06
 ### Changes
 - fix Search component docs display bug
