@@ -82,6 +82,7 @@ import AddressUtility from './src/components/AddressUtility';
 import Search from './src/components/Search';
 import usePreviousNextNavigation from './src/hooks/usePreviousNextNavigation';
 import PrevNextButtons from './src/components/PrevNextButtons';
+import ConfirmDialog from './src/components/ConfirmDialog';
 
 const reducers = { menu, news };
 
@@ -90,6 +91,7 @@ export {
     BackButton,
     Breadcrumbs,
     CheckboxWithLabel,
+    ConfirmDialog,
     collectionSelectorHelpers,
     CollectionSelectors,
     collectionStoreFactory,

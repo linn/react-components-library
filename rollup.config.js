@@ -81,7 +81,8 @@ export default [
             FileUploader: 'src/components/FileUploader.js',
             AddressUtility: 'src/components/AddressUtility.js',
             UsePreviousNextNavigation: 'src/hooks/usePreviousNextNavigation',
-            PrevNextButtons: 'src/components/PrevNextButtons'
+            PrevNextButtons: 'src/components/PrevNextButtons',
+            ConfirmDialog: 'src/components/ConfirmDialog.js'
         },
         plugins: [
             babel({ babelrc: false, ...babelrc, exclude: 'node_modules/**' }),

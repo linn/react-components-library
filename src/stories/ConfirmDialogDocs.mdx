@@ -1,0 +1,24 @@
+# ConfirmDialog docs
+
+This component renders an 'Are you sure?' style confirmation modal dialog which you can use to add an extra confirmation step for users when they are performing actions.
+It will offer some confirmation text, and then the option to either confirm and carry out the action, or cancel to abort the action, both via button clicks.
+
+This component just provides the Dialog - i.e. the thing that will pop up and interrupt the user - you must implement the button or other mechanism for opening and closing the Dialog yourself, and mangage its 'open' state externally. 
+This provides the most flexibility since you can use the component in any way you want, i.e. it doesn't lock you down to a specific button click or other interaction for users performing actions.
+
+The component closes itself when the user clicks either of the two buttons.
+
+It takes the following props:
+
+| Prop   |Type | Required/Default | Narrative
+| -------|-----|------------------|--------------------        
+| visible | bool | required | whether or not the modal is currently visible/open.
+| title | string | defaults to 'Are you sure?' | the big title text to show at the top of the modal.
+| confirmButtonText | string | defaults to 'Confirm' | the text to render on the confirm button.
+| cancelButtonText | string | defaults to 'cancel' | the text to render on the cancel button.
+| primaryText | string | defaults to null | An optional smaller piece of text to show the user.
+| secondaryText | string | defaults to null | An optional even smaller piece of text to show the user.
+| onConfirm | func | required | The action that you want to provide a confirmation stage for.
+| onCancel | func | null | An optional additional function to call on cancel button click (i.e. in addition to the default behaviour, which is just to close the modal).
+| maxWidth | string | defaults to 'm' | How wide the modal is. s, m, l or xl.
+| closeDialog | func | required | The function that closes the dialog. This should conventionally set the bool that is being passed as the 'visible' prop to false.
