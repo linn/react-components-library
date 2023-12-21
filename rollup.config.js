@@ -82,7 +82,7 @@ export default [
             AddressUtility: 'src/components/AddressUtility.js',
             UsePreviousNextNavigation: 'src/hooks/usePreviousNextNavigation',
             PrevNextButtons: 'src/components/PrevNextButtons',
-            ConfirmDialog: '/src/components/ConfirmDialog.js'
+            ConfirmDialog: 'src/components/ConfirmDialog.js'
         },
         plugins: [
             babel({ babelrc: false, ...babelrc, exclude: 'node_modules/**' }),
