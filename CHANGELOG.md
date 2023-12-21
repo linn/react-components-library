@@ -1,4 +1,7 @@
 # Changelog
+## [18.4.0] - 2023-12-21
+### Changes
+- Added new ConfirmDialog component
 ## [18.3.2] - 2023-12-18
 ### Changes
 - Datepicker component - tidy up, handle cases where no min/maxDate props are passed, add some documentation

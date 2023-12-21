@@ -1,6 +1,6 @@
 {
     "name": "@linn-it/linn-form-components-library",
-    "version": "18.3.2",
+    "version": "18.4.0",
     "private": false,
     "jest": {
         "testEnvironment": "jsdom"
@@ -38,7 +38,7 @@
         "@emotion/react": "^11.11.1",
         "@emotion/styled": "^11.11.0",
         "@mui/icons-material": "^5.14.3",
-        "@mui/material": "^5.14.3",
+        "@mui/material": "^5.15.1",
         "@mui/styles": "^5.14.3",
         "notistack": "^3.0.1",
         "react": "^18.2.0",
@@ -68,7 +68,7 @@
         "@emotion/react": "^11.11.1",
         "@emotion/styled": "^11.11.0",
         "@mui/icons-material": "^5.14.3",
-        "@mui/material": "^5.14.3",
+        "@mui/material": "^5.15.1",
         "@mui/styles": "^5.14.3",
         "@storybook/addon-actions": "^6.3.12",
         "@storybook/addon-docs": "^6.3.12",
