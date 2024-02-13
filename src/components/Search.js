@@ -52,7 +52,8 @@ function Search({
     helperText,
     autoFocus,
     visible,
-    displayChips
+    displayChips,
+    fullWidth
 }) {
     const classes = useStyles();
     const [dialogOpen, setDialogOpen] = useState(false);
@@ -175,6 +176,7 @@ function Search({
                 adornment={<SearchIcon />}
                 onChange={handleValueChange}
                 helperText={helperText}
+                fullWidth={fullWidth}
                 textFieldProps={{
                     disabled,
                     onKeyDown: data => {
@@ -235,7 +237,8 @@ Search.propTypes = {
     ),
     helperText: PropTypes.string,
     visible: PropTypes.bool,
-    displayChips: PropTypes.bool
+    displayChips: PropTypes.bool,
+    fullWidth: PropTypes.bool
 };
 
 Search.defaultProps = {
@@ -251,7 +254,8 @@ Search.defaultProps = {
     resultsInModal: false,
     helperText: 'PRESS ENTER TO SEARCH',
     visible: true,
-    displayChips: false
+    displayChips: false,
+    fullWidth: false
 };
 
 export default Search;
