@@ -1,4 +1,7 @@
 # Changelog
+## [18.4.1] - 2024-02-13
+### Changes
+- Allow passing fullwidth prop to the InputField of the Search component
 ## [18.4.0] - 2023-12-21
 ### Changes
 - Added new ConfirmDialog component
