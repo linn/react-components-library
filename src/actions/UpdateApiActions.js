@@ -109,7 +109,7 @@ export default function UpdateApiActions(
         }
     });
 
-    this.update = (href, item) => ({
+    this.putByHref = (href, item) => ({
         [RSAA]: {
             endpoint: href,
             method: 'PUT',
