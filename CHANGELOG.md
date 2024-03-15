@@ -1,4 +1,7 @@
 # Changelog
+## [18.5.0] - 2024-03-15
+### Changes
+- Add putByHref action to UpdateApiActions to allow PUT-ting to an arbitrary endpoint
 ## [18.4.1] - 2024-02-13
 ### Changes
 - Allow passing fullwidth prop to the InputField of the Search component

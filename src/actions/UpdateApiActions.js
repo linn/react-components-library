@@ -109,6 +109,24 @@ export default function UpdateApiActions(
         }
     });
 
+    this.putByHref = (href, item) => ({
+        [RSAA]: {
+            endpoint: href,
+            method: 'PUT',
+            options: { requiresAuth: true },
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(item),
+            types: [
+                rsaaTypes.requestUpdate(actionTypes, actionTypeRoot),
+                rsaaTypes.receiveUpdated(actionTypes, actionTypeRoot, itemName),
+                rsaaTypes.error(actionTypes, actionTypeRoot, itemName)
+            ]
+        }
+    });
+
     this.patch = (id, item) => ({
         [RSAA]: {
             endpoint: `${appRoot}${uri}/${id}`,
