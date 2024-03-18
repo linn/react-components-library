@@ -61,8 +61,8 @@ function InputField({
     const [inErrorState, setInErrorState] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     useEffect(() => {
-        if (!autoFocus || !inputRef.current || !visible) return;
         setTimeout(() => {
+            if (!autoFocus || !inputRef.current || !visible) return;
             inputRef.current.focus();
         }, 100);
     }, [autoFocus, visible]);

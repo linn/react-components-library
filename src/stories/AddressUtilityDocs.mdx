@@ -1,21 +1,20 @@
 # Address Utility
-A simple utility used for creating addresses.
-Can be rendered in two forms:
-
-* <b>inDialogBox=false</b>: The component will render itself on a Page with breadcrumbs etc as if it were a standalone utility. The back click acts as normal, i.e. it redirects the users to the specified 'backUrl'
-* <b>inDialogBox=true</b>: The component will expect to be rendered in a Dialog/Modal popover. As a result:
-
-  * The component is not rendered on a Page component with Breadcrumbs etc. so you can style it in a Modal as desired.
-  * The component will expect to be passed a closeDialog() function to call when the back button is clicked, as opposed to the history.push operations. 
-
-The Component currently only supports creating an address. You can fill in the fields and when you click save the addressActions.add() action will be dispatched to create the address, and the snackbar will be rendered on success.
+A simple Dialog used for creating or looking up addresses.
+Selecting an existing address that you have looked up, or clicking save to create a new address with values provided, will close the dialog and call the relevant function (see props below)
 
 ## Props
-* <b>inDialogBox</b> - bool - Specifies which mode to render the utility in, as described above
-* <b>closeDialog</b> - func - The operation to close the Dialog (and perform any after effects)
-* <b>addressee</b> - string - Optionally pass this prop to set the addressee from an external source (e.g. so the user doesn't have to type it in) 
-* <b>history</b> - obj - React router history with the push() function for redirecting
-* <b>config</b> - obj - Our config object that includes the appRoot string.
-* <b>addressActions</b> - obj - Address redux actions. The only two this component dispatches is add(address) when the Save button is clicked, and setSnackbarVisible to show feedback when save successful
-* <b>countriesActions</b>  - obj - Countries redux actions - required for looking up countries. 
-* <b>backUrl</b> - string - The url to redirect to when Back is clicked and inDialogBox=false
+
+| Prop   |Type | Required/Default | Narrative
+| -------|-----|------------------|--------------------        
+| createAddress | fucn | required | The function that handles creating a new address e.g. makes a network request, dispatch a redux action, handle the result. Called when the user clicks save to create a new address. Takes on param, the new address object to create. Closes the dialog.
+| selectAddress | func | required | The function that handles selecting an exisitng address, called when the user clicks a search result. Takes on param, the new address object to create. Closes the dialog.
+| createAddressLoading | bool | defaults to false | Whether the create operation is loading
+| selectAddress | func | required | the function to call if the user selects an existing address they have looked up (takes the selected address object as a param)
+| searchAddresses | func | required | function to call to look up existing address. Takes a string searchTerm param
+| addressSearchResults | array | defaults to [] | Search results for address lookup (when looking up existing address)
+| addressSearchLoading | bool | defaults to false | Whether the address search is loading
+| clearAddressesSearch | func | defaults to empty fun | function to clear addresses search results
+| searchCountries | func | required | function to call to look up country codes when creating a new address. Takes a string searchTerm param
+| countriesSearchResults | array | defaults to [] | Search results for country lookup (when creating a new address)
+| clearCountriesSearch | func | defaults to empty func | function to clear countries search results
+| defaultAddressee | string | defaults to null | Allows you to pass in a default/initial addressee name so the user doesn't have to enter it when creating an address

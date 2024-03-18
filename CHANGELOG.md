@@ -1,5 +1,8 @@
 # Changelog
-## [18.4.1] - 2024-02-13
+## [19.0.0] - 2024-02-18
+### Changes
+- Rework the AddressUtility to handle looking up existing addresses as well as creating new ones. Now also handles its own Dialog open/closed state, and seperates the redux data fetching container from the presentational component to allow it to be reusab;e in future apps that might not use redux.
+## [18.4.1] - 2024-02-1
 ### Changes
 - Allow passing fullwidth prop to the InputField of the Search component
 ## [18.4.0] - 2023-12-21
