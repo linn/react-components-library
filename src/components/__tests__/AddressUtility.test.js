@@ -123,8 +123,6 @@ describe('When creating an address...', () => {
         fireEvent.click(result);
         fireEvent.click(result);
 
-        //console.log(screen.debug(null, 100000));
-
         const saveButton = await screen.findByRole('button', { name: 'Save' });
         fireEvent.click(saveButton);
         expect(addressActions.add).toHaveBeenCalledWith(
