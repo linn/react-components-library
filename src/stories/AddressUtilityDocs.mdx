@@ -6,7 +6,7 @@ Selecting an existing address that you have looked up, or clicking save to creat
 
 | Prop   |Type | Required/Default | Narrative
 | -------|-----|------------------|--------------------        
-| createAddress | fucn | required | The function that handles creating a new address e.g. makes a network request, dispatch a redux action, handle the result. Called when the user clicks save to create a new address. Takes on param, the new address object to create. Closes the dialog.
+| createAddress | func | required | The function that handles creating a new address e.g. makes a network request, dispatch a redux action, handle the result. Called when the user clicks save to create a new address. Takes on param, the new address object to create. Closes the dialog.
 | selectAddress | func | required | The function that handles selecting an exisitng address, called when the user clicks a search result. Takes on param, the new address object to create. Closes the dialog.
 | createAddressLoading | bool | defaults to false | Whether the create operation is loading
 | selectAddress | func | required | the function to call if the user selects an existing address they have looked up (takes the selected address object as a param)
