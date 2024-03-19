@@ -83,11 +83,13 @@ import Search from './src/components/Search';
 import usePreviousNextNavigation from './src/hooks/usePreviousNextNavigation';
 import PrevNextButtons from './src/components/PrevNextButtons';
 import ConfirmDialog from './src/components/ConfirmDialog';
+import AddressUtilityReduxContainer from './src/containers/AddressUtilityReduxContainer';
 
 const reducers = { menu, news };
 
 export {
     AddressUtility,
+    AddressUtilityReduxContainer,
     BackButton,
     Breadcrumbs,
     CheckboxWithLabel,

@@ -3,23 +3,29 @@ import '@testing-library/jest-dom/extend-expect';
 import { useSelector } from 'react-redux';
 import { screen, fireEvent } from '@testing-library/react';
 import render from '../../test-utils';
-import AddressUtility from '../AddressUtility';
+import AddressUtilityReduxContainer from '../../containers/AddressUtilityReduxContainer';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
     useSelector: jest.fn()
 }));
 
-const history = { push: jest.fn(), location: { pathname: 'the-home-url/create-address' } };
-const config = { appRoot: '/the-home-url' };
 const addressActions = { add: jest.fn() };
+const addressesActions = { search: jest.fn() };
 
 addressActions.add.mockReturnValue({ type: 'ADD_ADDRESS', payload: {} });
-const countriesActions = { search: jest.fn() };
-const closeDialog = jest.fn();
+const countriesActions = { search: jest.fn(), clearSearch: jest.fn() };
+countriesActions.search.mockReturnValue({ type: 'SEARCH_COUNTRIES', payload: {} });
+countriesActions.clearSearch.mockReturnValue({ type: 'CLEAR_SEARCH_COUNTRIES', payload: {} });
+
+const onCreateSuccess = jest.fn();
+const onSelectAddress = jest.fn();
 
 const state = {
+    address: {},
+    addresses: {},
     countries: {
+        loading: false,
         searchItems: [
             { id: 'PG', countryCode: 'PG', countryName: 'PANGEA' },
             { id: 'GB', countryCode: 'GB', countryName: 'BRITTANIA' }
@@ -31,63 +37,21 @@ beforeAll(() => {
     useSelector.mockImplementation(callback => callback(state));
 });
 
-describe('When not inDialogBox...', () => {
-    beforeEach(() => {
-        jest.clearAllMocks();
-        render(
-            <AddressUtility
-                history={history}
-                config={config}
-                addressActions={addressActions}
-                countriesActions={countriesActions}
-                backUrl="/previous-page"
-            />
-        );
-    });
-
-    test('Should call history.push() when back button clicked', () => {
-        const backButton = screen.getByRole('button', { name: 'Back' });
-        fireEvent.click(backButton);
-        expect(history.push).toHaveBeenCalledWith('/previous-page');
-    });
-});
-
-describe('When inDialogBox...', () => {
-    beforeEach(() => {
-        jest.clearAllMocks();
-        render(
-            <AddressUtility
-                history={history}
-                config={config}
-                inDialogBox
-                closeDialog={closeDialog}
-                addressActions={addressActions}
-                countriesActions={countriesActions}
-                backUrl="/previous-page"
-            />
-        );
-    });
-
-    test('Should call closeDialog() when back button clicked', () => {
-        const backButton = screen.getByRole('button', { name: 'Back' });
-        fireEvent.click(backButton);
-        expect(closeDialog).toHaveBeenCalled();
-    });
-});
-
 describe('When addressee value passed...', () => {
     beforeEach(() => {
         jest.clearAllMocks();
         render(
-            <AddressUtility
-                addressee="Mr Person"
-                history={history}
-                config={config}
+            <AddressUtilityReduxContainer
+                defaultAddressee="Mr Person"
+                addressesActions={addressesActions}
                 addressActions={addressActions}
                 countriesActions={countriesActions}
-                backUrl="/previous-page"
+                onCreateSuccess={onCreateSuccess}
+                onSelectAddress={onSelectAddress}
             />
         );
+        const openButton = screen.getByRole('button', { name: 'Create Or Look Up Address' });
+        fireEvent.click(openButton);
     });
 
     test('Should render addressee', () => {
@@ -99,14 +63,17 @@ describe('When creating an address...', () => {
     beforeEach(() => {
         jest.clearAllMocks();
         render(
-            <AddressUtility
-                history={history}
-                config={config}
+            <AddressUtilityReduxContainer
+                defaultAddressee="Mr Person"
+                addressesActions={addressesActions}
                 addressActions={addressActions}
                 countriesActions={countriesActions}
-                backUrl="/previous-page"
+                onCreateSuccess={onCreateSuccess}
+                onSelectAddress={onSelectAddress}
             />
         );
+        const openButton = screen.getByRole('button', { name: 'Create Or Look Up Address' });
+        fireEvent.click(openButton);
     });
 
     test('Should dispatch add actions with new address as body', async () => {
@@ -145,15 +112,19 @@ describe('When creating an address...', () => {
             target: { value: 'P01 7PS' }
         });
 
-        const countryLookup = screen.getByLabelText('Country Lookup');
-        fireEvent.click(countryLookup);
+        const countryLookup = screen.getByLabelText('Look up Countries');
+        fireEvent.change(countryLookup, {
+            target: { value: 'GB' }
+        });
 
-        const result = screen.getByRole('button', { name: 'GB BRITTANIA' });
+        fireEvent.keyDown(countryLookup, { key: 'Enter', code: 'Enter', keyCode: 13 });
+        const result = screen.getByText('BRITTANIA');
+        fireEvent.click(result);
+        fireEvent.click(result);
         fireEvent.click(result);
 
         const saveButton = await screen.findByRole('button', { name: 'Save' });
         fireEvent.click(saveButton);
-
         expect(addressActions.add).toHaveBeenCalledWith(
             expect.objectContaining({
                 addressee: 'Mr Person',

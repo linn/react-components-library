@@ -1,4 +1,7 @@
 # Changelog
+## [19.0.0] - 2024-02-18
+### Changes
+- Rework the AddressUtility to handle looking up existing addresses as well as creating new ones. Now also handles its own Dialog open/closed state, and seperates the redux data fetching container from the presentational component to allow it to be reusable in future apps that might not use redux.
 ## [18.5.0] - 2024-03-15
 ### Changes
 - Add putByHref action to UpdateApiActions to allow PUT-ting to an arbitrary endpoint

@@ -80,6 +80,7 @@ export default [
             fetchError: 'src/reducers/reducerFactories/fetchErrorReducerFactory.js',
             FileUploader: 'src/components/FileUploader.js',
             AddressUtility: 'src/components/AddressUtility.js',
+            AddressUtilityReduxContainer: 'src/containers/AddressUtilityReduxContainer.js',
             UsePreviousNextNavigation: 'src/hooks/usePreviousNextNavigation',
             PrevNextButtons: 'src/components/PrevNextButtons',
             ConfirmDialog: 'src/components/ConfirmDialog.js'
