@@ -62,6 +62,8 @@ import userSelectors from './src/selectors/userSelectors';
 import utilities from './src/utilities/index';
 import initialiseOnMount from './src/components/common/initialiseOnMount';
 import Navigation from './src/containers/Navigation';
+import NavigationUI from './src/components/Navigation';
+
 import {
     getItemError,
     getRequestErrors,
@@ -137,6 +139,7 @@ export {
     menuSelectors,
     MultiReportTable,
     Navigation,
+    NavigationUI,
     news,
     newsSelectors,
     NotFound,
