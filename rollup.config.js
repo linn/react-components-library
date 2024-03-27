@@ -67,7 +67,7 @@ export default [
             reportResultsFactory: 'src/reducers/reducerFactories/reportResultsFactory.js',
             utilities: 'src/utilities/index.js',
             Navigation: 'src/containers/Navigation.js',
-            NavigationUI: '/src/components/Navigation',
+            NavigationUI: 'src/components/Navigation',
             fetchMenu: 'src/actions/fetchMenu.js',
             fetchNews: 'src/actions/fetchNews.js',
             menu: 'src/reducers/menu.js',
