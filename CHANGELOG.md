@@ -1,4 +1,7 @@
 # Changelog
+## [19.2.0] - 2024-05-14
+### Changes
+- Add datePickerProps to DatePicker to allow passing props through to mui datepicker.
 ## [19.1.0] - 2024-03-27
 ### Changes
 - Export the Navigation presentational component as 'NavigationUI'. Currently only the container is exported as 'Navigation', which contains all of the data-fetching/redux logic.
