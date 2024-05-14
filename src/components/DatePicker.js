@@ -18,7 +18,7 @@ const inputStyles = makeStyles(theme => ({
     }
 }));
 
-function Picker({ value, minDate, maxDate, label, onChange, required, disabled }) {
+function Picker({ value, minDate, maxDate, label, onChange, required, disabled, datePickerProps }) {
     const inputClasses = inputStyles();
     const labelClasses = labelStyles();
 
@@ -41,6 +41,7 @@ function Picker({ value, minDate, maxDate, label, onChange, required, disabled }
                 classes={inputClasses}
                 disabled={disabled}
                 className={inputClasses.root}
+                {...datePickerProps}
             />
         </>
     );
@@ -52,6 +53,7 @@ Picker.propTypes = {
     maxDate: PropTypes.oneOfType([PropTypes.shape({}), PropTypes.string]),
     required: PropTypes.bool,
     value: PropTypes.oneOfType([PropTypes.shape({}), PropTypes.string]),
+    datePickerProps: PropTypes.shape({}),
     disabled: PropTypes.bool,
     onChange: PropTypes.func
 };
@@ -61,6 +63,7 @@ Picker.defaultProps = {
     minDate: null,
     maxDate: null,
     required: false,
+    datePickerProps: null,
     value: new Date().toISOString(),
     disabled: false,
     onChange: () => {}
