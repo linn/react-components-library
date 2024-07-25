@@ -24,14 +24,19 @@ function FileUploader({
     snackbarVisible,
     setSnackbarVisible,
     initiallyExpanded,
-    initialFile
+    initialFile,
+    onFileSelect
 }) {
     const [file, setFile] = useState(initialFile);
     const [expanded, setExpanded] = useState(initiallyExpanded);
 
-    const onDrop = useCallback(acceptedFile => {
-        setFile(acceptedFile[0]);
-    }, []);
+    const onDrop = useCallback(
+        acceptedFile => {
+            setFile(acceptedFile[0]);
+            onFileSelect(acceptedFile[0]);
+        },
+        [onFileSelect]
+    );
     const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
     const handleUploadClick = () => {
@@ -138,7 +143,8 @@ FileUploader.propTypes = {
     snackbarVisible: PropTypes.bool,
     setSnackbarVisible: PropTypes.func,
     initiallyExpanded: PropTypes.bool,
-    initialFile: PropTypes.shape({})
+    initialFile: PropTypes.shape({}),
+    onFileSelect: PropTypes.func
 };
 
 FileUploader.defaultProps = {
@@ -149,7 +155,8 @@ FileUploader.defaultProps = {
     result: null,
     snackbarVisible: false,
     setSnackbarVisible: null,
-    initialFile: null
+    initialFile: null,
+    onFileSelect: () => {}
 };
 
 export default FileUploader;
