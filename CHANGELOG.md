@@ -1,4 +1,7 @@
 # Changelog
+## [19.3.0] - 2024-07-25
+### Changes
+- Add onFileSelect function prop to FileUploader, to allow file specifics (name etc) to be passed to parent components for use.
 ## [19.2.0] - 2024-05-14
 ### Changes
 - Add datePickerProps to DatePicker to allow passing props through to mui datepicker.
