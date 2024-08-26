@@ -1,4 +1,7 @@
 # Changelog
+## [19.4.0] - 2024-08-26
+### Changes
+- Add PermissionIndicator - standard indicator as to whether the user has permission for current page.
 ## [19.3.0] - 2024-07-25
 ### Changes
 - Add onFileSelect function prop to FileUploader, to allow file specifics (name etc) to be passed to parent components for use.
