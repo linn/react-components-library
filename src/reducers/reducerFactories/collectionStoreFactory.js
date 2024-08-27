@@ -3,16 +3,20 @@
 export default function (
     itemRoot,
     actionTypes,
-    defaultState = { loading: false, searchLoading: false, items: [], searchItems: [] }
+    defaultState = { loading: false, searchLoading: false, items: [], searchItems: [] },
+    listFieldName = null
 ) {
     const makeItem = item => ({ ...item, href: utilities.getSelfHref(item) });
 
-    const getItems = items => {
-        if (items) {
-            return items.map(i => makeItem(i));
+    const getItems = response => {
+        if (response && listFieldName) {
+            return response[listFieldName].map(i => makeItem(i));
+        }
+        if (response) {
+            return response.map(i => makeItem(i));
         }
 
-        return items;
+        return response;
     };
 
     return (state = defaultState, action) => {
