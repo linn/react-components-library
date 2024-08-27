@@ -1,7 +1,7 @@
 # Changelog
 ## [19.5.0] - 2024-08-26
 ### Changes
-- Add extra optional 'listFieldName' to collectionStoreFactory, to allow it to cope with responses, i.e. the payload.data of the RECEIVE_... action, that are not straight lists. I.e. they are objects, where the array containt the data of interest lives at payload.data[listFieldName] 
+- Add extra optional 'listFieldName' to collectionStoreFactory, to allow reducers it returns to cope with responses, i.e. the payload.data of the RECEIVE_... action, that are not straight lists. I.e. they are objects, where the array containt the data of interest lives at payload.data[listFieldName] 
 ## [19.4.0] - 2024-08-26
 ### Changes
 - Add PermissionIndicator - standard indicator as to whether the user has permission for current page.
