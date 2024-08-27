@@ -84,7 +84,8 @@ export default [
             AddressUtilityReduxContainer: 'src/containers/AddressUtilityReduxContainer.js',
             UsePreviousNextNavigation: 'src/hooks/usePreviousNextNavigation',
             PrevNextButtons: 'src/components/PrevNextButtons',
-            ConfirmDialog: 'src/components/ConfirmDialog.js'
+            ConfirmDialog: 'src/components/ConfirmDialog.js',
+            PermissionIndicator: 'src/components/PermissionIndicator.js'
         },
         plugins: [
             babel({ babelrc: false, ...babelrc, exclude: 'node_modules/**' }),
