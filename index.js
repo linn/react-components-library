@@ -86,6 +86,7 @@ import usePreviousNextNavigation from './src/hooks/usePreviousNextNavigation';
 import PrevNextButtons from './src/components/PrevNextButtons';
 import ConfirmDialog from './src/components/ConfirmDialog';
 import AddressUtilityReduxContainer from './src/containers/AddressUtilityReduxContainer';
+import PermissionIndicator from './src/components/PermissionIndicator';
 
 const reducers = { menu, news };
 
@@ -147,6 +148,7 @@ export {
     Page,
     paginationSelectorHelpers,
     PaginationSelectors,
+    PermissionIndicator,
     PrevNextButtons,
     ProcessActions,
     processSelectorHelpers,
