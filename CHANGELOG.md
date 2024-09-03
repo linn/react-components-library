@@ -1,4 +1,7 @@
 # Changelog
+## [19.6.0] - 2024-09-03
+### Changes
+- Add optional title string prop to the page component, to allow easily setting the pages title (i.e. the thing that will appear in the browser tab)
 ## [19.5.0] - 2024-08-26
 ### Changes
 - Add extra optional 'listFieldName' to collectionStoreFactory, to allow reducers it returns to cope with responses, i.e. the payload.data of the RECEIVE_... action, that are not straight lists. I.e. they are objects, where the array containing the data of interest lives at payload.data[listFieldName] 
