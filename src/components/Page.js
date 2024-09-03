@@ -46,7 +46,8 @@ function Page({
     showRequestErrors,
     homeUrl,
     showBreadcrumbs,
-    title
+    title,
+    defaultAppTitle
 }) {
     const classes = useStyles();
     const { enqueueSnackbar } = useSnackbar();
@@ -66,6 +67,11 @@ function Page({
         if (title) {
             document.title = title;
         }
+        return () => {
+            if (defaultAppTitle) {
+                document.title = defaultAppTitle;
+            }
+        };
     }, [title]);
 
     return (
@@ -95,7 +101,8 @@ Page.propTypes = {
     requestErrors: PropTypes.arrayOf(PropTypes.shape({})),
     homeUrl: PropTypes.string,
     showBreadcrumbs: PropTypes.bool,
-    title: PropTypes.string
+    title: PropTypes.string,
+    defaultAppTitle: PropTypes.string
 };
 
 Page.defaultProps = {
@@ -104,7 +111,8 @@ Page.defaultProps = {
     requestErrors: [],
     homeUrl: null,
     showBreadcrumbs: true,
-    title: null
+    title: null,
+    defaultAppTitle: null
 };
 
 export default Page;
