@@ -2,7 +2,7 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import makeStyles from '@mui/styles/makeStyles';
 import { useSnackbar } from 'notistack';
-import React, { Fragment, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Breadcrumbs from './Breadcrumbs';
 
@@ -45,7 +45,9 @@ function Page({
     requestErrors,
     showRequestErrors,
     homeUrl,
-    showBreadcrumbs
+    showBreadcrumbs,
+    title,
+    defaultAppTitle
 }) {
     const classes = useStyles();
     const { enqueueSnackbar } = useSnackbar();
@@ -61,24 +63,33 @@ function Page({
         }
     }, [requestErrors, enqueueSnackbar]);
 
-    return (
-        <>
-            <Grid container spacing={3} className={classes.grid}>
-                <Grid item xs={1} />
-                <Grid item xs={10} className="hide-when-printing">
-                    {showBreadcrumbs && <Breadcrumbs history={history} homeUrl={homeUrl} />}
-                </Grid>
-                <Grid item xs={1} />
+    useEffect(() => {
+        if (title) {
+            document.title = title;
+        }
+        return () => {
+            if (defaultAppTitle) {
+                document.title = defaultAppTitle;
+            }
+        };
+    }, [title]);
 
-                <Grid item xs={columnWidth[width]} />
-                <Grid item xs={pageWidth[width]}>
-                    <Paper className={classes.root} square>
-                        {children}
-                    </Paper>
-                </Grid>
-                <Grid item xs={columnWidth[width]} />
+    return (
+        <Grid container spacing={3} className={classes.grid}>
+            <Grid item xs={1} />
+            <Grid item xs={10} className="hide-when-printing">
+                {showBreadcrumbs && <Breadcrumbs history={history} homeUrl={homeUrl} />}
             </Grid>
-        </>
+            <Grid item xs={1} />
+
+            <Grid item xs={columnWidth[width]} />
+            <Grid item xs={pageWidth[width]}>
+                <Paper className={classes.root} square>
+                    {children}
+                </Paper>
+            </Grid>
+            <Grid item xs={columnWidth[width]} />
+        </Grid>
     );
 }
 
@@ -89,7 +100,9 @@ Page.propTypes = {
     showRequestErrors: PropTypes.bool,
     requestErrors: PropTypes.arrayOf(PropTypes.shape({})),
     homeUrl: PropTypes.string,
-    showBreadcrumbs: PropTypes.bool
+    showBreadcrumbs: PropTypes.bool,
+    title: PropTypes.string,
+    defaultAppTitle: PropTypes.string
 };
 
 Page.defaultProps = {
@@ -97,7 +110,9 @@ Page.defaultProps = {
     showRequestErrors: false,
     requestErrors: [],
     homeUrl: null,
-    showBreadcrumbs: true
+    showBreadcrumbs: true,
+    title: null,
+    defaultAppTitle: null
 };
 
 export default Page;
