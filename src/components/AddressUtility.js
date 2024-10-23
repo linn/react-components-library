@@ -24,7 +24,8 @@ function AddressUtility({
     addressSearchLoading,
     clearAddressesSearch,
     clearCountriesSearch,
-    defaultAddressee
+    defaultAddressee,
+    setIsActive
 }) {
     const [address, setAddress] = useState({ addressee: defaultAddressee });
     const useStyles = makeStyles(theme => ({
@@ -46,9 +47,13 @@ function AddressUtility({
 
     const close = () => {
         setPopUpOpen(false);
+        setIsActive(false);
     };
 
-    const open = () => setPopUpOpen(true);
+    const open = () => {
+        setPopUpOpen(true);
+        setIsActive(true);
+    };
 
     const [addressSearchTerm, setAddressSearchTerm] = useState('');
 
@@ -256,7 +261,8 @@ AddressUtility.propTypes = {
     clearAddressesSearch: PropTypes.func,
     clearCountriesSearch: PropTypes.func,
     createAddressLoading: PropTypes.bool,
-    defaultAddressee: PropTypes.string
+    defaultAddressee: PropTypes.string,
+    setIsActive: PropTypes.func.isRequired
 };
 
 AddressUtility.defaultProps = {

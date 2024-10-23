@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -26,7 +26,9 @@ function AddressUtilityReduxContainer({
     const countriesStoreItem = useSelector(state => state[countriesItemType.item]);
     const address = addressStoreItem.item;
 
-    if (address?.addressId) {
+    const [isActive, setIsActive] = useState(false);
+
+    if (isActive && address?.addressId) {
         onCreateSuccess(address);
         dispatch(addressActions.clearItem());
     }
@@ -57,6 +59,7 @@ function AddressUtilityReduxContainer({
             addressSearchLoading={collectionSelectorHelpers.getSearchLoading(addressesStoreItem)}
             clearAddressesSearch={() => dispatch(addressesActions.clearSearch())}
             createAddressLoading={itemSelectorHelpers.getItemLoading(addressStoreItem)}
+            setIsActive={setIsActive}
         />
     );
 }
