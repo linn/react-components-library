@@ -1,7 +1,7 @@
 # Changelog
 ## [19.7.0] - 2024-10-23
 ### Changes
-- Communicate whether the AddressUtility is curently 'active' (i.e. the dialog is open) up to its redux container, such that the container only runs the onCreateSuccess function if the dialog is actually open. This hopefully fixes an obscure bug where, if multiple AddressUtility's were being rendered on one page, the onCreateSuccess of the first instance ALWAYS fires, regardless of which instance the user was interacting with, since all instances share the same piece of redux state, and its a new address appearing in that piece of redux state that triggers the onCreateSuccess action. This new code essentially forces it to be the case that only one AddressUtility is ever in an 'active' state to hopefully sidestep this nasty bug.
+- Communicate whether the AddressUtility is curently 'active' (i.e. the dialog is open) up to its redux container, such that the container only runs the onCreateSuccess function if the dialog is actually open. This hopefully fixes an obscure bug where, if multiple AddressUtility's were being rendered on one page, the onCreateSuccess of the first instance ALWAYS fires regardless of which instance the user was interacting with. This occurs since all instances share the same piece of redux state - its a new address appearing in that piece of redux state that triggers the onCreateSuccess action, which isn't tied to a specific instance of the AddressUtility. This new code essentially forces it to be the case that only one AddressUtility is ever in an 'active' state to hopefully sidestep this nasty bug.
 
 ## [19.6.0] - 2024-09-03
 ### Changes
