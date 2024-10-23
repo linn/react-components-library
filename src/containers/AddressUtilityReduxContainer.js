@@ -61,6 +61,7 @@ function AddressUtilityReduxContainer({
             clearAddressesSearch={() => dispatch(addressesActions.clearSearch())}
             createAddressLoading={itemSelectorHelpers.getItemLoading(addressStoreItem)}
             setIsActive={setIsActive}
+            isActive={isActive}
         />
     );
 }
