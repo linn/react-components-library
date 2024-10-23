@@ -25,6 +25,7 @@ function AddressUtility({
     clearAddressesSearch,
     clearCountriesSearch,
     defaultAddressee,
+    isActive,
     setIsActive
 }) {
     const [address, setAddress] = useState({ addressee: defaultAddressee });
@@ -39,19 +40,15 @@ function AddressUtility({
     }));
     const classes = useStyles();
 
-    const [popUpOpen, setPopUpOpen] = useState(false);
-
     const handleFieldChange = (propertyName, newValue) => {
         setAddress(a => ({ ...a, [propertyName]: newValue }));
     };
 
     const close = () => {
-        setPopUpOpen(false);
         setIsActive(false);
     };
 
     const open = () => {
-        setPopUpOpen(true);
         setIsActive(true);
     };
 
@@ -77,7 +74,7 @@ function AddressUtility({
                 </Button>
             </Grid>
             <Grid item xs={8} />
-            <Dialog open={popUpOpen} maxWidth="md">
+            <Dialog open={isActive} maxWidth="md">
                 <div>
                     <IconButton className={classes.pullRight} aria-label="Close" onClick={close}>
                         <Close />
@@ -234,7 +231,6 @@ function AddressUtility({
                                             backClick={close}
                                             saveClick={() => {
                                                 createAddress(address);
-                                                close();
                                             }}
                                             cancelClick={close}
                                         />
@@ -262,7 +258,8 @@ AddressUtility.propTypes = {
     clearCountriesSearch: PropTypes.func,
     createAddressLoading: PropTypes.bool,
     defaultAddressee: PropTypes.string,
-    setIsActive: PropTypes.func.isRequired
+    setIsActive: PropTypes.func.isRequired,
+    isActive: PropTypes.bool.isRequired
 };
 
 AddressUtility.defaultProps = {

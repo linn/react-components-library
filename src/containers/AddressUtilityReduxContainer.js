@@ -31,6 +31,7 @@ function AddressUtilityReduxContainer({
     if (isActive && address?.addressId) {
         onCreateSuccess(address);
         dispatch(addressActions.clearItem());
+        setIsActive(false);
     }
 
     return (
