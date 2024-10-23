@@ -17,7 +17,8 @@ const defaultArgs = {
     addressSearchLoading: false,
     clearAddressesSearch: action('clearAddressesSearch'),
     clearCountriesSearch: action('clearCountriesSearch'),
-    defaultAddressee: 'default addressee'
+    defaultAddressee: 'default addressee',
+    isActive: true
 };
 
 export default {

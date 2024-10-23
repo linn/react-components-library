@@ -31,6 +31,7 @@ function AddressUtilityReduxContainer({
     if (isActive && address?.addressId) {
         onCreateSuccess(address);
         dispatch(addressActions.clearItem());
+        setIsActive(false);
     }
 
     return (
@@ -60,6 +61,7 @@ function AddressUtilityReduxContainer({
             clearAddressesSearch={() => dispatch(addressesActions.clearSearch())}
             createAddressLoading={itemSelectorHelpers.getItemLoading(addressStoreItem)}
             setIsActive={setIsActive}
+            isActive={isActive}
         />
     );
 }
