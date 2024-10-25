@@ -1,5 +1,11 @@
 # Changelog
-## [18.0.0] - 2024-10-23
+## [21.0.0] - 2024-10-25
+### Changes
+- InputField component: handle our own number inputs when type="number" as opposed to relying on the html input elements 'number' type. This is a a breaking change for the following reaosns:
+ -  clients that depend on being able to use the scroll wheel on number inputs as this behaviour is no longer supported.
+ - decimalPlaces defaults to 2 for number type inputs (values will be truncated o)
+
+## [20.0.0] - 2024-10-23
 ### Changes
 - Communicate whether the AddressUtility is curently 'active' (i.e. the dialog is open) up to its redux container, such that the container only runs the onCreateSuccess function if the dialog is actually open. This hopefully fixes an obscure bug where, if multiple AddressUtility's were being rendered on one page, the onCreateSuccess of the first instance ALWAYS fires regardless of which instance the user was interacting with. This occurs since all instances share the same piece of redux state - its a new address appearing in that piece of redux state that triggers the onCreateSuccess action, which isn't tied to a specific instance of the AddressUtility. This new code essentially forces it to be the case that only one AddressUtility is ever in an 'active' state to hopefully sidestep this nasty bug. This is a breaking change for any clients using the AddressUtility outwith the container, since it no longer handles its own open/closed state (now accepts isActive and setIsActive props to manage this state.)
 

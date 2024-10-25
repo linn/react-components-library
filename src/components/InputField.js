@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React, { useRef, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -60,6 +59,12 @@ function InputField({
     const inputRef = useRef();
     const [inErrorState, setInErrorState] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+    const [inputValue, setInputValue] = useState(value);
+
+    useEffect(() => {
+        setInputValue(value);
+    }, [value]);
+
     useEffect(() => {
         setTimeout(() => {
             if (!autoFocus || !inputRef.current || !visible) return;
@@ -70,40 +75,71 @@ function InputField({
     useEffect(() => {
         setInErrorState(error);
     }, [error]);
-    const change = e => {
+
+    const isNumber = val => {
+        const validNumberPattern = /^-?\d+(\.\d+)?$/;
+        return validNumberPattern.test(val);
+    };
+
+    const isPartial = val => {
+        const validPartialPattern = /^-?\d*\.?$/;
+        return validPartialPattern.test(val);
+    };
+
+    const handleChange = e => {
         const newValue = e.target.value;
 
-        let val = newValue;
-
-        if (type === 'date') {
-            val = newValue ? moment(newValue).utc().format() : '';
-        } else if (type === 'number') {
-            val = hasValue(newValue) ? parseFloat(newValue) : null;
-
-            if (
-                val &&
-                decimalPlaces &&
-                newValue.indexOf('.') < newValue.length - decimalPlaces &&
-                newValue.indexOf('.') !== -1
-            ) {
-                val = parseFloat(newValue.slice(0, newValue.indexOf('.') + decimalPlaces + 1));
-            }
-        } else if (maxLength && newValue?.length > maxLength) {
-            setInErrorState(true);
-            setErrorMessage(`MAX LENGTH (${maxLength}) EXCEEDED`);
+        if (type === 'number' && !disabled) {
+            setInErrorState(false);
+            setErrorMessage(null);
             if (onErrorStateChange) {
                 onErrorStateChange(true);
             }
-        } else if (maxLength && newValue?.length <= maxLength) {
-            setInErrorState(false);
-            if (onErrorStateChange) {
-                onErrorStateChange(false);
-            }
-            setErrorMessage('');
-        }
+            if (isNumber(newValue) || isPartial(newValue)) {
+                if (maxLength) {
+                    e.target.value = e.target.value.slice(0, maxLength);
+                }
 
-        onChange(propertyName, val);
+                setInputValue(newValue);
+
+                if (decimalPlaces && newValue.includes('.')) {
+                    const parts = newValue.split('.');
+                    if (parts[1]?.length > decimalPlaces) {
+                        setInErrorState(true);
+                        setErrorMessage(`Max ${decimalPlaces} decimal places allowed.`);
+                        if (onErrorStateChange) {
+                            onErrorStateChange(true);
+                        }
+                    } else {
+                        setInErrorState(false);
+                        setErrorMessage('');
+                        if (onErrorStateChange) {
+                            onErrorStateChange(false);
+                        }
+                    }
+                }
+            } else {
+                setInErrorState(true);
+                setErrorMessage('Invalid number format.');
+                if (onErrorStateChange) {
+                    onErrorStateChange(true);
+                }
+            }
+        } else {
+            setInputValue(newValue);
+        }
     };
+
+    const handleBlur = () => {
+        if (type === 'number') {
+            let finalValue = inputValue.endsWith('.') ? inputValue.slice(0, -1) : inputValue;
+            finalValue = isNumber(finalValue) ? parseFloat(finalValue) : 0;
+            onChange(propertyName, finalValue);
+        } else {
+            onChange(propertyName, inputValue);
+        }
+    };
+
     return (
         <>
             <InputLabel
@@ -131,14 +167,10 @@ function InputField({
                 size="small"
                 rows={rows}
                 inputRef={inputRef}
-                onWheel={() => {
-                    if (type === 'number') {
-                        inputRef.blur();
-                    }
-                }}
-                type={type}
-                value={type === 'date' ? moment(value).format('YYYY-MM-DD') : getValue(value)}
-                onChange={e => change(e)}
+                type={type === 'number' && !disabled ? 'text' : type}
+                value={type === 'date' ? moment(value).format('YYYY-MM-DD') : getValue(inputValue)}
+                onChange={handleChange}
+                onBlur={handleBlur}
                 InputProps={{
                     startAdornment: adornment ? (
                         <InputAdornment position="start">{adornment}</InputAdornment>
@@ -153,12 +185,8 @@ function InputField({
                         error: classes.error
                     }
                 }}
-                onInput={e => {
-                    if (type === 'number' && maxLength) {
-                        e.target.value = e.target.value.slice(0, maxLength);
-                    }
-                }}
                 variant="outlined"
+                // eslint-disable-next-line react/jsx-props-no-spreading
                 {...textFieldProps}
             />
         </>
@@ -205,7 +233,7 @@ InputField.defaultProps = {
     type: 'text',
     value: '',
     onChange: null,
-    decimalPlaces: null,
+    decimalPlaces: 2,
     textFieldProps: null,
     autoFocus: false,
     onErrorStateChange: null,
