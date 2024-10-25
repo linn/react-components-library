@@ -1,5 +1,5 @@
 # Changelog
-## [21.0.0] - 2024-10-25
+## [21.0.0-alpha] - 2024-10-25
 ### Changes
 - InputField component: handle our own number inputs when type="number" as opposed to relying on the html input elements 'number' type. This is a a breaking change for the following reaosns:
  -  clients that depend on being able to use the scroll wheel on number inputs as this behaviour is no longer supported.
