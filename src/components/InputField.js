@@ -104,14 +104,6 @@ function InputField({
 
                 // if we currently have a valid number, sync with the parent component
                 if (isNumber(newValue)) {
-                    // + trim to the specified decimal places if necessary
-                    let trimmedValue = newValue;
-                    if (decimalPlaces && newValue.includes('.')) {
-                        const parts = newValue.split('.');
-                        if (parts[1].length > decimalPlaces) {
-                            trimmedValue = `${parts[0]}.${parts[1].slice(0, decimalPlaces)}`;
-                        }
-                    }
                     if (newValue.includes('.')) {
                         const parts = newValue.split('.');
                         if (parts[1]?.length > decimalPlaces) {
@@ -126,9 +118,9 @@ function InputField({
                             if (onErrorStateChange) {
                                 onErrorStateChange(false);
                             }
+                            onChange(propertyName, parseFloat(newValue)); // Sync the trimmed number
                         }
                     }
-                    onChange(propertyName, parseFloat(trimmedValue)); // Sync the trimmed number
                 }
             } else {
                 setInErrorState(true);
