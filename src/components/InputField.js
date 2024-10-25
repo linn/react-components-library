@@ -102,21 +102,33 @@ function InputField({
 
                 setInputValue(newValue);
 
-                if (decimalPlaces && newValue.includes('.')) {
-                    const parts = newValue.split('.');
-                    if (parts[1]?.length > decimalPlaces) {
-                        setInErrorState(true);
-                        setErrorMessage(`Max ${decimalPlaces} decimal places allowed.`);
-                        if (onErrorStateChange) {
-                            onErrorStateChange(true);
-                        }
-                    } else {
-                        setInErrorState(false);
-                        setErrorMessage('');
-                        if (onErrorStateChange) {
-                            onErrorStateChange(false);
+                // if we currently have a valid number, sync with the parent component
+                if (isNumber(newValue)) {
+                    // + trim to the specified decimal places if necessary
+                    let trimmedValue = newValue;
+                    if (decimalPlaces && newValue.includes('.')) {
+                        const parts = newValue.split('.');
+                        if (parts[1].length > decimalPlaces) {
+                            trimmedValue = `${parts[0]}.${parts[1].slice(0, decimalPlaces)}`;
                         }
                     }
+                    if (newValue.includes('.')) {
+                        const parts = newValue.split('.');
+                        if (parts[1]?.length > decimalPlaces) {
+                            setInErrorState(true);
+                            setErrorMessage(`Max ${decimalPlaces} decimal places allowed.`);
+                            if (onErrorStateChange) {
+                                onErrorStateChange(true);
+                            }
+                        } else {
+                            setInErrorState(false);
+                            setErrorMessage('');
+                            if (onErrorStateChange) {
+                                onErrorStateChange(false);
+                            }
+                        }
+                    }
+                    onChange(propertyName, parseFloat(trimmedValue)); // Sync the trimmed number
                 }
             } else {
                 setInErrorState(true);
@@ -125,15 +137,37 @@ function InputField({
                     onErrorStateChange(true);
                 }
             }
-        } else {
+        } else if (maxLength && newValue?.length > maxLength) {
+            setInErrorState(true);
             setInputValue(newValue);
+            setErrorMessage(`MAX LENGTH (${maxLength}) EXCEEDED`);
+            if (onErrorStateChange) {
+                onErrorStateChange(true);
+            }
+        } else if (maxLength && newValue?.length <= maxLength) {
+            setInErrorState(false);
+            onChange(propertyName, newValue);
+            if (onErrorStateChange) {
+                onErrorStateChange(false);
+            }
+            setErrorMessage('');
+        } else {
+            onChange(propertyName, newValue);
         }
     };
 
     const handleBlur = () => {
         if (type === 'number') {
-            let finalValue = inputValue.endsWith('.') ? inputValue.slice(0, -1) : inputValue;
-            finalValue = isNumber(finalValue) ? parseFloat(finalValue) : 0;
+            let finalValue = inputValue.toString().endsWith('.')
+                ? inputValue.slice(0, -1)
+                : inputValue.toString();
+            finalValue = isNumber(finalValue)
+                ? parseFloat(finalValue.slice(0, finalValue.indexOf('.') + decimalPlaces + 1))
+                : '';
+
+            setInErrorState(false);
+            setErrorMessage();
+            setInputValue(finalValue);
             onChange(propertyName, finalValue);
         } else {
             onChange(propertyName, inputValue);

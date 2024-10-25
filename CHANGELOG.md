@@ -3,7 +3,7 @@
 ### Changes
 - InputField component: handle our own number inputs when type="number" as opposed to relying on the html input elements 'number' type. This is a a breaking change for the following reaosns:
  -  clients that depend on being able to use the scroll wheel on number inputs as this behaviour is no longer supported.
- - decimalPlaces defaults to 2 for number type inputs (values will be truncated o)
+ - decimalPlaces defaults to 9 for number type inputs if user does not specify a a custom value
 
 ## [20.0.0] - 2024-10-23
 ### Changes

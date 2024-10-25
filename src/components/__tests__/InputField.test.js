@@ -122,7 +122,7 @@ describe('When onErrorStateChange function supplied', () => {
             target: { value: 'not ok - longer than 3' }
         });
 
-        expect(onErrorStateChange).toBeCalledWith(true);
+        expect(onErrorStateChange).toHaveBeenCalledWith(true);
     });
 
     test('should call function with false param when max length not exceeded', () => {
@@ -141,6 +141,6 @@ describe('When onErrorStateChange function supplied', () => {
             target: { value: '123' }
         });
 
-        expect(onErrorStateChange).toBeCalledWith(false);
+        expect(onErrorStateChange).toHaveBeenCalledWith(false);
     });
 });

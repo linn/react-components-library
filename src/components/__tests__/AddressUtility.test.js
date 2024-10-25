@@ -81,6 +81,7 @@ describe('When creating an address...', () => {
         fireEvent.change(addresseeInput, {
             target: { value: 'Mr Person' }
         });
+        addresseeInput.blur();
 
         const addressee2Input = screen.getByLabelText('Addressee 2');
         fireEvent.change(addressee2Input, {

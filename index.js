@@ -11,7 +11,6 @@ import CheckboxWithLabel from './src/components/CheckboxWithLabel';
 import Title from './src/components/Title';
 import InputField from './src/components/InputField';
 import LinkButton from './src/components/LinkButton';
-import Typeahead from './src/components/Typeahead';
 import Page from './src/components/Page';
 import EntityList from './src/components/EntityList';
 import CreateButton from './src/components/CreateButton';
@@ -20,9 +19,6 @@ import SnackbarMessage from './src/components/SnackbarMessage';
 import DatePicker from './src/components/DatePicker';
 import DateTimePicker from './src/components/DateTimePicker';
 import SearchInputField from './src/components/SearchInputField';
-import useSearch from './src/hooks/useSearch';
-import TypeaheadTable from './src/components/TypeaheadTable';
-import TypeaheadDialog from './src/components/TypeaheadDialog';
 import makeActionTypes from './src/actions/makeActionTypes';
 import makeReportActionTypes from './src/actions/makeReportActionTypes';
 import makeProcessActionTypes from './src/actions/makeProcessActionTypes';
@@ -170,12 +166,8 @@ export {
     SnackbarMessage,
     StateApiActions,
     Title,
-    Typeahead,
-    TypeaheadDialog,
-    TypeaheadTable,
     UpdateApiActions,
     userSelectors,
     usePreviousNextNavigation,
-    useSearch,
     utilities
 };
