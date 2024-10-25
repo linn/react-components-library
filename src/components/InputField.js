@@ -89,7 +89,11 @@ function InputField({
     const handleChange = e => {
         const newValue = e.target.value;
 
-        if (type === 'number' && !disabled) {
+        if (disabled) {
+            return;
+        }
+
+        if (type === 'number') {
             setInErrorState(false);
             setErrorMessage(null);
             if (onErrorStateChange) {
@@ -159,11 +163,15 @@ function InputField({
 
     const handleBlur = () => {
         if (type === 'number') {
+            // if user leaves in invalid state
+            // trailing decimal point with no digits after it... just chop it off
             let finalValue = inputValue.toString().endsWith('.')
                 ? inputValue.slice(0, -1)
                 : inputValue.toString();
 
+            // too many decimal places?
             if (finalValue.indexOf('.')) {
+                // truncate them
                 finalValue = isNumber(finalValue)
                     ? parseFloat(finalValue.slice(0, finalValue.indexOf('.') + decimalPlaces + 1))
                     : '';
