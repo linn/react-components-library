@@ -206,7 +206,7 @@ function InputField({
                 size="small"
                 rows={rows}
                 inputRef={inputRef}
-                type={type === 'number' && !disabled ? 'text' : type}
+                type={type === 'number' ? 'text' : type}
                 value={type === 'date' ? moment(value).format('YYYY-MM-DD') : getValue(inputValue)}
                 onChange={handleChange}
                 onBlur={handleBlur}
