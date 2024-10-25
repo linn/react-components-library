@@ -104,21 +104,30 @@ function InputField({
 
                 // if we currently have a valid number, sync with the parent component
                 if (isNumber(newValue)) {
-                    if (newValue.includes('.')) {
+                    // if not a decimal
+                    if (!newValue.includes('.')) {
+                        // must be a valid number - sync the value
+                        onChange(propertyName, parseFloat(newValue));
+                    }
+                    // else need to check we are within the decimal place limit
+                    else {
                         const parts = newValue.split('.');
+
                         if (parts[1]?.length > decimalPlaces) {
+                            // decimal is too long, report error and don't syync
                             setInErrorState(true);
                             setErrorMessage(`Max ${decimalPlaces} decimal places allowed.`);
                             if (onErrorStateChange) {
                                 onErrorStateChange(true);
                             }
                         } else {
+                            // clear errors and syncc
                             setInErrorState(false);
                             setErrorMessage('');
                             if (onErrorStateChange) {
                                 onErrorStateChange(false);
                             }
-                            onChange(propertyName, parseFloat(newValue)); // Sync the trimmed number
+                            onChange(propertyName, parseFloat(newValue));
                         }
                     }
                 }
