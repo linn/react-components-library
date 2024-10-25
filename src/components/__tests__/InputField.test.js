@@ -20,7 +20,7 @@ const defaultProps = {
 };
 
 describe('When Editing', () => {
-    test('should change input to 5 decimal places from 6', () => {
+    test('should not change input if decimal places max overrun', () => {
         const { getByDisplayValue } = render(
             <InputField {...defaultProps} decimalPlaces={5} onChange={changeMock} />
         );
@@ -31,48 +31,7 @@ describe('When Editing', () => {
             target: { value: '1234.123451' }
         });
 
-        expect(changeMock).toHaveBeenCalledWith('cost', 1234.12345);
-    });
-
-    test('should change input to 2 decimal places from 3', () => {
-        const { getByDisplayValue } = render(
-            <InputField {...defaultProps} decimalPlaces={2} onChange={changeMock} />
-        );
-
-        const input = getByDisplayValue('0');
-
-        fireEvent.change(input, {
-            target: { value: '1234.123' }
-        });
-
-        expect(changeMock).toHaveBeenCalledWith('cost', 1234.12);
-    });
-
-    test('should change input to 2 decimal places from 6', () => {
-        const { getByDisplayValue } = render(
-            <InputField {...defaultProps} decimalPlaces={2} onChange={changeMock} />
-        );
-
-        const input = getByDisplayValue('0');
-
-        fireEvent.change(input, {
-            target: { value: '1234567.123446' }
-        });
-
-        expect(changeMock).toHaveBeenCalledWith('cost', 1234567.12);
-    });
-    test('should remain the same with no decimal places specified', () => {
-        const { getByDisplayValue } = render(
-            <InputField {...defaultProps} onChange={changeMock} />
-        );
-
-        const input = getByDisplayValue('0');
-
-        fireEvent.change(input, {
-            target: { value: '1234567.123446' }
-        });
-
-        expect(changeMock).toHaveBeenCalledWith('cost', 1234567.123446);
+        expect(changeMock).not.toHaveBeenCalled();
     });
 
     test('should should do nothing when number with no decimals entered', () => {
@@ -122,7 +81,7 @@ describe('When onErrorStateChange function supplied', () => {
             target: { value: 'not ok - longer than 3' }
         });
 
-        expect(onErrorStateChange).toBeCalledWith(true);
+        expect(onErrorStateChange).toHaveBeenCalledWith(true);
     });
 
     test('should call function with false param when max length not exceeded', () => {
@@ -141,6 +100,6 @@ describe('When onErrorStateChange function supplied', () => {
             target: { value: '123' }
         });
 
-        expect(onErrorStateChange).toBeCalledWith(false);
+        expect(onErrorStateChange).toHaveBeenCalledWith(false);
     });
 });
