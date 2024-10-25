@@ -93,7 +93,7 @@ function InputField({
             setInErrorState(false);
             setErrorMessage(null);
             if (onErrorStateChange) {
-                onErrorStateChange(true);
+                onErrorStateChange(false);
             }
             if (isNumber(newValue) || isPartial(newValue)) {
                 if (maxLength) {
@@ -161,9 +161,14 @@ function InputField({
             let finalValue = inputValue.toString().endsWith('.')
                 ? inputValue.slice(0, -1)
                 : inputValue.toString();
-            finalValue = isNumber(finalValue)
-                ? parseFloat(finalValue.slice(0, finalValue.indexOf('.') + decimalPlaces + 1))
-                : '';
+
+            if (finalValue.indexOf('.')) {
+                finalValue = isNumber(finalValue)
+                    ? parseFloat(finalValue.slice(0, finalValue.indexOf('.') + decimalPlaces + 1))
+                    : '';
+            } else {
+                finalValue = parseFloat(finalValue);
+            }
 
             setInErrorState(false);
             setErrorMessage();
@@ -267,7 +272,7 @@ InputField.defaultProps = {
     type: 'text',
     value: '',
     onChange: null,
-    decimalPlaces: 2,
+    decimalPlaces: 9,
     textFieldProps: null,
     autoFocus: false,
     onErrorStateChange: null,
