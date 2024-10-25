@@ -3,7 +3,7 @@
 ### Changes
 - InputField component: handle our own number inputs when type="number" as opposed to relying on the html input elements 'number' type. This is a a breaking change since:
  -  Using the scrollwheel to change number inputs is no longer supported
- - decimalPlaces defaults to 9 for number type inputs if user does not specify a a custom value
+ - decimalPlaces defaults to 2 for number type inputs if user does not specify a a custom value
  ### Deperecated (very breaking)
  Typeahead component, TypeaheadTable component, useSearch hook have all been removed from the package.
 

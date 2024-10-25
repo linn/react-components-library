@@ -281,7 +281,7 @@ InputField.defaultProps = {
     type: 'text',
     value: '',
     onChange: null,
-    decimalPlaces: 9,
+    decimalPlaces: 2,
     textFieldProps: null,
     autoFocus: false,
     onErrorStateChange: null,
