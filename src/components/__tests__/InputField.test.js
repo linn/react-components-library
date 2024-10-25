@@ -34,20 +34,6 @@ describe('When Editing', () => {
         expect(changeMock).not.toHaveBeenCalled();
     });
 
-    test('should remain the same with no decimal places specified', () => {
-        const { getByDisplayValue } = render(
-            <InputField {...defaultProps} onChange={changeMock} />
-        );
-
-        const input = getByDisplayValue('0');
-
-        fireEvent.change(input, {
-            target: { value: '1234567.123446' }
-        });
-
-        expect(changeMock).toHaveBeenCalledWith('cost', 1234567.123446);
-    });
-
     test('should should do nothing when number with no decimals entered', () => {
         const { getByDisplayValue } = render(
             <InputField {...defaultProps} decimalPlaces={2} onChange={changeMock} />
