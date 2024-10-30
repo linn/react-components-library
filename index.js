@@ -83,6 +83,8 @@ import PrevNextButtons from './src/components/PrevNextButtons';
 import ConfirmDialog from './src/components/ConfirmDialog';
 import AddressUtilityReduxContainer from './src/containers/AddressUtilityReduxContainer';
 import PermissionIndicator from './src/components/PermissionIndicator';
+import ReportDataGrid from './src/components/ReportDataGrid';
+import ReportDataGrids from './src/components/ReportDataGrids';
 
 const reducers = { menu, news };
 
@@ -152,6 +154,8 @@ export {
     processStoreFactory,
     reducers,
     ReportActions,
+    ReportDataGrid,
+    ReportDataGrids,
     reportOptionsFactory,
     reportResultsFactory,
     reportSelectorHelpers,

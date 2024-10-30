@@ -81,7 +81,9 @@ export default [
             UsePreviousNextNavigation: 'src/hooks/usePreviousNextNavigation',
             PrevNextButtons: 'src/components/PrevNextButtons',
             ConfirmDialog: 'src/components/ConfirmDialog.js',
-            PermissionIndicator: 'src/components/PermissionIndicator.js'
+            PermissionIndicator: 'src/components/PermissionIndicator.js',
+            ReportDataGrid: 'src/components/ReportDataGrid.js',
+            ReportDataGrids: 'src/components/ReportDataGrids.js'
         },
         plugins: [
             babel({ babelrc: false, ...babelrc, exclude: 'node_modules/**' }),
