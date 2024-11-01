@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import React, { useRef, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -60,10 +61,23 @@ function InputField({
     const [inErrorState, setInErrorState] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const [inputValue, setInputValue] = useState(value);
+    const isNumber = val => {
+        const validNumberPattern = /^-?\d+(\.\d+)?$/;
+        return validNumberPattern.test(val);
+    };
 
     useEffect(() => {
-        setInputValue(value);
-    }, [value]);
+        if (type === 'number') {
+            const numericValue = Number(value);
+            if (Number.isNaN(numericValue)) {
+                setInputValue('');
+            } else {
+                setInputValue(value);
+            }
+        } else {
+            setInputValue(value);
+        }
+    }, [value, type]);
 
     useEffect(() => {
         setTimeout(() => {
@@ -75,11 +89,6 @@ function InputField({
     useEffect(() => {
         setInErrorState(error);
     }, [error]);
-
-    const isNumber = val => {
-        const validNumberPattern = /^-?\d+(\.\d+)?$/;
-        return validNumberPattern.test(val);
-    };
 
     const isPartial = val => {
         const validPartialPattern = /^-?\d*\.?$/;
@@ -96,6 +105,15 @@ function InputField({
         if (type === 'number') {
             setInErrorState(false);
             setErrorMessage(null);
+            if (
+                newValue === null ||
+                newValue === undefined ||
+                newValue.toString().trim().length === 0
+            ) {
+                setInputValue('');
+                onChange(propertyName, '');
+                return;
+            }
             if (onErrorStateChange) {
                 onErrorStateChange(false);
             }
@@ -166,22 +184,22 @@ function InputField({
             // if user leaves in invalid state
             // trailing decimal point with no digits after it... just chop it off
             let finalValue = inputValue.toString().endsWith('.')
-                ? inputValue.slice(0, -1)
-                : inputValue.toString();
-
+                ? parseFloat(inputValue.slice(0, -1)).toFixed(decimalPlaces)
+                : parseFloat(inputValue).toFixed(decimalPlaces);
             // too many decimal places?
-            if (finalValue.indexOf('.')) {
+            if (finalValue.indexOf('.') >= 0) {
                 // truncate them
                 finalValue = isNumber(finalValue)
-                    ? parseFloat(finalValue.slice(0, finalValue.indexOf('.') + decimalPlaces + 1))
+                    ? parseFloat(
+                          finalValue.slice(0, finalValue.indexOf('.') + decimalPlaces + 1)
+                      ).toFixed(decimalPlaces)
                     : '';
-            } else {
-                finalValue = parseFloat(finalValue);
             }
+
+            setInputValue(finalValue);
 
             setInErrorState(false);
             setErrorMessage();
-            setInputValue(finalValue);
             onChange(propertyName, finalValue);
         } else {
             onChange(propertyName, inputValue);
@@ -218,8 +236,13 @@ function InputField({
                 type={type === 'number' ? 'text' : type}
                 value={type === 'date' ? moment(value).format('YYYY-MM-DD') : getValue(inputValue)}
                 onChange={handleChange}
-                onBlur={handleBlur}
                 InputProps={{
+                    onBlur: data => {
+                        if (textFieldProps?.onBlur) {
+                            textFieldProps.onBlur(data);
+                        }
+                        handleBlur();
+                    },
                     startAdornment: adornment ? (
                         <InputAdornment position="start">{adornment}</InputAdornment>
                     ) : null,
@@ -259,7 +282,7 @@ InputField.propTypes = {
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     onChange: PropTypes.func,
     decimalPlaces: PropTypes.number,
-    textFieldProps: PropTypes.shape({}),
+    textFieldProps: PropTypes.shape({ onBlur: PropTypes.func }),
     autoFocus: PropTypes.bool,
     onErrorStateChange: PropTypes.func,
     visible: PropTypes.bool
