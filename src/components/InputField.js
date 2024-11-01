@@ -187,16 +187,15 @@ function InputField({
                 ? parseFloat(inputValue.slice(0, -1)).toFixed(decimalPlaces)
                 : parseFloat(inputValue).toFixed(decimalPlaces);
             // too many decimal places?
-            if (finalValue.indexOf('.')) {
+            if (finalValue.indexOf('.') >= 0) {
                 // truncate them
                 finalValue = isNumber(finalValue)
                     ? parseFloat(
                           finalValue.slice(0, finalValue.indexOf('.') + decimalPlaces + 1)
                       ).toFixed(decimalPlaces)
                     : '';
-            } else {
-                finalValue = parseFloat(finalValue).toFixed(decimalPlaces);
             }
+
             setInputValue(finalValue);
 
             setInErrorState(false);
