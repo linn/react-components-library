@@ -1,4 +1,7 @@
 # Changelog
+## [21.2.0] - 2024-11-01
+### Changes
+- InputField bug fixes
 ## [21.1.0] - 2024-10-30
 ### Changes
 - Added ReportDataGrid and ReportDataGrids components as alternative report display components.
