@@ -201,7 +201,6 @@ function InputField({
 
             setInErrorState(false);
             setErrorMessage();
-            // setInputValue(finalValue);
             onChange(propertyName, finalValue);
         } else {
             onChange(propertyName, inputValue);
