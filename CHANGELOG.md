@@ -1,4 +1,8 @@
 # Changelog
+## [22.0.0] - 2024-11-05 :fireworks: :sparkler: :fireworks:
+### Changes
+- InputField: Remove  InputField 'onBlur' invalid state handling: calling onChange in the onBlur leads to unpredictable behaviour for developers who are not anticipating onChange to be called when the component loses focus.
+- Inputfield (*Breaking*) no longer supports type="date"
 ## [21.2.0] - 2024-11-01
 ### Changes
 - InputField bug fixes

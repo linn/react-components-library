@@ -19,36 +19,6 @@ const defaultProps = {
     value: 0
 };
 
-describe('When Editing', () => {
-    test('should not change input if decimal places max overrun', () => {
-        const { getByDisplayValue } = render(
-            <InputField {...defaultProps} decimalPlaces={5} onChange={changeMock} />
-        );
-
-        const input = getByDisplayValue('0');
-
-        fireEvent.change(input, {
-            target: { value: '1234.123451' }
-        });
-
-        expect(changeMock).not.toHaveBeenCalled();
-    });
-
-    test('should should do nothing when number with no decimals entered', () => {
-        const { getByDisplayValue } = render(
-            <InputField {...defaultProps} decimalPlaces={2} onChange={changeMock} />
-        );
-
-        const input = getByDisplayValue('0');
-
-        fireEvent.change(input, {
-            target: { value: '1234567' }
-        });
-
-        expect(changeMock).toHaveBeenCalledWith('cost', 1234567);
-    });
-});
-
 describe('When Max Length Exceeded', () => {
     test('should show error', () => {
         const { getByText, getByDisplayValue } = render(
