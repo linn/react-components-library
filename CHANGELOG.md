@@ -1,4 +1,7 @@
 # Changelog
+## [21.3.0] - 2024-11-05 
+### Changes
+- InputField bug fixes
 ## [21.2.0] - 2024-11-01
 ### Changes
 - InputField bug fixes

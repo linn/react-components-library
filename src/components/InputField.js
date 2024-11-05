@@ -5,7 +5,6 @@ import InputAdornment from '@mui/material/InputAdornment';
 import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
 import makeStyles from '@mui/styles/makeStyles';
-import moment from 'moment';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -96,7 +95,7 @@ function InputField({
     };
 
     const handleChange = e => {
-        const newValue = e.target.value;
+        let newValue = e.target.value;
 
         if (disabled) {
             return;
@@ -104,6 +103,7 @@ function InputField({
 
         if (type === 'number') {
             setInErrorState(false);
+            onErrorStateChange?.(false);
             setErrorMessage(null);
             if (
                 newValue === null ||
@@ -114,50 +114,24 @@ function InputField({
                 onChange(propertyName, '');
                 return;
             }
-            if (onErrorStateChange) {
-                onErrorStateChange(false);
-            }
+
             if (isNumber(newValue) || isPartial(newValue)) {
                 if (maxLength) {
-                    e.target.value = e.target.value.slice(0, maxLength);
+                    newValue = e.target.value.slice(0, maxLength);
                 }
 
-                setInputValue(newValue);
+                onChange(propertyName, newValue);
 
-                // if we currently have a valid number, sync with the parent component
-                if (isNumber(newValue)) {
-                    // if not a decimal
-                    if (!newValue.includes('.')) {
-                        // must be a valid number - sync the value
-                        onChange(propertyName, parseFloat(newValue));
-                    }
-                    // else need to check we are within the decimal place limit
-                    else {
-                        const parts = newValue.split('.');
+                if (newValue.includes('.')) {
+                    const parts = newValue.split('.');
 
-                        if (parts[1]?.length > decimalPlaces) {
-                            // decimal is too long, report error and don't syync
-                            setInErrorState(true);
-                            setErrorMessage(`Max ${decimalPlaces} decimal places allowed.`);
-                            if (onErrorStateChange) {
-                                onErrorStateChange(true);
-                            }
-                        } else {
-                            // clear errors and syncc
-                            setInErrorState(false);
-                            setErrorMessage('');
-                            if (onErrorStateChange) {
-                                onErrorStateChange(false);
-                            }
-                            onChange(propertyName, parseFloat(newValue));
+                    if (parts[1]?.length > decimalPlaces) {
+                        setInErrorState(true);
+                        setErrorMessage(`Max ${decimalPlaces} decimal places allowed.`);
+                        if (onErrorStateChange) {
+                            onErrorStateChange(true);
                         }
                     }
-                }
-            } else {
-                setInErrorState(true);
-                setErrorMessage('Invalid number format.');
-                if (onErrorStateChange) {
-                    onErrorStateChange(true);
                 }
             }
         } else if (maxLength && newValue?.length > maxLength) {
@@ -176,33 +150,6 @@ function InputField({
             setErrorMessage('');
         } else {
             onChange(propertyName, newValue);
-        }
-    };
-
-    const handleBlur = () => {
-        if (type === 'number') {
-            // if user leaves in invalid state
-            // trailing decimal point with no digits after it... just chop it off
-            let finalValue = inputValue.toString().endsWith('.')
-                ? parseFloat(inputValue.slice(0, -1)).toFixed(decimalPlaces)
-                : parseFloat(inputValue).toFixed(decimalPlaces);
-            // too many decimal places?
-            if (finalValue.indexOf('.') >= 0) {
-                // truncate them
-                finalValue = isNumber(finalValue)
-                    ? parseFloat(
-                          finalValue.slice(0, finalValue.indexOf('.') + decimalPlaces + 1)
-                      ).toFixed(decimalPlaces)
-                    : '';
-            }
-
-            setInputValue(finalValue);
-
-            setInErrorState(false);
-            setErrorMessage();
-            onChange(propertyName, finalValue);
-        } else {
-            onChange(propertyName, inputValue);
         }
     };
 
@@ -234,14 +181,13 @@ function InputField({
                 rows={rows}
                 inputRef={inputRef}
                 type={type === 'number' ? 'text' : type}
-                value={type === 'date' ? moment(value).format('YYYY-MM-DD') : getValue(inputValue)}
+                value={getValue(inputValue)}
                 onChange={handleChange}
                 InputProps={{
                     onBlur: data => {
                         if (textFieldProps?.onBlur) {
                             textFieldProps.onBlur(data);
                         }
-                        handleBlur();
                     },
                     startAdornment: adornment ? (
                         <InputAdornment position="start">{adornment}</InputAdornment>
