@@ -1,7 +1,7 @@
 # Changelog
-## [21.3.0] - 2024-11-05 
+## [21.3.0] - 2024-11-05 :fireworks:  :fireworks:
 ### Changes
-- InputField bug fixes
+- InputField: Remove  InputField 'onBlur' invalid state handling: calling onChange in the onBlur leads to unpredictable behaviour for developers who are not anticipating onChange to be called when the component loses focus.
 ## [21.2.0] - 2024-11-01
 ### Changes
 - InputField bug fixes
