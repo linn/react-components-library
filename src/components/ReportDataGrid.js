@@ -34,7 +34,7 @@ function ReportDataGrid({
                         rel={openLinksInNewTabs ? 'noopener noreferrer' : ''}
                         href={params.row[`${params.field}DrillDown`].url}
                     >
-                        {params.value}
+                        {params.formattedValue}
                     </a>
                 );
             }
@@ -44,20 +44,20 @@ function ReportDataGrid({
                     rel={openLinksInNewTabs ? 'noopener noreferrer' : ''}
                     to={params.row[`${params.field}DrillDown`].url}
                 >
-                    {params.value}
+                    {params.formattedValue}
                 </Link>
             );
         }
 
         if (fixedRowHeight) {
             return (
-                <Tooltip title={params.value}>
-                    <span>{params.value}</span>
+                <Tooltip title={params.formattedValue}>
+                    <span>{params.formattedValue}</span>
                 </Tooltip>
             );
         }
 
-        return <span>{params.value}</span>;
+        return <span>{params.formattedValue}</span>;
     };
     const columns = report.headers.dataGridColumnSpecifications.map((c, i) => ({
         field: c.columnId,
@@ -65,24 +65,30 @@ function ReportDataGrid({
         align: report.headers.dataGridColumnSpecifications[i].align,
         headerAlign: report.headers.dataGridColumnSpecifications[i].align,
         width: report.headers.dataGridColumnSpecifications[i].columnWidth,
+        valueFormatter: ({ value }) => {
+            if (
+                report.headers.dataGridColumnSpecifications[i].columnType === 'number' &&
+                (value || value === 0 || value === '0')
+            ) {
+                const { decimalPlaces } = report.headers.dataGridColumnSpecifications[i];
+                const numberFormat = Intl.NumberFormat('en-GB', {
+                    minimumFractionDigits: decimalPlaces ?? 2,
+                    maximumFractionDigits: decimalPlaces ?? 99
+                });
+
+                return numberFormat.format(value);
+            }
+
+            return value;
+        },
         renderCell
     }));
 
     let rows = report.results.map(r => {
         const values = columns.reduce((acc, col, i) => {
             let val = r.values[i]?.textDisplayValue ?? r.values[i]?.displayValue;
-            const isValue = !!r.values[i]?.displayValue;
-
-            const decimalPlaces = r.values[i]?.decimalPlaces;
             if ((val === 0 || val === '0') && !renderZeroes) {
                 val = '';
-            }
-            if (isValue) {
-                const numberFormat = Intl.NumberFormat('en-GB', {
-                    minimumFractionDigits: decimalPlaces ?? 2,
-                    maximumFractionDigits: decimalPlaces ?? 99
-                });
-                val = val ? numberFormat.format(val) : '';
             }
 
             acc[col.field] = val;
@@ -113,19 +119,11 @@ function ReportDataGrid({
         const { totals, headers } = report;
         const totalsValues = headers.dataGridColumnSpecifications.reduce((acc, spec, i) => {
             let totalVal = totals.values[i]?.displayValue;
-            const isValue = !!totalVal;
 
-            const decimalPlaces = totals.values[i]?.decimalPlaces;
             if ((totalVal === 0 || totalVal === '0') && !renderZeroes) {
                 totalVal = '';
             }
-            if (isValue) {
-                const numberFormat = Intl.NumberFormat('en-GB', {
-                    minimumFractionDigits: decimalPlaces ?? 2,
-                    maximumFractionDigits: decimalPlaces ?? 99
-                });
-                totalVal = totalVal ? numberFormat.format(totalVal) : '';
-            }
+
             acc[spec.columnId] = totalVal;
 
             return acc;
@@ -211,7 +209,12 @@ ReportDataGrid.propTypes = {
         headers: PropTypes.shape({
             columnHeaders: PropTypes.arrayOf(PropTypes.string),
             dataGridColumnSpecifications: PropTypes.arrayOf(
-                PropTypes.shape({ align: PropTypes.string, columnWidth: PropTypes.number })
+                PropTypes.shape({
+                    align: PropTypes.string,
+                    columnWidth: PropTypes.number,
+                    columnType: PropTypes.string,
+                    decimalPlaces: PropTypes.number
+                })
             ).isRequired
         })
     }).isRequired,

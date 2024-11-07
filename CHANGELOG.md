@@ -1,4 +1,7 @@
 # Changelog
+## [22.2.0] - 2024-11-07
+### Changes
+- ReportDataGrid - update number display to allow sorting
 ## [22.1.0] - 2024-11-05 :fireworks: :sparkler: :fireworks:
 ### Changes
 - InputField: Revert back to passing type="number" to the internal input component
