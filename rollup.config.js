@@ -39,7 +39,6 @@ export default [
             ReportTable: 'src/components/ReportTable.js',
             Page: 'src/components/Page.js',
             Loading: 'src/components/Loading.js',
-            Title: 'src/components/Title.js',
             InputField: 'src/components/InputField.js',
             EntityList: 'src/components/EntityList.js',
             OnOffSwitch: 'src/components/OnOffSwitch.js',

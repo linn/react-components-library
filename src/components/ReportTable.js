@@ -15,7 +15,6 @@ import {
     setTextValueDrilldown
 } from '../utilities/DisplayUtilities';
 import { reportResultType } from '../propTypes/index';
-import Title from './Title';
 import ErrorCard from './ErrorCard';
 
 const useStyles = makeStyles(() => ({
@@ -150,14 +149,15 @@ const Results = ({
     showRowCount
 }) => (
     <Paper className={allowPageBreakInside ? classes.rootAllowsPageBreaks : classes.root}>
-        <Title
-            text={formatTitle(
+        <Typography variant="h4">
+            {formatTitle(
                 title,
                 showTitle,
                 !reportData,
                 reportData && reportData.error,
                 reportData?.reportHelpText ?? ''
             )}
+        </Typography>
         />
         <div style={{ backgroundColor: 'white' }}>
             <Table size="small">

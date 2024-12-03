@@ -1,26 +1,9 @@
-import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
-import makeStyles from '@mui/styles/makeStyles';
-import { useSnackbar } from 'notistack';
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useSnackbar } from 'notistack';
+import { Box, Paper, Typography } from '@mui/material';
+import Grid2 from '@mui/material/Grid'; // Now fully stable in MUI v6
 import Breadcrumbs from './Breadcrumbs';
-
-const useStyles = makeStyles(theme => ({
-    root: {
-        padding: theme.spacing(4)
-    },
-    breadcrumbs: {
-        marginTop: theme.spacing(4),
-        marginLeft: theme.spacing(4),
-        marginRight: theme.spacing(4),
-        padding: theme.spacing(2)
-    },
-    grid: {
-        marginTop: theme.spacing(4),
-        width: '100%'
-    }
-}));
 
 const pageWidth = {
     xs: 4,
@@ -35,7 +18,7 @@ const columnWidth = {
     s: 3,
     m: 2,
     l: 1,
-    xl: false
+    xl: 0
 };
 
 function Page({
@@ -50,7 +33,6 @@ function Page({
     title,
     defaultAppTitle
 }) {
-    const classes = useStyles();
     const { enqueueSnackbar } = useSnackbar();
 
     useEffect(() => {
@@ -73,26 +55,30 @@ function Page({
                 document.title = defaultAppTitle;
             }
         };
-    }, [title]);
+    }, [title, defaultAppTitle]);
 
     return (
-        <Grid container spacing={3} className={classes.grid}>
-            <Grid item xs={1} />
-            <Grid item xs={10} className="hide-when-printing">
+        <Grid2 container spacing={3}>
+            <Grid2 item xs={12}>
+                <Typography variant="h6">{title}</Typography>
+            </Grid2>
+            
+            <Grid2 item xs={12}>
                 {showBreadcrumbs && (
                     <Breadcrumbs navigate={navigate} homeUrl={homeUrl} location={location} />
                 )}
-            </Grid>
-            <Grid item xs={1} />
+            </Grid2>
 
-            <Grid item xs={columnWidth[width]} />
-            <Grid item xs={pageWidth[width]}>
-                <Paper className={classes.root} square>
+            <Grid2 item xs={columnWidth[width]} />
+
+            <Grid2 item xs={pageWidth[width]}>
+                <Paper sx={{ padding: 4 }} square>
                     {children}
                 </Paper>
-            </Grid>
-            <Grid item xs={columnWidth[width]} />
-        </Grid>
+            </Grid2>
+
+            <Grid2 item xs={columnWidth[width]} />
+        </Grid2>
     );
 }
 

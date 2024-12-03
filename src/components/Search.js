@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import CloseIcon from '@mui/icons-material/Close';
 import SearchIcon from '@mui/icons-material/Search';
 import Dialog from '@mui/material/Dialog';
@@ -7,31 +8,13 @@ import IconButton from '@mui/material/IconButton';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import List from '@mui/material/List';
+import Box from '@mui/material/Box';
 import ListItem from '@mui/material/ListItem';
 import Typography from '@mui/material/Typography';
-import makeStyles from '@mui/styles/makeStyles';
 import PropTypes from 'prop-types';
 import React, { Fragment, useState } from 'react';
 import InputField from './InputField';
 import Loading from './Loading';
-
-const useStyles = makeStyles(theme => ({
-    nameText: {
-        fontWeight: theme.typography.fontWeightBold
-    },
-    bodyText: {
-        color: theme.palette.text.primary
-    },
-    pullRight: {
-        float: 'right'
-    },
-
-    dialog: {
-        margin: theme.spacing(6),
-        minWidth: theme.spacing(62)
-    },
-    pad: { padding: theme.spacing(2) }
-}));
 
 function Search({
     propertyName,
@@ -55,7 +38,6 @@ function Search({
     displayChips,
     fullWidth
 }) {
-    const classes = useStyles();
     const [dialogOpen, setDialogOpen] = useState(false);
     const [hasSearched, setHasSearched] = useState(false);
 
@@ -68,13 +50,12 @@ function Search({
                 }
             }
         }
-
         return count;
     };
 
     const resultItem = item => (
         <ListItem
-            className={classes.pad}
+            sx={{ padding: theme => theme.spacing(2) }}
             button
             onClick={() => {
                 clearSearch();
@@ -87,10 +68,14 @@ function Search({
         >
             <Grid container spacing={3}>
                 <Grid item xs={3}>
-                    <Typography classes={{ root: classes.nameText }}>{item.name}</Typography>
+                    <Typography sx={{ fontWeight: theme => theme.typography.fontWeightBold }}>
+                        {item.name}
+                    </Typography>
                 </Grid>
                 <Grid item xs={displayChips ? 3 : 9}>
-                    <Typography classes={{ root: classes.bodyText }}>{item.description}</Typography>
+                    <Typography sx={{ color: theme => theme.palette.text.primary }}>
+                        {item.description}
+                    </Typography>
                 </Grid>
                 {displayChips && (
                     <Grid item xs={6}>
@@ -105,7 +90,7 @@ function Search({
                                 <Chip
                                     id={c.text}
                                     label={c.text}
-                                    style={{ backgroundColor: c.color }}
+                                    sx={{ backgroundColor: c.color }}
                                 />
                             ))}
                         </Stack>
@@ -119,7 +104,6 @@ function Search({
         if (priorityFunction === 'closestMatchesFirst') {
             return countMatchingCharacters(item, searchTerm);
         }
-
         return priorityFunction(item, searchTerm);
     };
 
@@ -136,15 +120,7 @@ function Search({
                     ...i,
                     priority: priority(i, value)
                 }))
-                .sort((a, b) => {
-                    if (a.priority > b.priority) {
-                        return -1;
-                    }
-                    if (a.priority < b.priority) {
-                        return 1;
-                    }
-                    return 0;
-                });
+                .sort((a, b) => b.priority - a.priority);
         }
 
         if (resultLimit) {
@@ -165,6 +141,7 @@ function Search({
         }
         return <Typography>No matching items</Typography>;
     };
+
     return (
         <>
             <InputField
@@ -197,17 +174,26 @@ function Search({
             />
             {resultsInModal ? (
                 <Dialog data-testid="modal" open={dialogOpen} fullWidth maxWidth="md">
-                    <div>
+                    <Box>
                         <IconButton
-                            className={classes.pullRight}
+                            sx={{
+                                float: 'right'
+                            }}
                             aria-label="Close"
                             onClick={() => setDialogOpen(false)}
                             size="large"
                         >
                             <CloseIcon />
                         </IconButton>
-                        <div className={classes.dialog}>{loading ? <Loading /> : results()}</div>
-                    </div>
+                        <Box
+                            sx={{
+                                margin: theme => theme.spacing(6),
+                                minWidth: theme => theme.spacing(62)
+                            }}
+                        >
+                            {loading ? <Loading /> : results()}
+                        </Box>
+                    </Box>
                 </Dialog>
             ) : (
                 results()

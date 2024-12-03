@@ -1,11 +1,11 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
-import Title from './Title';
+import { Typography } from '@mui/material';
 
 function NotFound() {
     return (
         <Grid container alignItems="flex-start" styles={{ alignItems: 'flex-start' }}>
-            <Title text="Page not found" />
+            <Typography variant="h4">Page Not Found</Typography>
         </Grid>
     );
 }

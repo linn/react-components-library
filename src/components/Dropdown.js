@@ -1,34 +1,7 @@
 import React from 'react';
 import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
-import makeStyles from '@mui/styles/makeStyles';
 import PropTypes from 'prop-types';
-
-const useStyles = makeStyles(theme => ({
-    root: {
-        paddingTop: 0,
-        marginTop: theme.spacing(1)
-    },
-    disabled: {
-        background: theme.palette.grey[100],
-        color: theme.palette.text.secondary
-    },
-    label: {
-        fontSize: theme.typography.fontSize
-    },
-    helperText: {
-        color: theme.palette.error.main
-    },
-    labelAsterisk: {
-        color: theme.palette.error.main
-    },
-    required: {
-        color: theme.palette.error.main
-    },
-    error: {
-        color: theme.palette.error.main
-    }
-}));
 
 const hasValue = val => val || val === 0;
 
@@ -75,8 +48,6 @@ function Dropdown({
     margin,
     autoFocus
 }) {
-    const classes = useStyles();
-
     const change = e => {
         const newValue = e.target.value;
 
@@ -94,7 +65,13 @@ function Dropdown({
     return (
         <>
             <InputLabel
-                classes={{ root: classes.label, asterisk: classes.labelAsterisk }}
+                sx={{
+                    fontSize: theme => theme.typography.fontSize,
+                    color: error ? theme => theme.palette.error.main : 'inherit',
+                    '& .MuiInputLabel-asterisk': {
+                        color: theme => theme.palette.error.main
+                    }
+                }}
                 required={required}
                 error={error}
                 htmlFor={propertyName}
@@ -102,8 +79,13 @@ function Dropdown({
                 {label}
             </InputLabel>
             <TextField
-                classes={{
-                    root: classes.root
+                sx={{
+                    paddingTop: 0,
+                    marginTop: theme => theme.spacing(1),
+                    '& .MuiInputBase-root.Mui-disabled': {
+                        backgroundColor: theme => theme.palette.grey[100],
+                        color: theme => theme.palette.text.secondary
+                    }
                 }}
                 autoFocus={autoFocus}
                 error={error}
@@ -123,15 +105,12 @@ function Dropdown({
                 margin={margin}
                 variant="outlined"
                 required={required}
-                InputProps={{
-                    classes: {
-                        disabled: classes.disabled
-                    }
-                }}
                 FormHelperTextProps={{
-                    classes: {
-                        required: classes.required,
-                        error: classes.error
+                    sx: {
+                        color: error ? theme => theme.palette.error.main : 'inherit',
+                        '&.Mui-required': {
+                            color: theme => theme.palette.error.main
+                        }
                     }
                 }}
             >

@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import Typography from '@mui/material/Typography';
-import Title from './Title';
 
 const getListItemText = (entity, entityid, descriptionFieldName) =>
     descriptionFieldName
@@ -15,7 +14,7 @@ function EntityList({ title, entityList, entityId, descriptionFieldName, hasExte
     const Component = hasExternalLinks ? 'a' : Link;
     return (
         <>
-            <Title text={title} />
+            <Typography variant="h4">{title}</Typography>
             <List>
                 {entityList.map(entity => (
                     <ListItem

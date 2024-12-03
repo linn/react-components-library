@@ -1,8 +1,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import Page from '../components/Page';
-import Title from '../components/Title';
 import providers from './renderUtils/Providers';
+import { Typography } from '@mui/material';
 
 export default {
     title: 'Components/Page',
@@ -12,7 +12,7 @@ export default {
 
 export const Default = args => (
     <Page {...args}>
-        <Title text="Page Content Here" />
+        <Typography variant="h4">Page Content Here</Typography>
     </Page>
 );
 

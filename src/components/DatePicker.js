@@ -2,29 +2,12 @@ import React from 'react';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import InputLabel from '@mui/material/InputLabel';
 import PropTypes from 'prop-types';
-import makeStyles from '@mui/styles/makeStyles';
 import moment from 'moment';
 
-const labelStyles = makeStyles(theme => ({
-    root: {
-        fontSize: theme.typography.fontSize
-    }
-}));
-
-const inputStyles = makeStyles(theme => ({
-    root: {
-        marginTop: theme.spacing(1),
-        fontSize: theme.typography.fontSize
-    }
-}));
-
 function Picker({ value, minDate, maxDate, label, onChange, required, disabled, datePickerProps }) {
-    const inputClasses = inputStyles();
-    const labelClasses = labelStyles();
-
     return (
         <>
-            <InputLabel classes={{ root: labelClasses.root }} required={required}>
+            <InputLabel sx={theme => theme.typography.fontSize} required={required}>
                 {label}
             </InputLabel>
             <DatePicker
@@ -33,14 +16,20 @@ function Picker({ value, minDate, maxDate, label, onChange, required, disabled, 
                 inputVariant="outlined"
                 autoOk
                 format="DD/MM/YYYY"
-                slotProps={{ textField: { variant: 'outlined', size: 'small' } }}
+                slotProps={{
+                    textField: {
+                        variant: 'outlined',
+                        size: 'small',
+                        sx: {
+                            mt: 1
+                        }
+                    }
+                }}
                 value={value ? moment(value) : null}
                 minDate={minDate ? moment(minDate) : null}
                 maxDate={maxDate ? moment(maxDate) : null}
                 onChange={onChange}
-                classes={inputClasses}
                 disabled={disabled}
-                className={inputClasses.root}
                 {...datePickerProps}
             />
         </>
