@@ -71,7 +71,7 @@
         "@mui/material": "^5.15.1",
         "@mui/styles": "^5.14.3",
         "@storybook/addon-actions": "^6.3.12",
-        "@storybook/addon-docs": "^6.3.12",
+        "@storybook/addon-docs": "^6.5.16",
         "@storybook/addon-essentials": "^6.3.12",
         "@storybook/addons": "^6.3.12",
         "@storybook/builder-webpack5": "^6.5.16",
