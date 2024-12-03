@@ -18,10 +18,8 @@ export default {
 export const Default = args => <Breadcrumbs {...args} />;
 
 Default.args = {
-    history: {
-        push: () => {},
-        location: {
-            pathname: '/a/test/path'
-        }
-    }
+    location: {
+        pathname: '/a/test/path'
+    },
+    navigate: () => {}
 };

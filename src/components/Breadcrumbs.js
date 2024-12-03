@@ -17,10 +17,10 @@ const useStyles = makeStyles(() => ({
 
 const Slash = () => <> {' / '} </>;
 
-function Breadcrumbs({ history, rootPathLength, homeUrl }) {
+function Breadcrumbs({ navigate, rootPathLength, homeUrl, location }) {
     const classes = useStyles();
 
-    let path = history.location.pathname;
+    let path = location.pathname;
     if (path.endsWith('/')) {
         path = path.substring(0, path.length - 1);
     }
@@ -34,7 +34,7 @@ function Breadcrumbs({ history, rootPathLength, homeUrl }) {
             const handleClick = e => {
                 if (path.length > rootPathLength) {
                     e.preventDefault();
-                    history.push(href);
+                    navigate(href);
                 }
             };
 
@@ -81,10 +81,8 @@ function Breadcrumbs({ history, rootPathLength, homeUrl }) {
 }
 
 Breadcrumbs.propTypes = {
-    history: PropTypes.shape({
-        push: PropTypes.func,
-        location: PropTypes.shape({ pathname: PropTypes.string })
-    }).isRequired,
+    navigate: PropTypes.func.isRequired,
+    location: PropTypes.shape({ pathname: PropTypes.string }).isRequired,
     rootPathLength: PropTypes.number,
     homeUrl: PropTypes.string
 };

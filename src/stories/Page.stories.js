@@ -21,10 +21,8 @@ Default.story = {
 };
 
 Default.args = {
-    history: {
-        push: () => {},
-        location: {
-            pathname: '/a/test/path'
-        }
-    }
+    location: {
+        pathname: '/a/test/path'
+    },
+    navigate: () => {}
 };
