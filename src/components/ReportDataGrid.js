@@ -151,7 +151,7 @@ function ReportDataGrid({
 
     return (
         <Grid container spacing={3}>
-            <Grid item size={12} sx={{ marginBottom: '-10px' }}>
+            <Grid size={12} sx={{ marginBottom: '-10px' }}>
                 {titleHasDrilldowns ? (
                     <a
                         target={openLinksInNewTabs ? '_blank' : ''}
@@ -164,7 +164,7 @@ function ReportDataGrid({
                     title()
                 )}
             </Grid>
-            <Grid item size={12} sx={fullPages ? fixedHeightStyle : {}}>
+            <Grid size={12} sx={fullPages ? fixedHeightStyle : {}}>
                 <DataGrid
                     rows={rows}
                     columns={columns}

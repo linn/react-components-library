@@ -30,7 +30,7 @@ function Panel({ section, close }) {
             <Grid container>
                 {columns.map((col, i) => (
                     //eslint-disable-next-line react/no-array-index-key
-                    <Grid item xs={12} sm={6} md={4} lg={3} xl={3} key={i}>
+                    <Grid xs={12} sm={6} md={4} lg={3} xl={3} key={i}>
                         {col.categories
                             .filter(e => e.items.filter(item => item.showInMenu).length > 0)
                             .map(category => (
@@ -63,7 +63,7 @@ function Panel({ section, close }) {
                             ))}
                     </Grid>
                 ))}
-                <Grid item size={12}>
+                <Grid size={12}>
                     <a href={`/${section.id}`}>
                         <Button
                             onClick={close}

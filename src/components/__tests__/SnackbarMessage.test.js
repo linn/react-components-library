@@ -1,5 +1,5 @@
 import React from 'react';
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom';
 import { ThemeProvider, StyledEngineProvider, createTheme } from '@mui/material/styles';
 import { screen } from '@testing-library/react';
 import SnackbarMessage from '../SnackbarMessage';

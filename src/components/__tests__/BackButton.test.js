@@ -1,5 +1,5 @@
 import React from 'react';
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom';
 import { cleanup, fireEvent } from '@testing-library/react';
 import render from '../../test-utils';
 import BackButton from '../BackButton';

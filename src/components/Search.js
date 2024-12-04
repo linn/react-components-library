@@ -56,7 +56,6 @@ function Search({
     const resultItem = item => (
         <ListItem
             sx={{ padding: theme => theme.spacing(2) }}
-            button
             onClick={() => {
                 clearSearch();
                 if (resultsInModal) {
@@ -67,18 +66,18 @@ function Search({
             }}
         >
             <Grid container spacing={3}>
-                <Grid item xs={3}>
-                    <Typography sx={{ fontWeight: theme => theme.typography.fontWeightBold }}>
+                <Grid xs={3}>
+                    <Typography data-testid="result" sx={{ fontWeight: theme => theme.typography.fontWeightBold }}>
                         {item.name}
                     </Typography>
                 </Grid>
-                <Grid item xs={displayChips ? 3 : 9}>
+                <Grid xs={displayChips ? 3 : 9}>
                     <Typography sx={{ color: theme => theme.palette.text.primary }}>
                         {item.description}
                     </Typography>
                 </Grid>
                 {displayChips && (
-                    <Grid item xs={6}>
+                    <Grid xs={6}>
                         <Stack
                             direction="row"
                             justifyContent="flex-start"
@@ -89,6 +88,7 @@ function Search({
                             {item.chips?.map(c => (
                                 <Chip
                                     id={c.text}
+                                    key={c.text}
                                     label={c.text}
                                     sx={{ backgroundColor: c.color }}
                                 />

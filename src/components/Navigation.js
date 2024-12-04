@@ -169,7 +169,7 @@ function Navigation({
                                         spacing={3}
                                         sx={styles.container}
                                     >
-                                        <Grid item size={9}>
+                                        <Grid size={9}>
                                             <Tabs
                                                 sx={styles.tabs}
                                                 value={selected}
@@ -200,7 +200,7 @@ function Navigation({
                                                 ))}
                                             </Tabs>
                                         </Grid>
-                                        <Grid item size={1}>
+                                        <Grid size={1}>
                                             <Typography variant="h4">
                                                 <AccountCircle
                                                     sx={styles.icons}
@@ -211,7 +211,7 @@ function Navigation({
                                                 />
                                             </Typography>
                                         </Grid>
-                                        <Grid item size={1}>
+                                        <Grid size={1}>
                                             <Typography variant="h4">
                                                 <Badge
                                                     badgeContent={
@@ -229,7 +229,7 @@ function Navigation({
                                                 </Badge>
                                             </Typography>
                                         </Grid>
-                                        <Grid item size={1}>
+                                        <Grid size={1}>
                                             <Typography variant="h4">
                                                 <Search
                                                     sx={styles.icons}

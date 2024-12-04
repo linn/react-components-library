@@ -1,5 +1,5 @@
 import React from 'react';
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom';
 import { cleanup } from '@testing-library/react';
 import moment from 'moment';
 import render from '../../test-utils';
@@ -16,7 +16,7 @@ describe('<LinnWeekPicker />', () => {
                 selectedDate={moment('11-09-2019', 'DD-MM-YYYY')}
             />
         );
-        const item = getByDisplayValue('11/09/2019');
+        const item = getByDisplayValue('11.09.2019');
         expect(item).toBeInTheDocument();
     });
 
@@ -28,7 +28,7 @@ describe('<LinnWeekPicker />', () => {
                 selectedDate={new Date('01/01/2020')}
             />
         );
-        const item = getByDisplayValue('01/01/2020');
+        const item = getByDisplayValue('01.01.2020');
         expect(item).toBeInTheDocument();
     });
 
@@ -41,7 +41,7 @@ describe('<LinnWeekPicker />', () => {
             />
         );
 
-        const item = getByDisplayValue('11/09/2019');
+        const item = getByDisplayValue('11.09.2019');
         expect(item).toBeInTheDocument();
     });
 });

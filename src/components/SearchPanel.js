@@ -61,7 +61,7 @@ function SearchPanel({ menu, classes, close }) {
                 <Close />
             </Button>
             <Grid container>
-                <Grid item xs={12} sm={6} md={4} lg={3} xl={3} justify-content="flex-end">
+                <Grid xs={12} sm={6} md={4} lg={3} xl={3} justify-content="flex-end">
                     <SearchInputField
                         value={searchTerm}
                         onChange={handleFieldChange}

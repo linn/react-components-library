@@ -2,7 +2,7 @@ import React from 'react';
 import { screen } from '@testing-library/react';
 import CheckboxWithLabel from '../CheckboxWithLabel';
 import render from '../../test-utils';
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom';
 
 describe('<CheckboxWithLabel />', () => {
     beforeEach(() => {
