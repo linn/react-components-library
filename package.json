@@ -3,7 +3,10 @@
     "version": "22.2.0",
     "private": false,
     "jest": {
-        "testEnvironment": "jsdom"
+        "testEnvironment": "jsdom",
+        "setupFilesAfterEnv": [
+            "<rootDir>/setupTests.js"
+        ]
     },
     "dependencies": {
         "@mui/x-data-grid": "^7.23.0",
@@ -15,7 +18,8 @@
         "prop-types": "^15.8.1",
         "query-string": "^9.1.1",
         "react-dropzone": "^14.3.5",
-        "redux-mock-store": "^1.5.5"
+        "redux-mock-store": "^1.5.5",
+        "util": "^0.12.5"
     },
     "scripts": {
         "start": "react-scripts start",

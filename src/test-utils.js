@@ -7,6 +7,7 @@ import { SnackbarProvider } from 'notistack';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { apiMiddleware as api } from 'redux-api-middleware';
+import { MemoryRouter } from 'react-router-dom';
 import 'moment/locale/uk';
 
 const middleware = [api];
@@ -23,11 +24,13 @@ function Providers({ children }) {
     return (
         <Provider store={store}>
             <ThemeProvider theme={createTheme()}>
-                <SnackbarProvider dense maxSnack={5}>
-                    <LocalizationProvider dateAdapter={AdapterMoment} adapterLocale="uk">
-                        {children}
-                    </LocalizationProvider>
-                </SnackbarProvider>
+                <MemoryRouter initialEntries={['/']}>
+                    <SnackbarProvider dense maxSnack={5}>
+                        <LocalizationProvider dateAdapter={AdapterMoment} adapterLocale="uk">
+                            {children}
+                        </LocalizationProvider>
+                    </SnackbarProvider>
+                </MemoryRouter>
             </ThemeProvider>
         </Provider>
     );

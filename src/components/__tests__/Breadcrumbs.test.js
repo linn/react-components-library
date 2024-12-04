@@ -10,12 +10,7 @@ describe('<Breadcrumbs />', () => {
 
     describe('when path does not end in report', () => {
         beforeEach(() => {
-            const history = {
-                location: { pathname: '/a/test/path' },
-                push: mockPush
-            };
-
-            render(<Breadcrumbs history={history} />);
+            render(<Breadcrumbs location={{ pathname: '/a/test/path' }} navigate={mockPush} />);
         });
 
         it('should render the correct number of breadcrumbs with correct text', () => {
@@ -26,7 +21,7 @@ describe('<Breadcrumbs />', () => {
         });
 
         it('renders link to correct url', () => {
-            expect(screen.getByText('test')).toHaveAttribute('to', '/a/test');
+            expect(screen.getByText('test')).toHaveAttribute('href', '/a/test');
         });
     });
 });
