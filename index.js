@@ -63,7 +63,6 @@ import {
     getItemErrors,
     getItemErrorDetailMessage
 } from './src/selectors/errorSelectors';
-import errorTheme from './src/themes/errorTheme';
 import linnTheme from './src/themes/linnTheme';
 import SelectedItemsList from './src/components/SelectedItemsList';
 import NotFound from './src/components/NotFound';
@@ -102,7 +101,6 @@ export {
     Dropdown,
     EntityList,
     ErrorCard,
-    errorTheme,
     ExportButton,
     FetchApiActions,
     fetchErrorReducerFactory as fetchErrorReducer,
