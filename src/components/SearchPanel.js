@@ -10,13 +10,6 @@ import Close from '@mui/icons-material/Close';
 import SearchInputField from './SearchInputField';
 
 const styles = {
-    listItemText: {
-        '&:first-child': {
-            paddingLeft: 30,
-            paddingTop: 0,
-            paddingBottom: 0
-        }
-    },
     paper: {
         backgroundColor: '#f5f5f5',
         position: 'relative',
@@ -68,7 +61,7 @@ function SearchPanel({ menu, classes, close }) {
                 <Close />
             </Button>
             <Grid container>
-                <Grid item size={12} sm={6} md={4} lg={3} xl={3} justify-content="flex-end">
+                <Grid item xs={12} sm={6} md={4} lg={3} xl={3} justify-content="flex-end">
                     <SearchInputField
                         value={searchTerm}
                         onChange={handleFieldChange}
@@ -87,14 +80,8 @@ function SearchPanel({ menu, classes, close }) {
                             .map(entry => (
                                 <React.Fragment key={entry.href}>
                                     <a href={entry.href} style={{ textDecoration: 'none' }}>
-                                        <ListItem classes={{ root: classes.listItemText }} button>
-                                            <Typography
-                                                variant="overline"
-                                                classes={{
-                                                    overline: classes.menuItems
-                                                }}
-                                                color="primary"
-                                            >
+                                        <ListItem button>
+                                            <Typography variant="overline" color="primary">
                                                 {entry.title}
                                             </Typography>
                                         </ListItem>

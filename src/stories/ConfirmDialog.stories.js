@@ -22,7 +22,7 @@ export function Default(args) {
     const [open, setOpen] = useState(false);
     return (
         <Grid container spacing={3}>
-            <Grid item size={12}>
+            <Grid item xs={12}>
                 <Button
                     variant="outlined"
                     onClick={() => {

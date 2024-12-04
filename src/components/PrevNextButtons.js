@@ -9,23 +9,23 @@ function PrevNextButtons({ goPrev, goNext, nextResult, prevResult, disabled }) {
     return (
         <>
             {goPrev ? (
-                <Grid item size={2}>
+                <Grid item xs={2}>
                     <Button disabled={disabled} startIcon={<ArrowLeftIcon />} onClick={goPrev}>
                         {prevResult}
                     </Button>
                 </Grid>
             ) : (
-                <Grid item size={2} />
+                <Grid item xs={2} />
             )}
-            <Grid item size={8} />
+            <Grid item xs={8} />
             {goNext ? (
-                <Grid item size={2}>
+                <Grid item xs={2}>
                     <Button disabled={disabled} endIcon={<ArrowRightIcon />} onClick={goNext}>
                         {nextResult}
                     </Button>
                 </Grid>
             ) : (
-                <Grid item size={2} />
+                <Grid item xs={2} />
             )}
         </>
     );
