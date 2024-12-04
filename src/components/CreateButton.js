@@ -1,19 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
-import withStyles from '@mui/styles/withStyles';
 import PropTypes from 'prop-types';
 
-const styles = () => ({
-    root: {
-        float: 'right'
-    }
-});
-
-function CreateButton({ createUrl, classes, disabled }) {
+function CreateButton({ createUrl, disabled }) {
     return (
-        <Link to={createUrl}>
-            <Button color="primary" variant="outlined" className={classes.root} disabled={disabled}>
+        <Link to={createUrl} style={{ textDecoration: 'none' }}>
+            <Button color="primary" variant="outlined" sx={{ float: 'right' }} disabled={disabled}>
                 Create
             </Button>
         </Link>
@@ -22,7 +15,6 @@ function CreateButton({ createUrl, classes, disabled }) {
 
 CreateButton.propTypes = {
     createUrl: PropTypes.string.isRequired,
-    classes: PropTypes.shape({ root: PropTypes.string }).isRequired,
     disabled: PropTypes.bool
 };
 
@@ -30,4 +22,4 @@ CreateButton.defaultProps = {
     disabled: false
 };
 
-export default withStyles(styles)(CreateButton);
+export default CreateButton;

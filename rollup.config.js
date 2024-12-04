@@ -36,7 +36,6 @@ export default [
             Dropdown: 'src/components/Dropdown.js',
             ErrorCard: 'src/components/ErrorCard.js',
             SaveBackCancelButtons: 'src/components/SaveBackCancelButtons.js',
-            ReportTable: 'src/components/ReportTable.js',
             Page: 'src/components/Page.js',
             Loading: 'src/components/Loading.js',
             InputField: 'src/components/InputField.js',

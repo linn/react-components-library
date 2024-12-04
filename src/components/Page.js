@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useSnackbar } from 'notistack';
 import { Box, Paper, Typography } from '@mui/material';
-import Grid2 from '@mui/material/Grid'; // Now fully stable in MUI v6
+import Grid from '@mui/material/Grid2'; // Now fully stable in MUI v6
 import Breadcrumbs from './Breadcrumbs';
 
 const pageWidth = {
@@ -58,27 +58,27 @@ function Page({
     }, [title, defaultAppTitle]);
 
     return (
-        <Grid2 container spacing={3}>
-            <Grid2 item xs={12}>
+        <Grid container spacing={3}>
+            <Grid item size={12}>
                 <Typography variant="h6">{title}</Typography>
-            </Grid2>
+            </Grid>
             
-            <Grid2 item xs={12}>
+            <Grid item size={12}>
                 {showBreadcrumbs && (
                     <Breadcrumbs navigate={navigate} homeUrl={homeUrl} location={location} />
                 )}
-            </Grid2>
+            </Grid>
 
-            <Grid2 item xs={columnWidth[width]} />
+            <Grid item size={columnWidth[width]} />
 
-            <Grid2 item xs={pageWidth[width]}>
+            <Grid item size={pageWidth[width]}>
                 <Paper sx={{ padding: 4 }} square>
                     {children}
                 </Paper>
-            </Grid2>
+            </Grid>
 
-            <Grid2 item xs={columnWidth[width]} />
-        </Grid2>
+            <Grid item size={columnWidth[width]} />
+        </Grid>
     );
 }
 

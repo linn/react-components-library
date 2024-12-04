@@ -9,7 +9,7 @@ import ClickAwayListener from '@mui/material/ClickAwayListener';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Toolbar from '@mui/material/Toolbar';
-import Grid from '@mui/material/Grid';
+import Grid from '@mui/material/Grid2';
 import Typography from '@mui/material/Typography';
 import Badge from '@mui/material/Badge';
 import Button from '@mui/material/Button';
@@ -182,7 +182,7 @@ function Navigation({
                                                 spacing={0}
                                                 classes={{ container: classes.container }}
                                             >
-                                                <Grid item xs={9}>
+                                                <Grid item size={9}>
                                                     <Tabs
                                                         classes={{
                                                             root: classes.tabs
@@ -217,7 +217,7 @@ function Navigation({
                                                         ))}
                                                     </Tabs>
                                                 </Grid>
-                                                <Grid item xs={1}>
+                                                <Grid item size={1}>
                                                     <Typography variant="h4">
                                                         <AccountCircle
                                                             className={classes.icons}
@@ -230,7 +230,7 @@ function Navigation({
                                                         />
                                                     </Typography>
                                                 </Grid>
-                                                <Grid item xs={1}>
+                                                <Grid item size={1}>
                                                     <Typography variant="h4">
                                                         <Badge
                                                             badgeContent={
@@ -248,7 +248,7 @@ function Navigation({
                                                         </Badge>
                                                     </Typography>
                                                 </Grid>
-                                                <Grid item xs={1}>
+                                                <Grid item size={1}>
                                                     <Typography variant="h4">
                                                         <Search
                                                             className={classes.icons}

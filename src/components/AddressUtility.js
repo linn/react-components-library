@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import Grid2 from '@mui/material/Grid2';
+import Grid from '@mui/material/Grid2';
 import Dialog from '@mui/material/Dialog';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
@@ -57,14 +57,14 @@ function AddressUtility({
 
     return (
         <>
-            <Grid2 container>
-                <Grid2 size={4}>
+            <Grid container>
+                <Grid size={4}>
                     <Button variant="outlined" onClick={open}>
                         Create Or Look Up Address
                     </Button>
-                </Grid2>
-                <Grid2 size={8} />
-            </Grid2>
+                </Grid>
+                <Grid size={8} />
+            </Grid>
             <Dialog open={isActive} maxWidth="md">
                 <Box
                     sx={{
@@ -84,11 +84,11 @@ function AddressUtility({
                     >
                         <Close />
                     </IconButton>
-                    <Grid2 container spacing={3}>
-                        <Grid2 item size={12}>
+                    <Grid container spacing={3}>
+                        <Grid item size={12}>
                             <Typography variant="h6">Create or Look Up Address</Typography>
-                        </Grid2>
-                        <Grid2 item size={12}>
+                        </Grid>
+                        <Grid item size={12}>
                             <Search
                                 propertyName="salesAccount"
                                 label="Look up an address"
@@ -108,17 +108,17 @@ function AddressUtility({
                                 }}
                                 clearSearch={clearAddressesSearch}
                             />
-                        </Grid2>
-                        <Grid2 item size={12}>
+                        </Grid>
+                        <Grid item size={12}>
                             <Typography variant="subtitle1">
                                 Or Enter details and click save to create a new address
                             </Typography>
-                        </Grid2>
+                        </Grid>
                         {createAddressLoading ? (
                             <Loading />
                         ) : (
                             <>
-                                <Grid2 item size={8}>
+                                <Grid item size={8}>
                                     <InputField
                                         fullWidth
                                         value={address?.addressee}
@@ -126,9 +126,9 @@ function AddressUtility({
                                         propertyName="addressee"
                                         onChange={handleFieldChange}
                                     />
-                                </Grid2>
-                                <Grid2 item size={4} />
-                                <Grid2 item size={8}>
+                                </Grid>
+                                <Grid item size={4} />
+                                <Grid item size={8}>
                                     <InputField
                                         fullWidth
                                         value={address?.addressee2}
@@ -136,9 +136,9 @@ function AddressUtility({
                                         propertyName="addressee2"
                                         onChange={handleFieldChange}
                                     />
-                                </Grid2>
-                                <Grid2 item size={4} />
-                                <Grid2 item size={8}>
+                                </Grid>
+                                <Grid item size={4} />
+                                <Grid item size={8}>
                                     <InputField
                                         fullWidth
                                         value={address?.line1}
@@ -146,9 +146,9 @@ function AddressUtility({
                                         propertyName="line1"
                                         onChange={handleFieldChange}
                                     />
-                                </Grid2>
-                                <Grid2 item size={4} />
-                                <Grid2 item size={8}>
+                                </Grid>
+                                <Grid item size={4} />
+                                <Grid item size={8}>
                                     <InputField
                                         fullWidth
                                         value={address?.line2}
@@ -156,9 +156,9 @@ function AddressUtility({
                                         propertyName="line2"
                                         onChange={handleFieldChange}
                                     />
-                                </Grid2>
-                                <Grid2 item size={4} />
-                                <Grid2 item size={8}>
+                                </Grid>
+                                <Grid item size={4} />
+                                <Grid item size={8}>
                                     <InputField
                                         fullWidth
                                         value={address?.line3}
@@ -166,9 +166,9 @@ function AddressUtility({
                                         propertyName="line3"
                                         onChange={handleFieldChange}
                                     />
-                                </Grid2>
-                                <Grid2 item size={4} />
-                                <Grid2 item size={8}>
+                                </Grid>
+                                <Grid item size={4} />
+                                <Grid item size={8}>
                                     <InputField
                                         fullWidth
                                         value={address?.line4}
@@ -176,9 +176,9 @@ function AddressUtility({
                                         propertyName="line4"
                                         onChange={handleFieldChange}
                                     />
-                                </Grid2>
-                                <Grid2 item size={4} />
-                                <Grid2 item size={8}>
+                                </Grid>
+                                <Grid item size={4} />
+                                <Grid item size={8}>
                                     <InputField
                                         fullWidth
                                         value={address?.postCode}
@@ -186,9 +186,9 @@ function AddressUtility({
                                         propertyName="postCode"
                                         onChange={handleFieldChange}
                                     />
-                                </Grid2>
-                                <Grid2 item size={4} />
-                                <Grid2 item size={4}>
+                                </Grid>
+                                <Grid item size={4} />
+                                <Grid item size={4}>
                                     <Search
                                         propertyName="countryCode"
                                         label="Look up Countries"
@@ -217,8 +217,8 @@ function AddressUtility({
                                         }}
                                         clearSearch={clearCountriesSearch}
                                     />
-                                </Grid2>
-                                <Grid2 item size={8}>
+                                </Grid>
+                                <Grid item size={8}>
                                     <InputField
                                         fullWidth
                                         value={address?.countryName}
@@ -226,8 +226,8 @@ function AddressUtility({
                                         propertyName="countryName"
                                         onChange={() => {}}
                                     />
-                                </Grid2>
-                                <Grid2 item size={12}>
+                                </Grid>
+                                <Grid item size={12}>
                                     <SaveBackCancelButtons
                                         saveDisabled={!address?.addressee || !address?.countryCode}
                                         backClick={close}
@@ -236,10 +236,10 @@ function AddressUtility({
                                         }}
                                         cancelClick={close}
                                     />
-                                </Grid2>
+                                </Grid>
                             </>
                         )}
-                    </Grid2>
+                    </Grid>
                 </Box>
             </Dialog>
         </>

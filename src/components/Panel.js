@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '@mui/styles/withStyles';
 import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
+import Grid from '@mui/material/Grid2';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import Typography from '@mui/material/Typography';
@@ -47,7 +47,7 @@ function Panel({ section, classes, close }) {
             <Grid container justifyContent="flex-start">
                 {columns.map((col, i) => (
                     //eslint-disable-next-line react/no-array-index-key
-                    <Grid item xs={12} sm={6} md={4} lg={3} xl={3} key={i}>
+                    <Grid item size={12} sm={6} md={4} lg={3} xl={3} key={i}>
                         {col.categories
                             .filter(e => e.items.filter(item => item.showInMenu).length > 0)
                             .map(category => (
@@ -86,7 +86,7 @@ function Panel({ section, classes, close }) {
                             ))}
                     </Grid>
                 ))}
-                <Grid item xs={12}>
+                <Grid item size={12}>
                     <a href={`/${section.id}`}>
                         <Button
                             onClick={close}

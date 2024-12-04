@@ -3,7 +3,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import SearchIcon from '@mui/icons-material/Search';
 import Dialog from '@mui/material/Dialog';
 import Divider from '@mui/material/Divider';
-import Grid from '@mui/material/Grid';
+import Grid from '@mui/material/Grid2';
 import IconButton from '@mui/material/IconButton';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
@@ -67,18 +67,18 @@ function Search({
             }}
         >
             <Grid container spacing={3}>
-                <Grid item xs={3}>
+                <Grid item size={3}>
                     <Typography sx={{ fontWeight: theme => theme.typography.fontWeightBold }}>
                         {item.name}
                     </Typography>
                 </Grid>
-                <Grid item xs={displayChips ? 3 : 9}>
+                <Grid item size={displayChips ? 3 : 9}>
                     <Typography sx={{ color: theme => theme.palette.text.primary }}>
                         {item.description}
                     </Typography>
                 </Grid>
                 {displayChips && (
-                    <Grid item xs={6}>
+                    <Grid item size={6}>
                         <Stack
                             direction="row"
                             justifyContent="flex-start"

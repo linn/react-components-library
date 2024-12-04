@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '@mui/styles/withStyles';
 import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
+import Grid from '@mui/material/Grid2';
 import ListItem from '@mui/material/ListItem';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
@@ -68,7 +68,7 @@ function SearchPanel({ menu, classes, close }) {
                 <Close />
             </Button>
             <Grid container>
-                <Grid item xs={12} sm={6} md={4} lg={3} xl={3} justify-content="flex-end">
+                <Grid item size={12} sm={6} md={4} lg={3} xl={3} justify-content="flex-end">
                     <SearchInputField
                         value={searchTerm}
                         onChange={handleFieldChange}

@@ -1,146 +1,423 @@
 {
-    "title": {
-      "displayString": "Product Ranges",
-      "drillDowns": []
-    },
-    "resultType": null,
-    "reportValueType": "Value",
-    "displaySequence": null,
-    "headers": {
-      "rowHeader": "Id",
-      "columnHeaders": [
-        "Name",
-        "Description"
-      ],
-      "varianceRows": [],
-      "varianceColumns": [],
-      "totalColumns": [],
-      "textColumns": [
-        0,
-        1
-      ]
-    },
-    "filterOptions": [],
-    "results": [
+  "title": {
+    "displayString": "CASHBOOK 134 - GBP A/C (BARCLAYS) - GBP",
+    "drillDowns": []
+  },
+  "resultType": null,
+  "reportValueType": "Value",
+  "displaySequence": null,
+  "headers": {
+    "rowHeader": null,
+    "columnHeaders": [
+      "Tref",
+      "Date",
+      "Period",
+      "Description",
+      "Ref",
+      "TotalCurrency",
+      "Ex Rt",
+      "TotalBase",
+      "Alloc",
+      "Currency",
+      "Base",
+      "Dept",
+      "Nom"
+    ],
+    "dataGridColumnSpecifications": [
       {
-        "rowTitle": {
-          "displayString": "2",
-          "drillDowns": []
-        },
-        "rowSortOrder": 0,
-        "values": [
-          {
-            "displayValue": null,
-            "textDisplayValue": "thing",
-            "prefix": null,
-            "suffix": null,
-            "decimalPlaces": null,
-            "drillDowns": [
-              {
-                "name": "sales-products",
-                "href": "/products/reports/sales-products-by-product-range"
-              }
-            ]
-          },
-          {
-            "displayValue": null,
-            "textDisplayValue": "AKURATE PRODUCTS",
-            "prefix": null,
-            "suffix": null,
-            "decimalPlaces": null,
-            "drillDowns": []
-          }
-        ],
-        "rowType": "Value"
+        "columnWidth": 75,
+        "columnId": "Tref",
+        "align": "left",
+        "decimalPlaces": null,
+        "columnType": "text"
       },
       {
-        "rowTitle": {
-          "displayString": "10",
-          "drillDowns": []
-        },
-        "rowSortOrder": 1,
-        "values": [
-          {
-            "displayValue": null,
-            "textDisplayValue": "AML",
-            "prefix": null,
-            "suffix": null,
-            "decimalPlaces": null,
-            "drillDowns": [
-              {
-                "name": "sales-products",
-                "href": "/products/reports/sales-products-"
-              }
-            ]
-          },
-          {
-            "displayValue": null,
-            "textDisplayValue": "ASTON MARTIN",
-            "prefix": null,
-            "suffix": null,
-            "decimalPlaces": null,
-            "drillDowns": []
-          }
-        ],
-        "rowType": "Value"
+        "columnWidth": 100,
+        "columnId": "TransactionDate",
+        "align": "left",
+        "decimalPlaces": null,
+        "columnType": "text"
       },
       {
-        "rowTitle": {
-          "displayString": "6",
-          "drillDowns": []
-        },
-        "rowSortOrder": 2,
-        "values": [
-          {
-            "displayValue": null,
-            "textDisplayValue": "CLASSIK",
-            "prefix": null,
-            "suffix": null,
-            "decimalPlaces": null,
-            "drillDowns": [
-              {
-                "name": "sales-products",
-                "href": "/products/reports/sales-products-by-produce"
-              }
-            ]
-          },
-          {
-            "displayValue": "wow",
-            "textDisplayValue": "CLASSIK MUSIC",
-            "prefix": null,
-            "suffix": null,
-            "decimalPlaces": null,
-            "drillDowns": []
-          }
-        ],
-        "rowType": "Value"
+        "columnWidth": 100,
+        "columnId": "Period",
+        "align": "left",
+        "decimalPlaces": null,
+        "columnType": "text"
+      },
+      {
+        "columnWidth": 200,
+        "columnId": "Description",
+        "align": "left",
+        "decimalPlaces": null,
+        "columnType": "text"
+      },
+      {
+        "columnWidth": 75,
+        "columnId": "Ref",
+        "align": "left",
+        "decimalPlaces": null,
+        "columnType": "text"
+      },
+      {
+        "columnWidth": 200,
+        "columnId": "TotalCurrency",
+        "align": "right",
+        "decimalPlaces": 2,
+        "columnType": "number"
+      },
+      {
+        "columnWidth": 200,
+        "columnId": "ExchangeRate",
+        "align": "right",
+        "decimalPlaces": 7,
+        "columnType": "number"
+      },
+      {
+        "columnWidth": 200,
+        "columnId": "TotalBase",
+        "align": "right",
+        "decimalPlaces": 2,
+        "columnType": "number"
+      },
+      {
+        "columnWidth": 75,
+        "columnId": "Alloc",
+        "align": "left",
+        "decimalPlaces": null,
+        "columnType": "text"
+      },
+      {
+        "columnWidth": 200,
+        "columnId": "Currency",
+        "align": "right",
+        "decimalPlaces": 2,
+        "columnType": "number"
+      },
+      {
+        "columnWidth": 200,
+        "columnId": "Base",
+        "align": "right",
+        "decimalPlaces": 2,
+        "columnType": "number"
+      },
+      {
+        "columnWidth": 100,
+        "columnId": "Dept",
+        "align": "left",
+        "decimalPlaces": null,
+        "columnType": "text"
+      },
+      {
+        "columnWidth": 100,
+        "columnId": "Nom",
+        "align": "left",
+        "decimalPlaces": null,
+        "columnType": "text"
       }
     ],
-    "totals": {
+    "varianceRows": [],
+    "varianceColumns": [],
+    "totalColumns": [],
+    "textColumns": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      8,
+      11,
+      12
+    ]
+  },
+  "filterOptions": [],
+  "results": [
+    {
       "rowTitle": {
-        "displayString": "Totals",
+        "displayString": "4045/1",
         "drillDowns": []
       },
-      "rowSortOrder": null,
+      "rowSortOrder": 0,
       "values": [
         {
-          "displayValue": 0,
-          "textDisplayValue": null,
+          "displayValue": null,
+          "textDisplayValue": "4045",
           "prefix": null,
           "suffix": null,
           "decimalPlaces": null,
+          "allowWrap": true,
+          "attributes": [],
+          "drillDowns": [
+            {
+              "name": "Tref",
+              "href": "/ledgers/nominal/cashbooks/transactions/134/L/4045",
+              "externalLink": false
+            }
+          ]
+        },
+        {
+          "displayValue": null,
+          "textDisplayValue": "01/12/2020",
+          "prefix": null,
+          "suffix": null,
+          "decimalPlaces": null,
+          "allowWrap": true,
+          "attributes": [],
           "drillDowns": []
         },
         {
-          "displayValue": 0,
-          "textDisplayValue": null,
+          "displayValue": null,
+          "textDisplayValue": "DEC2020",
           "prefix": null,
           "suffix": null,
           "decimalPlaces": null,
+          "allowWrap": true,
+          "attributes": [],
+          "drillDowns": []
+        },
+        {
+          "displayValue": null,
+          "textDisplayValue": "JUST LISTEN CO. LTD           ",
+          "prefix": null,
+          "suffix": null,
+          "decimalPlaces": null,
+          "allowWrap": true,
+          "attributes": [],
+          "drillDowns": []
+        },
+        {
+          "displayValue": null,
+          "textDisplayValue": "88219",
+          "prefix": null,
+          "suffix": null,
+          "decimalPlaces": null,
+          "allowWrap": true,
+          "attributes": [],
+          "drillDowns": []
+        },
+        {
+          "displayValue": 858.62,
+          "textDisplayValue": null,
+          "prefix": null,
+          "suffix": null,
+          "decimalPlaces": 2,
+          "allowWrap": true,
+          "attributes": [],
+          "drillDowns": []
+        },
+        {
+          "displayValue": 1.0,
+          "textDisplayValue": null,
+          "prefix": null,
+          "suffix": null,
+          "decimalPlaces": 7,
+          "allowWrap": true,
+          "attributes": [],
+          "drillDowns": []
+        },
+        {
+          "displayValue": 858.62,
+          "textDisplayValue": null,
+          "prefix": null,
+          "suffix": null,
+          "decimalPlaces": 2,
+          "allowWrap": true,
+          "attributes": [],
+          "drillDowns": []
+        },
+        {
+          "displayValue": null,
+          "textDisplayValue": "SL",
+          "prefix": null,
+          "suffix": null,
+          "decimalPlaces": null,
+          "allowWrap": true,
+          "attributes": [],
+          "drillDowns": []
+        },
+        {
+          "displayValue": 858.62,
+          "textDisplayValue": null,
+          "prefix": null,
+          "suffix": null,
+          "decimalPlaces": 2,
+          "allowWrap": true,
+          "attributes": [],
+          "drillDowns": []
+        },
+        {
+          "displayValue": 858.62,
+          "textDisplayValue": null,
+          "prefix": null,
+          "suffix": null,
+          "decimalPlaces": 2,
+          "allowWrap": true,
+          "attributes": [],
+          "drillDowns": []
+        },
+        {
+          "displayValue": null,
+          "textDisplayValue": "2508",
+          "prefix": null,
+          "suffix": null,
+          "decimalPlaces": null,
+          "allowWrap": true,
+          "attributes": [],
+          "drillDowns": []
+        },
+        {
+          "displayValue": null,
+          "textDisplayValue": "23871",
+          "prefix": null,
+          "suffix": null,
+          "decimalPlaces": null,
+          "allowWrap": true,
+          "attributes": [],
           "drillDowns": []
         }
       ],
-      "rowType": "Total"
+      "rowType": "Value"
+    }
+  ],
+  "totals": {
+    "rowTitle": {
+      "displayString": "Totals",
+      "drillDowns": []
     },
-    "reportHelpText": null
-  }
+    "rowSortOrder": null,
+    "values": [
+      {
+        "displayValue": null,
+        "textDisplayValue": null,
+        "prefix": null,
+        "suffix": null,
+        "decimalPlaces": null,
+        "allowWrap": true,
+        "attributes": [],
+        "drillDowns": []
+      },
+      {
+        "displayValue": null,
+        "textDisplayValue": null,
+        "prefix": null,
+        "suffix": null,
+        "decimalPlaces": null,
+        "allowWrap": true,
+        "attributes": [],
+        "drillDowns": []
+      },
+      {
+        "displayValue": null,
+        "textDisplayValue": null,
+        "prefix": null,
+        "suffix": null,
+        "decimalPlaces": null,
+        "allowWrap": true,
+        "attributes": [],
+        "drillDowns": []
+      },
+      {
+        "displayValue": null,
+        "textDisplayValue": null,
+        "prefix": null,
+        "suffix": null,
+        "decimalPlaces": null,
+        "allowWrap": true,
+        "attributes": [],
+        "drillDowns": []
+      },
+      {
+        "displayValue": null,
+        "textDisplayValue": null,
+        "prefix": null,
+        "suffix": null,
+        "decimalPlaces": null,
+        "allowWrap": true,
+        "attributes": [],
+        "drillDowns": []
+      },
+      {
+        "displayValue": 1549638.93,
+        "textDisplayValue": null,
+        "prefix": null,
+        "suffix": null,
+        "decimalPlaces": 2,
+        "allowWrap": true,
+        "attributes": [],
+        "drillDowns": []
+      },
+      {
+        "displayValue": 77.0,
+        "textDisplayValue": null,
+        "prefix": null,
+        "suffix": null,
+        "decimalPlaces": 7,
+        "allowWrap": true,
+        "attributes": [],
+        "drillDowns": []
+      },
+      {
+        "displayValue": 1549638.93,
+        "textDisplayValue": null,
+        "prefix": null,
+        "suffix": null,
+        "decimalPlaces": 2,
+        "allowWrap": true,
+        "attributes": [],
+        "drillDowns": []
+      },
+      {
+        "displayValue": null,
+        "textDisplayValue": null,
+        "prefix": null,
+        "suffix": null,
+        "decimalPlaces": null,
+        "allowWrap": true,
+        "attributes": [],
+        "drillDowns": []
+      },
+      {
+        "displayValue": 1549638.93,
+        "textDisplayValue": null,
+        "prefix": null,
+        "suffix": null,
+        "decimalPlaces": 2,
+        "allowWrap": true,
+        "attributes": [],
+        "drillDowns": []
+      },
+      {
+        "displayValue": 1549638.93,
+        "textDisplayValue": null,
+        "prefix": null,
+        "suffix": null,
+        "decimalPlaces": 2,
+        "allowWrap": true,
+        "attributes": [],
+        "drillDowns": []
+      },
+      {
+        "displayValue": null,
+        "textDisplayValue": null,
+        "prefix": null,
+        "suffix": null,
+        "decimalPlaces": null,
+        "allowWrap": true,
+        "attributes": [],
+        "drillDowns": []
+      },
+      {
+        "displayValue": null,
+        "textDisplayValue": null,
+        "prefix": null,
+        "suffix": null,
+        "decimalPlaces": null,
+        "allowWrap": true,
+        "attributes": [],
+        "drillDowns": []
+      }
+    ],
+    "rowType": "Total"
+  },
+  "reportHelpText": null
+}

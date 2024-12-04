@@ -2,25 +2,18 @@ import React from 'react';
 import Tooltip from '@mui/material/Tooltip';
 import EditOffIcon from '@mui/icons-material/EditOff';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
-import { makeStyles } from '@mui/styles';
-
 import PropTypes from 'prop-types';
 
 function PermissionIndicator({ hasPermission, hasPermissionMessage, noPermissionMessage }) {
-    const useStyles = makeStyles(() => ({
-        pullRight: {
-            float: 'right'
-        }
-    }));
-    const classes = useStyles();
+    const pullRightStyle = { float: 'right' };
 
     return hasPermission ? (
         <Tooltip title={hasPermissionMessage}>
-            <ModeEditIcon color="primary" className={classes.pullRight} />
+            <ModeEditIcon color="primary" sx={pullRightStyle} />
         </Tooltip>
     ) : (
         <Tooltip title={noPermissionMessage}>
-            <EditOffIcon color="secondary" className={classes.pullRight} />
+            <EditOffIcon color="secondary" sx={pullRightStyle} />
         </Tooltip>
     );
 }

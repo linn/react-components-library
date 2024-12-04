@@ -33,7 +33,7 @@ Default.story = {
 };
 
 Default.args = {
-    value: new Date('01/01/2001'),
+    value: new Date('04/12/2024'),
     disabled: false,
     label: 'Your Label'
 };

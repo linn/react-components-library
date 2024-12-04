@@ -2,8 +2,6 @@ import BackButton from './src/components/BackButton';
 import ExportButton from './src/components/ExportButton';
 import Breadcrumbs from './src/components/Breadcrumbs';
 import SaveBackCancelButtons from './src/components/SaveBackCancelButtons';
-import ReportTable from './src/components/ReportTable';
-import MultiReportTable from './src/components/MultiReportTable';
 import Loading from './src/components/Loading';
 import Dropdown from './src/components/Dropdown';
 import ErrorCard from './src/components/ErrorCard';
@@ -135,7 +133,6 @@ export {
     markNotificationSeen,
     menu,
     menuSelectors,
-    MultiReportTable,
     Navigation,
     NavigationUI,
     news,
@@ -160,7 +157,6 @@ export {
     reportSelectorHelpers,
     ReportSelectors,
     reportsResultsFactory,
-    ReportTable,
     SaveBackCancelButtons,
     Search,
     SearchInputField,

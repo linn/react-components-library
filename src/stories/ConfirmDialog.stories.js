@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Grid from '@mui/material/Grid';
+import Grid from '@mui/material/Grid2';
 import Button from '@mui/material/Button';
 
 import { action } from '@storybook/addon-actions';
@@ -22,7 +22,7 @@ export function Default(args) {
     const [open, setOpen] = useState(false);
     return (
         <Grid container spacing={3}>
-            <Grid item xs={12}>
+            <Grid item size={12}>
                 <Button
                     variant="outlined"
                     onClick={() => {
