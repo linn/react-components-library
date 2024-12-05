@@ -1,4 +1,8 @@
 # Changelog
+## [23.0.0-alpha.01] - 2024-12-05
+### Changes
+- React Router upgrade to v7
+- Navigation component styling fixes + Esc key to close
 ## [23.0.0-alpha] - 2024-12-04
 ### Changes
 - MUI V6 upgrade attempt - not tested, possibly very breaking hence the alpha version number
