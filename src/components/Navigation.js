@@ -15,7 +15,7 @@ import { useSnackbar } from 'notistack';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Search from '@mui/icons-material/Search';
 import Notifications from '@mui/icons-material/Notifications';
-import utilities from '../utilities';
+import utilities from '../utilities/index';
 import Panel from './Panel';
 import SearchPanel from './SearchPanel';
 
