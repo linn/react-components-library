@@ -43,10 +43,10 @@ function Navigation({
         },
         tabLabel: {
             fontSize: '1rem',
-            color: '#B0B0B0' // Adjust based on theme
+            color: '#B0B0B0'
         },
         snackbarNew: {
-            background: '#1a73e8', // Primary Dark color
+            background: '#1a73e8',
             width: '800px'
         },
         snackbarSeen: {
@@ -93,10 +93,8 @@ function Navigation({
                 setSelected(false);
             }
         };
-        // Add event listener on mount
         document.addEventListener('keydown', handleKeyDown);
 
-        // Remove event listener on cleanup
         return () => {
             document.removeEventListener('keydown', handleKeyDown);
         };
