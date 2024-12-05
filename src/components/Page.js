@@ -1,26 +1,9 @@
-import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
-import makeStyles from '@mui/styles/makeStyles';
-import { useSnackbar } from 'notistack';
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useSnackbar } from 'notistack';
+import { Box, Paper, Typography } from '@mui/material';
+import Grid from '@mui/material/Grid2'; // Now fully stable in MUI v6
 import Breadcrumbs from './Breadcrumbs';
-
-const useStyles = makeStyles(theme => ({
-    root: {
-        padding: theme.spacing(4)
-    },
-    breadcrumbs: {
-        marginTop: theme.spacing(4),
-        marginLeft: theme.spacing(4),
-        marginRight: theme.spacing(4),
-        padding: theme.spacing(2)
-    },
-    grid: {
-        marginTop: theme.spacing(4),
-        width: '100%'
-    }
-}));
 
 const pageWidth = {
     xs: 4,
@@ -35,12 +18,13 @@ const columnWidth = {
     s: 3,
     m: 2,
     l: 1,
-    xl: false
+    xl: 0
 };
 
 function Page({
     children,
-    history,
+    navigate,
+    location,
     width,
     requestErrors,
     showRequestErrors,
@@ -49,7 +33,6 @@ function Page({
     title,
     defaultAppTitle
 }) {
-    const classes = useStyles();
     const { enqueueSnackbar } = useSnackbar();
 
     useEffect(() => {
@@ -72,37 +55,44 @@ function Page({
                 document.title = defaultAppTitle;
             }
         };
-    }, [title]);
+    }, [title, defaultAppTitle]);
 
     return (
-        <Grid container spacing={3} className={classes.grid}>
-            <Grid item xs={1} />
-            <Grid item xs={10} className="hide-when-printing">
-                {showBreadcrumbs && <Breadcrumbs history={history} homeUrl={homeUrl} />}
+        <Grid container spacing={3}>
+            <Grid xs={12}>
+                <Typography variant="h6">{title}</Typography>
             </Grid>
-            <Grid item xs={1} />
+            
+            <Grid xs={12}>
+                {showBreadcrumbs && (
+                    <Breadcrumbs navigate={navigate} homeUrl={homeUrl} location={location} />
+                )}
+            </Grid>
 
-            <Grid item xs={columnWidth[width]} />
-            <Grid item xs={pageWidth[width]}>
-                <Paper className={classes.root} square>
+            <Grid xs={columnWidth[width]} />
+
+            <Grid xs={pageWidth[width]}>
+                <Paper sx={{ padding: 4 }} square>
                     {children}
                 </Paper>
             </Grid>
-            <Grid item xs={columnWidth[width]} />
+
+            <Grid xs={columnWidth[width]} />
         </Grid>
     );
 }
 
 Page.propTypes = {
     children: PropTypes.node.isRequired,
-    history: PropTypes.shape({}).isRequired,
+    navigate: PropTypes.func,
     width: PropTypes.oneOf(['xs', 's', 'm', 'l', 'xl']),
     showRequestErrors: PropTypes.bool,
     requestErrors: PropTypes.arrayOf(PropTypes.shape({})),
     homeUrl: PropTypes.string,
     showBreadcrumbs: PropTypes.bool,
     title: PropTypes.string,
-    defaultAppTitle: PropTypes.string
+    defaultAppTitle: PropTypes.string,
+    location: PropTypes.shape({})
 };
 
 Page.defaultProps = {
@@ -112,7 +102,9 @@ Page.defaultProps = {
     homeUrl: null,
     showBreadcrumbs: true,
     title: null,
-    defaultAppTitle: null
+    defaultAppTitle: null,
+    navigate: null,
+    location: null
 };
 
 export default Page;

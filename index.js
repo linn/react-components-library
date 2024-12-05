@@ -2,13 +2,10 @@ import BackButton from './src/components/BackButton';
 import ExportButton from './src/components/ExportButton';
 import Breadcrumbs from './src/components/Breadcrumbs';
 import SaveBackCancelButtons from './src/components/SaveBackCancelButtons';
-import ReportTable from './src/components/ReportTable';
-import MultiReportTable from './src/components/MultiReportTable';
 import Loading from './src/components/Loading';
 import Dropdown from './src/components/Dropdown';
 import ErrorCard from './src/components/ErrorCard';
 import CheckboxWithLabel from './src/components/CheckboxWithLabel';
-import Title from './src/components/Title';
 import InputField from './src/components/InputField';
 import LinkButton from './src/components/LinkButton';
 import Page from './src/components/Page';
@@ -66,7 +63,6 @@ import {
     getItemErrors,
     getItemErrorDetailMessage
 } from './src/selectors/errorSelectors';
-import errorTheme from './src/themes/errorTheme';
 import linnTheme from './src/themes/linnTheme';
 import SelectedItemsList from './src/components/SelectedItemsList';
 import NotFound from './src/components/NotFound';
@@ -105,7 +101,6 @@ export {
     Dropdown,
     EntityList,
     ErrorCard,
-    errorTheme,
     ExportButton,
     FetchApiActions,
     fetchErrorReducerFactory as fetchErrorReducer,
@@ -136,7 +131,6 @@ export {
     markNotificationSeen,
     menu,
     menuSelectors,
-    MultiReportTable,
     Navigation,
     NavigationUI,
     news,
@@ -161,7 +155,6 @@ export {
     reportSelectorHelpers,
     ReportSelectors,
     reportsResultsFactory,
-    ReportTable,
     SaveBackCancelButtons,
     Search,
     SearchInputField,
@@ -169,7 +162,6 @@ export {
     smartGoBack,
     SnackbarMessage,
     StateApiActions,
-    Title,
     UpdateApiActions,
     userSelectors,
     usePreviousNextNavigation,

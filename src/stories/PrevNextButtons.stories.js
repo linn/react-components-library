@@ -1,6 +1,6 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router';
-import Grid from '@mui/material/Grid';
+import Grid from '@mui/material/Grid2';
 import { action } from '@storybook/addon-actions';
 import providers from './renderUtils/Providers';
 import PrevNextButons from '../components/PrevNextButtons';
@@ -20,13 +20,7 @@ export default {
 
 export const Default = args => (
     <MemoryRouter initialEntries={['/']}>
-        <Page
-            history={{
-                location: {
-                    pathname: '/a/test/path'
-                }
-            }}
-        >
+        <Page location={{pathname: "/a/test/path"}} navigate={() => {}}>
             <Grid container spacing={3}>
                 <PrevNextButons {...args} />
             </Grid>

@@ -2,7 +2,7 @@
 import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useDropzone } from 'react-dropzone';
-import Grid from '@mui/material/Grid';
+import Grid from '@mui/material/Grid2';
 import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
 import Typography from '@mui/material/Typography';
@@ -68,16 +68,16 @@ function FileUploader({
                 </AccordionSummary>
                 <AccordionDetails>
                     <Grid container spacing={3}>
-                        <Grid item xs={12}>
+                        <Grid xs={12}>
                             <Typography variant="subtitle1">{helperText}</Typography>
                         </Grid>
                         {loading ? (
-                            <Grid item xs={12}>
+                            <Grid xs={12}>
                                 <Loading />
                             </Grid>
                         ) : (
                             <>
-                                <Grid item xs={12}>
+                                <Grid xs={12}>
                                     <Box
                                         sx={{ border: '1px dashed grey', margin: '10px' }}
                                         style={{ cursor: 'pointer' }}
@@ -101,8 +101,8 @@ function FileUploader({
                                         )}
                                     </Box>
                                 </Grid>
-                                <Grid item xs={11} />
-                                <Grid item xs={1}>
+                                <Grid xs={11} />
+                                <Grid xs={1}>
                                     <Button
                                         id="save-button"
                                         variant="contained"
@@ -114,7 +114,7 @@ function FileUploader({
                                     </Button>
                                 </Grid>
                                 {result && !result.success && (
-                                    <Grid item xs={12}>
+                                    <Grid xs={12}>
                                         <ErrorCard
                                             errorMessage={result.message}
                                             detailLines={result?.errors}

@@ -1,10 +1,9 @@
 import React from 'react';
 import { DataGrid, gridClasses, GridToolbar } from '@mui/x-data-grid';
 import PropTypes from 'prop-types';
-import Grid from '@mui/material/Grid';
+import Grid from '@mui/material/Grid2';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
-import { makeStyles } from '@mui/styles';
 import { Link } from 'react-router-dom';
 
 function ReportDataGrid({
@@ -17,13 +16,7 @@ function ReportDataGrid({
     openLinksInNewTabs,
     fixedRowHeight
 }) {
-    const useStyles = makeStyles(() => ({
-        totalLine: {
-            fontWeight: 'bolder'
-        }
-    }));
-    const classes = useStyles();
-
+    // Rendering cell with drill-down functionality
     const renderCell = params => {
         const hasDrillDown = params.row[`${params.field}DrillDown`]?.url;
         if (hasDrillDown) {
@@ -59,6 +52,8 @@ function ReportDataGrid({
 
         return <span>{params.formattedValue}</span>;
     };
+
+    // Define columns dynamically from the report data
     const columns = report.headers.dataGridColumnSpecifications.map((c, i) => ({
         field: c.columnId,
         headerName: report.headers.columnHeaders[i],
@@ -84,6 +79,7 @@ function ReportDataGrid({
         renderCell
     }));
 
+    // Map rows from the report data
     let rows = report.results.map(r => {
         const values = columns.reduce((acc, col, i) => {
             let val = r.values[i]?.textDisplayValue ?? r.values[i]?.displayValue;
@@ -105,6 +101,8 @@ function ReportDataGrid({
         }, {});
         return { id: r.rowTitle.displayString, ...values };
     });
+
+    // Configure slots based on props
     let slots = {};
     if (!showHeader) {
         slots = {
@@ -115,6 +113,7 @@ function ReportDataGrid({
         slots = { ...slots, toolbar: GridToolbar };
     }
 
+    // Add totals row if required
     if (showTotals) {
         const { totals, headers } = report;
         const totalsValues = headers.dataGridColumnSpecifications.reduce((acc, spec, i) => {
@@ -131,24 +130,28 @@ function ReportDataGrid({
         rows = [...rows, { id: 'ReportDataGridTotalsRow', ...totalsValues }];
     }
 
+    // Define row class based on row id
     const getRowClass = params => {
         if (params.id === 'ReportDataGridTotalsRow') {
-            return classes.totalLine;
+            return 'totalLine'; // This will be handled by sx
         }
 
         return null;
     };
 
-    const fullPages = rows?.length >= 100;
-    const fixedHeightStyle = { height: '100vh' };
+    // Define title element
     const titleHasDrilldowns = report.title?.drillDowns?.length;
-
     const title = () => (
         <Typography variant={titleVariant}>{report.title.displayString}</Typography>
     );
+
+    // Fixed height style condition
+    const fullPages = rows?.length >= 100;
+    const fixedHeightStyle = { height: '100vh' };
+
     return (
-        <>
-            <Grid item xs={12} style={{ marginBottom: '-10px' }}>
+        <Grid container spacing={3}>
+            <Grid size={12} sx={{ marginBottom: '-10px' }}>
                 {titleHasDrilldowns ? (
                     <a
                         target={openLinksInNewTabs ? '_blank' : ''}
@@ -161,7 +164,7 @@ function ReportDataGrid({
                     title()
                 )}
             </Grid>
-            <Grid item xs={12} style={fullPages ? fixedHeightStyle : {}}>
+            <Grid size={12} sx={fullPages ? fixedHeightStyle : {}}>
                 <DataGrid
                     rows={rows}
                     columns={columns}
@@ -182,11 +185,14 @@ function ReportDataGrid({
                         },
                         [`& .${gridClasses.row}`]: {
                             maxHeight: 'none !important'
+                        },
+                        '.totalLine': {
+                            fontWeight: 'bolder'
                         }
                     }}
                 />
             </Grid>
-        </>
+        </Grid>
     );
 }
 

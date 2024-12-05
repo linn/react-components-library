@@ -2,53 +2,40 @@ import React from 'react';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import InputLabel from '@mui/material/InputLabel';
 import PropTypes from 'prop-types';
-import makeStyles from '@mui/styles/makeStyles';
 import TextField from '@mui/material/TextField';
 import moment from 'moment';
 
-const labelStyles = makeStyles(theme => ({
-    root: {
-        fontSize: theme.typography.fontSize
-    }
-}));
-
-const inputStyles = makeStyles(theme => ({
-    root: {
-        marginTop: theme.spacing(1),
-        fontSize: theme.typography.fontSize
-    }
-}));
-
 function Picker({ label, value, onChange, minDate, maxDate, required, disabled }) {
-    const inputClasses = inputStyles();
-    const labelClasses = labelStyles();
-    return <>
-        <InputLabel classes={{ root: labelClasses.root }} required={required}>
-            {label}
-        </InputLabel>
-        <DateTimePicker
-            allowKeyboardControl
-            autoOk
-            margin="dense"
-            inputVariant="outlined"
-            ampm={false}
-            renderInput={props => <TextField {...props} />}
-            value={moment(value)}
-            minDate={moment(minDate)}
-            maxDate={moment(maxDate)}
-            onChange={onChange}
-            classes={inputClasses}
-            className={inputClasses.root}
-            disabled={disabled}
-            format="DD/MM/YYYY HH:mm"
-            componentsProps={{
-                inputAdornment: { className: inputClasses.root },
-
-                textField: {
-                    InputProps: { classes: { disabled: inputClasses.disabled } },
-                },
-            }} />
-    </>;
+    return (
+        <>
+            <InputLabel sx={theme => theme.typography.fontSize} required={required}>
+                {label}
+            </InputLabel>
+            <DateTimePicker
+                allowKeyboardControl
+                autoOk
+                margin="dense"
+                inputVariant="outlined"
+                ampm={false}
+                renderInput={props => <TextField {...props} />}
+                value={moment(value)}
+                minDate={moment(minDate)}
+                maxDate={moment(maxDate)}
+                onChange={onChange}
+                disabled={disabled}
+                format="DD/MM/YYYY HH:mm"
+                slotProps={{
+                    textField: {
+                        variant: 'outlined',
+                        size: 'small',
+                        sx: {
+                            mt: 1
+                        }
+                    }
+                }}
+            />
+        </>
+    );
 }
 
 Picker.propTypes = {

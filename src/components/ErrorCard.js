@@ -2,39 +2,22 @@ import React from 'react';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
 import Error from '@mui/icons-material/Error';
-import { ThemeProvider } from '@mui/material/styles';
-import withStyles from '@mui/styles/withStyles';
 import PropTypes from 'prop-types';
-import errorTheme from '../themes/errorTheme';
 
-const styles = () => ({
-    root: {
-        justifyContent: 'center',
-        width: '50%',
-        margin: 'auto',
-        padding: 10
-    },
-    icon: {
-        marginRight: 5,
-        float: 'right'
-    },
-    typography: {
-        fontSize: 16
-    },
-    details: {
-        fontSize: 12,
-        marginTop: '10px'
-    }
-});
+function ErrorCard({ errorMessage, detailLines }) {
+    return (
+        <Card
+            sx={{
+                width: '50%',
+                margin: '0 auto',
+                padding: theme => theme.spacing(2),
+                backgroundColor: theme => theme.palette.error.light
+            }}
+        >
+            <Error sx={{ color: theme => theme.palette.error.dark, float: 'right' }} />
 
-const ErrorCard = ({ classes, errorMessage, detailLines }) => (
-    <ThemeProvider theme={errorTheme}>
-        <Card className={classes.root}>
-            <Error color="error" className={classes.icon} />
-            <Typography align="center" className={classes.typography}>
-                {errorMessage}
-            </Typography>
-            <div className={classes.details}>
+            <Typography align="center">{errorMessage}</Typography>
+            <div>
                 {detailLines?.map(d => (
                     <Typography
                         key={d.descriptor}
@@ -43,8 +26,8 @@ const ErrorCard = ({ classes, errorMessage, detailLines }) => (
                 ))}
             </div>
         </Card>
-    </ThemeProvider>
-);
+    );
+}
 
 ErrorCard.propTypes = {
     classes: PropTypes.shape({
@@ -64,4 +47,4 @@ ErrorCard.defaultProps = {
     detailLines: []
 };
 
-export default withStyles(styles)(ErrorCard);
+export default ErrorCard;

@@ -1,5 +1,5 @@
 import React from 'react';
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom';
 import { fireEvent, screen } from '@testing-library/react';
 import render from '../../test-utils';
 import Search from '../Search';
@@ -87,9 +87,9 @@ describe('When closestMatchesFirst priority Specified', () => {
     });
 
     test('should order by closest matches to search term', () => {
-        expect(screen.getAllByRole('button')[0]).toHaveTextContent('RESULT'); // 6 matching chars
-        expect(screen.getAllByRole('button')[1]).toHaveTextContent('RE A RESULT'); // 2 matching chars
-        expect(screen.getAllByRole('button')[2]).toHaveTextContent('OUTLIER RESULT'); // 0 matching chars
+        expect(screen.getAllByTestId('result')[0]).toHaveTextContent('RESULT'); // 6 matching chars
+        expect(screen.getAllByTestId('result')[1]).toHaveTextContent('RE A RESULT'); // 2 matching chars
+        expect(screen.getAllByTestId('result')[2]).toHaveTextContent('OUTLIER RESULT'); // 0 matching chars
     });
 });
 
@@ -111,7 +111,7 @@ describe('When custom priorityFunction Specified', () => {
     });
 
     test('should order by closest matches to search term', () => {
-        expect(screen.getAllByRole('button')[0]).toHaveTextContent('RESULT D');
+        expect(screen.getAllByTestId('result')[0]).toHaveTextContent('RESULT D');
     });
 });
 

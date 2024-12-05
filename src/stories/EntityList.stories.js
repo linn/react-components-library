@@ -6,12 +6,10 @@ import EntityList from '../components/EntityList';
 import providers from './renderUtils/Providers';
 
 const pageProps = {
-    history: {
-        push: () => {},
-        location: {
-            pathname: '/Entities'
-        }
-    }
+    location: {
+        pathname: '/Entities'
+    },
+    navigate: () => {}
 };
 
 export default {

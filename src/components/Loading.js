@@ -1,21 +1,17 @@
 ﻿import React from 'react';
-import makeStyles from '@mui/styles/makeStyles';
+import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 
-const useStyles = makeStyles((theme) => ({
-    outer: {
-        textAlign: 'center',
-        margin: theme.spacing(4),
-        height: '40px'
-    }
-}));
-
 export default function Loading() {
-    const classes = useStyles();
-
     return (
-        <div className={classes.outer}>
+        <Box
+            sx={{
+                textAlign: 'center',
+                margin: theme => theme.spacing(4),
+                height: '40px'
+            }}
+        >
             <CircularProgress />
-        </div>
+        </Box>
     );
 }

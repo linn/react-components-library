@@ -1,4 +1,8 @@
 # Changelog
+## [23.0.0-alpha] - 2024-12-04
+### Changes
+- MUI V6 upgrade attempt - not tested, possibly very breaking hence the alpha version number
+- Removed: ReportTable and all related code, Title component (since it was basically just an MUI Typography)
 ## [22.2.0] - 2024-11-07
 ### Changes
 - ReportDataGrid - update number display to allow sorting

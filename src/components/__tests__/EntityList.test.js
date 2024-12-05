@@ -1,9 +1,12 @@
+/**
+ * @jest-environment jsdom
+ */
 import React from 'react';
 import { screen } from '@testing-library/react';
 
 import EntityList from '../EntityList';
 import render from '../../test-utils';
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom';
 
 describe('<EntityList />', () => {
     const entityList = [

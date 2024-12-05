@@ -70,7 +70,7 @@ ConfirmDialog.defaultProps = {
     cancelButtonText: 'Cancel',
     primaryText: null,
     secondaryText: null,
-    maxWidth: 'm',
+    maxWidth: 'md',
     onCancel: null
 };
 

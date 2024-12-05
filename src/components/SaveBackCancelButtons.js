@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import PropTypes from 'prop-types';
 
@@ -10,16 +10,6 @@ function SaveBackCancelButtons({
     backClick,
     showBackButton
 }) {
-    const useStyles = makeStyles(theme => ({
-        pullRight: {
-            float: 'right'
-        },
-        cancel: {
-            marginRight: theme.spacing(1)
-        }
-    }));
-    const classes = useStyles();
-
     const handleClick = () => {
         if (saveDisabled) {
             backClick();
@@ -29,13 +19,13 @@ function SaveBackCancelButtons({
     };
 
     return (
-        <div className={classes.pullRight}>
+        <Box sx={{ float: 'right' }}>
             {(!saveDisabled || showBackButton) && (
                 <Button
                     id="cancel-button"
                     onClick={() => handleClick()}
                     variant="outlined"
-                    className={classes.cancel}
+                    sx={{ marginRight: theme => theme.spacing(1) }}
                 >
                     {saveDisabled ? 'Back' : 'Cancel'}
                 </Button>
@@ -49,7 +39,7 @@ function SaveBackCancelButtons({
             >
                 Save
             </Button>
-        </div>
+        </Box>
     );
 }
 

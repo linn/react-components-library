@@ -1,33 +1,8 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React, { useRef, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import InputAdornment from '@mui/material/InputAdornment';
 import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
-import makeStyles from '@mui/styles/makeStyles';
-
-const useStyles = makeStyles(theme => ({
-    root: {
-        paddingTop: 0,
-        marginTop: theme.spacing(1)
-    },
-    disabled: {
-        background: theme.palette.grey[100],
-        color: theme.palette.text.secondary
-    },
-    label: {
-        fontSize: theme.typography.fontSize
-    },
-    labelAsterisk: {
-        color: theme.palette.error.main
-    },
-    required: {
-        color: theme.palette.error.main
-    },
-    error: {
-        color: theme.palette.error.main
-    }
-}));
 
 const hasValue = val => val || val === 0;
 const getValue = val => (hasValue(val) ? val : '');
@@ -38,6 +13,7 @@ function InputField({
     type,
     adornment,
     disabled,
+
     error,
     fullWidth,
     helperText,
@@ -55,10 +31,10 @@ function InputField({
     onErrorStateChange,
     visible
 }) {
-    const classes = useStyles();
     const inputRef = useRef();
     const [inErrorState, setInErrorState] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+
     useEffect(() => {
         setTimeout(() => {
             if (!autoFocus || !inputRef.current || !visible) return;
@@ -69,6 +45,7 @@ function InputField({
     useEffect(() => {
         setInErrorState(error);
     }, [error]);
+
     const change = e => {
         const newValue = e.target.value;
 
@@ -101,10 +78,17 @@ function InputField({
 
         onChange(propertyName, val);
     };
+
     return (
         <>
             <InputLabel
-                classes={{ root: classes.label, asterisk: classes.labelAsterisk }}
+                sx={{
+                    fontSize: theme => theme.typography.fontSize,
+                    color: inErrorState ? theme => theme.palette.error.main : 'inherit',
+                    '& .MuiInputLabel-asterisk': {
+                        color: theme => theme.palette.error.main
+                    }
+                }}
                 required={required}
                 error={inErrorState}
                 htmlFor={propertyName}
@@ -112,8 +96,13 @@ function InputField({
                 {label}
             </InputLabel>
             <TextField
-                classes={{
-                    root: classes.root
+                sx={{
+                    paddingTop: 0,
+                    marginTop: theme => theme.spacing(1),
+                    '& .Mui-disabled': {
+                        backgroundColor: theme => theme.palette.grey[100],
+                        color: theme => theme.palette.text.secondary
+                    }
                 }}
                 disabled={disabled}
                 error={inErrorState}
@@ -130,7 +119,7 @@ function InputField({
                 inputRef={inputRef}
                 onWheel={() => {
                     if (type === 'number') {
-                        inputRef.blur();
+                        inputRef.current.blur();
                     }
                 }}
                 type={type}
@@ -139,15 +128,13 @@ function InputField({
                 InputProps={{
                     startAdornment: adornment ? (
                         <InputAdornment position="start">{adornment}</InputAdornment>
-                    ) : null,
-                    classes: {
-                        disabled: classes.disabled
-                    }
+                    ) : null
                 }}
                 FormHelperTextProps={{
-                    classes: {
-                        required: classes.required,
-                        error: classes.error
+                    sx: {
+                        color: inErrorState
+                            ? theme => theme.palette.error.main
+                            : theme => theme.palette.text.primary
                     }
                 }}
                 onInput={e => {
