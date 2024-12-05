@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -43,10 +43,10 @@ function Navigation({
         },
         tabLabel: {
             fontSize: '1rem',
-            color: '#B0B0B0' // Adjust based on theme
+            color: '#B0B0B0'
         },
         snackbarNew: {
-            background: '#1a73e8', // Primary Dark color
+            background: '#1a73e8',
             width: '800px'
         },
         snackbarSeen: {
@@ -74,13 +74,31 @@ function Navigation({
         appBar: {
             backgroundColor: '#424242',
             width: '100% !important',
-            margin: 0
+            margin: 0,
+            position: 'fixed',
+            zIndex: 1300
         },
         icons: {
             cursor: 'pointer',
             color: 'white'
         }
     };
+    const handleClose = () => {
+        setAnchorEl();
+    };
+
+    useEffect(() => {
+        const handleKeyDown = event => {
+            if (event.key === 'Escape') {
+                setSelected(false);
+            }
+        };
+        document.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown);
+        };
+    }, []);
 
     if (sections) {
         const menuIds = sections.map(item => item.id);
@@ -88,9 +106,7 @@ function Navigation({
         const handleClick = event => {
             setAnchorEl(event.currentTarget);
         };
-        const handleClose = () => {
-            setAnchorEl();
-        };
+
         const handleSignOut = () => {
             window.location.assign(`${authRoot}account/logout`);
         };
@@ -164,11 +180,7 @@ function Navigation({
                         {sections && !loading && (
                             <AppBar position="static" sx={styles.appBar}>
                                 <Toolbar>
-                                    <Grid
-                                        container
-                                        spacing={3}
-                                        sx={styles.container}
-                                    >
+                                    <Grid container spacing={3} sx={styles.container}>
                                         <Grid size={9}>
                                             <Tabs
                                                 sx={styles.tabs}

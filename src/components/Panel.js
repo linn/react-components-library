@@ -12,17 +12,26 @@ function Panel({ section, close }) {
     const { columns } = section;
 
     return (
-        <Paper sx={{ backgroundColor: '#f5f5f5', position: 'relative', zIndex: -1 }}>
+        <Paper
+            sx={{
+                backgroundColor: '#f5f5f5',
+                position: 'fixed',
+                zIndex: 1000,
+                paddingTop: '80px',
+                width: '100%',
+                overflow: 'auto',
+                height: '100vh'
+            }}
+        >
             <Button
                 onClick={close}
                 color="secondary"
                 sx={{
                     marginRight: '10px',
                     marginTop: '10px',
-                    position: 'absolute',
+                    float: 'right',
                     top: 0,
-                    right: 0,
-                    zIndex: 1
+                    right: 0
                 }}
             >
                 <Close />
@@ -34,8 +43,13 @@ function Panel({ section, close }) {
                         {col.categories
                             .filter(e => e.items.filter(item => item.showInMenu).length > 0)
                             .map(category => (
-                                <List key={category.title}>
-                                    <ListItem>
+                                <List key={category.title} dense>
+                                    <ListItem
+                                        sx={{
+                                            paddingTop: '0px !important',
+                                            paddingBottom: '0px !important'
+                                        }}
+                                    >
                                         <Typography variant="button" gutterBottom>
                                             {category.title.replace('&amp;', '&')}
                                         </Typography>
@@ -48,7 +62,7 @@ function Panel({ section, close }) {
                                                     key={entry.href}
                                                     style={{ textDecoration: 'none' }}
                                                 >
-                                                    <ListItem button>
+                                                    <ListItem>
                                                         <Typography
                                                             variant="overline"
                                                             color="primary"

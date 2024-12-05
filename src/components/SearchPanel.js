@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import withStyles from '@mui/styles/withStyles';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid2';
 import ListItem from '@mui/material/ListItem';
@@ -8,31 +7,24 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Close from '@mui/icons-material/Close';
 import SearchInputField from './SearchInputField';
+import List from '@mui/material/List';
 
 const styles = {
     paper: {
         backgroundColor: '#f5f5f5',
-        position: 'relative',
-        zIndex: -1
-    },
-    menuItems: {
-        fontSize: '12px',
-        lineHeight: 2
-    },
-    closeButton: {
-        marginRight: '10px',
-        marginTop: '10px',
-        position: 'absolute',
-        top: 0,
-        right: 0,
-        zIndex: 1
+        position: 'fixed',
+        zIndex: 1000,
+        paddingTop: '80px',
+        width: '100%',
+        overflow: 'auto',
+        height: '100vh'
     },
     searchInputField: {
         float: 'right'
     }
 };
 
-function SearchPanel({ menu, classes, close }) {
+function SearchPanel({ menu, close }) {
     const [searchTerm, setSearchTerm] = useState();
 
     const menuEntries = menu
@@ -56,8 +48,18 @@ function SearchPanel({ menu, classes, close }) {
         setSearchTerm(newValue);
     };
     return (
-        <Paper classes={{ root: classes.paper }}>
-            <Button onClick={close} color="secondary" style={styles.closeButton}>
+        <Paper sx={styles.paper}>
+            <Button
+                onClick={close}
+                color="secondary"
+                sx={{
+                    marginRight: '10px',
+                    marginTop: '10px',
+                    float: 'right',
+                    top: 0,
+                    right: 0
+                }}
+            >
                 <Close />
             </Button>
             <Grid container>
@@ -70,24 +72,26 @@ function SearchPanel({ menu, classes, close }) {
                         }}
                         placeholder="start typing..."
                     />
-                    {searchTerm?.length > 1 &&
-                        uniqueEntries
-                            .filter(
-                                e =>
-                                    e.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                                    e.href.toLowerCase().includes(searchTerm.toLowerCase())
-                            )
-                            .map(entry => (
-                                <React.Fragment key={entry.href}>
-                                    <a href={entry.href} style={{ textDecoration: 'none' }}>
-                                        <ListItem button>
-                                            <Typography variant="overline" color="primary">
-                                                {entry.title}
-                                            </Typography>
-                                        </ListItem>
-                                    </a>
-                                </React.Fragment>
-                            ))}
+                    <List dense>
+                        {searchTerm?.length > 1 &&
+                            uniqueEntries
+                                .filter(
+                                    e =>
+                                        e.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                                        e.href.toLowerCase().includes(searchTerm.toLowerCase())
+                                )
+                                .map(entry => (
+                                    <React.Fragment key={entry.href}>
+                                        <a href={entry.href} style={{ textDecoration: 'none' }}>
+                                            <ListItem>
+                                                <Typography variant="overline" color="primary">
+                                                    {entry.title}
+                                                </Typography>
+                                            </ListItem>
+                                        </a>
+                                    </React.Fragment>
+                                ))}
+                    </List>
                 </Grid>
             </Grid>
         </Paper>
@@ -95,13 +99,8 @@ function SearchPanel({ menu, classes, close }) {
 }
 
 SearchPanel.propTypes = {
-    classes: PropTypes.shape({
-        listItemText: PropTypes.string,
-        menuItems: PropTypes.string,
-        paper: PropTypes.string
-    }).isRequired,
     close: PropTypes.func.isRequired,
     menu: PropTypes.arrayOf(PropTypes.shape({})).isRequired
 };
 
-export default withStyles(styles)(SearchPanel);
+export default SearchPanel;
