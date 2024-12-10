@@ -70,7 +70,7 @@ function Panel({ section, close }) {
                                                         }}
                                                     >
                                                         <Typography
-                                                            sx={{ margin: 0, lineHeight: 1.5 }}
+                                                            sx={{ margin: 0, lineHeight: 1.8 }}
                                                             variant="overline"
                                                             color="primary"
                                                         >

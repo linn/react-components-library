@@ -93,7 +93,7 @@ function SearchPanel({ menu, close }) {
                                                 <Typography
                                                     variant="overline"
                                                     color="primary"
-                                                    sx={{ margin: 0, lineHeight: 1.5 }}
+                                                    sx={{ margin: 0, lineHeight: 1.8 }}
                                                 >
                                                     {entry.title}
                                                 </Typography>
