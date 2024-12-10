@@ -62,8 +62,15 @@ function Panel({ section, close }) {
                                                     key={entry.href}
                                                     style={{ textDecoration: 'none' }}
                                                 >
-                                                    <ListItem>
+                                                    <ListItem
+                                                        sx={{
+                                                            paddingTop: 0,
+                                                            paddingBottom: 0,
+                                                            margin: 0
+                                                        }}
+                                                    >
                                                         <Typography
+                                                            sx={{ margin: 0, lineHeight: 1.5 }}
                                                             variant="overline"
                                                             color="primary"
                                                         >

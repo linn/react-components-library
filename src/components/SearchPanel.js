@@ -83,8 +83,18 @@ function SearchPanel({ menu, close }) {
                                 .map(entry => (
                                     <React.Fragment key={entry.href}>
                                         <a href={entry.href} style={{ textDecoration: 'none' }}>
-                                            <ListItem>
-                                                <Typography variant="overline" color="primary">
+                                            <ListItem
+                                                sx={{
+                                                    paddingTop: 0,
+                                                    paddingBottom: 0,
+                                                    margin: 0
+                                                }}
+                                            >
+                                                <Typography
+                                                    variant="overline"
+                                                    color="primary"
+                                                    sx={{ margin: 0, lineHeight: 1.5 }}
+                                                >
                                                     {entry.title}
                                                 </Typography>
                                             </ListItem>
