@@ -12,13 +12,4 @@ function BackButton({ backClick, text }) {
     );
 }
 
-BackButton.propTypes = {
-    backClick: PropTypes.func.isRequired,
-    text: PropTypes.string
-};
-
-BackButton.defaultProps = {
-    text: null
-};
-
 export default BackButton;

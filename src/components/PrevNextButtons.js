@@ -31,20 +31,4 @@ function PrevNextButtons({ goPrev, goNext, nextResult, prevResult, disabled }) {
     );
 }
 
-PrevNextButtons.propTypes = {
-    goPrev: PropTypes.func,
-    goNext: PropTypes.func,
-    nextResult: PropTypes.string,
-    prevResult: PropTypes.string,
-    disabled: PropTypes.bool
-};
-
-PrevNextButtons.defaultProps = {
-    goPrev: null,
-    goNext: null,
-    nextResult: '',
-    prevResult: '',
-    disabled: false
-};
-
 export default PrevNextButtons;

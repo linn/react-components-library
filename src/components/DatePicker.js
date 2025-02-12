@@ -36,26 +36,4 @@ function Picker({ value, minDate, maxDate, label, onChange, required, disabled, 
     );
 }
 
-Picker.propTypes = {
-    label: PropTypes.string,
-    minDate: PropTypes.oneOfType([PropTypes.shape({}), PropTypes.string]),
-    maxDate: PropTypes.oneOfType([PropTypes.shape({}), PropTypes.string]),
-    required: PropTypes.bool,
-    value: PropTypes.oneOfType([PropTypes.shape({}), PropTypes.string]),
-    datePickerProps: PropTypes.shape({}),
-    disabled: PropTypes.bool,
-    onChange: PropTypes.func
-};
-
-Picker.defaultProps = {
-    label: '',
-    minDate: null,
-    maxDate: null,
-    required: false,
-    datePickerProps: null,
-    value: new Date().toISOString(),
-    disabled: false,
-    onChange: () => {}
-};
-
 export default Picker;

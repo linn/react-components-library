@@ -66,25 +66,4 @@ function AddressUtilityReduxContainer({
     );
 }
 
-AddressUtilityReduxContainer.propTypes = {
-    defaultAddressee: PropTypes.string,
-    onCreateSuccess: PropTypes.func.isRequired,
-    onSelectAddress: PropTypes.func.isRequired,
-    addressActions: PropTypes.shape({ add: PropTypes.func, clearItem: PropTypes.func }).isRequired,
-    addressesActions: PropTypes.shape({ search: PropTypes.func, clearSearch: PropTypes.func })
-        .isRequired,
-    countriesActions: PropTypes.shape({ search: PropTypes.func, clearSearch: PropTypes.func })
-        .isRequired,
-    addressItemType: PropTypes.shape({ item: PropTypes.string }),
-    addressesItemType: PropTypes.shape({ item: PropTypes.string }),
-    countriesItemType: PropTypes.shape({ item: PropTypes.string })
-};
-
-AddressUtilityReduxContainer.defaultProps = {
-    defaultAddressee: null,
-    addressItemType: { item: 'address' },
-    addressesItemType: { item: 'addresses' },
-    countriesItemType: { item: 'countries' }
-};
-
 export default AddressUtilityReduxContainer;

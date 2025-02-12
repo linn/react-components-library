@@ -28,18 +28,4 @@ class OnOffSwitch extends React.Component {
     }
 }
 
-OnOffSwitch.propTypes = {
-    value: PropTypes.bool,
-    disabled: PropTypes.bool,
-    label: PropTypes.string,
-    onChange: PropTypes.func.isRequired,
-    propertyName: PropTypes.string.isRequired
-};
-
-OnOffSwitch.defaultProps = {
-    value: false,
-    disabled: false,
-    label: ''
-};
-
 export default OnOffSwitch;

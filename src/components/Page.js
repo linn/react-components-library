@@ -82,29 +82,4 @@ function Page({
     );
 }
 
-Page.propTypes = {
-    children: PropTypes.node.isRequired,
-    navigate: PropTypes.func,
-    width: PropTypes.oneOf(['xs', 's', 'm', 'l', 'xl']),
-    showRequestErrors: PropTypes.bool,
-    requestErrors: PropTypes.arrayOf(PropTypes.shape({})),
-    homeUrl: PropTypes.string,
-    showBreadcrumbs: PropTypes.bool,
-    title: PropTypes.string,
-    defaultAppTitle: PropTypes.string,
-    location: PropTypes.shape({})
-};
-
-Page.defaultProps = {
-    width: 'l',
-    showRequestErrors: false,
-    requestErrors: [],
-    homeUrl: null,
-    showBreadcrumbs: true,
-    title: null,
-    defaultAppTitle: null,
-    navigate: null,
-    location: null
-};
-
 export default Page;

@@ -246,32 +246,4 @@ function AddressUtility({
     );
 }
 
-AddressUtility.propTypes = {
-    createAddress: PropTypes.func.isRequired,
-    selectAddress: PropTypes.func.isRequired,
-    searchCountries: PropTypes.func.isRequired,
-    searchAddresses: PropTypes.func.isRequired,
-    countriesSearchResults: PropTypes.arrayOf(PropTypes.shape({})),
-    countriesSearchLoading: PropTypes.bool,
-    addressSearchResults: PropTypes.arrayOf(PropTypes.shape({})),
-    addressSearchLoading: PropTypes.bool,
-    clearAddressesSearch: PropTypes.func,
-    clearCountriesSearch: PropTypes.func,
-    createAddressLoading: PropTypes.bool,
-    defaultAddressee: PropTypes.string,
-    setIsActive: PropTypes.func.isRequired,
-    isActive: PropTypes.bool.isRequired
-};
-
-AddressUtility.defaultProps = {
-    countriesSearchResults: [],
-    countriesSearchLoading: false,
-    addressSearchResults: [],
-    addressSearchLoading: false,
-    clearAddressesSearch: () => {},
-    clearCountriesSearch: () => {},
-    createAddressLoading: false,
-    defaultAddressee: false
-};
-
 export default AddressUtility;

@@ -104,12 +104,4 @@ function Panel({ section, close }) {
     );
 }
 
-Panel.propTypes = {
-    section: PropTypes.shape({
-        id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-        columns: PropTypes.arrayOf(PropTypes.shape({}))
-    }).isRequired,
-    close: PropTypes.func.isRequired
-};
-
 export default Panel;

@@ -1,4 +1,9 @@
 # Changelog
+## [24.0.0-alpha.01] - 2025-02-12
+### Changes
+- Upgrade to React 19
+- removal of prop types across the board as well as a few other changes 
+- minor updates of mui/x-data-grid, mui/x-date-pickers, babel, mui and testing-library packages
 ## [23.0.0-alpha.01] - 2024-12-05
 ### Changes
 - React Router upgrade to v7

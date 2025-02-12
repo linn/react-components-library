@@ -59,20 +59,4 @@ function LinkButton({ to, external, newTab, tooltip, text, disabled }) {
     );
 }
 
-LinkButton.propTypes = {
-    text: PropTypes.string.isRequired,
-    tooltip: PropTypes.string,
-    to: PropTypes.string.isRequired,
-    external: PropTypes.bool,
-    disabled: PropTypes.bool,
-    newTab: PropTypes.bool
-};
-
-LinkButton.defaultProps = {
-    external: false,
-    disabled: false,
-    tooltip: null,
-    newTab: false
-};
-
 export default LinkButton;

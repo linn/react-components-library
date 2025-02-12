@@ -60,18 +60,4 @@ function SelectedItemsList({ items, removeItem, title, maxHeight }) {
     );
 }
 
-SelectedItemsList.propTypes = {
-    items: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})]))
-        .isRequired,
-    removeItem: PropTypes.func,
-    title: PropTypes.string,
-    maxHeight: PropTypes.number
-};
-
-SelectedItemsList.defaultProps = {
-    removeItem: null,
-    title: 'Items Selected',
-    maxHeight: null
-};
-
 export default SelectedItemsList;

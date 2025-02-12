@@ -202,46 +202,4 @@ function Search({
     );
 }
 
-Search.propTypes = {
-    propertyName: PropTypes.string.isRequired,
-    autoFocus: PropTypes.bool,
-    label: PropTypes.string.isRequired,
-    clearSearch: PropTypes.func.isRequired,
-    handleValueChange: PropTypes.func.isRequired,
-    search: PropTypes.func.isRequired,
-    onResultSelect: PropTypes.func.isRequired,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    disabled: PropTypes.bool,
-    searchResults: PropTypes.arrayOf(PropTypes.shape({})),
-    loading: PropTypes.bool,
-    priorityFunction: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-    resultLimit: PropTypes.number,
-    resultsInModal: PropTypes.bool,
-    searchOnEnter: PropTypes.bool,
-    onKeyPressFunctions: PropTypes.arrayOf(
-        PropTypes.shape({ keyCode: PropTypes.number, action: PropTypes.func })
-    ),
-    helperText: PropTypes.string,
-    visible: PropTypes.bool,
-    displayChips: PropTypes.bool,
-    fullWidth: PropTypes.bool
-};
-
-Search.defaultProps = {
-    searchOnEnter: true,
-    onKeyPressFunctions: [],
-    autoFocus: true,
-    value: null,
-    disabled: false,
-    searchResults: [],
-    loading: false,
-    priorityFunction: null,
-    resultLimit: null,
-    resultsInModal: false,
-    helperText: 'PRESS ENTER TO SEARCH',
-    visible: true,
-    displayChips: false,
-    fullWidth: false
-};
-
 export default Search;

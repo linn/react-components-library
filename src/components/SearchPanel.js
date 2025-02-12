@@ -108,9 +108,4 @@ function SearchPanel({ menu, close }) {
     );
 }
 
-SearchPanel.propTypes = {
-    close: PropTypes.func.isRequired,
-    menu: PropTypes.arrayOf(PropTypes.shape({})).isRequired
-};
-
 export default SearchPanel;

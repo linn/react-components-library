@@ -43,17 +43,4 @@ function SaveBackCancelButtons({
     );
 }
 
-SaveBackCancelButtons.propTypes = {
-    saveClick: PropTypes.func.isRequired,
-    cancelClick: PropTypes.func.isRequired,
-    backClick: PropTypes.func.isRequired,
-    saveDisabled: PropTypes.bool,
-    showBackButton: PropTypes.bool
-};
-
-SaveBackCancelButtons.defaultProps = {
-    saveDisabled: false,
-    showBackButton: true
-};
-
 export default SaveBackCancelButtons;

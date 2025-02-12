@@ -82,16 +82,4 @@ function Breadcrumbs({ navigate, rootPathLength, homeUrl, location }) {
     );
 }
 
-Breadcrumbs.propTypes = {
-    navigate: PropTypes.func.isRequired,
-    location: PropTypes.shape({ pathname: PropTypes.string }).isRequired,
-    rootPathLength: PropTypes.number,
-    homeUrl: PropTypes.string
-};
-
-Breadcrumbs.defaultProps = {
-    rootPathLength: 2,
-    homeUrl: 'https://app.linn.co.uk'
-};
-
 export default Breadcrumbs;

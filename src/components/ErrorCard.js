@@ -29,22 +29,4 @@ function ErrorCard({ errorMessage, detailLines }) {
     );
 }
 
-ErrorCard.propTypes = {
-    classes: PropTypes.shape({
-        root: PropTypes.string,
-        icon: PropTypes.string,
-        typography: PropTypes.string,
-        details: PropTypes.string
-    }),
-    detailLines: PropTypes.arrayOf(
-        PropTypes.shape({ descriptor: PropTypes.string, message: PropTypes.string })
-    ),
-    errorMessage: PropTypes.string.isRequired
-};
-
-ErrorCard.defaultProps = {
-    classes: {},
-    detailLines: []
-};
-
 export default ErrorCard;

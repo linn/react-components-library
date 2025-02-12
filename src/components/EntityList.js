@@ -34,18 +34,4 @@ function EntityList({ title, entityList, entityId, descriptionFieldName, hasExte
     );
 }
 
-EntityList.propTypes = {
-    title: PropTypes.string,
-    entityId: PropTypes.string.isRequired,
-    entityList: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-    descriptionFieldName: PropTypes.string,
-    hasExternalLinks: PropTypes.bool
-};
-
-EntityList.defaultProps = {
-    descriptionFieldName: null,
-    title: '',
-    hasExternalLinks: false
-};
-
 export default EntityList;

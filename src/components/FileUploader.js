@@ -130,33 +130,4 @@ function FileUploader({
     );
 }
 
-FileUploader.propTypes = {
-    helperText: PropTypes.string,
-    title: PropTypes.string,
-    doUpload: PropTypes.func.isRequired,
-    loading: PropTypes.bool,
-    result: PropTypes.shape({
-        success: PropTypes.bool,
-        message: PropTypes.string,
-        errors: PropTypes.arrayOf(PropTypes.shape({}))
-    }),
-    snackbarVisible: PropTypes.bool,
-    setSnackbarVisible: PropTypes.func,
-    initiallyExpanded: PropTypes.bool,
-    initialFile: PropTypes.shape({}),
-    onFileSelect: PropTypes.func
-};
-
-FileUploader.defaultProps = {
-    helperText: 'Upload a File',
-    title: 'File Uploader',
-    initiallyExpanded: true,
-    loading: false,
-    result: null,
-    snackbarVisible: false,
-    setSnackbarVisible: null,
-    initialFile: null,
-    onFileSelect: () => {}
-};
-
 export default FileUploader;

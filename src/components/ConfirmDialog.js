@@ -51,27 +51,4 @@ function ConfirmDialog({
     );
 }
 
-ConfirmDialog.propTypes = {
-    visible: PropTypes.bool.isRequired,
-    title: PropTypes.string,
-    confirmButtonText: PropTypes.string,
-    cancelButtonText: PropTypes.string,
-    primaryText: PropTypes.string,
-    secondaryText: PropTypes.string,
-    onConfirm: PropTypes.func.isRequired,
-    maxWidth: PropTypes.string,
-    onCancel: PropTypes.func,
-    closeDialog: PropTypes.func.isRequired
-};
-
-ConfirmDialog.defaultProps = {
-    title: 'Are you sure?',
-    confirmButtonText: 'Confirm',
-    cancelButtonText: 'Cancel',
-    primaryText: null,
-    secondaryText: null,
-    maxWidth: 'md',
-    onCancel: null
-};
-
 export default ConfirmDialog;

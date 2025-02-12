@@ -38,24 +38,4 @@ function Picker({ label, value, onChange, minDate, maxDate, required, disabled }
     );
 }
 
-Picker.propTypes = {
-    label: PropTypes.string,
-    minDate: PropTypes.string,
-    maxDate: PropTypes.string,
-    onChange: PropTypes.func,
-    required: PropTypes.bool,
-    value: PropTypes.string,
-    disabled: PropTypes.bool
-};
-
-Picker.defaultProps = {
-    label: '',
-    minDate: undefined,
-    maxDate: undefined,
-    required: false,
-    value: new Date().toISOString(),
-    disabled: false,
-    onChange: () => {}
-};
-
 export default Picker;

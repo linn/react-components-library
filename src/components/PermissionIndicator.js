@@ -18,16 +18,4 @@ function PermissionIndicator({ hasPermission, hasPermissionMessage, noPermission
     );
 }
 
-PermissionIndicator.propTypes = {
-    hasPermission: PropTypes.bool,
-    hasPermissionMessage: PropTypes.string,
-    noPermissionMessage: PropTypes.string
-};
-
-PermissionIndicator.defaultProps = {
-    hasPermission: false,
-    hasPermissionMessage: 'You have permission for this page',
-    noPermissionMessage: 'You do not have permission for this page'
-};
-
 export default PermissionIndicator;

@@ -34,16 +34,4 @@ function SnackbarMessage({ message, visible, onClose, timeOut }) {
     );
 }
 
-SnackbarMessage.propTypes = {
-    message: PropTypes.string.isRequired,
-    timeOut: PropTypes.number,
-    visible: PropTypes.bool,
-    onClose: PropTypes.func.isRequired
-};
-
-SnackbarMessage.defaultProps = {
-    timeOut: 3000,
-    visible: false
-};
-
 export default SnackbarMessage;

@@ -73,23 +73,4 @@ function ExportButton({ href, accept, fileName, buttonText, tooltipText, disable
     );
 }
 
-ExportButton.propTypes = {
-    href: PropTypes.string.isRequired,
-    accept: PropTypes.string,
-    fileName: PropTypes.string,
-    buttonText: PropTypes.string,
-    tooltipText: PropTypes.string,
-    disabled: PropTypes.bool,
-    accessToken: PropTypes.string
-};
-
-ExportButton.defaultProps = {
-    accept: 'text/csv',
-    buttonText: 'EXPORT',
-    fileName: 'export.csv',
-    tooltipText: 'Download report as CSV file',
-    disabled: false,
-    accessToken: null
-};
-
 export default ExportButton;

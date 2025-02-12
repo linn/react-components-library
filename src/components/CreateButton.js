@@ -13,13 +13,4 @@ function CreateButton({ createUrl, disabled }) {
     );
 }
 
-CreateButton.propTypes = {
-    createUrl: PropTypes.string.isRequired,
-    disabled: PropTypes.bool
-};
-
-CreateButton.defaultProps = {
-    disabled: false
-};
-
 export default CreateButton;

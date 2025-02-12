@@ -15,13 +15,4 @@ function SearchInputField({ autoFocus, propertyName, ...rest }) {
     );
 }
 
-SearchInputField.propTypes = {
-    autoFocus: PropTypes.bool,
-    propertyName: PropTypes.string.isRequired
-};
-
-SearchInputField.defaultProps = {
-    autoFocus: false
-};
-
 export default SearchInputField;

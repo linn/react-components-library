@@ -19,19 +19,4 @@ const CheckboxWithLabel = ({ classes, checked, color = 'primary', label, onChang
     />
 );
 
-CheckboxWithLabel.propTypes = {
-    classes: PropTypes.shape({ root: PropTypes.shape({}) }),
-    checked: PropTypes.bool,
-    color: PropTypes.string,
-    label: PropTypes.string,
-    onChange: PropTypes.func.isRequired
-};
-
-CheckboxWithLabel.defaultProps = {
-    classes: {},
-    checked: false,
-    color: 'primary',
-    label: ''
-};
-
 export default withStyles(styles)(CheckboxWithLabel);
