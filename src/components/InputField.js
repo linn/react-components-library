@@ -1,5 +1,4 @@
 import React, { useRef, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import InputAdornment from '@mui/material/InputAdornment';
 import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
@@ -31,7 +30,7 @@ function InputField({
     onErrorStateChange,
     visible
 }) {
-    const inputRef = useRef();
+    const inputRef = useRef(null);
     const [inErrorState, setInErrorState] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
 
