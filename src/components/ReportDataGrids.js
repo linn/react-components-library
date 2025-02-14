@@ -1,3 +1,5 @@
+import React from 'react';
+
 import ReportDataGrid from './ReportDataGrid';
 
 function ReportDataGrids({
