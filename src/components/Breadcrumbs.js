@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 
@@ -59,7 +60,7 @@ function Breadcrumbs({
             {crumbs.map((crumb, index) => {
                 if (index < crumbs.length - 1) {
                     return (
-                        <div key={index}>
+                        <Fragment key={index}>
                             <Link
                                 key={crumb.href}
                                 href={crumb.href}
@@ -74,7 +75,7 @@ function Breadcrumbs({
                                 {crumb.caption}
                             </Link>
                             <Slash />
-                        </div>
+                        </Fragment>
                     );
                 }
                 return (
