@@ -12,6 +12,10 @@
         "prop-types": "^15.8.1",
         "query-string": "^9.1.1",
         "react-dropzone": "^14.3.5",
+        "react-redux": "^9.2.0",
+        "react-router-dom": "^7.1.5",
+        "redux": "^5.0.1",
+        "redux-api-middleware": "^3.2.1",
         "util": "^0.12.5"
     },
     "scripts": {
@@ -71,6 +75,7 @@
         "babel-jest": "^29.7.0",
         "babel-loader": "^9.2.1",
         "babel-preset-react": "^6.24.1",
+        "css-loader": "^7.1.2",
         "deep-freeze": "0.0.1",
         "eslint": "8.57.1",
         "eslint-config-airbnb": "^19.0.4",
@@ -90,9 +95,7 @@
         "prettier": "^3.5.0",
         "react": "^19.0.0",
         "react-dom": "^19.0.0",
-        "react-redux": "^9.2.0",
         "react-router-dom": "^7.1.5",
-        "redux": "^5.0.1",
         "rollup": "^1.32.1",
         "rollup-plugin-babel": "^4.4.0",
         "rollup-plugin-postcss": "^2.9.0",
