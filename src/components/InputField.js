@@ -30,7 +30,7 @@ function InputField({
     onErrorStateChange = null,
     visible = true
 }) {
-    const inputRef = useRef();
+    const inputRef = useRef(null);
     const [inErrorState, setInErrorState] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
 
