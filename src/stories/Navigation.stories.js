@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
+
 import Navigation from '../components/Navigation';
 import providers from './renderUtils/Providers';
 import menu from '../../public/menu.json';

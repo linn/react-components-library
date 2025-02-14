@@ -1,14 +1,12 @@
-import React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import PropTypes from 'prop-types';
 
 function SaveBackCancelButtons({
     saveClick,
     cancelClick,
-    saveDisabled,
+    saveDisabled = false,
     backClick,
-    showBackButton
+    showBackButton = true
 }) {
     const handleClick = () => {
         if (saveDisabled) {
@@ -42,18 +40,5 @@ function SaveBackCancelButtons({
         </Box>
     );
 }
-
-SaveBackCancelButtons.propTypes = {
-    saveClick: PropTypes.func.isRequired,
-    cancelClick: PropTypes.func.isRequired,
-    backClick: PropTypes.func.isRequired,
-    saveDisabled: PropTypes.bool,
-    showBackButton: PropTypes.bool
-};
-
-SaveBackCancelButtons.defaultProps = {
-    saveDisabled: false,
-    showBackButton: true
-};
 
 export default SaveBackCancelButtons;

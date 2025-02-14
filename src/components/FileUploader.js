@@ -1,6 +1,4 @@
-/* eslint-disable react/jsx-props-no-spreading */
-import React, { useState, useCallback } from 'react';
-import PropTypes from 'prop-types';
+import { useState, useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import Grid from '@mui/material/Grid2';
 import Box from '@mui/material/Box';
@@ -16,16 +14,16 @@ import SnackbarMessage from './SnackbarMessage';
 import Loading from './Loading';
 
 function FileUploader({
-    title,
-    helperText,
-    doUpload,
-    loading,
-    result,
-    snackbarVisible,
-    setSnackbarVisible,
-    initiallyExpanded,
-    initialFile,
-    onFileSelect
+    helperText = 'Upload a File',
+    title = 'File Uploader',
+    initiallyExpanded = true,
+    loading = false,
+    result = null,
+    snackbarVisible = false,
+    setSnackbarVisible = null,
+    initialFile = null,
+    onFileSelect = () => {},
+    doUpload
 }) {
     const [file, setFile] = useState(initialFile);
     const [expanded, setExpanded] = useState(initiallyExpanded);
@@ -129,34 +127,5 @@ function FileUploader({
         </>
     );
 }
-
-FileUploader.propTypes = {
-    helperText: PropTypes.string,
-    title: PropTypes.string,
-    doUpload: PropTypes.func.isRequired,
-    loading: PropTypes.bool,
-    result: PropTypes.shape({
-        success: PropTypes.bool,
-        message: PropTypes.string,
-        errors: PropTypes.arrayOf(PropTypes.shape({}))
-    }),
-    snackbarVisible: PropTypes.bool,
-    setSnackbarVisible: PropTypes.func,
-    initiallyExpanded: PropTypes.bool,
-    initialFile: PropTypes.shape({}),
-    onFileSelect: PropTypes.func
-};
-
-FileUploader.defaultProps = {
-    helperText: 'Upload a File',
-    title: 'File Uploader',
-    initiallyExpanded: true,
-    loading: false,
-    result: null,
-    snackbarVisible: false,
-    setSnackbarVisible: null,
-    initialFile: null,
-    onFileSelect: () => {}
-};
 
 export default FileUploader;

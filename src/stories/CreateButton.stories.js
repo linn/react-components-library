@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
+
 import { BrowserRouter } from 'react-router-dom';
 import CreateButton from '../components/CreateButton';
 

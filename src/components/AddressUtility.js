@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import { useState } from 'react';
 import Grid from '@mui/material/Grid2';
 import Dialog from '@mui/material/Dialog';
 import Button from '@mui/material/Button';
@@ -14,17 +13,17 @@ import Search from './Search';
 
 function AddressUtility({
     createAddress,
-    createAddressLoading,
+    createAddressLoading = false,
     selectAddress,
     searchCountries,
     searchAddresses,
-    countriesSearchResults,
-    countriesSearchLoading,
-    addressSearchResults,
-    addressSearchLoading,
-    clearAddressesSearch,
-    clearCountriesSearch,
-    defaultAddressee,
+    countriesSearchResults = [],
+    countriesSearchLoading = false,
+    addressSearchResults = [],
+    addressSearchLoading = false,
+    clearAddressesSearch = () => {},
+    clearCountriesSearch = () => {},
+    defaultAddressee = false,
     isActive,
     setIsActive
 }) {
@@ -245,33 +244,5 @@ function AddressUtility({
         </>
     );
 }
-
-AddressUtility.propTypes = {
-    createAddress: PropTypes.func.isRequired,
-    selectAddress: PropTypes.func.isRequired,
-    searchCountries: PropTypes.func.isRequired,
-    searchAddresses: PropTypes.func.isRequired,
-    countriesSearchResults: PropTypes.arrayOf(PropTypes.shape({})),
-    countriesSearchLoading: PropTypes.bool,
-    addressSearchResults: PropTypes.arrayOf(PropTypes.shape({})),
-    addressSearchLoading: PropTypes.bool,
-    clearAddressesSearch: PropTypes.func,
-    clearCountriesSearch: PropTypes.func,
-    createAddressLoading: PropTypes.bool,
-    defaultAddressee: PropTypes.string,
-    setIsActive: PropTypes.func.isRequired,
-    isActive: PropTypes.bool.isRequired
-};
-
-AddressUtility.defaultProps = {
-    countriesSearchResults: [],
-    countriesSearchLoading: false,
-    addressSearchResults: [],
-    addressSearchLoading: false,
-    clearAddressesSearch: () => {},
-    clearCountriesSearch: () => {},
-    createAddressLoading: false,
-    defaultAddressee: false
-};
 
 export default AddressUtility;

@@ -1,4 +1,8 @@
 # Changelog
+## [24.0.0-alpha.00] - 2025-02-14
+### Changes
+- React router 19 and various other updates
+
 ## [23.0.0-alpha.01] - 2024-12-05
 ### Changes
 - React Router upgrade to v7

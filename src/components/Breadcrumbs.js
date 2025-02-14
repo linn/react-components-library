@@ -1,11 +1,16 @@
-import React, { Fragment } from 'react';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
-import PropTypes from 'prop-types';
 
-const Slash = () => <> {' / '} </>;
+function Slash() {
+    return <> {' / '} </>;
+}
 
-function Breadcrumbs({ navigate, rootPathLength, homeUrl, location }) {
+function Breadcrumbs({
+    navigate,
+    rootPathLength = 2,
+    homeUrl = 'https://app.linn.co.uk',
+    location
+}) {
     let path = location.pathname;
     if (path.endsWith('/')) {
         path = path.substring(0, path.length - 1);
@@ -54,7 +59,7 @@ function Breadcrumbs({ navigate, rootPathLength, homeUrl, location }) {
             {crumbs.map((crumb, index) => {
                 if (index < crumbs.length - 1) {
                     return (
-                        <Fragment key={index}>
+                        <div key={index}>
                             <Link
                                 key={crumb.href}
                                 href={crumb.href}
@@ -69,7 +74,7 @@ function Breadcrumbs({ navigate, rootPathLength, homeUrl, location }) {
                                 {crumb.caption}
                             </Link>
                             <Slash />
-                        </Fragment>
+                        </div>
                     );
                 }
                 return (
@@ -81,17 +86,5 @@ function Breadcrumbs({ navigate, rootPathLength, homeUrl, location }) {
         </div>
     );
 }
-
-Breadcrumbs.propTypes = {
-    navigate: PropTypes.func.isRequired,
-    location: PropTypes.shape({ pathname: PropTypes.string }).isRequired,
-    rootPathLength: PropTypes.number,
-    homeUrl: PropTypes.string
-};
-
-Breadcrumbs.defaultProps = {
-    rootPathLength: 2,
-    homeUrl: 'https://app.linn.co.uk'
-};
 
 export default Breadcrumbs;

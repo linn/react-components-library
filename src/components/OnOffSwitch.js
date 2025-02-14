@@ -1,45 +1,25 @@
-import React from 'react';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
-import PropTypes from 'prop-types';
 
-class OnOffSwitch extends React.Component {
-    change() {
-        const { onChange, propertyName, value } = this.props;
+function OnOffSwitch({ onChange, propertyName, value = false, label, disabled }) {
+    const change = () => {
         onChange(propertyName, !value);
-    }
+    };
 
-    render() {
-        const { value, label, disabled } = this.props;
-        return (
-            <FormControlLabel
-                control={
-                    <Switch
-                        checked={value}
-                        onChange={() => this.change()}
-                        value={value}
-                        color="primary"
-                        disabled={disabled}
-                    />
-                }
-                label={label}
-            />
-        );
-    }
+    return (
+        <FormControlLabel
+            control={
+                <Switch
+                    checked={value}
+                    onChange={change}
+                    value={value}
+                    color="primary"
+                    disabled={disabled}
+                />
+            }
+            label={label}
+        />
+    );
 }
-
-OnOffSwitch.propTypes = {
-    value: PropTypes.bool,
-    disabled: PropTypes.bool,
-    label: PropTypes.string,
-    onChange: PropTypes.func.isRequired,
-    propertyName: PropTypes.string.isRequired
-};
-
-OnOffSwitch.defaultProps = {
-    value: false,
-    disabled: false,
-    label: ''
-};
 
 export default OnOffSwitch;

@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
+
 import { MemoryRouter } from 'react-router';
 import Page from '../components/Page';
 import EntityList from '../components/EntityList';

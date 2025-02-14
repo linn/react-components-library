@@ -1,9 +1,7 @@
-import React from 'react';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { styled } from '@mui/material/styles';
 import InputLabel from '@mui/material/InputLabel';
 import TextField from '@mui/material/TextField';
-import PropTypes from 'prop-types';
 import moment from 'moment';
 import { PickersDay } from '@mui/x-date-pickers/PickersDay';
 
@@ -32,12 +30,12 @@ const CustomPickersDay = styled(PickersDay, {
 }));
 
 export default function LinnWeekPicker({
-    selectedDate,
+    selectedDate = new Date(),
     setWeekStartDate,
-    propertyName,
-    label,
-    disabled,
-    required
+    propertyName = '',
+    label = '',
+    disabled = false,
+    required = false
 }) {
     const handleChange = date => {
         setWeekStartDate(propertyName, getWeekStartDate(date));
@@ -83,20 +81,3 @@ export default function LinnWeekPicker({
         </>
     );
 }
-
-LinnWeekPicker.propTypes = {
-    selectedDate: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string]),
-    setWeekStartDate: PropTypes.func.isRequired,
-    propertyName: PropTypes.string,
-    label: PropTypes.string,
-    disabled: PropTypes.bool,
-    required: PropTypes.bool
-};
-
-LinnWeekPicker.defaultProps = {
-    selectedDate: new Date(),
-    propertyName: '',
-    label: '',
-    disabled: false,
-    required: false
-};

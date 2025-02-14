@@ -1,11 +1,17 @@
-import React from 'react';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import InputLabel from '@mui/material/InputLabel';
-import PropTypes from 'prop-types';
 import TextField from '@mui/material/TextField';
 import moment from 'moment';
 
-function Picker({ label, value, onChange, minDate, maxDate, required, disabled }) {
+function Picker({
+    label = '',
+    value = new Date().toISOString(),
+    onChange = () => {},
+    minDate = undefined,
+    maxDate = undefined,
+    required = false,
+    disabled = false
+}) {
     return (
         <>
             <InputLabel sx={theme => theme.typography.fontSize} required={required}>
@@ -37,25 +43,5 @@ function Picker({ label, value, onChange, minDate, maxDate, required, disabled }
         </>
     );
 }
-
-Picker.propTypes = {
-    label: PropTypes.string,
-    minDate: PropTypes.string,
-    maxDate: PropTypes.string,
-    onChange: PropTypes.func,
-    required: PropTypes.bool,
-    value: PropTypes.string,
-    disabled: PropTypes.bool
-};
-
-Picker.defaultProps = {
-    label: '',
-    minDate: undefined,
-    maxDate: undefined,
-    required: false,
-    value: new Date().toISOString(),
-    disabled: false,
-    onChange: () => {}
-};
 
 export default Picker;

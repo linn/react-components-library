@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import { Fragment } from 'react';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import Typography from '@mui/material/Typography';
@@ -8,7 +7,12 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import Divider from '@mui/material/Divider';
 
-function SelectedItemsList({ items, removeItem, title, maxHeight }) {
+function SelectedItemsList({
+    items,
+    removeItem = null,
+    title = 'Items Selected',
+    maxHeight = null
+}) {
     return (
         <>
             <Typography
@@ -29,7 +33,7 @@ function SelectedItemsList({ items, removeItem, title, maxHeight }) {
                 }}
             >
                 {items.map(item => (
-                    <React.Fragment key={item.id ? item.id : item}>
+                    <Fragment key={item.id ? item.id : item}>
                         <ListItem
                             sx={{
                                 display: 'flex',
@@ -53,25 +57,11 @@ function SelectedItemsList({ items, removeItem, title, maxHeight }) {
                             )}
                         </ListItem>
                         <Divider />
-                    </React.Fragment>
+                    </Fragment>
                 ))}
             </List>
         </>
     );
 }
-
-SelectedItemsList.propTypes = {
-    items: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})]))
-        .isRequired,
-    removeItem: PropTypes.func,
-    title: PropTypes.string,
-    maxHeight: PropTypes.number
-};
-
-SelectedItemsList.defaultProps = {
-    removeItem: null,
-    title: 'Items Selected',
-    maxHeight: null
-};
 
 export default SelectedItemsList;

@@ -1,4 +1,3 @@
-import React from 'react';
 import '@testing-library/jest-dom';
 import { fireEvent, cleanup } from '@testing-library/react';
 import render from '../../test-utils';

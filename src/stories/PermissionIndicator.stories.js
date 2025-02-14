@@ -1,4 +1,4 @@
-import React from 'react';
+
 import providers from './renderUtils/Providers';
 import PermissionIndicator from '../components/PermissionIndicator';
 

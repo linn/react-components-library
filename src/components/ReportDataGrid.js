@@ -1,6 +1,4 @@
-import React from 'react';
 import { DataGrid, gridClasses, GridToolbar } from '@mui/x-data-grid';
-import PropTypes from 'prop-types';
 import Grid from '@mui/material/Grid2';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
@@ -8,13 +6,13 @@ import { Link } from 'react-router-dom';
 
 function ReportDataGrid({
     report,
-    renderZeroes,
-    titleVariant,
-    showHeader,
-    showExport,
-    showTotals,
-    openLinksInNewTabs,
-    fixedRowHeight
+    renderZeroes = false,
+    titleVariant = 'h6',
+    showHeader = true,
+    showExport = false,
+    showTotals = false,
+    openLinksInNewTabs = true,
+    fixedRowHeight = false
 }) {
     // Rendering cell with drill-down functionality
     const renderCell = params => {
@@ -195,48 +193,5 @@ function ReportDataGrid({
         </Grid>
     );
 }
-
-ReportDataGrid.propTypes = {
-    showExport: PropTypes.bool,
-    renderZeroes: PropTypes.bool,
-    titleVariant: PropTypes.string,
-    showHeader: PropTypes.bool,
-    report: PropTypes.shape({
-        title: PropTypes.shape({
-            displayString: PropTypes.string,
-            drillDowns: PropTypes.arrayOf(PropTypes.shape({ href: PropTypes.string }))
-        }),
-        totals: PropTypes.shape({
-            values: PropTypes.arrayOf(
-                PropTypes.shape({ displayValue: PropTypes.number, decimalPlaces: PropTypes.number })
-            )
-        }),
-        results: PropTypes.arrayOf(PropTypes.shape({})),
-        headers: PropTypes.shape({
-            columnHeaders: PropTypes.arrayOf(PropTypes.string),
-            dataGridColumnSpecifications: PropTypes.arrayOf(
-                PropTypes.shape({
-                    align: PropTypes.string,
-                    columnWidth: PropTypes.number,
-                    columnType: PropTypes.string,
-                    decimalPlaces: PropTypes.number
-                })
-            ).isRequired
-        })
-    }).isRequired,
-    showTotals: PropTypes.bool,
-    openLinksInNewTabs: PropTypes.bool,
-    fixedRowHeight: PropTypes.bool
-};
-
-ReportDataGrid.defaultProps = {
-    showExport: false,
-    renderZeroes: false,
-    titleVariant: 'h6',
-    showHeader: true,
-    showTotals: false,
-    openLinksInNewTabs: true,
-    fixedRowHeight: false
-};
 
 export default ReportDataGrid;

@@ -1,5 +1,3 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid2';
 import List from '@mui/material/List';
@@ -103,13 +101,5 @@ function Panel({ section, close }) {
         </Paper>
     );
 }
-
-Panel.propTypes = {
-    section: PropTypes.shape({
-        id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-        columns: PropTypes.arrayOf(PropTypes.shape({}))
-    }).isRequired,
-    close: PropTypes.func.isRequired
-};
 
 export default Panel;

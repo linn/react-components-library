@@ -1,10 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import IconButton from '@mui/material/IconButton';
 import Snackbar from '@mui/material/Snackbar';
 import CloseIcon from '@mui/icons-material/Close';
 
-function SnackbarMessage({ message, visible, onClose, timeOut }) {
+function SnackbarMessage({ message, visible = false, onClose, timeOut = 3000 }) {
     return (
         <Snackbar
             anchorOrigin={{
@@ -33,17 +31,5 @@ function SnackbarMessage({ message, visible, onClose, timeOut }) {
         />
     );
 }
-
-SnackbarMessage.propTypes = {
-    message: PropTypes.string.isRequired,
-    timeOut: PropTypes.number,
-    visible: PropTypes.bool,
-    onClose: PropTypes.func.isRequired
-};
-
-SnackbarMessage.defaultProps = {
-    timeOut: 3000,
-    visible: false
-};
 
 export default SnackbarMessage;

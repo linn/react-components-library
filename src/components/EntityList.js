@@ -1,5 +1,3 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -10,7 +8,13 @@ const getListItemText = (entity, entityid, descriptionFieldName) =>
         ? `${entity[entityid]} - ${entity[descriptionFieldName]}`
         : entity[entityid];
 
-function EntityList({ title, entityList, entityId, descriptionFieldName, hasExternalLinks }) {
+function EntityList({
+    title = '',
+    entityList,
+    entityId,
+    descriptionFieldName = null,
+    hasExternalLinks = false
+}) {
     const Component = hasExternalLinks ? 'a' : Link;
     return (
         <>
@@ -33,19 +37,5 @@ function EntityList({ title, entityList, entityId, descriptionFieldName, hasExte
         </>
     );
 }
-
-EntityList.propTypes = {
-    title: PropTypes.string,
-    entityId: PropTypes.string.isRequired,
-    entityList: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-    descriptionFieldName: PropTypes.string,
-    hasExternalLinks: PropTypes.bool
-};
-
-EntityList.defaultProps = {
-    descriptionFieldName: null,
-    title: '',
-    hasExternalLinks: false
-};
 
 export default EntityList;

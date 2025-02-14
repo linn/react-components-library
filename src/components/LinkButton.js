@@ -1,10 +1,15 @@
-import React from 'react';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import Link from '@mui/material/Link';
-import PropTypes from 'prop-types';
 
-function LinkButton({ to, external, newTab, tooltip, text, disabled }) {
+function LinkButton({
+    to,
+    external = false,
+    newTab = false,
+    tooltip = null,
+    text,
+    disabled = false
+}) {
     const button = (
         <Button
             color="primary"
@@ -58,21 +63,5 @@ function LinkButton({ to, external, newTab, tooltip, text, disabled }) {
         </div>
     );
 }
-
-LinkButton.propTypes = {
-    text: PropTypes.string.isRequired,
-    tooltip: PropTypes.string,
-    to: PropTypes.string.isRequired,
-    external: PropTypes.bool,
-    disabled: PropTypes.bool,
-    newTab: PropTypes.bool
-};
-
-LinkButton.defaultProps = {
-    external: false,
-    disabled: false,
-    tooltip: null,
-    newTab: false
-};
 
 export default LinkButton;

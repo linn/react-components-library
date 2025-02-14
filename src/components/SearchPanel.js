@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import { useState, Fragment } from 'react';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid2';
 import ListItem from '@mui/material/ListItem';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Close from '@mui/icons-material/Close';
-import SearchInputField from './SearchInputField';
 import List from '@mui/material/List';
+import SearchInputField from './SearchInputField';
 
 const styles = {
     paper: {
@@ -81,7 +80,7 @@ function SearchPanel({ menu, close }) {
                                         e.href.toLowerCase().includes(searchTerm.toLowerCase())
                                 )
                                 .map(entry => (
-                                    <React.Fragment key={entry.href}>
+                                    <Fragment key={entry.href}>
                                         <a href={entry.href} style={{ textDecoration: 'none' }}>
                                             <ListItem
                                                 sx={{
@@ -99,7 +98,7 @@ function SearchPanel({ menu, close }) {
                                                 </Typography>
                                             </ListItem>
                                         </a>
-                                    </React.Fragment>
+                                    </Fragment>
                                 ))}
                     </List>
                 </Grid>
@@ -107,10 +106,5 @@ function SearchPanel({ menu, close }) {
         </Paper>
     );
 }
-
-SearchPanel.propTypes = {
-    close: PropTypes.func.isRequired,
-    menu: PropTypes.arrayOf(PropTypes.shape({})).isRequired
-};
 
 export default SearchPanel;

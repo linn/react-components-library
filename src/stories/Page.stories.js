@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
+
 import Page from '../components/Page';
 import providers from './renderUtils/Providers';
 import { Typography } from '@mui/material';
