@@ -28,7 +28,7 @@ jobs:
       - run:
           name: publish to npm
           command: |
-            if [ "${CIRCLE_BRANCH}" == "master" || "${CIRCLE_BRANCH}" == "prerelease" ]; then
+            if [[ "${CIRCLE_BRANCH}" == "master" || "${CIRCLE_BRANCH}" == "prerelease" ]]; then
                 npm publish
             fi
       - run:
