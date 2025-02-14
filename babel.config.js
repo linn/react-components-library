@@ -4,7 +4,7 @@ module.exports = {
         [
             '@babel/preset-react',
             {
-                runtime: 'automatic' // React 17+ automatic JSX transform
+                runtime: 'automatic'
             }
         ]
     ],
@@ -14,7 +14,7 @@ module.exports = {
     ],
     env: {
         test: {
-            plugins: ['@babel/plugin-transform-runtime'] // For test environment
+            plugins: ['@babel/plugin-transform-runtime']
         }
     }
 };
