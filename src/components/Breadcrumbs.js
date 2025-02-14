@@ -43,7 +43,7 @@ function Breadcrumbs({
         }, []);
 
     return (
-        <div style={{ width: '100%' }}>
+        <Fragment style={{ width: '100%' }}>
             <Link
                 key="home"
                 href={homeUrl}
@@ -84,7 +84,7 @@ function Breadcrumbs({
                     </Typography>
                 );
             })}
-        </div>
+        </Fragment>
     );
 }
 
