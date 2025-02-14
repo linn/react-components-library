@@ -28,14 +28,12 @@ jobs:
       - run:
           name: publish to npm
           command: |
-            echo "Current branch: '${CIRCLE_BRANCH}'"
-            if [[ "${CIRCLE_BRANCH}" == "master" || "${CIRCLE_BRANCH}" == "prerelease" ]]; then
-              echo "Publishing to npm..."
-              npm publish
+            if [ "${CIRCLE_BRANCH}" == "master" || "${CIRCLE_BRANCH}" == "prerelease" ]; then
+                npm publish
             fi
       - run:
           name: deploy storybook
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              echo "Skipping storybook deploy for now"
+                npm run deploy-storybook --ci
             fi
