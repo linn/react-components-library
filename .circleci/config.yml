@@ -31,9 +31,9 @@ jobs:
             if [[ "${CIRCLE_BRANCH}" == "master" || "${CIRCLE_BRANCH}" == "prerelease" ]]; then
                 npm publish
             fi
-      - run:
-          name: deploy storybook
-          command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-                npm run deploy-storybook --ci
-            fi
+      # - run:
+      #     name: deploy storybook
+      #     command: |
+      #       if [ "${CIRCLE_BRANCH}" == "master" ]; then
+      #           npm run deploy-storybook --ci
+      #       fi
