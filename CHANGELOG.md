@@ -1,7 +1,10 @@
 # Changelog
-## [24.0.0-alpha.00] - 2025-02-14
+## [25.0.0] - 2025-02-17
 ### Changes
-- React router 19 and various other updates
+- React 19 and various other updates
+- Remove Storybook for now - needs updating
+- Redux also updated a major version but is curently untested and so not guaranteed to work.
+- All redux code will be stripped from this package soon, so using redux code from this version is not recommended
 
 ## [23.0.0-alpha.01] - 2024-12-05
 ### Changes
