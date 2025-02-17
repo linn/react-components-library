@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import AppBar from '@mui/material/AppBar';
@@ -20,12 +19,12 @@ import Panel from './Panel';
 import SearchPanel from './SearchPanel';
 
 function Navigation({
-    sections,
-    loading,
-    username,
-    myStuff,
-    seenNotifications,
-    unseenNotifications,
+    sections = null,
+    loading = false,
+    username = '',
+    myStuff = null,
+    seenNotifications = [],
+    unseenNotifications = [],
     markNotificationSeen,
     authRoot
 }) {
@@ -301,25 +300,5 @@ function Navigation({
         </div>
     );
 }
-
-Navigation.propTypes = {
-    sections: PropTypes.arrayOf(PropTypes.shape({})),
-    loading: PropTypes.bool,
-    username: PropTypes.string,
-    myStuff: PropTypes.shape({ groups: PropTypes.arrayOf(PropTypes.shape({})) }),
-    seenNotifications: PropTypes.arrayOf(PropTypes.shape({})),
-    unseenNotifications: PropTypes.arrayOf(PropTypes.shape({})),
-    markNotificationSeen: PropTypes.func.isRequired,
-    authRoot: PropTypes.string.isRequired
-};
-
-Navigation.defaultProps = {
-    sections: null,
-    myStuff: null,
-    seenNotifications: [],
-    unseenNotifications: [],
-    loading: false,
-    username: ''
-};
 
 export default Navigation;

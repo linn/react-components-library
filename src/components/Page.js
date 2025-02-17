@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { useSnackbar } from 'notistack';
-import { Box, Paper, Typography } from '@mui/material';
+import { Paper, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid2'; // Now fully stable in MUI v6
 import Breadcrumbs from './Breadcrumbs';
 
@@ -23,15 +22,15 @@ const columnWidth = {
 
 function Page({
     children,
-    navigate,
-    location,
-    width,
-    requestErrors,
-    showRequestErrors,
-    homeUrl,
-    showBreadcrumbs,
-    title,
-    defaultAppTitle
+    navigate = null,
+    location = null,
+    width = 'l',
+    requestErrors = [],
+    showRequestErrors = false,
+    homeUrl = null,
+    showBreadcrumbs = true,
+    title = null,
+    defaultAppTitle = null
 }) {
     const { enqueueSnackbar } = useSnackbar();
 
@@ -62,7 +61,7 @@ function Page({
             <Grid xs={12}>
                 <Typography variant="h6">{title}</Typography>
             </Grid>
-            
+
             <Grid xs={12}>
                 {showBreadcrumbs && (
                     <Breadcrumbs navigate={navigate} homeUrl={homeUrl} location={location} />
@@ -81,30 +80,5 @@ function Page({
         </Grid>
     );
 }
-
-Page.propTypes = {
-    children: PropTypes.node.isRequired,
-    navigate: PropTypes.func,
-    width: PropTypes.oneOf(['xs', 's', 'm', 'l', 'xl']),
-    showRequestErrors: PropTypes.bool,
-    requestErrors: PropTypes.arrayOf(PropTypes.shape({})),
-    homeUrl: PropTypes.string,
-    showBreadcrumbs: PropTypes.bool,
-    title: PropTypes.string,
-    defaultAppTitle: PropTypes.string,
-    location: PropTypes.shape({})
-};
-
-Page.defaultProps = {
-    width: 'l',
-    showRequestErrors: false,
-    requestErrors: [],
-    homeUrl: null,
-    showBreadcrumbs: true,
-    title: null,
-    defaultAppTitle: null,
-    navigate: null,
-    location: null
-};
 
 export default Page;

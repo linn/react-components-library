@@ -1,5 +1,4 @@
 import React, { useRef, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import InputAdornment from '@mui/material/InputAdornment';
 import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
@@ -8,30 +7,30 @@ const hasValue = val => val || val === 0;
 const getValue = val => (hasValue(val) ? val : '');
 
 function InputField({
-    onChange,
+    onChange = null,
     propertyName,
-    type,
-    adornment,
-    disabled,
+    type = 'text',
+    adornment = '',
+    disabled = false,
 
-    error,
-    fullWidth,
-    helperText,
-    label,
-    margin,
-    maxLength,
-    rows,
-    name,
-    placeholder,
-    required,
-    value,
-    decimalPlaces,
-    textFieldProps,
-    autoFocus,
-    onErrorStateChange,
-    visible
+    error = false,
+    fullWidth = false,
+    helperText = '',
+    label = '',
+    margin = 'dense',
+    maxLength = null,
+    rows = null,
+    name = '',
+    placeholder = '',
+    required = false,
+    value = '',
+    decimalPlaces = null,
+    textFieldProps = null,
+    autoFocus = false,
+    onErrorStateChange = null,
+    visible = true
 }) {
-    const inputRef = useRef();
+    const inputRef = useRef(null);
     const [inErrorState, setInErrorState] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
 
@@ -148,52 +147,5 @@ function InputField({
         </>
     );
 }
-
-InputField.propTypes = {
-    adornment: PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})]),
-    disabled: PropTypes.bool,
-    error: PropTypes.bool,
-    fullWidth: PropTypes.bool,
-    helperText: PropTypes.string,
-    label: PropTypes.string,
-    margin: PropTypes.string,
-    maxLength: PropTypes.number,
-    required: PropTypes.bool,
-    rows: PropTypes.number,
-    name: PropTypes.string,
-    placeholder: PropTypes.string,
-    propertyName: PropTypes.string.isRequired,
-    type: PropTypes.string,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    onChange: PropTypes.func,
-    decimalPlaces: PropTypes.number,
-    textFieldProps: PropTypes.shape({}),
-    autoFocus: PropTypes.bool,
-    onErrorStateChange: PropTypes.func,
-    visible: PropTypes.bool
-};
-
-InputField.defaultProps = {
-    adornment: '',
-    disabled: false,
-    error: false,
-    fullWidth: false,
-    helperText: '',
-    label: '',
-    margin: 'dense',
-    maxLength: null,
-    required: false,
-    rows: null,
-    name: '',
-    placeholder: '',
-    type: 'text',
-    value: '',
-    onChange: null,
-    decimalPlaces: null,
-    textFieldProps: null,
-    autoFocus: false,
-    onErrorStateChange: null,
-    visible: true
-};
 
 export default InputField;

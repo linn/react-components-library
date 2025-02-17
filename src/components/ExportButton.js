@@ -1,11 +1,18 @@
 import React, { useState } from 'react';
 import Button from '@mui/material/Button';
-import PropTypes from 'prop-types';
 import Tooltip from '@mui/material/Tooltip';
 import SvgIcon from '@mui/material/SvgIcon';
 import Loading from './Loading';
 
-function ExportButton({ href, accept, fileName, buttonText, tooltipText, disabled, accessToken }) {
+function ExportButton({
+    href,
+    accept = 'text/csv',
+    fileName = 'export.csv',
+    buttonText = 'EXPORT',
+    tooltipText = 'Download report as CSV file',
+    disabled = false,
+    accessToken = null
+}) {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
 
@@ -72,24 +79,5 @@ function ExportButton({ href, accept, fileName, buttonText, tooltipText, disable
         </div>
     );
 }
-
-ExportButton.propTypes = {
-    href: PropTypes.string.isRequired,
-    accept: PropTypes.string,
-    fileName: PropTypes.string,
-    buttonText: PropTypes.string,
-    tooltipText: PropTypes.string,
-    disabled: PropTypes.bool,
-    accessToken: PropTypes.string
-};
-
-ExportButton.defaultProps = {
-    accept: 'text/csv',
-    buttonText: 'EXPORT',
-    fileName: 'export.csv',
-    tooltipText: 'Download report as CSV file',
-    disabled: false,
-    accessToken: null
-};
 
 export default ExportButton;

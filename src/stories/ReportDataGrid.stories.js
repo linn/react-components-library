@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
+
 import { MemoryRouter } from 'react-router';
 import ReportDataGrid from '../components/ReportDataGrid';
 import small from '../SampleData/ReportTable/small.json';

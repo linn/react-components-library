@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
+
 import { action } from '@storybook/addon-actions';
 import { ThemeProvider, StyledEngineProvider, createTheme } from '@mui/material/styles';
 import SnackbarMessage from '../components/SnackbarMessage';

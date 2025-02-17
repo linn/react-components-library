@@ -1,4 +1,3 @@
-import React from 'react';
 import '@testing-library/jest-dom';
 import { fireEvent, cleanup } from '@testing-library/react';
 import render from '../../test-utils';
@@ -10,15 +9,6 @@ const changeMock = jest.fn();
 
 const onErrorStateChange = jest.fn();
 
-const defaultProps = {
-    label: 'Cost',
-    type: 'number',
-    maxLength: 14,
-    propertyName: 'cost',
-    editStatus: 'edit',
-    value: 0
-};
-
 describe('When Max Length Exceeded', () => {
     test('should show error', () => {
         const { getByText, getByDisplayValue } = render(
@@ -26,9 +16,7 @@ describe('When Max Length Exceeded', () => {
         );
         const input = getByDisplayValue('ok');
 
-        fireEvent.change(input, {
-            target: { value: 'not ok - longer than 3' }
-        });
+        fireEvent.change(input, { target: { value: 'not ok - longer than 3' } });
 
         expect(getByText('MAX LENGTH (3) EXCEEDED')).toBeInTheDocument();
     });
@@ -47,9 +35,7 @@ describe('When onErrorStateChange function supplied', () => {
         );
         const input = getByDisplayValue('ok');
 
-        fireEvent.change(input, {
-            target: { value: 'not ok - longer than 3' }
-        });
+        fireEvent.change(input, { target: { value: 'not ok - longer than 3' } });
 
         expect(onErrorStateChange).toHaveBeenCalledWith(true);
     });
@@ -66,9 +52,7 @@ describe('When onErrorStateChange function supplied', () => {
         );
         const input = getByDisplayValue('ok');
 
-        fireEvent.change(input, {
-            target: { value: '123' }
-        });
+        fireEvent.change(input, { target: { value: '123' } });
 
         expect(onErrorStateChange).toHaveBeenCalledWith(false);
     });

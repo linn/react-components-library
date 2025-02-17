@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
+
 import ThemeProvider from '@mui/styles/ThemeProvider';
 import SelectedItemsList from '../components/SelectedItemsList';
 import linnTheme from '../themes/linnTheme';

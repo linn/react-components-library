@@ -1,21 +1,12 @@
 import React from 'react';
 import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
-import PropTypes from 'prop-types';
 
 const hasValue = val => val || val === 0;
 
 const getValue = val => (hasValue(val) ? val : '');
 
 const hasDisplayText = items => items.some(item => item.displayText || item.displayText === '');
-
-const includesValue = (value, items) => {
-    if (hasDisplayText(items)) {
-        return items.some(item => item.id === value);
-    }
-
-    return items.includes(value);
-};
 
 const getOptions = (items, allowNoValue, optionsLoading = false) => {
     if (optionsLoading) return ['loading...'];
@@ -32,21 +23,21 @@ const getOptions = (items, allowNoValue, optionsLoading = false) => {
 
 function Dropdown({
     onChange,
-    optionsLoading,
+    optionsLoading = false,
     propertyName,
-    required,
-    disabled,
-    label,
-    items,
-    allowNoValue,
-    value,
-    helperText,
-    fullWidth,
-    adornment,
-    type,
-    error,
-    margin,
-    autoFocus
+    required = false,
+    disabled = false,
+    label = '',
+    items = [],
+    allowNoValue = true,
+    value = '',
+    helperText = '',
+    fullWidth = false,
+    adornment = '',
+    type = 'text',
+    error = false,
+    margin = 'dense',
+    autoFocus = false
 }) {
     const change = e => {
         const newValue = e.target.value;
@@ -129,61 +120,5 @@ function Dropdown({
         </>
     );
 }
-
-Dropdown.propTypes = {
-    adornment: PropTypes.string,
-    disabled: PropTypes.bool,
-    fullWidth: PropTypes.bool,
-    helperText: PropTypes.string,
-    label: PropTypes.string,
-    items: PropTypes.oneOfType([
-        PropTypes.arrayOf(PropTypes.string),
-        PropTypes.arrayOf(PropTypes.number),
-        PropTypes.arrayOf(
-            PropTypes.shape({
-                id: PropTypes.oneOfType([PropTypes.PropTypes.string, PropTypes.PropTypes.number]),
-                displayText: PropTypes.string
-            })
-        )
-    ]),
-    propertyName: PropTypes.string.isRequired,
-    required: PropTypes.bool,
-    value: props => {
-        const { items, value, allowNoValue, optionsLoading } = props;
-
-        if (value === null) {
-            return new Error('Please provide a value that is not null');
-        }
-        if (!optionsLoading && !includesValue(value, getOptions(items, allowNoValue))) {
-            return new Error('Please provide a value that is in the items list');
-        }
-
-        return null;
-    },
-    type: PropTypes.string,
-    onChange: PropTypes.func.isRequired,
-    error: PropTypes.bool,
-    margin: PropTypes.string,
-    allowNoValue: PropTypes.bool,
-    optionsLoading: PropTypes.bool,
-    autoFocus: PropTypes.bool
-};
-
-Dropdown.defaultProps = {
-    adornment: '',
-    disabled: false,
-    fullWidth: false,
-    items: [],
-    helperText: '',
-    type: 'text',
-    required: false,
-    value: '',
-    error: false,
-    margin: 'dense',
-    allowNoValue: true,
-    optionsLoading: false,
-    label: '',
-    autoFocus: false
-};
 
 export default Dropdown;

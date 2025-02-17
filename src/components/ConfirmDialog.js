@@ -1,6 +1,5 @@
 import React from 'react';
 import Dialog from '@mui/material/Dialog';
-import PropTypes from 'prop-types';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
@@ -9,14 +8,14 @@ import Button from '@mui/material/Button';
 
 function ConfirmDialog({
     visible,
-    title,
-    confirmButtonText,
-    cancelButtonText,
-    primaryText,
-    secondaryText,
+    title = 'Are you sure?',
+    confirmButtonText = 'Confirm',
+    cancelButtonText = 'Cancel',
+    primaryText = null,
+    secondaryText = null,
     onConfirm,
-    maxWidth,
-    onCancel,
+    maxWidth = 'md',
+    onCancel = null,
     closeDialog
 }) {
     return (
@@ -50,28 +49,5 @@ function ConfirmDialog({
         </Dialog>
     );
 }
-
-ConfirmDialog.propTypes = {
-    visible: PropTypes.bool.isRequired,
-    title: PropTypes.string,
-    confirmButtonText: PropTypes.string,
-    cancelButtonText: PropTypes.string,
-    primaryText: PropTypes.string,
-    secondaryText: PropTypes.string,
-    onConfirm: PropTypes.func.isRequired,
-    maxWidth: PropTypes.string,
-    onCancel: PropTypes.func,
-    closeDialog: PropTypes.func.isRequired
-};
-
-ConfirmDialog.defaultProps = {
-    title: 'Are you sure?',
-    confirmButtonText: 'Confirm',
-    cancelButtonText: 'Cancel',
-    primaryText: null,
-    secondaryText: null,
-    maxWidth: 'md',
-    onCancel: null
-};
 
 export default ConfirmDialog;

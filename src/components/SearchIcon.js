@@ -1,5 +1,6 @@
-import { IconButton } from '@mui/material';
 import React from 'react';
+
+import { IconButton } from '@mui/material';
 
 const SearchIcon = onClick => (
     <IconButton onClick={() => (onClick ? onClick() : false)} size="large">

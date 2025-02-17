@@ -11,7 +11,6 @@ import List from '@mui/material/List';
 import Box from '@mui/material/Box';
 import ListItem from '@mui/material/ListItem';
 import Typography from '@mui/material/Typography';
-import PropTypes from 'prop-types';
 import React, { Fragment, useState } from 'react';
 import InputField from './InputField';
 import Loading from './Loading';
@@ -19,24 +18,24 @@ import Loading from './Loading';
 function Search({
     propertyName,
     label,
-    value,
+    value = null,
     handleValueChange,
-    disabled,
+    disabled = false,
     search,
-    searchResults,
-    loading,
-    priorityFunction,
+    searchResults = [],
+    loading = false,
+    priorityFunction = null,
     onResultSelect,
-    resultLimit,
-    resultsInModal,
+    resultLimit = null,
+    resultsInModal = false,
     clearSearch,
-    searchOnEnter,
-    onKeyPressFunctions,
-    helperText,
-    autoFocus,
-    visible,
-    displayChips,
-    fullWidth
+    searchOnEnter = true,
+    onKeyPressFunctions = [],
+    helperText = 'PRESS ENTER TO SEARCH',
+    autoFocus = true,
+    visible = true,
+    displayChips = false,
+    fullWidth = false
 }) {
     const [dialogOpen, setDialogOpen] = useState(false);
     const [hasSearched, setHasSearched] = useState(false);
@@ -67,7 +66,10 @@ function Search({
         >
             <Grid container spacing={3}>
                 <Grid xs={3}>
-                    <Typography data-testid="result" sx={{ fontWeight: theme => theme.typography.fontWeightBold }}>
+                    <Typography
+                        data-testid="result"
+                        sx={{ fontWeight: theme => theme.typography.fontWeightBold }}
+                    >
                         {item.name}
                     </Typography>
                 </Grid>
@@ -201,47 +203,5 @@ function Search({
         </>
     );
 }
-
-Search.propTypes = {
-    propertyName: PropTypes.string.isRequired,
-    autoFocus: PropTypes.bool,
-    label: PropTypes.string.isRequired,
-    clearSearch: PropTypes.func.isRequired,
-    handleValueChange: PropTypes.func.isRequired,
-    search: PropTypes.func.isRequired,
-    onResultSelect: PropTypes.func.isRequired,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    disabled: PropTypes.bool,
-    searchResults: PropTypes.arrayOf(PropTypes.shape({})),
-    loading: PropTypes.bool,
-    priorityFunction: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-    resultLimit: PropTypes.number,
-    resultsInModal: PropTypes.bool,
-    searchOnEnter: PropTypes.bool,
-    onKeyPressFunctions: PropTypes.arrayOf(
-        PropTypes.shape({ keyCode: PropTypes.number, action: PropTypes.func })
-    ),
-    helperText: PropTypes.string,
-    visible: PropTypes.bool,
-    displayChips: PropTypes.bool,
-    fullWidth: PropTypes.bool
-};
-
-Search.defaultProps = {
-    searchOnEnter: true,
-    onKeyPressFunctions: [],
-    autoFocus: true,
-    value: null,
-    disabled: false,
-    searchResults: [],
-    loading: false,
-    priorityFunction: null,
-    resultLimit: null,
-    resultsInModal: false,
-    helperText: 'PRESS ENTER TO SEARCH',
-    visible: true,
-    displayChips: false,
-    fullWidth: false
-};
 
 export default Search;
