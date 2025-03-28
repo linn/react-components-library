@@ -1,4 +1,7 @@
 # Changelog
+## [25.1.0] - 2025-03-28
+### Changes
+- ReportDataGrid - pass rowType into DataGrid rows and make Total and Subtotal bold
 ## [25.0.0] - 2025-02-17
 ### Changes
 - React 19 and various other updates
