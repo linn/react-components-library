@@ -98,7 +98,7 @@ function ReportDataGrid({
             }
             return acc;
         }, {});
-        return { id: r.rowTitle.displayString, ...values };
+        return { id: r.rowTitle.displayString, rowType: r.rowType, ...values };
     });
 
     // Configure slots based on props
@@ -133,6 +133,10 @@ function ReportDataGrid({
     const getRowClass = params => {
         if (params.id === 'ReportDataGridTotalsRow') {
             return 'totalLine'; // This will be handled by sx
+        }
+
+        if (params.row.rowType === 'Subtotal' || params.row.rowType === 'Total') {
+            return 'totalLine';
         }
 
         return null;
