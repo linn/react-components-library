@@ -6,7 +6,7 @@ import ClickAwayListener from '@mui/material/ClickAwayListener';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Toolbar from '@mui/material/Toolbar';
-import Grid from '@mui/material/Grid2';
+import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Badge from '@mui/material/Badge';
 import Button from '@mui/material/Button';

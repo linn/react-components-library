@@ -1,4 +1,6 @@
 # Changelog
+## [26.0.0-alpha] - 2025-04-08
+-  Upgrade MUI to V7 (tentatively, hence the alpha version - will publish 26 proper once tested) 
 ## [25.1.0] - 2025-03-28
 ### Changes
 - ReportDataGrid - pass rowType into DataGrid rows and make Total and Subtotal bold

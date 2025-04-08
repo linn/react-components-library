@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSnackbar } from 'notistack';
 import { Paper, Typography } from '@mui/material';
-import Grid from '@mui/material/Grid2'; // Now fully stable in MUI v6
+import Grid from '@mui/material/Grid'; // Now fully stable in MUI v6
 import Breadcrumbs from './Breadcrumbs';
 
 const pageWidth = {
