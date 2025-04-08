@@ -1,6 +1,6 @@
 import React from 'react';
 import { DataGrid, gridClasses, GridToolbar } from '@mui/x-data-grid';
-import Grid from '@mui/material/Grid2';
+import Grid from '@mui/material/Grid';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';

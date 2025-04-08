@@ -1,6 +1,6 @@
 
 import { MemoryRouter } from 'react-router';
-import Grid from '@mui/material/Grid2';
+import Grid from '@mui/material/Grid';
 import { action } from '@storybook/addon-actions';
 import providers from './renderUtils/Providers';
 import PrevNextButons from '../components/PrevNextButtons';

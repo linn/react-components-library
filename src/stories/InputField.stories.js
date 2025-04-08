@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
-import Grid2 from '@mui/material/Grid2';
+import Grid from '@mui/material/Grid';
 import ThemeProvider from '@mui/styles/ThemeProvider';
 import linnTheme from '../themes/linnTheme';
 import InputField from '../components/InputField';
@@ -146,20 +146,20 @@ Multiline.args = {
 
 export const RegularSpacing = args => (
     <div style={{ width: '50%' }}>
-        <Grid2 container>
-            <Grid2 item xs={6}>
+        <Grid container>
+            <Grid item xs={6}>
                 <InputField {...args} {...actions} />
-            </Grid2>
-            <Grid2 item xs={6}>
+            </Grid>
+            <Grid item xs={6}>
                 <InputField {...args} {...actions} />
-            </Grid2>
-            <Grid2 item xs={6}>
+            </Grid>
+            <Grid item xs={6}>
                 <InputField {...args} {...actions} />
-            </Grid2>
-            <Grid2 item xs={6}>
+            </Grid>
+            <Grid item xs={6}>
                 <InputField {...args} {...actions} />
-            </Grid2>
-        </Grid2>
+            </Grid>
+        </Grid>
     </div>
 );
 
@@ -174,20 +174,20 @@ RegularSpacing.args = {
 
 export const CompactSpacing = args => (
     <div style={{ width: '50%' }}>
-        <Grid2 container>
-            <Grid2 item xs={6}>
+        <Grid container>
+            <Grid item xs={6}>
                 <InputField {...args} {...actions} />
-            </Grid2>
-            <Grid2 item xs={6}>
+            </Grid>
+            <Grid item xs={6}>
                 <InputField {...args} {...actions} />
-            </Grid2>
-            <Grid2 item xs={6}>
+            </Grid>
+            <Grid item xs={6}>
                 <InputField {...args} {...actions} />
-            </Grid2>
-            <Grid2 item xs={6}>
+            </Grid>
+            <Grid item xs={6}>
                 <InputField {...args} {...actions} />
-            </Grid2>
-        </Grid2>
+            </Grid>
+        </Grid>
     </div>
 );
 
