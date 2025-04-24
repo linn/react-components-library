@@ -1,6 +1,7 @@
 import babel from 'rollup-plugin-babel';
 import { terser } from 'rollup-plugin-terser';
 import postcss from 'rollup-plugin-postcss';
+import LinkField from './src/components/LinkField';
 
 const babelrc = {
     presets: ['@babel/preset-env', '@babel/react'],
@@ -39,6 +40,7 @@ export default [
             Page: 'src/components/Page.js',
             Loading: 'src/components/Loading.js',
             InputField: 'src/components/InputField.js',
+            LinkField: 'src/components/LinkField.js',
             EntityList: 'src/components/EntityList.js',
             OnOffSwitch: 'src/components/OnOffSwitch.js',
             SnackbarMessage: 'src/components/SnackbarMessage.js',

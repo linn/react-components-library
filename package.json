@@ -1,6 +1,6 @@
 {
     "name": "@linn-it/linn-form-components-library",
-    "version": "26.0.0-alpha",
+    "version": "26.1.0",
     "private": false,
     "dependencies": {
         "@mui/x-data-grid": "^7.28.3",
