@@ -81,6 +81,7 @@ import AddressUtilityReduxContainer from './src/containers/AddressUtilityReduxCo
 import PermissionIndicator from './src/components/PermissionIndicator';
 import ReportDataGrid from './src/components/ReportDataGrid';
 import ReportDataGrids from './src/components/ReportDataGrids';
+import LinkField from './src/components/LinkField';
 
 const reducers = { menu, news };
 
@@ -124,6 +125,7 @@ export {
     linnTheme,
     LinnWeekPicker,
     LinkButton,
+    LinkField,
     Loading,
     makeActionTypes,
     makeProcessActionTypes,

@@ -1,4 +1,7 @@
 # Changelog
+## [26.1.0] - 2025-04-24
+### Changes
+- added LinkField - simple link to match InputField display style with options for external/internal and open in new tab.
 ## [26.0.0-alpha] - 2025-04-08
 -  Upgrade MUI to V7 (tentatively, hence the alpha version - will publish 26 proper once tested) 
 ## [25.1.0] - 2025-03-28

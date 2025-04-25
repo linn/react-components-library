@@ -39,6 +39,7 @@ export default [
             Page: 'src/components/Page.js',
             Loading: 'src/components/Loading.js',
             InputField: 'src/components/InputField.js',
+            LinkField: 'src/components/LinkField.js',
             EntityList: 'src/components/EntityList.js',
             OnOffSwitch: 'src/components/OnOffSwitch.js',
             SnackbarMessage: 'src/components/SnackbarMessage.js',
