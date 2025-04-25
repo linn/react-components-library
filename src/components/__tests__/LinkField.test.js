@@ -1,9 +1,7 @@
 import '@testing-library/jest-dom';
-import { cleanup, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import render from '../../test-utils';
 import LinkField from '../LinkField';
-
-afterEach(cleanup);
 
 describe('When displaying link', () => {
     test('should show value', () => {
