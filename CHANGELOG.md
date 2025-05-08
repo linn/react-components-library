@@ -1,4 +1,7 @@
 # Changelog
+## [27.0.0] - 2025-05-08
+### Changes
+- Just some npm package updates. Breaking since major version increases of mui libraries - consuming code will need to match.
 ## [26.1.0] - 2025-04-24
 ### Changes
 - added LinkField - simple link to match InputField display style with options for external/internal and open in new tab.
