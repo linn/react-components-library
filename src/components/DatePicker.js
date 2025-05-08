@@ -27,6 +27,7 @@ function Picker({
                 slotProps={{
                     textField: {
                         variant: 'outlined',
+                        fullWidth: true,
                         size: 'small',
                         sx: {
                             mt: 1

@@ -1,9 +1,5 @@
 # Changelog
-## [27.0.1] - 2025-05-08
-### Changes
-- Just some npm package updates (missed some in last pass)
-## [27.0.0] - 2025-05-08
-### Changes
+## [27.0.0-27.0.2] - 2025-05-08
 - Just some npm package updates. Breaking since major version increases of mui libraries - consuming code will need to match.
 ## [26.1.0] - 2025-04-24
 ### Changes

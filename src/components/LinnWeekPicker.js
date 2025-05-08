@@ -78,6 +78,16 @@ export default function LinnWeekPicker({
                 renderInput={params => <TextField {...params} variant="outlined" />}
                 renderDay={renderWeekPickerDay}
                 inputFormat="DD/MM/YYYY"
+                slotProps={{
+                    textField: {
+                        variant: 'outlined',
+                        fullWidth: true,
+                        size: 'small',
+                        sx: {
+                            mt: 1
+                        }
+                    }
+                }}
             />
         </>
     );
