@@ -1,4 +1,6 @@
 # Changelog
+## [28.0.0] - 2025-06-09
+-  Instead of always just rendering a secondary non-working sign out link, the Navigation UI component now conditionally renders a button to invoke an optional handleSignOut function, if it is passed by the consuming code. The expectation is that in this scenario the consuming code will not also pass a 'sign out' menu item as part of the myStuff section of the menu.json (i.e. it will specify its own custom sign out behaviour instead via the handleSignOut prop) 
 ## [27.0.0-27.0.2] - 2025-05-08
 - Just some npm package updates. Breaking since major version increases of mui libraries - consuming code will need to match.
 ## [26.1.0] - 2025-04-24
