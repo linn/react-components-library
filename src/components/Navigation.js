@@ -271,7 +271,7 @@ function NavigationUI({
                                                     }}
                                                     onClick={handleSignOut}
                                                 >
-                                                    Sign Out
+                                                    Sign Out (Newer apps pages)
                                                 </MenuItem>
                                             )}
                                         </Menu>
