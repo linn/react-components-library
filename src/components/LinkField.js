@@ -2,6 +2,7 @@ import React from 'react';
 import InputLabel from '@mui/material/InputLabel';
 import { Link as RouterLink } from 'react-router-dom';
 import Link from '@mui/material/Link';
+import Typography from '@mui/material/Typography';
 
 function LinkField({
     value = '',
@@ -9,22 +10,32 @@ function LinkField({
     to,
     external = true,
     disabled = false,
-    label = ''
+    label = '',
+    shouldRender = true
 }) {
+    if (!shouldRender) {
+        return '';
+    }
+
+    if (disabled) {
+        return <Typography color="textDisabled">{value}</Typography>;
+    }
+
     return (
         <>
-            <InputLabel
-                sx={{
-                    fontSize: theme => theme.typography.fontSize
-                }}
-            >
-                {label}
-            </InputLabel>
+            {label && (
+                <InputLabel
+                    sx={{
+                        fontSize: theme => theme.typography.fontSize
+                    }}
+                >
+                    {label}
+                </InputLabel>
+            )}
             {external ? (
                 <Link
                     target={openLinksInNewTabs ? '_blank' : ''}
                     rel={openLinksInNewTabs ? 'noopener noreferrer' : ''}
-                    disabled={disabled}
                     variant="body1"
                     underline="hover"
                     href={to}
@@ -36,7 +47,6 @@ function LinkField({
                 <Link
                     target={openLinksInNewTabs ? '_blank' : ''}
                     rel={openLinksInNewTabs ? 'noopener noreferrer' : ''}
-                    disabled={disabled}
                     component={RouterLink}
                     variant="body1"
                     color="secondary"
