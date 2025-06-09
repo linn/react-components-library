@@ -18,7 +18,7 @@ import utilities from '../utilities/index';
 import Panel from './Panel';
 import SearchPanel from './SearchPanel';
 
-function NavigationUI({
+function Navigation({
     sections = null,
     loading = false,
     username = '',
@@ -309,4 +309,4 @@ function NavigationUI({
     );
 }
 
-export default NavigationUI;
+export default Navigation;
