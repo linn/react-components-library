@@ -26,7 +26,7 @@ function Navigation({
     seenNotifications = [],
     unseenNotifications = [],
     markNotificationSeen,
-    authRoot
+    handleSignOut = null
 }) {
     const [selected, setSelected] = useState(false);
     const [anchorEl, setAnchorEl] = useState();
@@ -104,10 +104,6 @@ function Navigation({
 
         const handleClick = event => {
             setAnchorEl(event.currentTarget);
-        };
-
-        const handleSignOut = () => {
-            window.location.assign(`${authRoot}account/logout`);
         };
 
         const actions = (key, e) => (
@@ -265,7 +261,19 @@ function Navigation({
                                                         </a>
                                                     </span>
                                                 ))}
-                                            <MenuItem onClick={handleSignOut}>Sign Out</MenuItem>
+                                            {handleSignOut && (
+                                                <MenuItem
+                                                    style={{
+                                                        color: 'blue',
+                                                        textDecoration: 'underline',
+                                                        cursor: 'pointer',
+                                                        background: 'none'
+                                                    }}
+                                                    onClick={handleSignOut}
+                                                >
+                                                    Sign Out (Newer apps pages)
+                                                </MenuItem>
+                                            )}
                                         </Menu>
                                     </Grid>
                                 </Toolbar>
