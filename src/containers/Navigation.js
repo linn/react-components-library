@@ -32,7 +32,6 @@ const mapStateToProps = (state, ownProps) => {
         loading: menuSelectors.getMenuLoading(state),
         seenNotifications: newsSelectors.getSeenNotifications(state),
         unseenNotifications: newsSelectors.getUnseenNotifications(state),
-        authRoot: config.authorityUri,
         handleSignOut: ownProps.handleSignOut
     };
 };
