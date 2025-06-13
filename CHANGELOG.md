@@ -1,4 +1,7 @@
 # Changelog
+## [29.0.0] - 2025-06-13
+-  Pass handleSignOut from Navigation HOC to its child
+- Rejig package.json - remove unused packages, move more stuff from dependencies into peerDependencies (technically breaking since consuming code will need to provide them now.)
 ## [28.1.0] - 2025-06-09
 -  Properly respect LinkField disabled prop and add shouldRender
 ## [28.0.0] - 2025-06-09
