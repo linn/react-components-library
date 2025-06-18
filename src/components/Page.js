@@ -58,25 +58,25 @@ function Page({
 
     return (
         <Grid container spacing={3}>
-            <Grid xs={12}>
+            <Grid size={12}>
                 <Typography variant="h6">{title}</Typography>
             </Grid>
 
-            <Grid xs={12}>
+            <Grid size={12}>
                 {showBreadcrumbs && (
                     <Breadcrumbs navigate={navigate} homeUrl={homeUrl} location={location} />
                 )}
             </Grid>
 
-            <Grid xs={columnWidth[width]} />
+            <Grid size={columnWidth[width]} />
 
-            <Grid xs={pageWidth[width]}>
+            <Grid size={pageWidth[width]}>
                 <Paper sx={{ padding: 4 }} square>
                     {children}
                 </Paper>
             </Grid>
 
-            <Grid xs={columnWidth[width]} />
+            <Grid size={columnWidth[width]} />
         </Grid>
     );
 }

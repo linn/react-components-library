@@ -147,16 +147,16 @@ Multiline.args = {
 export const RegularSpacing = args => (
     <div style={{ width: '50%' }}>
         <Grid container>
-            <Grid item xs={6}>
+            <Grid size={6}>
                 <InputField {...args} {...actions} />
             </Grid>
-            <Grid item xs={6}>
+            <Grid size={6}>
                 <InputField {...args} {...actions} />
             </Grid>
-            <Grid item xs={6}>
+            <Grid size={6}>
                 <InputField {...args} {...actions} />
             </Grid>
-            <Grid item xs={6}>
+            <Grid size={6}>
                 <InputField {...args} {...actions} />
             </Grid>
         </Grid>
@@ -175,16 +175,16 @@ RegularSpacing.args = {
 export const CompactSpacing = args => (
     <div style={{ width: '50%' }}>
         <Grid container>
-            <Grid item xs={6}>
+            <Grid size={6}>
                 <InputField {...args} {...actions} />
             </Grid>
-            <Grid item xs={6}>
+            <Grid size={6}>
                 <InputField {...args} {...actions} />
             </Grid>
-            <Grid item xs={6}>
+            <Grid size={6}>
                 <InputField {...args} {...actions} />
             </Grid>
-            <Grid item xs={6}>
+            <Grid size={6}>
                 <InputField {...args} {...actions} />
             </Grid>
         </Grid>

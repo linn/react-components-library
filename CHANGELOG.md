@@ -1,4 +1,7 @@
 # Changelog
+## [29.0.1] - 2025-06-18
+- Fix Warning resulting from passing style to a Fragment
+- Change mui Grid 'item xs' props to 'size'
 ## [29.0.0] - 2025-06-13
 -  Pass handleSignOut from Navigation HOC to its child
 - Rejig package.json - remove unused packages, move more stuff from dependencies into peerDependencies (technically breaking since consuming code will need to provide them now.)
