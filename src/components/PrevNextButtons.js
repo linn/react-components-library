@@ -15,23 +15,23 @@ function PrevNextButtons({
     return (
         <>
             {goPrev ? (
-                <Grid xs={2}>
+                <Grid size={2}>
                     <Button disabled={disabled} startIcon={<ArrowLeftIcon />} onClick={goPrev}>
                         {prevResult}
                     </Button>
                 </Grid>
             ) : (
-                <Grid xs={2} />
+                <Grid size={2} />
             )}
-            <Grid xs={8} />
+            <Grid size={8} />
             {goNext ? (
-                <Grid xs={2}>
+                <Grid size={2}>
                     <Button disabled={disabled} endIcon={<ArrowRightIcon />} onClick={goNext}>
                         {nextResult}
                     </Button>
                 </Grid>
             ) : (
-                <Grid xs={2} />
+                <Grid size={2} />
             )}
         </>
     );

@@ -1,6 +1,6 @@
 {
   "name": "@linn-it/linn-form-components-library",
-  "version": "29.0.0",
+  "version": "29.0.1",
   "private": false,
   "dependencies": {
     "query-string": "^9.1.2",

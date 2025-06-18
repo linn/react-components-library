@@ -65,7 +65,7 @@ function Search({
             }}
         >
             <Grid container spacing={3}>
-                <Grid xs={3}>
+                <Grid size={3}>
                     <Typography
                         data-testid="result"
                         sx={{ fontWeight: theme => theme.typography.fontWeightBold }}
@@ -73,13 +73,13 @@ function Search({
                         {item.name}
                     </Typography>
                 </Grid>
-                <Grid xs={displayChips ? 3 : 9}>
+                <Grid size={displayChips ? 3 : 9}>
                     <Typography sx={{ color: theme => theme.palette.text.primary }}>
                         {item.description}
                     </Typography>
                 </Grid>
                 {displayChips && (
-                    <Grid xs={6}>
+                    <Grid size={6}>
                         <Stack
                             direction="row"
                             justifyContent="flex-start"

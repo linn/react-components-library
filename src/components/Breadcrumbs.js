@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
+import Box from '@mui/material/Box';
 
 function Slash() {
     return <> {' / '} </>;
@@ -43,7 +44,7 @@ function Breadcrumbs({
         }, []);
 
     return (
-        <Fragment style={{ width: '100%' }}>
+        <Box style={{ width: '100%' }}>
             <Link
                 key="home"
                 href={homeUrl}
@@ -84,7 +85,7 @@ function Breadcrumbs({
                     </Typography>
                 );
             })}
-        </Fragment>
+        </Box>
     );
 }
 
