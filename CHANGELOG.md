@@ -1,5 +1,5 @@
 # Changelog
-## [29.0.1] - 2025-06-13
+## [29.0.1] - 2025-06-18
 - Fix Warning resulting from passing style to a Fragment
 - Change mui Grid 'item xs' props to 'size'
 ## [29.0.0] - 2025-06-13
