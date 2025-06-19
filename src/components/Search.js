@@ -1,9 +1,7 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import CloseIcon from '@mui/icons-material/Close';
 import SearchIcon from '@mui/icons-material/Search';
 import Dialog from '@mui/material/Dialog';
 import Divider from '@mui/material/Divider';
-import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
@@ -12,8 +10,8 @@ import Box from '@mui/material/Box';
 import ListItem from '@mui/material/ListItem';
 import Typography from '@mui/material/Typography';
 import React, { Fragment, useState } from 'react';
-import InputField from './InputField';
 import Loading from './Loading';
+import InputField from './InputField';
 
 function Search({
     propertyName,
@@ -64,41 +62,35 @@ function Search({
                 setHasSearched(false);
             }}
         >
-            <Grid container spacing={3}>
-                <Grid size={3}>
-                    <Typography
-                        data-testid="result"
-                        sx={{ fontWeight: theme => theme.typography.fontWeightBold }}
-                    >
-                        {item.name}
-                    </Typography>
-                </Grid>
-                <Grid size={displayChips ? 3 : 9}>
-                    <Typography sx={{ color: theme => theme.palette.text.primary }}>
-                        {item.description}
-                    </Typography>
-                </Grid>
+            <Stack spacing={3} direction="row">
+                <Typography
+                    data-testid="result"
+                    sx={{ fontWeight: theme => theme.typography.fontWeightBold }}
+                >
+                    {item.name}
+                </Typography>
+                <Typography sx={{ color: theme => theme.palette.text.primary }}>
+                    {item.description}
+                </Typography>
                 {displayChips && (
-                    <Grid size={6}>
-                        <Stack
-                            direction="row"
-                            justifyContent="flex-start"
-                            alignItems="flex-start"
-                            spacing={1}
-                            divider={<Divider orientation="vertical" flexItem />}
-                        >
-                            {item.chips?.map(c => (
-                                <Chip
-                                    id={c.text}
-                                    key={c.text}
-                                    label={c.text}
-                                    sx={{ backgroundColor: c.color }}
-                                />
-                            ))}
-                        </Stack>
-                    </Grid>
+                    <Stack
+                        direction="row"
+                        justifyContent="flex-start"
+                        alignItems="flex-start"
+                        spacing={1}
+                        divider={<Divider orientation="vertical" flexItem />}
+                    >
+                        {item.chips?.map(c => (
+                            <Chip
+                                id={c.text}
+                                key={c.text}
+                                label={c.text}
+                                sx={{ backgroundColor: c.color }}
+                            />
+                        ))}
+                    </Stack>
                 )}
-            </Grid>
+            </Stack>
         </ListItem>
     );
 
