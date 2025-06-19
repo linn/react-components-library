@@ -175,7 +175,7 @@ function Search({
                             }}
                             aria-label="Close"
                             onClick={() => setDialogOpen(false)}
-                            xs="large"
+                            size="large"
                         >
                             <CloseIcon />
                         </IconButton>
