@@ -1,4 +1,6 @@
 # Changelog
+## [29.0.3] - 2025-06-19
+- Fix search layout breakage
 ## [29.0.2] - 2025-06-19
 - Fix imports to use `react-router-dom` instead of `react-router`
 - Replace `query-string` dependency with native `URLSearchParams` API
