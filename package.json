@@ -1,9 +1,8 @@
 {
   "name": "@linn-it/linn-form-components-library",
-  "version": "29.0.1",
+  "version": "29.0.2",
   "private": false,
   "dependencies": {
-    "query-string": "^9.1.2",
     "react-dropzone": "^14.3.8"
   },
   "scripts": {

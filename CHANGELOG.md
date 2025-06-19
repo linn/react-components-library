@@ -1,4 +1,7 @@
 # Changelog
+## [29.0.2] - 2025-06-19
+- Fix imports to use `react-router-dom` instead of `react-router`
+- Replace `query-string` dependency with native `URLSearchParams` API
 ## [29.0.1] - 2025-06-18
 - Fix Warning resulting from passing style to a Fragment
 - Change mui Grid 'item xs' props to 'size'

@@ -1,5 +1,4 @@
 ﻿import { RSAA } from 'redux-api-middleware';
-import queryString from 'query-string';
 import * as rsaaTypes from './rsaaTypes';
 
 export default function ProcessActions(
@@ -22,7 +21,8 @@ export default function ProcessActions(
         const makeEndpoint = () => {
             let endpoint = `${appRoot}${uri}`;
             if (options) {
-                endpoint += `?${queryString.stringify(options)}`;
+                const query = new URLSearchParams(options).toString();
+                endpoint += `?${query}`;
             }
             return endpoint;
         };

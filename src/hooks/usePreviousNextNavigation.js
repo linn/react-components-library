@@ -1,5 +1,4 @@
-import { useLocation, useParams } from 'react-router';
-import queryString from 'query-string';
+import { useLocation, useParams } from 'react-router-dom';
 
 export default function usePreviousNextNavigation(
     urlBuilder,
@@ -9,13 +8,13 @@ export default function usePreviousNextNavigation(
     idFieldName
 ) {
     const { search } = useLocation();
-    const parsed = queryString.parse(search);
+    const params = new URLSearchParams(search);
     const { id } = useParams();
 
     let idField;
 
     if (idStyle === 'query') {
-        idField = parsed?.[idFieldName];
+        idField = params.get(idFieldName);
     } else {
         idField = id;
     }
