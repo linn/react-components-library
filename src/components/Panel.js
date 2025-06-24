@@ -37,8 +37,7 @@ function Panel({ section, close }) {
             </Button>
             <Grid container>
                 {columns.map((col, i) => (
-                    //eslint-disable-next-line react/no-array-index-key
-                    <Grid size={12} sm={6} md={4} lg={3} xl={3} key={i}>
+                    <Grid size={{ xs: 12, md: 6, lg: 3, xl: 3 }} key={i}>
                         {col.categories
                             .filter(e => e.items.filter(item => item.showInMenu).length > 0)
                             .map(category => (

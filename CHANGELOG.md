@@ -1,3 +1,5 @@
+# Changelog## [29.1.6] - 2025-06-24
+- UI bug fixes
 # Changelog## [29.1.4-5] - 2025-06-24
 - page component: Move Breadcrumbs inside Paper
 ## [29.1.3] - 2025-06-24

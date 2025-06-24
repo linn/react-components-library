@@ -44,7 +44,7 @@ function Breadcrumbs({
         }, []);
 
     return (
-        <Box style={{ width: '100%' }}>
+        <Box style={{ width: '100%', padding: '20px' }}>
             <Link
                 key="home"
                 href={homeUrl}
