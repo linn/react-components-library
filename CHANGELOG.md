@@ -1,4 +1,5 @@
-# Changelog
+# Changelog## [29.1.4] - 2025-06-124
+- page component: Move Breadcrumbs inside Paper
 ## [29.1.3] - 2025-06-124
 - Add optional handleOnBlur function parameter to Search
 ## [29.0.3] - 2025-06-19
