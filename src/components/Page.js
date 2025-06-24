@@ -43,7 +43,7 @@ function Page({
                 });
             });
         }
-    }, [requestErrors, enqueueSnackbar]);
+    }, [requestErrors, enqueueSnackbar, showRequestErrors]);
 
     useEffect(() => {
         if (title) {
@@ -61,16 +61,14 @@ function Page({
             <Grid size={12}>
                 <Typography variant="h6">{title}</Typography>
             </Grid>
-
-            <Grid size={12}>
-                {showBreadcrumbs && (
-                    <Breadcrumbs navigate={navigate} homeUrl={homeUrl} location={location} />
-                )}
-            </Grid>
-
             <Grid size={columnWidth[width]} />
-
             <Grid size={pageWidth[width]}>
+                <Grid size={12}>
+                    {showBreadcrumbs && (
+                        <Breadcrumbs navigate={navigate} homeUrl={homeUrl} location={location} />
+                    )}
+                </Grid>
+
                 <Paper sx={{ padding: 4 }} square>
                     {children}
                 </Paper>
