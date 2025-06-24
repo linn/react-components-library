@@ -33,7 +33,8 @@ function Search({
     autoFocus = true,
     visible = true,
     displayChips = false,
-    fullWidth = false
+    fullWidth = false,
+    handleOnBlur = null
 }) {
     const [dialogOpen, setDialogOpen] = useState(false);
     const [hasSearched, setHasSearched] = useState(false);
@@ -163,7 +164,8 @@ function Search({
                                 element.action();
                             }
                         });
-                    }
+                    },
+                    onBlur: handleOnBlur ? handleOnBlur : null
                 }}
             />
             {resultsInModal ? (

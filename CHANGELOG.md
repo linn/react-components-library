@@ -1,4 +1,6 @@
 # Changelog
+## [29.1.3] - 2025-06-124
+- Add optional handleOnBlur function parameter to Search
 ## [29.0.3] - 2025-06-19
 - Fix search layout breakage
 ## [29.0.2] - 2025-06-19
