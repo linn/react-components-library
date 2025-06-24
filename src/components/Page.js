@@ -63,13 +63,16 @@ function Page({
             </Grid>
             <Grid size={columnWidth[width]} />
             <Grid size={pageWidth[width]}>
-                <Grid size={12}>
-                    {showBreadcrumbs && (
-                        <Breadcrumbs navigate={navigate} homeUrl={homeUrl} location={location} />
-                    )}
-                </Grid>
-
                 <Paper sx={{ padding: 4 }} square>
+                    <Grid size={12}>
+                        {showBreadcrumbs && (
+                            <Breadcrumbs
+                                navigate={navigate}
+                                homeUrl={homeUrl}
+                                location={location}
+                            />
+                        )}
+                    </Grid>
                     {children}
                 </Paper>
             </Grid>

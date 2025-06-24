@@ -1,6 +1,6 @@
 {
   "name": "@linn-it/linn-form-components-library",
-  "version": "29.1.4",
+  "version": "29.1.5",
   "private": false,
   "dependencies": {
     "react-dropzone": "^14.3.8"
