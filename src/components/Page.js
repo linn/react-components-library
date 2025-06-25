@@ -59,9 +59,6 @@ function Page({
     return (
         <Grid container spacing={3}>
             <Grid size={12}>
-                <Typography variant="h6">{title}</Typography>
-            </Grid>
-            <Grid size={12}>
                 {showBreadcrumbs && (
                     <Breadcrumbs navigate={navigate} homeUrl={homeUrl} location={location} />
                 )}
