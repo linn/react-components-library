@@ -1,6 +1,6 @@
 # React Component Library
 
-React and Redux code to be reused across projects presented in a storybook dev environment.
+React components and related utilities to be reused across projects.
 
 
 ## Usage
