@@ -1,4 +1,6 @@
 # Changelog
+## [30.0.0] - 2025-07-02
+- Remove all redux code from this package. That code now lives in its [own package](https://www.npmjs.com/package/@linn-it/redux-utils)
 ## [29.1.6-7] - 2025-06-25
 - UI bug fixes
 # [29.1.4-5] - 2025-06-24
