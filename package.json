@@ -28,11 +28,8 @@
     "notistack": "^3.0.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-redux": "^9.2.0",
     "react-router": "^7.5.3",
-    "react-router-dom": "^7.5.3",
-    "redux": "^5.0.1",
-    "redux-api-middleware": "^3.2.1"
+    "react-router-dom": "^7.5.3"
   },
   "browserslist": [
     ">0.2%",
@@ -80,10 +77,7 @@
     "prettier": "^3.5.3",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-redux": "^9.2.0",
     "react-router-dom": "^7.5.3",
-    "redux": "^5.0.1",
-    "redux-api-middleware": "^3.2.1",
     "rollup": "^1.32.1",
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-postcss": "^2.9.0",
