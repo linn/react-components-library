@@ -38,7 +38,7 @@ jobs:
       - run:
           name: Publish to npm
           command: |
-            if [[ "${CIRCLE_BRANCH}" == "main" || "${CIRCLE_BRANCH}" == "prerelease" ]]; then
+            if [[ "${CIRCLE_BRANCH}" == "main" || "${CIRCLE_BRANCH}" == *prerelease* ]]; then
               npm publish
             fi
 
