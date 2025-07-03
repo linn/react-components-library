@@ -36,7 +36,16 @@ import PermissionIndicator from './src/components/PermissionIndicator';
 import ReportDataGrid from './src/components/ReportDataGrid';
 import ReportDataGrids from './src/components/ReportDataGrids';
 import LinkField from './src/components/LinkField';
-
+import useDebounceValue from './src/hooks/useDebounceValue';
+import useGet from './src/hooks/useGet';
+import useSearch from './src/hooks/useSearch';
+import useInitialise from './src/hooks/useInitialise';
+import usePost from './src/hooks/usePost';
+import usePut from './src/hooks/usePut';
+import useSignIn from './src/hooks/useSignIn';
+import useUserProfile
+ from './src/hooks/useUserProfile';
+ 
 export {
     AddressUtility,
     BackButton,
@@ -75,5 +84,13 @@ export {
     smartGoBack,
     SnackbarMessage,
     usePreviousNextNavigation,
+    useDebounceValue,
+    useGet,
+    useSearch,
+    useInitialise,
+    usePost,
+    usePut,
+    useSignIn,
+    useUserProfile,
     utilities
 };
