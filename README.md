@@ -1,6 +1,6 @@
 # React Component Library
 
-React and Redux code to be reused across projects presented in a storybook dev environment.
+React components and related utilities to be reused across projects.
 
 
 ## Usage
@@ -30,4 +30,4 @@ When you are ready to share your new component, add it to the rollup.config.js f
 ## Build, Test, Package and Deploy
 The build and tests will run automatically on commits to your branch if you have a pull request open. 
 
-When you merge to master (remember to up the package version number before you do) your changes will be published to npm and the new storybook will be deployed to github pages.
+When you merge to main (remember to up the package version number before you do) your changes will be published to npm and the new storybook will be deployed to github pages.
