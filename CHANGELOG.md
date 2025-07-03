@@ -1,4 +1,6 @@
 # Changelog
+## [30.1.0] - 2025-07-03
+- add custom react hooks (for api requests, auth, etc)
 ## [30.0.0] - 2025-07-02 VERY BREAKING
 - Remove all redux code from this package. That code now lives in its [own package](https://www.npmjs.com/package/@linn-it/redux-utils)
 - Rename NavigationUI export to Navigation
