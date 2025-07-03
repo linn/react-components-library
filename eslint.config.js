@@ -1,3 +1,6 @@
+// For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
+import storybook from "eslint-plugin-storybook";
+
 const react = require('eslint-plugin-react');
 const globals = require('globals');
 const eslintPluginPrettierRecommended = require('eslint-plugin-prettier/recommended');
