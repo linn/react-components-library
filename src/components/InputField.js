@@ -97,11 +97,7 @@ function InputField({
             <TextField
                 sx={{
                     paddingTop: 0,
-                    marginTop: theme => theme.spacing(1),
-                    '& .Mui-disabled': {
-                        backgroundColor: theme => theme.palette.grey[100],
-                        color: theme => theme.palette.text.secondary
-                    }
+                    marginTop: theme => theme.spacing(1)
                 }}
                 disabled={disabled}
                 error={inErrorState}

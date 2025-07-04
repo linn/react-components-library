@@ -1,7 +1,9 @@
 # Changelog
-## [30.1.0] - 2025-07-04
+## [31.0.0] - 2025-07-04
 - resurrect storybook
 - simplify Navigation notifications prop - now just accepts one 'notifications' list, as opposed to seen and unseen lists. No longer accepts markNotificationSeen function
+## [30.1.1] - 2025-07-03
+- make InputField and Dropdown dark mode friendlier
 ## [30.1.0] - 2025-07-03
 - add custom react hooks (for api requests, auth, etc)
 ## [30.0.0] - 2025-07-02 VERY BREAKING

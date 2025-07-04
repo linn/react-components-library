@@ -72,11 +72,7 @@ function Dropdown({
             <TextField
                 sx={{
                     paddingTop: 0,
-                    marginTop: theme => theme.spacing(1),
-                    '& .MuiInputBase-root.Mui-disabled': {
-                        backgroundColor: theme => theme.palette.grey[100],
-                        color: theme => theme.palette.text.secondary
-                    }
+                    marginTop: theme => theme.spacing(1)
                 }}
                 autoFocus={autoFocus}
                 error={error}
