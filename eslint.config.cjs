@@ -1,3 +1,5 @@
+// For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
+const storybook = require("eslint-plugin-storybook");
 const react = require('eslint-plugin-react');
 const globals = require('globals');
 const eslintPluginPrettierRecommended = require('eslint-plugin-prettier/recommended');
@@ -6,11 +8,12 @@ const unusedImports = require('eslint-plugin-unused-imports');
 
 module.exports = [
     {
-        files: ['**/*.{js,jsx,mjs,cjs,ts,tsx,test.js}'],
+        files: ['**/*.{js,jsx,mjs,cjs,ts,tsx,test.js,stories.js}'],
         plugins: {
             react,
             'react-hooks': reactHooks,
-            'unused-imports': unusedImports
+            'unused-imports': unusedImports,
+            storybook
         },
         languageOptions: {
             parserOptions: {

@@ -25,7 +25,7 @@ In the project directory, you can run:
 which runs the storybook dev server.
 
 Make a new branch and add your new components, tests and stories in the relevant directories and view them in your local storybook.
-When you are ready to share your new component, add it to the rollup.config.js following the existing syntax and it will be transpiled and presented as a module export by the build command. Up the version number in package.json and then make a pull request for review.
+When you are ready to share your new component, add it to the index.js following the existing syntax and it will be bundled and presented as a module export by the build command. Up the version number in package.json and then make a pull request for review.
 
 ## Build, Test, Package and Deploy
 The build and tests will run automatically on commits to your branch if you have a pull request open. 

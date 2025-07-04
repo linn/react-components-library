@@ -32,3 +32,6 @@ yarn-error.log*
 sh.exe.stackdump
 /dist
 /.vscode
+
+*storybook.log
+storybook-static
