@@ -2,8 +2,7 @@ name: Deploy Storybook to GitHub Pages
 
 on:
   push:
-    branches: [storybook-resurrect] # or your actual default branch
-
+    branches: [main]
 permissions:
   contents: read
   pages: write

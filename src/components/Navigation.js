@@ -23,9 +23,7 @@ function Navigation({
     loading = false,
     username = '',
     myStuff = null,
-    seenNotifications = [],
-    unseenNotifications = [],
-    markNotificationSeen,
+    notifications = [],
     handleSignOut = null
 }) {
     const [selected, setSelected] = useState(false);
@@ -129,10 +127,7 @@ function Navigation({
         );
 
         const noNotifications = () => {
-            if (!seenNotifications && !unseenNotifications) {
-                return true;
-            }
-            return seenNotifications.length + unseenNotifications.length === 0;
+            return notifications.length === 0;
         };
 
         const queueNotifications = () => {
@@ -146,7 +141,7 @@ function Navigation({
                     preventDuplicate: true
                 });
             } else {
-                unseenNotifications.concat(seenNotifications).forEach((e, i) => {
+                notifications.forEach((e, i) => {
                     setTimeout(() => {
                         enqueueSnackbar(`${e.title} ${e.content}`, {
                             anchorOrigin: {
@@ -221,11 +216,7 @@ function Navigation({
                                         <Grid size={1}>
                                             <Typography variant="h4">
                                                 <Badge
-                                                    badgeContent={
-                                                        unseenNotifications
-                                                            ? unseenNotifications.length
-                                                            : 0
-                                                    }
+                                                    badgeContent={notifications.length}
                                                     color="primary"
                                                     variant="dot"
                                                 >
