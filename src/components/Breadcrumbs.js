@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
@@ -43,48 +43,50 @@ function Breadcrumbs({
         }, []);
 
     return (
-        <Box style={{ marginLeft: '20px' }}>
-            <Link
-                key="home"
-                href={homeUrl}
-                variant="button"
-                sx={{
-                    '&:hover': {
-                        cursor: 'pointer'
+        <>
+            <Box style={{ marginLeft: '20px' }}>
+                <Link
+                    key="home"
+                    href={homeUrl}
+                    variant="button"
+                    sx={{
+                        '&:hover': {
+                            cursor: 'pointer'
+                        }
+                    }}
+                >
+                    HOME
+                </Link>
+                <> {' / '} </>
+                {crumbs.map((crumb, index) => {
+                    if (index < crumbs.length - 1) {
+                        return (
+                            <Box key={index}>
+                                <Link
+                                    key={crumb.href}
+                                    href={crumb.href}
+                                    variant="button"
+                                    sx={{
+                                        '&:hover': {
+                                            cursor: 'pointer'
+                                        }
+                                    }}
+                                    onClick={crumb.onClick}
+                                >
+                                    {crumb.caption}
+                                </Link>
+                                <> {' / '} </>
+                            </Box>
+                        );
                     }
-                }}
-            >
-                HOME
-            </Link>
-            <> {' / '} </>
-            {crumbs.map((crumb, index) => {
-                if (index < crumbs.length - 1) {
                     return (
-                        <Box key={index}>
-                            <Link
-                                key={crumb.href}
-                                href={crumb.href}
-                                variant="button"
-                                sx={{
-                                    '&:hover': {
-                                        cursor: 'pointer'
-                                    }
-                                }}
-                                onClick={crumb.onClick}
-                            >
-                                {crumb.caption}
-                            </Link>
-                            <> {' / '} </>
-                        </Box>
+                        <Typography display="inline" variant="button" key={index}>
+                            {crumb.caption}
+                        </Typography>
                     );
-                }
-                return (
-                    <Typography display="inline" variant="button" key={index}>
-                        {crumb.caption}
-                    </Typography>
-                );
-            })}
-        </Box>
+                })}
+            </Box>
+        </>
     );
 }
 
