@@ -40,50 +40,48 @@ function Breadcrumbs({
         }, []);
 
     return (
-        <>
-            <Box style={{ marginLeft: '20px' }}>
-                <Link
-                    key="home"
-                    href={homeUrl}
-                    variant="button"
-                    sx={{
-                        '&:hover': {
-                            cursor: 'pointer'
-                        }
-                    }}
-                >
-                    HOME
-                </Link>
-                <> {' / '} </>
-                {crumbs.map((crumb, index) => {
-                    if (index < crumbs.length - 1) {
-                        return (
-                            <Box key={index}>
-                                <Link
-                                    key={crumb.href}
-                                    href={crumb.href}
-                                    variant="button"
-                                    sx={{
-                                        '&:hover': {
-                                            cursor: 'pointer'
-                                        }
-                                    }}
-                                    onClick={crumb.onClick}
-                                >
-                                    {crumb.caption}
-                                </Link>
-                                <> {' / '} </>
-                            </Box>
-                        );
+        <Box style={{ marginLeft: '20px' }}>
+            <Link
+                key="home"
+                href={homeUrl}
+                variant="button"
+                sx={{
+                    '&:hover': {
+                        cursor: 'pointer'
                     }
+                }}
+            >
+                HOME
+            </Link>
+            <> {' / '} </>
+            {crumbs.map((crumb, index) => {
+                if (index < crumbs.length - 1) {
                     return (
-                        <Typography display="inline" variant="button" key={index}>
-                            {crumb.caption}
-                        </Typography>
+                        <Box key={index}>
+                            <Link
+                                key={crumb.href}
+                                href={crumb.href}
+                                variant="button"
+                                sx={{
+                                    '&:hover': {
+                                        cursor: 'pointer'
+                                    }
+                                }}
+                                onClick={crumb.onClick}
+                            >
+                                {crumb.caption}
+                            </Link>
+                            <> {' / '} </>
+                        </Box>
                     );
-                })}
-            </Box>
-        </>
+                }
+                return (
+                    <Typography display="inline" variant="button" key={index}>
+                        {crumb.caption}
+                    </Typography>
+                );
+            })}
+        </Box>
     );
 }
 
