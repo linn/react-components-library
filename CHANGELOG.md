@@ -1,5 +1,7 @@
 # Changelog
 ## [31.1.0] - 2025-07-07
+- Remove redundant Fragment
+## [31.1.0] - 2025-07-07
 - changed some React.Fragments to mui Box components
 ## [31.0.0] - 2025-07-04
 - resurrect storybook
