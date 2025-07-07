@@ -1,4 +1,6 @@
 # Changelog
+## [31.1.0] - 2025-07-07
+- changed some React.Fragments to mui Box components
 ## [31.0.0] - 2025-07-04
 - resurrect storybook
 - simplify Navigation notifications prop - now just accepts one 'notifications' list, as opposed to seen and unseen lists. No longer accepts markNotificationSeen function

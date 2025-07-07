@@ -1,5 +1,6 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import List from '@mui/material/List';
+import Box from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import Typography from '@mui/material/Typography';
 import ListItemText from '@mui/material/ListItemText';
@@ -33,7 +34,7 @@ function SelectedItemsList({
                 }}
             >
                 {items.map(item => (
-                    <Fragment key={item.id ? item.id : item}>
+                    <Box key={item.id ? item.id : item}>
                         <ListItem
                             sx={{
                                 display: 'flex',
@@ -57,7 +58,7 @@ function SelectedItemsList({
                             )}
                         </ListItem>
                         <Divider />
-                    </Fragment>
+                    </Box>
                 ))}
             </List>
         </>

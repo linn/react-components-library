@@ -1,5 +1,6 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState } from 'react';
 import Paper from '@mui/material/Paper';
+import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import ListItem from '@mui/material/ListItem';
 import Typography from '@mui/material/Typography';
@@ -80,7 +81,7 @@ function SearchPanel({ menu, close }) {
                                         e.href.toLowerCase().includes(searchTerm.toLowerCase())
                                 )
                                 .map(entry => (
-                                    <Fragment key={entry.href}>
+                                    <Box key={entry.href}>
                                         <a href={entry.href} style={{ textDecoration: 'none' }}>
                                             <ListItem
                                                 sx={{
@@ -98,7 +99,7 @@ function SearchPanel({ menu, close }) {
                                                 </Typography>
                                             </ListItem>
                                         </a>
-                                    </Fragment>
+                                    </Box>
                                 ))}
                     </List>
                 </Grid>

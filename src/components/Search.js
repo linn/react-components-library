@@ -9,7 +9,7 @@ import List from '@mui/material/List';
 import Box from '@mui/material/Box';
 import ListItem from '@mui/material/ListItem';
 import Typography from '@mui/material/Typography';
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import Loading from './Loading';
 import InputField from './InputField';
 
@@ -126,10 +126,10 @@ function Search({
             return (
                 <List dense>
                     {result.map(r => (
-                        <Fragment key={r.id}>
+                        <Box key={r.id}>
                             {resultItem(r)}
                             <Divider component="li" />
-                        </Fragment>
+                        </Box>
                     ))}
                 </List>
             );
