@@ -13,6 +13,10 @@ export default {
         { file: pkg.main, format: 'cjs', sourcemap: true },
         { file: pkg.module, format: 'es', sourcemap: true }
     ],
+    external: id =>
+        ['react', 'react-dom', 'react/jsx-runtime', 'react-is'].some(
+            pkg => id === pkg || id.startsWith(pkg + '/')
+        ),
     plugins: [
         peerDepsExternal(),
         json(),
