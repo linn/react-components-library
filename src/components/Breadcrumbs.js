@@ -3,10 +3,9 @@ import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
 
-function Slash() {
-    return <> {' / '} </>;
-}
-
+console.log('Typography:', Typography);
+console.log('Link:', Link);
+console.log('Box:', Box);
 function Breadcrumbs({
     navigate,
     rootPathLength = 2,
@@ -57,11 +56,11 @@ function Breadcrumbs({
             >
                 HOME
             </Link>
-            <Slash />
+            <> {' / '} </>
             {crumbs.map((crumb, index) => {
                 if (index < crumbs.length - 1) {
                     return (
-                        <Fragment key={index}>
+                        <Box key={index}>
                             <Link
                                 key={crumb.href}
                                 href={crumb.href}
@@ -75,8 +74,8 @@ function Breadcrumbs({
                             >
                                 {crumb.caption}
                             </Link>
-                            <Slash />
-                        </Fragment>
+                            <> {' / '} </>
+                        </Box>
                     );
                 }
                 return (

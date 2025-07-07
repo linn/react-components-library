@@ -43,9 +43,7 @@ import useInitialise from './src/hooks/useInitialise';
 import usePost from './src/hooks/usePost';
 import usePut from './src/hooks/usePut';
 import useSignIn from './src/hooks/useSignIn';
-import useUserProfile
- from './src/hooks/useUserProfile';
- 
+import useUserProfile from './src/hooks/useUserProfile';
 export {
     AddressUtility,
     BackButton,

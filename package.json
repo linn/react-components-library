@@ -1,6 +1,6 @@
 {
   "name": "@linn-it/linn-form-components-library",
-  "version": "31.1.0-alpha",
+  "version": "31.1.0-alpha.1",
   "private": false,
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
