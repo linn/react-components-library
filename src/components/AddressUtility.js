@@ -6,10 +6,10 @@ import IconButton from '@mui/material/IconButton';
 import Close from '@mui/icons-material/Close';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import SaveBackCancelButtons from './SaveBackCancelButtons';
-import InputField from './InputField';
-import Loading from './Loading';
-import Search from './Search';
+import SaveBackCancelButtons from './SaveBackCancelButtons.js';
+import InputField from './InputField.js';
+import Loading from './Loading.js';
+import Search from './Search.js';
 
 function AddressUtility({
     createAddress,

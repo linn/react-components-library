@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ReportDataGrid from './ReportDataGrid';
+import ReportDataGrid from './ReportDataGrid.js';
 
 function ReportDataGrids({
     reportData = [],

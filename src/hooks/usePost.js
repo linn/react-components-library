@@ -1,5 +1,5 @@
 import { useState, useRef, useCallback } from 'react';
-import { utilities } from '@linn-it/linn-form-components-library';
+import utilities from '../utilities/index.js';
 import { useAuth } from 'react-oidc-context';
 import { useNavigate } from 'react-router-dom';
 

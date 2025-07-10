@@ -5,18 +5,24 @@ import terser from '@rollup/plugin-terser';
 import json from '@rollup/plugin-json';
 import postcss from 'rollup-plugin-postcss';
 import babel from '@rollup/plugin-babel';
-import pkg from './package.json' assert { type: 'json' };
+
+const externalPackages = [
+    'react',
+    'react-dom',
+    'react/jsx-runtime',
+    'react-is',
+    '@mui/material',
+    '@mui/icons-material',
+    '@mui/lab'
+];
 
 export default {
     input: './index.js',
     output: [
-        { file: pkg.main, format: 'cjs', sourcemap: true },
-        { file: pkg.module, format: 'es', sourcemap: true }
+        { file: 'dist/index.cjs.js', format: 'cjs', sourcemap: true },
+        { file: 'dist/index.esm.js', format: 'es', sourcemap: true }
     ],
-    external: id =>
-        ['react', 'react-dom', 'react/jsx-runtime', 'react-is'].some(
-            pkg => id === pkg || id.startsWith(pkg + '/')
-        ),
+    external: id => externalPackages.some(pkg => id === pkg || id.startsWith(pkg + '/')),
     plugins: [
         peerDepsExternal(),
         json(),
@@ -24,6 +30,13 @@ export default {
         resolve({ extensions: ['.js', '.jsx'] }),
         babel({ babelHelpers: 'bundled', exclude: 'node_modules/**', extensions: ['.js', '.jsx'] }),
         commonjs(),
-        terser()
+        terser({
+            keep_classnames: true,
+            keep_fnames: true,
+            mangle: {
+                keep_classnames: true,
+                keep_fnames: true
+            }
+        })
     ]
 };

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import SvgIcon from '@mui/material/SvgIcon';
-import Loading from './Loading';
+import Loading from './Loading.js';
 
 function ExportButton({
     href,

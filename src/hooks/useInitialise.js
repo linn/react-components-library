@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import useGet from './useGet';
+import useGet from './useGet.js';
 
 // performs a single GET request once, as soon as the calling component is first mounted
 // the url is specified by the below parameters, where id and queryString are optional

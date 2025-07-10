@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Close from '@mui/icons-material/Close';
 import List from '@mui/material/List';
-import SearchInputField from './SearchInputField';
+import SearchInputField from './SearchInputField.js';
 
 const styles = {
     paper: {
