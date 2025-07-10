@@ -9,9 +9,9 @@ import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import ErrorCard from './ErrorCard';
-import SnackbarMessage from './SnackbarMessage';
-import Loading from './Loading';
+import ErrorCard from './ErrorCard.js';
+import SnackbarMessage from './SnackbarMessage.js';
+import Loading from './Loading.js';
 
 function FileUploader({
     helperText = 'Upload a File',

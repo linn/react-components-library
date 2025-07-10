@@ -1,7 +1,7 @@
 import React from 'react';
 
-import InputField from './InputField';
-import SearchIcon from './SearchIcon';
+import InputField from './InputField.js';
+import SearchIcon from './SearchIcon.js';
 
 function SearchInputField({ autoFocus = false, propertyName, ...rest }) {
     return (

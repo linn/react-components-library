@@ -5,6 +5,7 @@ import InputLabel from '@mui/material/InputLabel';
 
 const hasValue = val => val || val === 0;
 const getValue = val => (hasValue(val) ? val : '');
+console.log('TextField typeof:', typeof TextField);
 
 function InputField({
     onChange = null,

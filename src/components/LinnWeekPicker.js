@@ -6,7 +6,7 @@ import TextField from '@mui/material/TextField';
 import moment from 'moment';
 import { PickersDay } from '@mui/x-date-pickers/PickersDay';
 
-import { getWeekStartDate, getWeekEndDate } from '../utilities/dateUtilities';
+import { getWeekStartDate, getWeekEndDate } from '../utilities/dateUtilities.js';
 
 const CustomPickersDay = styled(PickersDay, {
     shouldForwardProp: prop =>

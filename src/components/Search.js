@@ -10,8 +10,8 @@ import Box from '@mui/material/Box';
 import ListItem from '@mui/material/ListItem';
 import Typography from '@mui/material/Typography';
 import React, { useState } from 'react';
-import Loading from './Loading';
-import InputField from './InputField';
+import Loading from './Loading.js';
+import InputField from './InputField.js';
 
 function Search({
     propertyName,
