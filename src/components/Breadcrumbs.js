@@ -1,7 +1,6 @@
 import React from 'react';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
-import Box from '@mui/material/Box';
 
 function Breadcrumbs({
     navigate,
@@ -40,7 +39,7 @@ function Breadcrumbs({
         }, []);
 
     return (
-        <Box style={{ marginLeft: '20px' }}>
+        <span style={{ marginLeft: '20px' }}>
             <Link
                 key="home"
                 href={homeUrl}
@@ -57,7 +56,7 @@ function Breadcrumbs({
             {crumbs.map((crumb, index) => {
                 if (index < crumbs.length - 1) {
                     return (
-                        <Box key={index}>
+                        <span key={index}>
                             <Link
                                 key={crumb.href}
                                 href={crumb.href}
@@ -72,7 +71,7 @@ function Breadcrumbs({
                                 {crumb.caption}
                             </Link>
                             <> {' / '} </>
-                        </Box>
+                        </span>
                     );
                 }
                 return (
@@ -81,7 +80,7 @@ function Breadcrumbs({
                     </Typography>
                 );
             })}
-        </Box>
+        </span>
     );
 }
 

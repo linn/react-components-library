@@ -1,4 +1,8 @@
 # Changelog
+## [31.1.2] - 2025-07-10
+- Fix breadcrumbs layout bug
+## [31.1.1] - 2025-07-09
+- Slight changes to rollup bundle config
 ## [31.1.0] - 2025-07-07
 - Remove redundant Fragment
 ## [31.1.0] - 2025-07-07
