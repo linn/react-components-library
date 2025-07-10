@@ -1,6 +1,6 @@
 {
   "name": "@linn-it/linn-form-components-library",
-  "version": "40.0.6",
+  "version": "31.1.2-alpha",
   "private": false,
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
@@ -19,7 +19,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "rollup --config",
+    "build": "npm ci && rollup --config",
     "deploy": "npm run build && npm publish",
     "test": "jest src/",
     "test:watch": "jest --watch",
