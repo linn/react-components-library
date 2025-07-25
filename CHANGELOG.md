@@ -1,4 +1,6 @@
 # Changelog
+## [31.1.3] - 2025-07-25
+- minor npm updates
 ## [31.1.2] - 2025-07-10
 - Fix breadcrumbs layout bug
 ## [31.1.1] - 2025-07-09
