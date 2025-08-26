@@ -59,7 +59,7 @@ function ReportDataGrid({
         align: report.headers.dataGridColumnSpecifications[i].align,
         headerAlign: report.headers.dataGridColumnSpecifications[i].align,
         width: report.headers.dataGridColumnSpecifications[i].columnWidth,
-        valueFormatter: ({ value }) => {
+        valueFormatter: value => {
             if (
                 report.headers.dataGridColumnSpecifications[i].columnType === 'number' &&
                 (value || value === 0 || value === '0')
@@ -174,7 +174,7 @@ function ReportDataGrid({
                     slots={slots}
                     autoHeight={!fullPages}
                     density="compact"
-                    getRowHeight={() => (fixedRowHeight ? 34 : 'auto')}
+                    getRowHeight={() => (fixedRowHeight ? 30 : 'auto')}
                     disableRowSelectionOnClick
                     getRowClassName={getRowClass}
                     hideFooter={report.results.length <= 100}
@@ -184,7 +184,7 @@ function ReportDataGrid({
                             whiteSpace: fixedRowHeight ? '' : 'normal !important',
                             wordWrap: fixedRowHeight ? '' : 'break-word !important',
                             wordBreak: fixedRowHeight ? '' : 'break-word !important',
-                            lineHeight: fixedRowHeight ? '' : '1.5 !important'
+                            lineHeight: fixedRowHeight ? 1 : '1.5 !important'
                         },
                         [`& .${gridClasses.row}`]: {
                             maxHeight: 'none !important'
