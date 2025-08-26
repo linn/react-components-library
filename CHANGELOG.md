@@ -1,4 +1,6 @@
 # Changelog
+## [31.1.4] - 2025-08-26
+- Fix ReportDataGrids valueFormatter, inline with mui datagrid changes
 ## [31.1.3] - 2025-07-25
 - minor npm updates
 ## [31.1.2] - 2025-07-10
