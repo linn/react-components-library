@@ -1,5 +1,5 @@
 import React from 'react';
-import { DataGrid, gridClasses, GridToolbar } from '@mui/x-data-grid';
+import { DataGrid, gridClasses } from '@mui/x-data-grid';
 import Grid from '@mui/material/Grid';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
@@ -108,9 +108,6 @@ function ReportDataGrid({
             columnHeaders: () => null
         };
     }
-    if (showExport) {
-        slots = { ...slots, toolbar: GridToolbar };
-    }
 
     // Add totals row if required
     if (showTotals) {
@@ -172,6 +169,7 @@ function ReportDataGrid({
                     rows={rows}
                     columns={columns}
                     slots={slots}
+                    showToolbar={showExport}
                     autoHeight={!fullPages}
                     density="compact"
                     getRowHeight={() => (fixedRowHeight ? 30 : 'auto')}
