@@ -1,4 +1,6 @@
 # Changelog
+## [31.1.5] - 2025-09-05
+- ReportDataGrid - replace obsolete header option
 ## [31.1.4] - 2025-08-26
 - Fix ReportDataGrids valueFormatter, inline with mui datagrid changes
 ## [31.1.3] - 2025-07-25
