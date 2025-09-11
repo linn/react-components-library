@@ -10,7 +10,8 @@ function ReportDataGrids({
     perReportExport = false,
     openLinksInNewTabs = true,
     showTotals = false,
-    fixedRowHeight = false
+    fixedRowHeight = false,
+    showRowCount = false
 }) {
     return (
         <>
@@ -25,6 +26,7 @@ function ReportDataGrids({
                     titleVariant={titlesVariant}
                     showHeader={repeatHeaders || i === 0}
                     openLinksInNewTabs={openLinksInNewTabs}
+                    showRowCount={showRowCount}
                 />
             ))}
         </>

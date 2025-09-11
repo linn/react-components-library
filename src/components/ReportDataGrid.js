@@ -13,7 +13,8 @@ function ReportDataGrid({
     showExport = false,
     showTotals = false,
     openLinksInNewTabs = true,
-    fixedRowHeight = false
+    fixedRowHeight = false,
+    showRowCount = false
 }) {
     // Rendering cell with drill-down functionality
     const renderCell = params => {
@@ -175,7 +176,7 @@ function ReportDataGrid({
                     getRowHeight={() => (fixedRowHeight ? 30 : 'auto')}
                     disableRowSelectionOnClick
                     getRowClassName={getRowClass}
-                    hideFooter={report.results.length <= 100}
+                    hideFooter={report.results.length <= 100 && !showRowCount}
                     sx={{
                         [`& .${gridClasses.cell}`]: {
                             py: 1,

@@ -1,4 +1,6 @@
 # Changelog
+## [31.2.0] - 2025-09-11
+- ReportDataGrid, ReportDataGrids - add showRowCount option. Per report using Datagrid footer.
 ## [31.1.5] - 2025-09-05
 - ReportDataGrid - replace obsolete header option
 ## [31.1.4] - 2025-08-26
