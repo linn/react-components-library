@@ -195,12 +195,12 @@ function ReportDataGrid({
                 />
             </Grid>
             {showRowCount && report && report.results && (
-                <Grid size={12} sx={{ marginTop: '-10px' }}>
+                <Grid size={12} sx={{ mt: -1.25 }}>
                     <Typography
                         variant="body2"
-                        style={{
+                        sx={{
                             float: 'left',
-                            paddingLeft: '15px'
+                            pl: 2
                         }}
                     >
                         Number of rows: {report.results.length}
