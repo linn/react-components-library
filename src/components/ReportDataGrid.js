@@ -176,7 +176,7 @@ function ReportDataGrid({
                     getRowHeight={() => (fixedRowHeight ? 30 : 'auto')}
                     disableRowSelectionOnClick
                     getRowClassName={getRowClass}
-                    hideFooter={report.results.length <= 100 && !showRowCount}
+                    hideFooter={report.results.length <= 100}
                     sx={{
                         [`& .${gridClasses.cell}`]: {
                             py: 1,
@@ -194,6 +194,19 @@ function ReportDataGrid({
                     }}
                 />
             </Grid>
+            {showRowCount && report && report.results && (
+                <Grid size={12} sx={{ mt: -1.25 }}>
+                    <Typography
+                        variant="body2"
+                        sx={{
+                            float: 'left',
+                            pl: 2
+                        }}
+                    >
+                        Number of rows: {report.results.length}
+                    </Typography>
+                </Grid>
+            )}
         </Grid>
     );
 }
