@@ -25,7 +25,6 @@ import NotFound from './src/components/NotFound.js';
 import LinnWeekPicker from './src/components/LinnWeekPicker.js';
 import { getWeekEndDate, getWeekStartDate } from './src/utilities/dateUtilities.js';
 import './src/styles/printStyles.css';
-import smartGoBack from './src/utilities/smartGoBack.js';
 import FileUploader from './src/components/FileUploader.js';
 import AddressUtility from './src/components/AddressUtility.js';
 import Search from './src/components/Search.js';
@@ -79,7 +78,6 @@ export {
     Search,
     SearchInputField,
     SelectedItemsList,
-    smartGoBack,
     SnackbarMessage,
     usePreviousNextNavigation,
     useDebounceValue,

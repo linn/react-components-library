@@ -38,7 +38,7 @@ function FileUploader({
     const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
     const handleUploadClick = () => {
-        const reader = new global.FileReader();
+        const reader = new globalThis.FileReader();
         reader.onload = () => {
             const binaryStr = reader.result;
             doUpload(binaryStr);
