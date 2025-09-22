@@ -1,4 +1,7 @@
 # Changelog
+## [32.0.0] - 2025-09-22
+- Change references to global to globalThis
+- Breaking: Remove smartGoBack
 ## [31.2.1] - 2025-09-16
 - ReportDataGrid - change showRowCount option to display below the grid.
 ## [31.2.0] - 2025-09-11
