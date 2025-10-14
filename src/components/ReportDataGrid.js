@@ -123,7 +123,7 @@ function ReportDataGrid({
             acc[spec.columnId] = totalVal;
 
             return acc;
-        });
+        }, {});
         rows = [...rows, { id: 'ReportDataGridTotalsRow', ...totalsValues }];
     }
 
