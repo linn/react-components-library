@@ -1,5 +1,5 @@
 # Changelog
-## [32.1.2] - 2025-11-10
+## [32.1.2-3] - 2025-11-10
 - minor npm updates
 ## [32.1.1] - 2025-10-14
 - fix ReportDataGrid bug where report would fail to render totals when no data
