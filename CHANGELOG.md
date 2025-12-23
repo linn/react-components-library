@@ -1,6 +1,8 @@
 # Changelog
-## [32.2.0] - 2025-12-23
+## [32.3.0] - 2025-12-23
 - Add background-colour and text-colour attributes to ReportDataGrid
+## [32.2.0] - 2025-12-04
+- added custom useDelete hook
 ## [32.1.2-3] - 2025-11-10
 - minor npm updates
 ## [32.1.1] - 2025-10-14
