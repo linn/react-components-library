@@ -97,6 +97,13 @@ function ReportDataGrid({
                     external: drillDowns[0].externalLink
                 };
             }
+
+            const attributes = r.values[i]?.attributes;
+            const hasAttributes = attributes?.length;
+            if (hasAttributes) {
+                acc[`${col.field}Attributes`] = attributes;
+            }
+
             return acc;
         }, {});
         return { id: r.rowTitle.displayString, rowType: r.rowType, ...values };
@@ -146,6 +153,31 @@ function ReportDataGrid({
         <Typography variant={titleVariant}>{report.title.displayString}</Typography>
     );
 
+    const colourStyles = {};
+    rows.forEach(row => {
+        columns.forEach(col => {
+            const attributes = row[`${col.field}Attributes`];
+            if (attributes) {
+                attributes.forEach(attribute => {
+                    if (attribute.attributeType === 'background-colour') {
+                        const className = `cell-bg-${attribute.attributeValue.replace('#', '')}`;
+                        colourStyles[`.${className}`] = {
+                            backgroundColor: attribute.attributeValue
+                        };
+                    }
+                });
+                attributes.forEach(attribute => {
+                    if (attribute.attributeType === 'text-colour') {
+                        const className = `cell-tc-${attribute.attributeValue.replace('#', '')}`;
+                        colourStyles[`.${className}`] = {
+                            color: attribute.attributeValue
+                        };
+                    }
+                });
+            }
+        });
+    });
+
     // Fixed height style condition
     const fullPages = rows?.length >= 100;
     const fixedHeightStyle = { height: '100vh' };
@@ -171,12 +203,29 @@ function ReportDataGrid({
                     columns={columns}
                     slots={slots}
                     showToolbar={showExport}
-                    autoHeight={!fullPages}
                     density="compact"
                     getRowHeight={() => (fixedRowHeight ? 30 : 'auto')}
                     disableRowSelectionOnClick
                     getRowClassName={getRowClass}
                     hideFooter={report.results.length <= 100}
+                    getCellClassName={params => {
+                        const attributes = params.row[`${params.field}Attributes`];
+                        if (attributes) {
+                            let classes = '';
+                            for (const attribute of attributes) {
+                                if (attribute.attributeType === 'text-colour') {
+                                    classes += `cell-tc-${attribute.attributeValue.replace('#', '')} `;
+                                }
+                                if (attribute.attributeType === 'background-colour') {
+                                    classes += `cell-bg-${attribute.attributeValue.replace('#', '')} `;
+                                }
+                            }
+
+                            return classes.trim();
+                        }
+
+                        return '';
+                    }}
                     sx={{
                         [`& .${gridClasses.cell}`]: {
                             py: 1,
@@ -190,7 +239,8 @@ function ReportDataGrid({
                         },
                         '.totalLine': {
                             fontWeight: 'bolder'
-                        }
+                        },
+                        ...colourStyles
                     }}
                 />
             </Grid>
