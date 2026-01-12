@@ -1,4 +1,6 @@
 # Changelog
+## [32.3.1] - 2026-01-12
+- Add toString for name in useSearch
 ## [32.3.0] - 2025-12-23
 - Add background-colour and text-colour attributes to ReportDataGrid
 ## [32.2.0] - 2025-12-04
