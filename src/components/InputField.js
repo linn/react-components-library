@@ -12,7 +12,6 @@ function InputField({
     type = 'text',
     adornment = '',
     disabled = false,
-
     error = false,
     fullWidth = false,
     helperText = '',
@@ -28,7 +27,8 @@ function InputField({
     textFieldProps = null,
     autoFocus = false,
     onErrorStateChange = null,
-    visible = true
+    visible = true,
+    autoComplete = 'off'
 }) {
     const inputRef = useRef(null);
     const [inErrorState, setInErrorState] = useState(false);
@@ -118,6 +118,7 @@ function InputField({
                     }
                 }}
                 type={type}
+                autoComplete={autoComplete}
                 value={getValue(value)}
                 onChange={e => change(e)}
                 InputProps={{

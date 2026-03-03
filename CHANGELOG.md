@@ -1,4 +1,6 @@
 # Changelog
+## [32.3.3] - 2026-03-03
+- Add autoComplete parameter to InputField and default to off
 ## [32.3.1] - 2026-01-12
 - Add toString for name in useSearch
 ## [32.3.0] - 2025-12-23
