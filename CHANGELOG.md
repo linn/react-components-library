@@ -1,4 +1,6 @@
 # Changelog
+## [32.4.0] - 2026-04-20
+- Add option to pass hideFromEdit Y/N to Dropdown to support allow obsolete fields to be displayed but not selected.
 ## [32.3.3] - 2026-03-03
 - Add autoComplete parameter to InputField and default to off
 ## [32.3.1] - 2026-01-12
