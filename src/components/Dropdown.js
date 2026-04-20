@@ -21,6 +21,19 @@ const getOptions = (items, allowNoValue, optionsLoading = false) => {
     return options;
 };
 
+const getSelectableItems = (items, currentValue) => {
+    if (!items) return items;
+    const filtered = items.filter(item => item.hideFromEdit !== 'Y');
+    // If the current value is a hidden item, include it so it still displays correctly
+    const currentItem = items.find(
+        item => (item.id !== undefined ? item.id : item) === currentValue
+    );
+    if (currentItem && currentItem.hideFromEdit === 'Y') {
+        return [currentItem, ...filtered];
+    }
+    return filtered;
+};
+
 function Dropdown({
     onChange,
     optionsLoading = false,
@@ -52,6 +65,8 @@ function Dropdown({
 
         onChange(propertyName, val);
     };
+
+    const selectableItems = getSelectableItems(items, value);
 
     return (
         <>
@@ -101,13 +116,13 @@ function Dropdown({
                     }
                 }}
             >
-                {hasDisplayText(items)
-                    ? getOptions(items, allowNoValue, optionsLoading).map(item => (
+                {hasDisplayText(selectableItems)
+                    ? getOptions(selectableItems, allowNoValue, optionsLoading).map(item => (
                           <option key={item.id} value={item.id}>
                               {item.displayText}
                           </option>
                       ))
-                    : getOptions(items, allowNoValue, optionsLoading).map(item => (
+                    : getOptions(selectableItems, allowNoValue, optionsLoading).map(item => (
                           <option key={item} value={item}>
                               {item}
                           </option>
