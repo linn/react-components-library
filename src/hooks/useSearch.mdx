@@ -1,0 +1,108 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Hooks/useSearch" />
+
+# useSearch
+
+A hook that simplifies searching against a REST API endpoint and mapping results to a consistent shape.
+
+## Signature
+
+```js
+const { search, results, loading, clear } = useSearch(
+    url,
+    idFieldKey,
+    nameFieldKey,
+    descriptionFieldKey,
+    requiresAuth,
+    itemsArray
+);
+```
+
+## Parameters
+
+<table>
+  <thead>
+    <tr><th>Parameter</th><th>Type</th><th>Default</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>url</code></td><td><code>string</code></td><td>—</td><td>Base URL for the search endpoint. A <code>?searchTerm=</code> query parameter is appended automatically.</td></tr>
+    <tr><td><code>idFieldKey</code></td><td><code>string</code></td><td><code>'id'</code></td><td>Name of the field in each result item to use as <code>id</code>.</td></tr>
+    <tr><td><code>nameFieldKey</code></td><td><code>string</code></td><td><code>'name'</code></td><td>Name of the field to map to <code>name</code>.</td></tr>
+    <tr><td><code>descriptionFieldKey</code></td><td><code>string</code></td><td><code>'description'</code></td><td>Name of the field to map to <code>description</code>.</td></tr>
+    <tr><td><code>requiresAuth</code></td><td><code>boolean</code></td><td><code>false</code></td><td>When <code>true</code>, an OIDC bearer token is included in the request headers.</td></tr>
+    <tr><td><code>itemsArray</code></td><td><code>boolean</code></td><td><code>false</code></td><td>Set to <code>true</code> when the API returns <code>{'{ items: [...] }'}</code> instead of a plain array.</td></tr>
+  </tbody>
+</table>
+
+## Return value
+
+<table>
+  <thead>
+    <tr><th>Property</th><th>Type</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>search</code></td><td><code>(searchTerm: string) =&gt; void</code></td><td>Call this to trigger a search. Results are fetched from <code>url?searchTerm=&lt;value&gt;</code>.</td></tr>
+    <tr><td><code>results</code></td><td><code>Array&lt;{'{ id, name, description, ...rest }'}&gt;</code></td><td>Mapped array of matching items. Empty array while loading or if no results.</td></tr>
+    <tr><td><code>loading</code></td><td><code>boolean</code></td><td><code>true</code> while the HTTP request is in flight.</td></tr>
+    <tr><td><code>clear</code></td><td><code>() =&gt; void</code></td><td>Resets <code>results</code> to an empty array (clears the previous search).</td></tr>
+  </tbody>
+</table>
+
+## Basic usage
+
+```jsx
+import useSearch from '@linn-it/linn-form-components-library/hooks/useSearch';
+
+function ProductSearch() {
+    const { search, results, loading, clear } = useSearch(
+        '/api/products',
+        'partNumber',  // mapped to `id`
+        'description', // mapped to `name`
+        'category'     // mapped to `description`
+    );
+
+    return (
+        <>
+            <input
+                placeholder="Search products"
+                onChange={e => search(e.target.value)}
+            />
+            {loading && <p>Loading…</p>}
+            <ul>
+                {results.map(r => (
+                    <li key={r.id}>{r.name} — {r.description}</li>
+                ))}
+            </ul>
+            <button onClick={clear}>Clear</button>
+        </>
+    );
+}
+```
+
+## With authenticated endpoints
+
+```jsx
+const { search, results } = useSearch(
+    '/api/secure/products',
+    'id',
+    'name',
+    'description',
+    true // requiresAuth — adds Bearer token from react-oidc-context
+);
+```
+
+## With legacy `items` array responses
+
+Some older Linn APIs return `{ items: [...] }` rather than a plain array. Pass `itemsArray: true` as the sixth argument:
+
+```jsx
+const { search, results } = useSearch(
+    '/api/employees/search',
+    'employeeId',
+    'fullName',
+    'department',
+    false,
+    true // itemsArray
+);
+```
