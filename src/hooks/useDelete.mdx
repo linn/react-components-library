@@ -1,0 +1,96 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Hooks/useDelete" />
+
+# useDelete
+
+A hook that handles HTTP DELETE requests to a REST API endpoint, managing loading state, error handling, and the response result.
+
+## Signature
+
+```js
+const { send, isLoading, errorMessage, deleteResult, clearData } = useDelete(url, requiresAuth);
+```
+
+## Parameters
+
+<table>
+  <thead>
+    <tr><th>Parameter</th><th>Type</th><th>Default</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>url</code></td><td><code>string</code></td><td>—</td><td>Base URL of the resource. The item ID is appended: <code>DELETE {'{ url }'}/{'{ id }'}</code>.</td></tr>
+    <tr><td><code>requiresAuth</code></td><td><code>boolean</code></td><td><code>false</code></td><td>When <code>true</code>, an OIDC bearer token is included in the request headers via <code>react-oidc-context</code>.</td></tr>
+  </tbody>
+</table>
+
+## Return value
+
+<table>
+  <thead>
+    <tr><th>Property</th><th>Type</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>send</code></td><td><code>(id: string | number) =&gt; Promise&lt;void&gt;</code></td><td>Triggers the DELETE request for the given <code>id</code>.</td></tr>
+    <tr><td><code>isLoading</code></td><td><code>boolean</code></td><td><code>true</code> while the request is in flight.</td></tr>
+    <tr><td><code>errorMessage</code></td><td><code>string | null</code></td><td>Set to the response body text when the request fails, otherwise <code>null</code>.</td></tr>
+    <tr><td><code>deleteResult</code></td><td><code>any | null</code></td><td>Set to the parsed JSON response body on success, otherwise <code>null</code>.</td></tr>
+    <tr><td><code>clearData</code></td><td><code>() =&gt; void</code></td><td>Resets <code>deleteResult</code> to <code>null</code> (useful when resetting a form or list after deletion).</td></tr>
+  </tbody>
+</table>
+
+## Basic usage
+
+```jsx
+import useDelete from '@linn-it/linn-form-components-library/hooks/useDelete';
+
+function DeleteProductButton({ productId }) {
+    const { send, isLoading, errorMessage, deleteResult } = useDelete('/api/products');
+
+    return (
+        <>
+            <button onClick={() => send(productId)} disabled={isLoading}>
+                {isLoading ? 'Deleting…' : 'Delete'}
+            </button>
+            {errorMessage && <p style={{ color: 'red' }}>Error: {errorMessage}</p>}
+            {deleteResult && <p>Deleted successfully.</p>}
+        </>
+    );
+}
+```
+
+## With authenticated endpoints
+
+```jsx
+const { send, isLoading, errorMessage } = useDelete(
+    '/api/secure/orders',
+    true // requiresAuth — adds Bearer token from react-oidc-context
+);
+```
+
+## Handling the result
+
+After a successful DELETE, `deleteResult` is set to the parsed JSON from the server response. You can use this to update local state or navigate away:
+
+```jsx
+const { send, deleteResult } = useDelete('/api/items');
+
+useEffect(() => {
+    if (deleteResult) {
+        navigate('/items'); // or dispatch a redux action, etc.
+    }
+}, [deleteResult]);
+```
+
+## Clearing state
+
+Use `clearData` to reset `deleteResult` back to `null` — for example when reopening a confirmation dialog:
+
+```jsx
+const { send, deleteResult, clearData } = useDelete('/api/items');
+
+const handleOpenDialog = () => {
+    clearData();
+    setDialogVisible(true);
+};
+```
