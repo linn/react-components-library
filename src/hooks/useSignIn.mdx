@@ -1,0 +1,67 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Hooks/useSignIn" />
+
+# useSignIn
+
+A hook that automatically triggers an OIDC sign-in redirect when the user is not authenticated. Before redirecting it saves the current pathname to `sessionStorage` so the application can restore the user's intended destination after sign-in completes.
+
+## Signature
+
+```js
+useSignIn();
+```
+
+## Parameters
+
+This hook takes no parameters.
+
+## Return value
+
+This hook returns nothing. Its only effect is triggering `signinRedirect()` when authentication is required.
+
+## Behaviour
+
+When the component mounts (and whenever the auth state changes), the hook checks all of the following conditions before initiating a redirect:
+
+- No auth params are present in the URL (`hasAuthParams()` is `false`)
+- The user is not already authenticated (`auth.isAuthenticated` is `false`)
+- No navigation is currently active (`auth.activeNavigator` is `undefined`)
+- The auth context is not loading (`auth.isLoading` is `false`)
+- A sign-in has not already been attempted in this render cycle
+
+When all conditions are met it calls `auth.signinRedirect()` and writes `window.location.pathname` to `sessionStorage` under the key `auth:redirect`.
+
+## Basic usage
+
+```jsx
+import useSignIn from '@linn-it/linn-form-components-library/hooks/useSignIn';
+
+function App() {
+    useSignIn();
+
+    return <RouterOutlet />;
+}
+```
+
+## Restoring the redirect destination
+
+After sign-in completes, read the saved pathname from `sessionStorage` to send the user back to where they were:
+
+```jsx
+function AuthCallback() {
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const redirect = sessionStorage.getItem('auth:redirect');
+        if (redirect) {
+            sessionStorage.removeItem('auth:redirect');
+            navigate(redirect);
+        } else {
+            navigate('/');
+        }
+    }, []);
+
+    return <p>Signing in…</p>;
+}
+```

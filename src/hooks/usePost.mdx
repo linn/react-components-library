@@ -1,0 +1,117 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Hooks/usePost" />
+
+# usePost
+
+A hook that handles HTTP POST requests to a REST API endpoint, managing loading state, error handling, request cancellation, and the response result. Optionally redirects to the `self` href of the created resource on success.
+
+## Signature
+
+```js
+const { send, cancelRequest, isLoading, errorMessage, postResult, clearPostResult } = usePost(url, requiresAuth, redirectOnSuccess);
+```
+
+## Parameters
+
+<table>
+  <thead>
+    <tr><th>Parameter</th><th>Type</th><th>Default</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>url</code></td><td><code>string</code></td><td>—</td><td>Base URL of the resource. An optional ID is appended when calling <code>send</code>.</td></tr>
+    <tr><td><code>requiresAuth</code></td><td><code>boolean</code></td><td><code>false</code></td><td>When <code>true</code>, an OIDC bearer token is included in the request headers via <code>react-oidc-context</code>.</td></tr>
+    <tr><td><code>redirectOnSuccess</code></td><td><code>boolean</code></td><td><code>false</code></td><td>When <code>true</code>, navigates to the <code>self</code> href from the response using <code>react-router-dom</code> after a successful POST.</td></tr>
+  </tbody>
+</table>
+
+## Return value
+
+<table>
+  <thead>
+    <tr><th>Property</th><th>Type</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>send</code></td><td><code>(id?: string | number, data: object) =&gt; Promise&lt;void&gt;</code></td><td>Triggers the POST request. Posts to <code>url/id</code> when <code>id</code> is provided, or <code>url</code> otherwise.</td></tr>
+    <tr><td><code>cancelRequest</code></td><td><code>() =&gt; void</code></td><td>Aborts the in-flight request via <code>AbortController</code>.</td></tr>
+    <tr><td><code>isLoading</code></td><td><code>boolean</code></td><td><code>true</code> while the request is in flight.</td></tr>
+    <tr><td><code>errorMessage</code></td><td><code>string | null</code></td><td>Set to the response body text when the request fails, otherwise <code>null</code>.</td></tr>
+    <tr><td><code>postResult</code></td><td><code>any | null</code></td><td>Set to the parsed JSON response body on success, otherwise <code>null</code>. Always <code>null</code> when <code>redirectOnSuccess</code> is <code>true</code>.</td></tr>
+    <tr><td><code>clearPostResult</code></td><td><code>() =&gt; void</code></td><td>Resets both <code>postResult</code> and <code>errorMessage</code> to <code>null</code>.</td></tr>
+  </tbody>
+</table>
+
+## Basic usage
+
+```jsx
+import usePost from '@linn-it/linn-form-components-library/hooks/usePost';
+
+function CreateProductForm() {
+    const { send, isLoading, errorMessage, postResult } = usePost('/api/products');
+
+    const handleSubmit = e => {
+        e.preventDefault();
+        send(undefined, { name: 'Widget', price: 9.99 });
+    };
+
+    return (
+        <>
+            <form onSubmit={handleSubmit}>
+                <button type="submit" disabled={isLoading}>
+                    {isLoading ? 'Saving…' : 'Create'}
+                </button>
+            </form>
+            {errorMessage && <p style={{ color: 'red' }}>Error: {errorMessage}</p>}
+            {postResult && <p>Created: {postResult.id}</p>}
+        </>
+    );
+}
+```
+
+## With redirect on success
+
+When `redirectOnSuccess` is `true` the hook navigates to the `self` link returned in the response body (via `react-router-dom`), so `postResult` will always be `null`:
+
+```jsx
+const { send, isLoading, errorMessage } = usePost(
+    '/api/orders',
+    false,
+    true // redirectOnSuccess
+);
+```
+
+## With authenticated endpoints
+
+```jsx
+const { send, postResult } = usePost(
+    '/api/secure/invoices',
+    true // requiresAuth — adds Bearer token from react-oidc-context
+);
+```
+
+## Cancelling a request
+
+Use `cancelRequest` to abort an in-flight POST — for example when the user navigates away:
+
+```jsx
+const { send, cancelRequest, isLoading } = usePost('/api/uploads');
+
+useEffect(() => {
+    return () => {
+        cancelRequest(); // abort on unmount
+    };
+}, []);
+```
+
+## Clearing state
+
+Use `clearPostResult` to reset both `postResult` and `errorMessage` — for example before resubmitting a form:
+
+```jsx
+const { send, postResult, clearPostResult } = usePost('/api/items');
+
+const handleRetry = () => {
+    clearPostResult();
+    send(undefined, formData);
+};
+```

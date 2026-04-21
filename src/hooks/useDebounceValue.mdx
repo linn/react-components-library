@@ -1,0 +1,90 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Hooks/useDebounceValue" />
+
+# useDebounceValue
+
+A hook that debounces updates to a value. The debounced value only changes after the specified delay has elapsed with no further updates, preventing rapid state changes from triggering expensive operations on every keystroke.
+
+## Signature
+
+```js
+const [debouncedValue, isDebouncing] = useDebounceValue(value, delay);
+```
+
+## Parameters
+
+<table>
+  <thead>
+    <tr><th>Parameter</th><th>Type</th><th>Default</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>value</code></td><td><code>any</code></td><td>—</td><td>The value to debounce. Whenever this changes the debounce timer resets.</td></tr>
+    <tr><td><code>delay</code></td><td><code>number</code></td><td><code>1000</code></td><td>Milliseconds to wait after the last change before updating <code>debouncedValue</code>.</td></tr>
+  </tbody>
+</table>
+
+## Return value
+
+<table>
+  <thead>
+    <tr><th>Index</th><th>Type</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>[0]</code> <code>debouncedValue</code></td><td><code>any</code></td><td>The debounced version of <code>value</code>. Only updates after <code>delay</code> ms of no changes.</td></tr>
+    <tr><td><code>[1]</code> <code>isDebouncing</code></td><td><code>boolean</code></td><td><code>true</code> while waiting for the debounce timer to fire; <code>false</code> once the debounced value has settled.</td></tr>
+  </tbody>
+</table>
+
+## Basic usage
+
+```jsx
+import useDebounceValue from '@linn-it/linn-form-components-library/hooks/useDebounceValue';
+
+function SearchInput() {
+    const [inputValue, setInputValue] = useState('');
+    const [debouncedValue, isDebouncing] = useDebounceValue(inputValue, 500);
+
+    useEffect(() => {
+        if (debouncedValue) {
+            fetchResults(debouncedValue);
+        }
+    }, [debouncedValue]);
+
+    return (
+        <>
+            <input
+                value={inputValue}
+                onChange={e => setInputValue(e.target.value)}
+                placeholder="Search…"
+            />
+            {isDebouncing && <span>Waiting…</span>}
+        </>
+    );
+}
+```
+
+## Custom delay
+
+```jsx
+// Use a shorter delay of 300 ms for a more responsive feel
+const [debouncedQuery, isDebouncing] = useDebounceValue(query, 300);
+```
+
+## Showing a loading indicator
+
+Use `isDebouncing` to give the user immediate feedback that something will happen:
+
+```jsx
+const [debouncedValue, isDebouncing] = useDebounceValue(searchTerm, 600);
+
+return (
+    <>
+        <input onChange={e => setSearchTerm(e.target.value)} />
+        {isDebouncing
+            ? <p>Waiting for you to stop typing…</p>
+            : <ResultsList query={debouncedValue} />
+        }
+    </>
+);
+```

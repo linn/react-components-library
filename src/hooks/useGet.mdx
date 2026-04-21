@@ -1,0 +1,91 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Hooks/useGet" />
+
+# useGet
+
+A hook that handles HTTP GET requests to a REST API endpoint, managing loading state, error handling, and the response result. Supports optional OIDC bearer token authentication and flexible URL construction.
+
+## Signature
+
+```js
+const { send, isLoading, errorMessage, result, clearData } = useGet(url, requiresAuth);
+```
+
+## Parameters
+
+<table>
+  <thead>
+    <tr><th>Parameter</th><th>Type</th><th>Default</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>url</code></td><td><code>string</code></td><td>—</td><td>Base URL of the resource. An optional ID and query string are appended when calling <code>send</code>.</td></tr>
+    <tr><td><code>requiresAuth</code></td><td><code>boolean</code></td><td><code>false</code></td><td>When <code>true</code>, an OIDC bearer token is included in the request headers via <code>react-oidc-context</code>.</td></tr>
+  </tbody>
+</table>
+
+## Return value
+
+<table>
+  <thead>
+    <tr><th>Property</th><th>Type</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>send</code></td><td><code>(id?: string | number, queryString?: string) =&gt; Promise&lt;void&gt;</code></td><td>Triggers the GET request. Fetches <code>url/id?queryString</code> when <code>id</code> is provided, or <code>url?queryString</code> otherwise.</td></tr>
+    <tr><td><code>isLoading</code></td><td><code>boolean</code></td><td><code>true</code> while the request is in flight.</td></tr>
+    <tr><td><code>errorMessage</code></td><td><code>string | null</code></td><td>Set to the response body text when the request fails, otherwise <code>null</code>.</td></tr>
+    <tr><td><code>result</code></td><td><code>any | null</code></td><td>Set to the parsed JSON response body on success, otherwise <code>null</code>.</td></tr>
+    <tr><td><code>clearData</code></td><td><code>() =&gt; void</code></td><td>Resets <code>result</code> to <code>null</code>.</td></tr>
+  </tbody>
+</table>
+
+## Basic usage
+
+```jsx
+import useGet from '@linn-it/linn-form-components-library/hooks/useGet';
+
+function ProductDetail({ productId }) {
+    const { send, isLoading, errorMessage, result } = useGet('/api/products');
+
+    useEffect(() => {
+        send(productId);
+    }, [productId]);
+
+    if (isLoading) return <p>Loading…</p>;
+    if (errorMessage) return <p style={{ color: 'red' }}>Error: {errorMessage}</p>;
+    if (!result) return null;
+
+    return <h1>{result.name}</h1>;
+}
+```
+
+## With a query string
+
+```jsx
+const { send, result } = useGet('/api/products');
+
+// Fetches GET /api/products?category=widgets
+send(undefined, '?category=widgets');
+```
+
+## With authenticated endpoints
+
+```jsx
+const { send, result } = useGet(
+    '/api/secure/orders',
+    true // requiresAuth — adds Bearer token from react-oidc-context
+);
+```
+
+## Clearing state
+
+Use `clearData` to reset `result` back to `null` — for example when navigating to a different record:
+
+```jsx
+const { send, result, clearData } = useGet('/api/items');
+
+const handleSelect = id => {
+    clearData();
+    send(id);
+};
+```

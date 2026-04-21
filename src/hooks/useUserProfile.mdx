@@ -1,0 +1,74 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Hooks/useUserProfile" />
+
+# useUserProfile
+
+A hook that reads the current user's profile information from `react-oidc-context`. It extracts the employee number, username, and display name from the OIDC token claims.
+
+## Signature
+
+```js
+const { userNumber, userName, name } = useUserProfile();
+```
+
+## Parameters
+
+This hook takes no parameters.
+
+## Return value
+
+<table>
+  <thead>
+    <tr><th>Property</th><th>Type</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>userNumber</code></td><td><code>string | undefined</code></td><td>The employee number extracted from the <code>employee</code> claim (the third path segment of the claim value).</td></tr>
+    <tr><td><code>userName</code></td><td><code>string | undefined</code></td><td>The username extracted from the <code>preferred_username</code> claim.</td></tr>
+    <tr><td><code>name</code></td><td><code>string | undefined</code></td><td>The display name extracted from the <code>name</code> claim.</td></tr>
+  </tbody>
+</table>
+
+## Basic usage
+
+```jsx
+import useUserProfile from '@linn-it/linn-form-components-library/hooks/useUserProfile';
+
+function UserGreeting() {
+    const { name, userName } = useUserProfile();
+
+    return (
+        <p>Welcome, {name} ({userName})</p>
+    );
+}
+```
+
+## Displaying the employee number
+
+```jsx
+function EmployeeInfo() {
+    const { userNumber, userName, name } = useUserProfile();
+
+    return (
+        <dl>
+            <dt>Name</dt>      <dd>{name}</dd>
+            <dt>Username</dt>  <dd>{userName}</dd>
+            <dt>Employee #</dt><dd>{userNumber}</dd>
+        </dl>
+    );
+}
+```
+
+## Conditional rendering for authenticated users
+
+The returned values are `undefined` when no user is signed in, so you can guard against unauthenticated states:
+
+```jsx
+function ProfileBadge() {
+    const { name, userNumber } = useUserProfile();
+
+    if (!name) return null;
+
+    return <span>{name} — #{userNumber}</span>;
+}
+```
