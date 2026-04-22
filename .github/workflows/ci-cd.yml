@@ -1,0 +1,120 @@
+name: CI/CD
+
+on:
+  push:
+    branches:
+      - main
+      - '*prerelease*'
+
+permissions:
+  contents: read
+  id-token: write
+  pages: write
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - run: npm ci
+
+      - run: npm run build
+
+      - run: npm test
+
+  publish:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' || contains(github.ref, 'prerelease')
+    environment: production
+    permissions:
+      contents: read
+      id-token: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://registry.npmjs.org'
+
+      - run: npm run build
+
+      - name: Check if version has changed
+        id: version-check
+        run: |
+          CURRENT=$(node -p "require('./package.json').version")
+          PREVIOUS=$(git show HEAD~1:package.json | node -p "JSON.parse(require('fs').readFileSync('/dev/stdin','utf8')).version" 2>/dev/null || echo "")
+          echo "current=$CURRENT" >> "$GITHUB_OUTPUT"
+          echo "previous=$PREVIOUS" >> "$GITHUB_OUTPUT"
+          if [ "$CURRENT" != "$PREVIOUS" ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Publish to npm
+        if: steps.version-check.outputs.changed == 'true'
+        run: npm publish --provenance
+
+      - name: Write step summary (no publish)
+        if: steps.version-check.outputs.changed == 'false'
+        run: |
+          echo "## ℹ️ No npm package published" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "The version in \`package.json\` (\`${{ steps.version-check.outputs.current }}\`) was not incremented since the previous commit. No package was published to npm." >> "$GITHUB_STEP_SUMMARY"
+          echo "If you intended to publish a new version, please bump the version number." >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Post commit comment (no publish)
+        if: steps.version-check.outputs.changed == 'false'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.repos.createCommitComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              commit_sha: context.sha,
+              body: 'ℹ️ **No npm package published** — the version in `package.json` was not incremented. If you intended to publish a new version, please bump the version number.'
+            });
+
+  deploy-storybook:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    concurrency:
+      group: storybook
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - run: npm ci
+
+      - run: npm run build-storybook
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./storybook-static
+
+      - uses: actions/deploy-pages@v4
+        id: deployment

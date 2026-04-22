@@ -1,4 +1,6 @@
 # Changelog
+## [32.5.0] - 2026-04-22
+- Migrate CI/CD from CircleCI to GitHub Actions (ci-cd.yml). npm publishing now uses OIDC Trusted Publisher instead of a stored NPM_TOKEN secret, with npm provenance attestation. Storybook deployment consolidated into the same workflow. Publish step now skips gracefully (with a commit comment notification) if the package version has not been incremented.
 ## [32.4.0] - 2026-04-20
 - Add option to pass hideFromEdit Y/N to Dropdown to support allow obsolete fields to be displayed but not selected.
 ## [32.3.3] - 2026-03-03
