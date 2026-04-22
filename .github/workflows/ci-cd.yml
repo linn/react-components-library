@@ -64,7 +64,7 @@ jobs:
 
       - name: Publish to npm
         if: steps.version-check.outputs.changed == 'true'
-        run: npm publish --provenance
+        run: npm publish --provenance --access public
 
       - name: Write step summary (no publish)
         if: steps.version-check.outputs.changed == 'false'
