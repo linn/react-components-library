@@ -1,0 +1,77 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Hooks/useInitialise" />
+
+# useInitialise
+
+A hook that fires a single GET request as soon as the calling component mounts. It wraps `useGet` and is intended for loading the initial data a page or form needs, without any manual `useEffect` boilerplate.
+
+## Signature
+
+```js
+const { isLoading, errorMessage, result } = useInitialise(url, id, queryString, requiresAuth);
+```
+
+## Parameters
+
+<table>
+  <thead>
+    <tr><th>Parameter</th><th>Type</th><th>Default</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>url</code></td><td><code>string</code></td><td>—</td><td>Base URL of the resource to fetch.</td></tr>
+    <tr><td><code>id</code></td><td><code>string | number | undefined</code></td><td>—</td><td>Optional ID to append to the URL: <code>GET {'{ url }'}/{'{ id }'}</code>.</td></tr>
+    <tr><td><code>queryString</code></td><td><code>string | undefined</code></td><td>—</td><td>Optional query string to append (e.g. <code>'?filter=active'</code>).</td></tr>
+    <tr><td><code>requiresAuth</code></td><td><code>boolean</code></td><td><code>false</code></td><td>When <code>true</code>, an OIDC bearer token is included in the request headers via <code>react-oidc-context</code>.</td></tr>
+  </tbody>
+</table>
+
+## Return value
+
+<table>
+  <thead>
+    <tr><th>Property</th><th>Type</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>isLoading</code></td><td><code>boolean</code></td><td><code>true</code> while the request is in flight.</td></tr>
+    <tr><td><code>errorMessage</code></td><td><code>string | null</code></td><td>Set to the response body text when the request fails, otherwise <code>null</code>.</td></tr>
+    <tr><td><code>result</code></td><td><code>any | null</code></td><td>Set to the parsed JSON response body on success, otherwise <code>null</code>.</td></tr>
+  </tbody>
+</table>
+
+## Basic usage
+
+```jsx
+import useInitialise from '@linn-it/linn-form-components-library/hooks/useInitialise';
+
+function ProductPage({ match }) {
+    const { isLoading, errorMessage, result } = useInitialise(
+        '/api/products',
+        match.params.id
+    );
+
+    if (isLoading) return <p>Loading…</p>;
+    if (errorMessage) return <p style={{ color: 'red' }}>Error: {errorMessage}</p>;
+    if (!result) return null;
+
+    return <h1>{result.name}</h1>;
+}
+```
+
+## With a query string
+
+```jsx
+// Fetches GET /api/products?includeArchived=true on mount
+const { result } = useInitialise('/api/products', undefined, '?includeArchived=true');
+```
+
+## With authenticated endpoints
+
+```jsx
+const { isLoading, result } = useInitialise(
+    '/api/secure/profile',
+    userId,
+    undefined,
+    true // requiresAuth — adds Bearer token from react-oidc-context
+);
+```

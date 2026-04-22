@@ -1,0 +1,108 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Hooks/usePut" />
+
+# usePut
+
+A hook that handles HTTP PUT requests to a REST API endpoint, managing loading state, error handling, and the response result. Supports optional OIDC bearer token authentication.
+
+## Signature
+
+```js
+const { send, isLoading, errorMessage, putResult, clearPutResult } = usePut(url, requiresAuth);
+```
+
+## Parameters
+
+<table>
+  <thead>
+    <tr><th>Parameter</th><th>Type</th><th>Default</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>url</code></td><td><code>string</code></td><td>—</td><td>Base URL of the resource. An optional ID is appended when calling <code>send</code>.</td></tr>
+    <tr><td><code>requiresAuth</code></td><td><code>boolean</code></td><td><code>false</code></td><td>When <code>true</code>, an OIDC bearer token is included in the request headers via <code>react-oidc-context</code>.</td></tr>
+  </tbody>
+</table>
+
+## Return value
+
+<table>
+  <thead>
+    <tr><th>Property</th><th>Type</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>send</code></td><td><code>(id?: string | number, data: object) =&gt; Promise&lt;void&gt;</code></td><td>Triggers the PUT request. Puts to <code>url/id</code> when <code>id</code> is provided, or <code>url</code> otherwise.</td></tr>
+    <tr><td><code>isLoading</code></td><td><code>boolean</code></td><td><code>true</code> while the request is in flight.</td></tr>
+    <tr><td><code>errorMessage</code></td><td><code>string | null</code></td><td>Set to the response body text when the request fails, otherwise <code>null</code>.</td></tr>
+    <tr><td><code>putResult</code></td><td><code>any | null</code></td><td>Set to the parsed JSON response body on success, otherwise <code>null</code>.</td></tr>
+    <tr><td><code>clearPutResult</code></td><td><code>() =&gt; void</code></td><td>Resets <code>putResult</code> to <code>null</code>.</td></tr>
+  </tbody>
+</table>
+
+## Basic usage
+
+```jsx
+import usePut from '@linn-it/linn-form-components-library/hooks/usePut';
+
+function EditProductForm({ productId, initialData }) {
+    const { send, isLoading, errorMessage, putResult } = usePut('/api/products');
+    const [formData, setFormData] = useState(initialData);
+
+    const handleSubmit = e => {
+        e.preventDefault();
+        send(productId, formData);
+    };
+
+    return (
+        <>
+            <form onSubmit={handleSubmit}>
+                <input
+                    value={formData.name}
+                    onChange={e => setFormData({ ...formData, name: e.target.value })}
+                />
+                <button type="submit" disabled={isLoading}>
+                    {isLoading ? 'Saving…' : 'Save'}
+                </button>
+            </form>
+            {errorMessage && <p style={{ color: 'red' }}>Error: {errorMessage}</p>}
+            {putResult && <p>Saved successfully.</p>}
+        </>
+    );
+}
+```
+
+## With authenticated endpoints
+
+```jsx
+const { send, isLoading, errorMessage } = usePut(
+    '/api/secure/orders',
+    true // requiresAuth — adds Bearer token from react-oidc-context
+);
+```
+
+## Handling the result
+
+After a successful PUT, `putResult` is set to the parsed JSON from the server response. You can use this to update local state or show a confirmation:
+
+```jsx
+const { send, putResult } = usePut('/api/items');
+
+useEffect(() => {
+    if (putResult) {
+        navigate('/items'); // or dispatch a redux action, etc.
+    }
+}, [putResult]);
+```
+
+## Clearing state
+
+Use `clearPutResult` to reset `putResult` back to `null` — for example when reopening an edit form:
+
+```jsx
+const { send, putResult, clearPutResult } = usePut('/api/items');
+
+const handleOpenEdit = () => {
+    clearPutResult();
+    setEditVisible(true);
+};
+```

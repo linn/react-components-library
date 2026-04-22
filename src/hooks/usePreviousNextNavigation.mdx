@@ -1,0 +1,109 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Hooks/usePreviousNextNavigation" />
+
+# usePreviousNextNavigation
+
+A hook that provides previous/next navigation through a list of search results. It reads the current item's ID from the route (either a URL param or a query-string parameter) and returns callbacks to navigate to the adjacent items.
+
+## Signature
+
+```js
+const [goPrev, goNext, prevResult, nextResult, currentResult] = usePreviousNextNavigation(
+    urlBuilder,
+    searchResults,
+    navigateFunction,
+    idStyle,
+    idFieldName
+);
+```
+
+## Parameters
+
+<table>
+  <thead>
+    <tr><th>Parameter</th><th>Type</th><th>Default</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>urlBuilder</code></td><td><code>(item: any) =&gt; string</code></td><td>—</td><td>Function that receives a result item and returns the URL to navigate to.</td></tr>
+    <tr><td><code>searchResults</code></td><td><code>any[]</code></td><td>—</td><td>Ordered array of search result items. Navigation moves through this array.</td></tr>
+    <tr><td><code>navigateFunction</code></td><td><code>(url: string, state: object) =&gt; void</code></td><td>—</td><td>Function used to navigate (e.g. the <code>navigate</code> function from <code>react-router-dom</code>).</td></tr>
+    <tr><td><code>idStyle</code></td><td><code>'param' | 'query'</code></td><td><code>'param'</code></td><td>How the current item ID is read from the URL. <code>'param'</code> reads from the <code>:id</code> route param; <code>'query'</code> reads from a query-string field.</td></tr>
+    <tr><td><code>idFieldName</code></td><td><code>string | undefined</code></td><td>—</td><td>When <code>idStyle</code> is <code>'query'</code>, the name of the query-string parameter that holds the current ID.</td></tr>
+  </tbody>
+</table>
+
+## Return value
+
+<table>
+  <thead>
+    <tr><th>Index</th><th>Type</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>[0]</code> <code>goPrev</code></td><td><code>(() =&gt; void) | null</code></td><td>Callback that navigates to the previous item. <code>null</code> when the current item is first in the list.</td></tr>
+    <tr><td><code>[1]</code> <code>goNext</code></td><td><code>(() =&gt; void) | null</code></td><td>Callback that navigates to the next item. <code>null</code> when the current item is last in the list.</td></tr>
+    <tr><td><code>[2]</code> <code>prevResult</code></td><td><code>any | undefined</code></td><td>The item before the current one in <code>searchResults</code>, or <code>undefined</code>.</td></tr>
+    <tr><td><code>[3]</code> <code>nextResult</code></td><td><code>any | undefined</code></td><td>The item after the current one in <code>searchResults</code>, or <code>undefined</code>.</td></tr>
+    <tr><td><code>[4]</code> <code>currentResult</code></td><td><code>any | undefined</code></td><td>The item in <code>searchResults</code> that matches the current route ID.</td></tr>
+  </tbody>
+</table>
+
+## Basic usage
+
+```jsx
+import { useNavigate } from 'react-router-dom';
+import usePreviousNextNavigation from '@linn-it/linn-form-components-library/hooks/usePreviousNextNavigation';
+
+function ProductDetail({ searchResults }) {
+    const navigate = useNavigate();
+
+    const [goPrev, goNext] = usePreviousNextNavigation(
+        item => `/products/${item}`,
+        searchResults,
+        navigate
+    );
+
+    return (
+        <>
+            <button onClick={goPrev} disabled={!goPrev}>Previous</button>
+            <button onClick={goNext} disabled={!goNext}>Next</button>
+        </>
+    );
+}
+```
+
+## With query-string IDs
+
+When the current item ID lives in a query-string parameter rather than a route param, pass `'query'` and the field name:
+
+```jsx
+const [goPrev, goNext] = usePreviousNextNavigation(
+    item => `/orders?orderId=${item}`,
+    searchResults,
+    navigate,
+    'query',    // idStyle
+    'orderId'   // idFieldName — reads ?orderId= from the current URL
+);
+```
+
+## Showing adjacent item details
+
+`prevResult` and `nextResult` let you preview what the user will navigate to:
+
+```jsx
+const [goPrev, goNext, prevResult, nextResult, currentResult] = usePreviousNextNavigation(
+    item => `/items/${item}`,
+    searchResults,
+    navigate
+);
+
+return (
+    <>
+        {prevResult && <small>← {prevResult}</small>}
+        <h1>Current: {currentResult}</h1>
+        {nextResult && <small>{nextResult} →</small>}
+        <button onClick={goPrev} disabled={!goPrev}>Prev</button>
+        <button onClick={goNext} disabled={!goNext}>Next</button>
+    </>
+);
+```
