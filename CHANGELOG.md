@@ -1,7 +1,5 @@
 # Changelog
-## [32.5.4] - 2026-04-22
-- Fix publish job: remove registry-url from setup-node (was conflicting with OIDC auth) and add missing npm ci step
-## [32.5.3] - 2026-04-22
+## [32.5.1] - 2026-04-22
 - Fix npm publish for scoped package - add --access public flag
 ## [32.5.0] - 2026-04-22
 - Migrate CI/CD from CircleCI to GitHub Actions (ci-cd.yml). npm publishing now uses OIDC Trusted Publisher instead of a stored NPM_TOKEN secret, with npm provenance attestation. Storybook deployment consolidated into the same workflow. Publish step now skips gracefully (with a commit comment notification) if the package version has not been incremented.
