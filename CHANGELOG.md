@@ -1,4 +1,6 @@
 # Changelog
+## [32.5.4] - 2026-04-22
+- Fix publish job: remove registry-url from setup-node (was conflicting with OIDC auth) and add missing npm ci step
 ## [32.5.3] - 2026-04-22
 - Fix npm publish for scoped package - add --access public flag
 ## [32.5.0] - 2026-04-22
