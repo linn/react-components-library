@@ -1,4 +1,6 @@
 # Changelog
+## [32.5.2] - 2026-04-22
+- Allow AddressUtility button to use full width of component
 ## [32.5.1] - 2026-04-22
 - Fix npm publish for scoped package - add --access public flag
 ## [32.5.0] - 2026-04-22

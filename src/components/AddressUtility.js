@@ -57,12 +57,11 @@ function AddressUtility({
     return (
         <>
             <Grid container>
-                <Grid size={4}>
+                <Grid size={12}>
                     <Button variant="outlined" onClick={open}>
                         Create Or Look Up Address
                     </Button>
                 </Grid>
-                <Grid size={8} />
             </Grid>
             <Dialog open={isActive} maxWidth="md">
                 <Box
