@@ -8,10 +8,13 @@ function SaveBackCancelButtons({
     cancelClick,
     saveDisabled = false,
     backClick,
-    showBackButton = true
+    showBackButton = true,
+    editStatus = null
 }) {
+    const editing = editStatus === 'edit' || editStatus === 'create';
+
     const handleClick = () => {
-        if (saveDisabled) {
+        if (saveDisabled && !editing) {
             backClick();
         } else {
             cancelClick();
@@ -20,14 +23,14 @@ function SaveBackCancelButtons({
 
     return (
         <Box sx={{ float: 'right' }}>
-            {(!saveDisabled || showBackButton) && (
+            {(!saveDisabled || showBackButton || editing) && (
                 <Button
                     id="cancel-button"
                     onClick={() => handleClick()}
                     variant="outlined"
                     sx={{ marginRight: theme => theme.spacing(1) }}
                 >
-                    {saveDisabled ? 'Back' : 'Cancel'}
+                    {saveDisabled && !editing ? 'Back' : 'Cancel'}
                 </Button>
             )}
             <Button
