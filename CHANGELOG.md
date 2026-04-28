@@ -1,4 +1,6 @@
 # Changelog
+## [32.6.1] - 2026-04-28
+- Show more fields in address search results
 ## [32.6.0] - 2026-04-27
 - Add optional editStatus parameter to SaveBackCancelButtons. Set it to edit or create as appropriate to allow cancel while save is disabled.
 ## [32.5.2] - 2026-04-22

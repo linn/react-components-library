@@ -44,7 +44,7 @@ function AddressUtility({
     };
 
     const chips = a => {
-        const result = [{ text: a.addressId }];
+        const result = [{ text: a.addressId }, { text: a.addressee }, { text: a.line1 }];
         if (a.postCode) {
             result.push({ text: a.postCode });
         }
