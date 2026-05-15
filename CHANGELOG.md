@@ -1,4 +1,6 @@
 # Changelog
+## [32.6.2] - 2026-05-15
+- add optional saveButtonLabelText parameter to SaveBackCancelButtons to change text on Save button. Defaults to Save.
 ## [32.6.1] - 2026-04-28
 - Show more fields in address search results
 ## [32.6.0] - 2026-04-27
