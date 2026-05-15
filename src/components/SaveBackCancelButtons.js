@@ -9,7 +9,8 @@ function SaveBackCancelButtons({
     saveDisabled = false,
     backClick,
     showBackButton = true,
-    editStatus = null
+    editStatus = null,
+    saveButtonLabelText = 'Save'
 }) {
     const editing = editStatus === 'edit' || editStatus === 'create';
 
@@ -40,7 +41,7 @@ function SaveBackCancelButtons({
                 onClick={() => saveClick()}
                 disabled={saveDisabled}
             >
-                Save
+                {saveButtonLabelText}
             </Button>
         </Box>
     );
