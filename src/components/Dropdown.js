@@ -99,22 +99,24 @@ function Dropdown({
                 fullWidth={fullWidth}
                 value={getValue(value)}
                 onChange={e => change(e)}
-                SelectProps={{
-                    native: true
+                slotProps={{
+                    select: {
+                        native: true
+                    },
+                    formHelperText: {
+                        sx: {
+                            color: error ? theme => theme.palette.error.main : 'inherit',
+                            '&.Mui-required': {
+                                color: theme => theme.palette.error.main
+                            }
+                        }
+                    }
                 }}
                 size="small"
                 helperText={helperText}
                 margin={margin}
                 variant="outlined"
                 required={required}
-                FormHelperTextProps={{
-                    sx: {
-                        color: error ? theme => theme.palette.error.main : 'inherit',
-                        '&.Mui-required': {
-                            color: theme => theme.palette.error.main
-                        }
-                    }
-                }}
             >
                 {hasDisplayText(selectableItems)
                     ? getOptions(selectableItems, allowNoValue, optionsLoading).map(item => (

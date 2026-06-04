@@ -1,7 +1,6 @@
 import React from 'react';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import InputLabel from '@mui/material/InputLabel';
-import TextField from '@mui/material/TextField';
 import moment from 'moment';
 
 function Picker({
@@ -19,12 +18,7 @@ function Picker({
                 {label}
             </InputLabel>
             <DateTimePicker
-                allowKeyboardControl
-                autoOk
-                margin="dense"
-                inputVariant="outlined"
                 ampm={false}
-                renderInput={props => <TextField {...props} />}
                 value={moment(value)}
                 minDate={moment(minDate)}
                 maxDate={moment(maxDate)}

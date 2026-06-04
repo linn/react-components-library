@@ -19,10 +19,6 @@ function Picker({
                 {label}
             </InputLabel>
             <DatePicker
-                allowKeyboardControl
-                margin="dense"
-                inputVariant="outlined"
-                autoOk
                 format="DD/MM/YYYY"
                 slotProps={{
                     textField: {
