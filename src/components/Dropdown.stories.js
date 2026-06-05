@@ -1,5 +1,16 @@
-import { action } from 'storybook/actions';
+import { useArgs } from 'storybook/preview-api';
 import Dropdown from './Dropdown';
+
+function StatefulDropdown(args) {
+    const [{ value }, updateArgs] = useArgs();
+    return (
+        <Dropdown
+            {...args}
+            value={value}
+            onChange={(propertyName, newValue) => updateArgs({ value: newValue })}
+        />
+    );
+}
 
 const colourItems = [
     { id: 'red', displayText: 'Red' },
@@ -13,8 +24,8 @@ export default {
     title: 'Components/Dropdown',
     component: Dropdown,
     tags: ['autodocs'],
+    render: StatefulDropdown,
     args: {
-        onChange: action('onChange'),
         propertyName: 'colour',
         label: 'Colour',
         items: colourItems,

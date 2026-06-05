@@ -1,12 +1,24 @@
-import { action } from 'storybook/actions';
+import { useArgs } from 'storybook/preview-api';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import LinnWeekPicker from './LinnWeekPicker';
+
+function StatefulLinnWeekPicker(args) {
+    const [{ selectedDate }, updateArgs] = useArgs();
+    return (
+        <LinnWeekPicker
+            {...args}
+            selectedDate={selectedDate}
+            setWeekStartDate={(propertyName, newDate) => updateArgs({ selectedDate: newDate })}
+        />
+    );
+}
 
 export default {
     title: 'Components/LinnWeekPicker',
     component: LinnWeekPicker,
     tags: ['autodocs'],
+    render: StatefulLinnWeekPicker,
     decorators: [
         Story => (
             <LocalizationProvider dateAdapter={AdapterMoment}>
@@ -15,7 +27,6 @@ export default {
         )
     ],
     args: {
-        setWeekStartDate: action('setWeekStartDate'),
         propertyName: 'weekStart',
         label: 'Select Week',
         selectedDate: new Date('2025-06-09'),

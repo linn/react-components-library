@@ -1,12 +1,23 @@
-import { action } from 'storybook/actions';
+import { useArgs } from 'storybook/preview-api';
 import SearchInputField from './SearchInputField';
+
+function StatefulSearchInputField(args) {
+    const [{ value }, updateArgs] = useArgs();
+    return (
+        <SearchInputField
+            {...args}
+            value={value}
+            onChange={(propertyName, newValue) => updateArgs({ value: newValue })}
+        />
+    );
+}
 
 export default {
     title: 'Components/SearchInputField',
     component: SearchInputField,
     tags: ['autodocs'],
+    render: StatefulSearchInputField,
     args: {
-        onChange: action('onChange'),
         propertyName: 'searchTerm',
         label: 'Search',
         value: '',

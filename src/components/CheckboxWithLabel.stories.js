@@ -1,12 +1,23 @@
-import { action } from 'storybook/actions';
+import { useArgs } from 'storybook/preview-api';
 import CheckboxWithLabel from './CheckboxWithLabel';
+
+function StatefulCheckbox(args) {
+    const [{ checked }, updateArgs] = useArgs();
+    return (
+        <CheckboxWithLabel
+            {...args}
+            checked={checked}
+            onChange={(event, newChecked) => updateArgs({ checked: newChecked })}
+        />
+    );
+}
 
 export default {
     title: 'Components/CheckboxWithLabel',
     component: CheckboxWithLabel,
     tags: ['autodocs'],
+    render: StatefulCheckbox,
     args: {
-        onChange: action('onChange'),
         label: 'Accept terms and conditions',
         checked: false,
         color: 'primary'

@@ -1,18 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import { useArgs } from 'storybook/preview-api';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import DatePicker from './DatePicker';
 
-function StatefulDatePicker({ value: initialValue, ...args }) {
-    const [value, setValue] = useState(initialValue);
-    useEffect(() => {
-        setValue(initialValue);
-    }, [initialValue]);
+function StatefulDatePicker(args) {
+    const [{ value }, updateArgs] = useArgs();
     return (
         <DatePicker
             {...args}
             value={value}
-            onChange={newValue => setValue(newValue ? newValue.toISOString() : null)}
+            onChange={newValue => updateArgs({ value: newValue ? newValue.toISOString() : null })}
         />
     );
 }

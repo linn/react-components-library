@@ -1,12 +1,23 @@
-import { action } from 'storybook/actions';
+import { useArgs } from 'storybook/preview-api';
 import InputField from './InputField';
+
+function StatefulInputField(args) {
+    const [{ value }, updateArgs] = useArgs();
+    return (
+        <InputField
+            {...args}
+            value={value}
+            onChange={(propertyName, newValue) => updateArgs({ value: newValue })}
+        />
+    );
+}
 
 export default {
     title: 'Components/InputField',
     component: InputField,
     tags: ['autodocs'],
+    render: StatefulInputField,
     args: {
-        onChange: action('onChange'),
         propertyName: 'exampleField',
         label: 'Label',
         value: '',
