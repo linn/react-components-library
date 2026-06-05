@@ -1,4 +1,5 @@
-import { fn } from 'storybook/test';
+import { useArgs } from 'storybook/preview-api';
+import { action } from 'storybook/actions';
 import Search from './Search';
 
 const sampleResults = [
@@ -7,24 +8,35 @@ const sampleResults = [
     { id: 3, name: 'Gadget Pro', description: 'Professional gadget' }
 ];
 
+function StatefulSearch(args) {
+    const [{ value }, updateArgs] = useArgs();
+    return (
+        <Search
+            {...args}
+            value={value}
+            handleValueChange={(propertyName, newValue) => updateArgs({ value: newValue })}
+        />
+    );
+}
+
 export default {
     title: 'Components/Search',
     component: Search,
     tags: ['autodocs'],
+    render: StatefulSearch,
     args: {
         propertyName: 'item',
         label: 'Search items',
         value: '',
-        handleValueChange: fn(),
         disabled: false,
-        search: fn(),
+        search: action('search'),
         searchResults: [],
         loading: false,
         priorityFunction: null,
-        onResultSelect: fn(),
+        onResultSelect: action('onResultSelect'),
         resultLimit: null,
         resultsInModal: false,
-        clearSearch: fn(),
+        clearSearch: action('clearSearch'),
         searchOnEnter: true,
         helperText: 'PRESS ENTER TO SEARCH',
         autoFocus: false,

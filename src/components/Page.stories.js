@@ -1,5 +1,5 @@
 import { MemoryRouter } from 'react-router-dom';
-import { fn } from 'storybook/test';
+import { action } from 'storybook/actions';
 import Page from './Page';
 
 export default {
@@ -15,7 +15,7 @@ export default {
     ],
     args: {
         children: <p>Page content goes here.</p>,
-        navigate: fn(),
+        navigate: action('navigate'),
         location: { pathname: '/purchasing/orders/12345' },
         width: 'l',
         requestErrors: [],

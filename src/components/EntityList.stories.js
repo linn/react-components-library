@@ -1,5 +1,4 @@
 import { MemoryRouter } from 'react-router-dom';
-import { fn } from 'storybook/test';
 import EntityList from './EntityList';
 
 const sampleEntities = [

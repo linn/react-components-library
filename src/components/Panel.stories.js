@@ -1,4 +1,4 @@
-import { fn } from 'storybook/test';
+import { action } from 'storybook/actions';
 import Panel from './Panel';
 
 const sampleSection = {
@@ -42,7 +42,7 @@ export default {
     component: Panel,
     tags: ['autodocs'],
     args: {
-        close: fn(),
+        close: action('close'),
         section: sampleSection
     }
 };

@@ -1,4 +1,4 @@
-import { fn } from 'storybook/test';
+import { action } from 'storybook/actions';
 import SelectedItemsList from './SelectedItemsList';
 
 const sampleItems = [
@@ -15,7 +15,7 @@ export default {
     tags: ['autodocs'],
     args: {
         items: sampleItems,
-        removeItem: fn(),
+        removeItem: action('removeItem'),
         title: 'Items Selected',
         maxHeight: null
     }

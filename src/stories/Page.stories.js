@@ -1,3 +1,4 @@
+import { action } from 'storybook/actions';
 import Page from '../components/Page';
 
 export default {
@@ -9,7 +10,7 @@ export default {
     },
     args: {
         children: <div />,
-        navigate: () => {},
+        navigate: action('navigate'),
         location: { pathname: 'a/test/path' },
         width: 'l',
         requestErrors: [],

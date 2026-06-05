@@ -10,9 +10,11 @@ function SnackbarMessage({ message, visible = false, onClose, timeOut = 3000 }) 
                 vertical: 'bottom',
                 horizontal: 'left'
             }}
-            ContentProps={{
-                sx: {
-                    backgroundColor: theme => theme.palette.primary.main
+            slotProps={{
+                content: {
+                    sx: {
+                        backgroundColor: theme => theme.palette.primary.main
+                    }
                 }
             }}
             open={visible}

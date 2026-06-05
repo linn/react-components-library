@@ -1,4 +1,4 @@
-import { fn } from 'storybook/test';
+import { action } from 'storybook/actions';
 import SearchPanel from './SearchPanel';
 
 const sampleMenu = [
@@ -50,7 +50,7 @@ export default {
     component: SearchPanel,
     tags: ['autodocs'],
     args: {
-        close: fn(),
+        close: action('close'),
         menu: sampleMenu
     }
 };

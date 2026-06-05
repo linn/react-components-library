@@ -1,5 +1,5 @@
 import { SnackbarProvider } from 'notistack';
-import { fn } from 'storybook/test';
+import { action } from 'storybook/actions';
 import Navigation from './Navigation';
 
 const sampleSections = [
@@ -76,7 +76,7 @@ export default {
         username: 'jsmith',
         myStuff: sampleMyStuff,
         notifications: [],
-        handleSignOut: fn()
+        handleSignOut: action('handleSignOut')
     }
 };
 

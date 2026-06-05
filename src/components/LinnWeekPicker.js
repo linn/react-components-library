@@ -2,13 +2,12 @@ import React from 'react';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { styled } from '@mui/material/styles';
 import InputLabel from '@mui/material/InputLabel';
-import TextField from '@mui/material/TextField';
 import moment from 'moment';
-import { PickersDay } from '@mui/x-date-pickers/PickersDay';
+import { PickerDay } from '@mui/x-date-pickers/PickerDay';
 
 import { getWeekStartDate, getWeekEndDate } from '../utilities/dateUtilities.js';
 
-const CustomPickersDay = styled(PickersDay, {
+const CustomPickerDay = styled(PickerDay, {
     shouldForwardProp: prop =>
         prop !== 'dayIsBetween' && prop !== 'isFirstDay' && prop !== 'isLastDay'
 })(({ theme, dayIsBetween, isFirstDay, isLastDay }) => ({
@@ -42,9 +41,10 @@ export default function LinnWeekPicker({
         setWeekStartDate(propertyName, getWeekStartDate(date));
     };
 
-    const renderWeekPickerDay = (date, _, pickersDayProps) => {
+    const WeekPickerDay = pickersDayProps => {
+        const { day: date } = pickersDayProps;
         if (!selectedDate) {
-            return <PickersDay {...pickersDayProps} />;
+            return <PickerDay {...pickersDayProps} />;
         }
 
         const start = moment(getWeekStartDate(selectedDate));
@@ -55,7 +55,7 @@ export default function LinnWeekPicker({
         const isLastDay = moment(date).isSame(end, 'day');
 
         return (
-            <CustomPickersDay
+            <CustomPickerDay
                 {...pickersDayProps}
                 dayIsBetween={dayIsBetween}
                 isFirstDay={isFirstDay}
@@ -75,9 +75,8 @@ export default function LinnWeekPicker({
                 disabled={disabled}
                 value={selectedDate ? moment(selectedDate) : null}
                 onChange={handleChange}
-                renderInput={params => <TextField {...params} variant="outlined" />}
-                renderDay={renderWeekPickerDay}
-                inputFormat="DD/MM/YYYY"
+                format="DD/MM/YYYY"
+                slots={{ day: WeekPickerDay }}
                 slotProps={{
                     textField: {
                         variant: 'outlined',

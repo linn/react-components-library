@@ -1,6 +1,18 @@
 import { MemoryRouter } from 'react-router-dom';
-import { fn } from 'storybook/test';
+import { useArgs } from 'storybook/preview-api';
+import { action } from 'storybook/actions';
 import AddressUtility from './AddressUtility';
+
+function StatefulAddressUtility(args) {
+    const [{ isActive }, updateArgs] = useArgs();
+    return (
+        <AddressUtility
+            {...args}
+            isActive={isActive}
+            setIsActive={newActive => updateArgs({ isActive: newActive })}
+        />
+    );
+}
 
 const sampleCountries = [
     { id: 'GB', name: 'United Kingdom', countryCode: 'GB', countryName: 'United Kingdom' },
@@ -24,6 +36,7 @@ export default {
     title: 'Components/AddressUtility',
     component: AddressUtility,
     tags: ['autodocs'],
+    render: StatefulAddressUtility,
     decorators: [
         Story => (
             <MemoryRouter>
@@ -32,20 +45,19 @@ export default {
         )
     ],
     args: {
-        createAddress: fn(),
+        createAddress: action('createAddress'),
         createAddressLoading: false,
-        selectAddress: fn(),
-        searchCountries: fn(),
-        searchAddresses: fn(),
+        selectAddress: action('selectAddress'),
+        searchCountries: action('searchCountries'),
+        searchAddresses: action('searchAddresses'),
         countriesSearchResults: [],
         countriesSearchLoading: false,
         addressSearchResults: [],
         addressSearchLoading: false,
-        clearAddressesSearch: fn(),
-        clearCountriesSearch: fn(),
+        clearAddressesSearch: action('clearAddressesSearch'),
+        clearCountriesSearch: action('clearCountriesSearch'),
         defaultAddressee: false,
-        isActive: false,
-        setIsActive: fn()
+        isActive: false
     }
 };
 

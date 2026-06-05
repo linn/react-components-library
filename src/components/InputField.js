@@ -121,16 +121,18 @@ function InputField({
                 autoComplete={autoComplete}
                 value={getValue(value)}
                 onChange={e => change(e)}
-                InputProps={{
-                    startAdornment: adornment ? (
-                        <InputAdornment position="start">{adornment}</InputAdornment>
-                    ) : null
-                }}
-                FormHelperTextProps={{
-                    sx: {
-                        color: inErrorState
-                            ? theme => theme.palette.error.main
-                            : theme => theme.palette.text.primary
+                slotProps={{
+                    input: {
+                        startAdornment: adornment ? (
+                            <InputAdornment position="start">{adornment}</InputAdornment>
+                        ) : null
+                    },
+                    formHelperText: {
+                        sx: {
+                            color: inErrorState
+                                ? theme => theme.palette.error.main
+                                : theme => theme.palette.text.primary
+                        }
                     }
                 }}
                 onInput={e => {

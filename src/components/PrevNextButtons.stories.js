@@ -1,4 +1,4 @@
-import { fn } from 'storybook/test';
+import { action } from 'storybook/actions';
 import Grid from '@mui/material/Grid';
 import PrevNextButtons from './PrevNextButtons';
 
@@ -14,8 +14,8 @@ export default {
         )
     ],
     args: {
-        goPrev: fn(),
-        goNext: fn(),
+        goPrev: action('goPrev'),
+        goNext: action('goNext'),
         prevResult: 'Previous',
         nextResult: 'Next',
         disabled: false

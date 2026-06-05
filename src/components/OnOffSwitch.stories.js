@@ -1,12 +1,23 @@
-import { fn } from 'storybook/test';
+import { useArgs } from 'storybook/preview-api';
 import OnOffSwitch from './OnOffSwitch';
+
+function StatefulOnOffSwitch(args) {
+    const [{ value }, updateArgs] = useArgs();
+    return (
+        <OnOffSwitch
+            {...args}
+            value={value}
+            onChange={(propertyName, newValue) => updateArgs({ value: newValue })}
+        />
+    );
+}
 
 export default {
     title: 'Components/OnOffSwitch',
     component: OnOffSwitch,
     tags: ['autodocs'],
+    render: StatefulOnOffSwitch,
     args: {
-        onChange: fn(),
         propertyName: 'featureEnabled',
         label: 'Enable feature',
         value: false,

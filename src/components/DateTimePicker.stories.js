@@ -1,12 +1,24 @@
-import { fn } from 'storybook/test';
+import { useArgs } from 'storybook/preview-api';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import DateTimePicker from './DateTimePicker';
+
+function StatefulDateTimePicker(args) {
+    const [{ value }, updateArgs] = useArgs();
+    return (
+        <DateTimePicker
+            {...args}
+            value={value}
+            onChange={newValue => updateArgs({ value: newValue ? newValue.toISOString() : null })}
+        />
+    );
+}
 
 export default {
     title: 'Components/DateTimePicker',
     component: DateTimePicker,
     tags: ['autodocs'],
+    render: StatefulDateTimePicker,
     decorators: [
         Story => (
             <LocalizationProvider dateAdapter={AdapterMoment}>
@@ -15,7 +27,6 @@ export default {
         )
     ],
     args: {
-        onChange: fn(),
         label: 'Select date and time',
         value: '2025-06-15T14:30:00.000Z',
         disabled: false,
