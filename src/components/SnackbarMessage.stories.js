@@ -1,4 +1,4 @@
-import { fn } from 'storybook/test';
+import { action } from 'storybook/actions';
 import SnackbarMessage from './SnackbarMessage';
 
 export default {
@@ -6,7 +6,7 @@ export default {
     component: SnackbarMessage,
     tags: ['autodocs'],
     args: {
-        onClose: fn(),
+        onClose: action('onClose'),
         message: 'Record saved successfully',
         visible: true,
         timeOut: null
