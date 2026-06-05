@@ -1,4 +1,4 @@
-import { fn } from 'storybook/test';
+import { action } from 'storybook/actions';
 import Navigation from '../components/Navigation';
 import menu from '../../public/menu.json';
 import { SnackbarProvider } from 'notistack';
@@ -32,7 +32,7 @@ export const Default = {
 export const WithSignOutLink = {
     name: 'With sign out link',
     args: {
-        handleSignOut: fn()
+        handleSignOut: action('handleSignOut')
     }
 };
 

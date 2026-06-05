@@ -1,4 +1,4 @@
-import { fn } from 'storybook/test';
+import { action } from 'storybook/actions';
 import Dropdown from './Dropdown';
 
 const colourItems = [
@@ -14,7 +14,7 @@ export default {
     component: Dropdown,
     tags: ['autodocs'],
     args: {
-        onChange: fn(),
+        onChange: action('onChange'),
         propertyName: 'colour',
         label: 'Colour',
         items: colourItems,

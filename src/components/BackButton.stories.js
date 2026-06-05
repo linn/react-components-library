@@ -1,4 +1,4 @@
-import { fn } from 'storybook/test';
+import { action } from 'storybook/actions';
 import BackButton from './BackButton';
 
 export default {
@@ -6,7 +6,7 @@ export default {
     component: BackButton,
     tags: ['autodocs'],
     args: {
-        backClick: fn()
+        backClick: action('backClick')
     }
 };
 

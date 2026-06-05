@@ -1,5 +1,4 @@
 import { MemoryRouter } from 'react-router-dom';
-import { fn } from 'storybook/test';
 import ReportDataGrids from './ReportDataGrids';
 
 const makeReport = (title, rows) => ({
@@ -27,11 +26,7 @@ const makeReport = (title, rows) => ({
     results: rows.map((r, i) => ({
         rowTitle: { displayString: `row${i}` },
         rowType: 'Normal',
-        values: [
-            { displayValue: r.product },
-            { displayValue: r.qty },
-            { displayValue: r.total }
-        ]
+        values: [{ displayValue: r.product }, { displayValue: r.qty }, { displayValue: r.total }]
     })),
     totals: null
 });

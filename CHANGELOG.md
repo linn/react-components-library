@@ -1,4 +1,9 @@
 # Changelog
+## [33.0.0] - 2026-06-05
+- Breaking: upgrade MUI peer dependencies from v7/v8 to v9 (`@mui/material`, `@mui/icons-material`, `@mui/styles`, `@mui/x-data-grid`, `@mui/x-date-pickers`)
+- Update component APIs for MUI v9 compatibility: `InputProps`/`FormHelperTextProps`/`SelectProps` migrated to `slotProps`; removed deprecated DatePicker props (`allowKeyboardControl`, `autoOk`, `renderInput`); `PickersDay` renamed to `PickerDay`
+- Update peer dependencies: `react`/`react-dom` 19.2.4 → 19.2.7, `react-router`/`react-router-dom` 7.13.1 → 7.17.0, `react-oidc-context` 3.3.0 → 3.3.1
+- Minor npm devDependency updates (storybook 9 → 10, rollup, babel, jest, etc.); eslint stays on 9.x (`eslint-plugin-react` does not yet support ESLint 10)
 ## [32.6.2] - 2026-05-15
 - add optional saveButtonLabelText parameter to SaveBackCancelButtons to change text on Save button. Defaults to Save.
 ## [32.6.1] - 2026-04-28

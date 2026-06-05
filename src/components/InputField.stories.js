@@ -1,4 +1,4 @@
-import { fn } from 'storybook/test';
+import { action } from 'storybook/actions';
 import InputField from './InputField';
 
 export default {
@@ -6,7 +6,7 @@ export default {
     component: InputField,
     tags: ['autodocs'],
     args: {
-        onChange: fn(),
+        onChange: action('onChange'),
         propertyName: 'exampleField',
         label: 'Label',
         value: '',

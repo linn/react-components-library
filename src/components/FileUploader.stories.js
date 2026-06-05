@@ -1,4 +1,4 @@
-import { fn } from 'storybook/test';
+import { action } from 'storybook/actions';
 import FileUploader from './FileUploader';
 
 export default {
@@ -12,9 +12,9 @@ export default {
         loading: false,
         result: null,
         snackbarVisible: false,
-        setSnackbarVisible: fn(),
-        onFileSelect: fn(),
-        doUpload: fn()
+        setSnackbarVisible: action('setSnackbarVisible'),
+        onFileSelect: action('onFileSelect'),
+        doUpload: action('doUpload')
     }
 };
 

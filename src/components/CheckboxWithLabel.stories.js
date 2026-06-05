@@ -1,4 +1,4 @@
-import { fn } from 'storybook/test';
+import { action } from 'storybook/actions';
 import CheckboxWithLabel from './CheckboxWithLabel';
 
 export default {
@@ -6,7 +6,7 @@ export default {
     component: CheckboxWithLabel,
     tags: ['autodocs'],
     args: {
-        onChange: fn(),
+        onChange: action('onChange'),
         label: 'Accept terms and conditions',
         checked: false,
         color: 'primary'

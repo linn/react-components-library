@@ -1,4 +1,4 @@
-import { fn } from 'storybook/test';
+import { action } from 'storybook/actions';
 import ConfirmDialog from './ConfirmDialog';
 
 export default {
@@ -6,9 +6,9 @@ export default {
     component: ConfirmDialog,
     tags: ['autodocs'],
     args: {
-        closeDialog: fn(),
-        onConfirm: fn(),
-        onCancel: fn(),
+        closeDialog: action('closeDialog'),
+        onConfirm: action('onConfirm'),
+        onCancel: action('onCancel'),
         visible: true,
         title: 'Are you sure?',
         primaryText: 'This action cannot be undone.',

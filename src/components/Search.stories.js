@@ -1,4 +1,4 @@
-import { fn } from 'storybook/test';
+import { action } from 'storybook/actions';
 import Search from './Search';
 
 const sampleResults = [
@@ -15,16 +15,16 @@ export default {
         propertyName: 'item',
         label: 'Search items',
         value: '',
-        handleValueChange: fn(),
+        handleValueChange: action('handleValueChange'),
         disabled: false,
-        search: fn(),
+        search: action('search'),
         searchResults: [],
         loading: false,
         priorityFunction: null,
-        onResultSelect: fn(),
+        onResultSelect: action('onResultSelect'),
         resultLimit: null,
         resultsInModal: false,
-        clearSearch: fn(),
+        clearSearch: action('clearSearch'),
         searchOnEnter: true,
         helperText: 'PRESS ENTER TO SEARCH',
         autoFocus: false,

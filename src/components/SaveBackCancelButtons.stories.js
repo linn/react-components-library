@@ -1,4 +1,4 @@
-import { fn } from 'storybook/test';
+import { action } from 'storybook/actions';
 import SaveBackCancelButtons from './SaveBackCancelButtons';
 
 export default {
@@ -6,9 +6,9 @@ export default {
     component: SaveBackCancelButtons,
     tags: ['autodocs'],
     args: {
-        saveClick: fn(),
-        cancelClick: fn(),
-        backClick: fn(),
+        saveClick: action('saveClick'),
+        cancelClick: action('cancelClick'),
+        backClick: action('backClick'),
         saveDisabled: false,
         showBackButton: true
     }

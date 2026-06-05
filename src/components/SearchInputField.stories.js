@@ -1,4 +1,4 @@
-import { fn } from 'storybook/test';
+import { action } from 'storybook/actions';
 import SearchInputField from './SearchInputField';
 
 export default {
@@ -6,7 +6,7 @@ export default {
     component: SearchInputField,
     tags: ['autodocs'],
     args: {
-        onChange: fn(),
+        onChange: action('onChange'),
         propertyName: 'searchTerm',
         label: 'Search',
         value: '',

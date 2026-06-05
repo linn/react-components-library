@@ -1,5 +1,5 @@
 import { MemoryRouter } from 'react-router-dom';
-import { fn } from 'storybook/test';
+import { action } from 'storybook/actions';
 import AddressUtility from './AddressUtility';
 
 const sampleCountries = [
@@ -32,20 +32,20 @@ export default {
         )
     ],
     args: {
-        createAddress: fn(),
+        createAddress: action('createAddress'),
         createAddressLoading: false,
-        selectAddress: fn(),
-        searchCountries: fn(),
-        searchAddresses: fn(),
+        selectAddress: action('selectAddress'),
+        searchCountries: action('searchCountries'),
+        searchAddresses: action('searchAddresses'),
         countriesSearchResults: [],
         countriesSearchLoading: false,
         addressSearchResults: [],
         addressSearchLoading: false,
-        clearAddressesSearch: fn(),
-        clearCountriesSearch: fn(),
+        clearAddressesSearch: action('clearAddressesSearch'),
+        clearCountriesSearch: action('clearCountriesSearch'),
         defaultAddressee: false,
         isActive: false,
-        setIsActive: fn()
+        setIsActive: action('setIsActive')
     }
 };
 

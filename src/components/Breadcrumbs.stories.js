@@ -1,4 +1,4 @@
-import { fn } from 'storybook/test';
+import { action } from 'storybook/actions';
 import Breadcrumbs from './Breadcrumbs';
 
 export default {
@@ -6,7 +6,7 @@ export default {
     component: Breadcrumbs,
     tags: ['autodocs'],
     args: {
-        navigate: fn(),
+        navigate: action('navigate'),
         homeUrl: 'https://app.linn.co.uk',
         rootPathLength: 2,
         location: { pathname: '/purchasing/orders/12345' }

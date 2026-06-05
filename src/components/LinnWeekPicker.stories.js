@@ -1,4 +1,4 @@
-import { fn } from 'storybook/test';
+import { action } from 'storybook/actions';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import LinnWeekPicker from './LinnWeekPicker';
@@ -15,7 +15,7 @@ export default {
         )
     ],
     args: {
-        setWeekStartDate: fn(),
+        setWeekStartDate: action('setWeekStartDate'),
         propertyName: 'weekStart',
         label: 'Select Week',
         selectedDate: new Date('2025-06-09'),

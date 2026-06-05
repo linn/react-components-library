@@ -1,4 +1,4 @@
-import { fn } from 'storybook/test';
+import { action } from 'storybook/actions';
 import OnOffSwitch from './OnOffSwitch';
 
 export default {
@@ -6,7 +6,7 @@ export default {
     component: OnOffSwitch,
     tags: ['autodocs'],
     args: {
-        onChange: fn(),
+        onChange: action('onChange'),
         propertyName: 'featureEnabled',
         label: 'Enable feature',
         value: false,
