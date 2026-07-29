@@ -207,7 +207,7 @@ function ReportDataGrid({
                     getRowHeight={() => (fixedRowHeight ? 30 : 'auto')}
                     disableRowSelectionOnClick
                     getRowClassName={getRowClass}
-                    hideFooter={report.results.length <= 100}
+					hideFooter={rows.length <= 100}
                     getCellClassName={params => {
                         const attributes = params.row[`${params.field}Attributes`];
                         if (attributes) {
