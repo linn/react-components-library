@@ -1,4 +1,6 @@
 # Changelog
+## [33.0.1] - 2026-07-29
+- Fix bug when exactly 100 rows hid the totals discovered on back post report (ticket 22250)
 ## [33.0.0] - 2026-06-05
 - Breaking: upgrade MUI peer dependencies from v7/v8 to v9 (material, icons-material, styles, x-data-grid, x-date-pickers)
 - Update InputField and Dropdown to use MUI v9 slotProps API
