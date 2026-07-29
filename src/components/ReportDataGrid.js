@@ -208,7 +208,6 @@ function ReportDataGrid({
                     disableRowSelectionOnClick
                     getRowClassName={getRowClass}
 					hideFooter={rows.length <= 100}
-                    initialState={{ pagination: { paginationModel: { pageSize: rows.length } } }}
                     getCellClassName={params => {
                         const attributes = params.row[`${params.field}Attributes`];
                         if (attributes) {
