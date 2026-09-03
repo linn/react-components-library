@@ -31,9 +31,6 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
-  "resolutions": {
-    "**/@emotion/styled": "11.0.0"
-  },
   "peerDependencies": {
     "@emotion/react": "11.14.0",
     "@emotion/styled": "11.14.1",
