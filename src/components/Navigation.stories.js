@@ -12,15 +12,27 @@ const sampleSections = [
                     {
                         title: 'Purchase Orders',
                         items: [
-                            { title: 'Create PO', href: '#', showInMenu: true },
-                            { title: 'View POs', href: '#', showInMenu: true }
+                            {
+                                title: 'Create PO',
+                                href: '/purchasing/orders/create',
+                                showInMenu: true
+                            },
+                            { title: 'View POs', href: '/purchasing/orders', showInMenu: true }
                         ]
                     },
                     {
                         title: 'Suppliers',
                         items: [
-                            { title: 'Supplier List', href: '#', showInMenu: true },
-                            { title: 'Add Supplier', href: '#', showInMenu: true }
+                            {
+                                title: 'Supplier List',
+                                href: '/purchasing/suppliers',
+                                showInMenu: true
+                            },
+                            {
+                                title: 'Add Supplier',
+                                href: '/purchasing/suppliers/create',
+                                showInMenu: true
+                            }
                         ]
                     }
                 ]
@@ -36,8 +48,8 @@ const sampleSections = [
                     {
                         title: 'Orders',
                         items: [
-                            { title: 'Sales Orders', href: '#', showInMenu: true },
-                            { title: 'Invoices', href: '#', showInMenu: true }
+                            { title: 'Sales Orders', href: '/sales/orders', showInMenu: true },
+                            { title: 'Invoices', href: '/sales/invoices', showInMenu: true }
                         ]
                     }
                 ]

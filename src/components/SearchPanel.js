@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -24,24 +24,40 @@ const styles = {
     }
 };
 
-function SearchPanel({ menu, close }) {
+function SearchPanel({ menu, close, onHoverSection = () => {} }) {
     const [searchTerm, setSearchTerm] = useState();
 
-    const menuEntries = menu
-        .map(s => s.columns)
-        .flat()
-        .map(c => c.categories)
-        .flat()
-        .map(i => i.items)
-        .flat();
+    const menuEntries = useMemo(
+        () =>
+            menu.flatMap(section =>
+                section.columns.flatMap(col =>
+                    col.categories.flatMap(category =>
+                        category.items.map(item => ({
+                            ...item,
+                            sectionId: section.id,
+                            breadcrumb:
+                                `${section.title} > ${category.title} > ${item.title}`.replace(
+                                    /&amp;/g,
+                                    '&'
+                                )
+                        }))
+                    )
+                )
+            ),
+        [menu]
+    );
 
-    const uniqueEntries = Object.values(
-        menuEntries.reduce((uniques, entry) => {
-            if (!uniques[entry.href]) {
-                return { ...uniques, [entry.href]: entry };
-            }
-            return uniques;
-        }, {})
+    const uniqueEntries = useMemo(
+        () =>
+            Object.values(
+                menuEntries.reduce((uniques, entry) => {
+                    if (!uniques[entry.href]) {
+                        return { ...uniques, [entry.href]: entry };
+                    }
+                    return uniques;
+                }, {})
+            ),
+        [menuEntries]
     );
 
     const handleFieldChange = (propertyName, newValue) => {
@@ -82,12 +98,20 @@ function SearchPanel({ menu, close }) {
                                 )
                                 .map(entry => (
                                     <Box key={entry.href}>
-                                        <a href={entry.href} style={{ textDecoration: 'none' }}>
+                                        <a
+                                            href={entry.href}
+                                            style={{ textDecoration: 'none' }}
+                                            onMouseEnter={() => onHoverSection(entry.sectionId)}
+                                            onMouseLeave={() => onHoverSection(null)}
+                                            onFocus={() => onHoverSection(entry.sectionId)}
+                                            onBlur={() => onHoverSection(null)}
+                                        >
                                             <ListItem
                                                 sx={{
                                                     paddingTop: 0,
                                                     paddingBottom: 0,
-                                                    margin: 0
+                                                    margin: 0,
+                                                    gap: '8px'
                                                 }}
                                             >
                                                 <Typography
@@ -96,6 +120,13 @@ function SearchPanel({ menu, close }) {
                                                     sx={{ margin: 0, lineHeight: 1.8 }}
                                                 >
                                                     {entry.title}
+                                                </Typography>
+                                                <Typography
+                                                    variant="caption"
+                                                    color="text.secondary"
+                                                    sx={{ margin: 0, lineHeight: 1.8 }}
+                                                >
+                                                    {entry.breadcrumb}
                                                 </Typography>
                                             </ListItem>
                                         </a>
