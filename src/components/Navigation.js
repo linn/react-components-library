@@ -101,7 +101,8 @@ function Navigation({
     if (sections) {
         const menuIds = sections.map(item => item.id);
         const hoveredTabIndex = menuIds.indexOf(hoveredSectionId);
-        const tabsValue = hoveredTabIndex !== -1 ? hoveredTabIndex : selected;
+        const baseTabsValue = selected === sections.length ? false : selected;
+        const tabsValue = hoveredTabIndex !== -1 ? hoveredTabIndex : baseTabsValue;
 
         const handleClick = event => {
             setAnchorEl(event.currentTarget);
@@ -290,7 +291,10 @@ function Navigation({
                     {selected === sections.length && (
                         <SearchPanel
                             menu={sections}
-                            close={() => setSelected(false)}
+                            close={() => {
+                                setSelected(false);
+                                setHoveredSectionId(null);
+                            }}
                             onHoverSection={setHoveredSectionId}
                         />
                     )}

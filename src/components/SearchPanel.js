@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -27,28 +27,37 @@ const styles = {
 function SearchPanel({ menu, close, onHoverSection = () => {} }) {
     const [searchTerm, setSearchTerm] = useState();
 
-    const menuEntries = menu.flatMap(section =>
-        section.columns.flatMap(col =>
-            col.categories.flatMap(category =>
-                category.items.map(item => ({
-                    ...item,
-                    sectionId: section.id,
-                    breadcrumb: `${section.title} > ${category.title} > ${item.title}`.replace(
-                        /&amp;/g,
-                        '&'
+    const menuEntries = useMemo(
+        () =>
+            menu.flatMap(section =>
+                section.columns.flatMap(col =>
+                    col.categories.flatMap(category =>
+                        category.items.map(item => ({
+                            ...item,
+                            sectionId: section.id,
+                            breadcrumb:
+                                `${section.title} > ${category.title} > ${item.title}`.replace(
+                                    /&amp;/g,
+                                    '&'
+                                )
+                        }))
                     )
-                }))
-            )
-        )
+                )
+            ),
+        [menu]
     );
 
-    const uniqueEntries = Object.values(
-        menuEntries.reduce((uniques, entry) => {
-            if (!uniques[entry.href]) {
-                return { ...uniques, [entry.href]: entry };
-            }
-            return uniques;
-        }, {})
+    const uniqueEntries = useMemo(
+        () =>
+            Object.values(
+                menuEntries.reduce((uniques, entry) => {
+                    if (!uniques[entry.href]) {
+                        return { ...uniques, [entry.href]: entry };
+                    }
+                    return uniques;
+                }, {})
+            ),
+        [menuEntries]
     );
 
     const handleFieldChange = (propertyName, newValue) => {
@@ -88,12 +97,15 @@ function SearchPanel({ menu, close, onHoverSection = () => {} }) {
                                         e.href.toLowerCase().includes(searchTerm.toLowerCase())
                                 )
                                 .map(entry => (
-                                    <Box
-                                        key={entry.href}
-                                        onMouseEnter={() => onHoverSection(entry.sectionId)}
-                                        onMouseLeave={() => onHoverSection(null)}
-                                    >
-                                        <a href={entry.href} style={{ textDecoration: 'none' }}>
+                                    <Box key={entry.href}>
+                                        <a
+                                            href={entry.href}
+                                            style={{ textDecoration: 'none' }}
+                                            onMouseEnter={() => onHoverSection(entry.sectionId)}
+                                            onMouseLeave={() => onHoverSection(null)}
+                                            onFocus={() => onHoverSection(entry.sectionId)}
+                                            onBlur={() => onHoverSection(null)}
+                                        >
                                             <ListItem
                                                 sx={{
                                                     paddingTop: 0,
