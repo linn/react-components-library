@@ -28,6 +28,7 @@ function Navigation({
 }) {
     const [selected, setSelected] = useState(false);
     const [anchorEl, setAnchorEl] = useState();
+    const [hoveredSectionId, setHoveredSectionId] = useState(null);
     const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
     const styles = {
@@ -99,6 +100,8 @@ function Navigation({
 
     if (sections) {
         const menuIds = sections.map(item => item.id);
+        const hoveredTabIndex = menuIds.indexOf(hoveredSectionId);
+        const tabsValue = hoveredTabIndex !== -1 ? hoveredTabIndex : selected;
 
         const handleClick = event => {
             setAnchorEl(event.currentTarget);
@@ -174,7 +177,7 @@ function Navigation({
                                         <Grid size={9}>
                                             <Tabs
                                                 sx={styles.tabs}
-                                                value={selected}
+                                                value={tabsValue}
                                                 onChange={(event, value) => {
                                                     if (selected === value) {
                                                         setSelected(false);
@@ -285,7 +288,11 @@ function Navigation({
                             )
                     )}
                     {selected === sections.length && (
-                        <SearchPanel menu={sections} close={() => setSelected(false)} />
+                        <SearchPanel
+                            menu={sections}
+                            close={() => setSelected(false)}
+                            onHoverSection={setHoveredSectionId}
+                        />
                     )}
                 </div>
             </ClickAwayListener>

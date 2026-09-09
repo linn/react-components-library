@@ -24,16 +24,23 @@ const styles = {
     }
 };
 
-function SearchPanel({ menu, close }) {
+function SearchPanel({ menu, close, onHoverSection = () => {} }) {
     const [searchTerm, setSearchTerm] = useState();
 
-    const menuEntries = menu
-        .map(s => s.columns)
-        .flat()
-        .map(c => c.categories)
-        .flat()
-        .map(i => i.items)
-        .flat();
+    const menuEntries = menu.flatMap(section =>
+        section.columns.flatMap(col =>
+            col.categories.flatMap(category =>
+                category.items.map(item => ({
+                    ...item,
+                    sectionId: section.id,
+                    breadcrumb: `${section.title} > ${category.title} > ${item.title}`.replace(
+                        /&amp;/g,
+                        '&'
+                    )
+                }))
+            )
+        )
+    );
 
     const uniqueEntries = Object.values(
         menuEntries.reduce((uniques, entry) => {
@@ -81,13 +88,18 @@ function SearchPanel({ menu, close }) {
                                         e.href.toLowerCase().includes(searchTerm.toLowerCase())
                                 )
                                 .map(entry => (
-                                    <Box key={entry.href}>
+                                    <Box
+                                        key={entry.href}
+                                        onMouseEnter={() => onHoverSection(entry.sectionId)}
+                                        onMouseLeave={() => onHoverSection(null)}
+                                    >
                                         <a href={entry.href} style={{ textDecoration: 'none' }}>
                                             <ListItem
                                                 sx={{
                                                     paddingTop: 0,
                                                     paddingBottom: 0,
-                                                    margin: 0
+                                                    margin: 0,
+                                                    gap: '8px'
                                                 }}
                                             >
                                                 <Typography
@@ -96,6 +108,13 @@ function SearchPanel({ menu, close }) {
                                                     sx={{ margin: 0, lineHeight: 1.8 }}
                                                 >
                                                     {entry.title}
+                                                </Typography>
+                                                <Typography
+                                                    variant="caption"
+                                                    color="text.secondary"
+                                                    sx={{ margin: 0, lineHeight: 1.8 }}
+                                                >
+                                                    {entry.breadcrumb}
                                                 </Typography>
                                             </ListItem>
                                         </a>

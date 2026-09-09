@@ -9,16 +9,24 @@ const sampleSection = {
                 {
                     title: 'Purchase Orders',
                     items: [
-                        { title: 'Create PO', href: '#', showInMenu: true },
-                        { title: 'View POs', href: '#', showInMenu: true },
-                        { title: 'Approve POs', href: '#', showInMenu: true }
+                        { title: 'Create PO', href: '/purchasing/orders/create', showInMenu: true },
+                        { title: 'View POs', href: '/purchasing/orders', showInMenu: true },
+                        {
+                            title: 'Approve POs',
+                            href: '/purchasing/orders/approve',
+                            showInMenu: true
+                        }
                     ]
                 },
                 {
                     title: 'Suppliers',
                     items: [
-                        { title: 'Supplier List', href: '#', showInMenu: true },
-                        { title: 'Add Supplier', href: '#', showInMenu: true }
+                        { title: 'Supplier List', href: '/purchasing/suppliers', showInMenu: true },
+                        {
+                            title: 'Add Supplier',
+                            href: '/purchasing/suppliers/create',
+                            showInMenu: true
+                        }
                     ]
                 }
             ]
@@ -28,8 +36,12 @@ const sampleSection = {
                 {
                     title: 'Invoices',
                     items: [
-                        { title: 'Invoice List', href: '#', showInMenu: true },
-                        { title: 'Overdue Invoices', href: '#', showInMenu: true }
+                        { title: 'Invoice List', href: '/purchasing/invoices', showInMenu: true },
+                        {
+                            title: 'Overdue Invoices',
+                            href: '/purchasing/invoices/overdue',
+                            showInMenu: true
+                        }
                     ]
                 }
             ]

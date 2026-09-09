@@ -1,4 +1,6 @@
 # Changelog
+## [34.1.0] - 2026-09-09
+- Show path to Navigation search results
 ## [33.0.1] - 2026-07-29
 - Fix bug when exactly 100 rows hid the totals discovered on back post report (ticket 22250)
 ## [33.0.0] - 2026-06-05
