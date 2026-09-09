@@ -100,9 +100,9 @@ function Navigation({
 
     if (sections) {
         const menuIds = sections.map(item => item.id);
-        const hoveredTabIndex = menuIds.indexOf(hoveredSectionId);
-        const baseTabsValue = selected === sections.length ? false : selected;
-        const tabsValue = hoveredTabIndex !== -1 ? hoveredTabIndex : baseTabsValue;
+        const searchOpen = selected === sections.length;
+        const hoveredTabIndex = searchOpen ? menuIds.indexOf(hoveredSectionId) : -1;
+        const tabsValue = hoveredTabIndex !== -1 ? hoveredTabIndex : searchOpen ? false : selected;
 
         const handleClick = event => {
             setAnchorEl(event.currentTarget);
