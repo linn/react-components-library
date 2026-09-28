@@ -26,6 +26,7 @@ function Search({
     onResultSelect,
     resultLimit = null,
     resultsInModal = false,
+    showResultsList = true,
     clearSearch,
     searchOnEnter = true,
     onKeyPressFunctions = [],
@@ -153,7 +154,7 @@ function Search({
                     disabled,
                     onKeyDown: data => {
                         if (searchOnEnter && data.keyCode === 13) {
-                            if (resultsInModal) {
+                            if (resultsInModal && showResultsList) {
                                 setDialogOpen(true);
                             }
                             search(value);
@@ -168,32 +169,33 @@ function Search({
                     onBlur: handleOnBlur ? handleOnBlur : null
                 }}
             />
-            {resultsInModal ? (
-                <Dialog data-testid="modal" open={dialogOpen} fullWidth maxWidth="md">
-                    <Box>
-                        <IconButton
-                            sx={{
-                                float: 'right'
-                            }}
-                            aria-label="Close"
-                            onClick={() => setDialogOpen(false)}
-                            size="large"
-                        >
-                            <CloseIcon />
-                        </IconButton>
-                        <Box
-                            sx={{
-                                margin: theme => theme.spacing(6),
-                                minWidth: theme => theme.spacing(62)
-                            }}
-                        >
-                            {loading ? <Loading /> : results()}
+            {showResultsList &&
+                (resultsInModal ? (
+                    <Dialog data-testid="modal" open={dialogOpen} fullWidth maxWidth="md">
+                        <Box>
+                            <IconButton
+                                sx={{
+                                    float: 'right'
+                                }}
+                                aria-label="Close"
+                                onClick={() => setDialogOpen(false)}
+                                size="large"
+                            >
+                                <CloseIcon />
+                            </IconButton>
+                            <Box
+                                sx={{
+                                    margin: theme => theme.spacing(6),
+                                    minWidth: theme => theme.spacing(62)
+                                }}
+                            >
+                                {loading ? <Loading /> : results()}
+                            </Box>
                         </Box>
-                    </Box>
-                </Dialog>
-            ) : (
-                results()
-            )}
+                    </Dialog>
+                ) : (
+                    results()
+                ))}
         </>
     );
 }

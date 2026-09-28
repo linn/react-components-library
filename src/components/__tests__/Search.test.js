@@ -142,3 +142,47 @@ describe('When chips', () => {
         expect(screen.getByText('chip 3')).toBeInTheDocument();
     });
 });
+
+describe('When showResultsList is false', () => {
+    beforeEach(() => {
+        render(
+            <Search
+                {...defaultProps}
+                value="RESULT"
+                showResultsList={false}
+                searchResults={[{ id: 'a', name: 'RESULT A' }]}
+            />
+        );
+        const input = screen.getByLabelText('Label');
+        fireEvent.keyDown(input, { key: 'Enter', keyCode: 13 });
+    });
+
+    test('does not render its own results list, for a consumer driving a different display', () => {
+        expect(screen.queryByTestId('result')).not.toBeInTheDocument();
+        expect(screen.queryByText('No matching items')).not.toBeInTheDocument();
+    });
+
+    test('still calls search as normal', () => {
+        expect(search).toHaveBeenCalledWith('RESULT');
+    });
+});
+
+describe('When showResultsList is false and resultsInModal is true', () => {
+    beforeEach(() => {
+        render(
+            <Search
+                {...defaultProps}
+                value="RESULT"
+                resultsInModal
+                showResultsList={false}
+                searchResults={[{ id: 'a', name: 'RESULT A' }]}
+            />
+        );
+        const input = screen.getByLabelText('Label');
+        fireEvent.keyDown(input, { key: 'Enter', keyCode: 13 });
+    });
+
+    test('does not open the modal either, so nothing hides other content on the page', () => {
+        expect(screen.queryByTestId('modal')).not.toBeInTheDocument();
+    });
+});
