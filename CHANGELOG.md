@@ -1,4 +1,6 @@
 # Changelog
+## [34.3.0] - 2026-09-29
+- Add keyboard navigation and escape to close to Search component. 
 ## [34.2.0] - 2026-09-28
 - Add optional showResultsList parameter to Search. Defaults to true (existing behaviour unchanged). Set to false to suppress Search's own results list/modal when a consumer (e.g. a DataGrid) renders the filtered results itself.
 ## [34.1.0] - 2026-09-09

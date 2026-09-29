@@ -53,7 +53,8 @@ export const WithResults = {
     name: 'With search results',
     args: {
         value: 'widget',
-        searchResults: sampleResults
+        searchResults: sampleResults,
+        helperText: 'USE ARROW KEYS TO NAVIGATE RESULTS, ENTER TO SELECT, ESCAPE TO DISMISS'
     }
 };
 
@@ -86,5 +87,15 @@ export const WithChips = {
             ...r,
             chips: [{ text: `ID: ${r.id}`, color: '#e3f2fd' }]
         }))
+    }
+};
+
+export const ResultsInModal = {
+    name: 'Results in modal',
+    args: {
+        resultsInModal: true,
+        value: 'widget',
+        searchResults: sampleResults,
+        helperText: 'PRESS ENTER TO SEARCH, THEN USE ARROW KEYS AND ENTER TO SELECT'
     }
 };
