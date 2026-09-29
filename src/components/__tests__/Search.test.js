@@ -183,6 +183,45 @@ describe('Keyboard navigation of results', () => {
         fireEvent.keyDown(input, { key: 'Enter', keyCode: 13 });
         expect(screen.getByText('RESULT A')).toBeInTheDocument();
     });
+
+    test('with searchOnEnter=false, changing the query after Escape re-shows results', () => {
+        render(
+            <Search
+                {...defaultProps}
+                searchOnEnter={false}
+                value="RESULT"
+                searchResults={searchResults}
+            />
+        );
+        expect(screen.getByText('RESULT A')).toBeInTheDocument();
+        const input = screen.getByLabelText('Label');
+        fireEvent.keyDown(input, { key: 'Escape' });
+        expect(screen.queryByText('RESULT A')).not.toBeInTheDocument();
+        fireEvent.change(input, { target: { value: 'RESULT B' } });
+        expect(screen.getByText('RESULT A')).toBeInTheDocument();
+    });
+
+    test('ArrowUp on the first result returns focus to the input (inline)', () => {
+        jest.useFakeTimers();
+        try {
+            render(
+                <Search
+                    {...defaultProps}
+                    autoFocus={false}
+                    value="RESULT"
+                    searchResults={searchResults}
+                />
+            );
+            const input = screen.getByLabelText('Label');
+            const [firstResult] = screen.getAllByRole('button', { name: /RESULT/ });
+            firstResult.focus();
+            fireEvent.keyDown(firstResult, { key: 'ArrowUp' });
+            jest.runOnlyPendingTimers();
+            expect(input).toHaveFocus();
+        } finally {
+            jest.useRealTimers();
+        }
+    });
 });
 
 describe('Keyboard navigation when results are shown in a modal', () => {
@@ -222,6 +261,33 @@ describe('Keyboard navigation when results are shown in a modal', () => {
         results[0].focus();
         fireEvent.keyDown(results[0], { key: 'Enter' });
         expect(onResultSelect).toHaveBeenCalledWith(searchResults[0]);
+    });
+
+    // The input lives outside the dialog's focus trap, so ArrowUp on the first
+    // result must not try to jump to it — focus stays inside the modal.
+    test('ArrowUp on the first result keeps focus inside the modal', () => {
+        jest.useFakeTimers();
+        try {
+            render(
+                <Search
+                    {...defaultProps}
+                    autoFocus={false}
+                    value="RESULT"
+                    resultsInModal
+                    searchResults={searchResults}
+                />
+            );
+            const input = screen.getByLabelText('Label');
+            fireEvent.keyDown(input, { key: 'Enter', keyCode: 13 });
+            const results = screen.getAllByRole('button', { name: /RESULT/ });
+            results[0].focus();
+            fireEvent.keyDown(results[0], { key: 'ArrowUp' });
+            jest.runOnlyPendingTimers();
+            expect(input).not.toHaveFocus();
+            expect(results[0]).toHaveFocus();
+        } finally {
+            jest.useRealTimers();
+        }
     });
 
     test('Escape closes the modal', async () => {

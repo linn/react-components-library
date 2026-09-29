@@ -74,6 +74,14 @@ function Search({
         focusInput();
     };
 
+    const handleQueryChange = (name, newValue) => {
+        // Starting a new query should bring back a list the user dismissed with
+        // Escape. This covers searchOnEnter={false}, where there is no Enter
+        // press to reset the hidden state.
+        setResultsHidden(false);
+        handleValueChange(name, newValue);
+    };
+
     const handleListKeyDown = event => {
         // The handler sits on both the results List and (for the modal) the
         // Dialog. Stop propagation once handled so a keypress originating on a
@@ -97,7 +105,14 @@ function Search({
             event.preventDefault();
             event.stopPropagation();
             if (currentIndex <= 0) {
-                focusInput();
+                // In the modal the input sits outside the dialog's focus trap,
+                // so returning focus to it is unreliable — keep focus on the
+                // first result. Inline, hop back up to the input.
+                if (resultsInModal) {
+                    focusResultAt(0);
+                } else {
+                    focusInput();
+                }
             } else {
                 focusResultAt(currentIndex - 1);
             }
@@ -216,7 +231,7 @@ function Search({
                 label={label}
                 autoFocus={autoFocus}
                 adornment={<SearchIcon />}
-                onChange={handleValueChange}
+                onChange={handleQueryChange}
                 helperText={helperText}
                 fullWidth={fullWidth}
                 textFieldProps={{
