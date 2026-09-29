@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { fireEvent, screen } from '@testing-library/react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 import render from '../../test-utils';
 import Search from '../Search';
 
@@ -140,6 +140,95 @@ describe('When chips', () => {
         expect(screen.getByText('chip 1')).toBeInTheDocument();
         expect(screen.getByText('chip 2')).toBeInTheDocument();
         expect(screen.getByText('chip 3')).toBeInTheDocument();
+    });
+});
+
+describe('Keyboard navigation of results', () => {
+    const searchResults = [
+        { id: 'a', name: 'RESULT A' },
+        { id: 'b', name: 'RESULT B' }
+    ];
+
+    test('results are out of the tab order but selectable once focused', () => {
+        render(<Search {...defaultProps} value="RESULT" searchResults={searchResults} />);
+        const [firstResult] = screen.getAllByRole('button');
+        expect(firstResult).toHaveAttribute('tabindex', '-1');
+        firstResult.focus();
+        expect(firstResult).toHaveFocus();
+        fireEvent.click(firstResult);
+        expect(onResultSelect).toHaveBeenCalledWith(searchResults[0]);
+    });
+
+    test('ArrowDown from the input moves focus into the results list', () => {
+        render(<Search {...defaultProps} value="RESULT" searchResults={searchResults} />);
+        const input = screen.getByLabelText('Label');
+        fireEvent.keyDown(input, { key: 'ArrowDown' });
+        expect(screen.getAllByRole('button')[0]).toHaveFocus();
+    });
+
+    test('Escape hides the results list without changing the value', () => {
+        render(<Search {...defaultProps} value="RESULT" searchResults={searchResults} />);
+        expect(screen.getByText('RESULT A')).toBeInTheDocument();
+        const input = screen.getByLabelText('Label');
+        fireEvent.keyDown(input, { key: 'Escape' });
+        expect(screen.queryByText('RESULT A')).not.toBeInTheDocument();
+        expect(defaultProps.handleValueChange).not.toHaveBeenCalled();
+    });
+
+    test('searching again after Escape re-shows the results', () => {
+        render(<Search {...defaultProps} value="RESULT" searchResults={searchResults} />);
+        const input = screen.getByLabelText('Label');
+        fireEvent.keyDown(input, { key: 'Escape' });
+        expect(screen.queryByText('RESULT A')).not.toBeInTheDocument();
+        fireEvent.keyDown(input, { key: 'Enter', keyCode: 13 });
+        expect(screen.getByText('RESULT A')).toBeInTheDocument();
+    });
+});
+
+describe('Keyboard navigation when results are shown in a modal', () => {
+    const searchResults = [
+        { id: 'a', name: 'RESULT A' },
+        { id: 'b', name: 'RESULT B' },
+        { id: 'c', name: 'RESULT C' }
+    ];
+
+    const openModal = () => {
+        render(
+            <Search {...defaultProps} value="RESULT" resultsInModal searchResults={searchResults} />
+        );
+        const input = screen.getByLabelText('Label');
+        fireEvent.keyDown(input, { key: 'Enter', keyCode: 13 });
+        return input;
+    };
+
+    // Fire from the currently focused result (a List descendant) so the event
+    // bubbles exactly as it does in a real browser and can be handled twice if
+    // wired up wrongly.
+    test('arrow keys move focus one result at a time inside the modal', () => {
+        openModal();
+        const results = screen.getAllByRole('button', { name: /RESULT/ });
+        results[0].focus();
+        fireEvent.keyDown(results[0], { key: 'ArrowDown' });
+        expect(results[1]).toHaveFocus();
+        fireEvent.keyDown(results[1], { key: 'ArrowDown' });
+        expect(results[2]).toHaveFocus();
+        fireEvent.keyDown(results[2], { key: 'ArrowUp' });
+        expect(results[1]).toHaveFocus();
+    });
+
+    test('Enter selects the focused result', () => {
+        openModal();
+        const results = screen.getAllByRole('button', { name: /RESULT/ });
+        results[0].focus();
+        fireEvent.keyDown(results[0], { key: 'Enter' });
+        expect(onResultSelect).toHaveBeenCalledWith(searchResults[0]);
+    });
+
+    test('Escape closes the modal', async () => {
+        openModal();
+        const modal = screen.getByTestId('modal');
+        fireEvent.keyDown(modal, { key: 'Escape' });
+        await waitFor(() => expect(screen.queryByTestId('modal')).not.toBeInTheDocument());
     });
 });
 

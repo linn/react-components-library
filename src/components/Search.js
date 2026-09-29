@@ -7,9 +7,9 @@ import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import List from '@mui/material/List';
 import Box from '@mui/material/Box';
-import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
 import Typography from '@mui/material/Typography';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Loading from './Loading.js';
 import InputField from './InputField.js';
 
@@ -39,6 +39,70 @@ function Search({
 }) {
     const [dialogOpen, setDialogOpen] = useState(false);
     const [hasSearched, setHasSearched] = useState(false);
+    const [resultsHidden, setResultsHidden] = useState(false);
+    const listRef = useRef(null);
+
+    const focusInput = () => {
+        setTimeout(() => {
+            document.getElementById(propertyName)?.focus();
+        }, 0);
+    };
+
+    const focusResultAt = index => {
+        const items = listRef.current?.querySelectorAll('[data-search-result]');
+        if (items?.length) {
+            items[Math.max(0, Math.min(index, items.length - 1))].focus();
+        }
+    };
+
+    // When the results modal opens (and results are ready), move focus straight
+    // onto the first result so it can be navigated and selected by keyboard.
+    useEffect(() => {
+        if (resultsInModal && dialogOpen && !loading) {
+            const timer = setTimeout(() => focusResultAt(0), 0);
+            return () => clearTimeout(timer);
+        }
+        return undefined;
+    }, [resultsInModal, dialogOpen, loading]);
+
+    const hideResults = () => {
+        if (resultsInModal) {
+            setDialogOpen(false);
+        } else {
+            setResultsHidden(true);
+        }
+        focusInput();
+    };
+
+    const handleListKeyDown = event => {
+        // The handler sits on both the results List and (for the modal) the
+        // Dialog. Stop propagation once handled so a keypress originating on a
+        // result isn't processed again as it bubbles up, which would skip items.
+        if (event.key === 'Escape') {
+            event.preventDefault();
+            event.stopPropagation();
+            hideResults();
+            return;
+        }
+        const items = listRef.current?.querySelectorAll('[data-search-result]');
+        if (!items?.length) {
+            return;
+        }
+        const currentIndex = Array.from(items).indexOf(document.activeElement);
+        if (event.key === 'ArrowDown') {
+            event.preventDefault();
+            event.stopPropagation();
+            focusResultAt(currentIndex + 1);
+        } else if (event.key === 'ArrowUp') {
+            event.preventDefault();
+            event.stopPropagation();
+            if (currentIndex <= 0) {
+                focusInput();
+            } else {
+                focusResultAt(currentIndex - 1);
+            }
+        }
+    };
 
     const countMatchingCharacters = (item, searchTerm) => {
         let count = 0;
@@ -52,17 +116,22 @@ function Search({
         return count;
     };
 
+    const selectResult = item => {
+        clearSearch();
+        if (resultsInModal) {
+            setDialogOpen(false);
+        }
+        onResultSelect(item);
+        setHasSearched(false);
+        focusInput();
+    };
+
     const resultItem = item => (
-        <ListItem
+        <ListItemButton
+            data-search-result
+            tabIndex={-1}
             sx={{ padding: theme => theme.spacing(2) }}
-            onClick={() => {
-                clearSearch();
-                if (resultsInModal) {
-                    setDialogOpen(false);
-                }
-                onResultSelect(item);
-                setHasSearched(false);
-            }}
+            onClick={() => selectResult(item)}
         >
             <Stack spacing={3} direction="row">
                 <Typography
@@ -93,7 +162,7 @@ function Search({
                     </Stack>
                 )}
             </Stack>
-        </ListItem>
+        </ListItemButton>
     );
 
     const priority = (item, searchTerm) => {
@@ -125,7 +194,7 @@ function Search({
 
         if (result?.length > 0 || !hasSearched) {
             return (
-                <List dense>
+                <List dense ref={listRef} onKeyDown={handleListKeyDown}>
                     {result.map(r => (
                         <Box key={r.id}>
                             {resultItem(r)}
@@ -157,8 +226,14 @@ function Search({
                             if (resultsInModal && showResultsList) {
                                 setDialogOpen(true);
                             }
+                            setResultsHidden(false);
                             search(value);
                             setHasSearched(true);
+                        } else if (data.key === 'Escape') {
+                            hideResults();
+                        } else if (data.key === 'ArrowDown' && showResultsList) {
+                            data.preventDefault();
+                            focusResultAt(0);
                         }
                         onKeyPressFunctions.forEach(element => {
                             if (data.keyCode === element.keyCode) {
@@ -171,7 +246,13 @@ function Search({
             />
             {showResultsList &&
                 (resultsInModal ? (
-                    <Dialog data-testid="modal" open={dialogOpen} fullWidth maxWidth="md">
+                    <Dialog
+                        data-testid="modal"
+                        open={dialogOpen}
+                        onKeyDown={handleListKeyDown}
+                        fullWidth
+                        maxWidth="md"
+                    >
                         <Box>
                             <IconButton
                                 sx={{
@@ -194,7 +275,7 @@ function Search({
                         </Box>
                     </Dialog>
                 ) : (
-                    results()
+                    !resultsHidden && results()
                 ))}
         </>
     );
