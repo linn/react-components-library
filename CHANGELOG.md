@@ -1,6 +1,7 @@
 # Changelog
-## [Unreleased]
+## [34.4.0] - 2026-10-05
 - Fix ReportDataGrid to embolden columns identified by headers.totalColumns, preserving total-row and cell-colour styling.
+- Update LinkField display to match InputField display more closely and add toolTip parameter
 ## [34.3.0] - 2026-09-29
 - Add keyboard navigation and escape to close to Search component. 
 ## [34.2.0] - 2026-09-28
