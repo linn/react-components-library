@@ -21,6 +21,9 @@
   "dependencies": {
     "react-dropzone": "15.0.0"
   },
+  "overrides": {
+    "fast-uri": "^3.1.7"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "npm ci && rollup --config",
@@ -39,7 +42,6 @@
     "@mui/x-data-grid": "9.12.0",
     "@mui/x-date-pickers": "9.12.0",
     "notistack": "3.0.2",
-    "oidc-client": "1.11.5",
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "react-oidc-context": "3.3.1",

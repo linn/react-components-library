@@ -60,6 +60,7 @@ function ReportDataGrid({
         align: report.headers.dataGridColumnSpecifications[i].align,
         headerAlign: report.headers.dataGridColumnSpecifications[i].align,
         width: report.headers.dataGridColumnSpecifications[i].columnWidth,
+        cellClassName: report.headers.totalColumns?.includes(i) ? 'totalColumn' : '',
         valueFormatter: value => {
             if (
                 report.headers.dataGridColumnSpecifications[i].columnType === 'number' &&
@@ -207,7 +208,7 @@ function ReportDataGrid({
                     getRowHeight={() => (fixedRowHeight ? 30 : 'auto')}
                     disableRowSelectionOnClick
                     getRowClassName={getRowClass}
-					hideFooter={rows.length <= 100}
+                    hideFooter={rows.length <= 100}
                     getCellClassName={params => {
                         const attributes = params.row[`${params.field}Attributes`];
                         if (attributes) {
@@ -239,6 +240,9 @@ function ReportDataGrid({
                         },
                         '.totalLine': {
                             fontWeight: 'bolder'
+                        },
+                        '.totalColumn': {
+                            fontWeight: 'bold'
                         },
                         ...colourStyles
                     }}

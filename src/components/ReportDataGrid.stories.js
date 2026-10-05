@@ -1,10 +1,11 @@
 import { MemoryRouter } from 'react-router-dom';
 import ReportDataGrid from './ReportDataGrid';
 
-const makeReport = (title, rows, totals = null) => ({
+const makeReport = (title, rows, totals = null, totalColumns = []) => ({
     title: { displayString: title },
     headers: {
         columnHeaders: ['Product', 'Qty', 'Unit Price', 'Total'],
+        totalColumns,
         dataGridColumnSpecifications: [
             { columnId: 'product', align: 'left', columnWidth: 200, columnType: 'text' },
             {
@@ -187,6 +188,13 @@ export default {
 };
 
 export const Default = {};
+
+export const WithTotalColumn = {
+    name: 'With total column',
+    args: {
+        report: makeReport('Products Report', basicRows, null, [3])
+    }
+};
 
 export const WithTotals = {
     name: 'With totals row',

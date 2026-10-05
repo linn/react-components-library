@@ -1,4 +1,6 @@
 # Changelog
+## [Unreleased]
+- Fix ReportDataGrid to embolden columns identified by headers.totalColumns, preserving total-row and cell-colour styling.
 ## [34.3.0] - 2026-09-29
 - Add keyboard navigation and escape to close to Search component. 
 ## [34.2.0] - 2026-09-28
