@@ -1,0 +1,155 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Hooks/useEditableSearchGrid" />
+
+# useEditableSearchGrid
+
+A hook that supplies the shared **in-grid search** mechanics for a **normal MUI `DataGrid`** — distilled
+from the hand-rolled copies in `PurchaseLedgerSplitDebitCredit` / `CashbookTransaction` (finance) and
+`SalesOrder` (sales). You keep your own `<DataGrid>` and spread the hook's pieces onto it; the hook does
+**not** render a grid and is not a wrapper.
+
+**It makes no API calls and uses no redux.** The consumer fetches (with `useGet`), holds the `rows` in
+state, does the code lookups in `onRowChange`, and supplies each search column's `searchResults`.
+
+---
+
+## How a `search` column is filled
+
+A column with `type: 'search'` is an editable text cell with two ways to fill it:
+
+1. **Type a code you know, then Tab** — the edit commits in one press, the value is zero-padded (if
+   `pad` is set), focus advances, and `onRowChange(row, oldRow, changedField)` fires so you can do the
+   direct lookup.
+2. **Press Enter (or click the cell's search icon)** — a modal `<Search>` opens, pre-seeded with what
+   you typed, to find the value by description. Picking a result writes it to the row (plus any
+   `updateFields`) and fires `onRowChange`.
+
+Tab / Shift-Tab traverse cells forms-style, wrapping across rows.
+
+---
+
+## Usage
+
+```jsx
+import { DataGrid } from '@mui/x-data-grid';
+import { useEditableSearchGrid } from '@linn-it/linn-form-components-library';
+
+function MyLines() {
+    const [rows, setRows] = useState(initialRows);
+
+    const columns = [
+        { field: 'departmentCode', headerName: 'Department', type: 'search', width: 140, pad: 10,
+          search: term => getDepartments(null, `?searchTerm=${encodeURIComponent(term.trim())}`),
+          searchResults: departmentsResult ?? [],
+          searchLoading,
+          resultIdField: 'departmentCode',
+          updateFields: [{ field: 'departmentName', from: 'description' }] },
+        { field: 'departmentName', headerName: 'Name', width: 220 },
+        { field: 'amount', headerName: 'Amount', type: 'number', width: 100, editable: true }
+    ];
+
+    const search = useEditableSearchGrid({
+        rows,
+        setRows,
+        columns,
+        onRowChange: (row, oldRow, changedField) => {
+            if (changedField === 'departmentCode' && row.departmentCode) {
+                getDepartmentById(row.departmentCode); // map the result back onto the row in an effect
+            }
+        },
+        groupValidations: [
+            { fields: ['departmentCode', 'nominalCode'], isValid: r => r.nominalAccountExists !== false }
+        ]
+    });
+
+    return (
+        <>
+            <DataGrid
+                apiRef={search.apiRef}
+                rows={rows}
+                columns={search.columns}
+                onCellKeyDown={search.handleCellKeyDown}
+                processRowUpdate={search.processRowUpdate}
+                sx={search.gridSx}
+                density="compact"
+                hideFooter
+                // ...any other DataGrid prop, directly
+            />
+            {search.searchDialogs}
+        </>
+    );
+}
+```
+
+Because it's your own `<DataGrid>`, everything else — custom cell renderers, `preProcessEditCellProps`,
+`valueFormatter`, a delete column, footers, `loading`, etc. — is just normal grid config.
+
+---
+
+## Hook input
+
+```js
+useEditableSearchGrid({ rows, setRows, columns, getRowId, onRowChange, groupValidations })
+```
+
+<table>
+  <thead>
+    <tr><th>Field</th><th>Type</th><th>Default</th><th>Notes</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>rows</code></td><td>array</td><td><code>[]</code></td><td>Your row state.</td></tr>
+    <tr><td><code>setRows</code></td><td><code>updater =&gt; void</code></td><td>—</td><td>Your row state setter; the hook calls it (functional updater) on every commit.</td></tr>
+    <tr><td><code>columns</code></td><td>array</td><td><code>[]</code></td><td>Your MUI columns, plus the <code>search</code> extensions below.</td></tr>
+    <tr><td><code>getRowId</code></td><td><code>row =&gt; id</code></td><td><code>row =&gt; row.id</code></td><td>Row id accessor (match your <code>DataGrid</code>'s).</td></tr>
+    <tr><td><code>onRowChange</code></td><td><code>(updatedRow, oldRow, changedField) =&gt; void</code></td><td>—</td><td>Fires after any search-cell commit (typed-and-Tab or modal select). Do lookups / validation here.</td></tr>
+    <tr><td><code>groupValidations</code></td><td>array</td><td><code>[]</code></td><td><code>[{'{ fields, isValid, invalidClassName? }'}]</code> — colours every field in a group when <code>isValid(row)</code> is <code>false</code>.</td></tr>
+  </tbody>
+</table>
+
+### `search` column extensions
+
+<table>
+  <thead>
+    <tr><th>Field</th><th>Type</th><th>Notes</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>type: 'search'</code></td><td>—</td><td>Editable lookup cell; <code>editable</code> defaults to <code>true</code>.</td></tr>
+    <tr><td><code>pad</code></td><td>number</td><td>Zero-pad the committed code to this width (<code>7769</code> → <code>0000007769</code>).</td></tr>
+    <tr><td><code>search</code></td><td><code>term =&gt; void</code></td><td>Runs the modal search — trigger the parent's fetch.</td></tr>
+    <tr><td><code>searchResults</code></td><td>array</td><td>Results for the modal list.</td></tr>
+    <tr><td><code>searchLoading</code></td><td>bool</td><td>Modal loading state.</td></tr>
+    <tr><td><code>resultIdField</code></td><td>string</td><td>Which result field is the code. Defaults to the column <code>field</code>, then <code>id</code>.</td></tr>
+    <tr><td><code>updateFields</code></td><td><code>[{'{ field, from }'}]</code></td><td>After a modal select, copy <code>result[from]</code> → <code>row[field]</code>.</td></tr>
+    <tr><td><code>renderCell</code></td><td>fn</td><td>Override the default (icon + value) renderer.</td></tr>
+    <tr><td><code>cellClassName</code></td><td>string | fn</td><td>Your own class; merged with the group-validation class.</td></tr>
+  </tbody>
+</table>
+
+## Hook output
+
+<table>
+  <thead>
+    <tr><th>Returned</th><th>Spread onto / use</th><th>Notes</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>apiRef</code></td><td><code>&lt;DataGrid apiRef={'{...}'} /&gt;</code></td><td>Shared with you — use it for your own grid driving (e.g. <code>startCellEditMode</code> to auto-advance, a stale-response guard).</td></tr>
+    <tr><td><code>columns</code></td><td><code>&lt;DataGrid columns={'{...}'} /&gt;</code></td><td>Your columns decorated with the search icon + validation class.</td></tr>
+    <tr><td><code>handleCellKeyDown</code></td><td><code>&lt;DataGrid onCellKeyDown={'{...}'} /&gt;</code></td><td>Tab traversal + commit-on-Tab + Enter→dialog.</td></tr>
+    <tr><td><code>processRowUpdate</code></td><td><code>&lt;DataGrid processRowUpdate={'{...}'} /&gt;</code></td><td>Pads the changed code, calls <code>setRows</code>, fires <code>onRowChange</code>, returns the row.</td></tr>
+    <tr><td><code>padSearchCodes</code></td><td>—</td><td><code>row =&gt; paddedRow</code>. Reuse the padding if you write your <strong>own</strong> <code>processRowUpdate</code>.</td></tr>
+    <tr><td><code>searchDialogs</code></td><td>render <code>{'{search.searchDialogs}'}</code></td><td>The modal <code>&lt;Search&gt;</code> dialogs (one per search column).</td></tr>
+    <tr><td><code>gridSx</code></td><td><code>&lt;DataGrid sx={'{{ ...search.gridSx, ...yours }}'} /&gt;</code></td><td>Defines the default <code>invalidCode</code> colour (yellow).</td></tr>
+  </tbody>
+</table>
+
+---
+
+## Notes
+
+- **No silent persistence** — the hook updates rows via your `setRows`; wire it or edits won't stick.
+- **Padding** — only on `search` columns that declare `pad`, and only the field that changed.
+- **Custom row logic** — keep your own `processRowUpdate` and either compose the hook's, or build one
+  with `padSearchCodes`; use the shared `apiRef` for things like auto-advancing to the next field.
+- **Lookups and stale-response guards are the consumer's job** (domain- and hook-specific) — do them in
+  `onRowChange` with `useGet`.

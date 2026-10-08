@@ -1,4 +1,6 @@
 # Changelog
+## [34.5.0] - 2026-10-08
+- Add AutoComplete component (type-ahead select with id/label and object modes) and useEditableSearchGrid hook (shared in-grid search mechanics for a MUI DataGrid), each with tests, docs and a story/mdx.
 ## [34.4.0] - 2026-10-05
 - Fix ReportDataGrid to embolden columns identified by headers.totalColumns, preserving total-row and cell-colour styling.
 - Update LinkField display to match InputField display more closely and add toolTip parameter

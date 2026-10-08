@@ -44,8 +44,11 @@ import usePut from './src/hooks/usePut.js';
 import useSignIn from './src/hooks/useSignIn.js';
 import useUserProfile from './src/hooks/useUserProfile.js';
 import useDelete from './src/hooks/useDelete.js';
+import AutoComplete from './src/components/AutoComplete.js';
+import useEditableSearchGrid from './src/hooks/useEditableSearchGrid.js';
 export {
     AddressUtility,
+    AutoComplete,
     BackButton,
     Breadcrumbs,
     CheckboxWithLabel,
@@ -82,6 +85,7 @@ export {
     SnackbarMessage,
     usePreviousNextNavigation,
     useDebounceValue,
+    useEditableSearchGrid,
     useGet,
     useSearch,
     useInitialise,
