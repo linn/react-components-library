@@ -62,7 +62,6 @@ function AutoComplete({
         <Autocomplete
             size="small"
             autoHighlight
-            autoSelect
             disableClearable={disableClearable}
             options={options}
             value={selectedOption}

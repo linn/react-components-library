@@ -117,11 +117,21 @@ function useEditableSearchGrid({
                 ?.querySelector('input');
             setSearchTerm(`${inputEl?.value ?? params.value ?? ''}`);
             setSearchDialog({ forRow: params.id, forColumn: params.field });
-            apiRef.current.stopCellEditMode({
-                id: params.id,
-                field: params.field,
-                ignoreModifications: true
-            });
+            // onCellKeyDown fires before MUI enters edit mode, so a freshly focused (view-mode) cell is
+            // not editing yet - stopCellEditMode throws if called on a non-editing cell. Guard it like
+            // the Tab branch does.
+            if (apiRef.current.getCellMode(params.id, params.field) === 'edit') {
+                apiRef.current.stopCellEditMode({
+                    id: params.id,
+                    field: params.field,
+                    ignoreModifications: true
+                });
+            }
+            // defaultMuiPrevented (NOT preventDefault) is what stops the grid's own Enter handler from
+            // starting edit mode on this cell behind the dialog. Without it MUI opens an empty editor
+            // underneath; selecting a result writes the code to the row, but committing that stale empty
+            // editor on the next Tab wipes the code back out (the "name filled, code blank" bug).
+            event.defaultMuiPrevented = true;
             event.preventDefault();
             return;
         }
@@ -212,6 +222,14 @@ function useEditableSearchGrid({
         setRows(current => current.map(r => (getRowId(r) === rowId ? updated : r)));
         onRowChange?.(updated, currentRow, column.field);
         closeDialog();
+
+        // Return focus to the cell the search was launched from, so Tab carries on to the next cell in
+        // the row. Without this the closing dialog drops focus to the top of the page. Deferred to the
+        // next tick so it runs after the dialog has finished releasing focus on unmount.
+        const api = apiRef.current;
+        if (api) {
+            setTimeout(() => api.setCellFocus(rowId, column.field), 0);
+        }
     };
 
     const searchDialogs = (
@@ -229,14 +247,17 @@ function useEditableSearchGrid({
                             resultsInModal
                             resultLimit={100}
                             propertyName={`${c.field}-search`}
-                            label=""
+                            label={c.headerName}
                             value={searchTerm}
                             handleValueChange={(_, newValue) => setSearchTerm(newValue)}
                             search={c.search}
-                            searchResults={c.searchResults?.map(r => ({
-                                ...r,
-                                id: r[c.resultIdField ?? c.field] ?? r.id
-                            }))}
+                            searchResults={c.searchResults?.map(r => {
+                                // Search ranks/renders via item.name (name.toUpperCase()), so a result
+                                // that only carries a code (e.g. { departmentCode, description }) must
+                                // still get a string name or ranking a non-empty search throws.
+                                const id = r[c.resultIdField ?? c.field] ?? r.id;
+                                return { ...r, id, name: r.name ?? `${id ?? ''}` };
+                            })}
                             loading={c.searchLoading}
                             priorityFunction="closestMatchesFirst"
                             onResultSelect={selected => writeResultToRow(c, selected)}
