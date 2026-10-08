@@ -170,5 +170,10 @@ describe('useEditableSearchGrid', () => {
         expect(updatedRow.departmentCode).toBe('0000007769');
         expect(updatedRow.departmentName).toBe('ASSEMBLY');
         expect(changedField).toBe('departmentCode');
+
+        // Once the dialog has fully closed, focus returns to the originating cell (via the dialog's
+        // transition onExited) so Tab continues to the next cell in the row rather than the page
+        // dropping focus to the top.
+        await waitFor(() => expect(cell(container, 'departmentCode')).toHaveFocus());
     });
 });

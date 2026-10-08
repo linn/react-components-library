@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { gridExpandedSortedRowIdsSelector, useGridApiRef, GridSearchIcon } from '@mui/x-data-grid';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -56,6 +56,8 @@ function useEditableSearchGrid({
     const apiRef = useGridApiRef();
     const [searchDialog, setSearchDialog] = useState({ forRow: null, forColumn: null });
     const [searchTerm, setSearchTerm] = useState('');
+    // The cell to refocus once the search dialog has fully closed (set when a result is picked).
+    const pendingFocusRef = useRef(null);
 
     const searchColumns = columns.filter(c => c.type === 'search');
 
@@ -221,15 +223,13 @@ function useEditableSearchGrid({
 
         setRows(current => current.map(r => (getRowId(r) === rowId ? updated : r)));
         onRowChange?.(updated, currentRow, column.field);
-        closeDialog();
 
-        // Return focus to the cell the search was launched from, so Tab carries on to the next cell in
-        // the row. Without this the closing dialog drops focus to the top of the page. Deferred to the
-        // next tick so it runs after the dialog has finished releasing focus on unmount.
-        const api = apiRef.current;
-        if (api) {
-            setTimeout(() => api.setCellFocus(rowId, column.field), 0);
-        }
+        // Refocus the originating cell once the dialog has fully closed (handled in the dialog's
+        // transition onExited), so Tab carries on to the next cell in the row instead of the page
+        // dropping focus to the top. Restoring on exit rather than now avoids racing the dialog's own
+        // focus handling.
+        pendingFocusRef.current = { rowId, field: column.field };
+        closeDialog();
     };
 
     const searchDialogs = (
@@ -239,6 +239,35 @@ function useEditableSearchGrid({
                     key={c.field}
                     open={searchDialog.forColumn === c.field}
                     onClose={closeDialog}
+                    slotProps={{
+                        // The transition's onExited fires after the dialog has fully closed (and after
+                        // MUI has done its own focus restoration), so this is the point to put focus back
+                        // on the grid cell - Tab then carries on to the next cell in the row instead of
+                        // the page dropping focus to the top. NB: in MUI v6+ this lives under
+                        // slotProps.transition; the old top-level TransitionProps is ignored.
+                        transition: {
+                            onExited: () => {
+                                const pending = pendingFocusRef.current;
+                                pendingFocusRef.current = null;
+                                const api = apiRef.current;
+                                if (!pending || !api) {
+                                    return;
+                                }
+                                // Sync the grid's own focus/roving-tabindex state...
+                                api.setCellFocus(pending.rowId, pending.field);
+                                // ...but setCellFocus refuses to move DOM focus while the active element
+                                // is still inside a portal (MUI guards against stealing focus from a
+                                // dialog), and our two closing modals leave focus astray - so move DOM
+                                // focus onto the cell element directly too. Tab then resumes from the cell.
+                                // Repeat on the next frame in case a closing modal reclaims focus just
+                                // after onExited.
+                                const focusCell = () =>
+                                    api.getCellElement(pending.rowId, pending.field)?.focus();
+                                focusCell();
+                                requestAnimationFrame(focusCell);
+                            }
+                        }
+                    }}
                 >
                     <DialogTitle>Search {c.headerName}</DialogTitle>
                     <DialogContent>
