@@ -75,16 +75,18 @@ function useEditableSearchGrid({
     };
 
     const searchRenderCell = params => (
-        <>
+        // flex + full height so the icon and the value are vertically centred together; a bare
+        // fragment lets the value fall to its baseline against the taller icon and sit low in the cell.
+        <span style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
             <GridSearchIcon
-                style={{ cursor: 'pointer', marginRight: 4 }}
+                style={{ cursor: 'pointer', marginRight: 4, flexShrink: 0 }}
                 onClick={() => {
                     setSearchTerm(`${params.value ?? ''}`);
                     setSearchDialog({ forRow: params.id, forColumn: params.field });
                 }}
             />
             {params.value}
-        </>
+        </span>
     );
 
     // Decorate each column: search columns get the icon renderer; every column's cellClassName merges
