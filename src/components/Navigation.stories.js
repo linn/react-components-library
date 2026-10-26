@@ -1,4 +1,3 @@
-import { SnackbarProvider } from 'notistack';
 import { action } from 'storybook/actions';
 import Navigation from './Navigation';
 
@@ -75,11 +74,9 @@ export default {
     tags: ['autodocs'],
     decorators: [
         Story => (
-            <SnackbarProvider maxSnack={3}>
-                <div style={{ height: '200px' }}>
-                    <Story />
-                </div>
-            </SnackbarProvider>
+            <div style={{ height: '200px' }}>
+                <Story />
+            </div>
         )
     ],
     args: {
@@ -87,7 +84,6 @@ export default {
         loading: false,
         username: 'jsmith',
         myStuff: sampleMyStuff,
-        notifications: [],
         handleSignOut: action('handleSignOut')
     }
 };
@@ -97,16 +93,6 @@ export const Default = {};
 export const Loading = {
     args: {
         loading: true
-    }
-};
-
-export const WithNotifications = {
-    name: 'With notifications',
-    args: {
-        notifications: [
-            { title: 'Order Approved', content: 'PO-12345 has been approved' },
-            { title: 'Low Stock Alert', content: 'Widget A is running low' }
-        ]
     }
 };
 

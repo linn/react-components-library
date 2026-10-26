@@ -1,4 +1,6 @@
 # Changelog
+## [35.0.0] - 2026-10-26
+- Breaking: remove notifications from Navigation - the bell icon, its snackbars and the `notifications` prop. Nothing fed it: apps still passed the props it replaced in 2025, and its Dismiss called an undefined `markNotificationSeen`. Apps can drop their `https://app.linn.co.uk/notifications` fetch and the `notifications`, `seenNotifications`, `unseenNotifications`, `markNotificationSeen` and `authRoot` props.
 ## [34.5.1] - 2026-10-16
 - tweak useEditableSearchGrid to line up text better in grid. No functional change.
 ## [34.5.0] - 2026-10-08

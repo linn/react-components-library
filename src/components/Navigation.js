@@ -8,13 +8,8 @@ import MenuItem from '@mui/material/MenuItem';
 import Toolbar from '@mui/material/Toolbar';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import Badge from '@mui/material/Badge';
-import Button from '@mui/material/Button';
-import { useSnackbar } from 'notistack';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Search from '@mui/icons-material/Search';
-import Notifications from '@mui/icons-material/Notifications';
-import utilities from '../utilities/index.js';
 import Panel from './Panel.js';
 import SearchPanel from './SearchPanel.js';
 
@@ -23,13 +18,11 @@ function Navigation({
     loading = false,
     username = '',
     myStuff = null,
-    notifications = [],
     handleSignOut = null
 }) {
     const [selected, setSelected] = useState(false);
     const [anchorEl, setAnchorEl] = useState();
     const [hoveredSectionId, setHoveredSectionId] = useState(null);
-    const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
     const styles = {
         root: {
@@ -42,13 +35,6 @@ function Navigation({
         tabLabel: {
             fontSize: '1rem',
             color: '#B0B0B0'
-        },
-        snackbarNew: {
-            background: '#1a73e8',
-            width: '800px'
-        },
-        snackbarSeen: {
-            width: '800px'
         },
         menuButton: {
             marginLeft: -12,
@@ -108,65 +94,6 @@ function Navigation({
             setAnchorEl(event.currentTarget);
         };
 
-        const actions = (key, e) => (
-            <>
-                <Button
-                    variant="contained"
-                    onClick={() => {
-                        window.location = utilities.getSelfHref(e);
-                    }}
-                >
-                    View
-                </Button>
-                <Button
-                    onClick={() => {
-                        closeSnackbar(key);
-                        localStorage.setItem(e.title, e.content);
-                        markNotificationSeen(e);
-                    }}
-                >
-                    Dismiss
-                </Button>
-            </>
-        );
-
-        const noNotifications = () => {
-            return notifications.length === 0;
-        };
-
-        const queueNotifications = () => {
-            if (noNotifications()) {
-                enqueueSnackbar('No notifications to show!', {
-                    anchorOrigin: {
-                        vertical: 'bottom',
-                        horizontal: 'right'
-                    },
-                    variant: 'info',
-                    preventDuplicate: true
-                });
-            } else {
-                notifications.forEach((e, i) => {
-                    setTimeout(() => {
-                        enqueueSnackbar(`${e.title} ${e.content}`, {
-                            anchorOrigin: {
-                                vertical: 'bottom',
-                                horizontal: 'right'
-                            },
-                            ContentProps: {
-                                sx: {
-                                    root: localStorage.getItem(e.title)
-                                        ? styles.snackbarSeen
-                                        : styles.snackbarNew
-                                }
-                            },
-                            action: key => actions(key, e),
-                            preventDuplicate: true
-                        });
-                    }, i * 200);
-                });
-            }
-        };
-
         return (
             <ClickAwayListener onClickAway={() => setSelected(false)}>
                 <div className="hide-when-printing">
@@ -175,7 +102,7 @@ function Navigation({
                             <AppBar position="static" sx={styles.appBar}>
                                 <Toolbar>
                                     <Grid container spacing={3} sx={styles.container}>
-                                        <Grid size={9}>
+                                        <Grid size={10}>
                                             <Tabs
                                                 sx={styles.tabs}
                                                 value={tabsValue}
@@ -215,20 +142,6 @@ function Navigation({
                                                     id={sections.length}
                                                     key={sections.length}
                                                 />
-                                            </Typography>
-                                        </Grid>
-                                        <Grid size={1}>
-                                            <Typography variant="h4">
-                                                <Badge
-                                                    badgeContent={notifications.length}
-                                                    color="primary"
-                                                    variant="dot"
-                                                >
-                                                    <Notifications
-                                                        sx={styles.icons}
-                                                        onClick={queueNotifications}
-                                                    />
-                                                </Badge>
                                             </Typography>
                                         </Grid>
                                         <Grid size={1}>
