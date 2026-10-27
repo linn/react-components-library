@@ -1,4 +1,6 @@
 # Changelog
+## [34.6.0] - 2026-10-27
+- Add LedgerPeriodAutoComplete: a ledger-period preset over AutoComplete (value and onChange are the periodNumber; options sorted by periodNumber, labelled by monthName, optional filter), moved from finance and purchasing2, with tests and a story.
 ## [34.5.1] - 2026-10-16
 - tweak useEditableSearchGrid to line up text better in grid. No functional change.
 ## [34.5.0] - 2026-10-08
