@@ -54,31 +54,47 @@ function ReportDataGrid({
     };
 
     // Define columns dynamically from the report data
-    const columns = report.headers.dataGridColumnSpecifications.map((c, i) => ({
-        field: c.columnId,
-        headerName: report.headers.columnHeaders[i],
-        align: report.headers.dataGridColumnSpecifications[i].align,
-        headerAlign: report.headers.dataGridColumnSpecifications[i].align,
-        width: report.headers.dataGridColumnSpecifications[i].columnWidth,
-        cellClassName: report.headers.totalColumns?.includes(i) ? 'totalColumn' : '',
-        valueFormatter: value => {
-            if (
-                report.headers.dataGridColumnSpecifications[i].columnType === 'number' &&
-                (value || value === 0 || value === '0')
-            ) {
-                const { decimalPlaces } = report.headers.dataGridColumnSpecifications[i];
-                const numberFormat = Intl.NumberFormat('en-GB', {
-                    minimumFractionDigits: decimalPlaces ?? 2,
-                    maximumFractionDigits: decimalPlaces ?? 99
-                });
+    const columns = report.headers.dataGridColumnSpecifications.map((c, i) => {
+        const spec = report.headers.dataGridColumnSpecifications[i];
+        const isDate = spec.columnType === 'date';
 
-                return numberFormat.format(value);
-            }
+        return {
+            field: c.columnId,
+            headerName: report.headers.columnHeaders[i],
+            align: spec.align,
+            headerAlign: spec.align,
+            width: spec.columnWidth,
+            cellClassName: report.headers.totalColumns?.includes(i) ? 'totalColumn' : '',
+            // Date columns sort/filter chronologically on the backend-supplied ISO sort value
+            // while still displaying the backend's formatted string (see valueFormatter below).
+            ...(isDate && {
+                type: 'date',
+                valueGetter: (value, row) => {
+                    const sortValue = row[`${c.columnId}SortValue`];
+                    return sortValue ? new Date(sortValue) : null;
+                }
+            }),
+            valueFormatter: (value, row) => {
+                // For date columns `value` is the Date used only for sorting; show the display string.
+                if (isDate) {
+                    return row[c.columnId];
+                }
 
-            return value;
-        },
-        renderCell
-    }));
+                if (spec.columnType === 'number' && (value || value === 0 || value === '0')) {
+                    const { decimalPlaces } = spec;
+                    const numberFormat = Intl.NumberFormat('en-GB', {
+                        minimumFractionDigits: decimalPlaces ?? 2,
+                        maximumFractionDigits: decimalPlaces ?? 99
+                    });
+
+                    return numberFormat.format(value);
+                }
+
+                return value;
+            },
+            renderCell
+        };
+    });
 
     // Map rows from the report data
     let rows = report.results.map(r => {
@@ -89,6 +105,12 @@ function ReportDataGrid({
             }
 
             acc[col.field] = val;
+
+            // Carry the backend sort key (e.g. ISO date) so date columns sort chronologically.
+            const sortValue = r.values[i]?.sortValue;
+            if (sortValue) {
+                acc[`${col.field}SortValue`] = sortValue;
+            }
 
             const drillDowns = r.values[i]?.drillDowns;
             const hasDrilldown = drillDowns?.length;

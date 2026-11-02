@@ -164,6 +164,56 @@ const reportWithColours = {
     totals: null
 };
 
+// Dates whose display (alphabetical) order differs from their chronological order, to show that
+// sorting the Date column uses the ISO sortValue rather than the display string.
+const reportWithDates = {
+    title: { displayString: 'Report with a date column' },
+    headers: {
+        columnHeaders: ['Order', 'Date', 'Total'],
+        dataGridColumnSpecifications: [
+            { columnId: 'order', align: 'left', columnWidth: 150, columnType: 'text' },
+            { columnId: 'date', align: 'left', columnWidth: 160, columnType: 'date' },
+            {
+                columnId: 'total',
+                align: 'right',
+                columnWidth: 130,
+                columnType: 'number',
+                decimalPlaces: 2
+            }
+        ]
+    },
+    results: [
+        {
+            rowTitle: { displayString: 'row0' },
+            rowType: 'Normal',
+            values: [
+                { displayValue: 'ORD-001' },
+                { textDisplayValue: '02-Nov-2026', sortValue: '2026-11-02T00:00:00.0000000' },
+                { displayValue: 49.9 }
+            ]
+        },
+        {
+            rowTitle: { displayString: 'row1' },
+            rowType: 'Normal',
+            values: [
+                { displayValue: 'ORD-002' },
+                { textDisplayValue: '10-Jan-2026', sortValue: '2026-01-10T00:00:00.0000000' },
+                { displayValue: 60.0 }
+            ]
+        },
+        {
+            rowTitle: { displayString: 'row2' },
+            rowType: 'Normal',
+            values: [
+                { displayValue: 'ORD-003' },
+                { textDisplayValue: '25-Mar-2025', sortValue: '2025-03-25T00:00:00.0000000' },
+                { displayValue: 199.98 }
+            ]
+        }
+    ],
+    totals: null
+};
+
 export default {
     title: 'Components/ReportDataGrid',
     component: ReportDataGrid,
@@ -229,6 +279,14 @@ export const WithColourAttributes = {
     name: 'With colour attributes',
     args: {
         report: reportWithColours
+    }
+};
+
+export const WithDateColumn = {
+    name: 'With date column (chronological sort)',
+    args: {
+        report: reportWithDates,
+        showExport: true
     }
 };
 

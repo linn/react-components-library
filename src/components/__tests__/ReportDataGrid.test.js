@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import ReportDataGrid from '../ReportDataGrid';
 
 const makeReport = totalColumns => ({
@@ -58,5 +59,67 @@ describe('ReportDataGrid total columns', () => {
         expect(totalCells).toHaveLength(2);
         expect(totalCells[1].closest('[role="row"]')).toHaveClass('totalLine');
         expect(totalCells[1].closest('[role="gridcell"]')).toHaveClass('totalColumn');
+    });
+});
+
+// A report with a single date column whose display order (alphabetical) differs from
+// its chronological order, so sorting correctness is observable.
+const makeDateReport = () => ({
+    title: { displayString: 'Report' },
+    headers: {
+        columnHeaders: ['Date'],
+        dataGridColumnSpecifications: [{ columnId: 'date', columnWidth: 200, columnType: 'date' }]
+    },
+    results: [
+        {
+            rowTitle: { displayString: 'a' },
+            rowType: 'Normal',
+            values: [{ textDisplayValue: '02-Nov-2026', sortValue: '2026-11-02T00:00:00.0000000' }]
+        },
+        {
+            rowTitle: { displayString: 'b' },
+            rowType: 'Normal',
+            values: [{ textDisplayValue: '10-Jan-2026', sortValue: '2026-01-10T00:00:00.0000000' }]
+        },
+        {
+            rowTitle: { displayString: 'c' },
+            rowType: 'Normal',
+            values: [{ textDisplayValue: '25-Mar-2025', sortValue: '2025-03-25T00:00:00.0000000' }]
+        }
+    ],
+    totals: { values: [{ displayValue: '' }] }
+});
+
+const dateColumnOrder = () =>
+    Array.from(document.querySelectorAll('[role="gridcell"][data-field="date"]')).map(
+        c => c.textContent
+    );
+
+describe('ReportDataGrid date columns', () => {
+    test('renders the backend formatted display string', () => {
+        render(<ReportDataGrid report={makeDateReport()} />);
+
+        expect(screen.getByText('02-Nov-2026')).toBeInTheDocument();
+        expect(screen.getByText('25-Mar-2025')).toBeInTheDocument();
+    });
+
+    test('sorts chronologically, not alphabetically, when sorting ascending', async () => {
+        render(<ReportDataGrid report={makeDateReport()} showExport />);
+
+        await userEvent.click(screen.getByRole('columnheader', { name: /Date/ }));
+
+        // Chronological ascending: Mar-2025, Jan-2026, Nov-2026.
+        // Alphabetical ascending would have been: 02-Nov-2026, 10-Jan-2026, 25-Mar-2025.
+        expect(dateColumnOrder()).toEqual(['25-Mar-2025', '10-Jan-2026', '02-Nov-2026']);
+    });
+
+    test('sorts chronologically descending on second header click', async () => {
+        render(<ReportDataGrid report={makeDateReport()} showExport />);
+
+        const header = screen.getByRole('columnheader', { name: /Date/ });
+        await userEvent.click(header);
+        await userEvent.click(header);
+
+        expect(dateColumnOrder()).toEqual(['02-Nov-2026', '10-Jan-2026', '25-Mar-2025']);
     });
 });
