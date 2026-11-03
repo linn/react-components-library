@@ -1,6 +1,8 @@
 # Changelog
 ## [34.7.0] - 2026-11-02
 - Fix ReportDataGrid date sorting: date columns (backend columnType "date") now sort/filter chronologically using the backend-supplied ISO sortValue rather than alphabetically on the display string. Requires Linn.Common.Reporting >= 1.10.0 / Linn.Common.Reporting.Resources >= 2.1.0 producing date columns via SetGridDateValue.
+- Update compatible dependencies, including React 19.3.1, MUI 9.5.0 / MUI X 9.17.0, Storybook 10.6.5, and React Router 7.18.5. Widen their peer ranges within the current majors while retaining existing minimum versions, so consumers do not need matching version bumps.
+- Refresh transitive dependencies for security fixes; remove unused deep-freeze and the unnecessary fast-uri override. Keep ESLint 9, React Router 7, and react-dropzone 15 to avoid incompatible major upgrades.
 ## [34.6.0] - 2026-10-27
 - Add LedgerPeriodAutoComplete: a ledger-period preset over AutoComplete (value and onChange are the periodNumber; options sorted by periodNumber, labelled by monthName, optional filter), moved from finance and purchasing2, with tests and a story.
 ## [34.5.1] - 2026-10-16
