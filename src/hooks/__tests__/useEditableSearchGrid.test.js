@@ -16,7 +16,7 @@ const Host = ({ onRowChange }) => {
     const columns = [
         { field: 'departmentCode', headerName: 'Department', type: 'search', width: 120, pad: 10 },
         { field: 'nominalCode', headerName: 'Nominal', type: 'search', width: 120, pad: 10 },
-        { field: 'amount', headerName: 'Amount', width: 100 }
+        { field: 'amount', headerName: 'Amount', width: 100, editable: true }
     ];
     const groupValidations = [
         {
@@ -107,6 +107,26 @@ describe('useEditableSearchGrid', () => {
         await waitFor(() =>
             expect(cell(container, 'nominalCode')).toHaveAttribute('tabindex', '0')
         );
+    });
+
+    // Regression: a plain (non-search) editable column must still report its field name as changedField.
+    // The grid has one processRowUpdate for every cell, so a consumer reacting to e.g. a PL-tref number
+    // column in onRowChange needs to know which field changed - previously changedField was only ever set
+    // for search columns, so a number-column edit arrived with changedField undefined and was skipped.
+    test('reports changedField for a non-search editable column', async () => {
+        const onRowChange = jest.fn();
+        const { container } = render(<Host onRowChange={onRowChange} />);
+
+        fireEvent.doubleClick(cell(container, 'amount'));
+        const input = cell(container, 'amount').querySelector('input');
+        fireEvent.change(input, { target: { value: '34' } });
+        fireEvent.keyDown(input, { key: 'Tab', code: 'Tab', keyCode: 9 });
+
+        await waitFor(() => expect(onRowChange).toHaveBeenCalled());
+
+        const [updatedRow, , changedField] = onRowChange.mock.calls.at(-1);
+        expect(changedField).toBe('amount');
+        expect(updatedRow.amount).toBe('34');
     });
 
     // Regression: Enter must open the dialog WITHOUT the grid starting edit mode on the cell behind it.
