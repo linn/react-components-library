@@ -1,4 +1,6 @@
 # Changelog
+## [34.7.1] - 2026-11-05
+- Fix useEditableSearchGrid so processRowUpdate reports changedField for all editable columns, not only type:'search' ones. The hook owns the grid's single processRowUpdate, so it fires on every editable cell's commit, but it previously only set changedField inside the search-column loop - a consumer reacting to a plain (e.g. number) column in onRowChange received changedField undefined and skipped its handler (surfaced as an order/PL-tref lookup never firing when typed into a grid cell). Padding stays search-only. Non-functional change for existing consumers, which only branch on their own field names.
 ## [34.7.0] - 2026-11-02
 - Fix ReportDataGrid date sorting: date columns (backend columnType "date") now sort/filter chronologically using the backend-supplied ISO sortValue rather than alphabetically on the display string. Requires Linn.Common.Reporting >= 1.10.0 / Linn.Common.Reporting.Resources >= 2.1.0 producing date columns via SetGridDateValue.
 - Update compatible dependencies, including React 19.3.1, MUI 9.5.0 / MUI X 9.17.0, Storybook 10.6.5, and React Router 7.18.5. Widen their peer ranges within the current majors while retaining existing minimum versions, so consumers do not need matching version bumps.

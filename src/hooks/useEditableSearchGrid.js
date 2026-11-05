@@ -199,12 +199,18 @@ function useEditableSearchGrid({
     };
 
     const processRowUpdate = (newRow, oldRow) => {
-        let changedField;
         const updated = { ...newRow };
 
+        // Report which editable column changed across ALL columns, not just the search ones. The grid
+        // has a single processRowUpdate, so this handler fires for every editable cell's commit; a
+        // consumer that reacts to a plain (non-search) column in onRowChange needs its field name too.
+        // Detected before padding so a re-typed search code (which pads back to its stored value) still
+        // counts as a change.
+        const changedField = columns.find(c => updated[c.field] !== oldRow?.[c.field])?.field;
+
+        // Padding stays search-only - that is this hook's own job; non-search columns are left as typed.
         searchColumns.forEach(c => {
             if (updated[c.field] !== oldRow?.[c.field]) {
-                changedField = c.field;
                 updated[c.field] = padCode(updated[c.field], c.pad);
             }
         });
