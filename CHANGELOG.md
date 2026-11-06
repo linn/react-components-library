@@ -1,4 +1,10 @@
 # Changelog
+## [34.9.0] - 2026-11-06
+- Add useSignedInRequest, with useSignedInGet, useSignedInPut and useSignedInPost: requests as the signed-in user that report hasToken (so a page waits for the token), mark an overtaken answer superseded, turn network failures into a failed outcome, sign in again on a 401 with no body (a rejected token; at most once a minute), and give only a 4xx's JSON-string message as errorMessage, never the raw body. send(url, body) returns the outcome. Moved from purchasing2 (#439).
+- useGet keeps only the latest request's answer: an earlier request answering after a newer one no longer overwrites it, and clearData drops an answer still on its way (#439).
+- useInitialise with requiresAuth waits for a signed-in user's token that hasn't expired before sending, rather than sending an empty or expired one; isLoading is true while it waits (#439).
+- usePut stops loading and sets errorMessage "An error occurred." on a network failure, as usePost does, rather than loading for ever; a 204 (no body) is a success with putResult null.
+- usePost treats a 204 (no body) as a success with postResult null, rather than "An error occurred."; with redirectOnSuccess it stays put.
 ## [34.8.0] - 2026-11-06
 - Breadcrumbs shows URL-encoded path segments decoded ("MAJIK%20CD" as "MAJIK CD"); the links keep the encoded path, and a segment that isn't valid encoding is shown as it is.
 - Add an optional errorMessage prop to Search: when set, it's shown in place of the results, so a failed search no longer reads as "No matching items"; it's announced to screen readers. It shows whenever it's set, so the consumer clears it when a new search starts. Unchanged for consumers that don't pass it.

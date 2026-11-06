@@ -51,9 +51,10 @@ function usePost(url, requiresAuth = false, redirectOnSuccess = false) {
                 const response = await fetch(id ? `${url}/${id}` : url, requestParameters);
 
                 if (response.ok) {
-                    const result = await response.json();
+                    // a 204 has no body, and is still a success (with nowhere to redirect to)
+                    const result = response.status === 204 ? null : await response.json();
                     setPostResult(result);
-                    if (redirectOnSuccess) {
+                    if (redirectOnSuccess && result) {
                         setPostResult(null);
                         navigate(utilities.getSelfHref(result));
                     }

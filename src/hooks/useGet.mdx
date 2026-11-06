@@ -89,3 +89,7 @@ const handleSelect = id => {
     send(id);
 };
 ```
+
+## Overlapping requests
+
+Only the latest `send`'s answer is kept: if an earlier request answers after a newer one, its result, error and loading state are ignored. `clearData` also drops an answer still on its way. For more (waiting for the token, signing in again, safe error messages) see `useSignedInRequest`.

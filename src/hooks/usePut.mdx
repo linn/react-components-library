@@ -106,3 +106,7 @@ const handleOpenEdit = () => {
     setEditVisible(true);
 };
 ```
+
+## Network failures
+
+A network failure (or a success body that isn't JSON) stops loading and sets `errorMessage` to "An error occurred.", as `usePost` does. A `204` (no body) is a success, with `putResult` `null`.

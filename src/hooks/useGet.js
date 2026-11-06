@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { useAuth } from 'react-oidc-context';
 
 function useGet(url, requiresAuth = false) {
@@ -8,10 +8,21 @@ function useGet(url, requiresAuth = false) {
 
     const auth = useAuth();
 
-    const clearData = () => setResult(null);
+    // only the latest request's answer is kept: a slow earlier one would otherwise overwrite it
+    const latestRequest = useRef(0);
+
+    // an answer still on its way is no longer wanted either
+    const clearData = () => {
+        latestRequest.current += 1;
+        setResult(null);
+        setIsLoading(false);
+    };
 
     const send = useCallback(
         async (id, queryString) => {
+            latestRequest.current += 1;
+            const thisRequest = latestRequest.current;
+            const isLatest = () => thisRequest === latestRequest.current;
             setIsLoading(true);
             setResult(null);
             setErrorMessage(null);
@@ -33,14 +44,24 @@ function useGet(url, requiresAuth = false) {
                 );
 
                 if (response.ok) {
-                    setResult(await response.json());
+                    const json = await response.json();
+                    if (isLatest()) {
+                        setResult(json);
+                    }
                 } else {
-                    setErrorMessage(await response.text());
+                    const text = await response.text();
+                    if (isLatest()) {
+                        setErrorMessage(text);
+                    }
                 }
             } catch (error) {
-                setErrorMessage(error.message);
+                if (isLatest()) {
+                    setErrorMessage(error.message);
+                }
             } finally {
-                setIsLoading(false);
+                if (isLatest()) {
+                    setIsLoading(false);
+                }
             }
         },
         [requiresAuth, auth.user?.access_token, url]

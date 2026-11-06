@@ -41,6 +41,10 @@ import useSearch from './src/hooks/useSearch.js';
 import useInitialise from './src/hooks/useInitialise.js';
 import usePost from './src/hooks/usePost.js';
 import usePut from './src/hooks/usePut.js';
+import useSignedInRequest from './src/hooks/useSignedInRequest.js';
+import useSignedInGet from './src/hooks/useSignedInGet.js';
+import useSignedInPut from './src/hooks/useSignedInPut.js';
+import useSignedInPost from './src/hooks/useSignedInPost.js';
 import useSignIn from './src/hooks/useSignIn.js';
 import useUserProfile from './src/hooks/useUserProfile.js';
 import useDelete from './src/hooks/useDelete.js';
@@ -93,6 +97,10 @@ export {
     useInitialise,
     usePost,
     usePut,
+    useSignedInRequest,
+    useSignedInGet,
+    useSignedInPut,
+    useSignedInPost,
     useSignIn,
     useUserProfile,
     useDelete,
