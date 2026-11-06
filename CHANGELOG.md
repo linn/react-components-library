@@ -1,4 +1,7 @@
 # Changelog
+## [34.8.0] - 2026-11-06
+- Breadcrumbs shows URL-encoded path segments decoded ("MAJIK%20CD" as "MAJIK CD"); the links keep the encoded path, and a segment that isn't valid encoding is shown as it is.
+- Add an optional errorMessage prop to Search: when set, it's shown in place of the results, so a failed search no longer reads as "No matching items"; it's announced to screen readers. It shows whenever it's set, so the consumer clears it when a new search starts. Unchanged for consumers that don't pass it.
 ## [34.7.1] - 2026-11-05
 - Fix useEditableSearchGrid so processRowUpdate reports changedField for all editable columns, not only type:'search' ones. The hook owns the grid's single processRowUpdate, so it fires on every editable cell's commit, but it previously only set changedField inside the search-column loop - a consumer reacting to a plain (e.g. number) column in onRowChange received changedField undefined and skipped its handler (surfaced as an order/PL-tref lookup never firing when typed into a grid cell). Padding stays search-only. Non-functional change for existing consumers, which only branch on their own field names.
 ## [34.7.0] - 2026-11-02

@@ -22,6 +22,7 @@ function Search({
     search,
     searchResults = [],
     loading = false,
+    errorMessage = null,
     priorityFunction = null,
     onResultSelect,
     resultLimit = null,
@@ -190,6 +191,16 @@ function Search({
     const results = () => {
         if (loading) {
             return <Loading />;
+        }
+
+        // a failed search, so the results shown would be wrong ("No matching items"); the consumer
+        // clears it when a new search starts
+        if (errorMessage) {
+            return (
+                <Typography color="error" role="alert">
+                    {errorMessage}
+                </Typography>
+            );
         }
 
         let result = searchResults;

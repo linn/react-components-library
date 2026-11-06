@@ -23,4 +23,27 @@ describe('<Breadcrumbs />', () => {
             expect(screen.getByText('test')).toHaveAttribute('href', '/a/test');
         });
     });
+
+    describe('when a path segment is URL-encoded', () => {
+        beforeEach(() => {
+            render(
+                <Breadcrumbs
+                    location={{ pathname: '/a/MADE%20CABLE/MAJIK%20CD' }}
+                    navigate={mockPush}
+                />
+            );
+        });
+
+        it('shows it decoded, with the link still encoded', () => {
+            expect(screen.getByText('MAJIK CD')).toBeInTheDocument();
+            expect(screen.getByText('MADE CABLE')).toHaveAttribute('href', '/a/MADE%20CABLE');
+        });
+    });
+
+    describe('when a path segment is not valid encoding', () => {
+        it('shows it as it is', () => {
+            render(<Breadcrumbs location={{ pathname: '/a/100%' }} navigate={mockPush} />);
+            expect(screen.getByText('100%')).toBeInTheDocument();
+        });
+    });
 });
