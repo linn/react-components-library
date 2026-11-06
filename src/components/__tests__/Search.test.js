@@ -341,3 +341,36 @@ describe('When showResultsList is false and resultsInModal is true', () => {
         expect(screen.queryByTestId('modal')).not.toBeInTheDocument();
     });
 });
+
+describe('When the search failed', () => {
+    test('shows the error message rather than "No matching items"', () => {
+        render(
+            <Search
+                {...defaultProps}
+                value="RESULT"
+                resultsInModal
+                errorMessage="The parts couldn't be searched. Please try again."
+            />
+        );
+        fireEvent.keyDown(screen.getByLabelText('Label'), { key: 'Enter', keyCode: 13 });
+
+        expect(
+            screen.getByText("The parts couldn't be searched. Please try again.")
+        ).toBeInTheDocument();
+        expect(screen.queryByText('No matching items')).not.toBeInTheDocument();
+    });
+
+    test('shows it inline too, as an alert', () => {
+        render(<Search {...defaultProps} value="RESULT" errorMessage="Search failed" />);
+        fireEvent.keyDown(screen.getByLabelText('Label'), { key: 'Enter', keyCode: 13 });
+
+        expect(screen.getByRole('alert')).toHaveTextContent('Search failed');
+        expect(screen.queryByText('No matching items')).not.toBeInTheDocument();
+    });
+
+    test('shows loading rather than the error while searching', () => {
+        render(<Search {...defaultProps} value="RESULT" loading errorMessage="Search failed" />);
+
+        expect(screen.queryByText('Search failed')).not.toBeInTheDocument();
+    });
+});

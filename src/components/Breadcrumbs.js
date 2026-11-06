@@ -2,6 +2,16 @@ import React from 'react';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 
+// A path segment as the user should read it: "MAJIK%20CD" is shown as "MAJIK CD". The link
+// keeps the encoded path; a segment that isn't valid encoding is shown as it is.
+const caption = segment => {
+    try {
+        return decodeURIComponent(segment);
+    } catch {
+        return segment;
+    }
+};
+
 function Breadcrumbs({
     navigate,
     rootPathLength = 2,
@@ -30,7 +40,7 @@ function Breadcrumbs({
                       ...sofar,
                       {
                           key: i,
-                          caption: crumb,
+                          caption: caption(crumb),
                           href: currentPath,
                           onClick: handleClick
                       }

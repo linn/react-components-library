@@ -65,6 +65,14 @@ export const Loading = {
     }
 };
 
+export const SearchFailed = {
+    name: 'Search failed',
+    args: {
+        value: 'widget',
+        errorMessage: "The parts couldn't be searched. Please try again."
+    }
+};
+
 export const Disabled = {
     args: {
         disabled: true
