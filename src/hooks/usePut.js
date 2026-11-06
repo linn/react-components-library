@@ -31,14 +31,20 @@ function usePut(url, requiresAuth = false) {
             headers: requiresAuth ? { ...headers, Authorization: `Bearer ${token}` } : headers
         };
 
-        const response = await fetch(id ? `${url}/${id}` : url, requestParameters);
+        // a network failure (or a success body that isn't JSON) would otherwise leave it loading
+        // for ever; usePost says the same
+        try {
+            const response = await fetch(id ? `${url}/${id}` : url, requestParameters);
 
-        if (response.ok) {
-            setPutResult(await response.json());
-            setIsLoading(false);
-        } else {
-            const text = await response.text();
-            setErrorMessage(text);
+            if (response.ok) {
+                // a 204 has no body, and is still a success
+                setPutResult(response.status === 204 ? null : await response.json());
+            } else {
+                setErrorMessage(await response.text());
+            }
+        } catch {
+            setErrorMessage('An error occurred.');
+        } finally {
             setIsLoading(false);
         }
     };

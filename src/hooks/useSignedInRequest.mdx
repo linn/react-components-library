@@ -1,0 +1,67 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Hooks/useSignedInRequest" />
+
+# useSignedInRequest (useSignedInGet, useSignedInPut, useSignedInPost)
+
+Requests as the signed-in user (`react-oidc-context`), for pages that need more than `useGet`, `usePut` and `usePost` give. Unlike those, it:
+
+- reports `hasToken`, so a page can wait for the sign-in token rather than send an empty one;
+- marks an answer `superseded` when a newer request (or `clearData`) has happened since, and doesn't keep it;
+- turns a network failure into a failed outcome, never a thrown error or endless loading;
+- signs in again when the API rejects the token (a `401` with no body, as `Linn.Common.Authentication.Host` 5's bearer challenge gives), at most once a minute so a token that keeps being refused can't loop; a `401` with a message (the app's own, e.g. "Could not identify the logged in employee") is shown, not signed in again;
+- never hands the server's raw body to the page: `errorMessage` is only a 4xx's JSON-string message, how `Linn.Common.Service` writes a `BadRequestResult`. A stack trace or HTML error page gives `null`, and the page says something of its own;
+- keeps `send`'s identity when the token is renewed in the background, so a page that loads in an effect on `send` doesn't load again and lose the user's edits.
+
+## Signature
+
+```js
+const { send, isLoading, ok, result, status, errorMessage, clearData, hasToken } = useSignedInGet();
+// also useSignedInPut(), useSignedInPost(), or useSignedInRequest('DELETE') for any method
+```
+
+`send(url, body?)` takes the whole URL (the hook has none of its own) and an optional body, sent as JSON. It returns a promise of the outcome:
+
+<table>
+  <thead>
+    <tr><th>Property</th><th>Type</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>ok</code></td><td><code>boolean</code></td><td>A 2xx answer whose body parsed.</td></tr>
+    <tr><td><code>status</code></td><td><code>number | null</code></td><td>The HTTP status; <code>null</code> when the network failed.</td></tr>
+    <tr><td><code>result</code></td><td><code>any | null</code></td><td>The parsed JSON of a successful answer; <code>null</code> for an empty body.</td></tr>
+    <tr><td><code>errorMessage</code></td><td><code>string | null</code></td><td>A 4xx's message when its body is a JSON string, otherwise <code>null</code>.</td></tr>
+    <tr><td><code>superseded</code></td><td><code>boolean</code></td><td><code>true</code> when a later <code>send</code> or <code>clearData</code> has happened since: ignore this answer.</td></tr>
+  </tbody>
+</table>
+
+The latest outcome (without `superseded`) is also kept as state: `isLoading`, `ok`, `result`, `status`, `errorMessage`. `clearData()` empties it and drops any answer still on its way. `hasToken` is `true` once the user has a token that hasn't expired.
+
+## Usage
+
+```jsx
+import { useSignedInGet, useSignedInPut } from '@linn-it/linn-form-components-library';
+
+function Plan({ code }) {
+    const { send: getPlan, hasToken, result: plan } = useSignedInGet();
+    const { send: putPlan } = useSignedInPut();
+    const [problem, setProblem] = useState(null);
+
+    useEffect(() => {
+        if (hasToken) {
+            getPlan(`/plans/${encodeURIComponent(code)}`);
+        }
+    }, [hasToken, code, getPlan]);
+
+    const save = async changes => {
+        const outcome = await putPlan(`/plans/${encodeURIComponent(code)}`, changes);
+        if (outcome.superseded) return;
+        if (!outcome.ok) {
+            setProblem(outcome.errorMessage ?? "Your changes couldn't be saved. Please try again.");
+        }
+    };
+    // ...
+}
+```
+
+The sign-in again sets `sessionStorage['auth:redirect']` to the current path, as `useSignIn` does, so the app's `onSigninCallback` brings the user back.

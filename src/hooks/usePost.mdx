@@ -115,3 +115,7 @@ const handleRetry = () => {
     send(undefined, formData);
 };
 ```
+
+## No content
+
+A `204` (no body) is a success, with `postResult` `null`; with `redirectOnSuccess` there's nothing to redirect to, so it stays put.

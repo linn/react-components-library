@@ -75,3 +75,7 @@ const { isLoading, result } = useInitialise(
     true // requiresAuth — adds Bearer token from react-oidc-context
 );
 ```
+
+## Waiting for the token
+
+With `requiresAuth`, nothing is sent until the signed-in user has a token that hasn't expired, rather than sending an empty or expired one and being refused. While it waits, `isLoading` is `true`. If the user never signs in, it never sends (the app's `useSignIn` takes them to sign in).
