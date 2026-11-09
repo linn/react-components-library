@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { act, render, renderHook, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { useAuth } from 'react-oidc-context';
-import { SignedInRequestProvider } from '../requestAuth.js';
+import { RequestAuthProvider } from '../requestAuth.js';
 import useSignedInGet from '../useSignedInGet.js';
 import useGet from '../useGet.js';
 import useInitialise from '../useInitialise.js';
@@ -11,7 +11,7 @@ import usePost from '../usePost.js';
 import useDelete from '../useDelete.js';
 
 // An app that signs in some other way than react-oidc-context's AuthProvider (redux-oidc, say) gives
-// the request hooks its user through a SignedInRequestProvider. These tests have no AuthProvider;
+// the request hooks its user through a RequestAuthProvider. These tests have no AuthProvider;
 // react-oidc-context's useAuth is mocked only to check it isn't called.
 jest.mock('react-oidc-context', () => ({ useAuth: jest.fn() }));
 jest.mock('react-router-dom', () => ({ useNavigate: () => jest.fn() }));
@@ -42,7 +42,7 @@ function Page() {
 function App({ firstUser }) {
     const [user, setUser] = React.useState(firstUser);
     return (
-        <SignedInRequestProvider user={user} signIn={signIn}>
+        <RequestAuthProvider user={user} signIn={signIn}>
             <button
                 type="button"
                 onClick={() => setUser({ access_token: 'a-renewed-token', expired: false })}
@@ -50,7 +50,7 @@ function App({ firstUser }) {
                 Renew the token
             </button>
             <Page />
-        </SignedInRequestProvider>
+        </RequestAuthProvider>
     );
 }
 
@@ -68,13 +68,13 @@ const bearerChallenge = { 'WWW-Authenticate': 'Bearer error="invalid_token"' };
 
 const authorizationOfRequest = index => fetch.mock.calls[index][1].headers.Authorization;
 
-// renderHook inside a SignedInRequestProvider giving this user
+// renderHook inside a RequestAuthProvider giving this user
 const withUser = user =>
     function Wrapper({ children }) {
         return (
-            <SignedInRequestProvider user={user} signIn={signIn}>
+            <RequestAuthProvider user={user} signIn={signIn}>
                 {children}
-            </SignedInRequestProvider>
+            </RequestAuthProvider>
         );
     };
 
@@ -84,7 +84,7 @@ beforeEach(() => {
     global.fetch = jest.fn(url => respond(200, { id: Number(url.split('/').pop()) }));
 });
 
-describe('useSignedInRequest given the user by a SignedInRequestProvider', () => {
+describe('useSignedInRequest given the user by a RequestAuthProvider', () => {
     test("sends the provider's user's token", async () => {
         render(<App firstUser={{ access_token: 'a-token', expired: false }} />);
 
@@ -162,7 +162,7 @@ describe('useSignedInRequest given the user by a SignedInRequestProvider', () =>
     });
 });
 
-describe('useSignedInRequest with no SignedInRequestProvider', () => {
+describe('useSignedInRequest with no RequestAuthProvider', () => {
     test("uses react-oidc-context's signed-in user", async () => {
         useAuth.mockReturnValue({
             user: { access_token: 'an-oidc-context-token', expired: false },
@@ -230,7 +230,7 @@ describe('useSignedInRequest with no SignedInRequestProvider', () => {
     });
 });
 
-describe('useGet given the user by a SignedInRequestProvider', () => {
+describe('useGet given the user by a RequestAuthProvider', () => {
     test("with requiresAuth, sends the provider's user's token", async () => {
         const { result } = renderHook(() => useGet('/things', true), {
             wrapper: withUser({ access_token: 'a-provider-token', expired: false })
@@ -256,7 +256,7 @@ describe('useGet given the user by a SignedInRequestProvider', () => {
     });
 });
 
-describe('useGet with neither a SignedInRequestProvider nor an AuthProvider', () => {
+describe('useGet with neither a RequestAuthProvider nor an AuthProvider', () => {
     test('sends without a token rather than failing', async () => {
         useAuth.mockReturnValue(undefined);
         const { result } = renderHook(() => useGet('/things'));
@@ -270,7 +270,7 @@ describe('useGet with neither a SignedInRequestProvider nor an AuthProvider', ()
     });
 });
 
-describe('useInitialise given the user by a SignedInRequestProvider', () => {
+describe('useInitialise given the user by a RequestAuthProvider', () => {
     test("with requiresAuth, sends the provider's user's token", () => {
         renderHook(() => useInitialise('/things', 1, null, true), {
             wrapper: withUser({ access_token: 'a-provider-token', expired: false })
@@ -288,7 +288,7 @@ describe('useInitialise given the user by a SignedInRequestProvider', () => {
     });
 });
 
-describe('usePut given the user by a SignedInRequestProvider', () => {
+describe('usePut given the user by a RequestAuthProvider', () => {
     test("with requiresAuth, sends the provider's user's token", async () => {
         const { result } = renderHook(() => usePut('/things', true), {
             wrapper: withUser({ access_token: 'a-provider-token', expired: false })
@@ -302,7 +302,7 @@ describe('usePut given the user by a SignedInRequestProvider', () => {
     });
 });
 
-describe('usePost given the user by a SignedInRequestProvider', () => {
+describe('usePost given the user by a RequestAuthProvider', () => {
     test("with requiresAuth, sends the provider's user's token", async () => {
         const { result } = renderHook(() => usePost('/things', true), {
             wrapper: withUser({ access_token: 'a-provider-token', expired: false })
@@ -316,7 +316,7 @@ describe('usePost given the user by a SignedInRequestProvider', () => {
     });
 });
 
-describe('useDelete given the user by a SignedInRequestProvider', () => {
+describe('useDelete given the user by a RequestAuthProvider', () => {
     test("with requiresAuth, sends the provider's user's token", async () => {
         const { result } = renderHook(() => useDelete('/things', true), {
             wrapper: withUser({ access_token: 'a-provider-token', expired: false })

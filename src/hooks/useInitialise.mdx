@@ -22,7 +22,7 @@ const { isLoading, errorMessage, result } = useInitialise(url, id, queryString, 
     <tr><td><code>url</code></td><td><code>string</code></td><td>—</td><td>Base URL of the resource to fetch.</td></tr>
     <tr><td><code>id</code></td><td><code>string | number | undefined</code></td><td>—</td><td>Optional ID to append to the URL: <code>GET {'{ url }'}/{'{ id }'}</code>.</td></tr>
     <tr><td><code>queryString</code></td><td><code>string | undefined</code></td><td>—</td><td>Optional query string to append (e.g. <code>'?filter=active'</code>).</td></tr>
-    <tr><td><code>requiresAuth</code></td><td><code>boolean</code></td><td><code>false</code></td><td>When <code>true</code>, the signed-in user's bearer token is included in the request headers, from <code>react-oidc-context</code>'s <code>AuthProvider</code> or a <code>SignedInRequestProvider</code>.</td></tr>
+    <tr><td><code>requiresAuth</code></td><td><code>boolean</code></td><td><code>false</code></td><td>When <code>true</code>, the signed-in user's bearer token is included in the request headers, from <code>react-oidc-context</code>'s <code>AuthProvider</code> or a <code>RequestAuthProvider</code>.</td></tr>
   </tbody>
 </table>
 

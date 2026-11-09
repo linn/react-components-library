@@ -17,8 +17,8 @@ const RequestAuthContext = createContext(null);
 //       userManager.signinRedirect({
 //           data: { redirect: window.location.pathname + window.location.search }
 //       });
-//   <SignedInRequestProvider user={user} signIn={signIn}>
-export function SignedInRequestProvider({ user, signIn, children }) {
+//   <RequestAuthProvider user={user} signIn={signIn}>
+export function RequestAuthProvider({ user, signIn, children }) {
     return (
         <RequestAuthContext.Provider value={{ user, signIn }}>
             {children}
@@ -26,7 +26,7 @@ export function SignedInRequestProvider({ user, signIn, children }) {
     );
 }
 
-// The signed-in user and signIn, from a SignedInRequestProvider if the app has one, otherwise
+// The signed-in user and signIn, from a RequestAuthProvider if the app has one, otherwise
 // from react-oidc-context's AuthProvider.
 export function useRequestAuth() {
     const given = useContext(RequestAuthContext);

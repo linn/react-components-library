@@ -4,7 +4,7 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 # useSignedInRequest (useSignedInGet, useSignedInPut, useSignedInPost)
 
-Requests as the signed-in user (from react-oidc-context's `AuthProvider`, or a [`SignedInRequestProvider`](?path=/docs/hooks-signedinrequestprovider--docs) for an app on redux-oidc), for pages that need more than `useGet`, `usePut` and `usePost` give. Unlike those, it:
+Requests as the signed-in user (from react-oidc-context's `AuthProvider`, or a [`RequestAuthProvider`](?path=/docs/hooks-requestauthprovider--docs) for an app on redux-oidc), for pages that need more than `useGet`, `usePut` and `usePost` give. Unlike those, it:
 
 - reports `hasToken`, so a page can wait for the sign-in token rather than send an empty one;
 - marks an answer `superseded` when a newer request (or `clearData`) has happened since, and doesn't keep it;
@@ -73,4 +73,4 @@ Only an API that sends the bearer challenge gets a user signed in again:
 
 Without them a rejected token just fails like any other refusal: nothing loops and nobody is bounced to sign in, but nobody is signed in again either.
 
-With react-oidc-context, signing in again sets `sessionStorage['auth:redirect']` to the current path and query string, as `useSignIn` does, so the app's `onSigninCallback` brings the user back. With a `SignedInRequestProvider`, the app's own `signIn` decides how to come back.
+With react-oidc-context, signing in again sets `sessionStorage['auth:redirect']` to the current path and query string, as `useSignIn` does, so the app's `onSigninCallback` brings the user back. With a `RequestAuthProvider`, the app's own `signIn` decides how to come back.

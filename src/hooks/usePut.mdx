@@ -20,7 +20,7 @@ const { send, isLoading, errorMessage, putResult, clearPutResult } = usePut(url,
   </thead>
   <tbody>
     <tr><td><code>url</code></td><td><code>string</code></td><td>—</td><td>Base URL of the resource. An optional ID is appended when calling <code>send</code>.</td></tr>
-    <tr><td><code>requiresAuth</code></td><td><code>boolean</code></td><td><code>false</code></td><td>When <code>true</code>, the signed-in user's bearer token is included in the request headers, from <code>react-oidc-context</code>'s <code>AuthProvider</code> or a <code>SignedInRequestProvider</code>.</td></tr>
+    <tr><td><code>requiresAuth</code></td><td><code>boolean</code></td><td><code>false</code></td><td>When <code>true</code>, the signed-in user's bearer token is included in the request headers, from <code>react-oidc-context</code>'s <code>AuthProvider</code> or a <code>RequestAuthProvider</code>.</td></tr>
   </tbody>
 </table>
 

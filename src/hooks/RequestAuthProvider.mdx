@@ -1,12 +1,12 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 
-<Meta title="Hooks/SignedInRequestProvider" />
+<Meta title="Hooks/RequestAuthProvider" />
 
-# SignedInRequestProvider
+# RequestAuthProvider
 
 Gives the request hooks (`useGet`, `useInitialise`, `usePut`, `usePost`, `useDelete` and [`useSignedInRequest`](?path=/docs/hooks-usesignedinrequest--docs)) the signed-in user and a way to sign in again, in an app that doesn't sign in with react-oidc-context's `AuthProvider`: one still on redux-oidc, say.
 
-**An app with react-oidc-context's `AuthProvider` doesn't need it**: without a `SignedInRequestProvider` the hooks use `useAuth()`, as they always have.
+**An app with react-oidc-context's `AuthProvider` doesn't need it**: without a `RequestAuthProvider` the hooks use `useAuth()`, as they always have.
 
 ## Props
 
@@ -28,7 +28,7 @@ Inside the app's Redux `Provider` and `OidcProvider`, around everything that mak
 
 ```jsx
 import { useSelector } from 'react-redux';
-import { SignedInRequestProvider } from '@linn-it/linn-form-components-library';
+import { RequestAuthProvider } from '@linn-it/linn-form-components-library';
 import userManager from '../helpers/userManager';
 
 function RequestAuth({ children }) {
@@ -38,9 +38,9 @@ function RequestAuth({ children }) {
             data: { redirect: window.location.pathname + window.location.search }
         });
     return (
-        <SignedInRequestProvider user={user} signIn={signIn}>
+        <RequestAuthProvider user={user} signIn={signIn}>
             {children}
-        </SignedInRequestProvider>
+        </RequestAuthProvider>
     );
 }
 ```

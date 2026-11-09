@@ -2,7 +2,7 @@ import { useCallback, useLayoutEffect, useRef, useState } from 'react';
 import { useRequestAuth } from './requestAuth.js';
 
 // Requests as the signed-in user. The user and sign-in come from requestAuth.js, so it works with
-// react-oidc-context's AuthProvider or, through a SignedInRequestProvider, with redux-oidc.
+// react-oidc-context's AuthProvider or, through a RequestAuthProvider, with redux-oidc.
 //
 // It reports whether there's a usable token yet (hasToken), so a page can wait for it; ignores an
 // answer that a newer request has overtaken; catches network failures; signs in again when the API
