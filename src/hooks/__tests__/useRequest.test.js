@@ -64,6 +64,7 @@ describe('useGet, usePut and usePost with no url of their own', () => {
             result: { id: 1 },
             errorMessage: null,
             apiMessage: null,
+            tokenRejected: false,
             superseded: false
         });
     });
@@ -142,16 +143,17 @@ describe('useGet, usePut and usePost with no url of their own', () => {
         expect(result.current.hasToken).toBe(false);
     });
 
-    test('a request sent before there was a token does not sign in again when the API challenges it', async () => {
+    test('a request sent before there was a token is not tokenRejected when the API challenges it', async () => {
         useAuth.mockReturnValue({ user: null, signinRedirect });
         fetch.mockReturnValueOnce(respond(401, undefined, { 'WWW-Authenticate': 'Bearer' }));
         const { result } = renderHook(() => useGet(null, true));
 
+        let outcome;
         await act(async () => {
-            await result.current.send('/things/1');
+            outcome = await result.current.send('/things/1');
         });
 
-        expect(signinRedirect).not.toHaveBeenCalled();
+        expect(outcome.tokenRejected).toBe(false);
     });
 
     test('has a token once the user has one that has not expired', () => {
@@ -276,46 +278,21 @@ describe('useGet, usePut and usePost with no url of their own', () => {
         expect(result.current.result).toEqual({ id: 2 });
     });
 
-    test('a rejected token (the bearer challenge) signs in again', async () => {
+    test('a rejected token (the bearer challenge) is reported as tokenRejected', async () => {
         fetch.mockReturnValueOnce(respond(401, undefined, bearerChallenge));
         const { result } = renderHook(() => useGet(null, true));
 
+        let outcome;
         await act(async () => {
-            await result.current.send('/things/1');
+            outcome = await result.current.send('/things/1');
         });
 
-        expect(signinRedirect).toHaveBeenCalledTimes(1);
+        expect(outcome.tokenRejected).toBe(true);
+        expect(result.current.tokenRejected).toBe(true);
     });
 
-    test('signing in again remembers the page to come back to', async () => {
+    test('a rejected token does not sign in again by itself (a page with edits would lose them)', async () => {
         fetch.mockReturnValueOnce(respond(401, undefined, bearerChallenge));
-        const { result } = renderHook(() => useGet(null, true));
-
-        await act(async () => {
-            await result.current.send('/things/1');
-        });
-
-        expect(sessionStorage.getItem('auth:redirect')).toBe(window.location.pathname);
-    });
-
-    test('a second rejected token within a minute does not sign in again', async () => {
-        fetch
-            .mockReturnValueOnce(respond(401, undefined, bearerChallenge))
-            .mockReturnValueOnce(respond(401, undefined, bearerChallenge));
-        const { result } = renderHook(() => useGet(null, true));
-
-        await act(async () => {
-            await result.current.send('/things/1');
-        });
-        await act(async () => {
-            await result.current.send('/things/1');
-        });
-
-        expect(signinRedirect).toHaveBeenCalledTimes(1);
-    });
-
-    test('a 401 with no body and no bearer challenge (a refused permission) does not sign in again', async () => {
-        fetch.mockReturnValueOnce(respond(401));
         const { result } = renderHook(() => useGet(null, true));
 
         await act(async () => {
@@ -325,7 +302,157 @@ describe('useGet, usePut and usePost with no url of their own', () => {
         expect(signinRedirect).not.toHaveBeenCalled();
     });
 
-    test('a 401 with a message is shown and does not sign in again', async () => {
+    test('signInAgain signs in', async () => {
+        const { result } = renderHook(() => useGet(null, true));
+
+        await act(async () => {
+            result.current.signInAgain();
+        });
+
+        expect(signinRedirect).toHaveBeenCalledTimes(1);
+    });
+
+    test('signInAgain remembers the page to come back to', async () => {
+        const { result } = renderHook(() => useGet(null, true));
+
+        await act(async () => {
+            result.current.signInAgain();
+        });
+
+        expect(sessionStorage.getItem('auth:redirect')).toBe(window.location.pathname);
+    });
+
+    test('signInAgain a second time within a minute does not sign in again', async () => {
+        const { result } = renderHook(() => useGet(null, true));
+
+        await act(async () => {
+            result.current.signInAgain();
+        });
+        await act(async () => {
+            result.current.signInAgain();
+        });
+
+        expect(signinRedirect).toHaveBeenCalledTimes(1);
+    });
+
+    test("signInAgain with force signs in even within a minute (the user's own click)", async () => {
+        const { result } = renderHook(() => useGet(null, true));
+
+        await act(async () => {
+            result.current.signInAgain();
+        });
+        await act(async () => {
+            result.current.signInAgain({ force: true });
+        });
+
+        expect(signinRedirect).toHaveBeenCalledTimes(2);
+    });
+
+    test('signInAgain keeps its identity when the user changes', () => {
+        const { result, rerender } = renderHook(() => useGet(null, true));
+        const { signInAgain } = result.current;
+
+        signedIn({ access_token: 'another-token', expired: false });
+        rerender();
+
+        expect(result.current.signInAgain).toBe(signInAgain);
+    });
+
+    test('signInAgain does nothing, rather than failing, when sessionStorage throws', async () => {
+        const getItem = jest.spyOn(Storage.prototype, 'getItem').mockImplementation(() => {
+            throw new Error('blocked');
+        });
+        const { result } = renderHook(() => useGet(null, true));
+
+        await act(async () => {
+            result.current.signInAgain();
+        });
+
+        expect(signinRedirect).not.toHaveBeenCalled();
+        getItem.mockRestore();
+    });
+
+    test('signInAgain with force still signs in when sessionStorage throws', async () => {
+        const getItem = jest.spyOn(Storage.prototype, 'getItem').mockImplementation(() => {
+            throw new Error('blocked');
+        });
+        const { result } = renderHook(() => useGet(null, true));
+
+        await act(async () => {
+            result.current.signInAgain({ force: true });
+        });
+
+        expect(signinRedirect).toHaveBeenCalledTimes(1);
+        getItem.mockRestore();
+    });
+
+    test('tokenRejected goes back to false when the next send starts', async () => {
+        fetch.mockReturnValueOnce(respond(401, undefined, bearerChallenge));
+        let answerSecond;
+        fetch.mockReturnValueOnce(new Promise(resolve => (answerSecond = resolve)));
+        const { result } = renderHook(() => useGet(null, true));
+        await act(async () => {
+            await result.current.send('/things/1');
+        });
+
+        act(() => {
+            result.current.send('/things/1');
+        });
+
+        expect(result.current.tokenRejected).toBe(false);
+        await act(async () => {
+            answerSecond(await respond(200, { id: 1 }));
+        });
+    });
+
+    test('usePut reports a rejected token as tokenRejected', async () => {
+        fetch.mockReturnValueOnce(respond(401, undefined, bearerChallenge));
+        const { result } = renderHook(() => usePut(null, true));
+
+        await act(async () => {
+            await result.current.send('/things/1', { name: 'x' });
+        });
+
+        expect(result.current.tokenRejected).toBe(true);
+    });
+
+    test('usePost reports a rejected token as tokenRejected', async () => {
+        fetch.mockReturnValueOnce(respond(401, undefined, bearerChallenge));
+        const { result } = renderHook(() => usePost(null, true));
+
+        await act(async () => {
+            await result.current.send('/things', { name: 'x' });
+        });
+
+        expect(result.current.tokenRejected).toBe(true);
+    });
+
+    test('usePost clearPostResult clears tokenRejected and apiMessage too', async () => {
+        fetch.mockReturnValueOnce(respond(401, 'Not allowed', bearerChallenge));
+        const { result } = renderHook(() => usePost(null, true));
+        await act(async () => {
+            await result.current.send('/things', { name: 'x' });
+        });
+
+        act(() => result.current.clearPostResult());
+
+        expect(result.current.tokenRejected).toBe(false);
+        expect(result.current.apiMessage).toBeNull();
+    });
+
+    test('a 401 with no body and no bearer challenge (a refused permission) is not tokenRejected', async () => {
+        fetch.mockReturnValueOnce(respond(401));
+        const { result } = renderHook(() => useGet(null, true));
+
+        let outcome;
+        await act(async () => {
+            outcome = await result.current.send('/things/1');
+        });
+
+        expect(outcome.tokenRejected).toBe(false);
+    });
+
+    test('a 401 with a message is shown and is not tokenRejected', async () => {
         fetch.mockReturnValueOnce(respond(401, 'Could not identify the logged in employee'));
         const { result } = renderHook(() => useGet(null, true));
 
@@ -335,7 +462,7 @@ describe('useGet, usePut and usePost with no url of their own', () => {
         });
 
         expect(outcome.apiMessage).toBe('Could not identify the logged in employee');
-        expect(signinRedirect).not.toHaveBeenCalled();
+        expect(outcome.tokenRejected).toBe(false);
     });
 
     test('clearData empties it and drops an answer still on its way', async () => {

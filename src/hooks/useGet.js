@@ -4,13 +4,20 @@ import useRequest from './useRequest.js';
 // a network failure's own message, as useGet has always given
 const networkFailureMessage = error => error.message;
 
-const idle = { isLoading: false, errorMessage: null, result: null, status: null, apiMessage: null };
+const idle = {
+    isLoading: false,
+    errorMessage: null,
+    result: null,
+    status: null,
+    apiMessage: null,
+    tokenRejected: false
+};
 
 // GETs from url (plus an id and query string) as the signed-in user when requiresAuth; see
 // useGet.mdx. With no url, send's first argument is the whole URL.
 function useGet(url, requiresAuth = false) {
     const [state, setState] = useState(idle);
-    const { request, forgetEarlierRequests, hasToken } = useRequest(
+    const { request, forgetEarlierRequests, hasToken, signInAgain } = useRequest(
         'GET',
         requiresAuth,
         networkFailureMessage
@@ -30,7 +37,8 @@ function useGet(url, requiresAuth = false) {
                 isLoading: true,
                 result: null,
                 errorMessage: null,
-                apiMessage: null
+                apiMessage: null,
+                tokenRejected: false
             }));
             const outcome = await request(target);
             // only the latest request's answer is kept: a slow earlier one would otherwise
@@ -41,7 +49,8 @@ function useGet(url, requiresAuth = false) {
                     result: outcome.result,
                     errorMessage: outcome.errorMessage,
                     status: outcome.status,
-                    apiMessage: outcome.apiMessage
+                    apiMessage: outcome.apiMessage,
+                    tokenRejected: outcome.tokenRejected
                 });
             }
             return outcome;
@@ -55,7 +64,7 @@ function useGet(url, requiresAuth = false) {
         setState(previous => ({ ...previous, result: null, isLoading: false }));
     }, [forgetEarlierRequests]);
 
-    return { send, ...state, clearData, hasToken };
+    return { send, ...state, clearData, hasToken, signInAgain };
 }
 
 export default useGet;

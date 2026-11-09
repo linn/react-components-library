@@ -8,14 +8,19 @@ const idle = {
     errorMessage: null,
     putResult: null,
     status: null,
-    apiMessage: null
+    apiMessage: null,
+    tokenRejected: false
 };
 
 // PUTs data to url (plus an id) as the signed-in user when requiresAuth; see usePut.mdx. With no
 // url, send's first argument is the whole URL.
 function usePut(url, requiresAuth = false) {
     const [state, setState] = useState(idle);
-    const { request, hasToken } = useRequest('PUT', requiresAuth, networkFailureMessage);
+    const { request, hasToken, signInAgain } = useRequest(
+        'PUT',
+        requiresAuth,
+        networkFailureMessage
+    );
 
     const send = useCallback(
         async (id, data) => {
@@ -30,7 +35,8 @@ function usePut(url, requiresAuth = false) {
                 isLoading: true,
                 putResult: null,
                 errorMessage: null,
-                apiMessage: null
+                apiMessage: null,
+                tokenRejected: false
             }));
             const outcome = await request(target, { body: data });
             if (!outcome.superseded) {
@@ -39,7 +45,8 @@ function usePut(url, requiresAuth = false) {
                     putResult: outcome.result,
                     errorMessage: outcome.errorMessage,
                     status: outcome.status,
-                    apiMessage: outcome.apiMessage
+                    apiMessage: outcome.apiMessage,
+                    tokenRejected: outcome.tokenRejected
                 });
             }
             return outcome;
@@ -52,7 +59,7 @@ function usePut(url, requiresAuth = false) {
         []
     );
 
-    return { send, ...state, clearPutResult, hasToken };
+    return { send, ...state, clearPutResult, hasToken, signInAgain };
 }
 
 export default usePut;

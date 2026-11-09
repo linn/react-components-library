@@ -38,6 +38,7 @@ useEffect(() => {
     <tr><td><code>result</code></td><td><code>any | null</code></td><td>The parsed JSON of a successful answer; <code>null</code> for a 204 or an empty body.</td></tr>
     <tr><td><code>errorMessage</code></td><td><code>string | null</code></td><td>As the hook's state has always had it: a refusal's body as it came, or the hook's text for a network failure.</td></tr>
     <tr><td><code>apiMessage</code></td><td><code>string | null</code></td><td>Only the API's own refusal message: a 4xx whose body is a JSON string (how <code>Linn.Common.Service</code> writes a <code>BadRequestResult</code>), otherwise <code>null</code>. Also kept as state.</td></tr>
+    <tr><td><code>tokenRejected</code></td><td><code>boolean</code></td><td><code>true</code> when the API rejected the token the request carried. See "A rejected token" below. Also kept as state.</td></tr>
     <tr><td><code>superseded</code></td><td><code>boolean</code></td><td><code>true</code> when a later <code>send</code> (or <code>useGet</code>'s <code>clearData</code>, <code>usePost</code>'s <code>cancelRequest</code>) on the same hook has happened since: its answer isn't kept, and the page should ignore it.</td></tr>
   </tbody>
 </table>
@@ -60,15 +61,27 @@ const { send: putPlan } = usePut(null, true);
 await putPlan(`${config.appRoot}${utilities.getHref(plan, 'edit')}`, changes);
 ```
 
-## Signing in again
+## A rejected token: signing in again
 
-When the API rejects the token the request carried (expired, say), the hook signs the user in again, at most once a minute so a token that keeps being refused can't loop. It goes by the API's **bearer challenge**, a `401` with `WWW-Authenticate: Bearer error="invalid_token"`, not by the body: any other `401` is the app's own refusal (often "you don't have permission", or "Could not identify the logged in employee"), which signing in again won't fix. A request sent before there was a token doesn't sign in again either, even if the API challenges it: the app's own sign-in (`useSignIn`) deals with a user who isn't signed in yet.
+When the API rejects the token a request carried (expired, say), the outcome and the hook's state have `tokenRejected: true`. **The hooks don't sign in again by themselves:** that would send the browser off to sign in, and a page with unsaved edits would lose them without warning. The page decides, with `signInAgain()`, which each hook returns:
 
-Only an API that sends the bearer challenge gets a user signed in again:
+```jsx
+const outcome = await putPlan(code, changes);
+if (outcome.tokenRejected) {
+    // a page with unsaved edits can say so first, or rely on a leave-page prompt
+    signInAgain();
+}
+```
+
+`signInAgain` signs in with the app's own sign-in, at most once a minute, so a page calling it whenever a token is rejected can't loop on a token that keeps being refused. A page with nothing to lose (a report, say) can call it straight away. A page with edits should also tell the user their sign-in has expired, with a button for `signInAgain({ force: true })`: the user may have stayed put (on a leave-page prompt, say) to keep their edits, and their own click skips the once-a-minute limit.
+
+`tokenRejected` goes by the API's **bearer challenge**, a `401` with `WWW-Authenticate: Bearer error="invalid_token"`, not by the body: any other `401` is the app's own refusal (often "you don't have permission", or "Could not identify the logged in employee"), which signing in again won't fix. A request sent before there was a token isn't `tokenRejected` either, even if the API challenges it: the app's own sign-in (`useSignIn`) deals with a user who isn't signed in yet.
+
+Only an API that sends the bearer challenge can report a rejected token:
 
 - **`app.UseBearerTokenAuthentication()`** from `Linn.Common.Authentication.Host` 5.0.0 or later, after `app.UseAuthentication()`. Referencing the package isn't enough: an API on plain `UseAuthentication()` treats a rejected token as no sign-in at all, and answers as it would anyone not signed in.
 - **For local development**, where the dev server calls the API on another port, the API's CORS settings must expose the header, or the browser hides it from the page: `builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().WithExposedHeaders("WWW-Authenticate")`.
 
-Without them a rejected token just fails like any other refusal: nothing loops and nobody is bounced to sign in, but nobody is signed in again either.
+Without them a rejected token is just a failed request, like any other refusal.
 
-With react-oidc-context, signing in again sets `sessionStorage['auth:redirect']` to the current path and query string, as `useSignIn` does, so the app's `onSigninCallback` brings the user back. With a `RequestAuthProvider`, the app's own `signIn` decides how to come back.
+With react-oidc-context, `signInAgain` sets `sessionStorage['auth:redirect']` to the current path and query string, as `useSignIn` does, so the app's `onSigninCallback` brings the user back. With a `RequestAuthProvider`, the app's own `signIn` decides how to come back.

@@ -8,14 +8,19 @@ const idle = {
     errorMessage: null,
     deleteResult: null,
     status: null,
-    apiMessage: null
+    apiMessage: null,
+    tokenRejected: false
 };
 
 // DELETEs url/id as the signed-in user when requiresAuth; see useDelete.mdx. With no url, send's
 // argument is the whole URL.
 function useDelete(url, requiresAuth = false) {
     const [state, setState] = useState(idle);
-    const { request, hasToken } = useRequest('DELETE', requiresAuth, networkFailureMessage);
+    const { request, hasToken, signInAgain } = useRequest(
+        'DELETE',
+        requiresAuth,
+        networkFailureMessage
+    );
 
     const send = useCallback(
         async id => {
@@ -25,7 +30,8 @@ function useDelete(url, requiresAuth = false) {
                 isLoading: true,
                 deleteResult: null,
                 errorMessage: null,
-                apiMessage: null
+                apiMessage: null,
+                tokenRejected: false
             }));
             const outcome = await request(target);
             if (!outcome.superseded) {
@@ -34,7 +40,8 @@ function useDelete(url, requiresAuth = false) {
                     deleteResult: outcome.result,
                     errorMessage: outcome.errorMessage,
                     status: outcome.status,
-                    apiMessage: outcome.apiMessage
+                    apiMessage: outcome.apiMessage,
+                    tokenRejected: outcome.tokenRejected
                 });
             }
             return outcome;
@@ -47,7 +54,7 @@ function useDelete(url, requiresAuth = false) {
         []
     );
 
-    return { send, ...state, clearData, hasToken };
+    return { send, ...state, clearData, hasToken, signInAgain };
 }
 
 export default useDelete;

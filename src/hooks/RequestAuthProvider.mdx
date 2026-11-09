@@ -16,7 +16,7 @@ Gives the request hooks (`useGet`, `useInitialise`, `usePut`, `usePost` and `use
   </thead>
   <tbody>
     <tr><td><code>user</code></td><td><code>{'{ access_token, expired } | null'}</code></td><td>The signed-in user, or <code>null</code> while there isn't one. The hooks send <code>access_token</code>, and wait while <code>expired</code> is true, so the app must sign in when the user is missing or expired.</td></tr>
-    <tr><td><code>signIn</code></td><td><code>() =&gt; void | Promise</code></td><td>Starts a sign-in that brings the user back to the page they're on, the app's own way. Called when the API rejects the token (see Signed-in requests), at most once a minute.</td></tr>
+    <tr><td><code>signIn</code></td><td><code>() =&gt; void | Promise</code></td><td>Starts a sign-in that brings the user back to the page they're on, the app's own way. Called by the hooks' <code>signInAgain</code>, which a page calls when the API has rejected the token (see Signed-in requests), at most once a minute.</td></tr>
   </tbody>
 </table>
 

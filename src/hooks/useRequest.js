@@ -5,13 +5,16 @@ import { useRequestAuth } from './requestAuth.js';
 // signed-in user and gives back its outcome. Each hook keeps its own signature and state on top.
 //
 // request(url, { body, signal }) returns a promise of
-// { ok, status, result, errorMessage, apiMessage, superseded }:
+// { ok, status, result, errorMessage, apiMessage, tokenRejected, superseded }:
 // - result is the parsed JSON of a successful answer; null for a 204 or an empty body;
 // - errorMessage is what the hooks have always given: a refusal's body as it came, or the hook's
 //   own text for a network failure (see networkFailureMessage);
 // - apiMessage is only the API's own refusal message: a 4xx whose body is a JSON string (how
 //   Linn.Common.Service writes a BadRequestResult), otherwise null. Never a stack trace or an
 //   HTML page, so it's safe to show as it is;
+// - tokenRejected is true when the API rejected the token the request carried (see isTokenRejected).
+//   The hooks don't sign in again by themselves: a page with unsaved edits would lose them. The page
+//   decides, with signInAgain (which each hook returns);
 // - superseded is true when a later request (or forgetEarlierRequests) on the same hook has
 //   happened since: the hook doesn't keep it, and the page should ignore it.
 
@@ -43,22 +46,27 @@ const hasNoBody = response =>
 // on); referencing the package isn't enough (finance has it, but uses plain UseAuthentication(), so a
 // rejected token is treated as no sign-in at all). And for a page on another origin (a dev server
 // calling the API on another port) the API's CORS settings must expose WWW-Authenticate, or the
-// browser hides it. Without either, a rejected token just fails: the user isn't signed in again.
+// browser hides it. Without either, a rejected token is just a failed request.
 const isTokenRejected = response =>
     response.status === 401 &&
     (response.headers?.get?.('WWW-Authenticate') ?? '').toLowerCase().startsWith('bearer');
 
-// A token the server keeps refusing would otherwise send the browser round the sign-in loop
-// for ever, so this signs in again at most once a minute.
-const signInAgain = signIn => {
+// A page that signs in again by itself whenever a token is rejected would, with a token the server
+// keeps refusing, send the browser round the sign-in loop for ever, so this signs in again at most
+// once a minute. force skips that limit, for the user's own click (a Sign in button), which can't
+// loop.
+const signInAtMostOnceAMinute = (signIn, force) => {
     try {
         const last = Number(sessionStorage.getItem(signInAgainKey) ?? 0);
-        if (Date.now() - last < oneMinute) {
+        if (!force && Date.now() - last < oneMinute) {
             return;
         }
         sessionStorage.setItem(signInAgainKey, String(Date.now()));
     } catch {
-        return;
+        // with no sessionStorage there's no telling how recently it last signed in again
+        if (!force) {
+            return;
+        }
     }
     Promise.resolve()
         .then(() => signIn?.())
@@ -72,7 +80,7 @@ function useRequest(method, requiresAuth, networkFailureMessage) {
     // in again), so a page can wait rather than send it and be refused. Once a token has arrived,
     // though, hasToken stays true while it expires and is renewed (a laptop waking from sleep, say),
     // so a page loading on hasToken doesn't load again and throw away the user's edits; a request
-    // sent meanwhile is refused and signs in again. It's false again only when there's no token.
+    // sent meanwhile is refused (tokenRejected). It's false again only when there's no token.
     const freshToken = !!token && !user?.expired;
     const [hadToken, setHadToken] = useState(freshToken);
     if (freshToken && !hadToken) {
@@ -131,21 +139,21 @@ function useRequest(method, requiresAuth, networkFailureMessage) {
                         status: response.status,
                         result: hasNoBody(response) ? null : await response.json(),
                         errorMessage: null,
-                        apiMessage: null
+                        apiMessage: null,
+                        tokenRejected: false
                     };
                 } else {
-                    // only a token that was sent can have been rejected: a request sent before
-                    // there was one gets the same challenge, and the app's own sign-in deals with that
-                    if (headers.Authorization && isTokenRejected(response)) {
-                        signInAgain(signInRef.current);
-                    }
                     const text = await response.text();
                     outcome = {
                         ok: false,
                         status: response.status,
                         result: null,
                         errorMessage: text,
-                        apiMessage: apiMessageOf(response.status, text)
+                        apiMessage: apiMessageOf(response.status, text),
+                        // only a token that was sent can have been rejected: a request sent before
+                        // there was one gets the same challenge, and the app's own sign-in deals
+                        // with that
+                        tokenRejected: !!headers.Authorization && isTokenRejected(response)
                     };
                 }
             } catch (error) {
@@ -155,7 +163,8 @@ function useRequest(method, requiresAuth, networkFailureMessage) {
                     status: null,
                     result: null,
                     errorMessage: networkFailureMessage(error),
-                    apiMessage: null
+                    apiMessage: null,
+                    tokenRejected: false
                 };
             }
 
@@ -167,7 +176,14 @@ function useRequest(method, requiresAuth, networkFailureMessage) {
         [method, requiresAuth, networkFailureMessage, isLatest, hasToken]
     );
 
-    return { request, forgetEarlierRequests, hasToken };
+    // signs in again, for a page to call when a request's token was rejected (tokenRejected): at most
+    // once a minute, coming back to this page; signInAgain({ force: true }) for the user's own click
+    const signInAgain = useCallback(
+        ({ force = false } = {}) => signInAtMostOnceAMinute(signInRef.current, force),
+        []
+    );
+
+    return { request, forgetEarlierRequests, hasToken, signInAgain };
 }
 
 export default useRequest;

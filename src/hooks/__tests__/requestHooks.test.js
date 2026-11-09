@@ -373,6 +373,24 @@ describe('useDelete', () => {
         expect(result.current.errorMessage).toBe('An error occurred.');
     });
 
+    test('reports a rejected token as tokenRejected', async () => {
+        fetch.mockReturnValueOnce(
+            Promise.resolve({
+                ok: false,
+                status: 401,
+                headers: new Headers({ 'WWW-Authenticate': 'Bearer error="invalid_token"' }),
+                text: () => Promise.resolve('')
+            })
+        );
+        const { result } = renderHook(() => useDelete('/things', true));
+
+        await act(async () => {
+            await result.current.send(4);
+        });
+
+        expect(result.current.tokenRejected).toBe(true);
+    });
+
     test('a 204 (no body) is a success', async () => {
         fetch.mockReturnValueOnce(Promise.resolve({ ok: true, status: 204 }));
         const { result } = renderHook(() => useDelete('/things', true));

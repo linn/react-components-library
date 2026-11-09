@@ -10,7 +10,8 @@ const idle = {
     errorMessage: null,
     postResult: null,
     status: null,
-    apiMessage: null
+    apiMessage: null,
+    tokenRejected: false
 };
 
 // POSTs data to url (plus an id) as the signed-in user when requiresAuth, and with
@@ -20,7 +21,7 @@ function usePost(url, requiresAuth = false, redirectOnSuccess = false) {
     const [state, setState] = useState(idle);
     const navigate = useNavigate();
     const abortControllerRef = useRef(null);
-    const { request, forgetEarlierRequests, hasToken } = useRequest(
+    const { request, forgetEarlierRequests, hasToken, signInAgain } = useRequest(
         'POST',
         requiresAuth,
         networkFailureMessage
@@ -44,7 +45,8 @@ function usePost(url, requiresAuth = false, redirectOnSuccess = false) {
                 isLoading: true,
                 postResult: null,
                 errorMessage: null,
-                apiMessage: null
+                apiMessage: null,
+                tokenRejected: false
             }));
             const outcome = await request(target, { body: data, signal: controller.signal });
             if (!outcome.superseded) {
@@ -53,7 +55,8 @@ function usePost(url, requiresAuth = false, redirectOnSuccess = false) {
                     postResult: outcome.result,
                     errorMessage: outcome.errorMessage,
                     status: outcome.status,
-                    apiMessage: outcome.apiMessage
+                    apiMessage: outcome.apiMessage,
+                    tokenRejected: outcome.tokenRejected
                 });
                 // a 204 or an empty body is a success with nowhere to redirect to
                 if (outcome.ok && redirectOnSuccess && outcome.result) {
@@ -74,10 +77,16 @@ function usePost(url, requiresAuth = false, redirectOnSuccess = false) {
     }, [forgetEarlierRequests]);
 
     const clearPostResult = useCallback(() => {
-        setState(previous => ({ ...previous, postResult: null, errorMessage: null }));
+        setState(previous => ({
+            ...previous,
+            postResult: null,
+            errorMessage: null,
+            apiMessage: null,
+            tokenRejected: false
+        }));
     }, []);
 
-    return { send, cancelRequest, ...state, clearPostResult, hasToken };
+    return { send, cancelRequest, ...state, clearPostResult, hasToken, signInAgain };
 }
 
 export default usePost;

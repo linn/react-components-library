@@ -17,14 +17,19 @@ jest.mock('react-router-dom', () => ({ useNavigate: () => jest.fn() }));
 
 const signIn = jest.fn();
 
-// A page that loads /things/1 as soon as there's a token, and shows what it got.
+// A page that loads /things/1 as soon as there's a token, and shows what it got. It has nothing to
+// lose, so it signs in again when its token is rejected.
 function Page() {
-    const { send, hasToken, result } = useGet(null, true);
+    const { send, hasToken, result, signInAgain } = useGet(null, true);
     useEffect(() => {
         if (hasToken) {
-            send('/things/1');
+            send('/things/1').then(outcome => {
+                if (outcome.tokenRejected) {
+                    signInAgain();
+                }
+            });
         }
-    }, [hasToken, send]);
+    }, [hasToken, send, signInAgain]);
     return (
         <>
             <p>{hasToken ? 'has a token' : 'no token yet'}</p>
@@ -135,7 +140,7 @@ describe('a page loading with useGet, given the user by a RequestAuthProvider', 
         expect(fetch).toHaveBeenCalledTimes(1);
     });
 
-    test("a rejected token (the bearer challenge) calls the provider's signIn", async () => {
+    test("a page signing in again on a rejected token calls the provider's signIn", async () => {
         fetch.mockReturnValueOnce(respond(401, undefined, bearerChallenge));
 
         render(<App firstUser={{ access_token: 'a-token', expired: false }} />);
@@ -174,7 +179,7 @@ describe('a page loading with useGet, with no RequestAuthProvider', () => {
         expect(authorizationOfRequest(0)).toBe('Bearer an-oidc-context-token');
     });
 
-    test("a rejected token (the bearer challenge) calls react-oidc-context's signinRedirect", async () => {
+    test("a page signing in again on a rejected token calls react-oidc-context's signinRedirect", async () => {
         const signinRedirect = jest.fn();
         useAuth.mockReturnValue({
             user: { access_token: 'an-oidc-context-token', expired: false },
