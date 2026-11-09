@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useAuth } from 'react-oidc-context';
+import { useRequestAuth } from './requestAuth.js';
 
 function useDelete(url, requiresAuth = false) {
     const [isLoading, setIsLoading] = useState(false);
@@ -10,9 +10,9 @@ function useDelete(url, requiresAuth = false) {
 
     const clearData = () => setDeleteResult(null);
 
-    const auth = useAuth();
+    const { user } = useRequestAuth();
     if (requiresAuth) {
-        token = auth.user?.access_token;
+        token = user?.access_token;
     }
 
     const send = async id => {

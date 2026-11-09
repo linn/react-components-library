@@ -16,7 +16,10 @@ function useSignIn() {
             !hasTriedSignin
         ) {
             auth.signinRedirect();
-            sessionStorage.setItem('auth:redirect', window.location.pathname);
+            sessionStorage.setItem(
+                'auth:redirect',
+                window.location.pathname + window.location.search
+            );
             setHasTriedSignin(true);
         }
     }, [auth, hasTriedSignin]);

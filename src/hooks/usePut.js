@@ -1,5 +1,10 @@
 import { useState } from 'react';
-import { useAuth } from 'react-oidc-context';
+import { useRequestAuth } from './requestAuth.js';
+
+// A success with nothing to parse: a 204, or an empty body (Content-Length: 0). An answer with no
+// headers at all (a test's fake fetch, say) is parsed, as before.
+const hasNoBody = response =>
+    response.status === 204 || response.headers?.get?.('Content-Length') === '0';
 
 function usePut(url, requiresAuth = false) {
     const [isLoading, setIsLoading] = useState(false);
@@ -11,9 +16,9 @@ function usePut(url, requiresAuth = false) {
 
     const clearPutResult = () => setPutResult(null);
 
-    const auth = useAuth();
+    const { user } = useRequestAuth();
     if (requiresAuth) {
-        token = auth.user?.access_token;
+        token = user?.access_token;
     }
 
     const send = async (id, data) => {
@@ -37,8 +42,9 @@ function usePut(url, requiresAuth = false) {
             const response = await fetch(id ? `${url}/${id}` : url, requestParameters);
 
             if (response.ok) {
-                // a 204 has no body, and is still a success
-                setPutResult(response.status === 204 ? null : await response.json());
+                // a 204, or a 200 with an empty body (Content-Length: 0), has no body, and is still
+                // a success
+                setPutResult(hasNoBody(response) ? null : await response.json());
             } else {
                 setErrorMessage(await response.text());
             }

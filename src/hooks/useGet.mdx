@@ -4,7 +4,7 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 # useGet
 
-A hook that handles HTTP GET requests to a REST API endpoint, managing loading state, error handling, and the response result. Supports optional OIDC bearer token authentication and flexible URL construction.
+A hook that handles HTTP GET requests to a REST API endpoint, managing loading state, error handling, and the response result. Supports optional OIDC bearer token authentication (the signed-in user's token, from react-oidc-context's `AuthProvider` or a [`SignedInRequestProvider`](?path=/docs/hooks-signedinrequestprovider--docs)) and flexible URL construction.
 
 ## Signature
 
@@ -20,7 +20,7 @@ const { send, isLoading, errorMessage, result, clearData } = useGet(url, require
   </thead>
   <tbody>
     <tr><td><code>url</code></td><td><code>string</code></td><td>—</td><td>Base URL of the resource. An optional ID and query string are appended when calling <code>send</code>.</td></tr>
-    <tr><td><code>requiresAuth</code></td><td><code>boolean</code></td><td><code>false</code></td><td>When <code>true</code>, an OIDC bearer token is included in the request headers via <code>react-oidc-context</code>.</td></tr>
+    <tr><td><code>requiresAuth</code></td><td><code>boolean</code></td><td><code>false</code></td><td>When <code>true</code>, the signed-in user's bearer token is included in the request headers, from <code>react-oidc-context</code>'s <code>AuthProvider</code> or a <code>SignedInRequestProvider</code>.</td></tr>
   </tbody>
 </table>
 
@@ -73,7 +73,7 @@ send(undefined, '?category=widgets');
 ```jsx
 const { send, result } = useGet(
     '/api/secure/orders',
-    true // requiresAuth — adds Bearer token from react-oidc-context
+    true // requiresAuth — adds the signed-in user's Bearer token
 );
 ```
 

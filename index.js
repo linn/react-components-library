@@ -45,6 +45,7 @@ import useSignedInRequest from './src/hooks/useSignedInRequest.js';
 import useSignedInGet from './src/hooks/useSignedInGet.js';
 import useSignedInPut from './src/hooks/useSignedInPut.js';
 import useSignedInPost from './src/hooks/useSignedInPost.js';
+import { SignedInRequestProvider, useRequestAuth } from './src/hooks/requestAuth.js';
 import useSignIn from './src/hooks/useSignIn.js';
 import useUserProfile from './src/hooks/useUserProfile.js';
 import useDelete from './src/hooks/useDelete.js';
@@ -101,6 +102,8 @@ export {
     useSignedInGet,
     useSignedInPut,
     useSignedInPost,
+    SignedInRequestProvider,
+    useRequestAuth,
     useSignIn,
     useUserProfile,
     useDelete,

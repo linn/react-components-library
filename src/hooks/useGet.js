@@ -1,12 +1,12 @@
 import { useCallback, useRef, useState } from 'react';
-import { useAuth } from 'react-oidc-context';
+import { useRequestAuth } from './requestAuth.js';
 
 function useGet(url, requiresAuth = false) {
     const [isLoading, setIsLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState(null);
     const [result, setResult] = useState(null);
 
-    const auth = useAuth();
+    const { user } = useRequestAuth();
 
     // only the latest request's answer is kept: a slow earlier one would otherwise overwrite it
     const latestRequest = useRef(0);
@@ -27,7 +27,7 @@ function useGet(url, requiresAuth = false) {
             setResult(null);
             setErrorMessage(null);
 
-            let token = requiresAuth ? auth.user?.access_token : ''; // Moved inside useCallback
+            let token = requiresAuth ? user?.access_token : ''; // Moved inside useCallback
 
             const headers = {
                 accept: 'application/json'
@@ -64,7 +64,7 @@ function useGet(url, requiresAuth = false) {
                 }
             }
         },
-        [requiresAuth, auth.user?.access_token, url]
+        [requiresAuth, user?.access_token, url]
     );
 
     return { send, isLoading, errorMessage, result, clearData };

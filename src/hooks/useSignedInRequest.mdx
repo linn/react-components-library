@@ -4,12 +4,12 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 # useSignedInRequest (useSignedInGet, useSignedInPut, useSignedInPost)
 
-Requests as the signed-in user (`react-oidc-context`), for pages that need more than `useGet`, `usePut` and `usePost` give. Unlike those, it:
+Requests as the signed-in user (from react-oidc-context's `AuthProvider`, or a [`SignedInRequestProvider`](?path=/docs/hooks-signedinrequestprovider--docs) for an app on redux-oidc), for pages that need more than `useGet`, `usePut` and `usePost` give. Unlike those, it:
 
 - reports `hasToken`, so a page can wait for the sign-in token rather than send an empty one;
 - marks an answer `superseded` when a newer request (or `clearData`) has happened since, and doesn't keep it;
 - turns a network failure into a failed outcome, never a thrown error or endless loading;
-- signs in again when the API rejects the token (a `401` with no body, as `Linn.Common.Authentication.Host` 5's bearer challenge gives), at most once a minute so a token that keeps being refused can't loop; a `401` with a message (the app's own, e.g. "Could not identify the logged in employee") is shown, not signed in again;
+- signs in again when the API rejects the token, at most once a minute so a token that keeps being refused can't loop. It goes by the API's bearer challenge, a `401` with `WWW-Authenticate: Bearer error="invalid_token"`, not by the body: any other `401` is the app's own refusal (often "you don't have permission", or "Could not identify the logged in employee"), which signing in again won't fix, so its message is shown instead;
 - never hands the server's raw body to the page: `errorMessage` is only a 4xx's JSON-string message, how `Linn.Common.Service` writes a `BadRequestResult`. A stack trace or HTML error page gives `null`, and the page says something of its own;
 - keeps `send`'s identity when the token is renewed in the background, so a page that loads in an effect on `send` doesn't load again and lose the user's edits.
 
@@ -35,7 +35,7 @@ const { send, isLoading, ok, result, status, errorMessage, clearData, hasToken }
   </tbody>
 </table>
 
-The latest outcome (without `superseded`) is also kept as state: `isLoading`, `ok`, `result`, `status`, `errorMessage`. `clearData()` empties it and drops any answer still on its way. `hasToken` is `true` once the user has a token that hasn't expired.
+The latest outcome (without `superseded`) is also kept as state: `isLoading`, `ok`, `result`, `status`, `errorMessage`. `clearData()` empties it and drops any answer still on its way. `hasToken` is `true` once the user has a token that hasn't expired. It relies on the app signing the user in when there's no user or theirs has expired: react-oidc-context's `useSignIn` does this (an expired user isn't `isAuthenticated`), and so does an app on redux-oidc that signs in before rendering. A stored token that has already expired isn't renewed silently by oidc-client-ts, so in an app that does neither, the page would wait (loading) for ever.
 
 ## Usage
 
@@ -64,4 +64,13 @@ function Plan({ code }) {
 }
 ```
 
-The sign-in again sets `sessionStorage['auth:redirect']` to the current path, as `useSignIn` does, so the app's `onSigninCallback` brings the user back.
+## What the API needs for signing in again
+
+Only an API that sends the bearer challenge gets a user signed in again:
+
+- **`app.UseBearerTokenAuthentication()`** from `Linn.Common.Authentication.Host` 5.0.0 or later, after `app.UseAuthentication()`. Referencing the package isn't enough: an API on plain `UseAuthentication()` treats a rejected token as no sign-in at all, and answers as it would anyone not signed in.
+- **For local development**, where the dev server calls the API on another port, the API's CORS settings must expose the header, or the browser hides it from the page: `builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().WithExposedHeaders("WWW-Authenticate")`.
+
+Without them a rejected token just fails like any other refusal: nothing loops and nobody is bounced to sign in, but nobody is signed in again either.
+
+With react-oidc-context, signing in again sets `sessionStorage['auth:redirect']` to the current path and query string, as `useSignIn` does, so the app's `onSigninCallback` brings the user back. With a `SignedInRequestProvider`, the app's own `signIn` decides how to come back.

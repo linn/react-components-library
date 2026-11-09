@@ -11,12 +11,16 @@ const signinRedirect = jest.fn();
 const signedIn = (user = { access_token: 'a-token', expired: false }) =>
     useAuth.mockReturnValue({ user, signinRedirect });
 
-const respond = (status, body) =>
+const respond = (status, body, headers = {}) =>
     Promise.resolve({
         ok: status >= 200 && status < 300,
         status,
+        headers: new Headers(headers),
         text: () => Promise.resolve(body === undefined ? '' : JSON.stringify(body))
     });
+
+// What Linn.Common.Authentication.Host's UseBearerTokenAuthentication answers a token it rejects
+const bearerChallenge = { 'WWW-Authenticate': 'Bearer error="invalid_token"' };
 
 beforeEach(() => {
     jest.clearAllMocks();
@@ -203,8 +207,8 @@ describe('useSignedInRequest', () => {
         expect(result.current.result).toEqual({ id: 2 });
     });
 
-    test('a rejected token (a 401 with no body) signs in again', async () => {
-        fetch.mockReturnValueOnce(respond(401));
+    test('a rejected token (the bearer challenge) signs in again', async () => {
+        fetch.mockReturnValueOnce(respond(401, undefined, bearerChallenge));
         const { result } = renderHook(() => useSignedInGet());
 
         await act(async () => {
@@ -215,7 +219,7 @@ describe('useSignedInRequest', () => {
     });
 
     test('signing in again remembers the page to come back to', async () => {
-        fetch.mockReturnValueOnce(respond(401));
+        fetch.mockReturnValueOnce(respond(401, undefined, bearerChallenge));
         const { result } = renderHook(() => useSignedInGet());
 
         await act(async () => {
@@ -226,7 +230,9 @@ describe('useSignedInRequest', () => {
     });
 
     test('a second rejected token within a minute does not sign in again', async () => {
-        fetch.mockReturnValueOnce(respond(401)).mockReturnValueOnce(respond(401));
+        fetch
+            .mockReturnValueOnce(respond(401, undefined, bearerChallenge))
+            .mockReturnValueOnce(respond(401, undefined, bearerChallenge));
         const { result } = renderHook(() => useSignedInGet());
 
         await act(async () => {
@@ -237,6 +243,17 @@ describe('useSignedInRequest', () => {
         });
 
         expect(signinRedirect).toHaveBeenCalledTimes(1);
+    });
+
+    test('a 401 with no body and no bearer challenge (a refused permission) does not sign in again', async () => {
+        fetch.mockReturnValueOnce(respond(401));
+        const { result } = renderHook(() => useSignedInGet());
+
+        await act(async () => {
+            await result.current.send('/things/1');
+        });
+
+        expect(signinRedirect).not.toHaveBeenCalled();
     });
 
     test('a 401 with a message is shown and does not sign in again', async () => {

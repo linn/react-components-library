@@ -117,6 +117,25 @@ describe('usePut', () => {
         expect(result.current.isLoading).toBe(false);
     });
 
+    test('a 200 with an empty body (Content-Length: 0) is a success', async () => {
+        fetch.mockReturnValueOnce(
+            Promise.resolve({
+                ok: true,
+                status: 200,
+                headers: new Headers({ 'Content-Length': '0' }),
+                json: () => Promise.reject(new SyntaxError('Unexpected end of JSON input'))
+            })
+        );
+        const { result } = renderHook(() => usePut('/things', true));
+
+        await act(async () => {
+            await result.current.send(1, { name: 'x' });
+        });
+
+        expect(result.current.errorMessage).toBeNull();
+        expect(result.current.putResult).toBeNull();
+    });
+
     test('keeps the parsed result of a successful answer', async () => {
         fetch.mockReturnValueOnce(
             Promise.resolve({ ok: true, status: 200, json: () => Promise.resolve({ id: 1 }) })
@@ -143,6 +162,25 @@ describe('usePost', () => {
         expect(result.current.errorMessage).toBeNull();
         expect(result.current.postResult).toBeNull();
         expect(result.current.isLoading).toBe(false);
+    });
+
+    test('a 200 with an empty body (Content-Length: 0) is a success', async () => {
+        fetch.mockReturnValueOnce(
+            Promise.resolve({
+                ok: true,
+                status: 200,
+                headers: new Headers({ 'Content-Length': '0' }),
+                json: () => Promise.reject(new SyntaxError('Unexpected end of JSON input'))
+            })
+        );
+        const { result } = renderHook(() => usePost('/things', true));
+
+        await act(async () => {
+            await result.current.send(null, { name: 'x' });
+        });
+
+        expect(result.current.errorMessage).toBeNull();
+        expect(result.current.postResult).toBeNull();
     });
 
     test('a 204 with redirectOnSuccess stays put', async () => {

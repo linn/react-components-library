@@ -1,7 +1,12 @@
 import { useState, useRef, useCallback } from 'react';
 import utilities from '../utilities/index.js';
-import { useAuth } from 'react-oidc-context';
+import { useRequestAuth } from './requestAuth.js';
 import { useNavigate } from 'react-router-dom';
+
+// A success with nothing to parse: a 204, or an empty body (Content-Length: 0). An answer with no
+// headers at all (a test's fake fetch, say) is parsed, as before.
+const hasNoBody = response =>
+    response.status === 204 || response.headers?.get?.('Content-Length') === '0';
 
 function usePost(url, requiresAuth = false, redirectOnSuccess = false) {
     const [isLoading, setIsLoading] = useState(false);
@@ -12,9 +17,9 @@ function usePost(url, requiresAuth = false, redirectOnSuccess = false) {
     const abortControllerRef = useRef(null);
 
     let token = '';
-    const auth = useAuth();
+    const { user } = useRequestAuth();
     if (requiresAuth) {
-        token = auth.user?.access_token;
+        token = user?.access_token;
     }
 
     const clearPostResult = useCallback(() => {
@@ -51,8 +56,9 @@ function usePost(url, requiresAuth = false, redirectOnSuccess = false) {
                 const response = await fetch(id ? `${url}/${id}` : url, requestParameters);
 
                 if (response.ok) {
-                    // a 204 has no body, and is still a success (with nowhere to redirect to)
-                    const result = response.status === 204 ? null : await response.json();
+                    // a 204, or a 200 with an empty body (Content-Length: 0), has no body, and is
+                    // still a success (with nowhere to redirect to)
+                    const result = hasNoBody(response) ? null : await response.json();
                     setPostResult(result);
                     if (redirectOnSuccess && result) {
                         setPostResult(null);
