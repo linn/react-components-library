@@ -6,10 +6,12 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 A hook that handles HTTP GET requests to a REST API endpoint, managing loading state, error handling, and the response result. Supports optional OIDC bearer token authentication (the signed-in user's token, from react-oidc-context's `AuthProvider` or a [`RequestAuthProvider`](?path=/docs/hooks-requestauthprovider--docs)) and flexible URL construction.
 
+With `requiresAuth` it sends as the signed-in user and reports `hasToken` (so a page can wait for the token); it keeps only the latest answer and signs in again when the API rejects the token: see [Signed-in requests](?path=/docs/hooks-signed-in-requests--docs), which also describes what `send` returns.
+
 ## Signature
 
 ```js
-const { send, isLoading, errorMessage, result, clearData } = useGet(url, requiresAuth);
+const { send, isLoading, errorMessage, result, clearData, hasToken, status, apiMessage } = useGet(url, requiresAuth);
 ```
 
 ## Parameters
@@ -19,7 +21,7 @@ const { send, isLoading, errorMessage, result, clearData } = useGet(url, require
     <tr><th>Parameter</th><th>Type</th><th>Default</th><th>Description</th></tr>
   </thead>
   <tbody>
-    <tr><td><code>url</code></td><td><code>string</code></td><td>—</td><td>Base URL of the resource. An optional ID and query string are appended when calling <code>send</code>.</td></tr>
+    <tr><td><code>url</code></td><td><code>string</code></td><td>—</td><td>Base URL of the resource. An optional ID and query string are appended when calling <code>send</code>. <code>null</code> for none: <code>send</code>'s first argument is then the whole URL.</td></tr>
     <tr><td><code>requiresAuth</code></td><td><code>boolean</code></td><td><code>false</code></td><td>When <code>true</code>, the signed-in user's bearer token is included in the request headers, from <code>react-oidc-context</code>'s <code>AuthProvider</code> or a <code>RequestAuthProvider</code>.</td></tr>
   </tbody>
 </table>
@@ -31,9 +33,12 @@ const { send, isLoading, errorMessage, result, clearData } = useGet(url, require
     <tr><th>Property</th><th>Type</th><th>Description</th></tr>
   </thead>
   <tbody>
-    <tr><td><code>send</code></td><td><code>(id?: string | number, queryString?: string) =&gt; Promise&lt;void&gt;</code></td><td>Triggers the GET request. Fetches <code>url/id?queryString</code> when <code>id</code> is provided, or <code>url?queryString</code> otherwise.</td></tr>
+    <tr><td><code>send</code></td><td><code>(id?: string | number, queryString?: string) =&gt; Promise&lt;outcome&gt;</code></td><td>Triggers the GET request. Fetches <code>url/id?queryString</code> when <code>id</code> is provided, or <code>url?queryString</code> otherwise.</td></tr>
     <tr><td><code>isLoading</code></td><td><code>boolean</code></td><td><code>true</code> while the request is in flight.</td></tr>
-    <tr><td><code>errorMessage</code></td><td><code>string | null</code></td><td>Set to the response body text when the request fails, otherwise <code>null</code>.</td></tr>
+    <tr><td><code>errorMessage</code></td><td><code>string | null</code></td><td>Set to the response body text when the request fails, otherwise <code>null</code>. It can be a stack trace or an HTML page: to show an error, prefer <code>apiMessage</code> with a sentence of your own.</td></tr>
+    <tr><td><code>hasToken</code></td><td><code>boolean</code></td><td><code>true</code> once the signed-in user has a token that hasn't expired (and while it's renewed): wait for it before sending to an endpoint that needs sign-in. See <a href="?path=/docs/hooks-signed-in-requests--docs">Signed-in requests</a>.</td></tr>
+    <tr><td><code>status</code></td><td><code>number | null</code></td><td>The latest answer's HTTP status; <code>null</code> before one, or when the network failed.</td></tr>
+    <tr><td><code>apiMessage</code></td><td><code>string | null</code></td><td>Only the API's own refusal message (a 4xx whose body is a JSON string), safe to show; otherwise <code>null</code>.</td></tr>
     <tr><td><code>result</code></td><td><code>any | null</code></td><td>Set to the parsed JSON response body on success, otherwise <code>null</code>.</td></tr>
     <tr><td><code>clearData</code></td><td><code>() =&gt; void</code></td><td>Resets <code>result</code> to <code>null</code>.</td></tr>
   </tbody>
@@ -92,4 +97,4 @@ const handleSelect = id => {
 
 ## Overlapping requests
 
-Only the latest `send`'s answer is kept: if an earlier request answers after a newer one, its result, error and loading state are ignored. `clearData` also drops an answer still on its way. For more (waiting for the token, signing in again, safe error messages) see `useSignedInRequest`.
+Only the latest `send`'s answer is kept: if an earlier request answers after a newer one, its result, error and loading state are ignored. `clearData` also drops an answer still on its way. For waiting for the token, signing in again and safe error messages, see [Signed-in requests](?path=/docs/hooks-signed-in-requests--docs).

@@ -4,7 +4,7 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 # RequestAuthProvider
 
-Gives the request hooks (`useGet`, `useInitialise`, `usePut`, `usePost`, `useDelete` and [`useSignedInRequest`](?path=/docs/hooks-usesignedinrequest--docs)) the signed-in user and a way to sign in again, in an app that doesn't sign in with react-oidc-context's `AuthProvider`: one still on redux-oidc, say.
+Gives the request hooks (`useGet`, `useInitialise`, `usePut`, `usePost` and `useDelete`; see [Signed-in requests](?path=/docs/hooks-signed-in-requests--docs)) the signed-in user and a way to sign in again, in an app that doesn't sign in with react-oidc-context's `AuthProvider`: one still on redux-oidc, say.
 
 **An app with react-oidc-context's `AuthProvider` doesn't need it**: without a `RequestAuthProvider` the hooks use `useAuth()`, as they always have.
 
@@ -16,11 +16,11 @@ Gives the request hooks (`useGet`, `useInitialise`, `usePut`, `usePost`, `useDel
   </thead>
   <tbody>
     <tr><td><code>user</code></td><td><code>{'{ access_token, expired } | null'}</code></td><td>The signed-in user, or <code>null</code> while there isn't one. The hooks send <code>access_token</code>, and wait while <code>expired</code> is true, so the app must sign in when the user is missing or expired.</td></tr>
-    <tr><td><code>signIn</code></td><td><code>() =&gt; void | Promise</code></td><td>Starts a sign-in that brings the user back to the page they're on, the app's own way. Called when the API rejects the token (see <code>useSignedInRequest</code>), at most once a minute.</td></tr>
+    <tr><td><code>signIn</code></td><td><code>() =&gt; void | Promise</code></td><td>Starts a sign-in that brings the user back to the page they're on, the app's own way. Called when the API rejects the token (see Signed-in requests), at most once a minute.</td></tr>
   </tbody>
 </table>
 
-Give it a new `user` whenever the app's user changes (a renewed token, say): the hooks use it for the next request, and `useSignedInRequest`'s `send` keeps its identity, so a page doesn't load again.
+Give it a new `user` whenever the app's user changes (a renewed token, say): the hooks use it for the next request, and the hooks' `send` keeps its identity, so a page doesn't load again.
 
 ## Usage with redux-oidc
 

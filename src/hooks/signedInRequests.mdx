@@ -1,0 +1,74 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Hooks/Signed-in requests" />
+
+# Signed-in requests (useGet, usePut, usePost, useDelete)
+
+What `useGet`, `usePut`, `usePost` and `useDelete` share. Each keeps its own signature and state (see its page); with `requiresAuth` they make the request as the signed-in user, from react-oidc-context's `AuthProvider` or, in an app on redux-oidc, a [`RequestAuthProvider`](?path=/docs/hooks-requestauthprovider--docs).
+
+## Waiting for the token
+
+Each hook returns `hasToken`: `true` once the user has a token that hasn't expired. Once it's true it stays true while that token expires and is renewed (so a page loading on `hasToken` doesn't load again and lose the user's edits); it's `false` again only when there's no token. A page whose endpoint needs sign-in waits for it rather than sending too early:
+
+```jsx
+const { send, hasToken, result } = useGet(itemTypes.plans.url, true);
+
+useEffect(() => {
+    if (hasToken) {
+        send(code);
+    }
+}, [hasToken, code, send]);
+```
+
+`send` itself never waits: called with no token yet, the request goes without one (as not signed in). This relies on the app signing the user in when there's no user or theirs has expired: react-oidc-context's `useSignIn` does this (an expired user isn't `isAuthenticated`), and so does an app on redux-oidc that signs in before rendering. A stored token that has already expired isn't renewed silently by oidc-client-ts, so in an app that does neither, a page waiting on `hasToken` would wait for ever. (`useInitialise` with `requiresAuth` waits the same way, by itself.)
+
+`send` keeps its identity when the token is renewed in the background, so a page that loads in an effect on `send` doesn't load again and lose the user's edits. It does change when `hasToken` does, so a page that sends in an effect on `send` without checking `hasToken` loads again once there's a token, as these hooks always have.
+
+## What send returns
+
+`send` returns a promise of the outcome, as well as setting the hook's state:
+
+<table>
+  <thead>
+    <tr><th>Property</th><th>Type</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>ok</code></td><td><code>boolean</code></td><td>A 2xx answer whose body parsed.</td></tr>
+    <tr><td><code>status</code></td><td><code>number | null</code></td><td>The HTTP status; <code>null</code> when the network failed. Also kept as state.</td></tr>
+    <tr><td><code>result</code></td><td><code>any | null</code></td><td>The parsed JSON of a successful answer; <code>null</code> for a 204 or an empty body.</td></tr>
+    <tr><td><code>errorMessage</code></td><td><code>string | null</code></td><td>As the hook's state has always had it: a refusal's body as it came, or the hook's text for a network failure.</td></tr>
+    <tr><td><code>apiMessage</code></td><td><code>string | null</code></td><td>Only the API's own refusal message: a 4xx whose body is a JSON string (how <code>Linn.Common.Service</code> writes a <code>BadRequestResult</code>), otherwise <code>null</code>. Also kept as state.</td></tr>
+    <tr><td><code>superseded</code></td><td><code>boolean</code></td><td><code>true</code> when a later <code>send</code> (or <code>useGet</code>'s <code>clearData</code>, <code>usePost</code>'s <code>cancelRequest</code>) on the same hook has happened since: its answer isn't kept, and the page should ignore it.</td></tr>
+  </tbody>
+</table>
+
+**Showing an error safely:** `errorMessage` can be a stack trace or an HTML error page. To show the user only what the API meant them to see, use `apiMessage` with a sentence of your own:
+
+```jsx
+const outcome = await send(code, changes);
+if (!outcome.superseded && !outcome.ok) {
+    setProblem(outcome.apiMessage ?? "Your changes couldn't be saved. Please try again.");
+}
+```
+
+## Without a URL of its own
+
+Give the hook no `url` (`null`) and `send`'s first argument is the whole URL: for a page that follows the links in a resource.
+
+```jsx
+const { send: putPlan } = usePut(null, true);
+await putPlan(`${config.appRoot}${utilities.getHref(plan, 'edit')}`, changes);
+```
+
+## Signing in again
+
+When the API rejects the token the request carried (expired, say), the hook signs the user in again, at most once a minute so a token that keeps being refused can't loop. It goes by the API's **bearer challenge**, a `401` with `WWW-Authenticate: Bearer error="invalid_token"`, not by the body: any other `401` is the app's own refusal (often "you don't have permission", or "Could not identify the logged in employee"), which signing in again won't fix. A request sent before there was a token doesn't sign in again either, even if the API challenges it: the app's own sign-in (`useSignIn`) deals with a user who isn't signed in yet.
+
+Only an API that sends the bearer challenge gets a user signed in again:
+
+- **`app.UseBearerTokenAuthentication()`** from `Linn.Common.Authentication.Host` 5.0.0 or later, after `app.UseAuthentication()`. Referencing the package isn't enough: an API on plain `UseAuthentication()` treats a rejected token as no sign-in at all, and answers as it would anyone not signed in.
+- **For local development**, where the dev server calls the API on another port, the API's CORS settings must expose the header, or the browser hides it from the page: `builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().WithExposedHeaders("WWW-Authenticate")`.
+
+Without them a rejected token just fails like any other refusal: nothing loops and nobody is bounced to sign in, but nobody is signed in again either.
+
+With react-oidc-context, signing in again sets `sessionStorage['auth:redirect']` to the current path and query string, as `useSignIn` does, so the app's `onSigninCallback` brings the user back. With a `RequestAuthProvider`, the app's own `signIn` decides how to come back.

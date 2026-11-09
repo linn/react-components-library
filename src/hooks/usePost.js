@@ -1,93 +1,83 @@
-import { useState, useRef, useCallback } from 'react';
-import utilities from '../utilities/index.js';
-import { useRequestAuth } from './requestAuth.js';
+import { useCallback, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import utilities from '../utilities/index.js';
+import useRequest from './useRequest.js';
 
-// A success with nothing to parse: a 204, or an empty body (Content-Length: 0). An answer with no
-// headers at all (a test's fake fetch, say) is parsed, as before.
-const hasNoBody = response =>
-    response.status === 204 || response.headers?.get?.('Content-Length') === '0';
+const networkFailureMessage = () => 'An error occurred.';
 
+const idle = {
+    isLoading: false,
+    errorMessage: null,
+    postResult: null,
+    status: null,
+    apiMessage: null
+};
+
+// POSTs data to url (plus an id) as the signed-in user when requiresAuth, and with
+// redirectOnSuccess goes to the created thing's self link; see usePost.mdx. With no url, send's
+// first argument is the whole URL.
 function usePost(url, requiresAuth = false, redirectOnSuccess = false) {
-    const [isLoading, setIsLoading] = useState(false);
-    const [errorMessage, setErrorMessage] = useState(null);
-    const [postResult, setPostResult] = useState(null);
-
+    const [state, setState] = useState(idle);
     const navigate = useNavigate();
     const abortControllerRef = useRef(null);
-
-    let token = '';
-    const { user } = useRequestAuth();
-    if (requiresAuth) {
-        token = user?.access_token;
-    }
-
-    const clearPostResult = useCallback(() => {
-        setPostResult(null);
-        setErrorMessage(null);
-    }, []);
+    const { request, forgetEarlierRequests, hasToken } = useRequest(
+        'POST',
+        requiresAuth,
+        networkFailureMessage
+    );
 
     const send = useCallback(
         async (id, data) => {
-            if (abortControllerRef.current) {
-                abortControllerRef.current.abort();
-            }
-
+            // a new post cancels one still on its way
+            abortControllerRef.current?.abort();
             const controller = new AbortController();
             abortControllerRef.current = controller;
 
-            setIsLoading(true);
-            setPostResult(null);
-            setErrorMessage(null);
-
-            const headers = {
-                accept: 'application/json',
-                'Content-Type': 'application/json'
-            };
-
-            const requestParameters = {
-                method: 'POST',
-                body: JSON.stringify(data),
-                headers: requiresAuth ? { ...headers, Authorization: `Bearer ${token}` } : headers,
-                signal: controller.signal
-            };
-
-            try {
-                const response = await fetch(id ? `${url}/${id}` : url, requestParameters);
-
-                if (response.ok) {
-                    // a 204, or a 200 with an empty body (Content-Length: 0), has no body, and is
-                    // still a success (with nowhere to redirect to)
-                    const result = hasNoBody(response) ? null : await response.json();
-                    setPostResult(result);
-                    if (redirectOnSuccess && result) {
-                        setPostResult(null);
-                        navigate(utilities.getSelfHref(result));
-                    }
-                } else {
-                    const text = await response.text();
-                    setErrorMessage(text);
-                }
-            } catch (error) {
-                if (error.name === 'AbortError') {
-                    console.log('Request was aborted.');
-                } else {
-                    setErrorMessage('An error occurred.');
-                }
-            } finally {
-                setIsLoading(false);
+            let target;
+            if (url == null) {
+                target = id;
+            } else {
+                target = id ? `${url}/${id}` : url;
             }
+            setState(previous => ({
+                ...previous,
+                isLoading: true,
+                postResult: null,
+                errorMessage: null,
+                apiMessage: null
+            }));
+            const outcome = await request(target, { body: data, signal: controller.signal });
+            if (!outcome.superseded) {
+                setState({
+                    isLoading: false,
+                    postResult: outcome.result,
+                    errorMessage: outcome.errorMessage,
+                    status: outcome.status,
+                    apiMessage: outcome.apiMessage
+                });
+                // a 204 or an empty body is a success with nowhere to redirect to
+                if (outcome.ok && redirectOnSuccess && outcome.result) {
+                    setState(previous => ({ ...previous, postResult: null }));
+                    navigate(utilities.getSelfHref(outcome.result));
+                }
+            }
+            return outcome;
         },
-        [requiresAuth, token, url, redirectOnSuccess, navigate]
+        [url, request, redirectOnSuccess, navigate]
     );
 
+    // stops the post still on its way: its answer, or its failure, is ignored
     const cancelRequest = useCallback(() => {
-        if (abortControllerRef.current) {
-            abortControllerRef.current.abort();
-        }
+        abortControllerRef.current?.abort();
+        forgetEarlierRequests();
+        setState(previous => ({ ...previous, isLoading: false }));
+    }, [forgetEarlierRequests]);
+
+    const clearPostResult = useCallback(() => {
+        setState(previous => ({ ...previous, postResult: null, errorMessage: null }));
     }, []);
 
-    return { send, cancelRequest, isLoading, errorMessage, postResult, clearPostResult };
+    return { send, cancelRequest, ...state, clearPostResult, hasToken };
 }
 
 export default usePost;

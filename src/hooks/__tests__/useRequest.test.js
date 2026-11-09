@@ -1,11 +1,15 @@
 import React, { useEffect } from 'react';
 import { act, render, renderHook, waitFor } from '@testing-library/react';
 import { useAuth } from 'react-oidc-context';
-import useSignedInGet from '../useSignedInGet.js';
-import useSignedInPut from '../useSignedInPut.js';
-import useSignedInPost from '../useSignedInPost.js';
+import useGet from '../useGet.js';
+import usePut from '../usePut.js';
+import usePost from '../usePost.js';
+
+// What useGet, usePut and usePost share (useRequest.js), with no url of their own: each send gives
+// the whole URL and returns the outcome.
 
 jest.mock('react-oidc-context', () => ({ useAuth: jest.fn() }));
+jest.mock('react-router-dom', () => ({ useNavigate: () => jest.fn() }));
 
 const signinRedirect = jest.fn();
 const signedIn = (user = { access_token: 'a-token', expired: false }) =>
@@ -16,7 +20,8 @@ const respond = (status, body, headers = {}) =>
         ok: status >= 200 && status < 300,
         status,
         headers: new Headers(headers),
-        text: () => Promise.resolve(body === undefined ? '' : JSON.stringify(body))
+        text: () => Promise.resolve(body === undefined ? '' : JSON.stringify(body)),
+        json: () => Promise.resolve(body)
     });
 
 // What Linn.Common.Authentication.Host's UseBearerTokenAuthentication answers a token it rejects
@@ -29,9 +34,9 @@ beforeEach(() => {
     global.fetch = jest.fn(() => respond(200, { id: 1 }));
 });
 
-describe('useSignedInRequest', () => {
+describe('useGet, usePut and usePost with no url of their own', () => {
     test("sends the signed-in user's token", async () => {
-        const { result } = renderHook(() => useSignedInGet());
+        const { result } = renderHook(() => useGet(null, true));
 
         await act(async () => {
             await result.current.send('/things/1');
@@ -40,12 +45,13 @@ describe('useSignedInRequest', () => {
         expect(fetch).toHaveBeenCalledWith('/things/1', {
             method: 'GET',
             headers: { accept: 'application/json', Authorization: 'Bearer a-token' },
-            body: undefined
+            body: undefined,
+            signal: undefined
         });
     });
 
     test('gives the parsed result of a successful answer', async () => {
-        const { result } = renderHook(() => useSignedInGet());
+        const { result } = renderHook(() => useGet(null, true));
 
         let outcome;
         await act(async () => {
@@ -57,12 +63,13 @@ describe('useSignedInRequest', () => {
             status: 200,
             result: { id: 1 },
             errorMessage: null,
+            apiMessage: null,
             superseded: false
         });
     });
 
     test('keeps the result of a successful answer as state', async () => {
-        const { result } = renderHook(() => useSignedInGet());
+        const { result } = renderHook(() => useGet(null, true));
 
         await act(async () => {
             await result.current.send('/things/1');
@@ -73,7 +80,7 @@ describe('useSignedInRequest', () => {
     });
 
     test('sends a body as JSON', async () => {
-        const { result } = renderHook(() => useSignedInPut());
+        const { result } = renderHook(() => usePut(null, true));
 
         await act(async () => {
             await result.current.send('/things/1', { name: 'x' });
@@ -89,7 +96,7 @@ describe('useSignedInRequest', () => {
     test('has no token while there is no signed-in user', () => {
         useAuth.mockReturnValue({ user: null, signinRedirect });
 
-        const { result } = renderHook(() => useSignedInGet());
+        const { result } = renderHook(() => useGet(null, true));
 
         expect(result.current.hasToken).toBe(false);
     });
@@ -100,9 +107,51 @@ describe('useSignedInRequest', () => {
             signinRedirect
         });
 
-        const { result } = renderHook(() => useSignedInGet());
+        const { result } = renderHook(() => useGet(null, true));
 
         expect(result.current.hasToken).toBe(false);
+    });
+
+    test('keeps hasToken while a token it already had expires and is renewed', () => {
+        const { result, rerender } = renderHook(() => useGet(null, true));
+
+        signedIn({ access_token: 'a-token', expired: true });
+        rerender();
+
+        expect(result.current.hasToken).toBe(true);
+    });
+
+    test('keeps send while a token it already had expires and is renewed', () => {
+        const { result, rerender } = renderHook(() => useGet(null, true));
+        const { send } = result.current;
+
+        signedIn({ access_token: 'a-token', expired: true });
+        rerender();
+        signedIn({ access_token: 'a-renewed-token', expired: false });
+        rerender();
+
+        expect(result.current.send).toBe(send);
+    });
+
+    test('has no token again once the user is signed out', () => {
+        const { result, rerender } = renderHook(() => useGet(null, true));
+
+        useAuth.mockReturnValue({ user: null, signinRedirect });
+        rerender();
+
+        expect(result.current.hasToken).toBe(false);
+    });
+
+    test('a request sent before there was a token does not sign in again when the API challenges it', async () => {
+        useAuth.mockReturnValue({ user: null, signinRedirect });
+        fetch.mockReturnValueOnce(respond(401, undefined, { 'WWW-Authenticate': 'Bearer' }));
+        const { result } = renderHook(() => useGet(null, true));
+
+        await act(async () => {
+            await result.current.send('/things/1');
+        });
+
+        expect(signinRedirect).not.toHaveBeenCalled();
     });
 
     test('has a token once the user has one that has not expired', () => {
@@ -111,12 +160,12 @@ describe('useSignedInRequest', () => {
             signinRedirect
         });
 
-        const { result } = renderHook(() => useSignedInGet());
+        const { result } = renderHook(() => useGet(null, true));
 
         expect(result.current.hasToken).toBe(true);
     });
 
-    test("gives a 4xx's message when its body is a JSON string", async () => {
+    test("gives a 4xx's message as apiMessage when its body is a JSON string", async () => {
         fetch.mockReturnValueOnce(
             Promise.resolve({
                 ok: false,
@@ -124,7 +173,7 @@ describe('useSignedInRequest', () => {
                 text: () => Promise.resolve('"Quantity must be a number"')
             })
         );
-        const { result } = renderHook(() => useSignedInPost());
+        const { result } = renderHook(() => usePost(null, true));
 
         let outcome;
         await act(async () => {
@@ -134,11 +183,11 @@ describe('useSignedInRequest', () => {
         expect(outcome).toMatchObject({
             ok: false,
             status: 400,
-            errorMessage: 'Quantity must be a number'
+            apiMessage: 'Quantity must be a number'
         });
     });
 
-    test("doesn't give a 5xx's body, even when it's a JSON string", async () => {
+    test("doesn't give a 5xx's body as apiMessage, even when it's a JSON string", async () => {
         fetch.mockReturnValueOnce(
             Promise.resolve({
                 ok: false,
@@ -146,17 +195,17 @@ describe('useSignedInRequest', () => {
                 text: () => Promise.resolve('"at Linn.Something.Save()"')
             })
         );
-        const { result } = renderHook(() => useSignedInPost());
+        const { result } = renderHook(() => usePost(null, true));
 
         let outcome;
         await act(async () => {
             outcome = await result.current.send('/things', {});
         });
 
-        expect(outcome).toMatchObject({ ok: false, status: 500, errorMessage: null });
+        expect(outcome).toMatchObject({ ok: false, status: 500, apiMessage: null });
     });
 
-    test("doesn't give a 4xx's body when it isn't a JSON string", async () => {
+    test("doesn't give a 4xx's body as apiMessage when it isn't a JSON string", async () => {
         fetch.mockReturnValueOnce(
             Promise.resolve({
                 ok: false,
@@ -164,26 +213,46 @@ describe('useSignedInRequest', () => {
                 text: () => Promise.resolve('<html><body>Bad Request</body></html>')
             })
         );
-        const { result } = renderHook(() => useSignedInPost());
+        const { result } = renderHook(() => usePost(null, true));
 
         let outcome;
         await act(async () => {
             outcome = await result.current.send('/things', {});
         });
 
-        expect(outcome).toMatchObject({ ok: false, status: 400, errorMessage: null });
+        expect(outcome).toMatchObject({ ok: false, status: 400, apiMessage: null });
+    });
+
+    test("errorMessage is a refusal's body as it came, as the hooks have always given", async () => {
+        fetch.mockReturnValueOnce(
+            Promise.resolve({
+                ok: false,
+                status: 400,
+                text: () => Promise.resolve('"Quantity must be a number"')
+            })
+        );
+        const { result } = renderHook(() => usePost(null, true));
+
+        let outcome;
+        await act(async () => {
+            outcome = await result.current.send('/things', {});
+        });
+
+        expect(outcome.errorMessage).toBe('"Quantity must be a number"');
+        expect(result.current.errorMessage).toBe('"Quantity must be a number"');
     });
 
     test('a network failure is a failure, not an exception', async () => {
         fetch.mockReturnValueOnce(Promise.reject(new TypeError('Failed to fetch')));
-        const { result } = renderHook(() => useSignedInGet());
+        const { result } = renderHook(() => useGet(null, true));
 
         let outcome;
         await act(async () => {
             outcome = await result.current.send('/things/1');
         });
 
-        expect(outcome).toMatchObject({ ok: false, status: null, errorMessage: null });
+        expect(outcome).toMatchObject({ ok: false, status: null, apiMessage: null });
+        expect(outcome.errorMessage).toBe('Failed to fetch');
         expect(result.current.isLoading).toBe(false);
     });
 
@@ -192,7 +261,7 @@ describe('useSignedInRequest', () => {
         fetch
             .mockReturnValueOnce(new Promise(resolve => (answerFirst = resolve)))
             .mockReturnValueOnce(respond(200, { id: 2 }));
-        const { result } = renderHook(() => useSignedInGet());
+        const { result } = renderHook(() => useGet(null, true));
 
         let first;
         await act(async () => {
@@ -209,7 +278,7 @@ describe('useSignedInRequest', () => {
 
     test('a rejected token (the bearer challenge) signs in again', async () => {
         fetch.mockReturnValueOnce(respond(401, undefined, bearerChallenge));
-        const { result } = renderHook(() => useSignedInGet());
+        const { result } = renderHook(() => useGet(null, true));
 
         await act(async () => {
             await result.current.send('/things/1');
@@ -220,7 +289,7 @@ describe('useSignedInRequest', () => {
 
     test('signing in again remembers the page to come back to', async () => {
         fetch.mockReturnValueOnce(respond(401, undefined, bearerChallenge));
-        const { result } = renderHook(() => useSignedInGet());
+        const { result } = renderHook(() => useGet(null, true));
 
         await act(async () => {
             await result.current.send('/things/1');
@@ -233,7 +302,7 @@ describe('useSignedInRequest', () => {
         fetch
             .mockReturnValueOnce(respond(401, undefined, bearerChallenge))
             .mockReturnValueOnce(respond(401, undefined, bearerChallenge));
-        const { result } = renderHook(() => useSignedInGet());
+        const { result } = renderHook(() => useGet(null, true));
 
         await act(async () => {
             await result.current.send('/things/1');
@@ -247,7 +316,7 @@ describe('useSignedInRequest', () => {
 
     test('a 401 with no body and no bearer challenge (a refused permission) does not sign in again', async () => {
         fetch.mockReturnValueOnce(respond(401));
-        const { result } = renderHook(() => useSignedInGet());
+        const { result } = renderHook(() => useGet(null, true));
 
         await act(async () => {
             await result.current.send('/things/1');
@@ -258,21 +327,21 @@ describe('useSignedInRequest', () => {
 
     test('a 401 with a message is shown and does not sign in again', async () => {
         fetch.mockReturnValueOnce(respond(401, 'Could not identify the logged in employee'));
-        const { result } = renderHook(() => useSignedInGet());
+        const { result } = renderHook(() => useGet(null, true));
 
         let outcome;
         await act(async () => {
             outcome = await result.current.send('/things/1');
         });
 
-        expect(outcome.errorMessage).toBe('Could not identify the logged in employee');
+        expect(outcome.apiMessage).toBe('Could not identify the logged in employee');
         expect(signinRedirect).not.toHaveBeenCalled();
     });
 
     test('clearData empties it and drops an answer still on its way', async () => {
         let answer;
         fetch.mockReturnValueOnce(new Promise(resolve => (answer = resolve)));
-        const { result } = renderHook(() => useSignedInGet());
+        const { result } = renderHook(() => useGet(null, true));
 
         let pending;
         act(() => {
@@ -289,7 +358,7 @@ describe('useSignedInRequest', () => {
     });
 
     test('send keeps its identity when the token is renewed', () => {
-        const { result, rerender } = renderHook(() => useSignedInGet());
+        const { result, rerender } = renderHook(() => useGet(null, true));
         const { send } = result.current;
 
         signedIn({ access_token: 'renewed', expired: false });
@@ -299,7 +368,7 @@ describe('useSignedInRequest', () => {
     });
 
     test('a renewed token is used by the next request', async () => {
-        const { result, rerender } = renderHook(() => useSignedInGet());
+        const { result, rerender } = renderHook(() => useGet(null, true));
         signedIn({ access_token: 'renewed', expired: false });
         rerender();
 
@@ -322,7 +391,7 @@ describe('useSignedInRequest', () => {
             return null;
         }
         function Page() {
-            const { send, hasToken } = useSignedInGet();
+            const { send, hasToken } = useGet(null, true);
             return <Child send={send} hasToken={hasToken} />;
         }
         global.fetch = jest.fn(() => new Promise(() => {}));

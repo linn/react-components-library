@@ -1,7 +1,7 @@
 import React, { createContext, useContext } from 'react';
 import { useAuth } from 'react-oidc-context';
 
-// What the request hooks (useGet, useInitialise, usePut, usePost, useDelete and useSignedInRequest)
+// What the request hooks (useGet, useInitialise, usePut, usePost and useDelete, through useRequest)
 // need from whatever does the app's sign-in: the signed-in user and a way to sign in again. So they
 // work in apps that sign in with react-oidc-context and in those that still use redux-oidc.
 const RequestAuthContext = createContext(null);

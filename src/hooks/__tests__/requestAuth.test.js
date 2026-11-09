@@ -3,7 +3,6 @@ import { act, render, renderHook, screen, fireEvent, waitFor } from '@testing-li
 import '@testing-library/jest-dom';
 import { useAuth } from 'react-oidc-context';
 import { RequestAuthProvider } from '../requestAuth.js';
-import useSignedInGet from '../useSignedInGet.js';
 import useGet from '../useGet.js';
 import useInitialise from '../useInitialise.js';
 import usePut from '../usePut.js';
@@ -20,7 +19,7 @@ const signIn = jest.fn();
 
 // A page that loads /things/1 as soon as there's a token, and shows what it got.
 function Page() {
-    const { send, hasToken, result } = useSignedInGet();
+    const { send, hasToken, result } = useGet(null, true);
     useEffect(() => {
         if (hasToken) {
             send('/things/1');
@@ -84,7 +83,7 @@ beforeEach(() => {
     global.fetch = jest.fn(url => respond(200, { id: Number(url.split('/').pop()) }));
 });
 
-describe('useSignedInRequest given the user by a RequestAuthProvider', () => {
+describe('a page loading with useGet, given the user by a RequestAuthProvider', () => {
     test("sends the provider's user's token", async () => {
         render(<App firstUser={{ access_token: 'a-token', expired: false }} />);
 
@@ -162,7 +161,7 @@ describe('useSignedInRequest given the user by a RequestAuthProvider', () => {
     });
 });
 
-describe('useSignedInRequest with no RequestAuthProvider', () => {
+describe('a page loading with useGet, with no RequestAuthProvider', () => {
     test("uses react-oidc-context's signed-in user", async () => {
         useAuth.mockReturnValue({
             user: { access_token: 'an-oidc-context-token', expired: false },
