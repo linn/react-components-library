@@ -43,7 +43,7 @@ const refusalMessage = (status, text) => {
 // browser hides it. Without either, a rejected token just fails: the user isn't signed in again.
 const isTokenRejected = response =>
     response.status === 401 &&
-    /^\s*Bearer\b/i.test(response.headers?.get?.('WWW-Authenticate') ?? '');
+    (response.headers?.get?.('WWW-Authenticate') ?? '').toLowerCase().startsWith('bearer');
 
 // A token the server keeps refusing would otherwise send the browser round the sign-in loop
 // for ever, so this signs in again at most once a minute.
