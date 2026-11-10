@@ -22,7 +22,7 @@ const { isLoading, errorMessage, result } = useInitialise(url, id, queryString, 
     <tr><td><code>url</code></td><td><code>string</code></td><td>—</td><td>Base URL of the resource to fetch.</td></tr>
     <tr><td><code>id</code></td><td><code>string | number | undefined</code></td><td>—</td><td>Optional ID to append to the URL: <code>GET {'{ url }'}/{'{ id }'}</code>.</td></tr>
     <tr><td><code>queryString</code></td><td><code>string | undefined</code></td><td>—</td><td>Optional query string to append (e.g. <code>'?filter=active'</code>).</td></tr>
-    <tr><td><code>requiresAuth</code></td><td><code>boolean</code></td><td><code>false</code></td><td>When <code>true</code>, an OIDC bearer token is included in the request headers via <code>react-oidc-context</code>.</td></tr>
+    <tr><td><code>requiresAuth</code></td><td><code>boolean</code></td><td><code>false</code></td><td>When <code>true</code>, the signed-in user's bearer token is included in the request headers, from <code>react-oidc-context</code>'s <code>AuthProvider</code> or a <code>RequestAuthProvider</code>.</td></tr>
   </tbody>
 </table>
 
@@ -72,6 +72,10 @@ const { isLoading, result } = useInitialise(
     '/api/secure/profile',
     userId,
     undefined,
-    true // requiresAuth — adds Bearer token from react-oidc-context
+    true // requiresAuth — adds the signed-in user's Bearer token
 );
 ```
+
+## Waiting for the token
+
+With `requiresAuth`, nothing is sent until the signed-in user has a token that hasn't expired, rather than sending an empty or expired one and being refused. While it waits, `isLoading` is `true`. If the user never signs in, it never sends. It relies on the app signing the user in when there's no user or theirs has expired: react-oidc-context's `useSignIn` does this (an expired user isn't `isAuthenticated`), and so does an app on redux-oidc that signs in before rendering. A stored token that has already expired isn't renewed silently by oidc-client-ts, so in an app that does neither, the page would wait (loading) for ever.

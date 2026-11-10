@@ -1,52 +1,70 @@
 import { useCallback, useState } from 'react';
-import { useAuth } from 'react-oidc-context';
+import useRequest from './useRequest.js';
 
+// a network failure's own message, as useGet has always given
+const networkFailureMessage = error => error.message;
+
+const idle = {
+    isLoading: false,
+    errorMessage: null,
+    result: null,
+    status: null,
+    apiMessage: null,
+    tokenRejected: false
+};
+
+// GETs from url (plus an id and query string) as the signed-in user when requiresAuth; see
+// useGet.mdx. With no url, send's first argument is the whole URL.
 function useGet(url, requiresAuth = false) {
-    const [isLoading, setIsLoading] = useState(false);
-    const [errorMessage, setErrorMessage] = useState(null);
-    const [result, setResult] = useState(null);
-
-    const auth = useAuth();
-
-    const clearData = () => setResult(null);
+    const [state, setState] = useState(idle);
+    const { request, forgetEarlierRequests, hasToken, signInAgain } = useRequest(
+        'GET',
+        requiresAuth,
+        networkFailureMessage
+    );
 
     const send = useCallback(
         async (id, queryString) => {
-            setIsLoading(true);
-            setResult(null);
-            setErrorMessage(null);
-
-            let token = requiresAuth ? auth.user?.access_token : ''; // Moved inside useCallback
-
-            const headers = {
-                accept: 'application/json'
-            };
-            const requestParameters = {
-                method: 'GET',
-                headers: requiresAuth ? { ...headers, Authorization: `Bearer ${token}` } : headers
-            };
-
-            try {
-                const response = await fetch(
-                    id ? `${url}/${id}${queryString ?? ''}` : `${url}${queryString ?? ''}`,
-                    requestParameters
-                );
-
-                if (response.ok) {
-                    setResult(await response.json());
-                } else {
-                    setErrorMessage(await response.text());
-                }
-            } catch (error) {
-                setErrorMessage(error.message);
-            } finally {
-                setIsLoading(false);
+            const query = queryString ?? '';
+            let target;
+            if (url == null) {
+                target = `${id ?? ''}${query}`;
+            } else {
+                target = id ? `${url}/${id}${query}` : `${url}${query}`;
             }
+            setState(previous => ({
+                ...previous,
+                isLoading: true,
+                result: null,
+                errorMessage: null,
+                apiMessage: null,
+                tokenRejected: false
+            }));
+            const outcome = await request(target);
+            // only the latest request's answer is kept: a slow earlier one would otherwise
+            // overwrite it
+            if (!outcome.superseded) {
+                setState({
+                    isLoading: false,
+                    result: outcome.result,
+                    errorMessage: outcome.errorMessage,
+                    status: outcome.status,
+                    apiMessage: outcome.apiMessage,
+                    tokenRejected: outcome.tokenRejected
+                });
+            }
+            return outcome;
         },
-        [requiresAuth, auth.user?.access_token, url]
+        [url, request]
     );
 
-    return { send, isLoading, errorMessage, result, clearData };
+    // an answer still on its way is no longer wanted either
+    const clearData = useCallback(() => {
+        forgetEarlierRequests();
+        setState(previous => ({ ...previous, result: null, isLoading: false }));
+    }, [forgetEarlierRequests]);
+
+    return { send, ...state, clearData, hasToken, signInAgain };
 }
 
 export default useGet;

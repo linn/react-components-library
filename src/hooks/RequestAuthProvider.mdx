@@ -1,0 +1,50 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Hooks/RequestAuthProvider" />
+
+# RequestAuthProvider
+
+Gives the request hooks (`useGet`, `useInitialise`, `usePut`, `usePost` and `useDelete`; see [Signed-in requests](?path=/docs/hooks-signed-in-requests--docs)) the signed-in user and a way to sign in again, in an app that doesn't sign in with react-oidc-context's `AuthProvider`: one still on redux-oidc, say.
+
+**An app with react-oidc-context's `AuthProvider` doesn't need it**: without a `RequestAuthProvider` the hooks use `useAuth()`, as they always have.
+
+## Props
+
+<table>
+  <thead>
+    <tr><th>Prop</th><th>Type</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>user</code></td><td><code>{'{ access_token, expired } | null'}</code></td><td>The signed-in user, or <code>null</code> while there isn't one. The hooks send <code>access_token</code>, and wait while <code>expired</code> is true, so the app must sign in when the user is missing or expired.</td></tr>
+    <tr><td><code>signIn</code></td><td><code>() =&gt; void | Promise</code></td><td>Starts a sign-in that brings the user back to the page they're on, the app's own way. Called by the hooks' <code>signInAgain</code>, which a page calls when the API has rejected the token (see Signed-in requests), at most once a minute.</td></tr>
+  </tbody>
+</table>
+
+Give it a new `user` whenever the app's user changes (a renewed token, say): the hooks use it for the next request, and the hooks' `send` keeps its identity, so a page doesn't load again.
+
+## Usage with redux-oidc
+
+Inside the app's Redux `Provider` and `OidcProvider`, around everything that makes requests:
+
+```jsx
+import { useSelector } from 'react-redux';
+import { RequestAuthProvider } from '@linn-it/linn-form-components-library';
+import userManager from '../helpers/userManager';
+
+function RequestAuth({ children }) {
+    const user = useSelector(state => state.oidc.user);
+    const signIn = () =>
+        userManager.signinRedirect({
+            data: { redirect: window.location.pathname + window.location.search }
+        });
+    return (
+        <RequestAuthProvider user={user} signIn={signIn}>
+            {children}
+        </RequestAuthProvider>
+    );
+}
+```
+
+Read the user with `useSelector`, not `store.getState()`, so the hooks are given a renewed user as soon as the store has it.
+
+`useRequestAuth()` returns the `{ user, signIn }` the hooks use, from the provider or react-oidc-context.

@@ -1,49 +1,65 @@
-import { useState } from 'react';
-import { useAuth } from 'react-oidc-context';
+import { useCallback, useState } from 'react';
+import useRequest from './useRequest.js';
 
+const networkFailureMessage = () => 'An error occurred.';
+
+const idle = {
+    isLoading: false,
+    errorMessage: null,
+    putResult: null,
+    status: null,
+    apiMessage: null,
+    tokenRejected: false
+};
+
+// PUTs data to url (plus an id) as the signed-in user when requiresAuth; see usePut.mdx. With no
+// url, send's first argument is the whole URL.
 function usePut(url, requiresAuth = false) {
-    const [isLoading, setIsLoading] = useState(false);
-    const [errorMessage, setErrorMessage] = useState(null);
+    const [state, setState] = useState(idle);
+    const { request, hasToken, signInAgain } = useRequest(
+        'PUT',
+        requiresAuth,
+        networkFailureMessage
+    );
 
-    const [putResult, setPutResult] = useState(null);
+    const send = useCallback(
+        async (id, data) => {
+            let target;
+            if (url == null) {
+                target = id;
+            } else {
+                target = id ? `${url}/${id}` : url;
+            }
+            setState(previous => ({
+                ...previous,
+                isLoading: true,
+                putResult: null,
+                errorMessage: null,
+                apiMessage: null,
+                tokenRejected: false
+            }));
+            const outcome = await request(target, { body: data });
+            if (!outcome.superseded) {
+                setState({
+                    isLoading: false,
+                    putResult: outcome.result,
+                    errorMessage: outcome.errorMessage,
+                    status: outcome.status,
+                    apiMessage: outcome.apiMessage,
+                    tokenRejected: outcome.tokenRejected
+                });
+            }
+            return outcome;
+        },
+        [url, request]
+    );
 
-    let token = '';
+    const clearPutResult = useCallback(
+        () => setState(previous => ({ ...previous, putResult: null })),
+        []
+    );
 
-    const clearPutResult = () => setPutResult(null);
-
-    const auth = useAuth();
-    if (requiresAuth) {
-        token = auth.user?.access_token;
-    }
-
-    const send = async (id, data) => {
-        setIsLoading(true);
-        setPutResult(null);
-        setErrorMessage(null);
-
-        const headers = {
-            accept: 'application/json',
-            'Content-Type': 'application/json'
-        };
-        const requestParameters = {
-            method: 'PUT',
-            body: JSON.stringify(data),
-            headers: requiresAuth ? { ...headers, Authorization: `Bearer ${token}` } : headers
-        };
-
-        const response = await fetch(id ? `${url}/${id}` : url, requestParameters);
-
-        if (response.ok) {
-            setPutResult(await response.json());
-            setIsLoading(false);
-        } else {
-            const text = await response.text();
-            setErrorMessage(text);
-            setIsLoading(false);
-        }
-    };
-
-    return { send, isLoading, errorMessage, putResult, clearPutResult };
+    return { send, ...state, clearPutResult, hasToken, signInAgain };
 }
 
 export default usePut;

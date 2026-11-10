@@ -41,6 +41,7 @@ import useSearch from './src/hooks/useSearch.js';
 import useInitialise from './src/hooks/useInitialise.js';
 import usePost from './src/hooks/usePost.js';
 import usePut from './src/hooks/usePut.js';
+import { RequestAuthProvider, useRequestAuth } from './src/hooks/requestAuth.js';
 import useSignIn from './src/hooks/useSignIn.js';
 import useUserProfile from './src/hooks/useUserProfile.js';
 import useDelete from './src/hooks/useDelete.js';
@@ -93,6 +94,8 @@ export {
     useInitialise,
     usePost,
     usePut,
+    RequestAuthProvider,
+    useRequestAuth,
     useSignIn,
     useUserProfile,
     useDelete,
