@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
+import { fromEvent } from 'file-selector';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
@@ -12,6 +13,26 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ErrorCard from './ErrorCard.js';
 import SnackbarMessage from './SnackbarMessage.js';
 import Loading from './Loading.js';
+
+// react-dropzone's own reader (file-selector's fromEvent) fails the whole drop when the browser has
+// no file system handle for a dropped item, which happens for a file with no path on disk such as
+// an attachment dragged straight out of Outlook. When it fails, use the files the browser put on
+// the drop itself. They are taken before awaiting, because the browser empties the drop's data
+// once the event handler returns.
+const getFilesFromEvent = async event => {
+    const droppedFiles =
+        event?.type === 'drop' && event.dataTransfer?.files
+            ? Array.from(event.dataTransfer.files)
+            : [];
+    try {
+        return await fromEvent(event);
+    } catch (error) {
+        if (droppedFiles.length > 0) {
+            return droppedFiles;
+        }
+        throw error;
+    }
+};
 
 function FileUploader({
     helperText = 'Upload a File',
@@ -35,7 +56,7 @@ function FileUploader({
         },
         [onFileSelect]
     );
-    const { getRootProps, getInputProps } = useDropzone({ onDrop });
+    const { getRootProps, getInputProps } = useDropzone({ onDrop, getFilesFromEvent });
 
     const handleUploadClick = () => {
         const reader = new globalThis.FileReader();

@@ -1,4 +1,6 @@
 # Changelog
+## [34.9.2] - 2026-11-11
+- Fix FileUploader so a dropped file that has no path on disk (an attachment or email dragged straight out of classic Outlook) is taken, rather than the drop being ignored. react-dropzone's reader (file-selector 2.x) fails the whole drop when the browser has no file system handle for an item; FileUploader now falls back to the files on the drop itself when that happens. Drops that already worked, and click to browse, are unchanged. Not tried against Outlook itself: the failure is reproduced in a test by a drop whose item has no handle. This doesn't help the new Outlook or Outlook on the web, which give a web page no file at all. file-selector (already bundled through react-dropzone) is now a direct dependency at the same version, 2.1.2.
 ## [34.9.0] - 2026-11-09
 All non-breaking: the request hooks keep their names, signatures and state, and errorMessage is still a refusal's body as it came.
 - useGet, usePut, usePost and useDelete share one core (useRequest), and with requiresAuth make requests as the signed-in user: from react-oidc-context's AuthProvider as before, or from a RequestAuthProvider in an app on redux-oidc. Docs: Hooks/Signed-in requests.
