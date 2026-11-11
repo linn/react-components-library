@@ -1,7 +1,16 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { MemoryRouter } from 'react-router-dom';
 import ReportDataGrid from '../ReportDataGrid';
+
+// jsdom has no browser stylesheet, so give links the browser's default link colour, as a real
+// browser does (without it a link just inherits its cell's colour and the link colour tests below
+// can't fail). It has to come before the grid's styles: jsdom picks between rules by the order
+// their stylesheets were added, and the grid's are added at the first render.
+const browserLinkColour = document.createElement('style');
+browserLinkColour.textContent = 'a { color: #0000ee; }';
+document.head.appendChild(browserLinkColour);
 
 const makeReport = totalColumns => ({
     title: { displayString: 'Report' },
@@ -121,5 +130,75 @@ describe('ReportDataGrid date columns', () => {
         await userEvent.click(header);
 
         expect(dateColumnOrder()).toEqual(['02-Nov-2026', '10-Jan-2026', '25-Mar-2025']);
+    });
+});
+
+describe('ReportDataGrid coloured cells that are drill-down links', () => {
+    test('a link within the app is shown in its cell text colour', () => {
+        const report = {
+            title: { displayString: 'Report' },
+            headers: {
+                columnHeaders: ['Product'],
+                dataGridColumnSpecifications: [
+                    { columnId: 'product', columnWidth: 200, columnType: 'text' }
+                ]
+            },
+            results: [
+                {
+                    rowTitle: { displayString: 'row0' },
+                    rowType: 'Normal',
+                    values: [
+                        {
+                            textDisplayValue: 'Widget',
+                            drillDowns: [{ href: '/products/widget', externalLink: false }],
+                            attributes: [
+                                { attributeType: 'text-colour', attributeValue: '#1565c0' }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        };
+
+        render(
+            <MemoryRouter>
+                <ReportDataGrid report={report} />
+            </MemoryRouter>
+        );
+
+        expect(screen.getByRole('link', { name: 'Widget' })).toHaveStyle({ color: '#1565c0' });
+    });
+
+    test('a link to another app is shown in its cell text colour', () => {
+        const report = {
+            title: { displayString: 'Report' },
+            headers: {
+                columnHeaders: ['Product'],
+                dataGridColumnSpecifications: [
+                    { columnId: 'product', columnWidth: 200, columnType: 'text' }
+                ]
+            },
+            results: [
+                {
+                    rowTitle: { displayString: 'row0' },
+                    rowType: 'Normal',
+                    values: [
+                        {
+                            textDisplayValue: 'Widget',
+                            drillDowns: [
+                                { href: 'https://app.linn.co.uk/widget', externalLink: true }
+                            ],
+                            attributes: [
+                                { attributeType: 'text-colour', attributeValue: '#d32f2f' }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        };
+
+        render(<ReportDataGrid report={report} />);
+
+        expect(screen.getByRole('link', { name: 'Widget' })).toHaveStyle({ color: '#d32f2f' });
     });
 });

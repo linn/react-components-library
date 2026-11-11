@@ -1,4 +1,6 @@
 # Changelog
+## [34.9.1] - 2026-11-11
+- Fix ReportDataGrid so a drill-down link in a cell with a text-colour attribute is shown in that colour. The cell was coloured, but the link inside kept the browser's link colour, so a coloured cell that's also a link looked like any other link (found on purchasing2's Orders vs Forecast, whose blue root products showed as ordinary links). Cells that aren't links are unchanged.
 ## [34.9.0] - 2026-11-09
 All non-breaking: the request hooks keep their names, signatures and state, and errorMessage is still a refusal's body as it came.
 - useGet, usePut, usePost and useDelete share one core (useRequest), and with requiresAuth make requests as the signed-in user: from react-oidc-context's AuthProvider as before, or from a RequestAuthProvider in an app on redux-oidc. Docs: Hooks/Signed-in requests.
