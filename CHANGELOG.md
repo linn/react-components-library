@@ -1,4 +1,6 @@
 # Changelog
+## [34.9.4] - 2026-11-11
+- LedgerPeriodAutoComplete adds ±month / ±year chevron steppers. Shown by default; pass showSteppers={false} to opt out.
 ## [34.9.3] - 2026-11-11
 - Fix ReportDataGrid so a drill-down link in a cell with a text-colour attribute is shown in that colour. The cell was coloured, but the link inside kept the browser's link colour, so a coloured cell that's also a link looked like any other link (found on purchasing2's Orders vs Forecast, whose blue root products showed as ordinary links). Cells that aren't links are unchanged.
 ## [34.9.2] - 2026-11-11
