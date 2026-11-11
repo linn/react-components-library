@@ -1,4 +1,6 @@
 # Changelog
+## [34.9.3] - 2026-11-11
+- Fix ReportDataGrid so a drill-down link in a cell with a text-colour attribute is shown in that colour. The cell was coloured, but the link inside kept the browser's link colour, so a coloured cell that's also a link looked like any other link (found on purchasing2's Orders vs Forecast, whose blue root products showed as ordinary links). Cells that aren't links are unchanged.
 ## [34.9.2] - 2026-11-11
 - Fix FileUploader so a dropped file that has no path on disk (an attachment or email dragged straight out of classic Outlook) is taken, rather than the drop being ignored. react-dropzone's reader (file-selector 2.x) fails the whole drop when the browser has no file system handle for an item; FileUploader now falls back to the files on the drop itself when that happens. Drops that already worked, and click to browse, are unchanged. Not tried against Outlook itself: the failure is reproduced in a test by a drop whose item has no handle. This doesn't help the new Outlook or Outlook on the web, which give a web page no file at all. file-selector (already bundled through react-dropzone) is now a direct dependency at the same version, 2.1.2.
 ## [34.9.0] - 2026-11-09

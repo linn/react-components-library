@@ -193,7 +193,9 @@ function ReportDataGrid({
                     if (attribute.attributeType === 'text-colour') {
                         const className = `cell-tc-${attribute.attributeValue.replace('#', '')}`;
                         colourStyles[`.${className}`] = {
-                            color: attribute.attributeValue
+                            color: attribute.attributeValue,
+                            // a drill-down link takes its cell's colour, not the browser's link colour
+                            '& a': { color: attribute.attributeValue }
                         };
                     }
                 });
