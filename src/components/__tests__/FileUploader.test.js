@@ -105,3 +105,50 @@ describe('When uerrors in result', () => {
         expect(screen.getByText('PART B - Part too large')).toBeInTheDocument();
     });
 });
+
+describe('When dropping a file the browser has no file system handle for', () => {
+    // An attachment dragged straight out of Outlook has no path on disk. On a secure page the
+    // browser then gives null for the dropped item's file system handle, although the file itself
+    // is on the drop.
+    let originalIsSecureContext;
+
+    beforeEach(async () => {
+        jest.clearAllMocks();
+        originalIsSecureContext = globalThis.isSecureContext;
+        globalThis.isSecureContext = true;
+
+        render(<FileUploader doUpload={doUpload} />);
+
+        const attachment = new File(['%PDF-1.4'], 'invoice.pdf', { type: 'application/pdf' });
+        const droppedItem = {
+            kind: 'file',
+            type: 'application/pdf',
+            getAsFile: () => attachment,
+            getAsFileSystemHandle: () => Promise.resolve(null)
+        };
+        const dropBox = screen.getByText('Drop the file here or click to browse...');
+
+        fireEvent.drop(dropBox, {
+            dataTransfer: {
+                types: ['Files'],
+                items: [droppedItem],
+                files: [attachment]
+            }
+        });
+
+        await screen.findByText('invoice.pdf');
+    });
+
+    afterEach(() => {
+        globalThis.isSecureContext = originalIsSecureContext;
+    });
+
+    test('Should show the dropped file', () => {
+        expect(screen.getByText('invoice.pdf')).toBeInTheDocument();
+    });
+
+    test('Upload button should be enabled...', () => {
+        const uploadButton = screen.getByRole('button', { name: 'Upload' });
+        expect(uploadButton).not.toBeDisabled();
+    });
+});

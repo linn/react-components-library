@@ -1,6 +1,6 @@
 {
   "name": "@linn-it/linn-form-components-library",
-  "version": "34.9.1",
+  "version": "34.9.3",
   "private": false,
   "repository": {
     "type": "git",
@@ -19,6 +19,7 @@
     }
   },
   "dependencies": {
+    "file-selector": "2.1.2",
     "react-dropzone": "15.0.0"
   },
   "scripts": {
