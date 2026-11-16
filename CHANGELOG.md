@@ -1,4 +1,9 @@
 # Changelog
+## [34.9.5] - 2026-11-16
+- LinnWeekPicker shows dates as dd-MMM-yyyy (13-Sep-2019).
+- Add optional displayDate prop to LinnWeekPicker: "start" (default) or "end" of the selected week. setWeekStartDate is still called with the week start.
+- LinnWeekPicker's label matches InputField's (size, colour, spacing) so the two line up.
+- Fix LinnWeekPicker weeks to always run Saturday to Friday, whatever the moment locale (on en-gb they ran Sunday to Saturday). Also fix the week highlight for ISO string dates.
 ## [34.9.4] - 2026-11-11
 - LedgerPeriodAutoComplete adds ±month / ±year chevron steppers. Shown by default; pass showSteppers={false} to opt out.
 ## [34.9.3] - 2026-11-11

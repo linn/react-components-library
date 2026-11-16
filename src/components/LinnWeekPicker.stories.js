@@ -19,6 +19,14 @@ export default {
     component: LinnWeekPicker,
     tags: ['autodocs'],
     render: StatefulLinnWeekPicker,
+    argTypes: {
+        displayDate: {
+            control: 'radio',
+            options: ['start', 'end'],
+            description:
+                'Which day of the selected week the field shows. setWeekStartDate is given the week start either way.'
+        }
+    },
     decorators: [
         Story => (
             <LocalizationProvider dateAdapter={AdapterMoment}>
@@ -31,7 +39,8 @@ export default {
         label: 'Select Week',
         selectedDate: new Date('2025-06-09'),
         disabled: false,
-        required: false
+        required: false,
+        displayDate: 'start'
     }
 };
 
@@ -41,6 +50,14 @@ export const WithLabel = {
     name: 'With label',
     args: {
         label: 'Production Week'
+    }
+};
+
+export const ShowsWeekEnd = {
+    name: 'Shows week end',
+    args: {
+        label: 'Week Ending',
+        displayDate: 'end'
     }
 };
 
