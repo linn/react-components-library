@@ -1,4 +1,7 @@
 # Changelog
+## [34.9.6] - 2026-11-16
+- DatePicker's label matches InputField's (size, colour, spacing; its sx was given a number, so MUI's larger grey default showed), and its field the same dense margin, so a DatePicker lines up with an InputField, Dropdown or LinnWeekPicker beside it (it sat 2.9px lower).
+- Add optional propertyName to DatePicker: the field's id, so its label is linked to it.
 ## [34.9.5] - 2026-11-16
 - LinnWeekPicker shows dates as dd-MMM-yyyy (13-Sep-2019).
 - Add optional displayDate prop to LinnWeekPicker: "start" (default) or "end" of the selected week. setWeekStartDate is still called with the week start.

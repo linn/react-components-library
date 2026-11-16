@@ -11,22 +11,37 @@ function Picker({
     onChange = () => {},
     required = false,
     disabled = false,
+    propertyName = '',
     datePickerProps = null
 }) {
     return (
         <>
-            <InputLabel sx={theme => theme.typography.fontSize} required={required}>
+            {/* same label as InputField (and LinnWeekPicker), so they line up side by side */}
+            <InputLabel
+                sx={{
+                    fontSize: theme => theme.typography.fontSize,
+                    color: 'inherit',
+                    '& .MuiInputLabel-asterisk': {
+                        color: theme => theme.palette.error.main
+                    }
+                }}
+                required={required}
+                htmlFor={propertyName || undefined}
+            >
                 {label}
             </InputLabel>
             <DatePicker
                 format="DD/MM/YYYY"
                 slotProps={{
                     textField: {
+                        id: propertyName || undefined,
                         variant: 'outlined',
                         fullWidth: true,
                         size: 'small',
+                        margin: 'dense',
                         sx: {
-                            mt: 1
+                            paddingTop: 0,
+                            marginTop: theme => theme.spacing(1)
                         }
                     }
                 }}

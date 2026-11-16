@@ -28,6 +28,7 @@ export default {
     ],
     args: {
         label: 'Select date',
+        propertyName: 'selectDate',
         value: '2025-06-15T00:00:00.000Z',
         disabled: false,
         required: false,
