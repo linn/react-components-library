@@ -35,24 +35,28 @@ export default function LinnWeekPicker({
     propertyName = '',
     label = '',
     disabled = false,
-    required = false
+    required = false,
+    displayDate = 'start'
 }) {
+    // normalise first: the date utilities parse a non-moment as MM-DD-YYYY, which an ISO string isn't
+    const selected = selectedDate ? moment(selectedDate) : null;
+    const weekStart = selected ? moment(getWeekStartDate(selected)) : null;
+    const weekEnd = selected ? moment(getWeekEndDate(selected)) : null;
+    const shownDate = displayDate === 'end' ? weekEnd : weekStart;
+
     const handleChange = date => {
         setWeekStartDate(propertyName, getWeekStartDate(date));
     };
 
     const WeekPickerDay = pickersDayProps => {
         const { day: date } = pickersDayProps;
-        if (!selectedDate) {
+        if (!selected) {
             return <PickerDay {...pickersDayProps} />;
         }
 
-        const start = moment(getWeekStartDate(selectedDate));
-        const end = moment(getWeekEndDate(selectedDate));
-
-        const dayIsBetween = moment(date).isBetween(start, end, null, '[]');
-        const isFirstDay = moment(date).isSame(start, 'day');
-        const isLastDay = moment(date).isSame(end, 'day');
+        const dayIsBetween = moment(date).isBetween(weekStart, weekEnd, null, '[]');
+        const isFirstDay = moment(date).isSame(weekStart, 'day');
+        const isLastDay = moment(date).isSame(weekEnd, 'day');
 
         return (
             <CustomPickerDay
@@ -67,23 +71,37 @@ export default function LinnWeekPicker({
     return (
         <>
             {label && (
-                <InputLabel required={required} sx={{ fontSize: '1rem', marginBottom: '8px' }}>
+                // same label as InputField, so the two line up side by side
+                <InputLabel
+                    sx={{
+                        fontSize: theme => theme.typography.fontSize,
+                        color: 'inherit',
+                        '& .MuiInputLabel-asterisk': {
+                            color: theme => theme.palette.error.main
+                        }
+                    }}
+                    required={required}
+                    htmlFor={propertyName || undefined}
+                >
                     {label}
                 </InputLabel>
             )}
             <DatePicker
                 disabled={disabled}
-                value={selectedDate ? moment(selectedDate) : null}
+                value={shownDate}
                 onChange={handleChange}
-                format="DD/MM/YYYY"
+                format="DD-MMM-YYYY"
                 slots={{ day: WeekPickerDay }}
                 slotProps={{
                     textField: {
+                        id: propertyName || undefined,
                         variant: 'outlined',
                         fullWidth: true,
                         size: 'small',
+                        margin: 'dense',
                         sx: {
-                            mt: 1
+                            paddingTop: 0,
+                            marginTop: theme => theme.spacing(1)
                         }
                     }
                 }}
