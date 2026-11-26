@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Grid from '@mui/material/Grid';
 import Dialog from '@mui/material/Dialog';
 import Button from '@mui/material/Button';
@@ -30,6 +30,51 @@ function AddressUtility({
     const [address, setAddress] = useState({ addressee: defaultAddressee });
     const [addressSearchTerm, setAddressSearchTerm] = useState('');
     const [countrySearchTerm, setCountrySearchTerm] = useState('');
+    // a country code typed and tabbed out of, waiting for the country search's results
+    const [awaitedCountryCode, setAwaitedCountryCode] = useState(null);
+
+    const pickCountry = country => {
+        setCountrySearchTerm(country.countryCode);
+        setAddress(a => ({
+            ...a,
+            countryCode: country.countryCode,
+            countryName: country.countryName
+        }));
+    };
+
+    const countryWithCode = code =>
+        (countriesSearchResults ?? []).find(
+            c => `${c.countryCode ?? ''}`.toUpperCase() === code.toUpperCase()
+        );
+
+    // Tab on the country: the country with exactly that code (any case), from the results there
+    // already or, once they come, from a search for it. Nothing is picked when there's none.
+    const lookUpCountryCode = () => {
+        const code = `${countrySearchTerm ?? ''}`.trim();
+        if (!code) {
+            return;
+        }
+        const found = countryWithCode(code);
+        if (found) {
+            pickCountry(found);
+            return;
+        }
+        setAwaitedCountryCode(code);
+        searchCountries(code);
+    };
+
+    useEffect(() => {
+        if (!awaitedCountryCode) {
+            return;
+        }
+        const found = countryWithCode(awaitedCountryCode);
+        if (found) {
+            pickCountry(found);
+            setAwaitedCountryCode(null);
+        }
+        // countryWithCode and pickCountry only read the results and set state
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [awaitedCountryCode, countriesSearchResults]);
 
     const handleFieldChange = (propertyName, newValue) => {
         setAddress(a => ({ ...a, [propertyName]: newValue }));
@@ -191,10 +236,15 @@ function AddressUtility({
                                         propertyName="countryCode"
                                         label="Look up Countries"
                                         value={countrySearchTerm}
-                                        handleValueChange={(_, newVal) =>
-                                            setCountrySearchTerm(newVal)
-                                        }
+                                        handleValueChange={(_, newVal) => {
+                                            setCountrySearchTerm(newVal);
+                                            setAwaitedCountryCode(null);
+                                        }}
                                         search={searchCountries}
+                                        onKeyPressFunctions={[
+                                            { keyCode: 9, action: lookUpCountryCode }
+                                        ]}
+                                        helperText="The code and Tab, or part of the name and Enter"
                                         searchResults={countriesSearchResults}
                                         loading={countriesSearchLoading}
                                         autoFocus={false}
@@ -205,14 +255,7 @@ function AddressUtility({
                                             }
                                             return 0;
                                         }}
-                                        onResultSelect={newValue => {
-                                            setCountrySearchTerm(newValue.countryCode);
-                                            setAddress(a => ({
-                                                ...a,
-                                                countryCode: newValue.countryCode,
-                                                countryName: newValue.countryName
-                                            }));
-                                        }}
+                                        onResultSelect={pickCountry}
                                         clearSearch={clearCountriesSearch}
                                     />
                                 </Grid>
