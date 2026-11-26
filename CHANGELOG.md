@@ -1,4 +1,6 @@
 # Changelog
+## [34.9.7] - 2026-11-26
+- AddressUtility looks a country up by its code: type the code in "Look up Countries" and press Tab, and the country with exactly that code (any case) is picked, from the results already there or, once they come, from a search the dialog makes with the page's own searchCountries. Nothing is picked when no country has that code, or when something else is typed before the results come. Enter still searches and lists the results, as before. No new props. The country box's helper text says so.
 ## [34.9.6] - 2026-11-16
 - DatePicker's label matches InputField's (size, colour, spacing; its sx was given a number, so MUI's larger grey default showed), and its field the same dense margin, so a DatePicker lines up with an InputField, Dropdown or LinnWeekPicker beside it (it sat 2.9px lower).
 - Add optional propertyName to DatePicker: the field's id, so its label is linked to it.
